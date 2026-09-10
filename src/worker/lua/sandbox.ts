@@ -1,4 +1,4 @@
-import { lua, lauxlib, lualib, to_luastring, to_jsstring } from 'fengari';
+import { lua, lauxlib, lualib, to_luastring, to_jsstring, type LuaState } from 'fengari';
 import { fail, ok, type Result } from '@shared/types';
 
 /**
@@ -147,7 +147,7 @@ export async function runLua(
       return fail('sandbox-violation', `Lua chunk failed to load: ${popError(L)}`);
     }
 
-    const T = lua.lua_newthread(L);
+    const T: LuaState = lua.lua_newthread(L);
     installHook(T, state, limits, startedAt);
 
     lua.lua_getglobal(T, to_luastring('run'));
@@ -235,8 +235,8 @@ type SandboxState = {
   pending: null | { binding: HostBinding; args: unknown[] };
 };
 
-function installHook(T: unknown, state: SandboxState, limits: SandboxLimits, startedAt: number): void {
-  const S = T as never;
+function installHook(T: LuaState, state: SandboxState, limits: SandboxLimits, startedAt: number): void {
+  const S = T;
   lua.lua_sethook(
     S,
     () => {
@@ -256,17 +256,16 @@ function installHook(T: unknown, state: SandboxState, limits: SandboxLimits, sta
 }
 
 function installHostTable(
-  L: unknown,
+  M: LuaState,
   bindings: HostBinding[],
   state: SandboxState,
   limits: SandboxLimits,
 ): void {
-  const M = L as never;
   lua.lua_newtable(M);
   for (const binding of bindings) {
     lua.lua_pushstring(M, to_luastring(binding.name));
-    lua.lua_pushjsfunction(M, (raw: unknown) => {
-      const S = raw as never;
+    lua.lua_pushjsfunction(M, (raw: LuaState) => {
+      const S = raw;
       if (state.hostCalls >= limits.hostCalls) {
         state.violation = 'host-call-limit';
         return lauxlib.luaL_error(S, to_luastring('host call budget exhausted'));
@@ -295,8 +294,8 @@ function errText(err: unknown): string {
   return err instanceof Error ? err.message : String(err);
 }
 
-function popError(L: unknown): string {
-  const S = L as never;
+function popError(L: LuaState): string {
+  const S = L;
   try {
     const raw = lua.lua_tojsstring(S, -1);
     lua.lua_pop(S, 1);
@@ -308,8 +307,8 @@ function popError(L: unknown): string {
 
 type Conv<T> = { ok: true; value: T } | { ok: false; message: string };
 
-function luaToJs(L: unknown, index: number, budget: number, depth = 0): Conv<unknown> {
-  const S = L as never;
+function luaToJs(L: LuaState, index: number, budget: number, depth = 0): Conv<unknown> {
+  const S = L;
   if (depth > 16) return { ok: false, message: 'Lua value nested too deeply.' };
   if (budget <= 0) return { ok: false, message: 'Lua value exceeds the node ceiling.' };
 
@@ -330,7 +329,7 @@ function luaToJs(L: unknown, index: number, budget: number, depth = 0): Conv<unk
   }
 }
 
-function tableToJs(S: never, index: number, budget: number, depth: number): Conv<unknown> {
+function tableToJs(S: LuaState, index: number, budget: number, depth: number): Conv<unknown> {
   const abs = lua.lua_absindex(S, index);
   let remaining = budget;
 
@@ -388,8 +387,8 @@ function tableToJs(S: never, index: number, budget: number, depth: number): Conv
   return { ok: true, value: obj };
 }
 
-function jsToLua(L: unknown, value: unknown, budget: number, depth = 0): Conv<true> {
-  const S = L as never;
+function jsToLua(L: LuaState, value: unknown, budget: number, depth = 0): Conv<true> {
+  const S = L;
   if (depth > 16) return { ok: false, message: 'Value nested too deeply for the sandbox.' };
   if (budget <= 0) return { ok: false, message: 'Value exceeds the node ceiling.' };
 
