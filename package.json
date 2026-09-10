@@ -1,0 +1,39 @@
+{
+  "name": "anascummis",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Conversational-first assistant with an authored personality, running on Cloudflare Workers.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "bun run build && wrangler dev",
+    "deploy": "bun run build && wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:migrate:local": "wrangler d1 migrations apply anascummis-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply anascummis-db --remote",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "fengari": "0.1.4",
+    "hono": "4.6.14",
+    "inkjs": "2.3.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.8.71",
+    "@cloudflare/workers-types": "4.20260702.1",
+    "@tailwindcss/vite": "4.0.0",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "@vitejs/plugin-react": "4.3.4",
+    "tailwindcss": "4.0.0",
+    "typescript": "5.7.2",
+    "vite": "6.0.7",
+    "vitest": "2.1.9",
+    "wrangler": "4.131.0"
+  }
+}

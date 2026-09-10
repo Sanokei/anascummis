@@ -1,0 +1,25 @@
+# Copy to .dev.vars for local development. Never commit the real file.
+# Every secret below is optional: the product reports an honest unavailable
+# state instead of pretending a provider exists.
+
+# Signs sessions and encrypts third-party tokens at rest. Required in production.
+SESSION_SECRET=
+
+# Conversational model. Falls back to Workers AI when absent.
+DEEPSEEK_API_KEY=
+
+# Transcription fallback when Workers AI is not bound.
+OPENAI_API_KEY=
+
+# Web search. Falls back to a keyless HTML endpoint when absent.
+BRAVE_SEARCH_KEY=
+
+# Social login. Each provider is independently optional.
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+
+# Cloudflare resource authorisation, separate from application login.
+CLOUDFLARE_OAUTH_CLIENT_ID=
+CLOUDFLARE_OAUTH_CLIENT_SECRET=

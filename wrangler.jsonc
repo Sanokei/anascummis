@@ -1,0 +1,46 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "anascummis",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "dist/client",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/auth/*", "/healthz"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "anascummis-db",
+      "database_id": "PLACEHOLDER_D1_ID",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "kv_namespaces": [
+    { "binding": "CACHE", "id": "PLACEHOLDER_KV_ID" }
+  ],
+  "durable_objects": {
+    "bindings": [
+      { "name": "SESSION", "class_name": "SessionCoordinator" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["SessionCoordinator"] }
+  ],
+  "ai": { "binding": "AI" },
+  "vars": {
+    "APP_NAME": "Anascummis",
+    "DEEPSEEK_BASE_URL": "https://api.deepseek.com/v1",
+    "DEEPSEEK_MODEL": "deepseek-chat",
+    "DEEPSEEK_MODEL_PRO": "deepseek-reasoner",
+    "WORKERS_AI_CHAT_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "WORKERS_AI_TRANSCRIBE_MODEL": "@cf/openai/whisper-large-v3-turbo",
+    "GUEST_RETENTION_SECONDS": "86400",
+    "MAX_STORY_DISPATCHES_PER_TURN": "3",
+    "MAX_FORGE_ATTEMPTS": "3"
+  }
+}
