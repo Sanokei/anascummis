@@ -16,7 +16,7 @@ export default defineWorkersConfig({
         // Durable Object bindings resolve their class from this module.
         main: './tests/helpers/worker-entry.ts',
         miniflare: {
-          compatibilityDate: '2026-06-01',
+          compatibilityDate: '2025-09-06',
           compatibilityFlags: ['nodejs_compat'],
           d1Databases: ['DB'],
           kvNamespaces: ['CACHE'],

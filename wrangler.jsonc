@@ -2,7 +2,10 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "anascummis",
   "main": "src/worker/index.ts",
-  "compatibility_date": "2026-06-01",
+  // Held at the date the pinned test runtime supports. The installed
+  // miniflare caps here, so a later date would mean tests and production
+  // exercised different runtime behaviour while appearing to agree.
+  "compatibility_date": "2025-09-06",
   "compatibility_flags": ["nodejs_compat"],
   // Fengari eagerly loads every Lua standard library, so importing it drags in
   // `tmp` (for os.tmpname) and `readline-sync` (for debug.debug). Both call

@@ -325,7 +325,7 @@ describe('export and deletion', () => {
     expect(await countRows('memory_index')).toBe(0);
   });
 
-  it('reports a count that is not the number of memories removed', async () => {
+  it('counts memories rather than cascaded index rows', async () => {
     const identity = await seedUser();
     await manager().remember(identity, {
       scope: 'topic',
@@ -337,13 +337,12 @@ describe('export and deletion', () => {
       indexKeys: ['one', 'two'],
     });
 
-    // One memory went in. D1 reports `meta.changes` for the whole statement,
-    // and the two index rows deleted by the cascade are counted alongside it,
-    // so the number `deleteAll` returns is 3. Anything shown to the user as
-    // "N memories deleted" is therefore wrong. Pinned here as the behaviour
-    // that exists, not the behaviour that is wanted.
+    // One memory went in, carrying two index keys. Reading `meta.changes` off
+    // the delete would report 3, because D1 counts the index rows removed by
+    // the cascade in the same figure. The count is taken before the delete so
+    // the number shown to the user is the number of memories.
     const removed = await manager().deleteAll(identity);
-    expect(removed.ok && removed.value).toBe(3);
+    expect(removed.ok && removed.value).toBe(1);
   });
 
   it('leaves another account untouched', async () => {

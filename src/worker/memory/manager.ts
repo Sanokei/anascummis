@@ -274,14 +274,33 @@ export class MemoryManager {
     });
   }
 
-  /** Deletion overrides pins and removes the associated index entries. */
+  /**
+   * Deletion overrides pins and removes the associated index entries.
+   *
+   * The count is taken before the delete rather than read from `meta.changes`.
+   * D1 reports one figure for the whole statement, and rows removed from
+   * `memory_index` by the cascade are counted alongside the memories, so a
+   * single memory with two index keys would otherwise be reported as three
+   * deletions to the user.
+   */
   async deleteAll(identity: Identity): Promise<Result<number>> {
     if (identity.kind !== 'user') return fail('not-authorised', 'Guests have no durable memory to delete.');
-    const res = await this.env.DB.prepare('DELETE FROM memory_files WHERE user_id = ?')
+
+    const counted = await this.env.DB.prepare(
+      'SELECT COUNT(*) AS n FROM memory_files WHERE user_id = ?',
+    )
+      .bind(identity.userId)
+      .first<{ n: number }>();
+    const removed = counted?.n ?? 0;
+
+    await this.env.DB.prepare('DELETE FROM memory_files WHERE user_id = ?')
       .bind(identity.userId)
       .run();
+    // The cascade covers this, but an orphaned index row would otherwise
+    // survive and keep routing retrieval at a memory that no longer exists.
     await this.env.DB.prepare('DELETE FROM memory_index WHERE user_id = ?').bind(identity.userId).run();
-    return ok(res.meta.changes ?? 0);
+
+    return ok(removed);
   }
 
   /* ---------------- assembly ---------------- */
