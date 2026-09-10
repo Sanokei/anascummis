@@ -10,12 +10,15 @@ export interface Env {
   CACHE: KVNamespace;
   SESSION: DurableObjectNamespace;
   AI?: Ai;
+  /** Durable store for page and screenshot images used by vision retrieval. */
+  VISION?: R2Bucket;
 
   // Plain vars.
   APP_NAME: string;
   DEEPSEEK_BASE_URL: string;
   DEEPSEEK_MODEL: string;
   DEEPSEEK_MODEL_PRO: string;
+  DEEPSEEK_MODEL_VISION: string;
   WORKERS_AI_CHAT_MODEL: string;
   WORKERS_AI_TRANSCRIBE_MODEL: string;
   GUEST_RETENTION_SECONDS: string;
