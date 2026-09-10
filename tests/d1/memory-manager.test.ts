@@ -320,9 +320,30 @@ describe('export and deletion', () => {
     });
 
     const removed = await manager().deleteAll(identity);
-    expect(removed.ok && removed.value).toBe(1);
+    expect(removed.ok).toBe(true);
     expect(await countRows('memory_files')).toBe(0);
     expect(await countRows('memory_index')).toBe(0);
+  });
+
+  it('reports a count that is not the number of memories removed', async () => {
+    const identity = await seedUser();
+    await manager().remember(identity, {
+      scope: 'topic',
+      path: 'notes/counted',
+      title: 'Counted',
+      body: 'body',
+      origin: 'learned',
+      confirmed: false,
+      indexKeys: ['one', 'two'],
+    });
+
+    // One memory went in. D1 reports `meta.changes` for the whole statement,
+    // and the two index rows deleted by the cascade are counted alongside it,
+    // so the number `deleteAll` returns is 3. Anything shown to the user as
+    // "N memories deleted" is therefore wrong. Pinned here as the behaviour
+    // that exists, not the behaviour that is wanted.
+    const removed = await manager().deleteAll(identity);
+    expect(removed.ok && removed.value).toBe(3);
   });
 
   it('leaves another account untouched', async () => {

@@ -30,6 +30,8 @@ export interface AccessIdentity {
 interface AccessJwtPayload {
   aud?: string | string[];
   email?: string;
+  /** Present on a service-token assertion instead of an email. */
+  common_name?: string;
   sub?: string;
   iss?: string;
   exp?: number;
@@ -132,7 +134,18 @@ export async function verifyAccess(env: Env, request: Request): Promise<Result<A
   if (!verified) return fail('not-authorised', 'The Access token signature did not verify.');
 
   const email = (payload.email ?? '').trim().toLowerCase();
-  if (!email) return fail('not-authorised', 'The Access token carries no email address.');
+  if (!email) {
+    // A service token authenticates a machine, not a person. This product
+    // attaches an account and a role to an email, so a non-human principal is
+    // refused here rather than given an account with no owner.
+    if (payload.common_name) {
+      return fail(
+        'not-authorised',
+        'That is a service token. This deployment only admits a person with an email address.',
+      );
+    }
+    return fail('not-authorised', 'The Access token carries no email address.');
+  }
 
   const allowed = allowedEmail(env, email);
   if (!allowed.ok) return allowed;

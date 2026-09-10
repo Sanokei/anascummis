@@ -64,6 +64,47 @@ The governing rule is that no layer can authorise itself:
 
 ---
 
+## Access
+
+**This deployment is closed.** Cloudflare Access sits in front of `anascummis.com`
+and is the only way in. Reaching the site at all requires an identity that satisfies the
+Access policy; there is no public entry point and no guest path from the internet.
+
+The gate is enforced twice, deliberately:
+
+1. **At the edge.** Cloudflare Access intercepts before the Worker runs. An unauthenticated
+   request is redirected to the Access login and never reaches this code.
+2. **In the Worker.** Every request re-verifies the forwarded JWT: the RS256 signature
+   against the team's published keys, the audience against this application's own tag, the
+   issuer, and the expiry. The token's own `alg` field is not trusted, so `alg: none` and
+   HMAC-confusion attempts are refused rather than parsed.
+
+The second check is not redundant. A request that reached the Worker by some other path
+would carry whatever header it liked, and `run_worker_first` is `true` so the gate covers
+static assets as well as the API. If the edge policy were ever removed, the Worker would
+still serve nothing.
+
+`ACCESS_REQUIRED` defaults to on and **fails closed**: with Access unconfigured, or a token
+that does not verify, nothing is served at all.
+
+### Roles
+
+Access answers whether someone may reach the Worker. A role answers what they can do once
+inside, which is a separate question.
+
+| Role | Granted by |
+| --- | --- |
+| `super-admin` | Membership of `SUPER_ADMIN_EMAILS`, checked on every sign-in |
+| `admin` | Assigned directly in the database |
+| `member` | Everyone else who satisfies the Access policy |
+
+The super-admin list is the authority, so removing an address demotes that account on its
+next sign-in rather than leaving a stale administrator. A role is never inferred from the
+email domain, which means widening the Access policy cannot accidentally mint admins.
+
+Service tokens are refused. They authenticate a machine and carry no email, and this
+product attaches an account and a role to a person.
+
 ## Requirements
 
 | Tool | Version used here |
@@ -83,6 +124,19 @@ cd anascummis
 bun install
 ```
 
+### Set up Cloudflare Access
+
+Create a self-hosted Access application for the hostname, add a policy naming who may enter,
+then put the team domain and the application's audience tag into `wrangler.jsonc`. Neither is
+a secret: the team domain is public and the audience tag identifies the application without
+authorising anything by itself.
+
+```bash
+bunx wrangler deploy --dry-run
+```
+
+Confirm `CF_ACCESS_TEAM_DOMAIN` and `CF_ACCESS_AUD` are listed before deploying for real.
+
 ### Create the Cloudflare resources
 
 ```bash
@@ -91,6 +145,10 @@ bunx wrangler d1 create anascummis-db
 
 ```bash
 bunx wrangler kv namespace create CACHE
+```
+
+```bash
+bunx wrangler r2 bucket create anascummis-vision
 ```
 
 Copy the returned `database_id` and KV `id` into `wrangler.jsonc`, replacing
@@ -127,6 +185,7 @@ because it signs sessions and encrypts third-party tokens at rest.
 | `GOOGLE_CLIENT_ID` / `_SECRET` | Google sign-in is hidden. |
 | `GITHUB_CLIENT_ID` / `_SECRET` | GitHub sign-in is hidden. |
 | `CLOUDFLARE_OAUTH_CLIENT_ID` / `_SECRET` | Connect Cloudflare is unavailable. |
+| `SUPER_ADMIN_EMAILS` | Nobody is a super-admin. Kept as a secret so no address is committed. |
 
 For production, set each one as a real secret rather than a var:
 

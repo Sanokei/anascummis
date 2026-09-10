@@ -80,7 +80,22 @@ not support file streaming.
 keyless path is fragile by nature: when its markup stops parsing, it returns
 `upstream-error` saying no sources were retrieved, rather than an invented result set.
 
-## 6. What is not implemented
+## 6. Cloudflare Access gates the whole deployment
+
+**Specification:** guest use is supported, with transient context and no durable memory.
+
+**Built:** guest support exists in full and is exercised by the code, but the deployment is
+closed behind Cloudflare Access at the operator's request. Nobody reaches the site without
+satisfying the Access policy, so in practice there are currently no guests.
+
+**Why:** the operator asked for it while the product is unfinished. This is a deployment
+decision, not a change to the product: setting `ACCESS_REQUIRED` to `false` restores the
+guest path without touching any other code.
+
+**What this costs:** the health check is behind Access too, because the Access policy covers
+the hostname rather than a path. An uptime monitor would need a bypass policy for `/healthz`.
+
+## 7. What is not implemented
 
 These are absent, not stubbed as if working:
 

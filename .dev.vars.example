@@ -23,3 +23,11 @@ GITHUB_CLIENT_SECRET=
 # Cloudflare resource authorisation, separate from application login.
 CLOUDFLARE_OAUTH_CLIENT_ID=
 CLOUDFLARE_OAUTH_CLIENT_SECRET=
+
+# Comma-separated addresses granted the super-admin role on first sign-in.
+# Kept as a secret rather than a var so no address is committed to the repo.
+SUPER_ADMIN_EMAILS=
+
+# For local development only. Setting this to false disables the Access gate,
+# which is why it lives here and not in wrangler.jsonc.
+# ACCESS_REQUIRED=false

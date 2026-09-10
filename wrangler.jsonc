@@ -21,7 +21,11 @@
     "directory": "dist/client",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*", "/auth/*", "/healthz"]
+    // Everything runs the Worker first so the Access gate is authoritative.
+    // With a path list here, static assets were served straight from the
+    // binding and the in-Worker gate never saw them: if the edge Access policy
+    // were ever removed, the client shell would have been public.
+    "run_worker_first": true
   },
   "d1_databases": [
     {
