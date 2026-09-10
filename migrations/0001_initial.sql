@@ -186,7 +186,18 @@ CREATE TABLE action_receipts (
 CREATE UNIQUE INDEX idx_receipt_idem ON action_receipts(capability_id, idempotency_key);
 CREATE INDEX idx_receipt_session ON action_receipts(session_id, intent_at);
 
+-- Skills live in three tiers.
+--
+--   global    ships with the Worker, identical for everyone, owner_id ''
+--   user      one account's own staged packages
+--   session   one guest's packages, cleaned up with the session
+--
+-- A user- or session-scoped package can never shadow a global name: the
+-- staging path rejects the collision, so installing your own "cloudflare"
+-- skill does not silently replace the trusted one.
 CREATE TABLE skill_catalog (
+  owner_scope   TEXT NOT NULL CHECK (owner_scope IN ('global','user','session')),
+  owner_id      TEXT NOT NULL DEFAULT '',
   qualified_name TEXT NOT NULL,
   revision      TEXT NOT NULL,
   origin        TEXT NOT NULL,
@@ -200,10 +211,15 @@ CREATE TABLE skill_catalog (
   trust         TEXT NOT NULL CHECK (trust IN ('bundled','vetted','staged','revoked')),
   body          TEXT NOT NULL,
   resources     TEXT NOT NULL DEFAULT '{}',
+  expires_at    TEXT,
   staged_at     TEXT NOT NULL,
-  PRIMARY KEY (qualified_name, revision)
+  PRIMARY KEY (owner_scope, owner_id, qualified_name, revision)
 );
 CREATE INDEX idx_skill_trust ON skill_catalog(trust);
+CREATE INDEX idx_skill_owner ON skill_catalog(owner_scope, owner_id);
+-- One global name maps to one origin, so two packages cannot both claim it.
+CREATE UNIQUE INDEX idx_skill_global_name
+  ON skill_catalog(qualified_name, revision) WHERE owner_scope = 'global';
 
 CREATE TABLE skill_runs (
   id            TEXT PRIMARY KEY,

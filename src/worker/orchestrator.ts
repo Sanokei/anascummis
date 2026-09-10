@@ -433,7 +433,11 @@ export class Orchestrator {
     let skillInstructions = '';
     let activeSkill: { name: string; version: string; origin: string } | undefined;
     if (selection.kind === 'selected') {
-      const activated = await this.skills.activate(selection.skill, input.permissions);
+      const activated = await this.skills.activate(
+        input.req.identity,
+        selection.skill,
+        input.permissions,
+      );
       if (activated.ok) {
         skillInstructions = activated.value.instructions;
         activeSkill = {

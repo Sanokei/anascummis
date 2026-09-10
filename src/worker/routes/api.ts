@@ -18,6 +18,12 @@ import { visionRoute } from '../providers/vision';
 import { VisionMemoryStore } from '../memory/vision-store';
 import { sha256Hex, randomId } from '../crypto';
 import { attachmentMetaKey } from '../registry/vision-natives';
+import { ownerFor } from '../skills/catalog';
+import {
+  collectionContext,
+  COLLECTION_DISCLOSURE,
+  AUDIO_DISCLOSURE,
+} from '../policy/collection';
 
 /**
  * JSON API.
@@ -317,9 +323,17 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
     const registry = buildRegistry(c.env);
     const harness = new SkillHarness(c.env, registry);
     const catalog = new SkillCatalog(c.env);
+    const collection = await collectionContext(c.env, ctx.identity);
     return c.json({
-      skills: await catalog.list(true),
+      // Only the global tier plus this caller's own, never anybody else's.
+      skills: await catalog.list(ownerFor(ctx.identity), true),
       recentRuns: await harness.runHistory(ctx.identity, 20),
+      optionalCollection: {
+        enabled: collection.optionalConsented,
+        note: collection.optionalConsented
+          ? 'Usage records are being kept. Switching this off deletes them.'
+          : 'Usage records are not being kept, so this list stays empty.',
+      },
     });
   });
 
@@ -402,6 +416,26 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
     });
   });
 
+  /**
+   * What this deployment actually stores, read from the same table the
+   * enforcement uses. The policy page renders this rather than restating it,
+   * so the two cannot drift apart.
+   */
+  app.get('/api/collection', async (c) => {
+    const ctx = await withIdentity(c);
+    const collection = await collectionContext(c.env, ctx.identity);
+    return c.json({
+      categories: COLLECTION_DISCLOSURE,
+      audio: AUDIO_DISCLOSURE,
+      current: {
+        identity: ctx.identity.kind,
+        optionalCollection: collection.optionalConsented,
+        conversationStorage: collection.persistenceEnabled,
+      },
+      policyVersion: CONSENT_POLICY_VERSION,
+    });
+  });
+
   app.post('/api/consent', async (c) => {
     const ctx = await withIdentity(c);
     const blocked = await guardCsrf(c, ctx);
@@ -423,7 +457,21 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
     )
       .bind(consentSubject(ctx.identity), consent.analytics ? 1 : 0, consent.policyVersion, consent.decidedAt)
       .run();
-    return c.json({ consent });
+
+    // Withdrawing consent removes what was collected under it. Stopping future
+    // collection while keeping the old records would not be a withdrawal.
+    let removed = 0;
+    if (!consent.analytics) {
+      const harness = new SkillHarness(c.env, buildRegistry(c.env));
+      removed = await harness.purgeOptionalRecords(ctx.identity);
+    }
+    return c.json({
+      consent,
+      removedRecords: removed,
+      note: consent.analytics
+        ? 'Usage records will be kept until you switch this off.'
+        : 'Optional collection is off and any records kept under it have been deleted.',
+    });
   });
 }
 

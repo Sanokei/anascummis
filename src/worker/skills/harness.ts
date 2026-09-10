@@ -1,11 +1,17 @@
 import type { Identity, PermissionName, SkillRunRecord } from '@shared/types';
 import { fail, ok, type Result } from '@shared/types';
 import type { Env } from '../env';
-import { SkillCatalog, type SkillMetadata, type SkillPackage } from './catalog';
+import {
+  SkillCatalog,
+  ownerFor,
+  type SkillMetadata,
+  type SkillPackage,
+} from './catalog';
 import { PermissionEnvelope } from '../policy/permissions';
 import { TaskBudget } from '../policy/budget';
 import { randomId } from '../crypto';
 import type { CapabilityRegistry } from '../registry/registry';
+import { collectionContext, mayRecord, redactTaskText } from '../policy/collection';
 
 /**
  * Skill Discovery and Execution Harness.
@@ -59,19 +65,22 @@ export class SkillHarness {
   }
 
   /**
-   * Chooses at most one skill from the installed catalogue.
+   * Chooses at most one skill from what this caller can see: the global tier
+   * plus their own.
    *
    * A trusted, enabled skill inside already granted permissions activates
    * without the user naming it. `explicit-only` and `disabled` are respected,
    * and nothing is invented that discovery did not return.
    */
   async select(req: DiscoveryRequest): Promise<SelectionOutcome> {
-    const available = await this.catalog.list();
+    const available = await this.catalog.list(ownerFor(req.identity));
 
     if (req.explicitName) {
-      const named = available.find((s) => s.qualifiedName === req.explicitName || s.title === req.explicitName);
+      const named = available.find(
+        (s) => s.qualifiedName === req.explicitName || s.title === req.explicitName,
+      );
       if (!named) {
-        return { kind: 'no-skill-needed', reason: `No skill named "${req.explicitName}" is installed.` };
+        return { kind: 'no-skill-needed', reason: `No skill named "${req.explicitName}" is available to you.` };
       }
       return this.gate(named, req.permissions, 'The user named this skill.');
     }
@@ -83,6 +92,8 @@ export class SkillHarness {
 
     const scored = available
       .filter((s) => s.invocation === 'automatic')
+      // Automatic activation is for vetted material. A staged package the user
+      // added still has to be named, because staging is not approval.
       .filter((s) => s.trust === 'bundled' || s.trust === 'vetted')
       .map((skill) => {
         const hay = `${skill.title} ${skill.description} ${skill.qualifiedName}`.toLowerCase();
@@ -96,7 +107,7 @@ export class SkillHarness {
     if (!best) {
       return {
         kind: 'no-skill-needed',
-        reason: 'No installed skill matches this request closely enough to be worth loading.',
+        reason: 'No available skill matches this request closely enough to be worth loading.',
       };
     }
     return this.gate(best.skill, req.permissions, `Matched on: ${best.hits.join(', ')}.`);
@@ -133,10 +144,11 @@ export class SkillHarness {
    * remedies.
    */
   async activate(
+    identity: Identity,
     metadata: SkillMetadata,
     sessionPermissions: PermissionEnvelope,
   ): Promise<Result<ActivationResult>> {
-    const loaded = await this.catalog.load(metadata.qualifiedName, metadata.revision);
+    const loaded = await this.catalog.load(ownerFor(identity), metadata.qualifiedName, metadata.revision);
     if (!loaded.ok) return loaded;
     const skill = loaded.value;
 
@@ -173,11 +185,29 @@ export class SkillHarness {
     });
   }
 
+  /**
+   * Records a run, subject to the collection rules.
+   *
+   * A run record is optional collection: it exists to understand how the
+   * product is used, not to answer the request. Without consent nothing is
+   * written at all, rather than being written in an anonymised form. Where a
+   * record is written, the request text is only kept when conversation storage
+   * is separately permitted.
+   */
   async recordRun(
     identity: Identity,
     input: Omit<SkillRunRecord, 'id' | 'at'>,
-  ): Promise<SkillRunRecord> {
-    const record: SkillRunRecord = { ...input, id: randomId('run'), at: new Date().toISOString() };
+  ): Promise<SkillRunRecord | null> {
+    const ctx = await collectionContext(this.env, identity);
+    if (!mayRecord('optional', ctx).allowed) return null;
+
+    const record: SkillRunRecord = {
+      ...input,
+      task: redactTaskText(input.task, ctx),
+      id: randomId('run'),
+      at: new Date().toISOString(),
+    };
+
     await this.env.DB.prepare(
       `INSERT INTO skill_runs
          (id, session_id, user_id, qualified_name, revision, origin, task,
@@ -191,7 +221,7 @@ export class SkillHarness {
         record.skillName,
         record.skillVersion,
         record.skillOrigin,
-        record.task.slice(0, 500),
+        record.task,
         JSON.stringify(record.capabilityVersions),
         JSON.stringify(record.permissions),
         record.outcome,
@@ -222,6 +252,19 @@ export class SkillHarness {
     }));
   }
 
+  /** Withdrawing consent removes what was already collected under it. */
+  async purgeOptionalRecords(identity: Identity): Promise<number> {
+    const res =
+      identity.kind === 'user'
+        ? await this.env.DB.prepare('DELETE FROM skill_runs WHERE user_id = ?')
+            .bind(identity.userId)
+            .run()
+        : await this.env.DB.prepare('DELETE FROM skill_runs WHERE session_id = ?')
+            .bind(identity.sessionId)
+            .run();
+    return res.meta.changes ?? 0;
+  }
+
   /**
    * Remote discovery.
    *
@@ -232,7 +275,7 @@ export class SkillHarness {
   async searchPublicSources(_query: string): Promise<Result<SkillMetadata[]>> {
     return fail(
       'not-authorised',
-      'Searching public skill sources needs an approval step that is not configured on this deployment. Only the bundled and staged catalogue was searched.',
+      'Searching public skill sources needs an approval step that is not configured on this deployment. Only the available catalogue was searched.',
     );
   }
 }

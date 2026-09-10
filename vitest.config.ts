@@ -13,6 +13,8 @@ export default defineWorkersConfig({
     poolOptions: {
       workers: {
         singleWorker: true,
+        // Durable Object bindings resolve their class from this module.
+        main: './tests/helpers/worker-entry.ts',
         miniflare: {
           compatibilityDate: '2026-06-01',
           compatibilityFlags: ['nodejs_compat'],

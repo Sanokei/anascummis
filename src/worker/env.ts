@@ -26,6 +26,14 @@ export interface Env {
   MAX_FORGE_ATTEMPTS: string;
   APP_URL?: string;
 
+  // Cloudflare Access gate. When ACCESS_REQUIRED is anything but "false" the
+  // Worker fails closed: no Access, nothing served.
+  ACCESS_REQUIRED?: string;
+  CF_ACCESS_TEAM_DOMAIN?: string;
+  CF_ACCESS_AUD?: string;
+  /** Comma-separated domains permitted behind the Access policy. */
+  ACCESS_ALLOWED_DOMAINS?: string;
+
   // Secrets. All optional: the product degrades to an honest unavailable state
   // rather than pretending a provider exists.
   DEEPSEEK_API_KEY?: string;
@@ -38,6 +46,8 @@ export interface Env {
   GITHUB_CLIENT_SECRET?: string;
   CLOUDFLARE_OAUTH_CLIENT_ID?: string;
   CLOUDFLARE_OAUTH_CLIENT_SECRET?: string;
+  /** Comma-separated addresses granted the super-admin role on first sign-in. */
+  SUPER_ADMIN_EMAILS?: string;
 }
 
 /** Names of every secret binding. Used to assert none of them leak outward. */
@@ -52,6 +62,7 @@ export const SECRET_BINDING_NAMES = [
   'GITHUB_CLIENT_SECRET',
   'CLOUDFLARE_OAUTH_CLIENT_ID',
   'CLOUDFLARE_OAUTH_CLIENT_SECRET',
+  'SUPER_ADMIN_EMAILS',
 ] as const;
 
 export type SecretName = (typeof SECRET_BINDING_NAMES)[number];

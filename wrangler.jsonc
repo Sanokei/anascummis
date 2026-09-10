@@ -4,7 +4,18 @@
   "main": "src/worker/index.ts",
   "compatibility_date": "2026-06-01",
   "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": true,
+  // Fengari eagerly loads every Lua standard library, so importing it drags in
+  // `tmp` (for os.tmpname) and `readline-sync` (for debug.debug). Both call
+  // process.binding, which workerd does not implement. The sandbox removes
+  // `os` and `debug` anyway, so these stubs only have to satisfy the imports.
+  "alias": {
+    "tmp": "./src/worker/lua/tmp-stub.ts",
+    "readline-sync": "./src/worker/lua/readline-stub.ts"
+  },
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "anascummis.com", "custom_domain": true }
+  ],
   "observability": { "enabled": true },
   "assets": {
     "directory": "dist/client",
@@ -16,12 +27,12 @@
     {
       "binding": "DB",
       "database_name": "anascummis-db",
-      "database_id": "PLACEHOLDER_D1_ID",
+      "database_id": "6c041ed8-d93c-4156-afd9-cebb8da88f9a",
       "migrations_dir": "migrations"
     }
   ],
   "kv_namespaces": [
-    { "binding": "CACHE", "id": "PLACEHOLDER_KV_ID" }
+    { "binding": "CACHE", "id": "2716ed1f396447f19583bd0f0b710888" }
   ],
   "durable_objects": {
     "bindings": [
@@ -37,6 +48,13 @@
   ],
   "vars": {
     "APP_NAME": "Anascummis",
+    "APP_URL": "https://anascummis.com",
+    "ACCESS_REQUIRED": "true",
+    "ACCESS_ALLOWED_DOMAINS": "",
+    // Not secrets: the team domain is public and the audience tag identifies
+    // the application without authorising anything on its own.
+    "CF_ACCESS_TEAM_DOMAIN": "kinoinstrument.cloudflareaccess.com",
+    "CF_ACCESS_AUD": "6ef46bd749c532b9237f201b49d1068e8ef6ee376afee20497e4d3cbd6768d41",
     "DEEPSEEK_BASE_URL": "https://api.deepseek.com/v1",
     "DEEPSEEK_MODEL": "deepseek-flash",
     "DEEPSEEK_MODEL_PRO": "deepseek-reasoner",

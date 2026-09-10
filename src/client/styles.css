@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+/*
+ * Anascummis is a piece of equipment, not a consumer app: dark ground, one
+ * restrained accent, and typography that separates the conversation from the
+ * instrumentation around it. Nothing glows, nothing gradients.
+ */
+
+@theme {
+  --color-ground: #0f0f0e;
+  --color-ground-raised: #171715;
+  --color-ground-sunken: #0a0a09;
+  --color-hairline: #2a2a26;
+  --color-hairline-bright: #3d3d37;
+
+  --color-ink: #ece8df;
+  --color-ink-dim: #9c978c;
+  --color-ink-faint: #6b675f;
+
+  --color-signal: #c98a3c;
+  --color-signal-dim: #8a5f2a;
+  --color-caution: #b5563f;
+  --color-affirm: #6f8f5c;
+
+  --font-sans: 'Inter var', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Menlo, monospace;
+
+  --radius-panel: 2px;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Text scale is a user preference, applied at the root so everything follows. */
+[data-text-scale] {
+  font-size: calc(15px * var(--text-scale, 1));
+}
+
+/* High contrast raises the hairlines and the dim text rather than inverting. */
+[data-contrast='high'] {
+  --color-hairline: #5a5a52;
+  --color-hairline-bright: #7d7d73;
+  --color-ink-dim: #cbc6bb;
+  --color-ink-faint: #a9a49a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+[data-motion='reduced'] * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Focus is always visible. The accent is reserved for it and for live state. */
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-signal-dim);
+  color: var(--color-ink);
+}
+
+/* Scrollbars match the panel rather than the OS default. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-hairline-bright) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-hairline-bright);
+  background-clip: content-box;
+}
+
+/*
+ * The orb's listening state. Deliberately slow and small: a settled shape with
+ * very restrained movement, not a progress indicator.
+ */
+@keyframes orb-settle {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.015);
+    opacity: 1;
+  }
+}
+
+.orb-listening {
+  animation: orb-settle 5.5s ease-in-out infinite;
+}
+
+/* A caption track that stays readable over the orb. */
+.caption-shadow {
+  text-shadow:
+    0 1px 2px var(--color-ground),
+    0 0 12px var(--color-ground);
+}
