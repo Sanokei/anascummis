@@ -16,6 +16,7 @@ import { PermissionEnvelope, defaultEnvelope } from './policy/permissions';
 import { MemoryManager, type Mission } from './memory/manager';
 import { SessionClient, type SessionSnapshot } from './do/session-coordinator';
 import { SkillHarness } from './skills/harness';
+import { ensureBundledSkills } from './skills/seed';
 import { resolveChoice } from './ink/resolver';
 import { evaluate, chooseIndex, type ActionOutcome } from './ink/runtime';
 import { capabilityIdToExternalName } from './ink/harness';
@@ -423,7 +424,9 @@ export class Orchestrator {
       });
     }
 
-    // A skill activates only when one genuinely helps.
+    // A skill activates only when one genuinely helps. Seeding first so the
+    // bundled packages are discoverable on a cold database.
+    await ensureBundledSkills(this.env);
     const selection = await this.skills.select({
       intent: input.req.text,
       identity: input.req.identity,

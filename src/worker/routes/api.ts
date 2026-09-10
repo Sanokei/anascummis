@@ -11,6 +11,7 @@ import { CheckpointStore } from '../memory/checkpoints';
 import { buildRegistry } from '../registry/natives';
 import { SkillHarness } from '../skills/harness';
 import { SkillCatalog } from '../skills/catalog';
+import { ensureBundledSkills } from '../skills/seed';
 import { listStories, requiredCapabilities } from '../stories/registry';
 import { resolveRoute } from '../providers/model';
 import { transcriptionRoute, transcribe, buildVocabularyHint, shouldSuppressChunk } from '../providers/transcribe';
@@ -322,6 +323,9 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
     const ctx = await withIdentity(c);
     const registry = buildRegistry(c.env);
     const harness = new SkillHarness(c.env, registry);
+    // Idempotent, and keyed on content hash, so a redeploy that changed
+    // nothing writes nothing.
+    await ensureBundledSkills(c.env);
     const catalog = new SkillCatalog(c.env);
     const collection = await collectionContext(c.env, ctx.identity);
     return c.json({

@@ -8,8 +8,8 @@ silent substitution.
 **Specification:** "the Next.js application API surface through vinext/Vite".
 
 **Built:** Vite 6 with React 18, built to static assets and served by the Worker through the
-`assets` binding, with `run_worker_first` for `/api/*` and `/auth/*`. The Worker itself is a
-Hono router.
+`assets` binding, with `run_worker_first` set to `true` so the Access gate covers static assets
+as well as the API. The Worker itself is a Hono router.
 
 **Why:** The specification also requires testing the selected vinext features on Workers and
 notes Cloudflare's own beta and compatibility qualifications. The rest of the product depends on
