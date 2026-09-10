@@ -21,6 +21,12 @@ export interface Env {
   DEEPSEEK_MODEL_VISION: string;
   WORKERS_AI_CHAT_MODEL: string;
   WORKERS_AI_TRANSCRIBE_MODEL: string;
+  WORKERS_AI_IMAGE_MODEL: string;
+  /** Empty by default. See visionRoute for why nothing is chosen automatically. */
+  WORKERS_AI_VISION_MODEL?: string;
+  FAL_IMAGE_MODEL?: string;
+  /** Needed by the Browser Rendering REST call. Not a secret. */
+  CLOUDFLARE_ACCOUNT_ID?: string;
   GUEST_RETENTION_SECONDS: string;
   MAX_STORY_DISPATCHES_PER_TURN: string;
   MAX_FORGE_ATTEMPTS: string;
@@ -48,6 +54,13 @@ export interface Env {
   CLOUDFLARE_OAUTH_CLIENT_SECRET?: string;
   /** Comma-separated addresses granted the super-admin role on first sign-in. */
   SUPER_ADMIN_EMAILS?: string;
+  /** fal.ai key for image generation and other hosted compute. */
+  FAL_KEY?: string;
+  /**
+   * Scoped to Browser Rendering only. The deploy token is deliberately not
+   * reused: a rendering credential should only be able to render.
+   */
+  BROWSER_RENDERING_TOKEN?: string;
 }
 
 /** Names of every secret binding. Used to assert none of them leak outward. */
@@ -63,6 +76,8 @@ export const SECRET_BINDING_NAMES = [
   'CLOUDFLARE_OAUTH_CLIENT_ID',
   'CLOUDFLARE_OAUTH_CLIENT_SECRET',
   'SUPER_ADMIN_EMAILS',
+  'FAL_KEY',
+  'BROWSER_RENDERING_TOKEN',
 ] as const;
 
 export type SecretName = (typeof SECRET_BINDING_NAMES)[number];

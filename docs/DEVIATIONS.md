@@ -95,7 +95,47 @@ guest path without touching any other code.
 **What this costs:** the health check is behind Access too, because the Access policy covers
 the hostname rather than a path. An uptime monitor would need a bypass policy for `/healthz`.
 
-## 7. What is not implemented
+## 7. Lab review needs a capable vision model, and the cheap one is not
+
+**Requested:** the assistant should do its own visual QA, looking at what it
+generated or at a screenshot it took.
+
+**Built:** `image.generate`, `render.screenshot`, `lab.open`, `lab.review` and
+`lab.close`, each a registry capability passing the ordinary dispatcher gate.
+
+**The measurement that shaped it.** Two Workers AI vision models were tested on
+2026-09-10 against a rendered page headed "Anascummis", carrying a paragraph and
+a button labelled Stop:
+
+| Model | Result |
+| --- | --- |
+| `@cf/llava-hf/llava-1.5-7b-hf` | Answered, and was wrong. Reported "a single word 'text' on a black background". |
+| `@cf/meta/llama-3.2-11b-vision-instruct` | Capable, but refuses until the account accepts Meta's community licence. |
+
+So neither is wired in as a default. A model that is confidently wrong is worse
+for QA than one that is absent, because its verdict reads exactly like a correct
+one. Accepting a model licence is the operator's decision, not this code's, so
+that was not clicked through either.
+
+`WORKERS_AI_VISION_MODEL` is empty by default and exists for an operator who has
+made that choice. Otherwise review needs `DEEPSEEK_API_KEY`, whose vision model
+is verified multimodal.
+
+**A review verdict is not a test result.** The specification is explicit that a
+model saying it approves is not validation, and reviewing your own output is
+exactly where that fails. So a verdict travels with a caveat that cannot be
+dropped by a caller reading only `allMet`, a criterion the reviewer did not
+answer is recorded `unverifiable` rather than met, and nothing in the product
+gates a consequential action on a review passing.
+
+**Screenshots need a token the operator creates.** Browser Rendering works on
+this account and is verified, but it is reached through the REST API, which
+needs a credential. The deploy token was not reused: it can create and delete
+every resource on the account, and a rendering credential should only be able to
+render. Without `BROWSER_RENDERING_TOKEN`, screenshots report
+`missing-credential` naming the scope they need.
+
+## 8. What is not implemented
 
 These are absent, not stubbed as if working:
 

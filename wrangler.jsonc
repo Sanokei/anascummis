@@ -68,6 +68,9 @@
     "DEEPSEEK_MODEL_VISION": "deepseek-flash",
     "WORKERS_AI_CHAT_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "WORKERS_AI_TRANSCRIBE_MODEL": "@cf/openai/whisper-large-v3-turbo",
+    "WORKERS_AI_IMAGE_MODEL": "@cf/black-forest-labs/flux-1-schnell",
+    "FAL_IMAGE_MODEL": "fal-ai/flux/schnell",
+    "CLOUDFLARE_ACCOUNT_ID": "0355a48bdcf68a5e308d3eb51082eafe",
     "GUEST_RETENTION_SECONDS": "86400",
     "MAX_STORY_DISPATCHES_PER_TURN": "3",
     "MAX_FORGE_ATTEMPTS": "3"

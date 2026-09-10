@@ -24,6 +24,15 @@ GITHUB_CLIENT_SECRET=
 CLOUDFLARE_OAUTH_CLIENT_ID=
 CLOUDFLARE_OAUTH_CLIENT_SECRET=
 
+# fal.ai, for image generation and other hosted compute. Without it, image
+# generation falls back to the bound Workers AI model.
+FAL_KEY=
+
+# Scoped to Browser Rendering: Edit only. Screenshots are unavailable without
+# it. The deploy token is deliberately not reused: a rendering credential
+# should only be able to render.
+BROWSER_RENDERING_TOKEN=
+
 # Comma-separated addresses granted the super-admin role on first sign-in.
 # Kept as a secret rather than a var so no address is committed to the repo.
 SUPER_ADMIN_EMAILS=

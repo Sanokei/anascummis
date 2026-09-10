@@ -7,6 +7,7 @@ import { webSearch, toCitation } from '../providers/search';
 import { retrievePage } from '../providers/retrieval';
 import { randomId } from '../crypto';
 import { VISION_NATIVES } from './vision-natives';
+import { LAB_NATIVES } from './lab-natives';
 
 /**
  * Seed capabilities: trusted host adapters with registry contracts.
@@ -434,6 +435,10 @@ export function buildRegistry(env: Env): CapabilityRegistry {
     // Vision is registered the same way as everything else: a contract in the
     // registry, reachable from Ink through the ordinary EXTERNAL name mapping.
     ...VISION_NATIVES,
+    // Labs: generate or render, look at it, judge it against stated criteria.
+    // Three separate contracts rather than one "do a lab" call, so each is
+    // gated, charged and recorded on its own.
+    ...LAB_NATIVES,
   ]) {
     registry.registerNative(handler);
   }

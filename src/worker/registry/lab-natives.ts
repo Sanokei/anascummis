@@ -1,0 +1,478 @@
+import type { CapabilityContract, JsonSchema } from '@shared/types';
+import { fail, ok, type Result } from '@shared/types';
+import type { NativeContext, NativeHandler } from './registry';
+import { generateImage, imageRoute } from '../providers/images';
+import { captureScreenshot, screenshotRoute } from '../providers/screenshot';
+import { LabWorkspace, REVIEW_CAVEAT, type LabArtifact } from '../labs/lab';
+import { attachmentMetaKey } from './vision-natives';
+import { isSupportedImageType, visionRoute } from '../providers/vision';
+import { randomId } from '../crypto';
+
+/**
+ * Lab capabilities.
+ *
+ * Making something, looking at it, and reviewing it are three separate
+ * contracts rather than one "do a lab" call, so each passes the dispatcher's
+ * gate on its own and each is charged and recorded separately. That also means
+ * a lab cannot hide an unbounded number of generations inside one dispatch.
+ *
+ * Image bytes never cross the Lua boundary. These return ids and verdicts; the
+ * bytes stay host-side and only reach the vision model from the orchestrator.
+ */
+
+const VERSION = '1.0.0';
+
+function labContract(input: {
+  id: string;
+  title: string;
+  summary: string;
+  inputSchema: JsonSchema;
+  outputSchema: JsonSchema;
+  permissions: CapabilityContract['permissions'];
+  risk: CapabilityContract['risk'];
+  idempotent: boolean;
+  timeoutMs: number;
+  requiresConfirmation?: boolean;
+}): CapabilityContract {
+  return {
+    id: input.id,
+    version: VERSION,
+    sourceHash: `native:${input.id}@${VERSION}`,
+    kind: 'native',
+    title: input.title,
+    summary: input.summary,
+    owner: 'host',
+    workspaceScope: 'session',
+    input: input.inputSchema,
+    output: input.outputSchema,
+    permissions: input.permissions,
+    risk: input.risk,
+    requiresConfirmation: input.requiresConfirmation ?? false,
+    budget: {
+      timeoutMs: input.timeoutMs,
+      instructionLimit: 0,
+      outputBytes: 96 * 1024,
+      hostCalls: 1,
+    },
+    idempotent: input.idempotent,
+    cancellable: true,
+    validation: {
+      validatedAt: '2026-09-10T00:00:00.000Z',
+      validator: 'host-seed@1',
+      checks: [
+        { name: 'host-authored', passed: true },
+        { name: 'no-image-bytes-cross-sandbox', passed: true },
+      ],
+      passed: true,
+    },
+    status: 'installed',
+    installedAt: '2026-09-10T00:00:00.000Z',
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/* image.generate                                                      */
+/* ------------------------------------------------------------------ */
+
+const imageGenerateHandler: NativeHandler = {
+  contract: labContract({
+    id: 'image.generate',
+    title: 'Generate an image',
+    summary: 'Produces an image from a prompt and keeps it as a session attachment.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        prompt: { type: 'string', maxLength: 4000 },
+        model: { type: 'string', maxLength: 120, description: 'Provider model id.' },
+        width: { type: 'integer', minimum: 128, maximum: 2048 },
+        height: { type: 'integer', minimum: 128, maximum: 2048 },
+        steps: { type: 'integer', minimum: 1, maximum: 50 },
+        seed: { type: 'integer', minimum: 0, maximum: 2_147_483_647 },
+      },
+      required: ['prompt'],
+      additionalProperties: false,
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        attachmentId: { type: 'string' },
+        provider: { type: 'string' },
+        model: { type: 'string' },
+        bytes: { type: 'integer' },
+        note: { type: 'string' },
+      },
+    },
+    permissions: ['workspace.write'],
+    risk: 'low',
+    // Two calls with the same prompt are two generations, and cost twice.
+    idempotent: false,
+    timeoutMs: 90_000,
+  }),
+  async execute(ctx: NativeContext): Promise<Result<unknown>> {
+    const charged = ctx.chargeExternal();
+    if (!charged.ok) return charged;
+
+    const generated = await generateImage(ctx.env, {
+      prompt: String(ctx.args.prompt ?? ''),
+      ...(typeof ctx.args.model === 'string' ? { model: ctx.args.model } : {}),
+      ...(typeof ctx.args.width === 'number' ? { width: ctx.args.width } : {}),
+      ...(typeof ctx.args.height === 'number' ? { height: ctx.args.height } : {}),
+      ...(typeof ctx.args.steps === 'number' ? { steps: ctx.args.steps } : {}),
+      ...(typeof ctx.args.seed === 'number' ? { seed: ctx.args.seed } : {}),
+      signal: ctx.signal,
+    });
+    if (!generated.ok) return generated;
+
+    const attachmentId = await storeAttachment(ctx, {
+      bytes: generated.value.bytes,
+      mimeType: generated.value.mimeType,
+      width: generated.value.width,
+      height: generated.value.height,
+      origin: `${generated.value.provider}:${generated.value.model}`,
+    });
+
+    return ok({
+      attachmentId,
+      provider: generated.value.provider,
+      model: generated.value.model,
+      bytes: generated.value.bytes.byteLength,
+      note: `Generated by ${generated.value.model}. It is a session attachment and expires with the session unless it is stored.`,
+    });
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* render.screenshot                                                   */
+/* ------------------------------------------------------------------ */
+
+const screenshotHandler: NativeHandler = {
+  contract: labContract({
+    id: 'render.screenshot',
+    title: 'Screenshot a page',
+    summary: 'Renders supplied HTML or a permitted URL and keeps the picture as an attachment.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        html: { type: 'string', maxLength: 400_000 },
+        url: { type: 'string', maxLength: 2000 },
+        width: { type: 'integer', minimum: 320, maximum: 2560 },
+        height: { type: 'integer', minimum: 240, maximum: 2560 },
+        fullPage: { type: 'boolean' },
+        waitForSelector: { type: 'string', maxLength: 200 },
+      },
+      additionalProperties: false,
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        attachmentId: { type: 'string' },
+        source: { type: 'string' },
+        width: { type: 'integer' },
+        height: { type: 'integer' },
+        bytes: { type: 'integer' },
+      },
+    },
+    permissions: ['net.fetch', 'workspace.write'],
+    risk: 'low',
+    idempotent: true,
+    timeoutMs: 60_000,
+  }),
+  async execute(ctx: NativeContext): Promise<Result<unknown>> {
+    const charged = ctx.chargeExternal();
+    if (!charged.ok) return charged;
+
+    const shot = await captureScreenshot(ctx.env, {
+      ...(typeof ctx.args.html === 'string' ? { html: ctx.args.html } : {}),
+      ...(typeof ctx.args.url === 'string' ? { url: ctx.args.url } : {}),
+      ...(typeof ctx.args.width === 'number' ? { width: ctx.args.width } : {}),
+      ...(typeof ctx.args.height === 'number' ? { height: ctx.args.height } : {}),
+      ...(ctx.args.fullPage === true ? { fullPage: true } : {}),
+      ...(typeof ctx.args.waitForSelector === 'string'
+        ? { waitForSelector: ctx.args.waitForSelector }
+        : {}),
+      signal: ctx.signal,
+    });
+    if (!shot.ok) return shot;
+
+    const attachmentId = await storeAttachment(ctx, {
+      bytes: shot.value.bytes,
+      mimeType: shot.value.mimeType,
+      width: shot.value.width,
+      height: shot.value.height,
+      origin: `screenshot:${shot.value.source}`,
+    });
+
+    return ok({
+      attachmentId,
+      source: shot.value.source,
+      width: shot.value.width,
+      height: shot.value.height,
+      bytes: shot.value.bytes.byteLength,
+    });
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* lab.open                                                            */
+/* ------------------------------------------------------------------ */
+
+const labOpenHandler: NativeHandler = {
+  contract: labContract({
+    id: 'lab.open',
+    title: 'Open a lab',
+    summary: 'Starts a visual QA lab with the acceptance criteria the work will be judged against.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        title: { type: 'string', maxLength: 200, description: 'What the work is meant to be.' },
+        criteria: {
+          type: 'array',
+          items: { type: 'string', maxLength: 400 },
+          description: 'Checkable statements about the finished thing.',
+        },
+      },
+      required: ['title', 'criteria'],
+      additionalProperties: false,
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        labId: { type: 'string' },
+        criteria: { type: 'array', items: { type: 'string' } },
+        maxRounds: { type: 'integer' },
+      },
+    },
+    permissions: ['workspace.write'],
+    risk: 'none',
+    idempotent: false,
+    timeoutMs: 10_000,
+  }),
+  async execute(ctx: NativeContext): Promise<Result<unknown>> {
+    const criteria = Array.isArray(ctx.args.criteria) ? ctx.args.criteria.map(String) : [];
+    const workspace = new LabWorkspace(ctx.env);
+    const lab = await workspace.create(ctx.identity, {
+      title: String(ctx.args.title ?? ''),
+      criteria,
+    });
+    if (!lab.ok) return lab;
+    return ok({ labId: lab.value.id, criteria: lab.value.criteria, maxRounds: 5 });
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* lab.review                                                          */
+/* ------------------------------------------------------------------ */
+
+const labReviewHandler: NativeHandler = {
+  contract: labContract({
+    id: 'lab.review',
+    title: 'Look at an artifact and judge it',
+    summary:
+      'Shows an attachment to the vision model and returns per-criterion findings. An opinion about a picture, not a test result.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        labId: { type: 'string', maxLength: 80 },
+        attachmentId: { type: 'string', maxLength: 80 },
+        note: { type: 'string', maxLength: 500, description: 'What changed since the last round.' },
+      },
+      required: ['labId', 'attachmentId'],
+      additionalProperties: false,
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        roundId: { type: 'string' },
+        allMet: { type: 'boolean' },
+        findings: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              criterion: { type: 'string' },
+              outcome: { type: 'string' },
+              evidence: { type: 'string' },
+            },
+          },
+        },
+        otherObservations: { type: 'array', items: { type: 'string' } },
+        reviewedBy: { type: 'string' },
+        caveat: { type: 'string' },
+      },
+    },
+    permissions: ['workspace.read'],
+    risk: 'low',
+    idempotent: false,
+    timeoutMs: 60_000,
+  }),
+  async execute(ctx: NativeContext): Promise<Result<unknown>> {
+    const charged = ctx.chargeExternal();
+    if (!charged.ok) return charged;
+
+    const workspace = new LabWorkspace(ctx.env);
+    const lab = await workspace.load(ctx.identity, String(ctx.args.labId ?? ''));
+    if (!lab.ok) return lab;
+
+    const loaded = await loadAttachment(ctx, String(ctx.args.attachmentId ?? ''));
+    if (!loaded.ok) return loaded;
+
+    const artifact: LabArtifact = {
+      bytes: loaded.value.bytes,
+      mimeType: loaded.value.mimeType,
+      kind: loaded.value.origin.startsWith('screenshot:') ? 'rendered-page' : 'generated-image',
+      producedBy: loaded.value.origin,
+      inputSummary: loaded.value.origin,
+      width: loaded.value.width,
+      height: loaded.value.height,
+    };
+
+    const review = await workspace.review(ctx.identity, {
+      lab: lab.value,
+      artifact,
+      ...(typeof ctx.args.note === 'string' ? { note: ctx.args.note } : {}),
+      signal: ctx.signal,
+    });
+    if (!review.ok) return review;
+
+    return ok({
+      roundId: review.value.roundId,
+      allMet: review.value.allMet,
+      findings: review.value.findings,
+      otherObservations: review.value.otherObservations,
+      reviewedBy: review.value.reviewedBy,
+      // Travels with every verdict, so it cannot be dropped by a caller that
+      // only reads `allMet`.
+      caveat: REVIEW_CAVEAT,
+    });
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* lab.close                                                           */
+/* ------------------------------------------------------------------ */
+
+const labCloseHandler: NativeHandler = {
+  contract: labContract({
+    id: 'lab.close',
+    title: 'Close a lab',
+    summary: 'Ends a lab with a summary of what was achieved and what is still unresolved.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        labId: { type: 'string', maxLength: 80 },
+        summary: { type: 'string', maxLength: 2000 },
+      },
+      required: ['labId', 'summary'],
+      additionalProperties: false,
+    },
+    outputSchema: {
+      type: 'object',
+      properties: { labId: { type: 'string' }, rounds: { type: 'integer' } },
+    },
+    permissions: ['workspace.write'],
+    risk: 'none',
+    idempotent: true,
+    timeoutMs: 10_000,
+  }),
+  async execute(ctx: NativeContext): Promise<Result<unknown>> {
+    const workspace = new LabWorkspace(ctx.env);
+    const closed = await workspace.close(
+      ctx.identity,
+      String(ctx.args.labId ?? ''),
+      String(ctx.args.summary ?? ''),
+    );
+    if (!closed.ok) return closed;
+    return ok({ labId: closed.value.id, rounds: closed.value.rounds });
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* Attachment helpers                                                  */
+/* ------------------------------------------------------------------ */
+
+interface StoredBytes {
+  bytes: ArrayBuffer;
+  mimeType: 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp';
+  width: number | null;
+  height: number | null;
+  origin: string;
+}
+
+async function storeAttachment(
+  ctx: NativeContext,
+  input: {
+    bytes: ArrayBuffer;
+    mimeType: string;
+    width: number | null;
+    height: number | null;
+    origin: string;
+  },
+): Promise<string> {
+  const id = randomId('att').replace('att_', '');
+  const ttl = Math.max(60, Number.parseInt(ctx.env.GUEST_RETENTION_SECONDS, 10) || 86_400);
+  await ctx.env.CACHE.put(`att:${ctx.identity.sessionId}:${id}`, input.bytes, {
+    expirationTtl: ttl,
+  });
+  await ctx.env.CACHE.put(
+    attachmentMetaKey(ctx.identity.sessionId, id),
+    JSON.stringify({
+      mimeType: input.mimeType,
+      width: input.width,
+      height: input.height,
+      origin: input.origin,
+    }),
+    { expirationTtl: ttl },
+  );
+  return id;
+}
+
+async function loadAttachment(ctx: NativeContext, id: string): Promise<Result<StoredBytes>> {
+  if (!/^[a-zA-Z0-9_-]{4,80}$/.test(id)) {
+    return fail('invalid-argument', 'That is not a valid attachment id.');
+  }
+  const metaRaw = await ctx.env.CACHE.get(attachmentMetaKey(ctx.identity.sessionId, id));
+  if (!metaRaw) {
+    return fail('missing-capability', 'That attachment is not available in this session any more.');
+  }
+  const meta = JSON.parse(metaRaw) as {
+    mimeType: string;
+    width: number | null;
+    height: number | null;
+    origin: string;
+  };
+  if (!isSupportedImageType(meta.mimeType)) {
+    return fail('unsupported-runtime', `${meta.mimeType} is not a reviewable image type.`);
+  }
+  const bytes = await ctx.env.CACHE.get(`att:${ctx.identity.sessionId}:${id}`, 'arrayBuffer');
+  if (!bytes) return fail('missing-capability', 'That attachment has expired.');
+  return ok({
+    bytes,
+    mimeType: meta.mimeType,
+    width: meta.width,
+    height: meta.height,
+    origin: meta.origin,
+  });
+}
+
+export const LAB_NATIVES: NativeHandler[] = [
+  imageGenerateHandler,
+  screenshotHandler,
+  labOpenHandler,
+  labReviewHandler,
+  labCloseHandler,
+];
+
+/** Reported by the session endpoint so the interface never offers a dead path. */
+export function labAvailability(env: import('../env').Env) {
+  const images = imageRoute(env);
+  const shots = screenshotRoute(env);
+  const vision = visionRoute(env);
+  return {
+    imageGeneration: { provider: images.provider, model: images.model, reason: images.reason },
+    screenshots: { available: shots.available, reason: shots.reason },
+    // Reviewing needs the multimodal route, which is separate from generating.
+    // Reported from the same function the review path uses, so the interface
+    // cannot offer a lab whose review step would fail.
+    review: { available: vision.provider !== 'none', model: vision.model, reason: vision.reason },
+  };
+}

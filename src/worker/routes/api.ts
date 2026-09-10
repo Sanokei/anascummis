@@ -19,6 +19,7 @@ import { visionRoute } from '../providers/vision';
 import { VisionMemoryStore } from '../memory/vision-store';
 import { sha256Hex, randomId } from '../crypto';
 import { attachmentMetaKey } from '../registry/vision-natives';
+import { labAvailability } from '../registry/lab-natives';
 import { ownerFor } from '../skills/catalog';
 import {
   collectionContext,
@@ -93,6 +94,7 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
         speech: { provider: speech.provider, model: speech.model },
         vision: { provider: vision.provider, model: vision.model, reason: vision.reason },
         cloudflareConnect: Boolean(c.env.CLOUDFLARE_OAUTH_CLIENT_ID),
+        labs: labAvailability(c.env),
       },
       consent: await readConsent(c.env, ctx.identity),
       policyVersion: CONSENT_POLICY_VERSION,

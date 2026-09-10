@@ -3,13 +3,41 @@ import { fileURLToPath } from 'node:url';
 
 export default defineWorkersConfig({
   resolve: {
-    alias: {
-      '@shared': fileURLToPath(new URL('./src/shared', import.meta.url)),
-      '@worker': fileURLToPath(new URL('./src/worker', import.meta.url)),
-    },
+    alias: [
+      { find: '@shared', replacement: fileURLToPath(new URL('./src/shared', import.meta.url)) },
+      { find: '@worker', replacement: fileURLToPath(new URL('./src/worker', import.meta.url)) },
+      // fengari's lualib eagerly pulls in loslib and ldblib, which require
+      // `tmp` and `readline-sync`; both call process.binding and cannot load
+      // on workerd. wrangler.jsonc substitutes stubs for the deployed Worker,
+      // and the test runtime needs the same substitution or importing the
+      // sandbox fails outright. Anchored so only the bare specifier matches.
+      { find: /^tmp$/, replacement: fileURLToPath(new URL('./tests/helpers/tmp-stub.cjs', import.meta.url)) },
+      {
+        find: /^readline-sync$/,
+        replacement: fileURLToPath(new URL('./tests/helpers/readline-stub.cjs', import.meta.url)),
+      },
+      // fengari also reads os.platform() to pick Lua's module search paths.
+      // The deployed Worker gets node:os from the runtime; the pinned test
+      // runtime does not resolve it, so the import fails before any test runs.
+      { find: /^(node:)?os$/, replacement: fileURLToPath(new URL('./tests/helpers/os-stub.cjs', import.meta.url)) },
+      {
+        find: /^(node:)?child_process$/,
+        replacement: fileURLToPath(new URL('./tests/helpers/child-process-stub.cjs', import.meta.url)),
+      },
+    ],
   },
   test: {
     include: ['tests/**/*.test.ts'],
+    // fengari is CommonJS with circular requires between fengari.js and
+    // loadlib.js. Vite's per-module transform turns those into ES bindings and
+    // the cycle then throws on a binding read before initialisation. Letting
+    // esbuild pre-bundle the package resolves the cycle the same way wrangler
+    // does for the deployed Worker.
+    deps: {
+      optimizer: {
+        ssr: { enabled: true, include: ['fengari'] },
+      },
+    },
     poolOptions: {
       workers: {
         singleWorker: true,

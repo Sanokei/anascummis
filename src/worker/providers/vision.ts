@@ -84,7 +84,9 @@ export function screenImages(images: ImagePart[]): Result<true> {
   return ok(true);
 }
 
-export function visionRoute(env: Env): { provider: 'deepseek' | 'none'; model: string; reason: string } {
+export function visionRoute(
+  env: Env,
+): { provider: 'deepseek' | 'workers-ai' | 'none'; model: string; reason: string } {
   if (env.DEEPSEEK_API_KEY && env.DEEPSEEK_BASE_URL && env.DEEPSEEK_MODEL_VISION) {
     return {
       provider: 'deepseek',
@@ -92,13 +94,32 @@ export function visionRoute(env: Env): { provider: 'deepseek' | 'none'; model: s
       reason: 'DEEPSEEK_API_KEY is configured and a vision model identifier is set.',
     };
   }
-  // Workers AI carries image-to-text models, but none of them is a drop-in for
-  // the conversational tool-calling route, so this reports unavailable rather
-  // than substituting a different capability.
+  // A Workers AI vision model is usable, but only when the operator has named
+  // one deliberately. The default is empty on purpose.
+  //
+  // Two models were measured on 2026-09-10 against a rendered page:
+  //   - @cf/llava-hf/llava-1.5-7b-hf answered, and was wrong. Shown a page
+  //     headed "Anascummis" with a paragraph and a Stop button, it reported
+  //     "a single word 'text' on a black background". For visual QA a model
+  //     that is confidently wrong is worse than one that is absent, because
+  //     its verdict reads exactly like a correct one.
+  //   - @cf/meta/llama-3.2-11b-vision-instruct is capable but licence-gated:
+  //     it refuses until the account accepts Meta's community licence, which
+  //     is the operator's decision to make, not this code's.
+  //
+  // So nothing is substituted automatically.
+  if (env.WORKERS_AI_VISION_MODEL) {
+    return {
+      provider: 'workers-ai',
+      model: env.WORKERS_AI_VISION_MODEL,
+      reason: 'WORKERS_AI_VISION_MODEL was set explicitly by the operator.',
+    };
+  }
   return {
     provider: 'none',
     model: '',
-    reason: 'No multimodal model is configured. Set DEEPSEEK_API_KEY and DEEPSEEK_MODEL_VISION.',
+    reason:
+      'No multimodal model is configured. Set DEEPSEEK_API_KEY with DEEPSEEK_MODEL_VISION, or name a Workers AI vision model in WORKERS_AI_VISION_MODEL once you have accepted its licence.',
   };
 }
 
@@ -124,6 +145,10 @@ export async function visionChat(env: Env, req: VisionRequest): Promise<Result<V
   const images = req.messages.flatMap((m) => m.parts.filter((p): p is ImagePart => p.kind === 'image'));
   const screened = screenImages(images);
   if (!screened.ok) return screened;
+
+  if (route.provider === 'workers-ai') {
+    return workersAiVisionChat(env, route.model, req, images);
+  }
 
   const body: Record<string, unknown> = {
     model: route.model,
@@ -162,6 +187,67 @@ export async function visionChat(env: Env, req: VisionRequest): Promise<Result<V
     }
     return fail('upstream-error', `Vision call failed: ${String(err)}`);
   }
+}
+
+/**
+ * Workers AI vision models take a single image as a byte array alongside one
+ * prompt, rather than OpenAI-style content parts. Only the last image is sent,
+ * because these models do not accept several.
+ */
+async function workersAiVisionChat(
+  env: Env,
+  model: string,
+  req: VisionRequest,
+  images: ImagePart[],
+): Promise<Result<VisionResult>> {
+  if (!env.AI) return fail('missing-credential', 'Workers AI is not bound.');
+
+  const image = images[images.length - 1];
+  if (!image) return fail('invalid-argument', 'A vision call needs an image.');
+  if (images.length > 1) {
+    return fail(
+      'unsupported-runtime',
+      'The configured Workers AI vision model accepts one image per call, and this request carried several.',
+    );
+  }
+  if (image.source.type !== 'data-url') {
+    return fail('unsupported-runtime', 'Workers AI vision needs the image bytes, not a URL reference.');
+  }
+
+  const prompt = req.messages
+    .flatMap((m) => m.parts.filter((p): p is TextPart => p.kind === 'text').map((p) => p.text))
+    .join('\n\n');
+
+  try {
+    const raw = (await env.AI.run(model as never, {
+      image: [...new Uint8Array(dataUrlToBytes(image.source.dataUrl))],
+      prompt,
+      max_tokens: req.maxTokens ?? 1200,
+    } as never)) as { description?: string; response?: string };
+
+    const text = raw.description ?? raw.response ?? '';
+    if (!text) return fail('upstream-error', 'The vision model returned nothing.');
+    return ok({ text, model, usage: { promptTokens: 0, completionTokens: 0 } });
+  } catch (err) {
+    const message = String(err);
+    // These models refuse until the account accepts their licence. That is the
+    // operator's decision, so it is surfaced rather than worked around.
+    if (/Model Agreement|agree/i.test(message)) {
+      return fail(
+        'not-authorised',
+        `${model} requires accepting its licence on the Cloudflare account before it will answer.`,
+      );
+    }
+    return fail('upstream-error', `Workers AI vision call failed: ${message}`);
+  }
+}
+
+function dataUrlToBytes(dataUrl: string): ArrayBuffer {
+  const comma = dataUrl.indexOf(',');
+  const binary = atob(comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl);
+  const out = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) out[i] = binary.charCodeAt(i);
+  return out.buffer;
 }
 
 function toProviderMessage(message: VisionMessage): Record<string, unknown> {
