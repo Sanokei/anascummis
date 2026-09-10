@@ -73,10 +73,14 @@ export class SkillHarness {
    * and nothing is invented that discovery did not return.
    */
   async select(req: DiscoveryRequest): Promise<SelectionOutcome> {
-    const available = await this.catalog.list(ownerFor(req.identity));
+    const owner = ownerFor(req.identity);
+    const available = await this.catalog.list(owner);
 
     if (req.explicitName) {
-      const named = available.find(
+      // Disabled packages are included here only so naming one explicitly gets
+      // "this skill is switched off" rather than the vaguer "no such skill".
+      // Automatic selection below still reads the filtered list.
+      const named = (await this.catalog.list(owner, true)).find(
         (s) => s.qualifiedName === req.explicitName || s.title === req.explicitName,
       );
       if (!named) {

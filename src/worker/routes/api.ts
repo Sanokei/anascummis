@@ -331,6 +331,10 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
     return c.json({
       // Only the global tier plus this caller's own, never anybody else's.
       skills: await catalog.list(ownerFor(ctx.identity), true),
+      // Packages of theirs that a global one has since taken over. They still
+      // exist and no longer resolve, so saying nothing would leave the owner
+      // wondering why their skill stopped being used.
+      shadowedByGlobal: await catalog.shadowedByGlobal(ownerFor(ctx.identity)),
       recentRuns: await harness.runHistory(ctx.identity, 20),
       optionalCollection: {
         enabled: collection.optionalConsented,

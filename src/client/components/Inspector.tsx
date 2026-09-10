@@ -249,6 +249,18 @@ function SkillsView() {
         </ul>
       )}
 
+      {data.shadowedByGlobal.length > 0 && (
+        <>
+          <Label>Taken over by the deployment</Label>
+          <p className="text-ink-dim text-[0.8rem]">
+            {data.shadowedByGlobal.join(', ')}
+            {data.shadowedByGlobal.length === 1 ? ' is' : ' are'} also the name of a skill that ships
+            with this deployment. The bundled one is used, and yours is no longer reachable. Rename
+            yours to get it back.
+          </p>
+        </>
+      )}
+
       <Label>Recent runs</Label>
       {data.recentRuns.length === 0 ? (
         <p className="text-ink-faint">Nothing recorded.</p>

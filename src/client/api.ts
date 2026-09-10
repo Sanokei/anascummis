@@ -183,6 +183,7 @@ export const api = {
       trust: string;
       toolPermissions: string[];
     }[];
+    shadowedByGlobal: string[];
     recentRuns: {
       id: string;
       skillName: string;

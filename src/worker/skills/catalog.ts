@@ -255,7 +255,7 @@ export class SkillCatalog {
        WHERE trust != 'revoked'
          AND (expires_at IS NULL OR expires_at > ?)
          AND (owner_scope = 'global' OR (owner_scope = ? AND owner_id = ?))
-       ORDER BY owner_scope DESC, qualified_name`,
+       ORDER BY (owner_scope = 'global') DESC, qualified_name`,
     )
       .bind(now, owner.scope, owner.id)
       .all<Record<string, unknown>>();
@@ -265,7 +265,14 @@ export class SkillCatalog {
     for (const row of rows.results ?? []) {
       const metadata = rowToMetadata(row);
       if (!includeDisabled && metadata.invocation === 'disabled') continue;
-      // Global rows sort first, so a duplicate name resolves to the global one.
+      // Global must sort first so a collision resolves to the trusted package.
+      // Ordering on `owner_scope DESC` would not do that: SQLite compares the
+      // values lexicographically, and 'user' sorts above 'global'.
+      //
+      // A collision is reachable even though `stage` refuses a non-global
+      // package that reuses a global name, because the two can arrive in the
+      // other order: an account stages a name, and a later deployment ships a
+      // global package that claims it.
       if (seen.has(metadata.qualifiedName)) continue;
       seen.add(metadata.qualifiedName);
       out.push(metadata);
@@ -273,15 +280,40 @@ export class SkillCatalog {
     return out;
   }
 
+  /**
+   * Names where the caller has a package of their own that a global package
+   * has since taken over. Their row still exists but no longer resolves, and
+   * silently dropping it would leave them wondering why their skill stopped
+   * being used.
+   */
+  async shadowedByGlobal(owner: SkillOwner): Promise<string[]> {
+    if (owner.scope === 'global') return [];
+    const rows = await this.env.DB.prepare(
+      `SELECT DISTINCT mine.qualified_name AS name
+       FROM skill_catalog mine
+       JOIN skill_catalog global
+         ON global.qualified_name = mine.qualified_name
+        AND global.owner_scope = 'global'
+       WHERE mine.owner_scope = ? AND mine.owner_id = ? AND mine.trust != 'revoked'`,
+    )
+      .bind(owner.scope, owner.id)
+      .all<{ name: string }>();
+    return (rows.results ?? []).map((r) => r.name);
+  }
+
   /** Loads the pinned instructions for one revision the caller can reach. */
   async load(owner: SkillOwner, qualifiedName: string, revision?: string): Promise<Result<SkillPackage>> {
     const now = new Date().toISOString();
+    // Global first, for the same reason as `list`: this row's body is what
+    // `activate` wraps and puts in the prompt, so resolving a collision to the
+    // caller's own package would let it serve its instructions under a trusted
+    // name indefinitely.
     const sql = `SELECT * FROM skill_catalog
        WHERE qualified_name = ?
          AND (expires_at IS NULL OR expires_at > ?)
          AND (owner_scope = 'global' OR (owner_scope = ? AND owner_id = ?))
          ${revision ? 'AND revision = ?' : ''}
-       ORDER BY owner_scope DESC, staged_at DESC LIMIT 1`;
+       ORDER BY (owner_scope = 'global') DESC, staged_at DESC LIMIT 1`;
 
     const statement = revision
       ? this.env.DB.prepare(sql).bind(qualifiedName, now, owner.scope, owner.id, revision)
