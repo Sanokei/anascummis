@@ -9,22 +9,22 @@
  * so nothing can reach `os.tmpname()`. This stub therefore only has to exist,
  * and it throws rather than returning a plausible path, so a route that did
  * somehow reach it would fail loudly instead of writing somewhere unexpected.
+ *
+ * CommonJS on purpose. The Worker build and the test runner both alias `tmp`
+ * here, and the test runtime hands Fengari to the runtime as raw CommonJS,
+ * whose `require` of an ES module throws before any test runs. Keeping one
+ * file for both is what stops the two drifting apart.
  */
 
-export function tmpNameSync(): never {
+function unavailable() {
   throw new Error('Temporary files are not available inside the Lua sandbox.');
 }
 
-export function fileSync(): never {
-  throw new Error('Temporary files are not available inside the Lua sandbox.');
-}
-
-export function dirSync(): never {
-  throw new Error('Temporary directories are not available inside the Lua sandbox.');
-}
-
-export function setGracefulCleanup(): void {
-  /* Nothing is created, so nothing needs cleaning up. */
-}
-
-export default { tmpNameSync, fileSync, dirSync, setGracefulCleanup };
+module.exports = {
+  tmpNameSync: unavailable,
+  fileSync: unavailable,
+  dirSync: unavailable,
+  setGracefulCleanup() {
+    /* Nothing is created, so nothing needs cleaning up. */
+  },
+};

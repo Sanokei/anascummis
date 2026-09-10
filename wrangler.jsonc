@@ -11,9 +11,15 @@
   // `tmp` (for os.tmpname) and `readline-sync` (for debug.debug). Both call
   // process.binding, which workerd does not implement. The sandbox removes
   // `os` and `debug` anyway, so these stubs only have to satisfy the imports.
+  // One set of stubs, aliased by both the Worker build and the test runner,
+  // so the behaviour the tests exercise is the behaviour that deploys.
   "alias": {
-    "tmp": "./src/worker/lua/tmp-stub.ts",
-    "readline-sync": "./src/worker/lua/readline-stub.ts"
+    "tmp": "./src/worker/lua/tmp-stub.cjs",
+    "readline-sync": "./src/worker/lua/readline-stub.cjs",
+    "os": "./src/worker/lua/os-stub.cjs",
+    "node:os": "./src/worker/lua/os-stub.cjs",
+    "child_process": "./src/worker/lua/child-process-stub.cjs",
+    "node:child_process": "./src/worker/lua/child-process-stub.cjs"
   },
   "workers_dev": false,
   "routes": [
