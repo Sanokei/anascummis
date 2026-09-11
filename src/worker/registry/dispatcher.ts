@@ -11,6 +11,7 @@ import { CapabilityRegistry } from './registry';
 import { PermissionEnvelope, confirmationBinding, needsConfirmation } from '../policy/permissions';
 import { TaskBudget } from '../policy/budget';
 import { runLua, type HostBinding, type SandboxLimits } from '../lua/sandbox';
+import type { PresentationChannels } from './surface-natives';
 import { canonicalJson, randomId, sha256Hex } from '../crypto';
 
 /**
@@ -39,6 +40,14 @@ export interface DispatchRequest {
   confirmationToken?: string;
   /** Natural idempotency key where the caller has one. */
   idempotencyKey?: string;
+  /**
+   * The turn's presentational channels, when this dispatch happens inside one.
+   *
+   * Only a handler that draws on the screen looks at these. A dispatch with no
+   * turn behind it — a validation run, a background job — has nowhere to put a
+   * window, and the presentational handlers say so instead of throwing.
+   */
+  channels?: PresentationChannels;
   /** Speculative work may compute and test but must not act consequentially. */
   speculative?: boolean;
 }
@@ -209,6 +218,9 @@ export class Dispatcher {
         signal,
         budget: req.budget,
         chargeExternal: (n) => req.budget.chargeExternalCall(n),
+        // Deliberately not passed to the Lua path below: a generated
+        // capability decides nothing about the screen.
+        ...req.channels,
       });
     }
 

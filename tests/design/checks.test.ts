@@ -1,8 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import {
+  checkVocabulary,
   compileCriteria,
   parseQuantity,
   resolveName,
+  ruleIds,
   runChecks,
   type Measures,
   type SceneMeasurements,
@@ -718,5 +720,76 @@ describe('assembly depth', () => {
     const found = check('it has at least 3 levels of hierarchy', m);
     expect(found.outcome).toBe('met');
     expect(found.measured.levels).toBe(3);
+  });
+});
+
+/* ------------------------------------------------------------------ */
+/* The published vocabulary                                            */
+/* ------------------------------------------------------------------ */
+
+describe('the vocabulary an author is shown', () => {
+  it('describes every rule exactly once', () => {
+    // `settlable` is built from the live RULES, so a rule that applies to a
+    // surface contributes its description to that surface's list. Five rules
+    // apply to both surfaces, so the two lists together are longer than the rule
+    // count — but the *distinct* descriptions must number exactly the rules.
+    // A rule added without a description drops that count; two rules sharing one
+    // description drops it too. Either way this fails, rather than letting the
+    // published list drift from the compiler — the drift that would have an
+    // author write a criterion the harness then refuses.
+    const described = [
+      ...checkVocabulary('vector').settlable,
+      ...checkVocabulary('scene').settlable,
+    ];
+    expect(new Set(described).size).toBe(ruleIds().length);
+  });
+
+  it('does not repeat itself within one surface', () => {
+    for (const surface of ['vector', 'scene'] as const) {
+      const settlable = checkVocabulary(surface).settlable;
+      expect(new Set(settlable).size, `${surface} lists a rule twice`).toBe(settlable.length);
+    }
+  });
+
+  it('describes only rules the surface can actually reach', () => {
+    // "rests on" is a scene idea; a drawing author must not be told to write it,
+    // because it would come straight back as a refusal.
+    const vector = checkVocabulary('vector').settlable.join(' ');
+    const scene = checkVocabulary('scene').settlable.join(' ');
+    expect(scene).toContain('sits on top of');
+    expect(vector).not.toContain('sits on top of');
+    // Counting is the rule that applies everywhere, so both surfaces have it.
+    expect(vector).toContain('how many of a named kind');
+    expect(scene).toContain('how many of a named kind');
+  });
+
+  it('lists only the nouns the surface can actually count', () => {
+    const vector = checkVocabulary('vector').nouns.map((n) => n.word);
+    const scene = checkVocabulary('scene').nouns.map((n) => n.word);
+    expect(vector).toContain('circle');
+    expect(vector).toContain('rect');
+    expect(scene).toContain('cylinder');
+    expect(scene).toContain('box');
+    // A drawing has no cylinders; a scene has no <circle> elements.
+    expect(vector).not.toContain('cylinder');
+    expect(scene).not.toContain('circle');
+  });
+
+  it('names each relation once, with the axis it is read along', () => {
+    const relations = checkVocabulary('vector').relations;
+    const words = relations.map((r) => r.word);
+    expect(words).toContain('above');
+    expect(words).toContain('left of');
+    // "above" and "over" are one relation, not two.
+    expect(words.filter((w) => w === 'above' || w === 'over')).toHaveLength(1);
+    expect(relations.find((r) => r.word === 'above')?.axis).toBe('vertical');
+  });
+
+  it('says out loud what no check can settle', () => {
+    // The not-settlable list is the honest half of the answer: an author reads it
+    // and knows those criteria will be an opinion, not a result.
+    const vocabulary = checkVocabulary('scene');
+    expect(vocabulary.notSettlable.join(' ')).toContain('good');
+    expect(vocabulary.settlable.join(' ')).not.toContain('looks');
   });
 });

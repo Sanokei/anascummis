@@ -135,7 +135,69 @@ every resource on the account, and a rendering credential should only be able to
 render. Without `BROWSER_RENDERING_TOKEN`, screenshots report
 `missing-credential` naming the scope they need.
 
-## 8. What is not implemented
+## 8. Visual QA is a host measurement first, and a model's opinion second
+
+**Requested:** a harness for making images with visual QA, so the assistant can
+check its own work looks right — and the same for 3D, following the published
+approach of generating an asset as source and compiling it.
+
+**Built:** `design.open`, `design.submit`, `design.read` and `design.close`, plus
+`src/worker/design/` — an SVG authoring path, a 3D scene path that compiles to a
+GLB mesh, a criteria compiler, and a two-track verdict.
+
+**The deviation, stated plainly.** A vision model is not asked whether the work
+is good, and its answer is never recorded as a result. Each acceptance criterion
+is compiled, before the work is measured, into a *host check* — arithmetic over
+the parsed source or over the rendered pixels. Only where no check can be
+compiled is a model asked, and what it says is stored in `basis: "opinion-only"`,
+a field of its own.
+
+This is a deliberate narrowing of what "visual QA" means, and it is narrower than
+the request. It follows from the specification's rule that an LLM cannot authorise
+itself and that a model saying it approves is not validation. A harness that asks
+a model "does this look good" and records the answer has the same defect as asking
+it to review its own code: the confident wrong answer reads exactly like the right
+one. The failure is not hypothetical — DEVIATIONS §7 records a bound vision model
+that described a page headed "Anascummis" as "a single word 'text' on a black
+background", and answered without hesitation.
+
+So the criterion vocabulary is fixed and inspectable (`design/checks.ts`), a
+criterion outside it is **refused with a stated reason** rather than quietly
+handed to a model, and `allVerified` is true only when every criterion was settled
+met by a check. A criterion nobody could settle is `unverifiable`. It is never
+`met`.
+
+Two things this buys that the loose version cannot: a "not met" is actionable
+because it names the number that failed, and re-measuring an old revision against
+a changed checker is possible at all, because the source is stored verbatim and
+the verdicts are recomputable from it.
+
+**What it cannot do.** Checks settle counts, names, containment, relative
+position, palette, canvas fit and non-emptiness. They cannot settle whether a
+picture is *good* — whether the composition reads, whether a colour is
+appropriate, whether a shape resembles what it is meant to depict. Those are
+refused, and the refusal is the honest output. The model is still consulted there,
+as an opinion, and the refusal is recorded alongside it so a reader can see that
+the harness declined rather than that it was never asked.
+
+**SVG needs a browser; 3D does not.** The two surfaces have genuinely different
+dependencies and it would be misleading to present them as one feature.
+Rasterising an authored SVG requires Browser Rendering, which needs
+`BROWSER_RENDERING_TOKEN` (see §7 for why the deploy token is not reused). The
+3D path needs nothing: the scene compiles to a mesh and the mesh is rasterised by
+a software renderer inside the Worker, so its pixel checks are deterministic and
+run everywhere, including in tests.
+
+When the token is absent, a vector lab still parses and measures its source and
+still settles every source criterion; the *pixel* criteria come back
+`unverifiable` with the reason named. They do not pass and they are not silently
+skipped. The 3D path has no such gap.
+
+**Interactive 3D display is not built.** A GLB is produced and stored, and a
+client can fetch it, but nothing in the interface renders one yet. The assets are
+real; the viewer is absent.
+
+## 9. What is not implemented
 
 These are absent, not stubbed as if working:
 

@@ -1,12 +1,57 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { Citation, InkChoiceView, PendingConfirmation, Turn } from '@shared/types';
+import type {
+  Citation,
+  InkChoiceView,
+  PendingConfirmation,
+  PersonaWear,
+  SurfaceWindow,
+  Turn,
+  TurnSurfaces,
+} from '@shared/types';
+import { MAX_OPEN_SURFACES } from '@shared/types';
 import { api, ApiFailure, type SessionState } from './api';
 import { Orb, type OrbState } from './components/Orb';
 import { Transcript } from './components/Transcript';
+import { SurfaceLayer } from './components/SurfaceLayer';
 import { Inspector, type InspectorTab } from './components/Inspector';
 import { CookieConsent } from './components/CookieConsent';
 import { Policies, type PolicyPage } from './pages/Policies';
 import { useMic } from './hooks/useMic';
+
+/**
+ * Windows survive a reload.
+ *
+ * They live in session storage rather than on the server because they are
+ * *view* state: the assistant's turns are the record, and what is currently
+ * arranged on screen is not part of it. Keeping them here means a refresh
+ * mid-task does not scatter everything the assistant had put in front of you,
+ * without inventing a server-side window model that would then have to be
+ * reconciled against what the person had dragged where.
+ *
+ * Every access is guarded. Private-mode browsers and blocked site data both
+ * make storage throw rather than return nothing, and losing your windows is a
+ * far smaller failure than failing to start.
+ */
+const SURFACE_STORAGE_KEY = 'anascummis.windows';
+
+function loadStoredWindows(): SurfaceWindow[] {
+  try {
+    const raw = sessionStorage.getItem(SURFACE_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed: unknown = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as SurfaceWindow[]).slice(0, MAX_OPEN_SURFACES) : [];
+  } catch {
+    return [];
+  }
+}
+
+function storeWindows(windows: SurfaceWindow[]): void {
+  try {
+    sessionStorage.setItem(SURFACE_STORAGE_KEY, JSON.stringify(windows));
+  } catch {
+    /* Nothing to do about it, and nothing worth telling the person. */
+  }
+}
 
 export function App() {
   const [session, setSession] = useState<SessionState | null>(null);
@@ -23,11 +68,14 @@ export function App() {
   const [consentOpen, setConsentOpen] = useState(false);
   const [inspectorOpen, setInspectorOpen] = useState(false);
   const [streamingText, setStreamingText] = useState<string | null>(null);
+  const [windows, setWindows] = useState<SurfaceWindow[]>(loadStoredWindows);
+  const [persona, setPersona] = useState<PersonaWear | null>(null);
 
   const turnAbort = useRef<AbortController | null>(null);
   const playing = useRef(false);
 
   const reducedMotion = session?.config.accessibility.reducedMotion ?? false;
+  const orbSize = useOrbSize();
 
   /* ---------------- loading ---------------- */
 
@@ -42,6 +90,10 @@ export function App() {
       .catch((err: Error) => setLoadError(err.message));
   }, []);
 
+  useEffect(() => {
+    storeWindows(windows);
+  }, [windows]);
+
   // Accessibility preferences apply at the root, so everything inherits them.
   useEffect(() => {
     if (!session) return;
@@ -51,6 +103,58 @@ export function App() {
     root.dataset.contrast = session.config.accessibility.highContrast ? 'high' : 'normal';
     root.dataset.motion = session.config.accessibility.reducedMotion ? 'reduced' : 'full';
   }, [session]);
+
+  /* ---------------- surfaces ---------------- */
+
+  /**
+   * Applies what a turn wants shown.
+   *
+   * A window is upserted by id rather than appended, which is the whole reason
+   * surfaces carry stable ids: two turns about the same comparison should
+   * update one window, not raise a second one beside it. Closing is applied
+   * after opening, so a turn can replace a window and its successor in one go
+   * without the ids ever colliding.
+   */
+  const applySurfaces = useCallback((surfaces: TurnSurfaces | undefined) => {
+    if (!surfaces) return;
+    setPersona(surfaces.persona);
+
+    const plan = surfaces.plan;
+    if (!plan) return;
+
+    setWindows((current) => {
+      const next = new Map(current.map((w) => [w.id, w]));
+      for (const window of plan.windows) {
+        const existing = next.get(window.id);
+        // Merging rather than replacing keeps the arrival time of a window
+        // that is only being updated, so it does not jump to the front of the
+        // cascade every time its contents change.
+        next.set(window.id, existing ? { ...window, createdAt: existing.createdAt } : window);
+      }
+      for (const closed of plan.close) next.delete(closed.id);
+      // Insertion order is the raise order, so the oldest window is dropped
+      // rather than whichever one happens to be least interesting.
+      return [...next.values()].slice(-MAX_OPEN_SURFACES);
+    });
+  }, []);
+
+  /*
+   * A costume comes off on its own.
+   *
+   * The server also expires it, but only when the next turn happens — and a
+   * joke that is still on the sphere's face ten minutes later because nobody
+   * has said anything since is exactly the failure the expiry exists to stop.
+   */
+  useEffect(() => {
+    if (!persona) return;
+    const remaining = Date.parse(persona.expiresAt) - Date.now();
+    if (remaining <= 0) {
+      setPersona(null);
+      return;
+    }
+    const timer = window.setTimeout(() => setPersona(null), remaining);
+    return () => window.clearTimeout(timer);
+  }, [persona]);
 
   /* ---------------- turns ---------------- */
 
@@ -79,6 +183,7 @@ export function App() {
         setChoices(response.choices);
         setCitations(response.citations);
         setConfirmation(response.pendingConfirmation);
+        applySurfaces(response.surfaces);
         if (response.blocked) setNotice(response.blocked);
         else if (response.paused) {
           setNotice({
@@ -102,7 +207,7 @@ export function App() {
         setBusy(false);
       }
     },
-    [],
+    [applySurfaces],
   );
 
   const onTranscript = useCallback(
@@ -164,39 +269,55 @@ export function App() {
   if (!session) {
     return (
       <main className="grid min-h-screen place-items-center">
-        <p className="text-ink-faint font-mono text-[0.8rem] tracking-wide uppercase">Starting</p>
+        <p className="text-ink-faint font-mono text-[0.8rem]">Starting</p>
       </main>
     );
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <div className="flex flex-1 overflow-hidden">
-        <main className="flex flex-1 flex-col overflow-hidden">
-          <header className="border-hairline flex items-center justify-between border-b px-5 py-3">
-            <h1 className="font-mono text-[0.8rem] tracking-wide uppercase">Anascummis</h1>
-            <div className="flex items-center gap-3">
-              {session.capabilities.model.provider === 'none' && (
-                <span className="text-caution font-mono text-[0.68rem] tracking-wide uppercase">
-                  No model configured
-                </span>
-              )}
-              <button
-                type="button"
-                onClick={() => setInspectorOpen((v) => !v)}
-                className="text-ink-faint hover:text-ink font-mono text-[0.68rem] tracking-wide uppercase lg:hidden"
-              >
-                {inspectorOpen ? 'Hide' : 'Details'}
-              </button>
-            </div>
-          </header>
+    <div className="flex h-screen flex-col overflow-hidden">
+      <header className="border-hairline flex shrink-0 items-center justify-between border-b px-6 py-3">
+        <div className="flex items-baseline gap-4">
+          <h1 className="text-[0.95rem] font-medium tracking-[-0.01em]">Anascummis</h1>
+          {persona && (
+            <p className="text-ink-faint text-[0.82rem]">
+              wearing <span className="text-ink-dim">{persona.persona.name}</span>
+            </p>
+          )}
+        </div>
+        <div className="flex items-center gap-4">
+          {session.capabilities.model.provider === 'none' && (
+            <span className="text-caution font-mono text-[0.72rem]">No model configured</span>
+          )}
+          <button
+            type="button"
+            onClick={() => setInspectorOpen((v) => !v)}
+            className="text-ink-faint hover:text-ink text-[0.8rem] lg:hidden"
+          >
+            {inspectorOpen ? 'Hide details' : 'Details'}
+          </button>
+        </div>
+      </header>
 
-          <div className="flex flex-1 flex-col overflow-y-auto px-5 py-6">
-            <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col">
-              <div className="mb-8 flex justify-center">
-                <Orb state={orbState} level={mic.level} reducedMotion={reducedMotion} />
-              </div>
+      <div className="flex min-h-0 flex-1">
+        <main className="flex min-w-0 flex-1 flex-col">
+          {/*
+            The sphere holds the top of the page and never scrolls away. A
+            presence that leaves when the conversation gets long is not a
+            presence; it is a header image.
+          */}
+          <div className="grid shrink-0 place-items-center pt-3 pb-1">
+            <Orb
+              state={orbState}
+              level={mic.level}
+              reducedMotion={reducedMotion}
+              size={orbSize}
+              persona={persona}
+            />
+          </div>
 
+          <div className="min-h-0 flex-1 overflow-y-auto px-6">
+            <div className="mx-auto w-full max-w-2xl pb-6">
               <Transcript
                 turns={turns}
                 citations={citations}
@@ -211,9 +332,7 @@ export function App() {
                 <ConfirmationCard
                   confirmation={confirmation}
                   busy={busy}
-                  onConfirm={() =>
-                    void send({ text: 'confirmed', token: confirmation.bindingHash })
-                  }
+                  onConfirm={() => void send({ text: 'confirmed', token: confirmation.bindingHash })}
                   onCancel={() => {
                     setConfirmation(null);
                     void stop();
@@ -224,11 +343,9 @@ export function App() {
               {notice && (
                 <div
                   role="status"
-                  className="border-hairline text-ink-dim mt-6 border-l-2 pl-4 text-[0.85rem]"
+                  className="border-caution/40 text-ink-dim mt-6 border-l-2 pl-4 text-[0.88rem]"
                 >
-                  <span className="text-ink-faint mr-2 font-mono text-[0.68rem] uppercase">
-                    {notice.kind}
-                  </span>
+                  <span className="text-caution mr-2 font-mono text-[0.72rem]">{notice.kind}</span>
                   {notice.message}
                 </div>
               )}
@@ -271,7 +388,7 @@ export function App() {
         </div>
       </div>
 
-      <footer className="border-hairline text-ink-faint flex flex-wrap gap-4 border-t px-5 py-2.5 text-[0.72rem]">
+      <footer className="border-hairline text-ink-faint flex shrink-0 flex-wrap gap-5 border-t px-6 py-2.5 text-[0.76rem]">
         <button type="button" onClick={() => setPolicy('privacy')} className="hover:text-ink-dim">
           Privacy
         </button>
@@ -285,6 +402,17 @@ export function App() {
           Cookie settings
         </button>
       </footer>
+
+      {/*
+        Above the page, below nothing. Windows are what the assistant put in
+        front of you, and they belong over the conversation rather than beside
+        it.
+      */}
+      <SurfaceLayer
+        windows={windows}
+        onDismiss={(id) => setWindows((current) => current.filter((w) => w.id !== id))}
+        reducedMotion={reducedMotion}
+      />
 
       <CookieConsent
         consent={session.consent}
@@ -300,6 +428,28 @@ export function App() {
       {policy && <Policies page={policy} onClose={() => setPolicy(null)} />}
     </div>
   );
+}
+
+/**
+ * The sphere's size, from the viewport.
+ *
+ * Driven by the smaller axis so it stays a circle the page has room for —
+ * on a short window it is the height that runs out first. The floor matters
+ * more than the ceiling: below about 150px the lattice stops resolving and it
+ * becomes a blue dot.
+ */
+function useOrbSize(): number {
+  const [size, setSize] = useState(() => orbSizeFor(window.innerWidth, window.innerHeight));
+  useEffect(() => {
+    const onResize = () => setSize(orbSizeFor(window.innerWidth, window.innerHeight));
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+  return size;
+}
+
+function orbSizeFor(width: number, height: number): number {
+  return Math.max(150, Math.round(Math.min(width * 0.34, height * 0.36, 320)));
 }
 
 /**
@@ -320,14 +470,12 @@ function ConfirmationCard({
   return (
     <section
       aria-label="Confirmation required"
-      className="border-signal-dim bg-ground-raised mt-6 border p-4"
+      className="border-caution/45 bg-ground-raised mt-6 rounded-[var(--radius-block)] border p-4"
     >
-      <h2 className="text-signal mb-1 font-mono text-[0.7rem] tracking-wide uppercase">
-        Confirm before this runs
-      </h2>
+      <h2 className="text-caution mb-1.5 text-[0.82rem]">Confirm before this runs</h2>
       <p className="mb-1">{confirmation.action}</p>
-      <p className="text-ink-dim font-mono text-[0.8rem]">Target: {confirmation.target}</p>
-      <ul className="text-ink-dim mt-2 flex flex-col gap-1 text-[0.85rem]">
+      <p className="text-ink-dim font-mono text-[0.82rem]">Target: {confirmation.target}</p>
+      <ul className="text-ink-dim mt-2 flex flex-col gap-1 text-[0.88rem]">
         {confirmation.consequences.map((line) => (
           <li key={line}>{line}</li>
         ))}
@@ -337,7 +485,7 @@ function ConfirmationCard({
           type="button"
           disabled={busy}
           onClick={onCancel}
-          className="border-hairline-bright hover:bg-ground flex-1 border px-3 py-2 text-[0.85rem]"
+          className="border-hairline hover:bg-ground-sunken flex-1 rounded-[var(--radius-block)] border px-3 py-2 text-[0.88rem] transition-colors"
         >
           No
         </button>
@@ -345,7 +493,7 @@ function ConfirmationCard({
           type="button"
           disabled={busy}
           onClick={onConfirm}
-          className="border-signal text-signal hover:bg-signal/10 flex-1 border px-3 py-2 text-[0.85rem]"
+          className="border-caution text-caution hover:bg-caution/10 flex-1 rounded-[var(--radius-block)] border px-3 py-2 text-[0.88rem] transition-colors"
         >
           Yes, run it
         </button>
@@ -375,18 +523,18 @@ function Composer({
 }) {
   const listening = micStatus === 'listening';
   return (
-    <div className="border-hairline border-t px-5 py-3">
+    <div className="shrink-0 px-6 pt-2 pb-5">
       <div className="mx-auto flex w-full max-w-2xl flex-col gap-2">
-        {micNote && <p className="text-ink-faint text-[0.78rem]">{micNote}</p>}
+        {micNote && <p className="text-ink-faint text-[0.8rem]">{micNote}</p>}
         <div className="flex items-end gap-2">
           <button
             type="button"
             onClick={onMic}
             aria-pressed={listening}
-            className={`border px-3 py-2 font-mono text-[0.7rem] tracking-wide uppercase transition-colors ${
+            className={`shrink-0 rounded-full border px-4 py-2.5 text-[0.85rem] transition-colors ${
               listening
-                ? 'border-signal text-signal'
-                : 'border-hairline text-ink-dim hover:border-hairline-bright'
+                ? 'border-signal text-signal bg-signal/10'
+                : 'border-hairline text-ink-dim hover:border-hairline-bright hover:text-ink'
             }`}
           >
             {listening ? 'Listening' : 'Talk'}
@@ -407,14 +555,14 @@ function Composer({
               }
             }}
             placeholder="Say something, or type it."
-            className="border-hairline bg-ground-sunken focus:border-hairline-bright max-h-40 min-h-[2.6rem] flex-1 resize-y border px-3 py-2 outline-none"
+            className="border-hairline bg-ground-raised focus:border-signal max-h-40 min-h-[2.9rem] min-w-0 flex-1 resize-y rounded-[var(--radius-panel)] border px-3.5 py-2.5 outline-none transition-colors placeholder:text-ink-faint"
           />
 
           <button
             type="button"
             onClick={onSend}
             disabled={busy || !draft.trim()}
-            className="border-hairline text-ink-dim hover:border-hairline-bright border px-3 py-2 font-mono text-[0.7rem] tracking-wide uppercase disabled:opacity-40"
+            className="border-hairline text-ink-dim hover:border-hairline-bright hover:text-ink shrink-0 rounded-full border px-4 py-2.5 text-[0.85rem] transition-colors disabled:opacity-40"
           >
             Send
           </button>
@@ -427,7 +575,7 @@ function Composer({
             type="button"
             onClick={onStop}
             title="Stop (Escape)"
-            className="border-caution text-caution hover:bg-caution/10 border px-3 py-2 font-mono text-[0.7rem] tracking-wide uppercase"
+            className="border-caution/50 text-caution hover:bg-caution/10 shrink-0 rounded-full border px-4 py-2.5 text-[0.85rem] transition-colors"
           >
             Stop
           </button>

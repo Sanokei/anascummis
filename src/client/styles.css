@@ -1,35 +1,87 @@
 @import 'tailwindcss';
 
 /*
- * Anascummis is a piece of equipment, not a consumer app: dark ground, one
- * restrained accent, and typography that separates the conversation from the
- * instrumentation around it. Nothing glows, nothing gradients.
+ * Anascummis is a lit room, not a dashboard.
+ *
+ * The ground is white and the ink is precise, and exactly one thing in the
+ * whole interface is *alive*: the sphere. That is the organising rule, and
+ * everything here follows from it. Colour is not decoration — the cyan belongs
+ * to the presence, and the only other hues are the two that mean something
+ * (stop, and done). Nothing else is tinted, nothing glows, nothing gradients.
+ *
+ * The previous ground was near-black, which made the sphere one lit thing among
+ * many and flattened it. On white the sphere is the single chromatic event on
+ * the page, which is what makes it read as a presence rather than a widget.
+ *
+ * The type is self-hosted rather than pulled from a font CDN — see `fonts.ts`
+ * for the faces and the reasoning. A third-party request on first paint would
+ * contradict the posture the app keeps everywhere else, and the two faces are
+ * only worth having if they ship with it.
  */
 
 @theme {
-  --color-ground: #0f0f0e;
-  --color-ground-raised: #171715;
-  --color-ground-sunken: #0a0a09;
-  --color-hairline: #2a2a26;
-  --color-hairline-bright: #3d3d37;
+  /* Ground: cool white. Not cream — cream reads as paper, and this is not paper. */
+  --color-ground: #fafbfd;
+  --color-ground-raised: #ffffff;
+  --color-ground-sunken: #eef2f8;
+  --color-hairline: #d9e1ec;
+  --color-hairline-bright: #b3c1d4;
 
-  --color-ink: #ece8df;
-  --color-ink-dim: #9c978c;
-  --color-ink-faint: #6b675f;
+  /*
+   * Three ink levels, all of which clear WCAG AA on the ground above. The old
+   * palette's faint tier did not, and it was used for real metadata rather than
+   * for decoration, so it was quietly unreadable.
+   */
+  --color-ink: #0e1626;
+  --color-ink-dim: #4a5872;
+  --color-ink-faint: #63728a;
 
-  --color-signal: #c98a3c;
-  --color-signal-dim: #8a5f2a;
-  --color-caution: #b5563f;
-  --color-affirm: #6f8f5c;
+  /*
+   * Cyan is the presence. It is not the "primary button colour" and it is not
+   * used for decoration anywhere — deep enough to read as text, and the
+   * lighter steps exist only inside the sphere's own gradient.
+   */
+  --color-signal: #0b7fa8;
+  --color-signal-dim: #7fd3ee;
+  --color-sphere: #2bc4ef;
+  --color-sphere-deep: #0e7fb4;
+  --color-sphere-core: #eafaff;
 
-  --font-sans: 'Inter var', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Menlo, monospace;
+  /* The two hues that carry meaning, and the only ones that do. */
+  --color-caution: #c6362b;
+  --color-affirm: #17734b;
 
-  --radius-panel: 2px;
+  /*
+   * The fallbacks are a real stack and not a formality: a latin subset does not
+   * carry the characters the app's own copy uses, and a blocked or slow font
+   * request must land somewhere legible rather than on Times.
+   */
+  --font-sans:
+    'IBM Plex Sans', ui-sans-serif, system-ui, 'Segoe UI Variable Display', 'Segoe UI',
+    -apple-system, 'Helvetica Neue', sans-serif;
+  --font-mono:
+    'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+
+  /* Windows are objects. A 2px corner would say "panel"; this says "thing". */
+  --radius-panel: 10px;
+  --radius-block: 6px;
+
+  /*
+   * One easing for anything that arrives, so the whole interface moves as if
+   * it were the same material. Fast out of the gate, settled at the end.
+   */
+  --ease-arrive: cubic-bezier(0.2, 0.9, 0.25, 1);
+
+  --shadow-window:
+    0 1px 2px rgb(14 22 38 / 0.06), 0 12px 32px -8px rgb(14 22 38 / 0.14),
+    0 32px 64px -32px rgb(14 22 38 / 0.18);
+  --shadow-window-focused:
+    0 1px 2px rgb(14 22 38 / 0.08), 0 20px 48px -12px rgb(14 22 38 / 0.2),
+    0 48px 80px -40px rgb(14 22 38 / 0.24);
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
@@ -46,6 +98,7 @@ body {
   font-size: 15px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* Text scale is a user preference, applied at the root so everything follows. */
@@ -53,12 +106,20 @@ body {
   font-size: calc(15px * var(--text-scale, 1));
 }
 
-/* High contrast raises the hairlines and the dim text rather than inverting. */
+/*
+ * High contrast darkens the ink and hairlines rather than inverting the page.
+ * The sphere is left alone: it is the one thing whose legibility does not
+ * depend on text contrast, and inverting it would remove the only landmark.
+ */
 [data-contrast='high'] {
-  --color-hairline: #5a5a52;
-  --color-hairline-bright: #7d7d73;
-  --color-ink-dim: #cbc6bb;
-  --color-ink-faint: #a9a49a;
+  --color-ink: #000000;
+  --color-ink-dim: #2b3549;
+  --color-ink-faint: #3f4a60;
+  --color-hairline: #8d9ab0;
+  --color-hairline-bright: #5b6880;
+  --color-signal: #05516b;
+  --color-caution: #8f1d15;
+  --color-affirm: #0c4a2f;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -76,18 +137,19 @@ body {
   transition: none !important;
 }
 
-/* Focus is always visible. The accent is reserved for it and for live state. */
+/* Focus is always visible, and is the same cyan as the presence. */
 :focus-visible {
   outline: 2px solid var(--color-signal);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
 ::selection {
-  background: var(--color-signal-dim);
+  background: color-mix(in oklab, var(--color-sphere) 28%, transparent);
   color: var(--color-ink);
 }
 
-/* Scrollbars match the panel rather than the OS default. */
+/* Scrollbars match the ground rather than the OS default. */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-hairline-bright) transparent;
@@ -100,6 +162,7 @@ body {
   background: var(--color-hairline);
   border: 3px solid transparent;
   background-clip: content-box;
+  border-radius: 999px;
 }
 *::-webkit-scrollbar-thumb:hover {
   background: var(--color-hairline-bright);
@@ -107,28 +170,96 @@ body {
 }
 
 /*
- * The orb's listening state. Deliberately slow and small: a settled shape with
- * very restrained movement, not a progress indicator.
+ * Prose: the assistant's own words. Measure is capped at 68ch, and the leading
+ * is looser than the interface's because this is the one place someone reads
+ * more than a sentence at a time.
+ */
+.prose-voice {
+  max-width: 68ch;
+  line-height: 1.62;
+}
+
+.prose-voice p {
+  margin: 0 0 0.7em;
+}
+.prose-voice p:last-child {
+  margin-bottom: 0;
+}
+
+/*
+ * The sphere's presence state. Deliberately slow and small: a settled shape
+ * with very restrained movement, not a progress indicator.
  */
 @keyframes orb-settle {
   0%,
   100% {
     transform: scale(1);
-    opacity: 0.85;
+    opacity: 0.9;
   }
   50% {
-    transform: scale(1.015);
+    transform: scale(1.012);
     opacity: 1;
   }
 }
 
 .orb-listening {
-  animation: orb-settle 5.5s ease-in-out infinite;
+  animation: orb-settle 6s ease-in-out infinite;
 }
 
-/* A caption track that stays readable over the orb. */
-.caption-shadow {
-  text-shadow:
-    0 1px 2px var(--color-ground),
-    0 0 12px var(--color-ground);
+/* A window arriving. Motion that answers an action, so it is allowed to be seen. */
+@keyframes window-arrive {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.window-arrive {
+  animation: window-arrive 200ms var(--ease-arrive) both;
+}
+
+/* The scrim behind an attention window. Kept very light; it isolates, not darkens. */
+@keyframes veil-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.veil-in {
+  animation: veil-in 160ms ease-out both;
+}
+
+/* A caret for streaming text, without Tailwind's pulsing default. */
+@keyframes caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.5ch;
+  margin-left: 1px;
+  animation: caret 1.1s steps(1, end) infinite;
+}
+
+.caret::before {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  vertical-align: -0.14em;
+  background: var(--color-signal);
 }

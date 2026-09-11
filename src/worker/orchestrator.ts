@@ -5,6 +5,7 @@ import type {
   PendingConfirmation,
   Turn,
   TurnResponse,
+  TurnSurfaces,
 } from '@shared/types';
 import { fail, ok, type Result } from '@shared/types';
 import type { Env } from './env';
@@ -30,6 +31,9 @@ import {
   classifyTurnIntent,
 } from './ink/personality';
 import { getStory, OPEN_CONVERSATION_ID } from './stories/registry';
+import { SurfaceCollector, turnSurfaces } from './surfaces/surface';
+import { PersonaSlot, loadPersona, storePersona } from './personas/wear';
+import { presentationInline } from './registry/surface-natives';
 import { randomId } from './crypto';
 
 /**
@@ -51,6 +55,23 @@ export interface TurnRequest {
   /** When set, streams the conversational reply's text as it is generated. */
   onText?: (delta: string) => void;
   signal: AbortSignal;
+}
+
+/**
+ * What a turn can put in front of the person, rather than say.
+ *
+ * A collector and a costume slot, made once per turn and handed to the two
+ * things that can use them: the dispatcher, for a tool call the model makes,
+ * and the Ink runtime's inline resolver, for a line an authored story runs.
+ * Neither of those needs to know anything else about the turn it is inside.
+ *
+ * The actor is not a third channel. Text streams; a surface appears and is
+ * revised; a costume is worn for a moment. Each has its own contract and none
+ * of them should be expressed in another's terms.
+ */
+interface TurnChannels {
+  surfaces: SurfaceCollector;
+  persona: PersonaSlot;
 }
 
 export class Orchestrator {
@@ -89,7 +110,19 @@ export class Orchestrator {
       begun.budgetStartedAt,
     );
 
-    const config = await this.memory.loadConfig(req.identity);
+    // The costume is read alongside the config rather than after it, because
+    // it is a read the reply does not depend on until a handler asks for it.
+    // Expiry is settled here: a costume whose time ran out between turns comes
+    // back as nothing, which is what makes "worn for a moment" true even when
+    // nobody speaks again for an hour.
+    const [config, worn] = await Promise.all([
+      this.memory.loadConfig(req.identity),
+      loadPersona(this.env, req.identity.sessionId),
+    ]);
+    const channels: TurnChannels = {
+      surfaces: new SurfaceCollector(),
+      persona: new PersonaSlot(worn),
+    };
     const permissions = defaultEnvelope(req.identity);
     const mission = missionFrom(snapshot);
 
@@ -103,7 +136,7 @@ export class Orchestrator {
 
     // A pending confirmation is answered before anything else is considered.
     if (snapshot.pendingConfirmation && req.confirmationToken) {
-      return this.resumeConfirmed(req, snapshot, generation, budget, permissions, userTurn, client);
+      return this.resumeConfirmed(req, snapshot, generation, budget, permissions, userTurn, client, channels);
     }
 
     const story = getStory(snapshot.storyId ?? OPEN_CONVERSATION_ID);
@@ -163,6 +196,7 @@ export class Orchestrator {
             story.id,
             story.version,
             'Use the branch list to pick the point you want. Going back branches from there; it does not erase what came after.',
+            channels,
           );
         case 'stop':
           await client.stop();
@@ -178,6 +212,7 @@ export class Orchestrator {
             story.id,
             story.version,
             'Stopped.',
+            channels,
           );
       }
     } else if (selected === null) {
@@ -197,6 +232,7 @@ export class Orchestrator {
         story.id,
         story.version,
         clarification,
+        channels,
       );
     }
 
@@ -217,6 +253,7 @@ export class Orchestrator {
         confirmationMode: config.dialogue.confirmationMode,
         confirmationToken: req.confirmationToken ?? null,
         readable: readableConfig(config),
+        channels,
       });
       if (!advanced.ok) return advanced;
 
@@ -236,6 +273,7 @@ export class Orchestrator {
           citations: advanced.value.citations,
           mission,
           blocked: null,
+          channels,
         });
       }
 
@@ -254,6 +292,7 @@ export class Orchestrator {
         citations: advanced.value.citations,
         mission,
         blocked: advanced.value.blocked,
+        channels,
       });
     }
 
@@ -268,6 +307,7 @@ export class Orchestrator {
       mission,
       pendingChoices: choices,
       seeded,
+      channels,
     });
     if (!reply.ok) return reply;
 
@@ -290,6 +330,7 @@ export class Orchestrator {
       blocked: reply.value.blocked,
       ...(reply.value.authoredLineId ? { authoredLineId: reply.value.authoredLineId } : {}),
       ...(reply.value.activeSkill ? { activeSkill: reply.value.activeSkill } : {}),
+      channels,
     });
   }
 
@@ -306,6 +347,7 @@ export class Orchestrator {
     confirmationMode: 'always' | 'risky-only' | 'off';
     confirmationToken: string | null;
     readable: Record<string, string | number | boolean>;
+    channels: TurnChannels;
   }): Promise<
     Result<{
       text: string;
@@ -333,6 +375,10 @@ export class Orchestrator {
         memo,
         readableConfig: input.readable,
         riskFor: (id) => this.riskFor(id),
+        // A story that raises a window gets it in the same pass, because there
+        // is nothing to wait for: no permission, no provider, no side effect.
+        // Everything else still yields to the dispatcher below.
+        inline: presentationInline(input.channels),
       });
       if (!run.ok) return run;
 
@@ -362,6 +408,7 @@ export class Orchestrator {
         generation: input.generation,
         signal: input.signal,
         ...(input.confirmationToken ? { confirmationToken: input.confirmationToken } : {}),
+        channels: input.channels,
       });
 
       if (outcome.kind === 'confirmation-required') {
@@ -409,6 +456,8 @@ export class Orchestrator {
     pendingChoices: InkChoiceView[];
     /** Seeding, started with the turn so it is not on this reply's path. */
     seeded: Promise<void>;
+    /** Where a tool call the model makes can put a window or a costume. */
+    channels: TurnChannels;
   }): Promise<
     Result<{
       text: string;
@@ -608,6 +657,7 @@ export class Orchestrator {
           confirmationMode: 'risky-only',
           generation: input.generation,
           signal: input.req.signal,
+          channels: input.channels,
         });
 
         if (outcome.kind === 'value') {
@@ -699,6 +749,7 @@ export class Orchestrator {
     permissions: PermissionEnvelope,
     userTurn: Turn,
     client: SessionClient,
+    channels: TurnChannels,
   ): Promise<Result<TurnResponse>> {
     const confirmation = snapshot.pendingConfirmation;
     if (!confirmation) return fail('invalid-argument', 'There is nothing awaiting confirmation.');
@@ -727,6 +778,7 @@ export class Orchestrator {
       confirmationMode: config.dialogue.confirmationMode,
       confirmationToken: req.confirmationToken,
       readable: readableConfig(config),
+      channels,
     });
     if (!advanced.ok) return advanced;
 
@@ -745,6 +797,7 @@ export class Orchestrator {
       citations: advanced.value.citations,
       mission: missionFrom(snapshot),
       blocked: advanced.value.blocked,
+      channels,
     });
   }
 
@@ -760,6 +813,7 @@ export class Orchestrator {
     storyId: string,
     storyVersion: string,
     text: string,
+    channels: TurnChannels,
   ): Promise<Result<TurnResponse>> {
     return this.commit({
       req,
@@ -776,6 +830,7 @@ export class Orchestrator {
       citations: [],
       mission: missionFrom(snapshot),
       blocked: null,
+      channels,
     });
   }
 
@@ -798,6 +853,7 @@ export class Orchestrator {
     blocked: { kind: import('@shared/types').FailureKind; message: string } | null;
     authoredLineId?: string;
     activeSkill?: { name: string; version: string; origin: string };
+    channels: TurnChannels;
   }): Promise<Result<TurnResponse>> {
     // Host-supplied text is pushed before the commit, not after it. Committing
     // is two Durable Object round-trips, and a deterministic reply that is
@@ -833,10 +889,23 @@ export class Orchestrator {
 
     if (!committed.applied) {
       // Stop landed while this turn was running, so the result is discarded.
+      // The costume is not stored either, for the same reason: a turn that did
+      // not happen should not leave a hat behind.
       return fail('cancelled', 'You stopped while that was running, so nothing was applied.');
     }
 
+    // Stored once the turn is applied, and before the response is built, so the
+    // store and the client never disagree about what is being worn. A turn that
+    // changed nothing writes nothing.
+    if (input.channels.persona.changed()) {
+      await storePersona(this.env, input.req.identity.sessionId, input.channels.persona.current());
+    }
+
     const snapshot = await input.client.snapshot();
+    const surfaces: TurnSurfaces = turnSurfaces(
+      input.channels.surfaces.plan(),
+      input.channels.persona.current(),
+    );
 
     return ok({
       sessionId: input.req.identity.sessionId,
@@ -853,6 +922,7 @@ export class Orchestrator {
       mission: input.mission.mission,
       currentTask: input.mission.currentTask,
       currentFocus: input.mission.currentFocus,
+      surfaces,
     });
   }
 }

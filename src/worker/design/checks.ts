@@ -1339,6 +1339,105 @@ export function runChecks(criteria: string[], m: Measures): CheckRun {
 }
 
 /* ------------------------------------------------------------------ */
+/* The vocabulary, published                                           */
+/* ------------------------------------------------------------------ */
+
+export interface CheckVocabulary {
+  /** Words that can be counted on this surface, with their canonical plural. */
+  nouns: { word: string; label: string }[];
+  /** Relative-position words, with the axis each is read along. */
+  relations: { word: string; axis: 'vertical' | 'horizontal' }[];
+  /** What the checks can decide, in plain terms, for an author to aim at. */
+  settlable: string[];
+  /** What no check can decide on any surface, so a model is asked and its answer is an opinion. */
+  notSettlable: string[];
+}
+
+/**
+ * What each rule settles, in plain terms, keyed by rule id.
+ *
+ * Kept beside `RULES` rather than inside it so a rule can be read as code, but
+ * the two are held together by a test: `ruleIds()` and this map must list
+ * exactly the same ids, so a rule cannot be added without saying what it
+ * settles, and this cannot describe a rule that does not exist.
+ */
+const RULE_DESCRIPTIONS: Record<string, string> = {
+  'source-safety': 'whether the source stays inside the safe subset',
+  'canvas-size': 'whether the drawing fits the canvas it declares',
+  'rendered-image': 'whether anything was actually drawn, and how much ink covers the frame',
+  'contains-text': 'whether the drawing contains text, and which words',
+  'rests-on': 'whether one part of an assembly sits on top of another rather than beside or through it',
+  'parentage': 'how the parts of an assembly nest, and which part is a child of which',
+  'containment': 'whether one named thing is inside another',
+  'spatial-relation': 'whether one named thing is above, below, left of or right of another',
+  'no-overlap': 'whether two named things overlap, or are clear of each other',
+  'assembly-depth': 'how deep the assembly is',
+  'named-thing-exists': 'whether a named thing exists, and whether a name is used only once',
+  'count-of-kind': 'how many of a named kind there are, and how many distinct colours are used',
+};
+
+/** The rule ids in precedence order, so a test can hold the published map to them. */
+export function ruleIds(): string[] {
+  return RULES.map((rule) => rule.id);
+}
+
+/**
+ * What a criterion can be written in, for one surface.
+ *
+ * Published so an author writes criteria that can actually be settled instead of
+ * finding out by having them refused. Every list here is derived from the live
+ * tables — the nouns, the relations and the rules the compiler itself uses — so
+ * it cannot promise something `compileCriteria` would reject. That failure mode
+ * is the one this file exists to prevent: a confident statement about what was
+ * checked, when nothing was.
+ *
+ * `notSettlable` is part of the answer on purpose. An author who knows that
+ * "it looks balanced" will never be settled by a check can choose whether to
+ * write it anyway and take an opinion, or write something checkable instead.
+ */
+export function checkVocabulary(surface: Surface): CheckVocabulary {
+  const nouns: { word: string; label: string }[] = [];
+  for (const [word, entry] of Object.entries(NOUNS)) {
+    if (entry.appliesTo.includes(surface)) nouns.push({ word, label: entry.label });
+  }
+  nouns.sort((a, b) => a.word.localeCompare(b.word));
+
+  // One word per relation: the entries within one are synonyms, and listing all
+  // four spellings of "above" would suggest they mean different things.
+  const seenRelations = new Set<string>();
+  const relations: { word: string; axis: 'vertical' | 'horizontal' }[] = [];
+  for (const relation of RELATIONS) {
+    const word = relation.words[0];
+    if (!word || seenRelations.has(relation.id)) continue;
+    seenRelations.add(relation.id);
+    relations.push({ word, axis: relation.axis });
+  }
+
+  // Only what this surface can actually reach. A scene rule is not described to
+  // a drawing author, because offering it would be an instruction to write a
+  // criterion that comes straight back as a refusal.
+  const settlable: string[] = [];
+  for (const rule of RULES) {
+    if (!rule.appliesTo.includes(surface)) continue;
+    const description = RULE_DESCRIPTIONS[rule.id];
+    if (description) settlable.push(description);
+  }
+
+  return {
+    nouns,
+    relations,
+    settlable,
+    notSettlable: [
+      'whether the picture is any good, balanced, or pleasing',
+      'whether a shape resembles the thing it is meant to depict',
+      'whether a colour is appropriate for the subject',
+      'whether a composition reads well at a glance',
+      'anything about geometry that a given view hides',
+    ],
+  };
+}
+
+/* ------------------------------------------------------------------ */
 /* Small helpers                                                       */
 /* ------------------------------------------------------------------ */
 

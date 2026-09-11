@@ -20,6 +20,8 @@ import { VisionMemoryStore } from '../memory/vision-store';
 import { sha256Hex, randomId } from '../crypto';
 import { attachmentMetaKey } from '../registry/vision-natives';
 import { labAvailability } from '../registry/lab-natives';
+import { designAvailability } from '../registry/design-natives';
+import { registerDesignRoutes } from './design';
 import { ownerFor } from '../skills/catalog';
 import {
   collectionContext,
@@ -95,6 +97,7 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
         vision: { provider: vision.provider, model: vision.model, reason: vision.reason },
         cloudflareConnect: Boolean(c.env.CLOUDFLARE_OAUTH_CLIENT_ID),
         labs: labAvailability(c.env),
+        design: designAvailability(c.env),
       },
       consent: await readConsent(c.env, ctx.identity),
       policyVersion: CONSENT_POLICY_VERSION,
@@ -537,6 +540,11 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
         : 'Optional collection is off and any records kept under it have been deleted.',
     });
   });
+
+  // Design renders are served from their own file: the route rebuilds the
+  // storage key from the path and checks it against the session's own rows, so
+  // the key itself is never accepted from a client.
+  registerDesignRoutes(app);
 }
 
 async function readConsent(env: Env, identity: Identity): Promise<ConsentState> {

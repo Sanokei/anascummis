@@ -66,6 +66,25 @@ export interface EvaluationOptions {
   inputs?: Record<string, string | number | boolean>;
   /** Risk lookup used to classify choices for the confirmation gate. */
   riskFor: (capabilityId: string) => RiskClass;
+  /**
+   * An external the host can answer itself, without a round trip.
+   *
+   * Consulted after the memo and before yielding, so a story that asks for a
+   * surface gets one inside the same pass rather than on the next one. The
+   * answer is recorded in `resolvedActions` exactly as a memo hit is, because
+   * from the story's point of view it is one: the call returned a value and
+   * evaluation continued.
+   *
+   * This is a hole in the action gate, and it is only safe because of what is
+   * put through it. A capability reached this way is never dispatched, so no
+   * permission is checked, no budget is charged, no receipt is written, and no
+   * confirmation can stop it. That is acceptable for a decision the host makes
+   * about its own screen from data it already holds — there is no work to gate,
+   * and gating it would be theatre — and it is not acceptable for anything
+   * else. Nothing with a permission, a side effect, or a cost may be wired
+   * here, and the caller is the only thing standing between those two cases.
+   */
+  inline?: (request: ActionRequest) => ActionOutcome | null;
   /** Ceiling on Continue() iterations, so a cyclic divert cannot spin. */
   maxContinues?: number;
 }
@@ -119,19 +138,23 @@ export async function evaluate(opts: EvaluationOptions): Promise<Result<Evaluati
         const argsHash = hashSync(args);
         const seen = occurrences.get(`${name}:${argsHash}`) ?? 0;
         const memoKey = `${name}:${argsHash}:${seen}`;
-        const memoised = opts.memo.get(memoKey);
-        if (memoised) {
-          occurrences.set(`${name}:${argsHash}`, seen + 1);
-          resolvedActions.push(memoKey);
-          return memoised.kind === 'value' ? toInkValue(memoised.value) : `error: ${memoised.message}`;
-        }
-        throw new ActionYield({
+        const request: ActionRequest = {
           memoKey,
           externalName: name,
           capabilityId,
           args,
           occurrence: seen,
-        });
+        };
+        // The memo first, then the host's own answer, and only then a yield.
+        // Order matters: a value that was already resolved must stay resolved,
+        // so replaying a pass never re-runs an inline resolver either.
+        const outcome = opts.memo.get(memoKey) ?? opts.inline?.(request) ?? null;
+        if (outcome) {
+          occurrences.set(`${name}:${argsHash}`, seen + 1);
+          resolvedActions.push(memoKey);
+          return outcome.kind === 'value' ? toInkValue(outcome.value) : `error: ${outcome.message}`;
+        }
+        throw new ActionYield(request);
       },
       false,
     );

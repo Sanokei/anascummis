@@ -44,5 +44,17 @@ export const COMPILED_STORIES: CompiledStory[] = [
       "web_search",
       "web_fetch"
     ]
+  },
+  {
+    "id": "show-and-tell",
+    "version": "4c510c7acfa4774a",
+    "entryKnot": "start",
+    "compiled": "{\"inkVersion\":21,\"root\":[[{\"->\":\"start\"},[\"done\",{\"#n\":\"g-0\"}],null],\"done\",{\"start\":[\"ev\",\"str\",\"^show-and-tell\",\"/str\",\"str\",\"^Show and tell\",\"/str\",\"str\",\"^A reply is read once and is gone. This is the other thing: it appears beside the reply and stays until something takes it down.\",\"/str\",\"str\",\"^normal\",\"/str\",{\"x()\":\"surface_window\",\"exArgs\":4},\"/ev\",{\"VAR=\":\"window_id\",\"re\":true},\"\\n\",\"^It is beside this, not in it.\",\"\\n\",{\"->\":\"offer\"},null],\"offer\":[[[\"ev\",{\"^->\":\"offer.0.0.$r1\"},{\"temp=\":\"$r\"},\"str\",{\"->\":\".^.s\"},[{\"#n\":\"$r1\"}],\"/str\",\"/ev\",{\"*\":\".^.^.c-0\",\"flg\":2},{\"s\":[\"^Say what it is for \",\"#\",\"^action: none\",\"/#\",{\"->\":\"$r\",\"var\":true},null]}],[\"ev\",{\"^->\":\"offer.0.1.$r1\"},{\"temp=\":\"$r\"},\"str\",{\"->\":\".^.s\"},[{\"#n\":\"$r1\"}],\"/str\",{\"VAR?\":\"dressed\"},\"!\",\"/ev\",{\"*\":\".^.^.c-1\",\"flg\":3},{\"s\":[\"^Wear the archivist while it is up \",\"#\",\"^action: none\",\"/#\",{\"->\":\"$r\",\"var\":true},null]}],[\"ev\",{\"^->\":\"offer.0.2.$r1\"},{\"temp=\":\"$r\"},\"str\",{\"->\":\".^.s\"},[{\"#n\":\"$r1\"}],\"/str\",{\"VAR?\":\"dressed\"},\"/ev\",{\"*\":\".^.^.c-2\",\"flg\":3},{\"s\":[\"^Take the costume off \",\"#\",\"^action: none\",\"/#\",{\"->\":\"$r\",\"var\":true},null]}],[\"ev\",{\"^->\":\"offer.0.3.$r1\"},{\"temp=\":\"$r\"},\"str\",{\"->\":\".^.s\"},[{\"#n\":\"$r1\"}],\"/str\",\"/ev\",{\"*\":\".^.^.c-3\",\"flg\":2},{\"s\":[\"^Take the window down \",\"#\",\"^action: none\",\"/#\",{\"->\":\"$r\",\"var\":true},null]}],{\"c-0\":[\"ev\",{\"^->\":\"offer.0.c-0.$r2\"},\"/ev\",{\"temp=\":\"$r\"},{\"->\":\".^.^.0.s\"},[{\"#n\":\"$r2\"}],\"\\n\",{\"->\":\"remark\"},null],\"c-1\":[\"ev\",{\"^->\":\"offer.0.c-1.$r2\"},\"/ev\",{\"temp=\":\"$r\"},{\"->\":\".^.^.1.s\"},[{\"#n\":\"$r2\"}],\"\\n\",{\"->\":\"dress\"},null],\"c-2\":[\"ev\",{\"^->\":\"offer.0.c-2.$r2\"},\"/ev\",{\"temp=\":\"$r\"},{\"->\":\".^.^.2.s\"},[{\"#n\":\"$r2\"}],\"\\n\",{\"->\":\"undress\"},null],\"c-3\":[\"ev\",{\"^->\":\"offer.0.c-3.$r2\"},\"/ev\",{\"temp=\":\"$r\"},{\"->\":\".^.^.3.s\"},[{\"#n\":\"$r2\"}],\"\\n\",{\"->\":\"take_down\"},null]}],null],\"remark\":[\"^A demonstration, so it demonstrates itself.\",\"\\n\",{\"->\":\"offer\"},null],\"dress\":[\"ev\",true,\"/ev\",{\"VAR=\":\"dressed\",\"re\":true},\"ev\",\"str\",\"^archivist\",\"/str\",\"str\",\"^a window full of documents deserves one\",\"/str\",\"str\",\"^filed\",\"/str\",{\"x()\":\"persona_wear\",\"exArgs\":3},\"pop\",\"/ev\",\"\\n\",{\"->\":\"offer\"},null],\"undress\":[\"ev\",false,\"/ev\",{\"VAR=\":\"dressed\",\"re\":true},\"ev\",{\"x()\":\"persona_clear\"},\"pop\",\"/ev\",\"\\n\",{\"->\":\"offer\"},null],\"take_down\":[\"ev\",{\"VAR?\":\"window_id\"},\"str\",\"^shown\",\"/str\",{\"x()\":\"surface_close\",\"exArgs\":2},\"/ev\",{\"VAR=\":\"window_id\",\"re\":true},\"\\n\",\"^It is down.\",\"\\n\",\"done\",null],\"global decl\":[\"ev\",\"str\",\"^\",\"/str\",{\"VAR=\":\"window_id\"},false,{\"VAR=\":\"dressed\"},\"/ev\",\"end\",null]}],\"listDefs\":{}}",
+    "externals": [
+      "surface_window",
+      "persona_wear",
+      "persona_clear",
+      "surface_close"
+    ]
   }
 ];

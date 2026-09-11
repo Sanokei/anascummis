@@ -8,6 +8,8 @@ import { retrievePage } from '../providers/retrieval';
 import { randomId } from '../crypto';
 import { VISION_NATIVES } from './vision-natives';
 import { LAB_NATIVES } from './lab-natives';
+import { DESIGN_NATIVES } from './design-natives';
+import { SURFACE_NATIVES } from './surface-natives';
 import { PREMISE_DOCS } from '../docs/compiled';
 import { StoryFunctionForge, type CapabilitySpec } from '../lua/forge';
 
@@ -594,6 +596,16 @@ export function buildRegistry(env: Env): CapabilityRegistry {
     // Three separate contracts rather than one "do a lab" call, so each is
     // gated, charged and recorded on its own.
     ...LAB_NATIVES,
+    // Design: author a drawing or a 3D scene as source, then settle each
+    // criterion by measuring the source where a measurement exists. A lab asks
+    // a model whether a picture looks right; here the model is asked only about
+    // what the arithmetic could not reach, and its answer is labelled as an
+    // opinion rather than recorded as a result.
+    ...DESIGN_NATIVES,
+    // Surfaces and personas: the two things a turn can put in front of the
+    // person rather than say. No permissions and no side effects, which is
+    // what lets the Ink runtime answer them inline; see surface-natives.
+    ...SURFACE_NATIVES,
   ]) {
     registry.registerNative(handler);
   }

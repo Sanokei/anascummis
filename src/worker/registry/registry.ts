@@ -10,6 +10,8 @@ import { sha256Hex } from '../crypto';
 import { validateAgainstSchema, serializedSize } from './schema';
 import type { PermissionEnvelope } from '../policy/permissions';
 import type { TaskBudget } from '../policy/budget';
+import type { SurfaceCollector } from '../surfaces/surface';
+import type { PersonaSlot } from '../personas/wear';
 
 /**
  * The authoritative executable catalogue.
@@ -37,6 +39,17 @@ export interface NativeContext {
   budget: TaskBudget;
   /** Charged for each outbound request the adapter makes. */
   chargeExternal: (n?: number) => Result<number>;
+  /**
+   * What this turn is putting on screen, when there is a turn behind the call.
+   *
+   * Optional because most dispatches have no turn: a validation run, a test, a
+   * background job. A handler that needs a collector and is given none fails
+   * with `missing-capability` rather than throwing, so a capability that is
+   * installed but not usable in this context says exactly that.
+   */
+  surfaces?: SurfaceCollector;
+  /** The costume this turn is wearing. Absent for the same reason `surfaces` is. */
+  persona?: PersonaSlot;
 }
 
 export interface LuaCapabilityRecord {

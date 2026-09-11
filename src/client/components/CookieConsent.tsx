@@ -104,7 +104,7 @@ export function CookieConsent({
           type="button"
           disabled={saving}
           onClick={() => void decide(false)}
-          className="border-hairline-bright hover:bg-ground flex-1 border px-3 py-2 text-[0.85rem] disabled:opacity-50"
+          className="border-hairline-bright hover:bg-ground-sunken flex-1 border px-3 py-2 text-[0.85rem] disabled:opacity-50"
         >
           Necessary only
         </button>
@@ -112,7 +112,7 @@ export function CookieConsent({
           type="button"
           disabled={saving}
           onClick={() => void decide(managing ? analytics : true)}
-          className="border-hairline-bright hover:bg-ground flex-1 border px-3 py-2 text-[0.85rem] disabled:opacity-50"
+          className="border-hairline-bright hover:bg-ground-sunken flex-1 border px-3 py-2 text-[0.85rem] disabled:opacity-50"
         >
           {managing ? 'Save choices' : 'Accept optional'}
         </button>
