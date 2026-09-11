@@ -17,7 +17,8 @@
     "cf-typegen": "wrangler types",
     "stories": "node scripts/compile-stories.mjs",
     "skills": "node scripts/compile-skills.mjs",
-    "docs": "node scripts/compile-docs.mjs"
+    "docs": "node scripts/compile-docs.mjs",
+    "design": "vite build --config vite.preview.config.ts && node scripts/inline-preview.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",

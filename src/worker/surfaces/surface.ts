@@ -395,11 +395,21 @@ export function validateBlock(
 
   if (block.title !== undefined && block.title.length > MAX_BLOCK_TITLE_CHARS) {
     out.push(
-      issue('text-too-long', `The title of ${block.id} is over ${MAX_BLOCK_TITLE_CHARS} characters.`, located),
+      issue(
+        'text-too-long',
+        `The title of ${block.id} is ${block.title.length} characters, over ${MAX_BLOCK_TITLE_CHARS}.`,
+        located,
+      ),
     );
   }
   if (block.caption !== undefined && block.caption.length > MAX_CAPTION_CHARS) {
-    out.push(issue('text-too-long', `The caption of ${block.id} is over ${MAX_CAPTION_CHARS} characters.`, located));
+    out.push(
+      issue(
+        'text-too-long',
+        `The caption of ${block.id} is ${block.caption.length} characters, over ${MAX_CAPTION_CHARS}.`,
+        located,
+      ),
+    );
   }
 
   out.push(...BLOCK_RULES[block.kind](block, where.windowId, where.tabId));
@@ -418,18 +428,20 @@ export function validateTab(tab: SurfaceTab, windowId: string): SurfaceIssue[] {
   const out: SurfaceIssue[] = [];
   if (tab.title.length > MAX_TAB_TITLE_CHARS) {
     out.push(
-      issue('text-too-long', `The title of ${tab.id} is over ${MAX_TAB_TITLE_CHARS} characters.`, {
-        windowId,
-        tabId: tab.id,
-      }),
+      issue(
+        'text-too-long',
+        `The title of ${tab.id} is ${tab.title.length} characters, over ${MAX_TAB_TITLE_CHARS}.`,
+        { windowId, tabId: tab.id },
+      ),
     );
   }
   if (tab.badge !== undefined && tab.badge.length > MAX_BADGE_CHARS) {
     out.push(
-      issue('text-too-long', `The badge on ${tab.id} is over ${MAX_BADGE_CHARS} characters.`, {
-        windowId,
-        tabId: tab.id,
-      }),
+      issue(
+        'text-too-long',
+        `The badge on ${tab.id} is ${tab.badge.length} characters, over ${MAX_BADGE_CHARS}.`,
+        { windowId, tabId: tab.id },
+      ),
     );
   }
 
@@ -495,19 +507,29 @@ export function validateWindow(window: SurfaceWindowDraft): SurfaceIssue[] {
     out.push(issue('not-a-window', `${windowId} has no title.`, { windowId }));
   } else if (window.title.length > MAX_WINDOW_TITLE_CHARS) {
     out.push(
-      issue('text-too-long', `The title of ${windowId} is over ${MAX_WINDOW_TITLE_CHARS} characters.`, { windowId }),
+      issue(
+        'text-too-long',
+        `The title of ${windowId} is ${window.title.length} characters, over ${MAX_WINDOW_TITLE_CHARS}.`,
+        { windowId },
+      ),
     );
   }
   if (window.subtitle !== undefined && window.subtitle.length > MAX_WINDOW_SUBTITLE_CHARS) {
     out.push(
-      issue('text-too-long', `The subtitle of ${windowId} is over ${MAX_WINDOW_SUBTITLE_CHARS} characters.`, {
-        windowId,
-      }),
+      issue(
+        'text-too-long',
+        `The subtitle of ${windowId} is ${window.subtitle.length} characters, over ${MAX_WINDOW_SUBTITLE_CHARS}.`,
+        { windowId },
+      ),
     );
   }
   if (window.raisedBy !== undefined && window.raisedBy.length > MAX_RAISED_BY_CHARS) {
     out.push(
-      issue('text-too-long', `raisedBy on ${windowId} is over ${MAX_RAISED_BY_CHARS} characters.`, { windowId }),
+      issue(
+        'text-too-long',
+        `raisedBy on ${windowId} is ${window.raisedBy.length} characters, over ${MAX_RAISED_BY_CHARS}.`,
+        { windowId },
+      ),
     );
   }
   if (window.emphasis !== undefined && !Object.prototype.hasOwnProperty.call(EMPHASIS_VALUES, window.emphasis)) {

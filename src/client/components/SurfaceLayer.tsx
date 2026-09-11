@@ -259,6 +259,8 @@ export function SurfaceLayer({ windows, onDismiss, reducedMotion }: SurfaceLayer
 
   const nodes = useRef(new Map<string, HTMLElement>());
   const geometry = useRef(new Map<string, Geometry>());
+  /** The mobile sheet stack, measured so the page can reserve the room it takes. */
+  const sheets = useRef<HTMLDivElement | null>(null);
   /**
    * Stacking levels, handed out monotonically. The counter is the whole point:
    * a level never has to be recomputed from the set a window sits in, so
@@ -409,6 +411,41 @@ export function SurfaceLayer({ windows, onDismiss, reducedMotion }: SurfaceLayer
     return () => window.removeEventListener('resize', onResize);
   }, [isMobile, applyGeometry]);
 
+  /*
+   * Tell the page how much of the bottom of the screen the sheets are using.
+   *
+   * On a phone this layer is a fixed overlay, so nothing in the document's own
+   * flow accounts for it — and the last thing the assistant said ended up
+   * underneath the stack with no way to scroll it clear. A stack of sheets is
+   * exactly as tall as whatever is in it, and that changes with every reply, so
+   * the height is measured and published as a custom property rather than
+   * guessed at. The page reserves the room; the layer keeps owning geometry.
+   *
+   * On a desktop there is nothing to reserve: windows float rather than sit on
+   * the bottom edge, so the property is cleared and the page closes back up.
+   */
+  useEffect(() => {
+    const root = document.documentElement;
+    const node = sheets.current;
+    if (!isMobile || !node) {
+      root.style.removeProperty('--surface-sheet-height');
+      return;
+    }
+    const publish = () => {
+      // Layout height, not the painted rect: a sheet animating in has a
+      // transform on it, and the page should reserve the room it will occupy
+      // rather than the room it currently crosses.
+      root.style.setProperty('--surface-sheet-height', `${node.offsetHeight}px`);
+    };
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty('--surface-sheet-height');
+    };
+  }, [isMobile, windows.length]);
+
   // An empty layer is scenery with nothing in it. It must not even be in the
   // tree, so nothing about it can intercept a click.
   if (windows.length === 0) return null;
@@ -451,9 +488,20 @@ export function SurfaceLayer({ windows, onDismiss, reducedMotion }: SurfaceLayer
       )}
 
       {isMobile ? (
-        // Below 640px the floating metaphor has nowhere to float: full-width
-        // sheets stack up from the bottom of the screen instead.
-        <div className="absolute inset-x-0 bottom-0 flex max-h-[85vh] flex-col gap-1.5 overflow-y-auto">
+        /*
+         * Below 640px the floating metaphor has nowhere to float: full-width
+         * sheets stack up from the bottom of the screen instead.
+         *
+         * The stack is capped well short of the full height rather than at the
+         * 85vh a lone sheet would be allowed. Ten of them in one scrolling
+         * column would otherwise leave a strip of the conversation showing,
+         * which reads as the page having broken rather than as sheets having
+         * opened over it.
+         */
+        <div
+          ref={sheets}
+          className="absolute inset-x-0 bottom-0 flex max-h-[60vh] flex-col gap-1.5 overflow-y-auto"
+        >
           {windows.map((surface) => (
             <SurfaceSheet
               key={surface.id}

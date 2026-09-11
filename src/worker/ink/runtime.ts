@@ -148,8 +148,15 @@ export async function evaluate(opts: EvaluationOptions): Promise<Result<Evaluati
         // The memo first, then the host's own answer, and only then a yield.
         // Order matters: a value that was already resolved must stay resolved,
         // so replaying a pass never re-runs an inline resolver either.
-        const outcome = opts.memo.get(memoKey) ?? opts.inline?.(request) ?? null;
+        const memoised = opts.memo.get(memoKey);
+        const outcome = memoised ?? opts.inline?.(request) ?? null;
         if (outcome) {
+          // An inline answer is filed in the memo like any other. Nothing
+          // between two passes can change what it should have been — the host
+          // decided about its own screen, and a dispatch in between does not
+          // touch that — so asking a second time would only repeat work the
+          // turn has already done.
+          if (!memoised) opts.memo.set(memoKey, outcome);
           occurrences.set(`${name}:${argsHash}`, seen + 1);
           resolvedActions.push(memoKey);
           return outcome.kind === 'value' ? toInkValue(outcome.value) : `error: ${outcome.message}`;

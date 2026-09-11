@@ -275,7 +275,20 @@ export function App() {
   }
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
+    /*
+     * `h-dvh` rather than `h-screen`, and the bottom padding is the sheets.
+     *
+     * On a phone the viewport is not a fixed number: the browser chrome slides
+     * away and back, and `100vh` is the height it has when that chrome is
+     * hidden. The composer at the bottom of this column is what gets pushed off
+     * the screen when it is not.
+     *
+     * The padding is what stops a stack of sheets from burying the composer and
+     * the last thing the assistant said. The layer measures itself and writes
+     * the property; the shell just gets shorter to make room, the same way it
+     * would for a keyboard.
+     */
+    <div className="flex h-dvh flex-col overflow-hidden pb-[var(--surface-sheet-height)]">
       <header className="border-hairline flex shrink-0 items-center justify-between border-b px-6 py-3">
         <div className="flex items-baseline gap-4">
           <h1 className="text-[0.95rem] font-medium tracking-[-0.01em]">Anascummis</h1>

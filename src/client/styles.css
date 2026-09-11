@@ -67,6 +67,14 @@
   --radius-block: 6px;
 
   /*
+   * How much of the bottom edge the mobile sheet stack is sitting on. Declared
+   * here as well as written by the layer so the value always resolves: the
+   * layer clears its inline property on desktop, and a `calc` reading a
+   * property that is not there is a padding that is not there either.
+   */
+  --surface-sheet-height: 0px;
+
+  /*
    * One easing for anything that arrives, so the whole interface moves as if
    * it were the same material. Fast out of the gate, settled at the end.
    */

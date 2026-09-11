@@ -63,6 +63,10 @@ A demonstration, so it demonstrates itself.
 -> offer
 
 === take_down ===
-~ window_id = surface_close(window_id, "shown")
+// Callable as a statement. Every one of these externals answers with a string —
+// the id on success, a sentence beginning "error:" on a refusal — so a story
+// that needed to know whether it worked can assign the answer and test it. This
+// one has already decided the close is worth trying, so it does not ask.
+~ surface_close(window_id, "shown")
 It is down.
 -> DONE

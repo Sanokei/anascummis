@@ -29,6 +29,23 @@ export class ApiFailure extends Error {
   }
 }
 
+/**
+ * What design work is possible in this deployment, per surface.
+ *
+ * The two surfaces are reported separately because they have genuinely
+ * different dependencies: a drawing is rasterised by Browser Rendering and
+ * cannot be rendered without it, while a scene is compiled and drawn inside the
+ * Worker and needs no provider at all. A single "design available" flag would
+ * either promise a renderer that is not configured or hide the one that always
+ * works.
+ */
+export interface DesignAvailability {
+  vector: { available: boolean; reason: string };
+  scene: { available: boolean; reason: string };
+  review: { available: boolean; model: string; reason: string };
+  maxRounds: number;
+}
+
 export interface SessionState {
   identity:
     | { kind: 'guest'; sessionId: string }
@@ -47,6 +64,7 @@ export interface SessionState {
     speech: { provider: string; model: string };
     vision: { provider: string; model: string; reason: string };
     cloudflareConnect: boolean;
+    design: DesignAvailability;
   };
   consent: ConsentState;
   policyVersion: string;
