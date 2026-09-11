@@ -16,6 +16,7 @@ import { PermissionEnvelope, defaultEnvelope } from './policy/permissions';
 import { MemoryManager, type Mission } from './memory/manager';
 import { SessionClient, type SessionSnapshot } from './do/session-coordinator';
 import { SkillHarness } from './skills/harness';
+import { describeRun } from './skills/outcome';
 import { ensureBundledSkills } from './skills/seed';
 import { resolveChoice } from './ink/resolver';
 import { evaluate, chooseIndex, type ActionOutcome } from './ink/runtime';
@@ -496,6 +497,29 @@ export class Orchestrator {
         };
       }
     } else if (selection.kind === 'blocked') {
+      // A refusal is the most actionable thing this layer produces — it names
+      // the exact permission that would unblock the procedure — and it used to
+      // be the one outcome never written down, because a blocked selection has
+      // no activeSkill to hang a record on and the gate's reason was dropped on
+      // the floor. The write is awaited rather than fired and forgotten: a
+      // Worker may cancel pending work once the response is done, and a record
+      // that vanishes is the same as no record. It is guarded because this is
+      // optional collection standing in front of a user's reply, and the reply
+      // is worth more than the row.
+      try {
+        await this.skills.recordRun(input.req.identity, {
+          skillName: selection.skill.qualifiedName,
+          skillVersion: selection.skill.revision,
+          skillOrigin: selection.skill.origin,
+          task: input.req.text.slice(0, 400),
+          capabilityVersions: [],
+          permissions: input.permissions.list(),
+          outcome: 'blocked',
+          reason: selection.reason,
+        });
+      } catch {
+        // Nothing reached the user is lost by this; only the note about it is.
+      }
       return ok({
         text: `I can see a procedure for that, but it is blocked: ${selection.reason}`,
         citations: [],
@@ -527,6 +551,12 @@ export class Orchestrator {
     const citations: Citation[] = [];
     const capabilityVersions: string[] = [];
     let reply = '';
+
+    // Dispatches that did not come back as a value. Kept as raw observations
+    // rather than a verdict, because whether they add up to a failed run is a
+    // judgement that belongs to whoever reads the record, not to the writer.
+    const failures: string[] = [];
+    const confirmations: string[] = [];
 
     // Everything pushed to the client while this reply was produced. Tracking
     // it is what lets the committed turn send only what is still unseen, even
@@ -590,6 +620,7 @@ export class Orchestrator {
             content: JSON.stringify(outcome.value).slice(0, 12_000),
           });
         } else if (outcome.kind === 'confirmation-required') {
+          confirmations.push(capabilityId);
           messages.push({
             role: 'tool',
             toolCallId: call.id,
@@ -600,6 +631,7 @@ export class Orchestrator {
             }),
           });
         } else {
+          failures.push(`${capabilityId} (${outcome.failure.kind})`);
           messages.push({
             role: 'tool',
             toolCallId: call.id,
@@ -623,7 +655,7 @@ export class Orchestrator {
         task: input.req.text.slice(0, 400),
         capabilityVersions,
         permissions: input.permissions.list(),
-        outcome: reply ? 'completed' : 'failed',
+        ...describeRun({ replied: reply !== '', failures, confirmations }),
       });
     }
 
