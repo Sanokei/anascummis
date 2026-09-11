@@ -24,14 +24,34 @@ interface UseMicOptions {
   vocabulary: string[];
 }
 
-const CHUNK_MS = 3200;
+const MAX_BUFFER_MS = 7000;
+const RECORD_CHUNK_MS = 700;
+const SILENCE_FLUSH_MS = 700;
+const MIN_BUFFER_MS = 250;
+/** Minimum accumulated speech before a partial transcript is sent. */
+const MIN_PARTIAL_MS = 500;
+/** Smallest gap between partial transcripts while the user keeps speaking. */
+const PARTIAL_INTERVAL_MS = 1000;
+
+interface BufferedChunk {
+  blob: Blob;
+  durationMs: number;
+  peakAmplitude: number;
+  rmsAmplitude: number;
+  duringPlayback: boolean;
+  echoDetected: boolean;
+}
 
 export function useMic({ onTranscript, playbackActive, vocabulary }: UseMicOptions) {
   const [status, setStatus] = useState<MicStatus>('off');
   const [level, setLevel] = useState(0);
   const [note, setNote] = useState<string | null>(null);
+  /** Live partial transcript, streamed while the user is still speaking. */
+  const [partialText, setPartialText] = useState('');
 
   const streamRef = useRef<MediaStream | null>(null);
+  const partialSeqRef = useRef(0);
+  const lastPartialAtRef = useRef(0);
   const recorderRef = useRef<MediaRecorder | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -40,6 +60,12 @@ export function useMic({ onTranscript, playbackActive, vocabulary }: UseMicOptio
   const sumSquaresRef = useRef(0);
   const sampleCountRef = useRef(0);
   const echoRef = useRef(false);
+  const audioMimeRef = useRef('audio/webm');
+  const bufferedChunksRef = useRef<BufferedChunk[]>([]);
+  const bufferedDurationMsRef = useRef(0);
+  const lastSpeechAtRef = useRef(0);
+  const flushTimeoutRef = useRef<number | null>(null);
+  const inSpeechSegmentRef = useRef(false);
 
   const releaseDevice = useCallback(() => {
     if (rafRef.current !== null) {
@@ -54,14 +80,125 @@ export function useMic({ onTranscript, playbackActive, vocabulary }: UseMicOptio
     void audioCtxRef.current?.close();
     audioCtxRef.current = null;
     analyserRef.current = null;
+    bufferedChunksRef.current = [];
+    bufferedDurationMsRef.current = 0;
+    inSpeechSegmentRef.current = false;
+    lastSpeechAtRef.current = 0;
+    if (flushTimeoutRef.current !== null) {
+      clearTimeout(flushTimeoutRef.current);
+      flushTimeoutRef.current = null;
+    }
     setLevel(0);
+    setPartialText('');
   }, []);
 
+  /**
+   * Sends captured audio for transcription. A partial runs while the user is
+   * still speaking and only updates the live transcript; a final runs at the
+   * end of an utterance and becomes the turn.
+   */
+  const sendChunks = useCallback(
+    async (chunks: BufferedChunk[], durationMs: number, kind: 'partial' | 'final') => {
+      if (chunks.length === 0) return;
+      // A later chunk supersedes this one, so a stale partial response is dropped.
+      const seq = ++partialSeqRef.current;
+
+      const peakAmplitude = Math.max(...chunks.map((chunk) => chunk.peakAmplitude));
+      const rmsAmplitude = Math.sqrt(
+        chunks.reduce((sum, chunk) => sum + chunk.rmsAmplitude * chunk.rmsAmplitude * chunk.durationMs, 0) /
+          Math.max(durationMs, 1),
+      );
+      const duringPlayback = chunks.some((chunk) => chunk.duringPlayback);
+      const echoDetected = chunks.some((chunk) => chunk.echoDetected);
+      const audio = new Blob(chunks.map((chunk) => chunk.blob), { type: audioMimeRef.current });
+
+      const form = new FormData();
+      form.append('audio', audio, `chunk.${audioExtension(audioMimeRef.current)}`);
+      form.append('audioMimeType', audioMimeRef.current);
+      form.append('peakAmplitude', String(peakAmplitude));
+      form.append('rmsAmplitude', String(rmsAmplitude));
+      form.append('duringPlayback', String(duringPlayback));
+      form.append('echoDetected', String(echoDetected));
+      form.append('durationMs', String(durationMs));
+      form.append('vocabulary', vocabulary.join(','));
+
+      try {
+        const result = await api.transcribe(form);
+        if (kind === 'partial' && seq !== partialSeqRef.current) return;
+        if (result.suppressed || !result.text.trim()) {
+          if (kind === 'final') setPartialText('');
+          return;
+        }
+        if (kind === 'partial') {
+          setPartialText(result.text);
+        } else {
+          setPartialText('');
+          onTranscript(result.text, result.rawTranscript ?? result.text);
+        }
+      } catch (err) {
+        if (kind === 'final') {
+          setPartialText('');
+          setNote(err instanceof Error ? err.message : 'That chunk could not be transcribed.');
+        }
+      }
+    },
+    [onTranscript, vocabulary],
+  );
+
+  /** A live snapshot of the utterance so far, without ending the segment. */
+  const sendPartial = useCallback(() => {
+    const durationMs = bufferedDurationMsRef.current;
+    if (durationMs < MIN_PARTIAL_MS) return;
+    void sendChunks(bufferedChunksRef.current.slice(), durationMs, 'partial');
+  }, [sendChunks]);
+
+  const flushBuffer = useCallback(
+    async (force = false) => {
+      const chunks = bufferedChunksRef.current;
+      if (!chunks.length) return;
+      const durationMs = bufferedDurationMsRef.current;
+      if (!force && durationMs < MIN_BUFFER_MS) {
+        bufferedChunksRef.current = [];
+        bufferedDurationMsRef.current = 0;
+        inSpeechSegmentRef.current = false;
+        lastSpeechAtRef.current = 0;
+        return;
+      }
+
+      bufferedChunksRef.current = [];
+      bufferedDurationMsRef.current = 0;
+      inSpeechSegmentRef.current = false;
+      lastSpeechAtRef.current = 0;
+
+      await sendChunks(chunks, durationMs, 'final');
+    },
+    [sendChunks],
+  );
+
+  const scheduleFlush = useCallback(() => {
+    if (flushTimeoutRef.current !== null) clearTimeout(flushTimeoutRef.current);
+    flushTimeoutRef.current = window.setTimeout(() => {
+      if (lastSpeechAtRef.current === 0) return;
+      const sinceSpeech = performance.now() - lastSpeechAtRef.current;
+      if (!Number.isFinite(sinceSpeech) || sinceSpeech >= SILENCE_FLUSH_MS) {
+        void flushBuffer();
+      }
+    }, SILENCE_FLUSH_MS);
+  }, [flushBuffer]);
+
   const stop = useCallback(async () => {
+    if (inSpeechSegmentRef.current) {
+      await flushBuffer(true);
+    } else {
+      bufferedChunksRef.current = [];
+      bufferedDurationMsRef.current = 0;
+      inSpeechSegmentRef.current = false;
+    }
+    lastSpeechAtRef.current = 0;
     releaseDevice();
     setStatus('off');
     await api.setListening(false).catch(() => undefined);
-  }, [releaseDevice]);
+  }, [flushBuffer, releaseDevice]);
 
   const start = useCallback(async () => {
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
@@ -121,6 +258,8 @@ export function useMic({ onTranscript, playbackActive, vocabulary }: UseMicOptio
     measure();
 
     const mime = pickMimeType();
+    audioMimeRef.current = mime ?? 'audio/webm';
+    lastSpeechAtRef.current = 0;
     const recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
     recorderRef.current = recorder;
 
@@ -136,33 +275,69 @@ export function useMic({ onTranscript, playbackActive, vocabulary }: UseMicOptio
       sampleCountRef.current = 0;
       echoRef.current = false;
 
-      const form = new FormData();
-      form.append('audio', event.data, 'chunk.webm');
-      form.append('peakAmplitude', String(peak));
-      form.append('rmsAmplitude', String(rms));
-      form.append('duringPlayback', String(duringPlayback));
-      form.append('echoDetected', String(echo));
-      form.append('durationMs', String(CHUNK_MS));
-      form.append('vocabulary', vocabulary.join(','));
-
-      try {
-        const result = await api.transcribe(form);
-        if (result.suppressed || !result.text.trim()) return;
-        onTranscript(result.text, result.rawTranscript ?? result.text);
-      } catch (err) {
-        setNote(err instanceof Error ? err.message : 'That chunk could not be transcribed.');
+      const speaking = peak > 0.012 || rms > 0.004;
+      if (speaking) {
+        if (!inSpeechSegmentRef.current) {
+          bufferedChunksRef.current = [];
+          bufferedDurationMsRef.current = 0;
+          inSpeechSegmentRef.current = true;
+          lastPartialAtRef.current = 0;
+        }
+        lastSpeechAtRef.current = performance.now();
+        bufferedChunksRef.current.push({
+          blob: event.data,
+          durationMs: RECORD_CHUNK_MS,
+          peakAmplitude: peak,
+          rmsAmplitude: rms,
+          duringPlayback,
+          echoDetected: echo,
+        });
+        bufferedDurationMsRef.current += RECORD_CHUNK_MS;
+        while (bufferedDurationMsRef.current > MAX_BUFFER_MS) {
+          const removed = bufferedChunksRef.current.shift();
+          if (removed) {
+            bufferedDurationMsRef.current = Math.max(0, bufferedDurationMsRef.current - removed.durationMs);
+          }
+        }
+        if (performance.now() - lastPartialAtRef.current >= PARTIAL_INTERVAL_MS) {
+          lastPartialAtRef.current = performance.now();
+          sendPartial();
+        }
+        if (flushTimeoutRef.current !== null) {
+          clearTimeout(flushTimeoutRef.current);
+          flushTimeoutRef.current = null;
+        }
+        return;
+      }
+      if (inSpeechSegmentRef.current) {
+        bufferedChunksRef.current.push({
+          blob: event.data,
+          durationMs: RECORD_CHUNK_MS,
+          peakAmplitude: peak,
+          rmsAmplitude: rms,
+          duringPlayback,
+          echoDetected: echo,
+        });
+        bufferedDurationMsRef.current += RECORD_CHUNK_MS;
+        while (bufferedDurationMsRef.current > MAX_BUFFER_MS) {
+          const removed = bufferedChunksRef.current.shift();
+          if (removed) {
+            bufferedDurationMsRef.current = Math.max(0, bufferedDurationMsRef.current - removed.durationMs);
+          }
+        }
+        scheduleFlush();
       }
     };
 
-    recorder.start(CHUNK_MS);
+    recorder.start(RECORD_CHUNK_MS);
     setStatus('listening');
     await api.setListening(true).catch(() => undefined);
-  }, [onTranscript, playbackActive, vocabulary]);
+  }, [playbackActive, scheduleFlush, sendPartial]);
 
   // Releasing on unmount matters: a navigation must not leave the mic open.
   useEffect(() => releaseDevice, [releaseDevice]);
 
-  return { status, level, note, start, stop };
+  return { status, level, note, partial: partialText, start, stop };
 }
 
 function pickMimeType(): string | null {
@@ -170,4 +345,12 @@ function pickMimeType(): string | null {
     if (MediaRecorder.isTypeSupported?.(candidate)) return candidate;
   }
   return null;
+}
+
+function audioExtension(mimeType: string): string {
+  const normalized = mimeType.toLowerCase();
+  if (normalized.startsWith('audio/mp4')) return 'm4a';
+  if (normalized.startsWith('audio/webm')) return 'webm';
+  if (normalized.startsWith('audio/ogg')) return 'ogg';
+  return 'webm';
 }

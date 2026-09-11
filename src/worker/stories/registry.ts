@@ -11,6 +11,13 @@ import { externalNameToCapabilityId } from '../ink/harness';
 
 export const OPEN_CONVERSATION_ID = 'open-conversation';
 
+/**
+ * The story that renders host-supplied reply text. It is not a conversation
+ * position, so it is never entered through a checkpoint or offered to a
+ * resolver; the host calls it directly for every visible reply.
+ */
+export const REPLY_SURFACE_ID = 'reply-surface';
+
 const BY_ID = new Map<string, CompiledStory>(COMPILED_STORIES.map((s) => [s.id, s]));
 
 export function getStory(id: string): CompiledStory | null {

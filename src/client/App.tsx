@@ -22,6 +22,7 @@ export function App() {
   const [policy, setPolicy] = useState<PolicyPage | null>(null);
   const [consentOpen, setConsentOpen] = useState(false);
   const [inspectorOpen, setInspectorOpen] = useState(false);
+  const [streamingText, setStreamingText] = useState<string | null>(null);
 
   const turnAbort = useRef<AbortController | null>(null);
   const playing = useRef(false);
@@ -57,18 +58,23 @@ export function App() {
     async (input: { text: string; rawTranscript?: string; choiceIndex?: number; token?: string }) => {
       setBusy(true);
       setNotice(null);
+      setStreamingText('');
       turnAbort.current?.abort();
       const controller = new AbortController();
       turnAbort.current = controller;
 
       try {
-        const response = await api.turn({
-          text: input.text,
-          ...(input.rawTranscript ? { rawTranscript: input.rawTranscript } : {}),
-          ...(typeof input.choiceIndex === 'number' ? { choiceIndex: input.choiceIndex } : {}),
-          ...(input.token ? { confirmationToken: input.token } : {}),
-          signal: controller.signal,
-        });
+        const response = await api.turn(
+          {
+            text: input.text,
+            ...(input.rawTranscript ? { rawTranscript: input.rawTranscript } : {}),
+            ...(typeof input.choiceIndex === 'number' ? { choiceIndex: input.choiceIndex } : {}),
+            ...(input.token ? { confirmationToken: input.token } : {}),
+            signal: controller.signal,
+          },
+          (delta) => setStreamingText((prev) => (prev ?? '') + delta),
+        );
+        setStreamingText(null);
         setTurns(response.turns);
         setChoices(response.choices);
         setCitations(response.citations);
@@ -81,6 +87,7 @@ export function App() {
           });
         }
       } catch (err) {
+        setStreamingText(null);
         if (err instanceof ApiFailure) {
           setNotice({
             kind: err.detail.kind,
@@ -195,6 +202,8 @@ export function App() {
                 citations={citations}
                 choices={choices}
                 busy={busy}
+                streamingText={streamingText}
+                partialTranscript={mic.partial}
                 onChoose={(index) => void send({ text: '', choiceIndex: index })}
               />
 

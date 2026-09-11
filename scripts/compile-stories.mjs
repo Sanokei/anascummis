@@ -19,6 +19,7 @@ const ENTRY_KNOTS = {
   'open-conversation': 'listening',
   research: 'start',
   'build-capability': 'propose',
+  'reply-surface': 'render',
 };
 
 const files = (await readdir(SOURCE_DIR)).filter((f) => f.endsWith('.ink')).sort();

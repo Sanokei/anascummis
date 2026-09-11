@@ -6,6 +6,10 @@ interface TranscriptProps {
   citations: Citation[];
   choices: InkChoiceView[];
   busy: boolean;
+  /** The in-flight assistant reply, streamed word by word. */
+  streamingText?: string | null;
+  /** Live transcription of what the user is saying right now. */
+  partialTranscript?: string | null;
   onChoose: (index: number) => void;
 }
 
@@ -13,12 +17,12 @@ interface TranscriptProps {
  * The conversation. Choices are offered as buttons but never required: the
  * same branch can be reached by saying what you mean.
  */
-export function Transcript({ turns, citations, choices, busy, onChoose }: TranscriptProps) {
+export function Transcript({ turns, citations, choices, busy, streamingText, partialTranscript, onChoose }: TranscriptProps) {
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ block: 'end' });
-  }, [turns.length, choices.length]);
+  }, [turns.length, choices.length, streamingText?.length, partialTranscript?.length]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -60,6 +64,30 @@ export function Transcript({ turns, citations, choices, busy, onChoose }: Transc
           )}
         </article>
       ))}
+
+      {partialTranscript ? (
+        <article aria-label="You said" className="pl-6 border-l border-hairline">
+          <p className="text-ink-faint mb-1 font-mono text-[0.7rem] tracking-wide uppercase">You</p>
+          <p className="text-ink-dim max-w-prose whitespace-pre-wrap">
+            {partialTranscript}
+            <span aria-hidden="true" className="animate-pulse">
+              ▍
+            </span>
+          </p>
+        </article>
+      ) : null}
+
+      {streamingText ? (
+        <article aria-label="Anascummis said">
+          <p className="text-ink-faint mb-1 font-mono text-[0.7rem] tracking-wide uppercase">Anascummis</p>
+          <p className="max-w-prose whitespace-pre-wrap">
+            {streamingText}
+            <span aria-hidden="true" className="animate-pulse">
+              ▍
+            </span>
+          </p>
+        </article>
+      ) : null}
 
       {citations.length > 0 && (
         <section aria-label="Sources" className="border-hairline border-t pt-4">

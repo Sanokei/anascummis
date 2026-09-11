@@ -29,6 +29,13 @@ export const COMPILED_STORIES: CompiledStory[] = [
     "externals": []
   },
   {
+    "id": "reply-surface",
+    "version": "bfe0412664b44c12",
+    "entryKnot": "render",
+    "compiled": "{\"inkVersion\":21,\"root\":[[{\"->\":\"render\"},[\"done\",{\"#n\":\"g-0\"}],null],\"done\",{\"render\":[\"ev\",{\"VAR?\":\"closing\"},\"/ev\",[{\"->\":\".^.b\",\"c\":true},{\"b\":[\"^ \",{\"->\":\"silence\"},{\"->\":\"render.4\"},null]}],\"nop\",\"\\n\",\"ev\",{\"VAR?\":\"reply\"},\"out\",\"/ev\",\"\\n\",\"done\",null],\"silence\":[\"done\",null],\"global decl\":[\"ev\",\"str\",\"^\",\"/str\",{\"VAR=\":\"reply\"},false,{\"VAR=\":\"closing\"},\"/ev\",\"end\",null]}],\"listDefs\":{}}",
+    "externals": []
+  },
+  {
     "id": "research",
     "version": "f4ef200130fb625e",
     "entryKnot": "start",

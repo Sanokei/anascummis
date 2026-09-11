@@ -82,6 +82,7 @@ export function transcriptionRoute(env: Env): { provider: 'workers-ai' | 'openai
 }
 
 const MAX_AUDIO_BYTES = 8 * 1024 * 1024;
+const OPENAI_WHISPER_MODEL = 'whisper-1';
 
 export async function transcribe(env: Env, input: TranscriptionInput): Promise<Result<TranscriptionResult>> {
   if (input.audio.byteLength === 0) return fail('invalid-argument', 'No audio was supplied.');
@@ -106,14 +107,27 @@ async function workersAiTranscribe(
   input: TranscriptionInput,
 ): Promise<Result<TranscriptionResult>> {
   if (!env.AI) return fail('missing-credential', 'Workers AI is not bound.');
-  try {
-    const payload: Record<string, unknown> = {
-      audio: base64(input.audio),
-    };
-    if (input.vocabularyHint) payload.prompt = input.vocabularyHint;
-    if (input.language) payload.language = input.language;
+  const audioBytes = Array.from(new Uint8Array(input.audio));
+  const audioMimeType = normalizeMimeType(input.mimeType);
 
-    const raw = (await env.AI.run(model as never, payload as never)) as {
+  const requestPayload = {
+    audio: audioBytes,
+    initial_prompt: input.vocabularyHint,
+    language: input.language,
+  };
+
+  const audioObjectPayload = {
+    audio: {
+      body: input.audio,
+      contentType: audioMimeType,
+    },
+    initial_prompt: input.vocabularyHint,
+    language: input.language,
+  };
+
+  try {
+    const cleanPayload = removeEmptyValues(requestPayload);
+    const raw = (await env.AI.run(model as never, cleanPayload as never)) as {
       text?: string;
       transcription_info?: { duration?: number; language_probability?: number };
     };
@@ -126,7 +140,42 @@ async function workersAiTranscribe(
       confidence: raw.transcription_info?.language_probability ?? null,
     });
   } catch (err) {
-    return fail('upstream-error', `Transcription failed: ${String(err)}`);
+    const decoded = String(err);
+    if (env.OPENAI_API_KEY && isAudioDecodeError(decoded)) {
+      const fallback = await openAiTranscribe(env, OPENAI_WHISPER_MODEL, input);
+      if (fallback.ok) return fallback;
+      return fail(
+        'upstream-error',
+        `Workers AI failed: ${decoded}. OpenAI fallback failed: ${fallback.message}`,
+      );
+    }
+    // Some Workers AI runtimes require { body, contentType } for audio.
+    try {
+      const objectPayload = removeEmptyValues(audioObjectPayload);
+      const raw = (await env.AI.run(model as never, objectPayload as never)) as {
+        text?: string;
+        transcription_info?: { duration?: number; language_probability?: number };
+      };
+      const text = (raw.text ?? '').trim();
+      return ok({
+        text,
+        provider: 'workers-ai',
+        model,
+        durationSeconds: raw.transcription_info?.duration ?? null,
+        confidence: raw.transcription_info?.language_probability ?? null,
+      });
+    } catch (objectErr) {
+      const fallbackError = String(objectErr);
+      if (env.OPENAI_API_KEY && isAudioDecodeError(fallbackError)) {
+        const fallback = await openAiTranscribe(env, OPENAI_WHISPER_MODEL, input);
+        if (fallback.ok) return fallback;
+        return fail(
+          'upstream-error',
+          `Workers AI failed: ${fallbackError}. OpenAI fallback failed: ${fallback.message}`,
+        );
+      }
+      return fail('upstream-error', `Transcription failed: ${fallbackError}`);
+    }
   }
 }
 
@@ -135,8 +184,10 @@ async function openAiTranscribe(
   model: string,
   input: TranscriptionInput,
 ): Promise<Result<TranscriptionResult>> {
+  const mimeType = normalizeMimeType(input.mimeType);
+  const extension = audioExtension(mimeType);
   const form = new FormData();
-  form.append('file', new Blob([input.audio], { type: input.mimeType }), 'chunk.webm');
+  form.append('file', new Blob([input.audio], { type: mimeType }), `chunk.${extension}`);
   form.append('model', model);
   form.append('response_format', 'json');
   if (input.vocabularyHint) form.append('prompt', input.vocabularyHint);
@@ -168,14 +219,42 @@ async function openAiTranscribe(
   }
 }
 
-function base64(buf: ArrayBuffer): string {
-  const bytes = new Uint8Array(buf);
-  let out = '';
-  const chunk = 0x8000;
-  for (let i = 0; i < bytes.length; i += chunk) {
-    out += String.fromCharCode(...bytes.subarray(i, i + chunk));
+function removeEmptyValues<T extends Record<string, unknown>>(input: T): Record<string, unknown> {
+  const output: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(input)) {
+    if (value === undefined || value === null || value === '') continue;
+    output[key] = value;
   }
-  return btoa(out);
+  return output;
+}
+
+function normalizeMimeType(raw: string): string {
+  const trimmed = raw.trim().toLowerCase();
+  if (!trimmed) return 'audio/webm';
+  return trimmed.split(';')[0] ?? 'audio/webm';
+}
+
+function audioExtension(mimeType: string): string {
+  switch (mimeType) {
+    case 'audio/mp4':
+      return 'm4a';
+    case 'audio/webm':
+    case 'audio/ogg':
+      return mimeType.split('/')[1] ?? 'webm';
+    case 'audio/mpeg':
+    case 'audio/mp3':
+    case 'audio/mpeg3':
+      return 'mp3';
+    case 'audio/wav':
+      return 'wav';
+    default:
+      return 'webm';
+  }
+}
+
+function isAudioDecodeError(message: string): boolean {
+  const normalized = message.toLowerCase();
+  return normalized.includes('decode') && normalized.includes('audio');
 }
 
 /** Short vocabulary hint. Names are supplied for recognition, not substitution. */

@@ -58,6 +58,12 @@ export interface EvaluationOptions {
   memo: Map<string, ActionOutcome>;
   /** Values Ink may read. Anything absent is invisible to the story. */
   readableConfig: Record<string, string | number | boolean>;
+  /**
+   * Variables the host supplies as input rather than configuration, set
+   * without the `config_` prefix. Configuration describes the deployment;
+   * an input is the particular thing this evaluation is about.
+   */
+  inputs?: Record<string, string | number | boolean>;
   /** Risk lookup used to classify choices for the confirmation gate. */
   riskFor: (capabilityId: string) => RiskClass;
   /** Ceiling on Continue() iterations, so a cyclic divert cannot spin. */
@@ -94,16 +100,8 @@ export async function evaluate(opts: EvaluationOptions): Promise<Result<Evaluati
   }
 
   // Allowlisted configuration, read-only from the story's point of view.
-  for (const [key, value] of Object.entries(opts.readableConfig)) {
-    const variable = `config_${key.replace(/\./g, '_')}`;
-    try {
-      if (story.variablesState.GlobalVariableExistsWithName(variable)) {
-        story.variablesState.$(variable, value);
-      }
-    } catch {
-      /* A story that does not declare the variable simply cannot read it. */
-    }
-  }
+  setVariables(story, opts.readableConfig, 'config_');
+  setVariables(story, opts.inputs, '');
 
   const occurrences = new Map<string, number>();
   const resolvedActions: string[] = [];
@@ -280,6 +278,28 @@ function hashSync(args: unknown[]): string {
 /** Used where an async hash is available and collision resistance matters. */
 export async function strongArgsHash(args: unknown): Promise<string> {
   return sha256Hex(canonicalJson(args));
+}
+
+/**
+ * Sets the variables a story declares. A name the story does not declare is
+ * skipped rather than created, so a caller cannot widen what a story can read.
+ */
+function setVariables(
+  story: Story,
+  values: Record<string, string | number | boolean> | undefined,
+  prefix: string,
+): void {
+  if (!values) return;
+  for (const [key, value] of Object.entries(values)) {
+    const variable = `${prefix}${key.replace(/\./g, '_')}`;
+    try {
+      if (story.variablesState.GlobalVariableExistsWithName(variable)) {
+        story.variablesState.$(variable, value);
+      }
+    } catch {
+      /* A story that does not declare the variable simply cannot read it. */
+    }
+  }
 }
 
 function describe(err: unknown): string {

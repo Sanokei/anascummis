@@ -38,8 +38,15 @@ export interface ChatRequest {
   modelClass?: ModelClass;
   temperature?: number;
   maxTokens?: number;
+  /**
+   * DeepSeek thinking effort request. We keep the public token broad here and
+   * map it to DeepSeek's supported values inside the provider call.
+   */
+  requestedEffort?: 'none' | 'low' | 'medium' | 'high' | 'max';
   /** Requests a JSON object response where the provider supports it. */
   json?: boolean;
+  /** Streams text deltas to this callback as they arrive (DeepSeek only). */
+  onText?: (delta: string) => void;
   signal?: AbortSignal;
 }
 
@@ -100,22 +107,31 @@ export async function chat(env: Env, req: ChatRequest): Promise<Result<ChatResul
   return workersAiChat(env, route, req);
 }
 
-async function deepseekChat(env: Env, route: ModelRoute, req: ChatRequest): Promise<Result<ChatResult>> {
-  const body: Record<string, unknown> = {
-    model: route.model,
-    messages: req.messages.map(toOpenAiMessage),
-    temperature: req.temperature ?? 0.6,
-    max_tokens: req.maxTokens ?? 1200,
-    stream: false,
-  };
-  if (req.tools?.length) {
-    body.tools = req.tools.map((t) => ({
-      type: 'function',
-      function: { name: t.name, description: t.description, parameters: t.parameters },
-    }));
-    body.tool_choice = 'auto';
+/**
+ * Streams a conversational reply.
+ *
+ * DeepSeek streams over SSE and forwards text deltas through `req.onText` as
+ * they arrive, which is what makes a spoken reply read as immediate rather
+ * than arriving whole at the end of the turn. Workers AI has no streaming
+ * surface, so it degrades to a single-shot call that emits the reply once.
+ */
+export async function streamChat(env: Env, req: ChatRequest): Promise<Result<ChatResult>> {
+  const route = resolveRoute(env, req.modelClass ?? 'flash');
+  if (route.provider === 'none') {
+    return fail(
+      'missing-credential',
+      'No conversational model is available. Set DEEPSEEK_API_KEY or bind Workers AI.',
+    );
   }
-  if (req.json) body.response_format = { type: 'json_object' };
+  if (route.provider === 'deepseek') return deepseekStreamChat(env, route, req);
+
+  const res = await workersAiChat(env, route, req);
+  if (res.ok && res.value.text) req.onText?.(res.value.text);
+  return res;
+}
+
+async function deepseekChat(env: Env, route: ModelRoute, req: ChatRequest): Promise<Result<ChatResult>> {
+  const body = buildDeepseekBody(route, req, false);
 
   try {
     const res = await fetch(`${env.DEEPSEEK_BASE_URL.replace(/\/+$/, '')}/chat/completions`, {
@@ -150,6 +166,155 @@ async function deepseekChat(env: Env, route: ModelRoute, req: ChatRequest): Prom
     }
     return fail('upstream-error', `Model call failed: ${String(err)}`);
   }
+}
+
+/**
+ * Shared request body. Streaming and buffered calls differ only in `stream`
+ * (and the resulting transport), not in the prompt, tools or effort.
+ */
+function buildDeepseekBody(route: ModelRoute, req: ChatRequest, stream: boolean): Record<string, unknown> {
+  const deepseekEffort = mapReasoningEffort(req.requestedEffort);
+  const body: Record<string, unknown> = {
+    model: route.model,
+    messages: req.messages.map(toOpenAiMessage),
+    temperature: req.temperature ?? 0.6,
+    max_tokens: req.maxTokens ?? 1200,
+    stream,
+  };
+  if (deepseekEffort) {
+    body.thinking = { type: 'enabled' };
+    body.reasoning_effort = deepseekEffort;
+  }
+  if (req.tools?.length) {
+    body.tools = req.tools.map((t) => ({
+      type: 'function',
+      function: { name: t.name, description: t.description, parameters: t.parameters },
+    }));
+    body.tool_choice = 'auto';
+  }
+  if (req.json) body.response_format = { type: 'json_object' };
+  return body;
+}
+
+async function deepseekStreamChat(env: Env, route: ModelRoute, req: ChatRequest): Promise<Result<ChatResult>> {
+  let res: Response;
+  try {
+    res = await fetch(`${env.DEEPSEEK_BASE_URL.replace(/\/+$/, '')}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${env.DEEPSEEK_API_KEY}`,
+        Accept: 'text/event-stream',
+      },
+      body: JSON.stringify(buildDeepseekBody(route, req, true)),
+      signal: req.signal,
+    });
+  } catch (err) {
+    if (err instanceof Error && err.name === 'AbortError') {
+      return fail('cancelled', 'Model call was cancelled.');
+    }
+    return fail('upstream-error', `Model call failed: ${String(err)}`);
+  }
+
+  if (!res.ok) {
+    const detail = (await res.text()).slice(0, 400);
+    return fail('upstream-error', `Model provider returned ${res.status}.`, detail);
+  }
+
+  const reader = res.body?.getReader();
+  if (!reader) return deepseekChat(env, route, req);
+
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let text = '';
+  let finishReason = '';
+  const toolFragments = new Map<number, { id: string; name: string; arguments: string }>();
+
+  const consume = (line: string) => {
+    const trimmed = line.trim();
+    if (!trimmed.startsWith('data:')) return;
+    const data = trimmed.slice(5).trim();
+    if (!data || data === '[DONE]') return;
+
+    let json: unknown;
+    try {
+      json = JSON.parse(data);
+    } catch {
+      return;
+    }
+    if (!json || typeof json !== 'object') return;
+    const record = json as Record<string, unknown>;
+
+    const choices = record.choices as Array<Record<string, unknown>> | undefined;
+    const choice = choices?.[0];
+    if (!choice || typeof choice !== 'object') return;
+
+    const delta = (choice.delta ?? {}) as Record<string, unknown>;
+    if (typeof delta.content === 'string' && delta.content) {
+      text += delta.content;
+      req.onText?.(delta.content);
+    }
+
+    const toolCalls = delta.tool_calls as Array<Record<string, unknown>> | undefined;
+    if (Array.isArray(toolCalls)) {
+      for (const call of toolCalls) {
+        const index = typeof call.index === 'number' ? call.index : 0;
+        let fragment = toolFragments.get(index);
+        if (!fragment) {
+          fragment = { id: '', name: '', arguments: '' };
+          toolFragments.set(index, fragment);
+        }
+        if (typeof call.id === 'string') fragment.id = call.id;
+        const fn = call.function as Record<string, unknown> | undefined;
+        if (fn && typeof fn.name === 'string') fragment.name = fn.name;
+        if (fn && typeof fn.arguments === 'string') fragment.arguments += fn.arguments;
+      }
+    }
+
+    if (typeof choice.finish_reason === 'string') finishReason = choice.finish_reason;
+  };
+
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      let newline = buffer.indexOf('\n');
+      while (newline >= 0) {
+        consume(buffer.slice(0, newline).replace(/\r$/, ''));
+        buffer = buffer.slice(newline + 1);
+        newline = buffer.indexOf('\n');
+      }
+    }
+    buffer += decoder.decode();
+    if (buffer.trim()) consume(buffer);
+  } catch (err) {
+    if (err instanceof Error && err.name === 'AbortError') {
+      return fail('cancelled', 'Model call was cancelled.');
+    }
+    return fail('upstream-error', `Model stream failed: ${String(err)}`);
+  }
+
+  const toolCalls: ToolCall[] = [...toolFragments.values()]
+    .filter((fragment) => fragment.name)
+    .map((fragment) => ({
+      id: fragment.id || `call_${fragment.name}`,
+      name: fragment.name,
+      arguments: normaliseArgs(fragment.arguments),
+    }));
+
+  return ok({
+    text,
+    toolCalls,
+    provider: 'deepseek',
+    model: route.model,
+    // Streaming does not report usage, so the budget charge is estimated.
+    usage: {
+      promptTokens: estimateTokens(req.messages.map((m) => m.content).join('\n')),
+      completionTokens: estimateTokens(text),
+    },
+    truncated: finishReason === 'length',
+  });
 }
 
 async function workersAiChat(env: Env, route: ModelRoute, req: ChatRequest): Promise<Result<ChatResult>> {
@@ -225,6 +390,24 @@ function readToolCalls(raw: OpenAiCompletion['choices'] extends undefined ? neve
     });
   }
   return out;
+}
+
+function mapReasoningEffort(effort?: ChatRequest['requestedEffort']): 'low' | 'high' | 'max' | 'none' | undefined {
+  switch (effort) {
+    case 'low':
+      return 'low';
+    case 'high':
+      return 'high';
+    case 'max':
+      return 'max';
+    case 'none':
+      return 'none';
+    case 'medium':
+      // DeepSeek's V4 effort set is none/low/high/max; map medium to low.
+      return 'low';
+    default:
+      return undefined;
+  }
 }
 
 /** Tool arguments arrive as a JSON string from some providers and an object from others. */

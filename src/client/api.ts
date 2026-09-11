@@ -89,6 +89,92 @@ function safeJson(text: string): unknown {
   }
 }
 
+type TurnStreamEvent =
+  | { type: 'delta'; text: string }
+  | { type: 'done'; value: TurnResponse }
+  | { type: 'error'; error: string; message: string; outcomeUnknown?: boolean };
+
+/**
+ * A turn streams as server-sent events: text deltas as the model generates
+ * them, then a final frame carrying the committed turn. Reading them lets the
+ * transcript fill in word by word instead of appearing whole at the end.
+ */
+async function streamTurn(
+  input: {
+    text: string;
+    rawTranscript?: string;
+    choiceIndex?: number;
+    confirmationToken?: string;
+    signal?: AbortSignal;
+  },
+  onDelta?: (text: string) => void,
+): Promise<TurnResponse> {
+  const { signal, ...body } = input;
+  const res = await fetch('/api/turn', {
+    method: 'POST',
+    headers: new Headers({
+      'content-type': 'application/json',
+      'x-anascummis-csrf': csrf,
+      accept: 'text/event-stream',
+    }),
+    body: JSON.stringify(body),
+    credentials: 'same-origin',
+    ...(signal ? { signal } : {}),
+  });
+
+  if (!res.ok || !res.body) {
+    const text = await res.text();
+    const detail = (safeJson(text) ?? {}) as { error?: string; message?: string; outcomeUnknown?: boolean };
+    throw new ApiFailure({
+      kind: detail.error ?? 'unknown',
+      message: detail.message ?? `Request failed with ${res.status}.`,
+      outcomeUnknown: detail.outcomeUnknown ?? false,
+      status: res.status,
+    });
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let result: TurnResponse | null = null;
+
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    let newline = buffer.indexOf('\n');
+    while (newline >= 0) {
+      const line = buffer.slice(0, newline).replace(/\r$/, '');
+      buffer = buffer.slice(newline + 1);
+      if (line.startsWith('data:')) {
+        const event = safeJson(line.slice(5).trim()) as TurnStreamEvent | null;
+        if (event && event.type === 'delta') onDelta?.(event.text);
+        else if (event && event.type === 'done') result = event.value;
+        else if (event && event.type === 'error') {
+          throw new ApiFailure({
+            kind: event.error,
+            message: event.message,
+            outcomeUnknown: event.outcomeUnknown ?? false,
+            status: res.status,
+          });
+        }
+      }
+      newline = buffer.indexOf('\n');
+    }
+  }
+
+  if (!result) {
+    throw new ApiFailure({
+      kind: 'unknown',
+      message: 'The stream ended before a result arrived.',
+      outcomeUnknown: true,
+      status: res.status,
+    });
+  }
+  return result;
+}
+
 export const api = {
   async session(): Promise<SessionState> {
     const state = await request<SessionState>('/api/session');
@@ -96,19 +182,17 @@ export const api = {
     return state;
   },
 
-  turn(input: {
-    text: string;
-    rawTranscript?: string;
-    choiceIndex?: number;
-    confirmationToken?: string;
-    signal?: AbortSignal;
-  }): Promise<TurnResponse> {
-    const { signal, ...body } = input;
-    return request<TurnResponse>('/api/turn', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      ...(signal ? { signal } : {}),
-    });
+  turn(
+    input: {
+      text: string;
+      rawTranscript?: string;
+      choiceIndex?: number;
+      confirmationToken?: string;
+      signal?: AbortSignal;
+    },
+    onDelta?: (text: string) => void,
+  ): Promise<TurnResponse> {
+    return streamTurn(input, onDelta);
   },
 
   stop(): Promise<{ stopped: boolean; generation: number; note: string }> {

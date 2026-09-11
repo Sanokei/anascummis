@@ -123,22 +123,73 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
     // The request signal aborts when the client disconnects, which is one of
     // the ways Stop reaches in-flight work.
     const orchestrator = new Orchestrator(c.env);
-    const result = await orchestrator.handleTurn({
-      identity: ctx.identity,
-      text,
-      ...(body.rawTranscript ? { rawTranscript: body.rawTranscript } : {}),
-      ...(typeof body.choiceIndex === 'number' ? { choiceIndex: body.choiceIndex } : {}),
-      ...(body.confirmationToken ? { confirmationToken: body.confirmationToken } : {}),
-      signal: c.req.raw.signal,
-    });
 
-    if (!result.ok) {
-      return c.json(
-        { error: result.kind, message: result.message, outcomeUnknown: result.outcomeUnknown ?? false },
-        statusFor(result.kind),
-      );
-    }
-    return c.json(result.value);
+    // The turn streams: text deltas arrive as the model generates them, then a
+    // final frame carries the committed turn. A spoken reply should read as
+    // immediate, not as a wait that resolves all at once.
+    const encoder = new TextEncoder();
+    const sink: { controller: ReadableStreamDefaultController<Uint8Array> | null } = {
+      controller: null,
+    };
+    const stream = new ReadableStream<Uint8Array>({
+      start(c) {
+        sink.controller = c;
+      },
+    });
+    const emit = (event: unknown) => {
+      try {
+        sink.controller?.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
+      } catch {
+        // The client has gone; nothing more to push.
+      }
+    };
+
+    const run = (async () => {
+      try {
+        const result = await orchestrator.handleTurn({
+          identity: ctx.identity,
+          text,
+          ...(body.rawTranscript ? { rawTranscript: body.rawTranscript } : {}),
+          ...(typeof body.choiceIndex === 'number' ? { choiceIndex: body.choiceIndex } : {}),
+          ...(body.confirmationToken ? { confirmationToken: body.confirmationToken } : {}),
+          signal: c.req.raw.signal,
+          onText: (delta) => emit({ type: 'delta', text: delta }),
+        });
+        if (!result.ok) {
+          emit({
+            type: 'error',
+            error: result.kind,
+            message: result.message,
+            outcomeUnknown: result.outcomeUnknown ?? false,
+          });
+        } else {
+          emit({ type: 'done', value: result.value });
+        }
+      } catch (err) {
+        emit({
+          type: 'error',
+          error: 'unknown',
+          message: err instanceof Error ? err.message : String(err),
+          outcomeUnknown: false,
+        });
+      } finally {
+        try {
+          sink.controller?.close();
+        } catch {
+          // Closed already, or never opened.
+        }
+      }
+    })();
+    c.executionCtx.waitUntil(run);
+
+    return new Response(stream, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+      },
+    });
   });
 
   /**
@@ -212,7 +263,10 @@ export function registerApiRoutes(app: Hono<{ Bindings: Env }>): void {
 
     const result = await transcribe(c.env, {
       audio,
-      mimeType: file.type || 'audio/webm',
+      mimeType: (() => {
+        const raw = form.get('audioMimeType');
+        return (typeof raw === 'string' ? raw.trim() : '') || file.type || 'audio/webm';
+      })(),
       vocabularyHint: buildVocabularyHint(extraTerms),
       signal: c.req.raw.signal,
     });

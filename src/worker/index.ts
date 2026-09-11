@@ -56,7 +56,7 @@ app.use('*', async (c, next) => {
  */
 app.use('*', async (c, next) => {
   await next();
-  const headers = c.res.headers;
+  const headers = new Headers(c.res.headers);
   headers.set('X-Content-Type-Options', 'nosniff');
   headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   headers.set('X-Frame-Options', 'DENY');
@@ -81,6 +81,12 @@ app.use('*', async (c, next) => {
       ].join('; '),
     );
   }
+
+  c.res = new Response(c.res.body, {
+    status: c.res.status,
+    statusText: c.res.statusText,
+    headers,
+  });
 });
 
 /** Liveness only. It deliberately says nothing about who may get in. */

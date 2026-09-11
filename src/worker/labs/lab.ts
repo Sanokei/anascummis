@@ -227,6 +227,7 @@ export class LabWorkspace {
       json: true,
       temperature: 0,
       maxTokens: 1200,
+      requestedEffort: 'high',
       ...(input.signal ? { signal: input.signal } : {}),
     });
     if (!res.ok) return res;

@@ -19,9 +19,15 @@ import { SkillHarness } from './skills/harness';
 import { ensureBundledSkills } from './skills/seed';
 import { resolveChoice } from './ink/resolver';
 import { evaluate, chooseIndex, type ActionOutcome } from './ink/runtime';
+import { renderReply, streamedRemainder } from './ink/render';
 import { capabilityIdToExternalName } from './ink/harness';
-import { chat, resolveRoute, type ChatMessage } from './providers/model';
-import { findAuthoredLine, VOICE_GUIDANCE, classifyTurnIntent } from './ink/personality';
+import { streamChat, resolveRoute, type ChatMessage } from './providers/model';
+import {
+  findAuthoredLine,
+  isClosingBeat,
+  VOICE_GUIDANCE,
+  classifyTurnIntent,
+} from './ink/personality';
 import { getStory, OPEN_CONVERSATION_ID } from './stories/registry';
 import { randomId } from './crypto';
 
@@ -41,6 +47,8 @@ export interface TurnRequest {
   choiceIndex?: number;
   /** Set when the user answered a pending confirmation. */
   confirmationToken?: string;
+  /** When set, streams the conversational reply's text as it is generated. */
+  onText?: (delta: string) => void;
   signal: AbortSignal;
 }
 
@@ -59,6 +67,16 @@ export class Orchestrator {
 
   async handleTurn(req: TurnRequest): Promise<Result<TurnResponse>> {
     const client = new SessionClient(this.env, req.identity.sessionId);
+    // Seeding is idempotent and memoised per isolate, but on a cold isolate it
+    // is several D1 statements standing in front of every reply. It is
+    // independent of the turn's own work, so it runs alongside the two Durable
+    // Object round-trips below rather than blocking them.
+    const seeded = ensureBundledSkills(this.env);
+    // Paths that answer without a model return before this is awaited, exactly
+    // as they did when seeding came later. This keeps such a path from turning
+    // a seeding failure into an unhandled rejection; the promise itself still
+    // rejects for the reply paths, which is where it always mattered.
+    void seeded.catch(() => undefined);
     const snapshot = await client.snapshot();
     const begun = await client.beginTurn();
     const generation = begun.generation;
@@ -248,6 +266,7 @@ export class Orchestrator {
       generation,
       mission,
       pendingChoices: choices,
+      seeded,
     });
     if (!reply.ok) return reply;
 
@@ -258,6 +277,7 @@ export class Orchestrator {
       budget,
       userTurn,
       assistantText: reply.value.text,
+      streamed: reply.value.streamed,
       // The unresolved decision is still on offer after the detour.
       choices,
       stateJson,
@@ -386,6 +406,8 @@ export class Orchestrator {
     generation: number;
     mission: Mission;
     pendingChoices: InkChoiceView[];
+    /** Seeding, started with the turn so it is not on this reply's path. */
+    seeded: Promise<void>;
   }): Promise<
     Result<{
       text: string;
@@ -393,11 +415,14 @@ export class Orchestrator {
       mission: Mission;
       authoredLineId?: string;
       activeSkill?: { name: string; version: string; origin: string };
+      /** Text already pushed to the client while this reply was produced. */
+      streamed: string;
       blocked: { kind: import('@shared/types').FailureKind; message: string } | null;
     }>
   > {
     // An approved line for a recurring situation is reused verbatim, and costs
-    // nothing.
+    // nothing. The reply is already known here, so it is the one path that can
+    // answer without waiting on a model, a skill or a memory read.
     const authored = findAuthoredLine(input.req.text);
     if (authored) {
       return ok({
@@ -405,13 +430,21 @@ export class Orchestrator {
         citations: [],
         mission: input.mission,
         authoredLineId: authored.line.id,
+        streamed: '',
         blocked: null,
       });
     }
 
+    // The host's closing line ends the exchange. The script is explicit that
+    // the cut is clean — no acknowledgement, no follow-up, no summary — so the
+    // story layer answers with silence, and does it without a model call.
+    if (isClosingBeat(input.req.text)) {
+      return ok({ text: '', citations: [], mission: input.mission, streamed: '', blocked: null });
+    }
+
     // A brief acknowledgement does not need a turn of its own.
     if (classifyTurnIntent(input.req.text) === 'continue') {
-      return ok({ text: '', citations: [], mission: input.mission, blocked: null });
+      return ok({ text: '', citations: [], mission: input.mission, streamed: '', blocked: null });
     }
 
     const route = resolveRoute(this.env);
@@ -420,18 +453,31 @@ export class Orchestrator {
         text: 'There is no conversational model configured on this deployment, so I cannot answer that. Everything else here still works.',
         citations: [],
         mission: input.mission,
+        streamed: '',
         blocked: { kind: 'missing-credential', message: route.reason },
       });
     }
 
-    // A skill activates only when one genuinely helps. Seeding first so the
-    // bundled packages are discoverable on a cold database.
-    await ensureBundledSkills(this.env);
-    const selection = await this.skills.select({
-      intent: input.req.text,
-      identity: input.req.identity,
-      permissions: input.permissions,
-    });
+    // Skill selection, context assembly and tool listing are independent and
+    // read-only, so they run together rather than each waiting on the last.
+    // Selection waits only on seeding, because the bundled packages have to be
+    // discoverable before anything can be selected from them.
+    const [selection, context, tools] = await Promise.all([
+      input.seeded.then(() =>
+        this.skills.select({
+          intent: input.req.text,
+          identity: input.req.identity,
+          permissions: input.permissions,
+        }),
+      ),
+      this.memory.assemble({
+        identity: input.req.identity,
+        mission: input.mission,
+        recentTurns: input.snapshot.turns,
+        query: input.req.text,
+      }),
+      this.toolDefinitions(input.permissions),
+    ]);
 
     let skillInstructions = '';
     let activeSkill: { name: string; version: string; origin: string } | undefined;
@@ -454,18 +500,10 @@ export class Orchestrator {
         text: `I can see a procedure for that, but it is blocked: ${selection.reason}`,
         citations: [],
         mission: input.mission,
+        streamed: '',
         blocked: { kind: 'missing-permission', message: selection.reason },
       });
     }
-
-    const context = await this.memory.assemble({
-      identity: input.req.identity,
-      mission: input.mission,
-      recentTurns: input.snapshot.turns,
-      query: input.req.text,
-    });
-
-    const tools = await this.toolDefinitions(input.permissions);
     const messages: ChatMessage[] = [
       { role: 'system', content: `${VOICE_GUIDANCE}\n\n${context.layers.map((l) => l.body).join('\n\n')}` },
       ...(skillInstructions ? [{ role: 'system' as const, content: skillInstructions }] : []),
@@ -490,21 +528,33 @@ export class Orchestrator {
     const capabilityVersions: string[] = [];
     let reply = '';
 
+    // Everything pushed to the client while this reply was produced. Tracking
+    // it is what lets the committed turn send only what is still unseen, even
+    // when the reply took several rounds with tool calls in between.
+    let streamed = '';
+    const onText = (delta: string) => {
+      if (!delta) return;
+      streamed += delta;
+      input.req.onText?.(delta);
+    };
+
     // Bounded tool loop. Every proposed call goes through the dispatcher, so
     // the model never executes anything itself.
     for (let step = 0; step < 4; step++) {
-      const res = await chat(this.env, {
+      const res = await streamChat(this.env, {
         messages,
         tools,
         temperature: 0.5,
         maxTokens: 900,
         signal: input.req.signal,
+        onText,
       });
       if (!res.ok) {
         return ok({
           text: 'I could not reach the model just then.',
           citations,
           mission: input.mission,
+          streamed,
           blocked: { kind: res.kind, message: res.message },
         });
       }
@@ -560,6 +610,11 @@ export class Orchestrator {
       }
     }
 
+    // The visible reply comes from the authored surface, not from the raw
+    // model text. A surface that cannot render is not worth a worse answer:
+    // the reply has already been streamed, so it is what the user has seen.
+    const rendered = await renderReply({ text: reply || 'I do not have an answer for that yet.' });
+
     if (activeSkill) {
       await this.skills.recordRun(input.req.identity, {
         skillName: activeSkill.name,
@@ -573,9 +628,10 @@ export class Orchestrator {
     }
 
     return ok({
-      text: reply || 'I do not have an answer for that yet.',
+      text: rendered.ok ? rendered.value : reply,
       citations,
       mission: input.mission,
+      streamed,
       ...(activeSkill ? { activeSkill } : {}),
       blocked: null,
     });
@@ -698,6 +754,8 @@ export class Orchestrator {
     budget: TaskBudget;
     userTurn: Turn;
     assistantText: string;
+    /** Text the client has already been sent for this reply. */
+    streamed?: string;
     choices: InkChoiceView[];
     stateJson: string;
     storyId: string;
@@ -709,6 +767,14 @@ export class Orchestrator {
     authoredLineId?: string;
     activeSkill?: { name: string; version: string; origin: string };
   }): Promise<Result<TurnResponse>> {
+    // Host-supplied text is pushed before the commit, not after it. Committing
+    // is two Durable Object round-trips, and a deterministic reply that is
+    // already known should not wait on either of them to become visible.
+    // Only the part the client has not seen is sent, so a reply that streamed
+    // as it was generated is never shown twice.
+    const remainder = streamedRemainder(input.assistantText, input.streamed ?? '');
+    if (remainder) input.req.onText?.(remainder);
+
     const assistantTurn: Turn = {
       id: randomId('turn'),
       role: 'assistant',
