@@ -3,6 +3,7 @@ import { fail, ok, type Result } from '@shared/types';
 import type { NativeContext, NativeHandler } from './registry';
 import type { ActionOutcome, ActionRequest } from '../ink/runtime';
 import type { SurfaceCollector, SurfaceIssue, SurfaceWindowDraft } from '../surfaces/surface';
+import { BLOCK_KIND_NAMES } from '../surfaces/surface';
 import type { PersonaSlot } from '../personas/wear';
 import { AUTHORED_PERSONAS, authoredPersona } from '../personas/authored';
 import { validatePersona } from '../personas/harness';
@@ -101,13 +102,15 @@ const blockSchema: JsonSchema = {
     id: stringSchema('Unique within the tab. Reused on a later turn, it updates this block.', 64),
     kind: {
       type: 'string',
-      enum: ['text', 'image', 'code', 'list', 'fields', 'links'],
+      enum: BLOCK_KIND_NAMES,
       description: 'What the block is. Each kind renders as itself; there is no free markup.',
     },
     title: stringSchema('Shown above the block.', 120),
     text: stringSchema('Prose, for text and code. Blank lines separate paragraphs.', 4000),
     url: stringSchema('For image: an absolute https URL, or workspace:<name> for a session artifact.', 2000),
     alt: stringSchema('For image. Required, and never empty: a picture nobody can see needs a description.', 400),
+    labId: stringSchema('For design: the lab, as design.open returned its id.', 64),
+    revisionId: stringSchema('For design: the round to show, as design.submit returned its revisionId.', 64),
     language: stringSchema('For code. A hint for the renderer only.', 40),
     caption: stringSchema('Shown beneath the block, quieter than its content.', 300),
     items: {

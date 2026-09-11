@@ -5,6 +5,7 @@ import type {
 } from 'react';
 import { MAX_OPEN_SURFACES } from '@shared/types';
 import type { SurfaceBlock, SurfaceWindow } from '@shared/types';
+import { DesignBlock } from './DesignBlock';
 
 /**
  * Surfaces: what the assistant raises when a reply has something to show rather
@@ -893,6 +894,12 @@ function WindowBody({ surface }: { surface: SurfaceWindow }) {
 
 function SurfaceBlockView({ block }: { block: SurfaceBlock }) {
   const header = Boolean(block.title) || (block.kind === 'code' && Boolean(block.language));
+  /*
+   * A design block that names no revision draws its caption as its own body —
+   * there is nothing else it could show — so it is not printed a second time
+   * here. Every other block is body first and caption under it, below.
+   */
+  const captionIsBody = block.kind === 'design' && (!block.labId || !block.revisionId);
   return (
     <section className="mb-4 last:mb-0">
       {header && (
@@ -910,7 +917,7 @@ function SurfaceBlockView({ block }: { block: SurfaceBlock }) {
         </div>
       )}
       <SurfaceBlockBody block={block} />
-      {block.caption && (
+      {block.caption && !captionIsBody && (
         <p className="text-ink-faint mt-1.5 text-[0.78rem]">{block.caption}</p>
       )}
     </section>
@@ -995,6 +1002,17 @@ function SurfaceBlockBody({ block }: { block: SurfaceBlock }) {
 
     case 'text':
       return <Prose text={block.text ?? ''} />;
+
+    case 'design':
+      /*
+       * The block carries names, not a result, so the fetch happens inside the
+       * component rather than here: a window outlives the turn that raised it,
+       * and a review copied into the block when the turn ran would keep sitting
+       * on screen after it had stopped being what was recorded.
+       */
+      return (
+        <DesignBlock labId={block.labId} revisionId={block.revisionId} caption={block.caption} />
+      );
 
     default:
       return null;

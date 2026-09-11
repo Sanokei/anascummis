@@ -9,6 +9,7 @@ import { TaskBudget, TURN_LIMITS } from '../../src/worker/policy/budget';
 import { DESIGN_NATIVES } from '../../src/worker/registry/design-natives';
 import { buildRegistry } from '../../src/worker/registry/natives';
 import { externalNameToCapabilityId } from '../../src/worker/ink/harness';
+import { SurfaceCollector, validateBlock } from '../../src/worker/surfaces/surface';
 import { SCENE_SOURCE_EXAMPLE } from '../../src/worker/design/scene';
 import { MAX_ROUNDS_PER_DESIGN_LAB } from '../../src/worker/design/types';
 import type { Env } from '../../src/worker/env';
@@ -60,6 +61,7 @@ function contextFor(
   identity: Identity,
   args: Record<string, unknown>,
   charge: (n: number) => Result<number> = (n) => ({ ok: true, value: n }),
+  surfaces?: SurfaceCollector,
 ): { ctx: NativeContext; charges: Charges } {
   const charges: Charges = { calls: [] };
   const ctx: NativeContext = {
@@ -73,6 +75,10 @@ function contextFor(
       charges.calls.push(n);
       return charge(n);
     },
+    // Left off entirely when there is none, rather than set to undefined. A
+    // native that asks whether there is a collector has to see the same absence
+    // an inline story pass produces, not a key that is present and empty.
+    ...(surfaces ? { surfaces } : {}),
   };
   return { ctx, charges };
 }
@@ -89,10 +95,9 @@ async function call(
   identity: Identity,
   args: Record<string, unknown>,
   charge?: (n: number) => Result<number>,
+  surfaces?: SurfaceCollector,
 ): Promise<{ result: Result<unknown>; charges: Charges }> {
-  const { ctx, charges } = charge
-    ? contextFor(identity, args, charge)
-    : contextFor(identity, args);
+  const { ctx, charges } = contextFor(identity, args, charge, surfaces);
   const result = await native(id).execute(ctx);
   return { result, charges };
 }
@@ -933,5 +938,126 @@ describe('the permission envelope', () => {
       expect(all.missingFor(handler.contract), handler.contract.id).toEqual([]);
       expect(handler.contract.permissions.length, handler.contract.id).toBeGreaterThan(0);
     }
+  });
+});
+
+/* ------------------------------------------------------------------ */
+
+describe('showing the round', () => {
+  /*
+   * The failure this whole feature exists to prevent is a picture nobody can
+   * see. Everything above proves the harness measures correctly; this proves
+   * the measurement arrives somewhere a person is looking, which is a separate
+   * claim that was false until the window was raised.
+   *
+   * The window id is derived from the lab id rather than random, and these
+   * tests hold it to that: a random id would still pass a "raised a window"
+   * test while putting a second window beside the first on every round.
+   */
+
+  const windowIdFor = (labId: string): string => `design-${labId.replace(/_/g, '-')}`;
+
+  it('raises a window naming the lab and the revision it just recorded', async () => {
+    const identity = guest();
+    const labId = await openLab(identity, { surface: 'scene' });
+    const surfaces = new SurfaceCollector();
+
+    const submitted = valueOf(
+      await call('design.submit', identity, { labId, source: SCENE_SOURCE_EXAMPLE }, undefined, surfaces).then(
+        (r) => r.result,
+      ),
+    ) as { revisionId: string; windowId?: string };
+
+    expect(submitted.windowId).toBe(windowIdFor(labId));
+
+    const plan = surfaces.plan();
+    expect(plan.windows).toHaveLength(1);
+    const block = plan.windows[0]?.tabs[0]?.blocks[0];
+    expect(block?.kind).toBe('design');
+    expect(block?.labId).toBe(labId);
+    expect(block?.revisionId).toBe(submitted.revisionId);
+  });
+
+  /*
+   * The producer and the validator are two code paths that only ever meet in
+   * production, so nothing stops a native from raising a block the host itself
+   * would refuse — and the refusal would not even surface, because the raise
+   * happens after the native has already succeeded. This is the test that
+   * catches that, and it is deliberately written as "whatever it raises" rather
+   * than as a field-by-field restatement, so it keeps holding when the block
+   * grows.
+   */
+  it('raises a block the surface validator would accept from anyone', async () => {
+    const identity = guest();
+    const labId = await openLab(identity, { surface: 'scene' });
+    const surfaces = new SurfaceCollector();
+    await call('design.submit', identity, { labId, source: SCENE_SOURCE_EXAMPLE }, undefined, surfaces);
+
+    const window = surfaces.plan().windows[0];
+    expect(window).toBeDefined();
+    for (const tab of window?.tabs ?? []) {
+      for (const block of tab.blocks) {
+        expect(
+          validateBlock(block, { windowId: window?.id ?? '', tabId: tab.id }),
+          `${block.id} would be refused if a model had proposed it`,
+        ).toEqual([]);
+      }
+    }
+  });
+
+  it('updates the same window on a later round rather than raising a twin', async () => {
+    const identity = guest();
+    const labId = await openLab(identity, { surface: 'scene' });
+    const surfaces = new SurfaceCollector();
+
+    const first = valueOf(
+      await call('design.submit', identity, { labId, source: SCENE_SOURCE_EXAMPLE }, undefined, surfaces).then(
+        (r) => r.result,
+      ),
+    ) as { windowId?: string; windowUpdated?: boolean };
+    const second = valueOf(
+      await call('design.submit', identity, { labId, source: SCENE_SOURCE_EXAMPLE }, undefined, surfaces).then(
+        (r) => r.result,
+      ),
+    ) as { windowId?: string; windowUpdated?: boolean };
+
+    expect(first.windowId).toBe(windowIdFor(labId));
+    expect(second.windowId).toBe(first.windowId);
+    expect(first.windowUpdated).toBe(false);
+    expect(second.windowUpdated).toBe(true);
+    expect(surfaces.plan().windows).toHaveLength(1);
+  });
+
+  it('takes the window down when the lab is closed', async () => {
+    const identity = guest();
+    const labId = await openLab(identity, { surface: 'scene' });
+    const surfaces = new SurfaceCollector();
+    await call('design.submit', identity, { labId, source: SCENE_SOURCE_EXAMPLE }, undefined, surfaces);
+    expect(surfaces.openCount()).toBe(1);
+
+    await call('design.close', identity, { labId, summary: 'Settled.' }, undefined, surfaces);
+
+    // A closed lab takes no further revisions, so a window still showing the
+    // last one would be the only thing left on screen saying the lab is live.
+    expect(surfaces.plan().close.map((entry) => entry.id)).toContain(windowIdFor(labId));
+    expect(surfaces.openCount()).toBe(0);
+  });
+
+  /*
+   * An inline story pass resolving a design external has no collector, and the
+   * call has to keep working: the revision is the deliverable and the window is
+   * only how it becomes visible. Absent, not failed.
+   */
+  it('records the round when there is no turn to show it in', async () => {
+    const identity = guest();
+    const labId = await openLab(identity, { surface: 'scene' });
+
+    const submitted = valueOf(
+      await call('design.submit', identity, { labId, source: SCENE_SOURCE_EXAMPLE }).then((r) => r.result),
+    ) as { revisionId: string; windowId?: string; windowRefused?: string };
+
+    expect(submitted.revisionId).toMatch(/^rev_/);
+    expect(submitted.windowId).toBeUndefined();
+    expect(submitted.windowRefused).toBeUndefined();
   });
 });

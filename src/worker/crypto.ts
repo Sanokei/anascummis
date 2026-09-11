@@ -9,6 +9,22 @@ export function randomId(prefix = ''): string {
   return prefix ? `${prefix}_${hex}` : hex;
 }
 
+/**
+ * The shape of an id `randomId` produces, for the layers that have to decide
+ * whether a string could be one.
+ *
+ * It lives beside the generator rather than at each site that checks it,
+ * because an id grammar restated per call site drifts from the thing minting
+ * the ids, and the drift is silent in the worse direction: a *valid* id starts
+ * being refused by whichever copy was not updated.
+ *
+ * Deliberately looser than what today's generator happens to emit. It answers
+ * "could this have come from `randomId`", not "did this call produce it" —
+ * pinning it to sixteen bytes of hex would turn any future change to the
+ * generator into an instant refusal of every id already written down.
+ */
+export const GENERATED_ID = /^[a-z]+_[a-z0-9]{1,60}$/;
+
 export function randomToken(bytes = 32): string {
   return base64url(crypto.getRandomValues(new Uint8Array(bytes)));
 }

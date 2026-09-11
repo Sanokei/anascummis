@@ -1,0 +1,17 @@
+-- Why a revision has no pixels.
+--
+-- The `render_key` column already tells a reader that a revision did not
+-- render, and that is what makes its pixel criteria unverifiable rather than
+-- met. What it cannot tell them is why. The reason is the only part a person
+-- can act on: a rasteriser that is not configured, a drawing over the size cap,
+-- and a scene that produced no renderable geometry are three different problems
+-- with three different remedies, and until now all three arrived as the same
+-- empty frame. The explanation existed, but only for the turn that produced it,
+-- and a window outlives that turn.
+--
+-- Nullable, and null both for a revision that rendered and for one recorded
+-- before this column existed. A null therefore means "no reason was recorded",
+-- which is deliberately not the same claim as "nothing went wrong" — nothing
+-- reads it as either, and a caller that needs to distinguish them has
+-- `render_key` to do it with.
+ALTER TABLE design_revisions ADD COLUMN unrendered TEXT;

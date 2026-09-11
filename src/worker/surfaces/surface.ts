@@ -15,6 +15,7 @@ import {
   MAX_SURFACE_TABS_PER_WINDOW,
   MAX_SURFACE_WINDOWS_PER_TURN,
 } from '@shared/types';
+import { GENERATED_ID } from '../crypto';
 
 /**
  * What one turn wants on screen, accumulated and checked before it is sent.
@@ -96,7 +97,20 @@ const BLOCK_KINDS: Record<SurfaceBlockKind, true> = {
   list: true,
   fields: true,
   links: true,
+  design: true,
 };
+
+/**
+ * The kind names, in the order they are listed to anyone who asks.
+ *
+ * Exported so that the vocabulary the *model* is offered and the vocabulary the
+ * host actually accepts are the same list rather than two lists that agree
+ * today. They were two once, and the model-facing copy is the worse of the two
+ * to get wrong: the tool schema closes its own object, so a model told about six
+ * kinds never proposes the seventh and cannot find out why. Derived from the
+ * `Record` above, which is the one that breaks the build when a kind is added.
+ */
+export const BLOCK_KIND_NAMES = Object.keys(BLOCK_KINDS) as SurfaceBlockKind[];
 
 const EMPHASIS_VALUES: Record<SurfaceEmphasis, true> = {
   quiet: true,
@@ -336,6 +350,37 @@ const BLOCK_RULES: Record<
     }
     return out;
   },
+  /*
+   * A design block is two names, and this checks only that they are the right
+   * *shape* of name. Whether they resolve is a session question the routes
+   * answer from the database, and that is deliberately not answerable here:
+   * this module is synchronous, runs inline in a story pass, and must not know
+   * what a design lab is. Checking the shape is still worth doing, because the
+   * alternative is a window that renders empty and leaves a person to work out
+   * why — a refusal at the call that raised it is a sentence someone can act on.
+   */
+  design: (block, windowId, tabId) => {
+    const out: SurfaceIssue[] = [];
+    if (typeof block.labId !== 'string' || !GENERATED_ID.test(block.labId)) {
+      out.push(
+        issue('malformed-id', `${block.id} is a design block with no usable lab id.`, {
+          windowId,
+          tabId,
+          blockId: block.id,
+        }),
+      );
+    }
+    if (typeof block.revisionId !== 'string' || !GENERATED_ID.test(block.revisionId)) {
+      out.push(
+        issue('malformed-id', `${block.id} is a design block with no usable revision id.`, {
+          windowId,
+          tabId,
+          blockId: block.id,
+        }),
+      );
+    }
+    return out;
+  },
 };
 
 function missing(kind: string, windowId: string, tabId: string, blockId: string): SurfaceIssue {
@@ -369,6 +414,24 @@ function prose(
   return [];
 }
 
+/**
+ * The block kinds, as a sentence.
+ *
+ * Read out of `BLOCK_KINDS` rather than written out, because this sentence is
+ * the one place the vocabulary is restated in prose — and prose does not break
+ * the build. It went stale exactly once, the day a seventh kind was added and
+ * the refusal carried on listing six, which is the failure mode the `Record`
+ * above was chosen to prevent and could not prevent here. A model that is told
+ * the wrong vocabulary keeps choosing from it.
+ */
+function listKinds(): string {
+  const kinds = BLOCK_KIND_NAMES;
+  const last = kinds[kinds.length - 1];
+  if (last === undefined) return '';
+  const rest = kinds.slice(0, -1);
+  return rest.length === 0 ? last : `${rest.join(', ')} and ${last}`;
+}
+
 /** One block, checked on its own. Uniqueness among siblings is the window's job. */
 export function validateBlock(
   block: SurfaceBlock,
@@ -384,7 +447,7 @@ export function validateBlock(
     out.push(
       issue(
         'unknown-block-kind',
-        `${block.id} is a "${String(block.kind)}" block. The kinds are text, image, code, list, fields and links.`,
+        `${block.id} is a "${String(block.kind)}" block. The kinds are ${listKinds()}.`,
         located,
       ),
     );

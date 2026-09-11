@@ -7,8 +7,7 @@ import type { Env } from '../env';
 import { isSafeSvg, rasterWrapHtml } from '../design/svg';
 import { checkVocabulary } from '../design/checks';
 import { DesignWorkspace } from '../design/workspace';
-import { MAX_ROUNDS_PER_DESIGN_LAB } from '../design/types';
-import { REVIEW_CAVEAT } from '../design/types';
+import { MAX_ROUNDS_PER_DESIGN_LAB, REVIEW_CAVEAT, type DesignLab } from '../design/types';
 
 /**
  * Design capabilities: author a picture as source, and have it checked.
@@ -242,6 +241,15 @@ const designSubmitHandler: NativeHandler = {
         unrendered: { type: 'string' },
         reviewedBy: { type: 'string' },
         caveat: { type: 'string' },
+        windowId: {
+          type: 'string',
+          description: 'The window this round was put on, when it was shown. Stable per lab across rounds.',
+        },
+        windowUpdated: { type: 'boolean', description: 'True when it replaced a window already open.' },
+        windowRefused: {
+          type: 'string',
+          description: 'Why the round could not be shown. The revision was recorded regardless.',
+        },
       },
     },
     permissions: ['workspace.write'],
@@ -281,8 +289,11 @@ const designSubmitHandler: NativeHandler = {
     if (!submitted.ok) return submitted;
 
     const { review, revision, renders, glb, issues, unrendered } = submitted.value;
+    const raised = raiseDesignWindow(ctx, lab.value, revision.id);
     return ok({
       revisionId: revision.id,
+      ...(raised?.outcome === 'shown' ? { windowId: raised.id, windowUpdated: raised.updated } : {}),
+      ...(raised?.outcome === 'refused' ? { windowRefused: raised.reason } : {}),
       round: lab.value.rounds + 1,
       maxRounds: MAX_ROUNDS_PER_DESIGN_LAB,
       allVerified: review.allVerified,
@@ -441,6 +452,11 @@ const designReadHandler: NativeHandler = {
       refused: parseJsonArray(row.refused),
       issues: parseJsonArray(row.issues),
       ...(typeof row.render_key === 'string' ? { renderKey: row.render_key } : {}),
+      // Present only when the reason was recorded. Omitted rather than sent as
+      // null so that a caller reading it cannot mistake "no revision here ever
+      // failed to render" for "this one did, for no stated reason" — the column
+      // is null in both cases and only its absence is unambiguous.
+      ...(typeof row.unrendered === 'string' ? { unrendered: row.unrendered } : {}),
       caveat: REVIEW_CAVEAT,
     });
   },
@@ -487,9 +503,79 @@ const designCloseHandler: NativeHandler = {
       String(ctx.args.summary ?? ''),
     );
     if (!closed.ok) return closed;
+    // The window comes down with the lab. A closed lab takes no further
+    // revisions, so a window still showing the last one would be the only thing
+    // left on screen saying the lab is live. Closing a window that is not open
+    // is not an error, so there is nothing to check first.
+    ctx.surfaces?.close(designWindowId(closed.value.id), 'The lab is closed.');
     return ok({ labId: closed.value.id, state: closed.value.state, rounds: closed.value.rounds });
   },
 };
+
+/* ------------------------------------------------------------------ */
+/* Showing the round                                                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * One window per lab, named after it.
+ *
+ * Stable across rounds on purpose: a second round replaces the window already
+ * on screen rather than opening a twin beside it, which is the only reason this
+ * id is derived rather than random. The lab id cannot be used as-is — it
+ * carries an underscore, and a window id is lower-case letters, digits and
+ * hyphens — so the separator is the one character that has to change.
+ */
+function designWindowId(labId: string): string {
+  return `design-${labId.replace(/_/g, '-')}`;
+}
+
+type Raised =
+  | { outcome: 'shown'; id: string; updated: boolean }
+  | { outcome: 'refused'; reason: string };
+
+/**
+ * Puts the round that just happened on screen, and says whether it worked.
+ *
+ * The block carries the lab and revision *names* and never the review itself.
+ * The client fetches both from the routes that own them, which is what keeps
+ * the window true after the fact: a window outlives the turn that raised it,
+ * and a review copied into it would sit on screen going stale while the
+ * recorded one stayed correct.
+ *
+ * Null when there is no turn to put a window on. That is a real case rather
+ * than a defensive one — an authored story resolving a design external inline
+ * has no collector — and it is not a failure: the revision is written either
+ * way, and a picture is not less real for having had nowhere to appear.
+ */
+function raiseDesignWindow(ctx: NativeContext, lab: DesignLab, revisionId: string): Raised | null {
+  const collector = ctx.surfaces;
+  if (!collector) return null;
+
+  const accepted = collector.open({
+    id: designWindowId(lab.id),
+    title: lab.title,
+    subtitle: `${lab.surface === 'vector' ? 'Drawing' : 'Scene'} · round ${
+      lab.rounds + 1
+    } of ${MAX_ROUNDS_PER_DESIGN_LAB}`,
+    raisedBy: 'design.submit',
+    activeTabId: 'result',
+    tabs: [
+      {
+        id: 'result',
+        title: 'Result',
+        blocks: [{ id: 'revision', kind: 'design', labId: lab.id, revisionId }],
+      },
+    ],
+  });
+
+  // A refusal is reported rather than swallowed. It is almost always the open
+  // window ceiling, and a caller can only act on that — by closing one — if it
+  // is told that is what happened.
+  if (!accepted.ok) {
+    return { outcome: 'refused', reason: accepted.issues.map((issue) => issue.message).join(' ') };
+  }
+  return { outcome: 'shown', id: accepted.window.id, updated: accepted.updated };
+}
 
 /* ------------------------------------------------------------------ */
 

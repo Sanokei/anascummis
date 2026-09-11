@@ -54,6 +54,14 @@ export default defineWorkersConfig({
             MAX_STORY_DISPATCHES_PER_TURN: '3',
             MAX_FORGE_ATTEMPTS: '3',
             GUEST_RETENTION_SECONDS: '86400',
+            // Session cookies are HMAC-signed, and `sessionSecret` refuses
+            // anything shorter than 32 characters. Without this, `resolveIdentity`
+            // falls through to minting a *fresh* guest id on every request, so no
+            // two requests could ever be the same session and no session-scoped
+            // route could be tested over HTTP at all. A test-only value, plainly
+            // not a credential: the real secret reaches a deployment through
+            // `wrangler secret put` and never through this file.
+            SESSION_SECRET: 'test-secret-not-used-anywhere-real-000000',
           },
         },
       },

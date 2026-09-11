@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
+  BLOCK_KIND_NAMES,
   MAX_BLOCK_TEXT_CHARS,
   MAX_LIST_ITEMS,
   MAX_WINDOW_TITLE_CHARS,
@@ -513,5 +514,90 @@ describe('image blocks', () => {
   it('refuses a link that is not absolute', () => {
     const block = { id: 'docs', kind: 'links', links: [{ label: 'Docs', href: '/docs' }] };
     expect(codes(validateBlock(block as never, where))).toEqual(['image-url-unsupported']);
+  });
+});
+
+describe('design blocks', () => {
+  const where = { windowId: 'w', tabId: 't' };
+  const design = (over: Record<string, unknown> = {}) => ({
+    id: 'revision',
+    kind: 'design',
+    labId: 'design_0f1e2d3c4b5a69788796a5b4c3d2e1f0',
+    revisionId: 'rev_0f1e2d3c4b5a69788796a5b4c3d2e1f0',
+    ...over,
+  });
+
+  it('accepts the ids the design capabilities actually issue', () => {
+    expect(validateBlock(design() as never, where)).toEqual([]);
+  });
+
+  /*
+   * A design block is not an image block that forgot its alt text. It carries
+   * no url at all — the client builds the byte route out of the two ids — so
+   * the image rules must not reach it, and this is the test that says so. It is
+   * the one that fails if a later refactor decides every block which results in
+   * a picture is an image block.
+   */
+  it('is not held to the image rules, because it carries no url', () => {
+    expect(codes(validateBlock(design() as never, where))).toEqual([]);
+    expect(codes(validateBlock(design({ url: 'https://example.test/a.png' }) as never, where))).toEqual([]);
+  });
+
+  it('refuses a block that names no lab, or no revision', () => {
+    for (const over of [{ labId: '' }, { revisionId: '' }, { labId: undefined }, { revisionId: undefined }]) {
+      expect(codes(validateBlock(design(over) as never, where))).toEqual(['malformed-id']);
+    }
+  });
+
+  /*
+   * Every one of these is a string a caller might reach for while trying to
+   * make a block point at somebody else's picture: a traversal, a scheme it
+   * does not own, an uppercase prefix, a bare hex tail. None of them could have
+   * come out of `randomId`, so none of them is a name this host has to go and
+   * look up.
+   */
+  it('refuses an id this host could not have issued', () => {
+    for (const bad of [
+      '../../etc/passwd',
+      'design_../../etc',
+      'design_abc/../def',
+      'workspace:chart.png',
+      'https://example.test/a.png',
+      'DESIGN_abc',
+      'design-abc',
+      'design_',
+      '0f1e2d3c4b5a69788796a5b4c3d2e1f0',
+      'a'.repeat(200),
+    ]) {
+      expect(codes(validateBlock(design({ labId: bad }) as never, where))).toEqual(['malformed-id']);
+    }
+  });
+
+  /*
+   * Two ids of the right shape in the wrong roles are accepted here, on
+   * purpose. This layer decides whether a string *could* name something the
+   * host issued. Whether it names something this session owns is a database
+   * fact the byte and review routes answer, and answering it here would mean
+   * teaching the surface module what a design lab is — the coupling this
+   * module's header gives up everything to avoid.
+   */
+  it('checks the shape of an id, not whether it exists', () => {
+    expect(validateBlock(design({ labId: 'rev_abc', revisionId: 'design_abc' }) as never, where)).toEqual([]);
+  });
+
+  /*
+   * The vocabulary is restated in exactly one place a compiler cannot check:
+   * the sentence a model reads when it names a kind that does not exist. It has
+   * already gone stale once — it went on listing six kinds the day a seventh
+   * landed. This is the test that keeps the sentence and the accept-list the
+   * same list.
+   */
+  it('lists every kind it accepts when refusing one it does not', () => {
+    const issues = validateBlock({ id: 'canvas', kind: 'canvas' } as never, where);
+    expect(codes(issues)).toEqual(['unknown-block-kind']);
+
+    const message = issues[0]?.message ?? '';
+    expect(BLOCK_KIND_NAMES).toContain('design');
+    for (const kind of BLOCK_KIND_NAMES) expect(message).toContain(kind);
   });
 });

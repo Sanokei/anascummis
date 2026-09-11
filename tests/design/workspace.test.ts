@@ -652,6 +652,51 @@ describe('history', () => {
   });
 });
 
+describe('why a revision has no pixels', () => {
+  it('is recorded with the revision, so it outlives the turn that produced it', async () => {
+    const identity = guest();
+    const lab = await newLab(identity, { surface: 'vector', criteria: ['exactly three circles'] });
+
+    // No rasteriser is configured, which is the ordinary case for a deployment
+    // with no Browser Rendering binding — and the one a person is most likely to
+    // meet, because it is what they get the first time they ask for a drawing.
+    const submitted = valueOf(await workspace().submit(identity, { lab, source: THREE_CIRCLES }));
+    expect(submitted.unrendered).toBe(
+      'No SVG rasteriser is configured, so no pixels were produced. Source checks still ran.',
+    );
+
+    // The property under test: the reason is in the row, not only in the value
+    // returned to the caller that produced it. Everything that draws or reports
+    // a revision afterwards reads the row, and a reason living only in a return
+    // value is gone by the time anything looks — which is what made the client's
+    // "why nothing was rendered" panel unreachable.
+    const rows = await workspace().history(identity, lab.id);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]!.unrendered).toBe(submitted.unrendered);
+  });
+
+  it(
+    'is absent for a revision that did render',
+    async () => {
+      const identity = guest();
+      const lab = await newLab(identity, { surface: 'scene', criteria: LAMP_CRITERIA });
+
+      const submitted = valueOf(
+        await workspace().submit(identity, { lab, source: SCENE_SOURCE_EXAMPLE }),
+      );
+      expect(submitted.unrendered).toBeNull();
+
+      // Null in the column as well as in the value, which is the trade the
+      // migration states plainly: a revision that rendered and one recorded
+      // before the column existed are the same shape here, and `render_key`
+      // rather than this column is what answers "did it render".
+      const rows = await workspace().history(identity, lab.id);
+      expect(rows[0]!.unrendered).toBeNull();
+    },
+    RENDER_TIMEOUT_MS,
+  );
+});
+
 describe('source', () => {
   it('gives back the authored text verbatim to its own session', async () => {
     const identity = guest();

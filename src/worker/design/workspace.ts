@@ -247,8 +247,8 @@ export class DesignWorkspace {
 
   async history(identity: Identity, labId: string): Promise<Record<string, unknown>[]> {
     const rows = await this.env.DB.prepare(
-      `SELECT id, surface, source_hash, views, verdicts, all_verified, counts, refused,
-              issues, other_observations, reviewed_by, created_at
+      `SELECT id, surface, source_hash, views, unrendered, verdicts, all_verified, counts,
+              refused, issues, other_observations, reviewed_by, created_at
        FROM design_revisions WHERE lab_id = ? AND session_id = ? ORDER BY created_at`,
     )
       .bind(labId, identity.sessionId)
@@ -361,9 +361,9 @@ export class DesignWorkspace {
       this.env.DB.prepare(
         `INSERT INTO design_revisions
            (id, lab_id, session_id, surface, source, source_hash, render_key, render_storage,
-            views, verdicts, all_verified, counts, refused, issues, other_observations,
-            reviewed_by, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            unrendered, views, verdicts, all_verified, counts, refused, issues,
+            other_observations, reviewed_by, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       ).bind(
         revision.id,
         lab.id,
@@ -373,6 +373,7 @@ export class DesignWorkspace {
         revision.sourceHash,
         revision.renderKey,
         stored.value.storage,
+        unrendered,
         JSON.stringify(
           views.map((render) => ({ view: render.view, key: stored.value.keys[render.view] ?? null })),
         ),

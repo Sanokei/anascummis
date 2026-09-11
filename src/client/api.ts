@@ -46,6 +46,21 @@ export interface DesignAvailability {
   maxRounds: number;
 }
 
+/**
+ * What a lab can do in this deployment.
+ *
+ * Three rows, because the three steps have three different dependencies:
+ * generating an image needs a model route, taking a screenshot needs Browser
+ * Rendering, and reviewing the result needs the multimodal route. The review
+ * row is reported from the same function the review path uses, so the interface
+ * cannot offer a lab whose last step would fail.
+ */
+export interface LabAvailability {
+  imageGeneration: { provider: string; model: string; reason: string };
+  screenshots: { available: boolean; reason: string };
+  review: { available: boolean; model: string; reason: string };
+}
+
 export interface SessionState {
   identity:
     | { kind: 'guest'; sessionId: string }
@@ -64,6 +79,7 @@ export interface SessionState {
     speech: { provider: string; model: string };
     vision: { provider: string; model: string; reason: string };
     cloudflareConnect: boolean;
+    labs: LabAvailability;
     design: DesignAvailability;
   };
   consent: ConsentState;

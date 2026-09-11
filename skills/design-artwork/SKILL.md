@@ -98,6 +98,12 @@ but you should still expect "above" to mean what it looks like it means.
   settle counts and positions. Whether it is any good is not something this
   harness can tell you, and pretending otherwise is the failure it was built to
   avoid.
+- **A round you submit is shown.** When the result carries a `windowId`, the
+  drawing or the scene's rendered views are on screen beside the conversation,
+  and so is the reason when nothing could be rendered. A `windowRefused` instead
+  means it was not shown; say the round was recorded rather than shown. Do not
+  narrate what is already visible — spend the words on what the verdicts settled
+  and what they did not.
 - The GLB is exported to the session's own storage and fetched through
   `/api/design/{labId}/renders/{revisionId}/mesh.glb`. Nothing renders one in
   the interface yet; say so rather than describing a viewer that is not there.

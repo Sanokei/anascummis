@@ -119,6 +119,15 @@ export interface DesignViewProps {
   allVerified?: boolean;
   /** The model that answered the opinion-only criteria, when one did. */
   reviewedBy?: string | null;
+  /**
+   * When the revision was recorded, which is when it was reviewed.
+   *
+   * There is no separate moment of review to report: the route sends the
+   * revision's own timestamp because the review is written in the same batch as
+   * the revision it describes. Recorded, never inferred — an interface that
+   * worked out a plausible time to show would be inventing a fact.
+   */
+  reviewedAt?: string | null;
   otherObservations?: string[];
   /** Travels with every review, and is shown in full. */
   caveat: string;
@@ -131,6 +140,7 @@ export interface DesignViewProps {
 
 export function DesignView(props: DesignViewProps) {
   const { labId, revisionId, surface, renderKeys, glbKey, unrendered, availability } = props;
+  const reviewed = reviewMoment(props.reviewedAt);
 
   const views = useMemo(() => orderedViews(renderKeys), [renderKeys]);
   // Held as a view *name* rather than an index, so a re-render with a different
@@ -267,6 +277,18 @@ export function DesignView(props: DesignViewProps) {
           {props.reviewedBy && (
             <p className="text-ink-faint font-mono text-[0.68rem]">
               opinions from {props.reviewedBy}
+              {/*
+                When, not only who. An attribution naming the model but not the
+                moment reads as a standing fact about the criteria rather than
+                one reading of them taken at a time — and a criterion can be
+                revised, so the round it was read in is part of what was said.
+              */}
+              {reviewed && (
+                <>
+                  {' · '}
+                  <time dateTime={props.reviewedAt ?? ''}>{reviewed}</time>
+                </>
+              )}
             </p>
           )}
         </div>
@@ -674,6 +696,34 @@ function renderUrl(labId: string, revisionId: string, file: string): string {
 
 function fileName(key: string): string {
   return key.slice(key.lastIndexOf('/') + 1);
+}
+
+/**
+ * The moment a review was taken, as a person reads it.
+ *
+ * The recorded value travels unchanged in the `<time>` element's `dateTime`,
+ * so the exact instant is still in the document for anything that wants it and
+ * this is only what is printed. Printed in the reader's own locale and zone,
+ * because that is the clock they can check it against: the value came from this
+ * Worker, so two readers in different zones are looking at the same instant
+ * written the way each of them writes instants.
+ *
+ * A value that will not parse is passed through rather than replaced with
+ * "Invalid Date", which would be this component's words about a field it could
+ * not read — and a wrong-looking timestamp is easier to distrust correctly than
+ * a plausible one.
+ */
+function reviewMoment(recorded: string | null | undefined): string | null {
+  if (typeof recorded !== 'string' || recorded === '') return null;
+  const at = new Date(recorded);
+  if (Number.isNaN(at.getTime())) return recorded;
+  return at.toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
 
 /* ------------------------------------------------------------------ */

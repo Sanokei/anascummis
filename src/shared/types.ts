@@ -356,10 +356,10 @@ export const CONSENT_POLICY_VERSION = '2026-09-10';
  * of a new thing arriving beside it.
  */
 
-export type SurfaceBlockKind = 'text' | 'image' | 'code' | 'list' | 'fields' | 'links';
+export type SurfaceBlockKind = 'text' | 'image' | 'code' | 'list' | 'fields' | 'links' | 'design';
 
 /**
- * One piece of a tab. Deliberately a closed vocabulary of six kinds rather
+ * One piece of a tab. Deliberately a closed vocabulary of seven kinds rather
  * than free markup: every kind has a renderer the host controls, so a surface
  * can never introduce a construct the client did not agree to draw.
  */
@@ -377,6 +377,19 @@ export interface SurfaceBlock {
    * unusable to anyone not looking at it, and the host refuses to surface one.
    */
   alt?: string;
+  /**
+   * For `design`. The lab whose revision this block shows.
+   *
+   * A design block carries *names*, not a result. The picture and the verdicts
+   * are fetched from the routes that own them, under the same session bound as
+   * everything else, because a window outlives the turn that raised it: a
+   * snapshot of a review would sit in a window still on screen and quietly stop
+   * being what was recorded. An id cannot go stale — it resolves to whatever
+   * was actually measured, which is the property this whole harness rests on.
+   */
+  labId?: string;
+  /** For `design`. The revision whose recorded review and renders to show. */
+  revisionId?: string;
   /** For `code`. A hint only; the client never executes it. */
   language?: string;
   /** For `list`. */
