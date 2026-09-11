@@ -75,5 +75,33 @@ const single = html
 const target = `${root}dist/preview.html`;
 await writeFile(target, single, 'utf8');
 
+/*
+ * The publishing shape.
+ *
+ * A hosted page is a fragment: the host wraps it in its own doctype, head and
+ * body, so handing it a complete document nests one inside the other. The outer
+ * scaffolding comes off and the title moves to the top, where the host looks
+ * for it — and the metas go, because the host sets charset and viewport itself
+ * and a second viewport tag in the body is one too many.
+ *
+ * This is the same bytes as `preview.html` minus the wrapper, so there is
+ * exactly one build and no chance of the two drifting.
+ */
+const fragment = single
+  .replace(/<!doctype html>\s*/i, '')
+  .replace(/<html[^>]*>\s*/i, '')
+  .replace(/<\/?head>\s*/gi, '')
+  .replace(/<\/?body>\s*/gi, '')
+  .replace(/<\/html>\s*/i, '')
+  .replace(/<meta[^>]*>\s*/gi, '')
+  .trimStart();
+
+const fragmentTarget = `${root}dist/preview.artifact.html`;
+await writeFile(fragmentTarget, fragment, 'utf8');
+
 const { size } = await stat(target);
-console.log(`dist/preview.html  ${(size / 1024).toFixed(0)} kB  (${inlined.size} font files inlined)`);
+const { size: fragmentSize } = await stat(fragmentTarget);
+console.log(
+  `dist/preview.html           ${(size / 1024).toFixed(0)} kB  (${inlined.size} font files inlined)\n` +
+    `dist/preview.artifact.html  ${(fragmentSize / 1024).toFixed(0)} kB  (fragment, for publishing)`,
+);
