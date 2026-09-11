@@ -8,6 +8,8 @@ import { retrievePage } from '../providers/retrieval';
 import { randomId } from '../crypto';
 import { VISION_NATIVES } from './vision-natives';
 import { LAB_NATIVES } from './lab-natives';
+import { PREMISE_DOCS } from '../docs/compiled';
+import { StoryFunctionForge, type CapabilitySpec } from '../lua/forge';
 
 /**
  * Seed capabilities: trusted host adapters with registry contracts.
@@ -418,11 +420,162 @@ const previewHandler: NativeHandler = {
 };
 
 /* ------------------------------------------------------------------ */
+/* premise.read                                                        */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The project's own authored premise and specification, inlined at build time
+ * so the assistant can read them the way a coding agent reads its repository.
+ * They are static host text, not task material.
+ */
+const premiseReadHandler: NativeHandler = {
+  contract: contract({
+    id: 'premise.read',
+    title: 'Read the premise and specification',
+    summary: 'Returns this project\'s authored premise and specification documents.',
+    inputSchema: {
+      type: 'object',
+      properties: { doc: stringSchema('Document id, or omit to list all.', 120) },
+      additionalProperties: false,
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        docs: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'string' },
+              title: { type: 'string' },
+              body: { type: 'string' },
+            },
+          },
+        },
+      },
+    },
+    permissions: [],
+    risk: 'none',
+  }),
+  async execute(ctx: NativeContext): Promise<Result<unknown>> {
+    const docId = typeof ctx.args.doc === 'string' ? ctx.args.doc.trim() : '';
+    if (docId) {
+      const doc = PREMISE_DOCS.find((d) => d.id === docId || d.title === docId);
+      if (!doc) return fail('missing-capability', `No premise document named "${docId}".`);
+      return ok({ docs: [doc] });
+    }
+    return ok({ docs: PREMISE_DOCS });
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* forge.capability                                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The runtime end of "build the missing glue". The model proposes a capability
+ * spec and rationale; the forge generates, validates and installs it. This is
+ * a high-risk action — it installs executable Lua — so it always confirms.
+ */
+function forgeHandler(forge: StoryFunctionForge): NativeHandler {
+  return {
+    contract: contract({
+      id: 'forge.capability',
+      title: 'Build a capability',
+      summary: 'Generates, validates and installs one small Lua capability to fill a real gap.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          id: stringSchema('Capability id, e.g. "etsy.order".', 64),
+          title: stringSchema('Short title.', 200),
+          summary: stringSchema('What it does, one or two sentences.', 1000),
+          rationale: stringSchema('Why it is needed, in the user\'s terms.', 2000),
+          input: { type: 'object', description: 'JSON Schema for the capability input.' },
+          output: { type: 'object', description: 'JSON Schema for the capability output.' },
+          requestedPermissions: { type: 'array', items: { type: 'string' } },
+          risk: { type: 'string', enum: ['none', 'low', 'moderate', 'high'] },
+        },
+        required: ['id', 'title', 'summary', 'input', 'output', 'requestedPermissions', 'risk'],
+        additionalProperties: false,
+      },
+      outputSchema: {
+        type: 'object',
+        properties: {
+          outcome: { type: 'string', enum: ['installed', 'reused', 'failed'] },
+          reason: { type: 'string' },
+          capabilityId: { type: 'string' },
+          attempts: { type: 'integer' },
+        },
+      },
+      permissions: ['skills.execute'],
+      risk: 'high',
+      requiresConfirmation: true,
+      idempotent: false,
+      timeoutMs: 120_000,
+    }),
+    async execute(ctx: NativeContext): Promise<Result<unknown>> {
+      const spec = coerceCapabilitySpec(ctx.args);
+      if (!spec.ok) return spec;
+      const report = await forge.forge({
+        spec: spec.value,
+        rationale: String(ctx.args.rationale ?? ''),
+        budget: ctx.budget,
+        sessionPermissions: ctx.permissions,
+        signal: ctx.signal,
+      });
+      return ok({
+        outcome: report.outcome,
+        reason: report.reason ?? '',
+        capabilityId: report.capability?.id ?? '',
+        attempts: report.attempts.length,
+      });
+    },
+  };
+}
+
+const FORGEABLE_RISK: ReadonlySet<string> = new Set(['none', 'low', 'moderate', 'high']);
+
+function isJsonSchema(value: unknown): value is JsonSchema {
+  return (
+    Boolean(value) &&
+    typeof value === 'object' &&
+    typeof (value as { type?: unknown }).type === 'string'
+  );
+}
+
+/** Coerces and validates the model's spec before the forge sees it. */
+function coerceCapabilitySpec(args: Record<string, unknown>): Result<CapabilitySpec> {
+  const id = typeof args.id === 'string' ? args.id.trim() : '';
+  const title = typeof args.title === 'string' ? args.title.trim() : '';
+  const summary = typeof args.summary === 'string' ? args.summary.trim() : '';
+  const input = isJsonSchema(args.input) ? args.input : null;
+  const output = isJsonSchema(args.output) ? args.output : null;
+  const risk =
+    typeof args.risk === 'string' && FORGEABLE_RISK.has(args.risk) ? (args.risk as RiskClass) : null;
+  const requestedPermissions = Array.isArray(args.requestedPermissions)
+    ? args.requestedPermissions
+        .filter((p): p is string => typeof p === 'string')
+        .map((p) => p as PermissionName)
+    : [];
+
+  if (!id || !title || !summary || !input || !output || !risk) {
+    return fail(
+      'invalid-argument',
+      'A capability spec needs id, title, summary, input (object), output (object) and a non-irreversible risk.',
+    );
+  }
+  return ok({ id, title, summary, input, output, requestedPermissions, risk });
+}
+
+/* ------------------------------------------------------------------ */
 /* Registration                                                        */
 /* ------------------------------------------------------------------ */
 
 export function buildRegistry(env: Env): CapabilityRegistry {
   const registry = new CapabilityRegistry(env);
+  // The forge shares this registry, so reuse and shadowing checks see the same
+  // natives as the dispatcher. It must not build against a fresh, empty one.
+  const forge = new StoryFunctionForge(env, registry);
   for (const handler of [
     webSearchHandler,
     webFetchHandler,
@@ -431,7 +584,9 @@ export function buildRegistry(env: Env): CapabilityRegistry {
     workspaceListHandler,
     memoryReadHandler,
     clockHandler,
+    premiseReadHandler,
     previewHandler,
+    forgeHandler(forge),
     // Vision is registered the same way as everything else: a contract in the
     // registry, reachable from Ink through the ordinary EXTERNAL name mapping.
     ...VISION_NATIVES,

@@ -6,7 +6,7 @@
   "description": "Conversational-first assistant with an authored personality, running on Cloudflare Workers.",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/compile-stories.mjs && node scripts/compile-skills.mjs && vite build",
+    "build": "node scripts/compile-stories.mjs && node scripts/compile-skills.mjs && node scripts/compile-docs.mjs && vite build",
     "preview": "bun run build && wrangler dev",
     "deploy": "bun run build && wrangler deploy",
     "typecheck": "tsc --noEmit",
@@ -16,7 +16,8 @@
     "db:migrate:remote": "wrangler d1 migrations apply anascummis-db --remote",
     "cf-typegen": "wrangler types",
     "stories": "node scripts/compile-stories.mjs",
-    "skills": "node scripts/compile-skills.mjs"
+    "skills": "node scripts/compile-skills.mjs",
+    "docs": "node scripts/compile-docs.mjs"
   },
   "dependencies": {
     "fengari": "0.1.4",

@@ -5,6 +5,7 @@ import { ok } from '@shared/types';
 import type { NativeContext } from '@worker/registry/registry';
 import { buildRegistry } from '@worker/registry/natives';
 import { defaultEnvelope } from '@worker/policy/permissions';
+import { TaskBudget, TURN_LIMITS } from '@worker/policy/budget';
 import { anotherSession, applyMigrations, guest, seedUser } from '../helpers/db';
 
 /**
@@ -25,6 +26,7 @@ function context(identity: Identity, args: Record<string, unknown>): NativeConte
     identity,
     permissions: defaultEnvelope(identity),
     signal: new AbortController().signal,
+    budget: new TaskBudget('test', TURN_LIMITS),
     chargeExternal: () => ok(0),
   };
 }

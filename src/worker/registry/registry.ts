@@ -9,6 +9,7 @@ import type { Env } from '../env';
 import { sha256Hex } from '../crypto';
 import { validateAgainstSchema, serializedSize } from './schema';
 import type { PermissionEnvelope } from '../policy/permissions';
+import type { TaskBudget } from '../policy/budget';
 
 /**
  * The authoritative executable catalogue.
@@ -32,6 +33,8 @@ export interface NativeContext {
   permissions: PermissionEnvelope;
   /** Aborts when the session generation is fenced or the user pressed Stop. */
   signal: AbortSignal;
+  /** The task budget this dispatch charges against, for work beyond `chargeExternal`. */
+  budget: TaskBudget;
   /** Charged for each outbound request the adapter makes. */
   chargeExternal: (n?: number) => Result<number>;
 }

@@ -207,6 +207,7 @@ export class Dispatcher {
         identity: req.identity,
         permissions: req.permissions,
         signal,
+        budget: req.budget,
         chargeExternal: (n) => req.budget.chargeExternalCall(n),
       });
     }
@@ -263,6 +264,7 @@ export class Dispatcher {
             identity: req.identity,
             permissions: req.permissions,
             signal,
+            budget: req.budget,
             chargeExternal: () => ok(0),
           });
           return res.ok ? { ok: true, value: res.value } : { ok: false, error: res.message };
@@ -284,6 +286,7 @@ export class Dispatcher {
             identity: req.identity,
             permissions: req.permissions,
             signal,
+            budget: req.budget,
             chargeExternal: () => ok(0),
           });
           return res.ok ? { ok: true, value: res.value } : { ok: false, error: res.message };
