@@ -7,6 +7,8 @@ import { isWellFormedCapabilityId } from '../../src/worker/registry/registry';
 import { PermissionEnvelope, defaultEnvelope } from '../../src/worker/policy/permissions';
 import { TaskBudget, TURN_LIMITS } from '../../src/worker/policy/budget';
 import { DESIGN_NATIVES } from '../../src/worker/registry/design-natives';
+import { buildRegistry } from '../../src/worker/registry/natives';
+import { externalNameToCapabilityId } from '../../src/worker/ink/harness';
 import { SCENE_SOURCE_EXAMPLE } from '../../src/worker/design/scene';
 import { MAX_ROUNDS_PER_DESIGN_LAB } from '../../src/worker/design/types';
 import type { Env } from '../../src/worker/env';
@@ -885,6 +887,41 @@ describe('design.close', () => {
 /* ------------------------------------------------------------------ */
 /* The envelope                                                        */
 /* ------------------------------------------------------------------ */
+
+describe('reachability', () => {
+  it('registers them in the registry the orchestrator builds', async () => {
+    // Every other test in this file drives a handler directly, which would keep
+    // passing if the handlers were never registered. This is the one that says
+    // a turn can actually reach them: `buildRegistry` is what `Orchestrator`
+    // constructs, and `/api/capabilities` lists from the same call.
+    const registry = buildRegistry(env as unknown as Env);
+    const installed = await registry.listInstalled();
+    const ids = new Set(installed.map((entry) => entry.id));
+
+    for (const handler of DESIGN_NATIVES) {
+      expect(ids.has(handler.contract.id), `${handler.contract.id} is not registered`).toBe(true);
+    }
+  });
+
+  it('reaches design.submit from the Ink external a story would write', () => {
+    // A story names an external with underscores; the registry keys on dots.
+    // If this mapping stops covering the design ids, the capability stays
+    // installed and becomes unreachable from the only place that calls it.
+    expect(externalNameToCapabilityId('design_submit')).toBe('design.submit');
+    expect(externalNameToCapabilityId('design_open')).toBe('design.open');
+    expect(externalNameToCapabilityId('design_read')).toBe('design.read');
+    expect(externalNameToCapabilityId('design_close')).toBe('design.close');
+  });
+
+  it('offers every registered design id a permission envelope that grants it', () => {
+    // Registered but ungranted is a capability that always fails at the
+    // permission check, which reads to a person as the feature being broken.
+    const envelope = defaultEnvelope(guest());
+    for (const handler of DESIGN_NATIVES) {
+      expect(envelope.missingFor(handler.contract), handler.contract.id).toEqual([]);
+    }
+  });
+});
 
 describe('the permission envelope', () => {
   it('can express the permissions these contracts ask for', () => {
