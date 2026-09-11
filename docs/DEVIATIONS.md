@@ -68,9 +68,10 @@ specification requires when provisioning is unavailable.
 ## 5. Provider coverage
 
 **DeepSeek** is the configured conversational route and is used when `DEEPSEEK_API_KEY` is set.
-No key was available during this build, so the deployed instance falls back to the bound Workers
-AI chat model. The fallback is reported in the interface rather than hidden, and the wire model
-identifier is configuration in both cases.
+No key was available for most of this build, so the deployed instance fell back to the bound
+Workers AI chat model; a key was added on 2026-09-11 and the live provider was then probed
+directly (§9). The fallback is reported in the interface rather than hidden either way, and the
+wire model identifier is configuration in both cases.
 
 **Whisper** runs through Workers AI, which is bound and functional. The OpenAI path exists for
 deployments that prefer it and sends complete bounded chunks, because hosted `whisper-1` does
@@ -197,12 +198,96 @@ skipped. The 3D path has no such gap.
 client can fetch it, but nothing in the interface renders one yet. The assets are
 real; the viewer is absent.
 
-## 9. What is not implemented
+## 9. The provider is probed before it is depended on
+
+**Requested:** DeepSeek's FIM and chat prefix completion, to stream a minimal
+skeleton of what to say and fill it in — and, separately, that the assistant
+should normally *not* think, with reasoning effort set by the model itself for
+turns it judges difficult.
+
+**Built:** `scripts/probe-deepseek.mjs`, and one change that came out of it.
+The probe is re-runnable after any provider change; everything below is
+measured rather than read off documentation.
+
+### Reasoning was on by default, and cost seconds a turn
+
+Asking the live provider an ordinary question — "what is a lighthouse for?" —
+with nothing specified:
+
+| Request | First visible token | Reasoning before it |
+| --- | --- | --- |
+| nothing sent (the previous behaviour) | 8015ms | 6775ms |
+| `thinking: { type: 'disabled' }` | 2075ms | none |
+
+Every reply was paying for reasoning nobody asked for and nobody sees. The code
+could not express the alternative: `buildDeepseekBody` wrote
+`thinking: {type: 'enabled'}` or wrote nothing, and writing nothing means
+thinking on. `reasoningFields` in `src/worker/providers/model.ts` is now the
+single place either provider decides this. An absent request sends
+`thinking: { type: 'disabled' }`; a turn that wants to think names a level and
+gets it. `vision.ts` carried a duplicate of the old logic and now imports this
+one.
+
+**The vocabulary was also wrong.** Both providers held a hand-written mapping
+asserting the effort set was `none/low/high/max` and rewriting `medium` to
+`low`. Sending the provider a deliberately invalid value returned the real set:
+
+    reasoning_effort: none | minimal | low | medium | high | xhigh | max
+    thinking.type:    adaptive | enabled | disabled
+
+So `medium` is real and was being silently downgraded, and `minimal` and
+`xhigh` were unreachable. The mapping is deleted rather than corrected: it is
+exactly the kind of hand-maintained translation that drifts from the provider
+it describes. The type is now the vocabulary, and nothing translates.
+
+`adaptive` — the provider choosing for itself — is accepted, because it exists
+and it is what the request describes. It is not the default: one probe run
+showed it still reasoning on a trivial question, and that run was
+network-degraded, so it is recorded as unmeasured rather than as working.
+
+### The beta surfaces are measured, and nothing is built on them
+
+**Prefix completion is unreliable.** On an English prompt continued from an
+English prefix, 12 calls produced wrong-language or malformed output in roughly
+half of them — Chinese, markdown table syntax, literal `\t` runs, stray leading
+digits. Four of six failed with a plain system message; adding an explicit
+"always reply in English" line left two of six wrong and two more malformed.
+
+For a voice-first assistant that is the worst available failure: the reply is
+spoken, and half the time it would be spoken in the wrong language. The
+existing mechanism — stream host-supplied text verbatim, then reconcile the
+committed turn with `streamedRemainder` — is strictly more robust, and it was
+already in place.
+
+**Tools and prefix completion are mutually exclusive.** The provider rejects the
+combination outright: `Function call should not be used with prefix`. A prefix
+pass could only ever have been the phrasing half of a turn, never the
+tool-calling half.
+
+**FIM survived its samples but is not established.** Both calls filled the
+middle correctly and in English, better behaviour than prefix completion on the
+same host — but two calls is not a rate, and both surfaces live on the same
+beta endpoint.
+
+**A stable prefix really is cheap.** A repeated 836-token prefix hit the context
+cache for 640 of those tokens and made the second call roughly three times
+faster. The economics of prefilling speculative work hold; the surface to do
+the filling with does not.
+
+**What this costs:** the two-phase reply design has no mechanism, and the
+skeleton-then-fill work is not started. FIM may still carry it once it has been
+measured the way prefix completion was. The reasoning change costs turns that
+would have benefited from unrequested thinking — a turn must now ask, which
+means the escalation has an owner, and where that owner is the model the
+escalation still needs a shape. That is open work.
+
+## 10. What is not implemented
 
 These are absent, not stubbed as if working:
 
-- **Streaming token output.** Responses are delivered per turn. The client renders progressively
-  but the Worker does not stream partial model tokens.
+- **Audio, not text, is the latency budget.** The reply streams, and a turn answers before its
+  model call finishes, but the only latency that matters is time-to-first-*sound*, and no
+  end-to-end figure for it is claimed here.
 - **Real audio latency measurement at p50/p95.** The measurement points are instrumented and
   recorded, but no documented-conditions benchmark run was performed, so no latency figure is
   claimed.
