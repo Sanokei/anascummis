@@ -140,7 +140,9 @@ render. Without `BROWSER_RENDERING_TOKEN`, screenshots report
 
 **Requested:** a harness for making images with visual QA, so the assistant can
 check its own work looks right — and the same for 3D, following the published
-approach of generating an asset as source and compiling it.
+approach of generating an asset as source and compiling it (Nova3D,
+arXiv:2607.22738; `ATTRIBUTION.md` records what was taken from it, and the one
+place this build does not match it).
 
 **Built:** `design.open`, `design.submit`, `design.read` and `design.close`, plus
 `src/worker/design/` — an SVG authoring path, a 3D scene path that compiles to a

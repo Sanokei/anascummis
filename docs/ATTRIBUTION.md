@@ -52,6 +52,35 @@ compilation here use `inkjs`, which is a JavaScript implementation that runs on 
 without a native dependency, and whose compiler output is validated by the harness rather than
 trusted.
 
+## Nova3D
+
+The 3D surface follows the approach published as **Nova3D: Code-Native Generation of Programmable
+3D Assets** (arXiv:[2607.22738](https://arxiv.org/abs/2607.22738), cs.GR, submitted 22 July 2026).
+
+**What was inspected.** The abstract page, on 2026-09-10. The full text was not retrieved, so the
+comparison below is against the abstract's own account of its method, not against its
+stage-level implementation, which cannot be checked from here.
+
+**What was taken, and it is the central claim rather than a detail:** a 3D asset is generated as
+executable *source*, the source is compiled, and the compiled result — here a GLB — is treated as
+the artifact. The correspondences the paper draws follow from that, and the scene language here
+is built to have them: because the deliverable is a program, semantic handles exist at generation
+time rather than being recovered afterwards, so a scene carries named `part` declarations in a
+parent-child assembly, each with a `kind`, a `size` and a position in its parent's space, plus
+`material` and `joint` lines. The joints match the paper's articulation support — `revolute` and
+`prismatic`, each with an axis and a range. The criteria compiler measures against those same
+names, which is the paper's measurable-constraints idea.
+
+**What was not taken.** No source code, prompt, model, benchmark item or reported result. The
+scene language, the compiler, the GLB writer, the software rasteriser and the checks are original
+to this repository, and the criteria vocabulary is this project's own.
+
+**Where this build differs.** The paper reports a measured local-edit property among its results.
+Here a revision is a whole re-authored source, and revisions are compared only through their
+criteria, so nothing measures whether a change stayed local to the part it named. A named part is
+a handle an author can aim at; it is not a measured guarantee that editing it left the rest alone.
+That is a gap against the paper's stated capability rather than a reinterpretation of it.
+
 ## Third-party dependencies
 
 | Package | Version | Licence | Why |

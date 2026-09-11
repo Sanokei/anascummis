@@ -54,6 +54,13 @@ The governing rule is that no layer can authorise itself:
 - **Story Function Forge** — checks for an existing compatible capability first. When new Lua is
   genuinely needed, it requires a specification, a least-privilege manifest, an implementation,
   tests, and a reviewable validation report before installation.
+- **Design harness** — a drawing or a 3D scene is authored as *source*, and the source is the
+  artifact: it is measured, compiled to an image or a GLB, and kept verbatim so a revision can
+  be re-checked later against a changed checker. Acceptance criteria are compiled into host
+  checks that run against the source or the rendered pixels, and a vision model's view is
+  recorded separately and is never by itself the reason a criterion reads `met`. A scene renders
+  itself inside the Worker, so its pixel checks run without a browser; a drawing needs one, and
+  says so rather than quietly passing when none is configured.
 - **Skill Discovery and Execution Harness** — the Agent Skills `SKILL.md` format with staged
   loading. Catalogue metadata first, instructions on activation, supporting files as needed.
 - **Memory Manager** — layered context: global guidance, user preferences, project context,
