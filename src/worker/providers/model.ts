@@ -12,6 +12,44 @@ import type { Env } from '../env';
 
 export type ModelClass = 'flash' | 'pro';
 
+/**
+ * DeepSeek's reasoning-effort vocabulary, read off the provider rather than
+ * inferred from documentation.
+ *
+ * Verified 2026-09-11 by sending a deliberately invalid value and reading the
+ * validation error, which enumerated the real set. It is wider than the four
+ * levels this code previously assumed, and `medium` is a real level — the old
+ * mapping silently downgraded it to `low`.
+ */
+export type ReasoningEffort = 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max';
+
+export interface ReasoningFields {
+  thinking: { type: 'disabled' | 'adaptive' | 'enabled' };
+  reasoning_effort?: ReasoningEffort;
+}
+
+/**
+ * How much reasoning a turn is allowed to spend.
+ *
+ * Off is the default, and it is expressed by asking for nothing, because the
+ * provider's own default is thinking *on*: an unasked-for reply was spending
+ * seconds producing reasoning before its first visible word. Nothing in the
+ * codebase could say "off" before this — which is why every turn paid for it.
+ *
+ * `none` is not off. It still enables thinking and still emits reasoning, just
+ * briefly, so the two stay distinct rather than being folded into one value.
+ *
+ * `adaptive` hands the choice to the provider. It is accepted because it
+ * exists and it is what "let it decide for itself" would mean, but it is not
+ * the default: one probe run showed it reasoning on a trivial question, which
+ * is not the wanted behaviour, and that run was too degraded to settle it.
+ */
+export function reasoningFields(requested?: ReasoningEffort | 'adaptive'): ReasoningFields {
+  if (requested === undefined) return { thinking: { type: 'disabled' } };
+  if (requested === 'adaptive') return { thinking: { type: 'adaptive' } };
+  return { thinking: { type: 'enabled' }, reasoning_effort: requested };
+}
+
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant' | 'tool';
   content: string;
@@ -39,10 +77,12 @@ export interface ChatRequest {
   temperature?: number;
   maxTokens?: number;
   /**
-   * DeepSeek thinking effort request. We keep the public token broad here and
-   * map it to DeepSeek's supported values inside the provider call.
+   * How much reasoning this turn may spend.
+   *
+   * Absent means none at all, which is the common case: a turn has to ask for
+   * thinking rather than get it by default. See `reasoningFields` for why.
    */
-  requestedEffort?: 'none' | 'low' | 'medium' | 'high' | 'max';
+  requestedEffort?: ReasoningEffort | 'adaptive';
   /** Requests a JSON object response where the provider supports it. */
   json?: boolean;
   /** Streams text deltas to this callback as they arrive (DeepSeek only). */
@@ -173,18 +213,14 @@ async function deepseekChat(env: Env, route: ModelRoute, req: ChatRequest): Prom
  * (and the resulting transport), not in the prompt, tools or effort.
  */
 function buildDeepseekBody(route: ModelRoute, req: ChatRequest, stream: boolean): Record<string, unknown> {
-  const deepseekEffort = mapReasoningEffort(req.requestedEffort);
   const body: Record<string, unknown> = {
     model: route.model,
     messages: req.messages.map(toOpenAiMessage),
     temperature: req.temperature ?? 0.6,
     max_tokens: req.maxTokens ?? 1200,
     stream,
+    ...reasoningFields(req.requestedEffort),
   };
-  if (deepseekEffort) {
-    body.thinking = { type: 'enabled' };
-    body.reasoning_effort = deepseekEffort;
-  }
   if (req.tools?.length) {
     body.tools = req.tools.map((t) => ({
       type: 'function',
@@ -390,24 +426,6 @@ function readToolCalls(raw: OpenAiCompletion['choices'] extends undefined ? neve
     });
   }
   return out;
-}
-
-function mapReasoningEffort(effort?: ChatRequest['requestedEffort']): 'low' | 'high' | 'max' | 'none' | undefined {
-  switch (effort) {
-    case 'low':
-      return 'low';
-    case 'high':
-      return 'high';
-    case 'max':
-      return 'max';
-    case 'none':
-      return 'none';
-    case 'medium':
-      // DeepSeek's V4 effort set is none/low/high/max; map medium to low.
-      return 'low';
-    default:
-      return undefined;
-  }
 }
 
 /** Tool arguments arrive as a JSON string from some providers and an object from others. */

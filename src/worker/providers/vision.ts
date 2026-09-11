@@ -1,6 +1,6 @@
 import { fail, ok, type Result } from '@shared/types';
 import type { Env } from '../env';
-import type { ChatMessage } from './model';
+import { reasoningFields, type ChatMessage, type ReasoningEffort } from './model';
 import { validateAgainstSchema } from '../registry/schema';
 import type { JsonSchema } from '@shared/types';
 
@@ -127,7 +127,7 @@ export interface VisionRequest {
   messages: VisionMessage[];
   maxTokens?: number;
   temperature?: number;
-  requestedEffort?: 'none' | 'low' | 'medium' | 'high' | 'max';
+  requestedEffort?: ReasoningEffort | 'adaptive';
   /** Requests a JSON object response, used by the annotation contract. */
   json?: boolean;
   signal?: AbortSignal;
@@ -151,18 +151,14 @@ export async function visionChat(env: Env, req: VisionRequest): Promise<Result<V
     return workersAiVisionChat(env, route.model, req, images);
   }
 
-  const deepseekEffort = mapReasoningEffort(req.requestedEffort);
   const body: Record<string, unknown> = {
     model: route.model,
     messages: req.messages.map(toProviderMessage),
     max_tokens: req.maxTokens ?? 1500,
     temperature: req.temperature ?? 0.2,
     stream: false,
+    ...reasoningFields(req.requestedEffort),
   };
-  if (deepseekEffort) {
-    body.thinking = { type: 'enabled' };
-    body.reasoning_effort = deepseekEffort;
-  }
   if (req.json) body.response_format = { type: 'json_object' };
 
   try {
@@ -192,24 +188,6 @@ export async function visionChat(env: Env, req: VisionRequest): Promise<Result<V
       return fail('cancelled', 'Vision call was cancelled.');
     }
     return fail('upstream-error', `Vision call failed: ${String(err)}`);
-  }
-}
-
-function mapReasoningEffort(effort?: VisionRequest['requestedEffort']): 'low' | 'high' | 'max' | 'none' | undefined {
-  switch (effort) {
-    case 'low':
-      return 'low';
-    case 'high':
-      return 'high';
-    case 'max':
-      return 'max';
-    case 'none':
-      return 'none';
-    case 'medium':
-      // DeepSeek V4 effort space is none/low/high/max.
-      return 'low';
-    default:
-      return undefined;
   }
 }
 
