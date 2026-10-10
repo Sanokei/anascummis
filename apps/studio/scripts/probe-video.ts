@@ -1,0 +1,16 @@
+import {join,resolve} from 'node:path';
+import {mkdir} from 'node:fs/promises';
+const output=resolve(process.env.VIDEO_PROBE_OUTPUT||join(import.meta.dir,'../.data/video-probe'));
+await mkdir(output,{recursive:true});
+const {downloadVideo,captureWebScreenshot,createVideo,setVideoClip,setVideoMusic,renderVideo,videoProcess,importMedia,mediaPath}=await import('../core/video');
+const signal=AbortSignal.timeout(120000),start=performance.now();
+const source=await downloadVideo('https://samples.ffmpeg.org/MPEG-4/turn-on-off.mp4','FFmpeg public test sample',signal);
+const screen=await captureWebScreenshot('https://ffmpeg.org/','FFmpeg public page',signal);
+const narration=join(output,'narration.wav');await videoProcess('ffmpeg',['-v','error','-y','-f','lavfi','-i','sine=frequency=440:sample_rate=48000','-t','3',narration],signal);
+const audio=await importMedia('Synthetic audio fixture.wav',new Uint8Array(await Bun.file(narration).arrayBuffer()));
+const p=createVideo('Public-source and screenshot proof',640,360,24);
+setVideoClip(p.id,0,{mediaId:source.id,start:0,duration:1,speed:1,volume:0,caption:'Public video source',fit:'contain',fade:.1});
+setVideoClip(p.id,1,{mediaId:screen.capturedMedia.id,start:0,duration:2,speed:1,volume:0,caption:'Actual background browser screenshot',fit:'contain',fade:.1});
+setVideoMusic(p.id,{mediaId:audio.id,start:0,volume:.2,mode:'replace',loop:false});
+const result=await renderVideo(p.id,signal);await Bun.write(join(output,'verified-video.mp4'),Bun.file(mediaPath(result.videoReady.id)));await Bun.write(join(output,'browser-screenshot.png'),Bun.file(mediaPath(screen.capturedMedia.id)));
+const proof={elapsedMs:Math.round(performance.now()-start),source,screen,project:p.id,result,note:'Real online import, isolated browser screenshot and FFmpeg decode. Audio is a synthetic fixture, not a speech recognition/model accuracy test.'};await Bun.write(join(output,'proof.json'),JSON.stringify(proof,null,2));console.log(JSON.stringify(proof));

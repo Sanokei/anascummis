@@ -13,3 +13,13 @@ Thumbs.db
 *.log
 coverage/
 .vite/
+apps/studio/.data/
+apps/studio/.runtime/
+apps/studio/.venv/
+apps/studio/.next/
+apps/studio/out/
+apps/studio/.test-data/
+apps/studio/public/scene.js
+.deploy-backups/
+apps/studio/.demo-assets/
+apps/studio/tsconfig.tsbuildinfo

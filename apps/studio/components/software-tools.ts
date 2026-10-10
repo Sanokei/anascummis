@@ -1,0 +1,4 @@
+import {softwareTools,type SourceRecord} from '../core/software-tools';
+let cached:Promise<Record<string,{source:string;sha256:string}>>|undefined;
+function publicSource(){return cached ||= fetch('/opensource/source-catalog.json').then(async response=>{if(!response.ok)throw new Error('Public source catalog unavailable');return await response.json() as Record<string,{source:string;sha256:string}>;});}
+export function browserSoftwareTools(){return softwareTools(async()=>Object.entries(await publicSource()).map(([path,item])=>({path,characters:item.source.length,sha256:item.sha256} as SourceRecord)),async(path,offset)=>{const item=(await publicSource())[path];if(!item||!Number.isInteger(offset)||offset<0||offset>=item.source.length)throw new Error('Unknown public source page');return {path,sha256:item.sha256,offset,source:item.source.slice(offset,offset+900),partial:offset+900<item.source.length,next:offset+900<item.source.length?offset+900:null};});}

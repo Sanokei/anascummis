@@ -1,0 +1,8 @@
+/** Stored ZIP records: bounded exports require no external archive process. */
+export function zip(files:Record<string,Uint8Array>):Uint8Array{
+  const encoder=new TextEncoder(),local:Uint8Array[]=[],central:Uint8Array[]=[];let offset=0;
+  const crc=(bytes:Uint8Array)=>{let c=0xffffffff;for(const b of bytes){c^=b;for(let i=0;i<8;i++)c=(c>>>1)^((c&1)?0xedb88320:0);}return (c^0xffffffff)>>>0;};
+  const record=(length:number)=>{const b=new Uint8Array(length);return {b,v:new DataView(b.buffer)};};
+  for(const [name,data]of Object.entries(files)){if(name.includes('..')||name.startsWith('/')||name.includes('\\'))throw new Error('Invalid archive name');const n=encoder.encode(name),sum=crc(data),l=record(30+n.length);l.v.setUint32(0,0x04034b50,true);l.v.setUint16(4,20,true);l.v.setUint16(6,0x800,true);l.v.setUint32(14,sum,true);l.v.setUint32(18,data.length,true);l.v.setUint32(22,data.length,true);l.v.setUint16(26,n.length,true);l.b.set(n,30);local.push(l.b,data);const c=record(46+n.length);c.v.setUint32(0,0x02014b50,true);c.v.setUint16(4,20,true);c.v.setUint16(6,20,true);c.v.setUint16(8,0x800,true);c.v.setUint32(16,sum,true);c.v.setUint32(20,data.length,true);c.v.setUint32(24,data.length,true);c.v.setUint16(28,n.length,true);c.v.setUint32(42,offset,true);c.b.set(n,46);central.push(c.b);offset+=l.b.length+data.length;}
+  const size=central.reduce((n,b)=>n+b.length,0),end=record(22);end.v.setUint32(0,0x06054b50,true);end.v.setUint16(8,central.length,true);end.v.setUint16(10,central.length,true);end.v.setUint32(12,size,true);end.v.setUint32(16,offset,true);const out=new Uint8Array(offset+size+22);let at=0;for(const b of [...local,...central,end.b]){out.set(b,at);at+=b.length;}return out;
+}

@@ -1,0 +1,93 @@
+{
+  "id": "onlineslop-self-build-v1",
+  "description": "User acceptance test for Anascummis software creation. Existing OnlineSlop is reference material, never evidence that this model created it.",
+  "targets": [
+    "zip",
+    "exe"
+  ],
+  "requirements": [
+    {
+      "id": "self-context",
+      "description": "Inspect relevant Anascummis source through paginated harness tools, cite paths and hashes, and reuse only needed modules in an independently runnable app."
+    },
+    {
+      "id": "offline-model",
+      "description": "Use a resident local Qwen 0.6B with bounded decisions and no external language-model API; run a no-network inference test after installing weights."
+    },
+    {
+      "id": "devices",
+      "description": "Enumerate and select camera and microphone, preserve settings, handle permission rejection and show a real preview."
+    },
+    {
+      "id": "discovery",
+      "description": "Search current public sources for creator/community stories aligned with Atrioc, Ludwig and Jerma; retain search queries, URLs and retrieval dates."
+    },
+    {
+      "id": "novelty",
+      "description": "Check recent SlopLive/PyroLive coverage and record uncertainty; do not claim absence of coverage or responses from search absence."
+    },
+    {
+      "id": "investigation",
+      "description": "Investigate independent story candidates concurrently with scoped evidence; corroborate factual claims from read sources and distinguish allegation, opinion and confirmed fact."
+    },
+    {
+      "id": "scripts",
+      "description": "Create coherent sourced scripts and show a teleprompter beside actual visual references and master audio controls."
+    },
+    {
+      "id": "recording",
+      "description": "Record real camera/microphone segments after a three-second countdown; preserve originals and detect semantic completion, with a manual override."
+    },
+    {
+      "id": "ending",
+      "description": "A long pause alone never ends recording. Test flubs, off-script speech, incomplete closing sentences and a completed ending."
+    },
+    {
+      "id": "cleanup",
+      "description": "Produce editable evidence-based cut suggestions from actual transcripts and audio timings; retain original takes and let the user reject cuts."
+    },
+    {
+      "id": "edit",
+      "description": "Render watchable real footage with tested transitions, graphics, inserts, overlays, source clips and licensed/user-supplied music/effects; no fabricated media."
+    },
+    {
+      "id": "timeline",
+      "description": "Reorder and exclude whole story chunks; trims and visual/audio changes affect the final render."
+    },
+    {
+      "id": "render",
+      "description": "Decode the exported video with FFmpeg; verify duration, audio/video streams, dimensions and ordering against timeline evidence."
+    },
+    {
+      "id": "youtube",
+      "description": "Provide YouTube OAuth and explicit upload controls; verify request scopes, resumable upload, retries and failure handling with a test server. Disclose that a real account upload still requires user credentials and approval."
+    },
+    {
+      "id": "iteration",
+      "description": "Publish timestamped QA progress and real screenshots while working; retry repairs within a visible budget and preserve failures."
+    },
+    {
+      "id": "zip",
+      "description": "Produce a reproducible Bun/Next/React source ZIP excluding secrets, personal recordings, node_modules and credentials; install/build/test in a clean workspace."
+    },
+    {
+      "id": "exe",
+      "description": "Produce a Windows executable and test launch, settings persistence, local Qwen inference and bundled resources on Windows. Document dependencies and first-run model downloads; never rename a ZIP to EXE or claim an untested launcher is verified."
+    }
+  ],
+  "leads": [
+    "Atrioc response to a MoistCritical out-of-context clip allegation",
+    "Fruit-fly brain simulations in digital environments",
+    "Trump terminology involving artificial superintelligence / SI"
+  ],
+  "leadPolicy": "Research leads only. Verify chronology and original sources at execution time. Do not invent a current event or assert that no response exists.",
+  "stages": [
+    "minimal self-source aware app",
+    "devices and recording",
+    "parallel evidence investigation",
+    "scripts and completion detection",
+    "editable FFmpeg timeline",
+    "YouTube integration",
+    "clean ZIP and Windows packaging"
+  ]
+}

@@ -1,0 +1,8 @@
+import {createHash} from 'node:crypto';import {mkdir,rename} from 'node:fs/promises';
+const target='.runtime/lavasr';await mkdir(target,{recursive:true});
+const release=await (await fetch('https://api.github.com/repos/Topping1/LavaSR-ONNX/releases/tags/Alpha-v0.1')).json() as any;
+for(const asset of release.assets.filter((a:any)=>a.name.startsWith('enhancer_'))){const path=target+'/'+asset.name;if(await Bun.file(path).exists())continue;const p=Bun.spawn([process.platform==='win32'?'curl.exe':'curl','--fail','--location','--retry','5','--retry-all-errors','--silent','--show-error','--output',path+'.part',asset.browser_download_url],{stdout:'inherit',stderr:'inherit'});if(await p.exited)throw new Error('Enhancer download failed');const sha='sha256:'+createHash('sha256').update(new Uint8Array(await Bun.file(path+'.part').arrayBuffer())).digest('hex');if(sha!==asset.digest)throw new Error('Enhancer checksum mismatch');await rename(path+'.part',path);console.log(asset.name,'verified');}
+const commit=await (await fetch('https://api.github.com/repos/Topping1/LavaSR-ONNX/commits/main')).json() as any;
+for(const name of ['lavasr_core.py','config.yaml','LICENSE']){const r=await fetch(`https://raw.githubusercontent.com/Topping1/LavaSR-ONNX/${commit.sha}/${name}`);if(!r.ok)throw new Error('Enhancer source unavailable');await Bun.write('worker/lavasr/'+name,await r.text());}
+await Bun.write(target+'/provenance.json',JSON.stringify({repo:'Topping1/LavaSR-ONNX',sourceRevision:commit.sha,release:release.tag_name,assets:release.assets.filter((a:any)=>a.name.startsWith('enhancer_')).map((a:any)=>({name:a.name,digest:a.digest}))},null,2));
+

@@ -1,0 +1,10 @@
+import {join,resolve} from 'node:path';import {mkdir} from 'node:fs/promises';
+const root=resolve(import.meta.dir,'..'),folder=join(root,'.runtime','browser-contract-'+crypto.randomUUID());await mkdir(folder,{recursive:true});
+const node=Bun.which('node');if(!node)throw new Error('Node is required');
+const contract=join(folder,'contract.json');await Bun.write(contract,JSON.stringify({kind:'counter',label:'Count',button:'Increment'}));
+const outcomes=[];
+for(const scenario of [{delta:1,label:'Count',expected:true},{delta:2,label:'Count',expected:false},{delta:1,label:'Wrong label',expected:false}]){const {delta,label,expected}=scenario;const started=performance.now(),name=label==='Count'?'delta-'+delta:'missing-label';
+ const server=Bun.serve({hostname:'127.0.0.1',port:0,fetch:()=>new Response('<!doctype html><h1>Verifier probe</h1><output aria-label="'+label+'">0</output><button>Increment</button><script>document.querySelector("button").onclick=()=>{const out=document.querySelector("output");out.textContent=String(Number(out.textContent)+'+delta+');};</script>',{headers:{'Content-Type':'text/html'}})});
+ try{const report=join(folder,name+'.json'),process=Bun.spawn([node,join(root,'worker','software-browser.mjs'),'http://127.0.0.1:'+server.port,join(folder,name+'.png'),report,contract],{stdout:'pipe',stderr:'pipe'});const code=await process.exited,result=await Bun.file(report).json();if(expected&&(code!==0||result.behavior!=='counter acceptance passed'))throw new Error('Correct behavior was rejected');if(!expected&&(code===0||!result.errors.length))throw new Error('Wrong behavior was accepted');const milliseconds=Math.round(performance.now()-started);if(label!=='Count'&&milliseconds>30000)throw new Error('Missing control stalled browser QA');outcomes.push({delta,label,code,milliseconds,...result});}finally{await server.stop(true);}
+}
+await Bun.write(join(root,'.runtime','browser-contract-regression.json'),JSON.stringify({folder,outcomes},null,2));console.log('Real browser accepts +1, rejects +2, and fails missing controls promptly against the independent counter contract.');

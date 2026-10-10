@@ -1,284 +1,128 @@
 # Anascummis
 
-A conversational-first assistant with an authored personality, running on Cloudflare Workers.
+The original Anascummis cyan orb on its white ground, with voice as the working interface. Website editing, user-supplied images, PDF tools and BabylonJS scenes run behind the conversational harness. The new studio is in `apps/studio`; the previous Worker assistant remains available as legacy source. `bun run dev` now selects the studio.
 
-You talk to it. It keeps the thread, finds relevant information and skills, and does permitted
-work without turning the exchange into a menu. Voice is a primary interface; text and clickable
-choices are fully usable alternatives. Ordinary conversation is a valid outcome — it does not
-invent a software project, deploy a Worker, or install a skill because you started talking.
+## Current verification status
 
-Software creation is a supporting capability, not the point. When an installed tool or skill can
-do the job, it uses that. When a capability is genuinely missing, it can build and validate a
-bounded extension instead of claiming the job was done.
+The Bun backend has 23 passing tests and passes TypeScript checking. Tests exercise immutable PDF revisions, real PyMuPDF text edits and PNG rendering, website escaping, vault encryption, local request guards, ZIP exports, specialist tool permissions, handoff isolation, shared agent budgets, duplicate prevention, verification and cancellation.
 
----
+The Next.js production build and full frontend TypeScript check pass. Browser checks verify the original orb renderer and the absence of dashboard/editor/composer controls. A browser CPU round-trip synthesizes “Show my website.” with Supertonic and recognizes it with Whisper tiny English. The matching ORT factory and explicitly decompressed WASM binary ship with the app. Actual Qwen3-0.6B Q4_0 inference on four CPU threads successfully delegated a website title change, generated grounded arguments and verified the saved value in 2.66 seconds across three calls. This excludes recognition and speech; broader Qwen workflows, browser inference accuracy, native Piper and desktop installation still need verification.
 
-## How it fits together
+The public demo is deployed at https://anascummis.com (2026-10-07), Worker `anascummis-demo`, version `28aad209-3db1-4b13-a1ae-cb82d3a23826`. Anonymous requests return HTTP 200 without an Access redirect. A hostname-scoped Everyone bypass makes the demo public; the original admin allow policy and all three unrelated Access applications are preserved. The static demo has no legacy D1 binding or private local files. Deployment backups are kept locally in `.deploy-backups/` and excluded from Git. Specialist harnesses and verification limits are documented in [SMALL-MODEL.md](apps/studio/SMALL-MODEL.md).
 
-```
-speech or typed text
-  → Whisper (when audio is used)
-  → choice resolver
-  → skill activation, when a skill is actually useful
-  → validated Ink story or open-conversation continuation
-  → host confirmation and authorisation gate
-  → capability registry
-  → bounded Lua sandbox and granted host bindings
-  → structured result
-  → Ink continuation
-  → visible response, optional spoken output
-```
+## Install and run locally
 
-The governing rule is that no layer can authorise itself:
+Install Bun and Python (or uv). Allow several GB of free disk space for dependencies and models. A modern 64-bit computer with 8 GB RAM is a practical starting target; this is not a measured minimum or a guarantee for every consumer device.
 
-| Layer | Supplies | Cannot do |
-| --- | --- | --- |
-| Conversation | Intent | Authorise an action |
-| Skills | Relevant procedures | Grant a permission or call an arbitrary Lua path |
-| Ink | Composition and navigation | Contain an unresolved action reference |
-| Lua | Bounded leaf computation | Call the model, spawn an agent, or load code |
-| Host and registry | Authorisation and execution | Be widened by anything above it |
-
-### Components
-
-- **Ink Story Harness** — compiles candidate stories with the real Ink compiler, then checks
-  every action reference against a registry contract snapshot. No executable story version may
-  contain an unresolved action reference, including on a branch nobody selected.
-- **Capability registry** — the authoritative executable catalogue. Each entry carries an
-  immutable version and source hash, an input/output contract, granted permissions, a risk
-  class, resource budgets, and validation evidence. Execution needs an installed, non-revoked
-  version plus current session authorisation.
-- **Lua sandbox** — Fengari with a fresh state per call, denied globals, an instruction-count
-  debug hook that interrupts a spinning loop, and a coroutine yield/resume protocol so host
-  bindings can be asynchronous without blocking the VM.
-- **Story Function Forge** — checks for an existing compatible capability first. When new Lua is
-  genuinely needed, it requires a specification, a least-privilege manifest, an implementation,
-  tests, and a reviewable validation report before installation.
-- **Design harness** — a drawing or a 3D scene is authored as *source*, and the source is the
-  artifact: it is measured, compiled to an image or a GLB, and kept verbatim so a revision can
-  be re-checked later against a changed checker. Acceptance criteria are compiled into host
-  checks that run against the source or the rendered pixels, and a vision model's view is
-  recorded separately and is never by itself the reason a criterion reads `met`. A scene renders
-  itself inside the Worker, so its pixel checks run without a browser; a drawing needs one, and
-  says so rather than quietly passing when none is configured.
-- **Skill Discovery and Execution Harness** — the Agent Skills `SKILL.md` format with staged
-  loading. Catalogue metadata first, instructions on activation, supporting files as needed.
-- **Memory Manager** — layered context: global guidance, user preferences, project context,
-  topic memories, immediate conversation state. Conversation history is an immutable checkpoint
-  DAG with one active HEAD per session.
-- **Session coordinator** — a Durable Object holding the live HEAD, generation fences, and
-  action ordering. KV is a short-lived cache, never a synchronisation authority.
-
----
-
-## Access
-
-**This deployment is closed.** Cloudflare Access sits in front of `anascummis.com`
-and is the only way in. Reaching the site at all requires an identity that satisfies the
-Access policy; there is no public entry point and no guest path from the internet.
-
-The gate is enforced twice, deliberately:
-
-1. **At the edge.** Cloudflare Access intercepts before the Worker runs. An unauthenticated
-   request is redirected to the Access login and never reaches this code.
-2. **In the Worker.** Every request re-verifies the forwarded JWT: the RS256 signature
-   against the team's published keys, the audience against this application's own tag, the
-   issuer, and the expiry. The token's own `alg` field is not trusted, so `alg: none` and
-   HMAC-confusion attempts are refused rather than parsed.
-
-The second check is not redundant. A request that reached the Worker by some other path
-would carry whatever header it liked, and `run_worker_first` is `true` so the gate covers
-static assets as well as the API. If the edge policy were ever removed, the Worker would
-still serve nothing.
-
-`ACCESS_REQUIRED` defaults to on and **fails closed**: with Access unconfigured, or a token
-that does not verify, nothing is served at all.
-
-### Roles
-
-Access answers whether someone may reach the Worker. A role answers what they can do once
-inside, which is a separate question.
-
-| Role | Granted by |
-| --- | --- |
-| `super-admin` | Membership of `SUPER_ADMIN_EMAILS`, checked on every sign-in |
-| `admin` | Assigned directly in the database |
-| `member` | Everyone else who satisfies the Access policy |
-
-The super-admin list is the authority, so removing an address demotes that account on its
-next sign-in rather than leaving a stale administrator. A role is never inferred from the
-email domain, which means widening the Access policy cannot accidentally mint admins.
-
-Service tokens are refused. They authenticate a machine and carry no email, and this
-product attaches an account and a role to a person.
-
-## Requirements
-
-| Tool | Version used here |
-| --- | --- |
-| Bun | 1.3.0 |
-| Node | 22.x (for Wrangler) |
-| Wrangler | 4.131.0 |
-| A Cloudflare account | Workers, D1, KV, Durable Objects, Workers AI |
-
----
-
-## Installation
-
-```bash
-git clone https://github.com/Sanokei/anascummis.git
-cd anascummis
+```sh
+cd apps/studio
 bun install
+bun run setup
+bun run model:setup
+bun run speech:setup
+bun run build
 ```
 
-### Set up Cloudflare Access
+Open two terminals:
 
-Create a self-hosted Access application for the hostname, add a policy naming who may enter,
-then put the team domain and the application's audience tag into `wrangler.jsonc`. Neither is
-a secret: the team domain is public and the audience tag identifies the application without
-authorising anything by itself.
+```sh
+# Terminal 1: CPU-only Qwen3 0.6B server
+bun run model:start
 
-```bash
-bunx wrangler deploy --dry-run
+# Terminal 2: local studio
+bun run start
 ```
 
-Confirm `CF_ACCESS_TEAM_DOMAIN` and `CF_ACCESS_AUD` are listed before deploying for real.
+Open `http://127.0.0.1:3211`. For frontend development use `bun run dev` instead of `start`; the Bun backend proxies the Next development server on port 3212.
 
-### Create the Cloudflare resources
+The model installer automatically installs an official llama.cpp CPU build on Windows x64. On macOS/Linux/other architectures install llama.cpp for the platform and set `LLAMA_SERVER` to its executable. The model uses CPU inference, four threads, one inference slot and a 2048-token context. No hosted model fallback is used by the studio. See `apps/studio/.env.example` for optional runtime overrides.
 
-```bash
-bunx wrangler d1 create anascummis-db
+Model and voice setup download files once. With runtimes and dependencies installed, local website editing, PDF tools, saved details, model inference and speech need no internet connection. Research, account login, payments and deployment necessarily require a connection.
+
+## Voice interaction
+
+Touch the holographic orb to start listening. After sustained speech, 650 ms of silence ends the turn; touching it again also finishes recording. Touch during thought or speech, or press Escape, to stop. Press Space twice within 450 ms to reveal a message box below the orb; Enter sends the same conversational request. Spaces inside the message box work normally. There is no navigation bar or dashboard. Requested previews appear as result surfaces.
+
+Drop supported images, PDFs, recordings or videos onto the orb. File cards show transfer progress, processing, receipt or failure; successful transfers receive a spoken acknowledgement. The public demo accepts PNG/JPEG images; native PDF/audio/video tools require the local app. The shared metadata includes Open Graph and Twitter large-image cards with a 1200×630 orb-only thumbnail rendered from the same shader.
+
+Speech recognition uses CPU WASM Whisper tiny English in a Web Worker. The local app prefers Piper for replies; a Supertonic WASM voice is available in the browser. These do not call browser speechSynthesis or SpeechRecognition. Speech and Qwen files download on first use and are cached by the browser; offline use requires those downloads to finish and the local application server to be running.
+
+## Website workspace
+
+- Edit name, headline, copy, typography, colors and named sections through conversation with the orb.
+- Upload PNG/JPEG images. Site tools only accept image identifiers supplied by the host; they cannot substitute stock or generated images.
+- Preview HTML in a sandboxed iframe. Content is escaped, and text/link colors adapt to the background for readability.
+- Keep immutable revisions. The backend retains revision fences and version restoration.
+- Add bounded BabylonJS primitives in conversation and inspect the scene in the 3D tab. Local site exports include the bundled scene renderer when built.
+- Export a website ZIP with HTML, images, editable `site.json`, `scene.json`, and Workers static-assets configuration. `public/` is ready for the included Wrangler configuration.
+- Use an existing hosted Stripe Payment Link. The studio rejects private Stripe credentials in website content. It does not implement orders, subscriptions, fulfillment or a webhook backend; a success page is not payment evidence.
+
+The current website harness edits a typed section/primitive schema. It is not yet an arbitrary Next.js source generator, a design-import engine, a complete ecommerce builder or an unrestricted code executor. Generated websites currently use static HTML/CSS; the studio itself uses Next.js and React.
+
+## PDF tools and private details
+
+Open PDFs in the same workspace. Conversation tools read exact page text, replace text, add positioned text, redact a region, rotate pages, insert uploaded images/signatures, and add red grading comments, highlights or strikeouts. The host checks tool arguments, and the PDF engine refuses clipped text rather than saving a broken edit. The backend also supports cropping, page operations, form filling, metadata and reflow through its edit API.
+
+Ask the orb to show the website, show the scene, open a PDF, attach an image, close the preview, or export the PDF as PNG. File selection uses the system picker after touching the orb again; editing stays conversational. Current voice PNG export uses page 1. Backend APIs retain image-to-PDF and revision operations.
+
+The passphrase vault uses scrypt and AES-256-GCM and locks after 15 minutes of inactivity. Its entries are only supplied to a local model turn when explicitly selected. Turns with private saved details cannot enable research. PDFs, images, website revisions, chat logs and model traces are stored separately without vault encryption; inserting a saved detail into a document makes it part of that document and its history. Upload a signature as an image; cryptographic PDF signing is not implemented.
+
+## Model harness
+
+One quantized Qwen3 0.6B model performs routing and argument generation across specialist harnesses. The coordinator delegates small tasks with scoped tools and explicit evidence handoffs. Each turn shares at most 48 model calls, 18 host actions and six delegations. The host validates arguments, verifies writes, retains evidence outside the 2,048-token prompt, stops repeated mutations and cancels unfinished work. Nothing the model writes becomes shell code. See `apps/studio/SMALL-MODEL.md` for execution contracts and measured limitations.
+
+This follows the useful small-decision idea behind NanoJev without assuming a game-trained checkpoint understands websites. There is no claim of perfect understanding. The current tests use a scripted inference adapter to test host behavior; actual Qwen task accuracy and CPU performance still need evaluation.
+
+Optional research tools read public HTTPS pages with DNS pinning/private-address checks. Brave web/news search requires `BRAVE_SEARCH_KEY`. Web content is treated as untrusted evidence and carries source URLs and retrieval timestamps. Without network tools, current events should not be represented as verified.
+
+## Recording and video skills
+
+Say **open a recording**, touch the orb to choose your audio, then describe the edit. Audio-only recordings are transcribed locally with timed Whisper segments. The video specialist can combine the recording with video clips, uploaded PNG/JPEGs and actual public-page screenshots, add captions/fades, change speed/framing, and export a checked MP4 through local FFmpeg. **Preview the timeline** opens an Etro layer preview; **export video** downloads the rendered MP4. The orb remains the main interface.
+
+FFmpeg/FFprobe are required. Online YouTube imports need yt-dlp; isolated background browser capture needs Node and Chrome/Edge. Web search needs the configured Brave key. Source tools are granted only for explicit online requests. Six trusted video recipes are retrieved one at a time rather than stuffed into the model prompt. See [video setup, tools, limits and verification](apps/studio/VIDEO.md). Desktop-app control and autonomous creative accuracy are not established by the current checks.
+
+## Speech
+
+Replies are spoken automatically. The local app prefers a local Piper executable and installed voice; browser replies use Supertonic WASM. No Chrome `speechSynthesis` or remote speech inference is used. `speech:setup` installs Piper into the Python environment and downloads an English Lessac medium voice/config/model card. Piper and voice redistribution licenses must be included in a future installer. Microphone audio is decoded and resampled to 16 kHz, then transcribed with Whisper tiny English in a local Web Worker. Recording ends on the second orb touch or after 30 seconds. Microphone tracks close before the reply is generated.
+
+## Cloudflare and the public demo
+
+The local backend exposes Wrangler login, account status and explicit website publishing. Wrangler owns OAuth credentials; neither the model nor the generated site receives those credentials. Publishing deploys a static-assets Worker for the selected site. Automatic expiration/deletion of temporary sites is not implemented yet.
+
+`apps/studio/wrangler.demo.jsonc` prepares a public static studio demo on `workers.dev` and `anascummis.com`, using the same exported Next frontend. The public demo has no personal files or hosted language-model inference. Its Worker supports bounded news/image retrieval and Durable Object collaboration. Website editing uses browser state and user-uploaded images. Qwen runs in a Web Worker on the visitor's CPU through Transformers.js/WASM; the first request downloads model files. Speech generation and recognition were exercised in the test browser; broader device compatibility, memory use and Qwen task accuracy still need evaluation. PDF tools, the encrypted vault, publishing, native PDF/video tools and Pocket TTS with LavaSR require the local application. Demo uploads are kept in browser memory; exported HTML embeds them.
+
+```sh
+bun run demo:build
+bun run demo:deploy
 ```
 
-```bash
-bunx wrangler kv namespace create CACHE
-```
+The orb frontend is deployed to `https://anascummis.com` as `anascummis-demo`. Its hostname has a public Access bypass; administrative services remain separate. Native PDF/video tools, private storage and background browser capture require the local app and are not exposed by the public static Worker.
 
-```bash
-bunx wrangler r2 bucket create anascummis-vision
-```
+## Checks and reference material
 
-Copy the returned `database_id` and KV `id` into `wrangler.jsonc`, replacing
-`PLACEHOLDER_D1_ID` and `PLACEHOLDER_KV_ID`.
-
-### Apply the schema
-
-```bash
-bunx wrangler d1 migrations apply anascummis-db --local
-```
-
-```bash
-bunx wrangler d1 migrations apply anascummis-db --remote
-```
-
-### Configure secrets
-
-Copy the example file and fill in what you have.
-
-```bash
-cp .dev.vars.example .dev.vars
-```
-
-Every secret is optional. A missing provider produces an honest unavailable state rather than a
-silent substitution. `SESSION_SECRET` is the exception: production refuses to start without it,
-because it signs sessions and encrypts third-party tokens at rest.
-
-| Secret | Effect when absent |
-| --- | --- |
-| `SESSION_SECRET` | Required. Generate with `openssl rand -base64 48`. |
-| `DEEPSEEK_API_KEY` | Falls back to the bound Workers AI chat model. |
-| `OPENAI_API_KEY` | Transcription falls back to Workers AI Whisper. |
-| `BRAVE_SEARCH_KEY` | Search falls back to a keyless HTML endpoint. |
-| `GOOGLE_CLIENT_ID` / `_SECRET` | Google sign-in is hidden. |
-| `GITHUB_CLIENT_ID` / `_SECRET` | GitHub sign-in is hidden. |
-| `CLOUDFLARE_OAUTH_CLIENT_ID` / `_SECRET` | Connect Cloudflare is unavailable. |
-| `SUPER_ADMIN_EMAILS` | Nobody is a super-admin. Kept as a secret so no address is committed. |
-
-For production, set each one as a real secret rather than a var:
-
-```bash
-bunx wrangler secret put SESSION_SECRET
-```
-
----
-
-## Running it
-
-Local development, with the Vite dev server proxying `/api` to a local Worker:
-
-```bash
-bun run dev
-```
-
-The Worker side, against local D1 and KV:
-
-```bash
-bunx wrangler dev
-```
-
-Build and preview exactly what deploys:
-
-```bash
-bun run preview
-```
-
-Deploy:
-
-```bash
-bun run deploy
-```
-
----
-
-## Tests
-
-```bash
+```sh
+cd apps/studio
 bun run test
-```
-
-Tests run inside `workerd` through `@cloudflare/vitest-pool-workers`, so D1, KV, and Durable
-Object behaviour is exercised against the real runtime rather than a mock. Coverage is
-deliberately weighted toward the failure paths: cancellation, stale worker results, budget
-exhaustion, revoked capabilities, denied tools, prompt injection in retrieved text, consent
-refusal, and speech false positives.
-
-```bash
 bun run typecheck
 ```
 
----
+PDF tests need the installed Python PDF environment or `PYTHON_PATH`. `tsconfig.core.json` checks the backend independently of frontend dependencies. The test wrapper cleans temporary SQLite data after the child process exits, which avoids Windows file locks.
 
-## Repository layout
+Kinoinstrument was read online. See `apps/studio/PROVENANCE.md` for the reviewed files/commit, Stripe skill and reused PDF source. Previous architecture and deployment instructions are in `LEGACY_ARCHITECTURE.md`; they describe the legacy Worker, not the new local runtime. Existing legacy build/test scripts remain available; `legacy:dev` selects the previous Vite frontend.
 
-```
-migrations/          D1 schema
-skills/              Bundled SKILL.md packages
-stories/             Ink sources, versioned and immutable
-capabilities/        Seed Lua capabilities and manifests
-src/shared/          Contracts shared by Worker and client
-src/worker/
-  auth/              OAuth, sessions, CSRF, PKCE, account linking
-  ink/               Ink runtime, harness, choice resolver, name recognition
-  lua/               Sandbox and Story Function Forge
-  registry/          Capability registry, schemas, native adapters
-  skills/            Discovery, staging, execution harness
-  memory/            Layered context and the checkpoint DAG
-  agents/            Scheduler and the elastic job pool
-  providers/         DeepSeek, Whisper, search, retrieval
-  policy/            Budgets, permissions, confirmation
-  do/                Session coordinator Durable Object
-src/client/          React interface
-tests/               Vitest suites
-docs/                Attribution, deviations, verification notes
-```
 
----
 
-## Attribution and reuse
 
-Baselines inspected and adapted are recorded in [docs/ATTRIBUTION.md](docs/ATTRIBUTION.md), with
-the licence that governs each one. Deviations from the specification, and the reason for each,
-are recorded in [docs/DEVIATIONS.md](docs/DEVIATIONS.md).
 
-Public visibility is not a licence to redistribute code. Where a baseline's licence does not
-permit reuse, the documented interface was implemented independently instead of copied.
+
+## Streaming voice and shared goals
+
+Run `bun run speech:setup` after setup to install CPU Pocket TTS, the Alba voice and LavaSR enhancement. Native speech streams enhanced 48 kHz audio; browser speech uses Kokoro 82M q8. Model downloads happen once before offline use. See `apps/studio/licenses/VOICE.md` for attribution and `apps/studio/REALTIME.md` for measured latency and limitations. This does not establish support for every consumer computer.
+
+Say or type work together to open the floating collaboration panel. Invites and opt-in public goal discovery are supported. Signed encrypted messages carry plans, task proposals and results; each participant accepts work locally. See `apps/studio/PEERS.md`. Networking is required for cooperation and current research.
+
+## Persistent software builder
+
+Software requests now use a durable local queue with the full goal, milestones, source workspace and acceptance evidence saved in SQLite. Work continues in background slices and resumes after restart. The orb's Software work panel shows real build checks, screenshots and verified ZIP/Windows executable downloads. Say “show builds” to open it.
+
+The online orb can pair with this local builder using the private key shown in the local Software work panel. The key is held in the browser session and does not go to the model or Cloudflare. Initial dependencies/model installation requires connectivity; cached local inference and editing work offline. See `apps/studio/SOFTWARE.md` for execution scope, progress-sensitive stall limits and measured end-to-end evidence. A completed simple recipe does not establish that Qwen can autonomously create OnlineSlop.

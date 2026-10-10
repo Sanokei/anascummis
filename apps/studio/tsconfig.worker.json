@@ -1,0 +1,1 @@
+{"compilerOptions":{"target":"ES2022","lib":["ES2022"],"module":"ESNext","moduleResolution":"bundler","strict":true,"noEmit":true,"skipLibCheck":true,"types":[]},"files":["worker-configuration.d.ts","worker/demo.ts","worker/peer-room.ts","worker/goal-directory.ts"]}

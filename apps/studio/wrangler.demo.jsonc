@@ -1,0 +1,45 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "anascummis-demo",
+  "main": "worker/demo.ts",
+  "compatibility_date": "2026-10-07",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "anascummis.com",
+      "custom_domain": true
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "./.demo-assets",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ],
+    "not_found_handling": "single-page-application"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "PEER_ROOMS",
+        "class_name": "PeerRoom"
+      },
+      {
+        "class_name": "GoalDirectory",
+        "name": "GOAL_DIRECTORY"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "new_sqlite_classes": [
+        "PeerRoom",
+        "GoalDirectory"
+      ],
+      "tag": "peers-v1"
+    }
+  ]
+}

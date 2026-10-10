@@ -1,0 +1,2 @@
+export {};
+for(const url of ['https://registry.npmjs.org/kokoro-js/latest','https://api.github.com/repos/Topping1/LavaSR-ONNX/contents','https://api.github.com/repos/Topping1/LavaSR-ONNX/releases/tags/Alpha-v0.1']){const r=await fetch(url);const data=await r.json() as any;if(url.includes('registry'))console.log(JSON.stringify(data));else if(Array.isArray(data))console.log(data.map((x:any)=>({name:x.name,url:x.download_url})));else console.log(data.assets.map((x:any)=>({name:x.name,size:x.size,url:x.browser_download_url,digest:x.digest})));}

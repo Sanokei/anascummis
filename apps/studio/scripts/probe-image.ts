@@ -1,0 +1,2 @@
+export {};
+const url=new URL('https://commons.wikimedia.org/w/api.php');url.search=new URLSearchParams({action:'query',format:'json',generator:'search',gsrsearch:'Yemen photograph',gsrnamespace:'6',gsrlimit:'3',prop:'imageinfo',iiprop:'url|extmetadata|mime',iiurlwidth:'640'}).toString();const response=await fetch(url,{headers:{'User-Agent':'Anascummis/1.0 (https://anascummis.com; visual context)'},signal:AbortSignal.timeout(20000)});console.log(response.status);const data=await response.json() as any;console.log(JSON.stringify(data).slice(0,6000));
