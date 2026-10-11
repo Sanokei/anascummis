@@ -14,7 +14,13 @@ export async function fetchNews(query:string,signal:AbortSignal):Promise<NewsPac
   const url=new URL('https://news.google.com/rss/search');url.searchParams.set('q',(newsTopic(query)||query.slice(0,300))+' when:7d');url.searchParams.set('hl','en-US');url.searchParams.set('gl','US');url.searchParams.set('ceid','US:en');
   const response=await fetchWithoutRedirects(url,{signal:AbortSignal.any([signal,AbortSignal.timeout(12000)])});
   console.info('anascummis-news-diagnostic-v1',JSON.stringify({stage:'response',status:response.status,ok:response.ok,hasBody:Boolean(response.body),contentType:response.headers.get('content-type')}));
-  if(!response.ok||!response.body)throw new Error('News retrieval unavailable. I cannot verify current events.');
+  if(!response.ok||!response.body){
+    let sample='',inspected=0;
+    if(response.body){const reader=response.body.getReader(),decoder=new TextDecoder();try{while(inspected<8192){const chunk=await reader.read();if(chunk.done)break;const bytes=chunk.value.subarray(0,8192-inspected);inspected+=bytes.length;sample+=decoder.decode(bytes,{stream:true});}}finally{await reader.cancel().catch(()=>{});}}
+    const category=/unusual traffic|automated quer|automated request|recaptcha|captcha/i.test(sample)?'provider-abuse-protection':/access denied|permission denied|forbidden/i.test(sample)?'provider-denied':/cloudflare|cf-ray|cloudflare_error/i.test(sample)?'edge-proxy-error':/service unavailable|temporar|overload|backend error|server error/i.test(sample)?'provider-unavailable':'unclassified-provider-error';
+    console.info('anascummis-news-diagnostic-v1',JSON.stringify({stage:'failure-category',status:response.status,category,inspectedBytes:inspected,hasRetryAfter:response.headers.has('retry-after'),mentionsGoogle:/google/i.test(sample)}));
+    throw new Error('News retrieval unavailable. I cannot verify current events.');
+  }
   const reader=response.body.getReader(),decoder=new TextDecoder();let xml='',bytes=0;
   try{for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>500000)throw new Error('News response too large');xml+=decoder.decode(value,{stream:true});}xml+=decoder.decode();}finally{await reader.cancel();}
   const results=parseNews(xml);console.info('anascummis-news-diagnostic-v1',JSON.stringify({stage:'parsed',bytes,results:results.length}));if(!results.length)throw new Error('No recent news sources found.');
