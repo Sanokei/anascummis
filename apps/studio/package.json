@@ -8,6 +8,7 @@
     "build": "bun scripts/build-scene.ts && next build --webpack",
     "start": "bun scripts/dev.ts --production",
     "test": "bun scripts/test.ts",
+    "test:research:edge": "bun scripts/test-research-edge.ts",
     "typecheck": "tsc --noEmit",
     "setup": "bun scripts/setup.ts",
     "speech:setup": "bun scripts/speech-setup.ts",

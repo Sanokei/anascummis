@@ -11,8 +11,8 @@ export const FloatingPanels=memo(function FloatingPanels({panels,onDismiss}:{pan
     for(const [id,layoutId] of known.current){if(!panels.some(p=>p.id===id)){if(model.getNodeById(id))model.doAction(Actions.deleteTab(id));known.current.delete(id);}}
     for(const panel of panels){
       if(known.current.has(panel.id)){const node=model.getNodeById(panel.id) as TabNode|undefined;if(node&&node.getName()!==panel.title)model.doAction(Actions.updateNodeAttributes(panel.id,{name:panel.title,helpText:panel.reason}));continue;}
-      const sequence=known.current.size,width=Math.min(400,innerWidth-32),height=Math.min(440,innerHeight-48);
-      const x=innerWidth<700?16:sequence%2?24:Math.max(24,innerWidth-width-24),y=24+Math.floor(sequence/2)*32;
+      const sequence=known.current.size,width=Math.min(400,innerWidth-32),height=Math.min(440,innerHeight-96);
+      const x=innerWidth<700?16:sequence%2?24:Math.max(24,innerWidth-width-24),y=72+Math.floor(sequence/2)*32;
       const layoutId=model.doAction(Actions.createPopout({type:'row',children:[{type:'tabset',name:panel.title,children:[{type:'tab',id:panel.id,name:panel.title,component:'surface',helpText:panel.reason}]}]},{x,y,width,height},'float'));
       known.current.set(panel.id,layoutId);
     }

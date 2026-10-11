@@ -1,3 +1,4 @@
+import {fetchWithoutRedirects} from './fetch-without-redirects';
 import {newsTopic} from './visual-context';
 export type NewsItem={title:string;url:string;published:string;publisher:string};
 export type NewsPack={retrievedAt:string;coverage:'headlines';results:NewsItem[]};
@@ -11,7 +12,7 @@ export function parseNews(xml:string):NewsItem[]{
 }
 export async function fetchNews(query:string,signal:AbortSignal):Promise<NewsPack>{
   const url=new URL('https://news.google.com/rss/search');url.searchParams.set('q',(newsTopic(query)||query.slice(0,300))+' when:7d');url.searchParams.set('hl','en-US');url.searchParams.set('gl','US');url.searchParams.set('ceid','US:en');
-  const response=await fetch(url,{redirect:'error',signal:AbortSignal.any([signal,AbortSignal.timeout(12000)])});
+  const response=await fetchWithoutRedirects(url,{signal:AbortSignal.any([signal,AbortSignal.timeout(12000)])});
   if(!response.ok||!response.body)throw new Error('News retrieval unavailable. I cannot verify current events.');
   const reader=response.body.getReader(),decoder=new TextDecoder();let xml='',bytes=0;
   try{for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>500000)throw new Error('News response too large');xml+=decoder.decode(value,{stream:true});}xml+=decoder.decode();}finally{await reader.cancel();}

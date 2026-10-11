@@ -12,6 +12,8 @@ The public demo is deployed at https://anascummis.com (2026-10-07), Worker `anas
 
 ## Install and run locally
 
+Use the **Download** button at the top right of https://anascummis.com to get the local source ZIP. Extract it and follow `studio/LOCAL-INSTALL.md`; it includes setup requirements and platform limits. This is a source kit that needs installation, not a prebuilt desktop executable.
+
 Install Bun and Python (or uv). Allow several GB of free disk space for dependencies and models. A modern 64-bit computer with 8 GB RAM is a practical starting target; this is not a measured minimum or a guarantee for every consumer device.
 
 ```sh
