@@ -43,11 +43,11 @@ test('Wikipedia and Commons success keep public-only headers and image attributi
   expect(calls).toHaveLength(2);
 });
 for(const status of [301,302,303,304,307,308]){
-  test('rejects '+status+' and cancels its body before any second request',async()=>{
+  test('rejects '+status+' before any second request and cancels available bodies',async()=>{
     let cancelled=false;
-    const calls=mockFetch(()=>new Response(new ReadableStream({cancel(){cancelled=true;}}),{status,headers:{Location:'https://evil.example/steal'}}));
+    const calls=mockFetch(()=>new Response(status===304?null:new ReadableStream({cancel(){cancelled=true;}}),{status,headers:{Location:'https://evil.example/steal'}}));
     await expect(fetchNews('News',signal())).rejects.toThrow('redirects are not allowed');
-    expect(calls).toHaveLength(1);expect(cancelled).toBe(true);
+    expect(calls).toHaveLength(1);if(status!==304)expect(cancelled).toBe(true);
   });
 }
 for(const location of ['https://news.google.com/rss/search','/rss/search','https://evil.example/','http://127.0.0.1/private','https://user:password@evil.example/']){

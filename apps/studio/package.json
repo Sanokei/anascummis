@@ -9,6 +9,7 @@
     "start": "bun scripts/dev.ts --production",
     "test": "bun scripts/test.ts",
     "test:research:edge": "bun scripts/test-research-edge.ts",
+    "test:download:ui": "bun build scripts/test-download-ui.ts --target=node --external playwright-core --outfile=.test-data/download-ui.mjs && node .test-data/download-ui.mjs",
     "typecheck": "tsc --noEmit",
     "setup": "bun scripts/setup.ts",
     "speech:setup": "bun scripts/speech-setup.ts",
