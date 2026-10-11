@@ -15,7 +15,7 @@ export {GoalDirectory} from '../../worker/goal-directory';
 const rss='<rss><channel><item><title>Verified headline</title><link>https://news.google.com/articles/test</link><source>Test publisher</source></item></channel></rss>';
 export default {async fetch(request:Request,env:Env){
   if(new URL(request.url).pathname==='/health')return new Response(null,{status:204});
-  const scenario=await request.json() as {route?:string;status?:number;location?:string;failure?:string;commonsRedirect?:boolean;legacy?:boolean;deny?:boolean;fallback?:boolean;fallbackRedirect?:boolean;fallbackStale?:boolean};
+  const scenario=await request.json() as {route?:string;status?:number;location?:string;failure?:string;commonsRedirect?:boolean;legacy?:boolean;deny?:boolean;fallback?:boolean;fallbackRedirect?:boolean;fallbackStale?:boolean;question?:string};
   if(scenario.legacy){try{new Request('https://news.google.com/',{redirect:'error'});return Response.json({legacyRejected:false});}catch(e){return Response.json({legacyRejected:String(e).includes('Invalid redirect value')});}}
   const calls:{url:string;redirect:string;authorization:string|null;cookie:string|null;builder:string|null}[]=[];let cancelled=false;
   const originalFetch=globalThis.fetch;
@@ -36,7 +36,7 @@ export default {async fetch(request:Request,env:Env){
     return Response.json({query:{pages:{2:{imageinfo:[{mime:'image/jpeg',thumburl:'https://upload.wikimedia.org/test.jpg',descriptionurl:'https://commons.wikimedia.org/wiki/File:Test.jpg',extmetadata:{LicenseShortName:{value:'CC BY-SA'},Artist:{value:'Test artist'}}}]}}}});
   }) as typeof fetch;
   try{
-    const client=new Request('https://anascummis.com'+(scenario.route||'/api/news'),{method:'POST',headers:{Origin:scenario.deny?'https://evil.example':'https://anascummis.com','X-Requested-With':'Anascummis',Authorization:'Bearer test-client-only',Cookie:'test-client-only=1','X-Builder-Key':'test-client-only','Content-Type':'application/json'},body:JSON.stringify({query:'Test topic'})});
+    const client=new Request('https://anascummis.com'+(scenario.route||'/api/news'),{method:'POST',headers:{Origin:scenario.deny?'https://evil.example':'https://anascummis.com','X-Requested-With':'Anascummis',Authorization:'Bearer test-client-only',Cookie:'test-client-only=1','X-Builder-Key':'test-client-only','Content-Type':'application/json'},body:JSON.stringify({query:scenario.question||'Test topic'})});
     const response=await demo.fetch(client,env);
     return Response.json({status:response.status,body:await response.json(),calls,cancelled});
   }finally{globalThis.fetch=originalFetch;}
@@ -63,6 +63,7 @@ try{
   result=await probe({fallback:true});assert.equal(result.status,200);assert.equal(result.body.provider,'bbc-rss');assert.equal(result.body.results[0].publisher,'BBC News');assert.equal(result.calls.length,2);boundary(result);
   result=await probe({fallback:true,fallbackRedirect:true});assert.equal(result.status,502);assert.match(result.body.error,/redirects are not allowed/);assert.equal(result.calls.length,2);boundary(result);
   result=await probe({fallback:true,fallbackStale:true});assert.equal(result.status,502);assert.match(result.body.error,/No recent matching BBC/);assert.equal(result.calls.length,2);boundary(result);
+  for(const question of ["What's the latest science news?","What\u2019s the latest science news?","Show me the latest science news"]){result=await probe({fallback:true,question});assert.equal(result.status,200);assert.equal(result.calls[1].url,'https://feeds.bbci.co.uk/news/science_and_environment/rss.xml');assert.equal(new URL(result.calls[0].url).searchParams.get('q'),'science when:7d');boundary(result);}
   result=await probe({failure:'size'});assert.equal(result.status,502);assert.match(result.body.error,/News response too large/);
   result=await probe({deny:true});assert.equal(result.status,403);assert.equal(result.calls.length,0);
   console.log(count+' workerd probes passed, including reproduction of the unsupported legacy mode and authentication boundaries.');
