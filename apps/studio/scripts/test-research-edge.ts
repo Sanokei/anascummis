@@ -15,7 +15,7 @@ export {GoalDirectory} from '../../worker/goal-directory';
 const rss='<rss><channel><item><title>Verified headline</title><link>https://news.google.com/articles/test</link><source>Test publisher</source></item></channel></rss>';
 export default {async fetch(request:Request,env:Env){
   if(new URL(request.url).pathname==='/health')return new Response(null,{status:204});
-  const scenario=await request.json() as {route?:string;status?:number;location?:string;failure?:string;commonsRedirect?:boolean;legacy?:boolean;deny?:boolean};
+  const scenario=await request.json() as {route?:string;status?:number;location?:string;failure?:string;commonsRedirect?:boolean;legacy?:boolean;deny?:boolean;fallback?:boolean;fallbackRedirect?:boolean;fallbackStale?:boolean};
   if(scenario.legacy){try{new Request('https://news.google.com/',{redirect:'error'});return Response.json({legacyRejected:false});}catch(e){return Response.json({legacyRejected:String(e).includes('Invalid redirect value')});}}
   const calls:{url:string;redirect:string;authorization:string|null;cookie:string|null;builder:string|null}[]=[];let cancelled=false;
   const originalFetch=globalThis.fetch;
@@ -23,6 +23,11 @@ export default {async fetch(request:Request,env:Env){
     const upstream=new Request(input,init);
     calls.push({url:upstream.url,redirect:upstream.redirect,authorization:upstream.headers.get('authorization'),cookie:upstream.headers.get('cookie'),builder:upstream.headers.get('x-builder-key')});
     if(scenario.failure==='network')throw Error('fixture connection failed');
+    if(scenario.fallback&&upstream.url.startsWith('https://news.google.com/'))return new Response(null,{status:503});
+    if(scenario.fallback&&upstream.url.startsWith('https://feeds.bbci.co.uk/')){
+      if(scenario.fallbackRedirect)return new Response(null,{status:302,headers:{Location:'https://evil.example/'}});
+      return new Response('<rss><channel><item><title>Test topic headline</title><link>https://www.bbc.com/news/articles/test</link><pubDate>'+new Date(Date.now()-(scenario.fallbackStale?8*86400000:3600000)).toUTCString()+'</pubDate></item></channel></rss>');
+    }
     if(scenario.status)return new Response(scenario.status===304?null:new ReadableStream({cancel(){cancelled=true;}}),{status:scenario.status,headers:scenario.location?{Location:scenario.location}:{}});
     if(scenario.failure==='size')return new Response('x'.repeat(500001));
     if(upstream.url.startsWith('https://news.google.com/'))return new Response(rss);
@@ -43,7 +48,7 @@ const proc=Bun.spawn(['node',join(root,'node_modules','wrangler','bin','wrangler
 const endpoint='http://127.0.0.1:17891';
 let count=0;
 async function probe(value:Record<string,unknown>){const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value),signal:AbortSignal.timeout(10000)});assert.equal(response.status,200);count++;return await response.json() as any;}
-function boundary(result:any){for(const request of result.calls){assert.equal(request.redirect,'manual');assert.equal(request.authorization,null);assert.equal(request.cookie,null);assert.equal(request.builder,null);assert.ok(/^https:\/\/(news\.google\.com|en\.wikipedia\.org|commons\.wikimedia\.org)\//.test(request.url));}}
+function boundary(result:any){for(const request of result.calls){assert.equal(request.redirect,'manual');assert.equal(request.authorization,null);assert.equal(request.cookie,null);assert.equal(request.builder,null);assert.ok(/^https:\/\/(news\.google\.com|en\.wikipedia\.org|commons\.wikimedia\.org|feeds\.bbci\.co\.uk)\//.test(request.url));}}
 try{
   let ready=false;for(let attempt=0;attempt<60;attempt++){if(proc.exitCode!==null)throw Error('Worker test process exited');try{ready=(await fetch(endpoint+'/health',{signal:AbortSignal.timeout(500)})).status===204;if(ready)break;}catch{}await Bun.sleep(500);}
   if(!ready)throw Error('Local workerd did not start');
@@ -54,7 +59,10 @@ try{
   for(const location of ['https://news.google.com/rss/search','/rss/search','http://127.0.0.1/private']){result=await probe({status:302,location});assert.equal(result.status,502);assert.equal(result.calls.length,1);boundary(result);}
   result=await probe({route:'/api/visual',commonsRedirect:true});assert.equal(result.status,200);assert.equal(result.body.image,undefined);assert.equal(result.calls.length,2);boundary(result);
   result=await probe({failure:'network'});assert.equal(result.status,502);assert.match(result.body.error,/connection failed/);assert.equal(result.calls.length,1);
-  result=await probe({status:503});assert.equal(result.status,502);assert.match(result.body.error,/News retrieval unavailable/);assert.equal(result.calls.length,1);
+  result=await probe({status:503});assert.equal(result.status,502);assert.match(result.body.error,/News retrieval unavailable/);assert.equal(result.calls.length,2);boundary(result);
+  result=await probe({fallback:true});assert.equal(result.status,200);assert.equal(result.body.provider,'bbc-rss');assert.equal(result.body.results[0].publisher,'BBC News');assert.equal(result.calls.length,2);boundary(result);
+  result=await probe({fallback:true,fallbackRedirect:true});assert.equal(result.status,502);assert.match(result.body.error,/redirects are not allowed/);assert.equal(result.calls.length,2);boundary(result);
+  result=await probe({fallback:true,fallbackStale:true});assert.equal(result.status,502);assert.match(result.body.error,/No recent matching BBC/);assert.equal(result.calls.length,2);boundary(result);
   result=await probe({failure:'size'});assert.equal(result.status,502);assert.match(result.body.error,/News response too large/);
   result=await probe({deny:true});assert.equal(result.status,403);assert.equal(result.calls.length,0);
   console.log(count+' workerd probes passed, including reproduction of the unsupported legacy mode and authentication boundaries.');

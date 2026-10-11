@@ -77,7 +77,7 @@ test('Wikipedia redirects fail; optional Commons redirects fall back to the arti
   const visual=await fetchVisual('Test topic',signal());expect(visual.image).toBeUndefined();expect(visual.title).toBe('Test topic');expect(calls).toHaveLength(2);
 });
 test('HTTP failures retain caller errors and make no retries',async()=>{
-  const calls=mockFetch(()=>new Response('unavailable',{status:503}));
+  const calls=mockFetch(()=>new Response('unavailable',{status:500}));
   await expect(fetchNews('News',signal())).rejects.toThrow('News retrieval unavailable');
   await expect(fetchVisual('Test topic',signal())).rejects.toThrow('Visual source unavailable');
   expect(calls).toHaveLength(2);
