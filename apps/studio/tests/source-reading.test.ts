@@ -20,8 +20,8 @@ function host(db:Database,ledger:PublicSourceLedger,infer:Infer){return new Goal
 function ledgerFor(db:Database,onRead=()=>{}){return new PublicSourceLedger(db,async()=>{onRead();return describePublicSource(url,{url,type:'text/plain',bytes:new TextEncoder().encode(content)});});}
 const answer:Infer=async(_system,packet,schema)=>{
   if(!(schema.properties as any).citations)return {accepted:true,reason:'Every requested location is present in the concrete answer and selected passages.'};
-  const source=JSON.parse(packet).sources as {id:string;text:string}[];
-  const citations=[first,second].map(quote=>({id:source.find(item=>item.text.includes(quote))!.id,quote}));
+  const spans=JSON.parse(packet).sources.flatMap((source:any)=>source.spans) as {id:string;text:string}[];
+  const citations=[first,second].map(quote=>spans.find(span=>span.text.includes(quote))!.id);
   return {response:'Compatibility tests: https://example.com/tests. Browser results: https://example.com/results.',citations,uncertainty:'',answerable:true,answerabilityReason:'Both exact locations are present in the selected passages.'};
 };
 
@@ -32,7 +32,7 @@ test('selected passages are durable before inference and both acceptance and cov
   try{const created=queue.create(input);id=created.id;queue.start();const goal=await wait(queue,id,item=>item.status==='completed'),reading=ledger.reading(id)!;
     expect(reading.ranges).toHaveLength(2);expect(reading.ranges.every(range=>range.end-range.start<=800)).toBe(true);expect(reading.ranges.reduce((n,range)=>n+range.text.length,0)).toBeLessThanOrEqual(1600);
     const result=goal.tasks.find(task=>task.sourceAnswer)!.execution!.sourceAnswer!;
-    expect(result.citations.map(citation=>citation.offset)).toEqual([content.indexOf(first),content.indexOf(second)]);expect(result.citations.every(citation=>citation.offset>800)).toBe(true);expect(result.readingId).toBe(reading.id);
+    expect(result.citations[0].quote).toContain(first);expect(result.citations[1].quote).toContain(second);for(const citation of result.citations){expect(content.slice(citation.offset,citation.offset+citation.quote.length)).toBe(citation.quote);expect(citation.offset).toBe(content.indexOf(citation.quote));}expect(result.citations.every(citation=>citation.offset>800)).toBe(true);expect(result.readingId).toBe(reading.id);
     for(const role of ['Independent source-answer','Independent goal coverage']){const packet=packets.find(item=>item.role.startsWith(role))!.value;expect(packet.exactQuestion).toBe(question);expect(packet.answer.text).toContain('https://example.com/tests');expect(packet.selectedPassages.map((range:any)=>range.text).join('\n')).toContain(second);expect(JSON.stringify(packet).length).toBeLessThanOrEqual(4500);}
     expect(goal.events.some(event=>event.phase==='selection_saved')).toBe(true);
   }finally{queue.shutdown();await tick();db.close();}
@@ -40,7 +40,7 @@ test('selected passages are durable before inference and both acceptance and cov
 
 test('source-insufficient output cannot complete even if a later reviewer would blindly accept',async()=>{
   const db=new Database(':memory:'),ledger=ledgerFor(db);let reviews=0;
-  const infer:Infer=async(_role,packet,schema)=>{if(!(schema.properties as any).citations){reviews++;return {accepted:true,reason:'This must not be reached.'};}const source=JSON.parse(packet).sources[0];return {response:'The selected excerpt mentions compatibility tests.',citations:[{id:source.id,quote:first}],uncertainty:'The postal address is not provided.',answerable:false,answerabilityReason:'The requested postal address is absent from these passages.'};};
+  const infer:Infer=async(_role,packet,schema)=>{if(!(schema.properties as any).citations){reviews++;return {accepted:true,reason:'This must not be reached.'};}const span=JSON.parse(packet).sources.flatMap((source:any)=>source.spans).find((span:any)=>span.text.includes(first));return {response:'The selected excerpt mentions compatibility tests.',citations:[span.id],uncertainty:'The postal address is not provided.',answerable:false,answerabilityReason:'The requested postal address is absent from these passages.'};};
   const queue=host(db,ledger,infer);
   try{const created=queue.create({...input,request:'Which postal address is listed next to the compatibility tests?'});queue.start();const goal=await wait(queue,created.id,item=>item.status==='needs_input');expect(goal.message).toContain('do not fully answer');expect(goal.tasks.find(task=>task.sourceAnswer)!.execution?.sourceAnswer?.answerable).toBe(false);expect(reviews).toBe(0);expect(ledger.reading(goal.id)).toBeDefined();expect(goal.tasks[0].status).toBe('verified');}
   finally{queue.shutdown();await tick();db.close();}
@@ -49,7 +49,7 @@ test('source-insufficient output cannot complete even if a later reviewer would 
 test('independent source review rejects an unanswered question while a supported negative factual answer remains valid',async()=>{
   for(const negative of [false,true]){
     const db=new Database(':memory:'),text=negative?'The table explicitly lists no postal address.':content,ledger=new PublicSourceLedger(db,async()=>describePublicSource(url,{url,type:'text/plain',bytes:new TextEncoder().encode(text)}));
-    const infer:Infer=async(role,packet,schema)=>{if((schema.properties as any).citations){const source=JSON.parse(packet).sources[0];return {response:negative?'The table does not provide a postal address.':'Look in the documentation for the requested address.',citations:[{id:source.id,quote:negative?text:first}],uncertainty:negative?'A postal address is not provided.':'The requested address is not provided.',answerable:true,answerabilityReason:negative?'The explicit negative statement answers the yes/no question.':'A generic direction is not sufficient evidence.'};}return {accepted:negative||!role.startsWith('Independent source-answer'),reason:negative?'The explicit negative fact answers the complete question.':'The actual answer does not give the requested postal address.'};};
+    const infer:Infer=async(role,packet,schema)=>{if((schema.properties as any).citations){const span=JSON.parse(packet).sources.flatMap((source:any)=>source.spans).find((span:any)=>span.text.includes(negative?text:first));return {response:negative?'The table does not provide a postal address.':'Look in the documentation for the requested address.',citations:[span.id],uncertainty:negative?'A postal address is not provided.':'The requested address is not provided.',answerable:true,answerabilityReason:negative?'The explicit negative statement answers the yes/no question.':'A generic direction is not sufficient evidence.'};}return {accepted:negative||!role.startsWith('Independent source-answer'),reason:negative?'The explicit negative fact answers the complete question.':'The actual answer does not give the requested postal address.'};};
     const queue=host(db,ledger,infer);
     try{const goal=queue.create({...input,request:negative?'Does the table list a postal address?':'Which postal address is listed next to compatibility tests?'});queue.start();const saved=await wait(queue,goal.id,item=>['completed','needs_input'].includes(item.status));expect(saved.status).toBe(negative?'completed':'needs_input');if(!negative)expect(saved.tasks.find(task=>task.sourceAnswer)!.review?.accepted).toBe(false);}
     finally{queue.shutdown();await tick();db.close();}
@@ -128,4 +128,12 @@ test('reading history is bounded metadata, while explicit owned reading inspecti
     const recent=ledger.readingPage('goal',1);expect(recent.readings).toHaveLength(1);expect(recent.readings[0].ranges.every(range=>!('text'in range))).toBe(true);expect(recent.nextCursor).toBeDefined();expect(ledger.readingPage('goal',1,recent.nextCursor).readings[0].id).not.toBe(recent.readings[0].id);expect(ledger.reading('goal','source-answer',{id:first.id},false)?.id).toBe(first.id);expect(()=>ledger.reading('goal','source-answer',{id:first.id})).toThrow('full source BLOBs');ledger.get=originalGet;expect(ledger.reading('other','source-answer',{id:first.id})).toBeUndefined();
     for(const cursor of ['0','01','-1','1e2','9007199254740992',''])expect(()=>ledger.readingPage('goal',1,cursor)).toThrow('cursor');expect(()=>ledger.readingPage('goal',26)).toThrow('limit');
   }finally{db.close();}
+});
+
+test('a chosen repeated literal span retains its own occurrence offset rather than the first matching quote',async()=>{
+  const repeated='The release channel is stable and tested.',text=repeated+'\n'+repeated,db=new Database(':memory:'),ledger=new PublicSourceLedger(db,async()=>describePublicSource(url,{url,type:'text/plain',bytes:new TextEncoder().encode(text)}));let chosen='';
+  const infer:Infer=async(_role,packet,schema)=>{if(!(schema.properties as any).citations)return {accepted:true,reason:'The explicit release channel statement answers the complete question.'};const spans=JSON.parse(packet).sources.flatMap((source:any)=>source.spans),span=spans.filter((span:any)=>span.text===repeated).at(-1);chosen=span.id;return {response:'The release channel is stable and tested.',citations:[span.id],uncertainty:'',answerable:true,answerabilityReason:'The chosen literal span states the release channel.'};};
+  const queue=host(db,ledger,infer);
+  try{const created=queue.create({...input,request:'Which release channel is described?'});queue.start();const goal=await wait(queue,created.id,item=>item.status==='completed'),citation=goal.tasks.find(task=>task.sourceAnswer)!.execution!.sourceAnswer!.citations[0];expect(citation.quote).toBe(repeated);expect(citation.spanId).toBe(chosen);expect(citation.offset).toBe(text.lastIndexOf(repeated));expect(citation.offset).not.toBe(text.indexOf(repeated));}
+  finally{queue.shutdown();await tick();db.close();}
 });

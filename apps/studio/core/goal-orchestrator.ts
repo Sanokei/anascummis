@@ -8,9 +8,9 @@ export const GOAL_SPECIALISTS = ['analysis', 'website', 'pdf', 'scene', 'commerc
 export type GoalSpecialist = typeof GOAL_SPECIALISTS[number];
 export type GoalStatus = 'queued' | 'planning' | 'running' | 'needs_input' | 'completed' | 'cancelled';
 export type SourceAnswer = {text: string; uncertainty: string; limit: string;
-  readingId?: string; answerable?: boolean; answerabilityReason?: string;
+  readingId?: string; answerable?: boolean; answerabilityReason?: string;citationMethod?:'host-spans-v1';
   selections: {sourceId: string; label: string; start: number; end: number; textSha256: string; rangeSha256?:string; text?:string}[];
-  citations: {sourceId: string; label: string; quote: string; offset: number; textSha256: string}[]};
+  citations: {sourceId: string; label: string; quote: string; offset: number; textSha256: string;spanId?:string}[]};
 export type GoalExecution = {message: string; verified: boolean; evidence: string[]; softwareTaskId?: string; sourceId?: string; sourceAnswer?: SourceAnswer};
 export type GoalReview = {accepted: boolean; reason: string};
 export type GoalTask = {

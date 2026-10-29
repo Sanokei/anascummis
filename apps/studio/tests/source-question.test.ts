@@ -12,8 +12,8 @@ const url = 'https://raw.githubusercontent.com/whatwg/fetch/main/README.md';
 const question = 'Which standard does this repository host?\nUse the supplied evidence.';
 const content = 'This repository hosts the Fetch Standard.\n' + 'More saved text. '.repeat(160);
 const page = () => describePublicSource(url, {url, type: 'text/plain', bytes: new TextEncoder().encode(content)});
-const accept: Infer = async (_system, _packet, schema) => (schema.properties as Record<string, unknown>)?.citations !== undefined
-  ? {response: 'The repository hosts the Fetch Standard.', citations: [{id: 'source-1', quote: 'This repository hosts the Fetch Standard.'}], uncertainty: 'Only the selected excerpt supports this answer.',answerable:true,answerabilityReason:'The selected source explicitly names the hosted standard.'}
+const accept: Infer = async (_system, packet, schema) => (schema.properties as Record<string, unknown>)?.citations !== undefined
+  ? {response: 'The repository hosts the Fetch Standard.', citations: [JSON.parse(packet).sources.flatMap((source:any)=>source.spans).find((span:any)=>span.text==='This repository hosts the Fetch Standard.').id], uncertainty: 'Only the selected excerpt supports this answer.',answerable:true,answerabilityReason:'The selected source explicitly names the hosted standard.'}
   : {accepted: true, reason: 'The recorded source quotes and saved question satisfy the bounded acceptance criterion.'};
 const noModel: Infer = async () => {throw new Error('Local AI is unavailable (test fixture).');};
 const tick = () => new Promise(resolve => setTimeout(resolve, 3));
@@ -81,7 +81,8 @@ test('scripted inference host-flow completes with exact citation offsets/hash an
     const created = queue.create(input); queue.start();
     const goal = await waitFor(queue, created.id, item => item.status === 'completed');
     const answer = goal.tasks[1].execution!.sourceAnswer!, snapshot = sources.list(goal.id)[0];
-    expect(answer.citations[0]).toEqual({sourceId: snapshot.id, label: 'source-1', quote: 'This repository hosts the Fetch Standard.', offset: 0, textSha256: snapshot.textSha256});
+    expect(answer.citations[0]).toEqual({sourceId: snapshot.id, label: 'source-1', quote: 'This repository hosts the Fetch Standard.', offset: 0, textSha256: snapshot.textSha256,spanId:'span-1'});
+    expect(answer.citationMethod).toBe('host-spans-v1');expect(answer.limit).toContain('host copied their exact saved text');
     expect(answer.selections).toEqual([{sourceId: snapshot.id, label: 'source-1', start: 0, end: 800, textSha256: snapshot.textSha256,rangeSha256:sourceHash(content.slice(0,800)),text:content.slice(0,800)}]);
     expect(answer.readingId).toBe(sources.reading(goal.id)?.id);expect(answer.answerable).toBe(true);
     expect(roles.some(role => role.startsWith('Goal planning'))).toBe(false);
@@ -91,14 +92,14 @@ test('scripted inference host-flow completes with exact citation offsets/hash an
   } finally {queue.shutdown(); await tick(); db.close();}
 });
 
-test('a fabricated quote blocks the answer while accepted source evidence stays intact', async () => {
+test('a fabricated span reference blocks the answer while accepted source evidence stays intact', async () => {
   const db = new Database(':memory:'), sources = new PublicSourceLedger(db, async () => page());
-  const generate: Infer = async () => ({response: 'Invented answer.', citations: [{id: 'source-1', quote: 'This sentence does not exist in the source.'}], uncertainty: '',answerable:true,answerabilityReason:'Claimed answerability does not excuse fabricated quotes.'});
+  const generate: Infer = async () => ({response: 'Invented answer.', citations: ['invented-span'], uncertainty: '',answerable:true,answerabilityReason:'Claimed answerability does not excuse fabricated source references.'});
   const queue = host(db, sources, generate);
   try {
     const created = queue.create(input); queue.start();
     const goal = await waitFor(queue, created.id, item => item.status === 'needs_input');
-    expect(goal.message).toContain('quote the selected source exactly');
+    expect(goal.message).toContain('outside the allowed choices');
     expect(goal.tasks[0].status).toBe('verified'); expect(goal.tasks[1].execution).toBeUndefined();
     expect(sources.list(goal.id)).toHaveLength(1);
   } finally {queue.shutdown(); await tick(); db.close();}
