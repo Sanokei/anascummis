@@ -117,6 +117,18 @@ async function runCase(browser, viewportName, options) {
   async function closeGoals() {
     await page.getByRole('tab', {name: 'Goals', exact: true}).focus(); await page.keyboard.press('Control+Delete'); await page.locator('.goal-panel').waitFor({state: 'hidden'});
   }
+  async function restoredBriefForm(id) {
+    await card(id).waitFor();
+    const input = card(id).getByRole('textbox', {name: 'Brief title', exact: true});
+    const reveal = card(id).getByRole('button', {name: /^(?:Create research brief|Continue brief draft)$/});
+    // Goal history and browser draft hydration happen after the window mounts.
+    // Wait for the hydrated state before choosing whether the form needs opening.
+    await until(async () => {
+      if (await input.isVisible()) return true;
+      if (await reveal.isVisible() && await reveal.isEnabled()) await reveal.click();
+      return input.isVisible();
+    }, 'saved brief form and browser draft hydrate after opening Goals');
+  }
   async function snapshotGoal(id) {const goal = await get('/api/goals/' + id); return structuredClone(goal);}
   async function pollGoal(id, predicate, label, milliseconds = 180_000) {
     let value, prior = '';
@@ -187,10 +199,10 @@ async function runCase(browser, viewportName, options) {
     const titleInput = card(parent.id).getByRole('textbox', {name: 'Brief title', exact: true}), notesInput = card(parent.id).getByRole('textbox', {name: 'Your notes for the brief', exact: true});
     await titleInput.fill(title); await notesInput.fill(notes); const postsBeforeDraft = mutationCount();
     await screenshot('unsaved-exact-title-and-notes', notesInput); await closeGoals(); await openGoals();
-    if (!await titleInput.isVisible()) await card(parent.id).getByRole('button', {name: 'Create research brief', exact: true}).click();
+    await restoredBriefForm(parent.id);
     assert.equal(await titleInput.inputValue(), title); assert.equal(await notesInput.inputValue(), notes);
     await page.reload({waitUntil: 'networkidle'}); await openGoals();
-    if (!await titleInput.isVisible()) await card(parent.id).getByRole('button', {name: 'Create research brief', exact: true}).click();
+    await restoredBriefForm(parent.id);
     assert.equal(await titleInput.inputValue(), title); assert.equal(await notesInput.inputValue(), notes); assert.equal(mutationCount(), postsBeforeDraft);
     assertStep('An unsent brief title and personal note survive actual window close/reopen and browser reload, with no child submission or model work.');
 
