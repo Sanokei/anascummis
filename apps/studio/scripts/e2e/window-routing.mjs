@@ -19,9 +19,9 @@ export const windowRoutingJourney = {
     assert.deepEqual(mutations(), []); await ctx.screenshot('revision-request-kept', input);
     ctx.assert('Existing-app edit shows explicit revision instructions and preserves exact text without applying or submitting it.');
     await ctx.closeComposer(); await ctx.send('Open my app'); await ctx.closeComposer();
-    await ctx.until(async () => /has not been launched[\s\S]*download the source[\s\S]*README/i.test(await ctx.page.locator('.voice-status').innerText()), 'Open app gives honest supported download/start handoff');
+    await ctx.until(async () => /Start app[\s\S]*checked source ZIP[\s\S]*No app has started/i.test(await ctx.page.locator('.voice-status').innerText()), 'Open app explains the explicit supported launch action and manual fallback');
     await ctx.page.locator('.software-panel').waitFor(); assert.deepEqual(mutations(), []);
-    await ctx.screenshot('honest-open-app-handoff'); ctx.assert('Open my app explains the source/README path without claiming a launch.');
+    await ctx.screenshot('honest-open-app-handoff'); ctx.assert('Open my app explains explicit Start and the source ZIP fallback without creating a launch.');
     await ctx.send('Show tasks'); await ctx.closeComposer(); await ctx.page.locator('.work-journal').waitFor();
     assert.deepEqual(mutations(), []); assert.deepEqual(await ctx.readApi('/api/software'), before);
     await ctx.screenshot('show-tasks-work-history'); ctx.assert('Show tasks reaches Work history; navigation produces no build, revision, chat or goal mutations.');

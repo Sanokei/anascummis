@@ -181,7 +181,7 @@ export async function runSuite(journeys, options) {
   }
   await fingerprint(join(studioRoot, 'out'));
   report.applicationSource = [];
-  const applicationPaths = ['app/page.tsx', 'app/style.css', 'components/GoalPanel.tsx', 'components/GoalSources.tsx', 'components/SoftwarePanel.tsx', 'core/window-requests.ts', 'scripts/model.ts', 'core/server.ts', 'core/workspace-export.ts',
+  const applicationPaths = ['app/page.tsx', 'app/style.css', 'components/GoalPanel.tsx', 'components/GoalSources.tsx', 'components/SoftwarePanel.tsx', 'components/SoftwareLaunch.tsx', 'core/software-launch.ts', 'core/app-launch-package.ts', 'core/app-launch-process.ts', 'worker/app-launch.ts', 'core/window-requests.ts', 'scripts/model.ts', 'core/server.ts', 'core/workspace-export.ts',
     'core/orchestrator.ts', 'core/harness.ts', 'core/model.ts', 'core/model-scheduler.ts', 'core/decision-routing.ts', 'core/working-memory.ts', 'core/tools.ts',
     'core/analysis-harness.ts', 'core/source-question.ts', 'core/source-passages.ts', 'core/source-citation-spans.ts', 'core/public-source.ts', 'core/goal-executor.ts', 'core/goal-orchestrator.ts',
     'core/software-api.ts', 'core/software-task.ts', 'core/software-runner.ts', 'core/software-recipes.ts', 'core/collection-screen.ts', 'core/react-screen.ts', 'worker/software-browser.mjs'];

@@ -1,4 +1,5 @@
 import {softwareRoute,pairedSoftwareRequest,softwareCors,softwareCorsHeaders} from './software-api';
+import {softwareLaunches} from './software-launch';
 import {createSoftwareTask,softwareJob,stopSoftwareTask,startSoftwareWorker,shutdownSoftwareWorker} from './software-task';
 import {softwareRequested} from './software-tools';
 import {softwareTools} from './software-tools';
@@ -57,7 +58,7 @@ async function handleLocal(req:Request):Promise<Response>{
   if(req.method!=='GET'&&req.method!=='HEAD'&&!paired&&(sameOrigin!==origin||req.headers.get('X-Requested-With')!=='Anascummis'||!req.headers.get('cookie')?.split(';').some(c=>c.trim()===`studio=${token}`)))return json({error:'Invalid local session'},403);
   if(Number(req.headers.get('content-length')||0)>(path==='/api/media'?151_000_000:30_000_000))return json({error:'Request too large'},413);
   try {
-    if(path.startsWith('/api/software')){if(path==='/api/software-pairing'&&!req.headers.get('cookie')?.split(';').some(c=>c.trim()===`studio=${token}`))return json({error:'Open the local app before pairing'},403);const result=await softwareRoute(req);if(result)return result;}
+    if(path.startsWith('/api/software')){if((path==='/api/software-pairing'||/^\/api\/software\/[a-f0-9-]{36}\/launch(?:\/|$)/.test(path))&&!req.headers.get('cookie')?.split(';').some(c=>c.trim()===`studio=${token}`))return json({error:'Open the local Studio window before using this action'},403);const result=await softwareRoute(req);if(result)return result;}
     if(path==='/api/status')return json({runtime:'local',model:await modelStatus(),speech:'Streaming Pocket TTS with local LavaSR enhancement',network:'Opt-in actions only'});
     if(path==='/api/goals'){
       if(req.method==='GET')return json(goals.list().map(goalResponse));
@@ -144,7 +145,7 @@ async function handleLocal(req:Request):Promise<Response>{
   }catch(e){return json({error:e instanceof Error?e.message:String(e)},400);}
 }
 export async function handle(req:Request):Promise<Response>{if(softwareCors(req)&&req.headers.get('host')===`127.0.0.1:${port}`){if(req.method==='OPTIONS')return new Response(null,{headers:softwareCorsHeaders()});if(!pairedSoftwareRequest(req))return json({error:'Pair this computer before starting builds'},403);const response=await handleLocal(req),headers=new Headers(response.headers);for(const [key,value]of Object.entries(softwareCorsHeaders()))headers.set(key,value);return new Response(response.body,{status:response.status,headers});}return handleLocal(req);}
-if(import.meta.main){const localServer=Bun.serve({hostname:'127.0.0.1',port,maxRequestBodySize:151_000_000,idleTimeout:255,fetch:handle});workJournal.interruptRunning();goals.start();reconcileGoalSoftware(goals.list());startSoftwareWorker();console.log(`Anascummis Studio: ${origin}`);const close=()=>{shuttingDown=true;goals.shutdown();shutdownSoftwareWorker();for(const job of jobs.values())job.controller.abort();void localServer.stop(true);setTimeout(()=>process.exit(0),2000).unref();};process.on('SIGINT',close);process.on('SIGTERM',close);}
+if(import.meta.main){const localServer=Bun.serve({hostname:'127.0.0.1',port,maxRequestBodySize:151_000_000,idleTimeout:255,fetch:handle});softwareLaunches.initialize();workJournal.interruptRunning();goals.start();reconcileGoalSoftware(goals.list());startSoftwareWorker();console.log(`Anascummis Studio: ${origin}`);const close=()=>{if(shuttingDown)return;shuttingDown=true;goals.shutdown();shutdownSoftwareWorker();for(const job of jobs.values())job.controller.abort();void softwareLaunches.shutdown().catch(error=>console.error('App shutdown was not confirmed:',error instanceof Error?error.message:String(error))).finally(()=>{void localServer.stop(true);setTimeout(()=>process.exit(0),2000).unref();});};process.on('SIGINT',close);process.on('SIGTERM',close);}
 
 
 
