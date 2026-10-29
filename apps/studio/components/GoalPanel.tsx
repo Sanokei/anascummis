@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import type {GoalRecord} from '../core/goal-orchestrator';
 import type {ActivityPage} from '../core/activity-journal';
 import {ActivityHistory} from './ActivityHistory';
+import {GoalSources} from './GoalSources';
 
 const goalLabels = {
   queued: 'Queued', planning: 'Planning', running: 'Working', needs_input: 'Needs attention',
@@ -36,7 +37,8 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
   const [message, setMessage] = useState(''), [loadError, setLoadError] = useState(''), [busy, setBusy] = useState<string>();
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [newGoalOpen, setNewGoalOpen] = useState(false);
-  const requestDraft = useRef({text: ''}), noteDrafts = useRef<Record<string, {text: string}>>({});
+  const [sourceMode, setSourceMode] = useState(false), [sourceUrls, setSourceUrls] = useState('');
+  const requestDraft = useRef({text: '', sourceMode: false, sourceUrls: ''}), noteDrafts = useRef<Record<string, {text: string}>>({});
   const busyRef = useRef<string | undefined>(undefined), mutationEpoch = useRef(0);
 
   useEffect(() => {setIncludeDocument(!!documentId);}, [documentId]);
@@ -63,7 +65,7 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
     setGoals(current => [goal, ...current.filter(item => item.id !== goal.id)]);
   }
   function writeRequest(text: string) {
-    requestDraft.current = {text}; setRequest(text);
+    requestDraft.current = {...requestDraft.current, text}; setRequest(text);
     if (text.length) setNewGoalOpen(true);
   }
   function writeNote(id: string, text: string) {
@@ -77,12 +79,13 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
     try {
       const goal = await goalApi('', {
         request: submitted.text, project: projectId,
-        ...(includeDocument && documentId ? {document: documentId} : {}), research
+        ...(!submitted.sourceMode && includeDocument && documentId ? {document: documentId} : {}), research,
+        ...(submitted.sourceMode ? {sourceQuestion: {urls: submitted.sourceUrls.split('\n').map(url => url.trim()).filter(Boolean)}} : {})
       }) as GoalRecord;
       received(goal);
-      if (requestDraft.current === submitted) {writeRequest(''); setNewGoalOpen(false);}
+      if (requestDraft.current === submitted) {writeRequest(''); setSourceUrls(''); requestDraft.current = {...requestDraft.current, sourceUrls: ''}; setNewGoalOpen(false);}
       else setNewGoalOpen(true);
-      setMessage('The full goal is saved. Planning, specialist work and acceptance reviews will appear here.');
+      setMessage(submitted.sourceMode ? 'The exact question and source steps are saved. Acquisition, answer and acceptance progress will appear here.' : 'The full goal is saved. Planning, specialist work and acceptance reviews will appear here.');
     } catch (error) {setMessage('Submission was not confirmed. Check saved goals before sending again. ' + String(error));}
     finally {mutationEpoch.current++; busyRef.current = undefined; setBusy(undefined);}
   }
@@ -100,10 +103,12 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
   }
 
   const newGoalForm = <form onSubmit={event => {event.preventDefault(); void start();}}>
-      <label>Goal<textarea aria-label="Goal" value={request} onChange={event => writeRequest(event.target.value)} maxLength={8000} placeholder="Describe the result you want and what must be true when it is finished."/></label>
-      {documentId && <label className="goal-option"><input type="checkbox" checked={includeDocument} onChange={event => setIncludeDocument(event.target.checked)}/>Include the open PDF{documentName ? ': ' + documentName : ''}</label>}
-      <label className="goal-option"><input type="checkbox" checked={research} onChange={event => setResearch(event.target.checked)}/>Allow public web research for this goal</label>
-      <button type="submit" disabled={!projectId || !request.trim() || !!busy}>{busy === 'new' ? 'Saving goal…' : 'Start coordinated work'}</button>
+      <label className="goal-option"><input type="checkbox" checked={sourceMode} onChange={event => {const enabled = event.target.checked; requestDraft.current = {...requestDraft.current, sourceMode: enabled}; setSourceMode(enabled);}}/>Question from public sources</label>
+      <label>{sourceMode ? 'Exact question (up to 1,000 characters)' : 'Goal'}<textarea aria-label={sourceMode ? 'Exact question' : 'Goal'} value={request} onChange={event => writeRequest(event.target.value)} maxLength={sourceMode ? Math.max(1000, request.length) : 8000} placeholder={sourceMode ? 'Ask a focused question the supplied source excerpts can answer.' : 'Describe the result you want and what must be true when it is finished.'}/></label>
+      {sourceMode && <><label>Public HTTPS sources (one per line, up to two)<textarea aria-label="Public source URLs" value={sourceUrls} maxLength={4001} onChange={event => {const text = event.target.value; requestDraft.current = {...requestDraft.current, sourceUrls: text}; setSourceUrls(text);}} placeholder="https://raw.githubusercontent.com/owner/repository/commit/README.md"/></label><small>The first 800 text positions per source are selected for the answer. Full bounded copies and content hashes stay inspectable. No search key is needed. A local model is required to answer.</small>{request.length > 1000 && <p role="status">Shorten this question to 1,000 characters. Your full draft is kept.</p>}</>}
+      {documentId && !sourceMode && <label className="goal-option"><input type="checkbox" checked={includeDocument} onChange={event => {requestDraft.current = {...requestDraft.current}; setIncludeDocument(event.target.checked);}}/>Include the open PDF{documentName ? ': ' + documentName : ''}</label>}
+      <label className="goal-option"><input type="checkbox" checked={research} onChange={event => {requestDraft.current = {...requestDraft.current}; setResearch(event.target.checked);}}/>Allow public web research for this goal</label>
+      <button type="submit" disabled={!projectId || !request.trim() || !!busy || (sourceMode && (!research || !sourceUrls.trim() || request.length > 1000))}>{busy === 'new' ? 'Saving goal…' : sourceMode ? 'Save question and read sources' : 'Start coordinated work'}</button>
       {!projectId && <small>Preparing the current website workspace…</small>}
     </form>;
   return <section className="goal-panel" aria-label="Coordinated goals">
@@ -131,8 +136,9 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
           <small>Software build for milestone {goal.tasks.indexOf(linkedSoftwareTask!) + 1}</small>
           <button onClick={() => onOpenSoftware(linkedSoftwareId)}>Open software build</button>
         </div>}
+        <GoalSources goal={goal}/>
         {(canResume || !!notes[goal.id]) && <form onSubmit={event => {event.preventDefault(); if (canResume) void act(goal, 'resume');}}>
-          <label>Guidance for continuing<textarea aria-label="Guidance for continuing" value={notes[goal.id] || ''} onChange={event => writeNote(goal.id, event.target.value)} maxLength={2000} placeholder="Clarify missing information or explain what to try next."/></label>
+          <label>Guidance for continuing{goal.sourceQuestion ? ' (up to 500 characters)' : ''}<textarea aria-label="Guidance for continuing" value={notes[goal.id] || ''} onChange={event => writeNote(goal.id, event.target.value)} maxLength={goal.sourceQuestion ? 500 : 2000} placeholder="Clarify missing information or explain what to try next."/></label>
           <small>Accepted milestones are kept. Only unfinished work is retried; review any saved changes before continuing.</small>
           {!canResume && <small>Your newer guidance draft is kept. You can send it when this goal needs attention or is stopped.</small>}
           <button type="submit" disabled={!!busy || !canResume}>Continue remaining work</button>

@@ -23,6 +23,8 @@ import {zip} from './zip';
 import {WorkJournal} from './work-journal';
 import {GoalOrchestrator,type GoalRecord} from './goal-orchestrator';
 import {executeGoalTask} from './goal-executor';
+import {PublicSourceLedger} from './public-source';
+import {reviewSourceAcquisition} from './source-question';
 import {stopGoalSoftware,reconcileGoalSoftware,goalSoftwareLinks} from './goal-software';
 import {importMedia,listMedia,listVideoPlans,media,mediaPath,videoPlan,videoTools} from './video';
 const port=Number(process.env.STUDIO_PORT||3211),origin=`http://127.0.0.1:${port}`,token=crypto.randomUUID();
@@ -30,8 +32,9 @@ const projectJobs=new Map<string,Promise<void>>();
 const jobs=new Map<string,{status:string;controller:AbortController;result?:unknown;error?:string;progress?:unknown}>();
 const workJournal=new WorkJournal(db);
 let shuttingDown=false;
-const goals=new GoalOrchestrator(db,{infer,execute:(task,goal,signal)=>executeGoalTask(task,goal,signal,()=>shuttingDown),allowedSpecialists:['analysis','website','pdf','scene','commerce','research','video','video_sources','software']});
-const goalResponse=(goal:GoalRecord)=>{const links=goalSoftwareLinks(goal.id);return {...goal,tasks:goal.tasks.map(task=>({...task,...(links[task.id]?{softwareTaskId:links[task.id]}:{})}))};};
+const goalSources=new PublicSourceLedger(db);
+const goals=new GoalOrchestrator(db,{infer,execute:(task,goal,signal,progress)=>executeGoalTask(task,goal,signal,()=>shuttingDown,goalSources,progress),reviewSource:(task,goal,execution,signal)=>reviewSourceAcquisition(goalSources,task,goal,execution,signal),allowedSpecialists:['analysis','website','pdf','scene','commerce','research','video','video_sources','software']});
+const goalResponse=(goal:GoalRecord)=>{const links=goalSoftwareLinks(goal.id);return {...goal,...(goal.sourceQuestion?{sources:goalSources.list(goal.id)}:{}),tasks:goal.tasks.map(task=>({...task,...(links[task.id]?{softwareTaskId:links[task.id]}:{})}))};};
 const json=(v:unknown,status=200)=>Response.json(v,{status,headers:{'Cache-Control':'no-store'}});
 function activityPagination(url:URL){const raw=url.searchParams.get('limit');if(raw!==null&&!/^[1-9][0-9]*$/.test(raw))throw new Error('Choose an activity history limit from 1 to 100');return {limit:raw===null?25:Number(raw),before:url.searchParams.get('before')??undefined};}
 const download=(bytes:Uint8Array,type:string,name:string)=>new Response(bytes as any,{headers:{'Content-Type':type,'Content-Disposition':`attachment; filename="${name.replace(/[^\w.-]/g,'_')}"`,'Cache-Control':'no-store'}});
@@ -51,9 +54,11 @@ async function handleLocal(req:Request):Promise<Response>{
     if(path==='/api/status')return json({runtime:'local',model:await modelStatus(),speech:'Streaming Pocket TTS with local LavaSR enhancement',network:'Opt-in actions only'});
     if(path==='/api/goals'){
       if(req.method==='GET')return json(goals.list().map(goalResponse));
-      if(req.method==='POST'){const a=object(await req.json()),projectId=text(a.project,100),documentId=a.document?text(a.document,100):undefined;getProject(projectId);if(documentId)document(documentId);return json(goalResponse(goals.create({request:text(a.request,8000),projectId,documentId,research:a.research===true})),202);}
+      if(req.method==='POST'){const a=object(await req.json()),projectId=text(a.project,100),documentId=a.document?text(a.document,100):undefined;getProject(projectId);if(documentId)document(documentId);return json(goalResponse(goals.create({request:text(a.request,8000),projectId,documentId,research:a.research===true,sourceQuestion:a.sourceQuestion})),202);}
       return json({error:'Unsupported goal operation'},405);
     }
+    const sourceMatch=/^\/api\/goals\/([a-f0-9-]{36})\/sources\/([a-f0-9-]{36})$/.exec(path);
+    if(sourceMatch){if(req.method!=='GET')return json({error:'Saved sources are read-only'},405);goals.get(sourceMatch[1]);const raw=url.searchParams.get('offset')||'0';if(!/^(0|[1-9][0-9]*)$/.test(raw))throw new Error('Invalid saved-text position');return json(goalSources.page(sourceMatch[1],sourceMatch[2],Number(raw)));}
     const goalMatch=/^\/api\/goals\/([a-f0-9-]{36})(?:\/(stop|resume|activity))?$/.exec(path);
     if(goalMatch){const id=goalMatch[1];try{goals.get(id);}catch{return json({error:'Goal not found'},404);}if(goalMatch[2]==='activity'){if(req.method!=='GET')return json({error:'Unsupported goal activity operation'},405);const page=activityPagination(url);return json(goals.activity(id,page.limit,page.before));}if(!goalMatch[2]&&req.method==='GET')return json(goalResponse(goals.get(id)));if(goalMatch[2]==='stop'&&req.method==='POST'){const stopped=goals.stop(id);stopGoalSoftware(id);return json(goalResponse(stopped));}if(goalMatch[2]==='resume'&&req.method==='POST'){const a=object(await req.json());return json(goalResponse(goals.resume(id,a.note===undefined?'':text(a.note,2000))));}return json({error:'Unsupported goal operation'},405);}
     if(path==='/api/vault'&&req.method==='GET')return json(await vault.status());
@@ -100,7 +105,7 @@ async function handleLocal(req:Request):Promise<Response>{
       db.query('INSERT INTO messages(project,role,content) VALUES(?,?,?)').run(id,'user',request);
       workJournal.create({id:jobId,projectId:id,documentId:pdfId,request});jobs.set(jobId,job);
       const workspace:Tool={name:'workspace',description:'Request a preview, user file picker or export. Video tools run locally. The client applies requests before speaking.',schema:objectSchema({action:{type:'string',enum:['show_website','show_scene','show_pdf','show_video','preview_video_timeline','close_preview','attach_image','open_pdf','open_media','export']},format:{type:'string',enum:['pdf','png','html','zip','mp4']}}),run:async args=>{validate(workspace.schema,args);return {workspaceRequest:args};}};
-      const tools=[...softwareTools(sourceCatalog,readOwnSource,true),...siteTools(id),...(pdfId?pdfTools(pdfId):[]),...videoTools(controller.signal,a.research===true),workspace,...(a.research===true?researchTools():[])];
+      const tools=[...softwareTools(sourceCatalog,readOwnSource,true),...siteTools(id),...(pdfId?pdfTools(pdfId):[]),...videoTools(controller.signal,a.research===true),workspace,...(a.research===true?researchTools(controller.signal):[])];
       const previous=projectJobs.get(id)||Promise.resolve();let release!:()=>void;projectJobs.set(id,new Promise<void>(resolve=>release=resolve));job.progress={phase:'queued',agent:'coordinator'};void (async()=>{await previous;controller.signal.throwIfAborted();const current=getProject(id);context.site=current.site;context.revision=current.revision;return exclusive(id,()=>exclusive(pdfId||'no-pdf',()=>orchestrate(request,context,tools,controller.signal,infer,{onEvent:event=>{job.progress=event;workJournal.progress(jobId,event);}})));})().then(result=>{controller.signal.throwIfAborted();workJournal.complete(jobId,result);job.status='complete';job.result=result;db.query('INSERT INTO messages(project,role,content) VALUES(?,?,?)').run(id,'assistant',JSON.stringify(result));}).catch(e=>{job.status=controller.signal.aborted?(shuttingDown?'interrupted':'cancelled'):'failed';job.error=String(e);workJournal.fail(jobId,job.status as 'interrupted'|'cancelled'|'failed',shuttingDown?'The backend stopped before this task finished. Review its progress and saved changes before continuing.':job.error);}).finally(()=>{release();setTimeout(()=>jobs.delete(jobId),600000).unref();});
       return json({jobId});
     }

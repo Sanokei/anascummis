@@ -3,7 +3,8 @@ import type {Infer} from './model';
 import {object, text} from './site';
 
 export type AnalysisEvidence = {id: string; text: string};
-export type AnalysisResult = {message: string; verified: boolean; evidence: string[]};
+export type AnalysisResult = {message: string; verified: boolean; evidence: string[];
+  answer: {text: string; citations: {id: string; quote: string}[]; uncertainty: string; limit: string}};
 const evidenceId = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,39}$/;
 const requestLimit = 2400;
 const contextLimit = 3600;
@@ -80,6 +81,7 @@ export async function runAnalysis(
   return {
     message: response + references + '\n\n' + (uncertainty ? uncertainty + ' ' : '') + limit,
     verified: true,
+    answer: {text: response, citations: checked, uncertainty, limit},
     evidence: [...checked.map(citation => `Exact supplied-source quote [${citation.id}]: ${citation.quote}`), limit]
   };
 }
