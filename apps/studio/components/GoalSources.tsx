@@ -1,22 +1,30 @@
 'use client';
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import type {GoalRecord} from '../core/goal-orchestrator';
 import type {SourceSnapshot} from '../core/public-source';
 
 function SavedSource({goalId, source, label}: {goalId: string; source: SourceSnapshot; label: string}) {
   const [page, setPage] = useState<{offset: number; end: number; text: string}>();
   const [busy, setBusy] = useState(false), [error, setError] = useState('');
+  const activeRead = useRef<AbortController | undefined>(undefined);
+  useEffect(() => () => activeRead.current?.abort(), []);
+  function close() {
+    activeRead.current?.abort(); activeRead.current = undefined;
+    setBusy(false); setPage(undefined); setError('');
+  }
   async function inspect(offset: number) {
-    if (busy) return;
+    if (activeRead.current) return;
+    const control = new AbortController(); activeRead.current = control;
     setBusy(true); setError('');
     try {
-      const response = await fetch('/api/goals/' + goalId + '/sources/' + source.id + '?offset=' + offset, {credentials: 'same-origin', cache: 'no-store'});
+      const response = await fetch('/api/goals/' + goalId + '/sources/' + source.id + '?offset=' + offset, {credentials: 'same-origin', cache: 'no-store', signal: control.signal});
       const value = await response.json();
+      if (control.signal.aborted || activeRead.current !== control) return;
       if (!response.ok) throw new Error(value.error || 'Saved text is unavailable.');
       if (value.source?.textSha256 !== source.textSha256) throw new Error('The saved source identity changed.');
       setPage(value);
-    } catch (failure) {setError(String(failure));}
-    finally {setBusy(false);}
+    } catch (failure) {if (!control.signal.aborted && activeRead.current === control) setError(String(failure));}
+    finally {if (activeRead.current === control) {activeRead.current = undefined; setBusy(false);}}
   }
   return <article className="goal-source" aria-label={'Saved source ' + label}>
     <strong>[{label}] {source.title}</strong>
@@ -28,7 +36,7 @@ function SavedSource({goalId, source, label}: {goalId: string; source: SourceSna
       <small>Snapshot {source.id} · {source.normalization}. Text positions use UTF-16 offsets. Acquisition checks do not establish factual accuracy.</small>
     </details>
     <div className="goal-actions"><button disabled={busy} onClick={() => void inspect(page?.offset || 0)}>{busy ? 'Reading saved text…' : page ? 'Reload saved text' : 'Inspect saved text'}</button>
-      {page && <button onClick={() => setPage(undefined)}>Close saved text</button>}</div>
+      {page && <button onClick={close}>Close saved text</button>}</div>
     {error && <p role="status">{error}</p>}
     {page && <div className="goal-saved-text">
       <p>Saved text {page.offset}–{page.end} of {source.textLength}. Answer selection: 0–{Math.min(800, source.textLength)}; later text is retained for inspection, outside this answer’s model context.</p>
