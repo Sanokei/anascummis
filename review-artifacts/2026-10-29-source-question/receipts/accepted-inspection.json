@@ -1,0 +1,20 @@
+{
+  "source": "75dd7f01a49909a470522165a71c0acbe558e3ab",
+  "fixture": "Read-only reopen of the real persisted scripted-inference result on an ordinary host with no model fixture running. This tests result retention and display, not native model quality.",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "goalId": "84bff419-54e6-4b70-a50d-82259b05ccc7",
+  "completed": true,
+  "citations": 2,
+  "sourceAcquisitionAttempts": [
+    1,
+    1
+  ]
+}

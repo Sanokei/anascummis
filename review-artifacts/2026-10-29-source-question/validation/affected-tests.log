@@ -1,0 +1,57 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-evidence.test.ts:
+(pass) handoffs contain actual host evidence, never the predecessor model summary [0.71ms]
+(pass) local roles can consume private accepted work but network roles cannot [0.15ms]
+(pass) missing, unaccepted, duplicate and oversized dependency packets fail rather than drop evidence [1.34ms]
+(pass) research receipts retain actual source text, URL and retrieval time and label long excerpts [1.12ms]
+(pass) a typical website change keeps actual arguments and final inspected state below the complete packet bound [0.44ms]
+(pass) media handoffs preserve downloaded IDs and actual public provenance [0.23ms]
+(pass) PDF receipts identify selected pages, available text and omitted geometry honestly [1.24ms]
+(pass) bounded numeric write arguments retain complete rectangle and page coordinates [0.12ms]
+(pass) failed calls, coordinator summaries and internal mixed-context reads are never host source receipts [0.03ms]
+(pass) oversized complete receipts pause instead of silently omitting calls or shortening source identities [0.87ms]
+
+tests/analysis-harness.test.ts:
+(pass) analysis produces a useful no-source answer with an explicit factual-verification boundary [1.73ms]
+(pass) source-backed analysis validates actual source IDs and exact excerpts without claiming truth verification [0.37ms]
+(pass) invented source IDs, invented quotes and missing citations fail closed [0.58ms]
+(pass) source-less answers cannot attach invented citations, URLs or browsing claims [0.56ms]
+(pass) malformed or empty structured answers never produce a verified result [0.44ms]
+(pass) oversized questions or evidence fail before inference instead of silently dropping content [0.17ms]
+(pass) the supplied evidence snapshot cannot change while inference is pending [0.27ms]
+(pass) a supported request reaches the model in full, including its final instruction [0.22ms]
+(pass) abort stops inference before a call and discards a late generated answer [0.25ms]
+(pass) duplicate source identifiers cannot provide ambiguous evidence [0.08ms]
+
+tests/goal-orchestrator.test.ts:
+(pass) distinct planner, specialist execution and independent reviewer complete dependency-ordered work [16.54ms]
+(pass) the complete long goal is read and coverage-reviewed in persisted pages without truncating it [33.47ms]
+(pass) a specialist completion claim without host evidence cannot reach acceptance or completion [6.70ms]
+(pass) acceptance rejection is retained and only unverified milestones execute again after explicit guidance [12.88ms]
+(pass) final goal-coverage review rejects an incomplete plan even when every planned milestone passed [9.34ms]
+(pass) capability and dependency restrictions stop unsupported work before execution [26.66ms]
+(pass) cancellation stays authoritative when a non-cooperative executor returns a late success [15.31ms]
+(pass) reopening the database preserves verified work and pauses an uncertain write instead of replaying it [11.55ms]
+(pass) a restored milestone with saved host evidence is reviewed without executing its write twice [8.08ms]
+(pass) one software milestone owns the whole app instead of creating separate apps for dependent edits [6.44ms]
+(pass) a rejected software acceptance reason survives repeated guided retries [10.91ms]
+(pass) a restored multi-software plan is rejected before separate application workspaces can run [6.40ms]
+(pass) only a validated host software child reference is retained in milestone execution evidence [7.70ms]
+(pass) malformed or non-software child references cannot become trusted task links [10.31ms]
+
+tests/source-question.test.ts:
+(pass) source acquisition persists full plaintext and immutable identities across database reopen; view/retry never refetch [2.89ms]
+(pass) host-seeded source reading succeeds before missing inference and explicit continuation preserves accepted acquisition [17.53ms]
+(pass) scripted inference host-flow completes with exact citation offsets/hash and separate answer/coverage review [21.39ms]
+(pass) a fabricated quote blocks the answer while accepted source evidence stays intact [8.73ms]
+(pass) stop during a pending acquisition discards a late response and cannot complete or auto-replay [15.92ms]
+(pass) restart between saved acquisition and execution return requires explicit Continue and reuses snapshot [19.54ms]
+(pass) source mode rejects missing research permission, private/credential URLs, duplicate URLs, PDF and oversized exact questions [2.35ms]
+(pass) fixed publisher fetch sends only a public URL and bounded headers, refuses redirects/types/oversize, preserves plain code [5.72ms]
+(pass) plain source title uses its top-level heading or filename, not an unrelated subsection [0.12ms]
+
+ 43 pass
+ 0 fail
+ 204 expect() calls
+Ran 43 tests across 4 files. [337.00ms]

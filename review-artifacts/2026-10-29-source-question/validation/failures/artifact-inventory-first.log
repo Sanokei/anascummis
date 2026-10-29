@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "<stdin>", line 13, in <module>
+AssertionError: manifest.json
+
+The first packaging helper checked the README's manifest link before creating
+that manifest. It stopped before writing the inventory. Reordered generation
+before link verification; no application, fixture or source evidence changed.

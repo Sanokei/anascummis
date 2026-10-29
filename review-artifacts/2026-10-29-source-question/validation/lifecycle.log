@@ -1,0 +1,4 @@
+Active ordinary host PID 65044; scripted model=false; data=/workspace/.cloud-env/anascummis/source-question/lifecycle-9EeKnu
+Active ordinary host PID 65188; scripted model=true; data=/workspace/.cloud-env/anascummis/source-question/lifecycle-9EeKnu
+Active ordinary host PID 65204; scripted model=true; data=/workspace/.cloud-env/anascummis/source-question/lifecycle-9EeKnu
+PASS source-question browser/real-fetch/persistence lifecycle: /workspace/.cloud-env/anascummis/source-question/lifecycle-9EeKnu

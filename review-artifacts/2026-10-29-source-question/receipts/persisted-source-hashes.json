@@ -1,0 +1,24 @@
+[
+  {
+    "id": "eff9ebc0-8881-4132-b01f-0592d029e4e6",
+    "goal": "84bff419-54e6-4b70-a50d-82259b05ccc7",
+    "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+    "bytes": 4815,
+    "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+    "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+    "rawHashMatches": true,
+    "textHashMatches": true,
+    "fullTextLength": 4815
+  },
+  {
+    "id": "ee952432-386d-4401-830c-be2e7829a8a4",
+    "goal": "84bff419-54e6-4b70-a50d-82259b05ccc7",
+    "url": "https://raw.githubusercontent.com/whatwg/html/main/README.md",
+    "bytes": 887,
+    "sha256": "a36af09bcf4ed0230de83305d8029075ca657bccb9421f39504e79692adf7c74",
+    "textSha256": "a36af09bcf4ed0230de83305d8029075ca657bccb9421f39504e79692adf7c74",
+    "rawHashMatches": true,
+    "textHashMatches": true,
+    "fullTextLength": 887
+  }
+]

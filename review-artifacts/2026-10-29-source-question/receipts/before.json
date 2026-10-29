@@ -1,0 +1,13 @@
+{
+  "fixture": "Ordinary pre-increment server/UI at 25a5379713dafc12df0e59dbc9fef130c087e5d0; no model/API mocks",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "text": "A planner breaks down your goal, specialists do the work, and a separate reviewer checks each milestone. Their progress stays here when this window or page closes.\n\nGoal\nAllow public web research for this goal\nStart coordinated work\n\nNo saved goals yet."
+}

@@ -1,0 +1,7 @@
+{
+  "label": "before",
+  "fixture": "Real saved-source API and ordinary server; one protected saved-text GET response is deliberately delayed in the browser. No public refetch or model fixture.",
+  "outcome": "failed",
+  "reopened": true,
+  "error": "AssertionError [ERR_ASSERTION]: A late saved-text response must not reopen a closed reader.\n\ntrue !== false\n"
+}

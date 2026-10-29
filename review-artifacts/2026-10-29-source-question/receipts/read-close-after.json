@@ -1,0 +1,7 @@
+{
+  "label": "after",
+  "fixture": "Real saved-source API and ordinary server; one protected saved-text GET response is deliberately delayed in the browser. No public refetch or model fixture.",
+  "outcome": "passed",
+  "reopened": false,
+  "manualReopenWorks": true
+}

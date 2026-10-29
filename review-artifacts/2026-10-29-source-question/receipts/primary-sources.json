@@ -1,0 +1,28 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+    "title": "README.md",
+    "retrievedAt": "2026-10-29T14:30:22.200Z",
+    "bytes": 4815,
+    "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+    "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+    "id": "eff9ebc0-8881-4132-b01f-0592d029e4e6"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/whatwg/html/main/README.md",
+    "title": "README.md",
+    "retrievedAt": "2026-10-29T14:30:22.383Z",
+    "bytes": 887,
+    "sha256": "a36af09bcf4ed0230de83305d8029075ca657bccb9421f39504e79692adf7c74",
+    "textSha256": "a36af09bcf4ed0230de83305d8029075ca657bccb9421f39504e79692adf7c74",
+    "id": "ee952432-386d-4401-830c-be2e7829a8a4"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/api/abortsignal/throwifaborted/index.md",
+    "title": "index.md",
+    "retrievedAt": "2026-10-29T14:33:16.212Z",
+    "bytes": 1932,
+    "sha256": "5b693625bd60c07ad82d3cd89114f05295e59270968039a351ffddfa660940b6",
+    "selectedReference": "This method can also be used to abort operations at particular points in code, rather than passing to functions that take a signal."
+  }
+]

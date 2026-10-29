@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: A late saved-text response must not reopen a closed reader.
+
+true !== false
+
+    at file:///workspace/.cloud-env/anascummis/source-question/read-close.mjs:15:9 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: true,
+  expected: false,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

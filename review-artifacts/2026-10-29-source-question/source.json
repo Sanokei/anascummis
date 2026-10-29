@@ -1,0 +1,46 @@
+{
+  "base": "25a5379713dafc12df0e59dbc9fef130c087e5d0",
+  "sourceCommit": "75dd7f01a49909a470522165a71c0acbe558e3ab",
+  "sourceTree": "2d62aa820ef3e79caf6164c2213b8aac75ab02e2",
+  "branch": "codex/source-question-20261029",
+  "codePaths": [
+    "README.md",
+    "apps/studio/app/style.css",
+    "apps/studio/components/GoalPanel.tsx",
+    "apps/studio/components/GoalSources.tsx",
+    "apps/studio/core/analysis-harness.ts",
+    "apps/studio/core/goal-executor.ts",
+    "apps/studio/core/goal-orchestrator.ts",
+    "apps/studio/core/public-source.ts",
+    "apps/studio/core/server.ts",
+    "apps/studio/core/source-question.ts",
+    "apps/studio/core/tools.ts",
+    "apps/studio/tests/source-question.test.ts"
+  ],
+  "validation": {
+    "affectedTests": {
+      "exitCode": 0,
+      "pass": 43,
+      "fail": 0,
+      "assertions": 204,
+      "files": 4,
+      "source": "4c66da150296b9710ba04c05f5119185fe5367e2"
+    },
+    "finalTypeScriptExitCode": 0,
+    "finalProductionBuildExitCode": 0,
+    "finalDelayedReadCloseExitCode": 0,
+    "finalRetainedAnswerInspectionExitCode": 0,
+    "normalLifecycleSource": "4c66da150296b9710ba04c05f5119185fe5367e2",
+    "finalDeltaPaths": [
+      "apps/studio/components/GoalSources.tsx"
+    ]
+  },
+  "ordinaryServer": {
+    "pid": 65500,
+    "startedAt": "2026-10-29 14:34:22 UTC",
+    "command": "STUDIO_DEV=0 bun core/server.ts",
+    "port": 3211,
+    "modelReady": false
+  },
+  "sharing": "Private GitHub source/PNG review on the scoped branch; no main promotion or public app deployment."
+}

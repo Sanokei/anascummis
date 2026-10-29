@@ -1,0 +1,57 @@
+Active ordinary host PID 64332; scripted model=false; data=/workspace/.cloud-env/anascummis/source-question/lifecycle-kN3OkE
+locator.tap: Timeout 12000ms exceeded.
+Call log:
+[2m  - waiting for locator('.flexlayout__float_window').filter({ has: locator('.goal-panel') }).locator('[title="Close"]').first()[22m
+[2m    - locator resolved to <div title="Close" aria-hidden="true" class="flexlayout__tab_button_trailing" data-layout-path="/sublayout1/ts0/tb0/button/close">…</div>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="flexlayout__float_window_content">…</div> intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="flexlayout__float_window_content">…</div> intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m    22 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <div class="flexlayout__float_window_content">…</div> intercepts pointer events[22m
+[2m     - retrying tap action[22m
+[2m       - waiting 500ms[22m
+
+    at /workspace/.cloud-env/anascummis/source-question/lifecycle.mjs:75:20 {
+  log: [
+    `  - waiting for locator('.flexlayout__float_window').filter({ has: locator('.goal-panel') }).locator('[title="Close"]').first()`,
+    '    - locator resolved to <div title="Close" aria-hidden="true" class="flexlayout__tab_button_trailing" data-layout-path="/sublayout1/ts0/tb0/button/close">…</div>',
+    '  - attempting tap action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div class="flexlayout__float_window_content">…</div> intercepts pointer events',
+    '    - retrying tap action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div class="flexlayout__float_window_content">…</div> intercepts pointer events',
+    '    - retrying tap action',
+    '      - waiting 100ms',
+    '    22 × waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <div class="flexlayout__float_window_content">…</div> intercepts pointer events',
+    '     - retrying tap action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}
