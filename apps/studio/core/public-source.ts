@@ -3,14 +3,21 @@ import {createHash} from 'node:crypto';
 import {isIP} from 'node:net';
 import {safeFetch, publicAddress} from './network';
 import {fetchWithoutRedirects} from './fetch-without-redirects';
+import {selectSourcePassages,utf16Boundary} from './source-passages';
+import type {GoalExecution,GoalReview,GoalTask} from './goal-orchestrator';
 
 export type SourceSnapshot = {
   id: string; goalId: string; taskId: string; requestedUrl: string; url: string; title: string;
   retrievedAt: string; type: string; bytes: number; textLength: number;
   sha256: string; textSha256: string; normalization: 'public-text-v1';
+  copiedFrom?: {goalId:string;sourceId:string};
 };
 export type PublicPage = Omit<SourceSnapshot, 'id' | 'goalId' | 'taskId'> & {body: Uint8Array; text: string};
-export type SourceProgress = (phase: 'fetching_source' | 'source_saved' | 'source_reused' | 'answering_sources', detail: string) => void;
+export type SourceProgress = (phase: 'fetching_source' | 'source_saved' | 'source_reused' | 'selection_saved' | 'selection_reused' | 'answering_sources', detail: string) => void;
+export type SourceRangeInput={sourceId:string;start:number;end:number;textSha256:string};
+export type SourceReadingResult={id:string;goalId:string;taskId:string;readingId?:string;question:string;attempt:number;created:number;status:GoalTask['status'];execution:GoalExecution;review?:GoalReview};
+export type SourceReadingPlan={id:string;goalId:string;taskId:string;version:'source-passages-v1';mode:'auto'|'manual';question:string;questionSha256:string;created:number;match:'matched'|'none'|'manual';ranges:(SourceRangeInput&{label:string;rangeSha256:string;text:string;score:number;matchedTerms:string[]})[];result?:SourceReadingResult;resultCount?:number};
+export type SourceReadingSummary=Omit<SourceReadingPlan,'ranges'|'result'>&{ranges:Omit<SourceReadingPlan['ranges'][number],'text'>[]};
 export const sourceHash = (data: string | Uint8Array) => createHash('sha256').update(data).digest('hex');
 const MAX_BYTES = 500_000;
 
@@ -76,6 +83,13 @@ export function describePublicSource(requestedUrl: string, result: {bytes: Uint8
 export class PublicSourceLedger {
   constructor(private db: Database, private read = readPublicSource) {
     db.exec('CREATE TABLE IF NOT EXISTS goal_sources(id TEXT PRIMARY KEY,goal TEXT NOT NULL,task TEXT NOT NULL,metadata TEXT NOT NULL,body BLOB NOT NULL,text TEXT NOT NULL,UNIQUE(goal,task))');
+    db.exec('CREATE TABLE IF NOT EXISTS goal_source_readings(id TEXT PRIMARY KEY,goal TEXT NOT NULL,task TEXT NOT NULL,question_hash TEXT NOT NULL,body TEXT NOT NULL,UNIQUE(goal,task,question_hash))');
+    if(!(db.query('PRAGMA table_info(goal_source_readings)').all() as {name:string}[]).some(column=>column.name==='question_hash'))db.transaction(()=>{
+      db.exec('CREATE TABLE goal_source_readings_v2(id TEXT PRIMARY KEY,goal TEXT NOT NULL,task TEXT NOT NULL,question_hash TEXT NOT NULL,body TEXT NOT NULL,UNIQUE(goal,task,question_hash))');
+      for(const row of db.query('SELECT id,goal,task,body FROM goal_source_readings').all() as {id:string;goal:string;task:string;body:string}[]){const plan=JSON.parse(row.body) as SourceReadingPlan;if(sourceHash(plan.question)!==plan.questionSha256)throw new Error('An earlier saved reading has an invalid question hash.');db.query('INSERT INTO goal_source_readings_v2 VALUES(?,?,?,?,?)').run(row.id,row.goal,row.task,plan.questionSha256,row.body);}
+      db.exec('DROP TABLE goal_source_readings; ALTER TABLE goal_source_readings_v2 RENAME TO goal_source_readings');
+    })();
+    db.exec('CREATE TABLE IF NOT EXISTS goal_source_answer_history(id TEXT PRIMARY KEY,goal TEXT NOT NULL,task TEXT NOT NULL,reading_id TEXT,attempt INTEGER NOT NULL,body TEXT NOT NULL,UNIQUE(goal,task,attempt))');
   }
   list(goalId: string): SourceSnapshot[] {
     return (this.db.query('SELECT metadata FROM goal_sources WHERE goal=? ORDER BY rowid').all(goalId) as {metadata: string}[]).map(row => JSON.parse(row.metadata));
@@ -110,5 +124,62 @@ export class PublicSourceLedger {
     const saved = this.get(goalId, id);
     if (!Number.isSafeInteger(offset) || offset < 0 || offset > saved.text.length) throw new Error('Invalid saved-text position.');
     return {source: saved.source, offset, end: Math.min(offset + 1000, saved.text.length), text: saved.text.slice(offset, offset + 1000)};
+  }
+  validateRanges(goalId:string,raw:unknown):SourceRangeInput[]{
+    if(!Array.isArray(raw)||!raw.length||raw.length>2)throw new Error('Choose one or two saved-text ranges.');
+    let total=0;const ranges=raw.map(value=>{
+      if(!value||typeof value!=='object'||typeof value.sourceId!=='string'||typeof value.textSha256!=='string'||!Number.isSafeInteger(value.start)||!Number.isSafeInteger(value.end))throw new Error('Invalid saved-text range.');
+      const saved=this.get(goalId,value.sourceId);
+      if(saved.source.textSha256!==value.textSha256||value.start<0||value.end<=value.start||value.end>saved.text.length||!utf16Boundary(saved.text,value.start)||!utf16Boundary(saved.text,value.end))throw new Error('Saved-text range or source identity is invalid. Use complete characters and current snapshot hashes.');
+      total+=value.end-value.start;return {sourceId:value.sourceId,start:value.start,end:value.end,textSha256:value.textSha256};
+    });
+    if(total>1600)throw new Error('Select at most 1,600 UTF-16 text positions in total.');
+    if(new Set(ranges.map(range=>range.sourceId)).size>2)throw new Error('Select at most two saved sources.');
+    for(let i=0;i<ranges.length;i++)for(let j=0;j<i;j++)if(ranges[i].sourceId===ranges[j].sourceId&&ranges[i].start<ranges[j].end&&ranges[j].start<ranges[i].end)throw new Error('Selected ranges must not overlap.');
+    return ranges;
+  }
+  reading(goalId:string,taskId='source-answer',identity?:{id?:string;questionSha256?:string},verifySources=true):SourceReadingPlan|undefined{
+    const row=identity?.id?this.db.query('SELECT id,body FROM goal_source_readings WHERE goal=? AND task=? AND id=?').get(goalId,taskId,identity.id):identity?.questionSha256?this.db.query('SELECT id,body FROM goal_source_readings WHERE goal=? AND task=? AND question_hash=?').get(goalId,taskId,identity.questionSha256):this.db.query('SELECT id,body FROM goal_source_readings WHERE goal=? AND task=? ORDER BY rowid DESC LIMIT 1').get(goalId,taskId);
+    if(!row)return;const saved=row as {id:string;body:string};
+    const plan=JSON.parse(saved.body) as SourceReadingPlan;
+    if(plan.id!==saved.id||plan.goalId!==goalId||plan.taskId!==taskId||plan.version!=='source-passages-v1'||!['auto','manual'].includes(plan.mode)||!['matched','none','manual'].includes(plan.match)||typeof plan.question!=='string'||sourceHash(plan.question)!==plan.questionSha256)throw new Error('Saved reading identity check failed. Create a new question from the saved sources.');
+    if(!Array.isArray(plan.ranges)||!plan.ranges.length||plan.ranges.length>2)throw new Error('Saved reading ranges are invalid.');
+    if(verifySources)this.validateRanges(goalId,plan.ranges);
+    if(new Set(plan.ranges.map(range=>range.label)).size!==plan.ranges.length)throw new Error('Saved reading labels are not unique.');
+    for(const range of plan.ranges){const actual=verifySources?this.get(goalId,range.sourceId).text.slice(range.start,range.end):range.text;if(typeof actual!=='string'||actual.length!==range.end-range.start||actual!==range.text||sourceHash(actual)!==range.rangeSha256)throw new Error('Saved reading range changed. Create a new question from the saved sources.');}
+    return plan;
+  }
+  readings(goalId:string):SourceReadingPlan[]{return (this.db.query('SELECT id,task FROM goal_source_readings WHERE goal=? ORDER BY rowid').all(goalId) as {id:string;task:string}[]).map(row=>this.reading(goalId,row.task,{id:row.id})!);}
+  readingPage(goalId:string,limit=10,before?:string):{readings:SourceReadingSummary[];nextCursor?:string}{
+    if(!Number.isInteger(limit)||limit<1||limit>25)throw new Error('Choose a reading history limit from 1 to 25.');
+    if(before!==undefined&&(!/^[1-9][0-9]*$/.test(before)||before.length>16||!Number.isSafeInteger(Number(before))))throw new Error('Invalid reading history cursor.');
+    const rows=(before===undefined?this.db.query('SELECT rowid,id,task FROM goal_source_readings WHERE goal=? ORDER BY rowid DESC LIMIT ?').all(goalId,limit+1):this.db.query('SELECT rowid,id,task FROM goal_source_readings WHERE goal=? AND rowid<? ORDER BY rowid DESC LIMIT ?').all(goalId,Number(before),limit+1)) as {rowid:number;id:string;task:string}[];
+    const readings=rows.slice(0,limit).map(row=>{const plan=this.reading(goalId,row.task,{id:row.id},false)!;return {...plan,ranges:plan.ranges.map(({text,...range})=>range),resultCount:this.resultCount(goalId,plan.id)};});
+    return {readings,nextCursor:rows.length>limit?String(rows[limit-1].rowid):undefined};
+  }
+  archiveAnswer(goalId:string,task:GoalTask,question:string):SourceReadingResult|undefined{
+    if(!this.db.inTransaction)throw new Error('Answer archival must share the source-question continuation transaction.');
+    if(!task.sourceAnswer||!task.execution?.sourceAnswer)return;
+    const prior=this.db.query('SELECT body FROM goal_source_answer_history WHERE goal=? AND task=? AND attempt=?').get(goalId,task.id,task.attempts) as {body:string}|null;if(prior)return JSON.parse(prior.body);
+    const result:SourceReadingResult={id:crypto.randomUUID(),goalId,taskId:task.id,readingId:task.execution.sourceAnswer.readingId,question,attempt:task.attempts,created:Date.now(),status:task.status,execution:structuredClone(task.execution),...(task.review?{review:structuredClone(task.review)}:{})};
+    this.db.query('INSERT INTO goal_source_answer_history VALUES(?,?,?,?,?,?)').run(result.id,goalId,task.id,result.readingId||null,task.attempts,JSON.stringify(result));return result;
+  }
+  resultCount(goalId:string,readingId:string){return (this.db.query('SELECT COUNT(*) AS count FROM goal_source_answer_history WHERE goal=? AND reading_id=?').get(goalId,readingId) as {count:number}).count;}
+  readingResult(goalId:string,readingId:string):SourceReadingResult|undefined{const row=this.db.query('SELECT body FROM goal_source_answer_history WHERE goal=? AND reading_id=? ORDER BY rowid DESC LIMIT 1').get(goalId,readingId) as {body:string}|null;return row?JSON.parse(row.body):undefined;}
+  prepareReading(goalId:string,taskId:string,question:string,manual?:SourceRangeInput[]):{plan:SourceReadingPlan;reused:boolean}{
+    const previous=this.reading(goalId,taskId,{questionSha256:sourceHash(question)});
+    if(previous){if(manual&&JSON.stringify(this.validateRanges(goalId,manual))!==JSON.stringify(previous.ranges.map(({sourceId,start,end,textSha256})=>({sourceId,start,end,textSha256}))))throw new Error('The saved reading has different text ranges. Create a new linked question to change the selection.');return {plan:previous,reused:true};}
+    const sources=this.list(goalId);if(!sources.length||sources.length>2)throw new Error('One or two acquired public sources are required before selecting passages.');
+    const automatic=manual?undefined:selectSourcePassages(question,sources.map(source=>({id:source.id,label:source.taskId,text:this.get(goalId,source.id).text})));
+    const selected=manual?this.validateRanges(goalId,manual):automatic!.ranges.map(range=>({...range,textSha256:sources.find(source=>source.id===range.sourceId)!.textSha256}));
+    const counts=new Map<string,number>();
+    const ranges=selected.map(range=>{const saved=this.get(goalId,range.sourceId),number=(counts.get(range.sourceId)||0)+1;counts.set(range.sourceId,number);const automaticRange=automatic?.ranges.find(item=>item.sourceId===range.sourceId&&item.start===range.start&&item.end===range.end);const text=saved.text.slice(range.start,range.end);return {...range,label:saved.source.taskId+(number>1?'-p'+number:''),text,rangeSha256:sourceHash(text),score:automaticRange?.score||0,matchedTerms:automaticRange?.matchedTerms||[]};});
+    const plan:SourceReadingPlan={id:crypto.randomUUID(),goalId,taskId,version:'source-passages-v1',mode:manual?'manual':'auto',question,questionSha256:sourceHash(question),created:Date.now(),match:manual?'manual':automatic!.match,ranges};
+    this.db.transaction(()=>{this.db.query('INSERT INTO goal_source_readings(id,goal,task,question_hash,body) VALUES(?,?,?,?,?)').run(plan.id,goalId,taskId,plan.questionSha256,JSON.stringify(plan));})();
+    return {plan,reused:false};
+  }
+  copySnapshots(parentGoalId:string,goalId:string,sourceIds:string[]):SourceSnapshot[]{
+    if(!this.db.inTransaction)throw new Error('Source copies must share the new goal transaction.');
+    return sourceIds.map(id=>{const saved=this.get(parentGoalId,id),source:SourceSnapshot={...saved.source,id:crypto.randomUUID(),goalId,copiedFrom:{goalId:parentGoalId,sourceId:id}};this.db.query('INSERT INTO goal_sources(id,goal,task,metadata,body,text) VALUES(?,?,?,?,?,?)').run(source.id,goalId,source.taskId,JSON.stringify(source),saved.body,saved.text);return source;});
   }
 }

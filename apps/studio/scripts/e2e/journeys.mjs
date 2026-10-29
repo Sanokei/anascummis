@@ -3,6 +3,7 @@ import {samplePdf} from './artifacts.mjs';
 import {writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
+import {laterSourceFollowupJourney} from './source-reading.mjs';
 
 const unavailable = /Local AI is unavailable|local (?:AI|model|service).*unavailable|connect.*local|not ready/i;
 async function preview(ctx, title) {
@@ -203,5 +204,6 @@ export const journeys = [
       ctx.record.downloads.push({path: 'counter-source.zip', bytes: bytes.length, sha256: artifact.sha256}); ctx.assert('Downloaded app source matches its checked artifact identity.');
       await ctx.inspectCounter(task.id);
     }
-  }
+  },
+  laterSourceFollowupJourney
 ];

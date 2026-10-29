@@ -13,7 +13,7 @@ const question = 'Which standard does this repository host?\nUse the supplied ev
 const content = 'This repository hosts the Fetch Standard.\n' + 'More saved text. '.repeat(160);
 const page = () => describePublicSource(url, {url, type: 'text/plain', bytes: new TextEncoder().encode(content)});
 const accept: Infer = async (_system, _packet, schema) => (schema.properties as Record<string, unknown>)?.citations !== undefined
-  ? {response: 'The repository hosts the Fetch Standard.', citations: [{id: 'source-1', quote: 'This repository hosts the Fetch Standard.'}], uncertainty: 'Only the selected excerpt supports this answer.'}
+  ? {response: 'The repository hosts the Fetch Standard.', citations: [{id: 'source-1', quote: 'This repository hosts the Fetch Standard.'}], uncertainty: 'Only the selected excerpt supports this answer.',answerable:true,answerabilityReason:'The selected source explicitly names the hosted standard.'}
   : {accepted: true, reason: 'The recorded source quotes and saved question satisfy the bounded acceptance criterion.'};
 const noModel: Infer = async () => {throw new Error('Local AI is unavailable (test fixture).');};
 const tick = () => new Promise(resolve => setTimeout(resolve, 3));
@@ -22,7 +22,7 @@ async function waitFor(queue: GoalOrchestrator, id: string, check: (goal: GoalRe
   throw new Error('Goal state timed out: ' + JSON.stringify(queue.get(id)));
 }
 function host(db: Database, sources: PublicSourceLedger, infer: Infer = accept) {
-  return new GoalOrchestrator(db, {infer,
+  return new GoalOrchestrator(db, {infer,sourceLedger:sources,
     execute: (task, goal, signal, progress) => executeSourceQuestion(sources, task, goal, signal, infer, progress),
     reviewSource: (task, goal, execution, signal) => reviewSourceAcquisition(sources, task, goal, execution, signal)});
 }
@@ -82,9 +82,10 @@ test('scripted inference host-flow completes with exact citation offsets/hash an
     const goal = await waitFor(queue, created.id, item => item.status === 'completed');
     const answer = goal.tasks[1].execution!.sourceAnswer!, snapshot = sources.list(goal.id)[0];
     expect(answer.citations[0]).toEqual({sourceId: snapshot.id, label: 'source-1', quote: 'This repository hosts the Fetch Standard.', offset: 0, textSha256: snapshot.textSha256});
-    expect(answer.selections).toEqual([{sourceId: snapshot.id, label: 'source-1', start: 0, end: 800, textSha256: snapshot.textSha256}]);
+    expect(answer.selections).toEqual([{sourceId: snapshot.id, label: 'source-1', start: 0, end: 800, textSha256: snapshot.textSha256,rangeSha256:sourceHash(content.slice(0,800)),text:content.slice(0,800)}]);
+    expect(answer.readingId).toBe(sources.reading(goal.id)?.id);expect(answer.answerable).toBe(true);
     expect(roles.some(role => role.startsWith('Goal planning'))).toBe(false);
-    expect(roles.filter(role => role.startsWith('Independent milestone'))).toHaveLength(1);
+    expect(roles.filter(role => role.startsWith('Independent source-answer'))).toHaveLength(1);
     expect(roles.some(role => role.startsWith('Independent goal coverage'))).toBe(true);
     expect(goal.message).toContain('not independently verified');
   } finally {queue.shutdown(); await tick(); db.close();}
@@ -92,7 +93,7 @@ test('scripted inference host-flow completes with exact citation offsets/hash an
 
 test('a fabricated quote blocks the answer while accepted source evidence stays intact', async () => {
   const db = new Database(':memory:'), sources = new PublicSourceLedger(db, async () => page());
-  const generate: Infer = async () => ({response: 'Invented answer.', citations: [{id: 'source-1', quote: 'This sentence does not exist in the source.'}], uncertainty: ''});
+  const generate: Infer = async () => ({response: 'Invented answer.', citations: [{id: 'source-1', quote: 'This sentence does not exist in the source.'}], uncertainty: '',answerable:true,answerabilityReason:'Claimed answerability does not excuse fabricated quotes.'});
   const queue = host(db, sources, generate);
   try {
     const created = queue.create(input); queue.start();

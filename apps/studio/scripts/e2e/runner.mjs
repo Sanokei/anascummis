@@ -156,7 +156,7 @@ export async function runSuite(journeys, options) {
   try {report.source = execFileSync('git', ['rev-parse', 'HEAD'], {cwd: studioRoot, encoding: 'utf8'}).trim();} catch {}
   try {report.sourceDirty = !!execFileSync('git', ['status', '--porcelain'], {cwd: studioRoot, encoding: 'utf8'}).trim();} catch {}
   report.runnerSource = [];
-  for (const name of ['scripts/test-user-journeys.mjs', 'scripts/e2e/runner.mjs', 'scripts/e2e/journeys.mjs', 'scripts/e2e/artifacts.mjs']) {
+  for (const name of ['scripts/test-user-journeys.mjs', 'scripts/e2e/runner.mjs', 'scripts/e2e/journeys.mjs', 'scripts/e2e/artifacts.mjs', 'scripts/e2e/source-reading.mjs']) {
     report.runnerSource.push({path: name, sha256: sha(await readFile(join(studioRoot, name)))});
   }
   report.servedBuild = [];
@@ -171,9 +171,9 @@ export async function runSuite(journeys, options) {
   }
   await fingerprint(join(studioRoot, 'out'));
   report.applicationSource = [];
-  const applicationPaths = ['app/page.tsx', 'app/style.css', 'core/server.ts', 'core/workspace-export.ts',
+  const applicationPaths = ['app/page.tsx', 'app/style.css', 'components/GoalPanel.tsx', 'components/GoalSources.tsx', 'core/server.ts', 'core/workspace-export.ts',
     'core/orchestrator.ts', 'core/harness.ts', 'core/model.ts', 'core/model-scheduler.ts', 'core/decision-routing.ts', 'core/working-memory.ts', 'core/tools.ts',
-    'core/analysis-harness.ts', 'core/source-question.ts', 'core/public-source.ts', 'core/goal-executor.ts', 'core/goal-orchestrator.ts',
+    'core/analysis-harness.ts', 'core/source-question.ts', 'core/source-passages.ts', 'core/public-source.ts', 'core/goal-executor.ts', 'core/goal-orchestrator.ts',
     'core/software-api.ts', 'core/software-task.ts', 'core/software-runner.ts', 'core/software-recipes.ts', 'worker/software-browser.mjs'];
   for (const name of applicationPaths) {try {report.applicationSource.push({path: name, sha256: sha(await readFile(join(studioRoot, name)))});} catch {}}
   const browser = await chromium.launch({executablePath: await browserPath(), headless: true});

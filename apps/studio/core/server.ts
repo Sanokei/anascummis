@@ -23,7 +23,7 @@ import {zip} from './zip';
 import {WorkJournal} from './work-journal';
 import {GoalOrchestrator,type GoalRecord} from './goal-orchestrator';
 import {executeGoalTask} from './goal-executor';
-import {PublicSourceLedger} from './public-source';
+import {PublicSourceLedger,sourceHash} from './public-source';
 import {reviewSourceAcquisition} from './source-question';
 import {stopGoalSoftware,reconcileGoalSoftware,goalSoftwareLinks} from './goal-software';
 import {importMedia,listMedia,listVideoPlans,media,mediaPath,videoPlan,videoTools} from './video';
@@ -33,8 +33,8 @@ const jobs=new Map<string,{status:string;controller:AbortController;result?:unkn
 const workJournal=new WorkJournal(db);
 let shuttingDown=false;
 const goalSources=new PublicSourceLedger(db);
-const goals=new GoalOrchestrator(db,{infer,execute:(task,goal,signal,progress)=>executeGoalTask(task,goal,signal,()=>shuttingDown,goalSources,progress),reviewSource:(task,goal,execution,signal)=>reviewSourceAcquisition(goalSources,task,goal,execution,signal),allowedSpecialists:['analysis','website','pdf','scene','commerce','research','video','video_sources','software']});
-const goalResponse=(goal:GoalRecord)=>{const links=goalSoftwareLinks(goal.id);return {...goal,...(goal.sourceQuestion?{sources:goalSources.list(goal.id)}:{}),tasks:goal.tasks.map(task=>({...task,...(links[task.id]?{softwareTaskId:links[task.id]}:{})}))};};
+const goals=new GoalOrchestrator(db,{infer,sourceLedger:goalSources,execute:(task,goal,signal,progress)=>executeGoalTask(task,goal,signal,()=>shuttingDown,goalSources,progress),reviewSource:(task,goal,execution,signal)=>reviewSourceAcquisition(goalSources,task,goal,execution,signal),allowedSpecialists:['analysis','website','pdf','scene','commerce','research','video','video_sources','software']});
+const goalResponse=(goal:GoalRecord)=>{const links=goalSoftwareLinks(goal.id),answer=goal.tasks.find(task=>task.sourceAnswer)?.execution?.sourceAnswer;return {...goal,...(goal.sourceQuestion?{sources:goalSources.list(goal.id),reading:goalSources.reading(goal.id,'source-answer',answer?.readingId?{id:answer.readingId}:{questionSha256:sourceHash(goal.request+(goal.guidance?'\nContinuation guidance: '+goal.guidance:''))},false)}:{}),tasks:goal.tasks.map(task=>({...task,...(links[task.id]?{softwareTaskId:links[task.id]}:{})}))};};
 const json=(v:unknown,status=200)=>Response.json(v,{status,headers:{'Cache-Control':'no-store'}});
 function activityPagination(url:URL){const raw=url.searchParams.get('limit');if(raw!==null&&!/^[1-9][0-9]*$/.test(raw))throw new Error('Choose an activity history limit from 1 to 100');return {limit:raw===null?25:Number(raw),before:url.searchParams.get('before')??undefined};}
 const download=(bytes:Uint8Array,type:string,name:string)=>new Response(bytes as any,{headers:{'Content-Type':type,'Content-Disposition':`attachment; filename="${name.replace(/[^\w.-]/g,'_')}"`,'Cache-Control':'no-store'}});
@@ -64,6 +64,8 @@ async function handleLocal(req:Request):Promise<Response>{
       if(req.method==='POST'){const a=object(await req.json()),projectId=text(a.project,100),documentId=a.document?text(a.document,100):undefined;getProject(projectId);if(documentId)document(documentId);return json(goalResponse(goals.create({request:text(a.request,8000),projectId,documentId,research:a.research===true,sourceQuestion:a.sourceQuestion})),202);}
       return json({error:'Unsupported goal operation'},405);
     }
+    const readingMatch=/^\/api\/goals\/([a-f0-9-]{36})\/readings(?:\/([a-f0-9-]{36}))?$/.exec(path);
+    if(readingMatch){try{if(!goals.get(readingMatch[1]).sourceQuestion)return json({error:'Source question not found'},404);}catch{return json({error:'Goal not found'},404);}if(req.method!=='GET')return json({error:'Saved reading history is read-only'},405);if(readingMatch[2]){const plan=goalSources.reading(readingMatch[1],'source-answer',{id:readingMatch[2]});if(!plan)return json({error:'Saved reading not found in this goal'},404);return json({...plan,result:goalSources.readingResult(readingMatch[1],plan.id),resultCount:goalSources.resultCount(readingMatch[1],plan.id)});}const page=activityPagination(url);return json(goalSources.readingPage(readingMatch[1],url.searchParams.has('limit')?page.limit:10,page.before));}
     const sourceMatch=/^\/api\/goals\/([a-f0-9-]{36})\/sources\/([a-f0-9-]{36})$/.exec(path);
     if(sourceMatch){if(req.method!=='GET')return json({error:'Saved sources are read-only'},405);goals.get(sourceMatch[1]);const raw=url.searchParams.get('offset')||'0';if(!/^(0|[1-9][0-9]*)$/.test(raw))throw new Error('Invalid saved-text position');return json(goalSources.page(sourceMatch[1],sourceMatch[2],Number(raw)));}
     const goalMatch=/^\/api\/goals\/([a-f0-9-]{36})(?:\/(stop|resume|activity))?$/.exec(path);

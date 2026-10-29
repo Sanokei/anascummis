@@ -26,6 +26,7 @@ Use `CHROME_PATH` if Chrome is outside the detected platform paths, `BUN_PATH` i
 | Personalize a bakery website | Submit the full request, check exact requested title/subtitle in the preview, reload, and inspect the actual exported ZIP. If AI is unavailable, check recovery separately and mark the user goal blocked. |
 | Export the intended file | Start with a missing-PDF request and require a clear error with no wrong download. Open a real PDF via the picker; preview the website; obtain actual website HTML/ZIP and PDF/PNG, without confusing their targets or editing the original. |
 | Answer from a public source | Submit a focused question and public URL through Goals; inspect retained source identity, reload, and require an actual answer with literal source citations. Source retention alone is not an answered question. |
+| Read later evidence and follow up | Ask for two facts beyond the opening excerpt, inspect the persisted reading and exact citations, then explicitly ask a linked question from the saved copies. Require both real answers, no refetch or parent change, and an unsupported-address control that stays unfinished. |
 | Build a counter application | Submit a real software request, retain progress across reload, and require the actual checked download. Independent interactive app acceptance is a separate required stage; absent execution proof remains blocked rather than being counted as an achieved goal. |
 
 ## Outcomes and evidence
