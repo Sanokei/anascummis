@@ -277,18 +277,18 @@ export class GoalOrchestrator {
   /** The server supplies a verified base document identity. Client input cannot
    * choose files, tool operations or a revision. Duplicate delivery returns the
    * original child without restarting it. */
-  existingDocumentEdit(parentId:string,requestKey:string,intent:string):GoalRecord|undefined {
+  existingDocumentEdit(parentId:string,requestKey:string,intent:string,sentenceLabels?:[string,string]):GoalRecord|undefined {
     const row=this.db.query('SELECT goal_id FROM goal_document_edit_requests WHERE parent_id=? AND request_key=?').get(parentId,requestKey) as {goal_id:string}|null;
     if(!row)return undefined;
     const saved=this.get(row.goal_id);
-    if(saved.documentEdit?.intent!==intent)throw new Error('This edit identity already saved another intent. Inspect its original proposal before starting another.');
+    if(saved.documentEdit?.intent!==intent||JSON.stringify(saved.documentEdit?.sentenceLabels)!==JSON.stringify(sentenceLabels))throw new Error('This edit identity already saved another intent or sentence format. Inspect its original proposal before starting another.');
     return saved;
   }
 
   createDocumentEdit(parentId:string,input:DocumentEditRequest):GoalRecord {
     if(!this.options.reviewDocumentEdit)throw new Error('The native document edit host is unavailable.');
     const child=this.db.transaction(()=>{
-      const existing=this.existingDocumentEdit(parentId,input.requestKey,input.intent);if(existing)return existing;
+      const existing=this.existingDocumentEdit(parentId,input.requestKey,input.intent,input.sentenceLabels);if(existing)return existing;
       const parent=this.get(parentId),artifact=parent.tasks.find(task=>task.sourceBrief)?.execution?.briefArtifact;
       if(!parent.brief||parent.status!=='completed'||!parent.coverageDone||input.parentGoalId!==parent.id||!artifact||input.documentId!==artifact.documentId||input.basePdfSha256!==artifact.pdfSha256||input.baseRevision!==0||!input.intent.trim()||input.intent.length>500||!/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(input.requestKey))throw new Error('Finish and inspect the accepted original research brief before editing.');
       const created=this.create({request:input.intent,projectId:parent.projectId,documentId:input.documentId},true);

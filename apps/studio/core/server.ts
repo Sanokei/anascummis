@@ -27,7 +27,7 @@ import {executeGoalTask} from './goal-executor';
 import {PublicSourceLedger,sourceHash} from './public-source';
 import {reviewSourceAcquisition} from './source-question';
 import {ResearchBriefStore} from './research-brief';
-import {ResearchBriefEditStore} from './research-brief-edit';
+import {ResearchBriefEditStore,validateDocumentEditLabels} from './research-brief-edit';
 import {stopGoalSoftware,reconcileGoalSoftware,goalSoftwareLinks} from './goal-software';
 import {importMedia,listMedia,listVideoPlans,media,mediaPath,videoPlan,videoTools} from './video';
 const port=Number(process.env.STUDIO_PORT||3211),origin=`http://127.0.0.1:${port}`,token=crypto.randomUUID();
@@ -100,8 +100,8 @@ async function handleLocal(req:Request):Promise<Response>{
         return new Response(file.bytes as any,{headers:{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; sandbox allow-top-navigation-by-user-activation; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Cache-Control':'no-store'}});
       }
       if(req.method!=='POST')return json({error:'Use the saved goal to inspect its document edit'},405);
-      const a=object(await req.json());if(Object.keys(a).some(key=>!['requestKey','intent'].includes(key)))throw new Error('A native edit accepts only its exact intent and submission identity.');
-      const submitted={requestKey:text(a.requestKey,100),intent:text(a.intent,500)},existing=goals.existingDocumentEdit(goal.id,submitted.requestKey,submitted.intent);
+      const a=object(await req.json());if(Object.keys(a).some(key=>!['requestKey','intent','sentenceLabels'].includes(key)))throw new Error('A native edit accepts only its exact intent, optional sentence labels and submission identity.');
+      const editIntent=text(a.intent,500),labels=validateDocumentEditLabels(editIntent,a.sentenceLabels),submitted={requestKey:text(a.requestKey,100),intent:editIntent,...(labels?{sentenceLabels:labels}:{})},existing=goals.existingDocumentEdit(goal.id,submitted.requestKey,submitted.intent,submitted.sentenceLabels);
       if(existing)return json(goalResponse(existing),202);
       const prepared=await researchBriefEdits.prepare(goal,submitted);return json(goalResponse(goals.createDocumentEdit(goal.id,prepared)),202);
     }

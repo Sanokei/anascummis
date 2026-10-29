@@ -26,4 +26,27 @@ describe('document edit browser drafts and uncertain approvals', () => {
     expect(readBriefEditApproval(JSON.stringify(approval))).toEqual(approval);
     for (const value of [{...approval, operationId: 'other'}, {...approval, proposalSha256: 'a'.repeat(63)}, null, []]) expect(() => readBriefEditApproval(JSON.stringify(value))).toThrow('Inspect');
   });
+  test('optional sentence format keeps incomplete labels and an exact submitted snapshot', () => {
+    expect(readBriefEditDraft(JSON.stringify(original()))).toEqual(original()); // Earlier v1 drafts remain free prose.
+    const partial: BriefEditFormDraft = {...original(), sentenceLabels: ['Tests:', '']};
+    expect(readBriefEditDraft(JSON.stringify(partial))).toEqual(partial);
+    expect(() => beginBriefEditSubmission(partial)).toThrow('different nonempty');
+    expect(() => beginBriefEditSubmission({...partial, sentenceLabels: ['Tests:', 'Tests:']})).toThrow('different nonempty');
+    const spaced: BriefEditFormDraft = {...partial, sentenceLabels: [' Tests:', 'Browser results:']};
+    expect(readBriefEditDraft(JSON.stringify(spaced))).toEqual(spaced);
+    expect(() => beginBriefEditSubmission(spaced)).toThrow('leading or trailing spaces');
+    const labelled: BriefEditFormDraft = {...original(), sentenceLabels: ['Tests:', 'Browser results:']}, pending = beginBriefEditSubmission(labelled);
+    expect(pending.submitted?.sentenceLabels).toEqual(['Tests:', 'Browser results:']);
+    expect(readBriefEditDraft(JSON.stringify(pending))).toEqual(pending);
+    expect(settleBriefEditSubmission(pending, pending.submitted!, () => newer)).toBeUndefined();
+    expect(settleBriefEditSubmission({...pending, sentenceLabels: ['Checks:', 'Browser results:']}, pending.submitted!, () => newer)).toEqual({...labelled, requestKey: newer, sentenceLabels: ['Checks:', 'Browser results:']});
+    expect(() => settleBriefEditSubmission(pending, {...pending.submitted!, sentenceLabels: ['Other:', 'Results:']}, () => newer)).toThrow('does not match');
+  });
+  test('unchecked unsent labels survive acknowledgement and invalid labels are not silently shortened', () => {
+    const cached: BriefEditFormDraft = {...original(), labelDraft: ['Tests:', 'Browser results:']}, pending = beginBriefEditSubmission(cached);
+    expect(pending.submitted).toEqual({requestKey: key, intent: cached.intent});
+    expect(readBriefEditDraft(JSON.stringify(cached))).toEqual(cached);
+    expect(settleBriefEditSubmission(pending, pending.submitted!, () => newer)).toEqual({...cached, requestKey: newer});
+    for (const value of [{...original(), sentenceLabels: ['a'.repeat(33), 'Results:']}, {...original(), sentenceLabels: ['Only one']}, {...original(), labelDraft: ['Tests:', 3]}, {...original(), submitted: {...original(), sentenceLabels: ['', '']}}]) expect(() => readBriefEditDraft(JSON.stringify(value))).toThrow('could not be read');
+  });
 });

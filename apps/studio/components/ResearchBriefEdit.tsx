@@ -5,7 +5,7 @@ import type {DocumentEditRequest, DocumentEditState} from '../core/research-brie
 import type {BriefDraft} from '../core/research-brief-types';
 import {
   beginBriefEditSubmission, readBriefEditApproval, readBriefEditDraft, sameBriefEditApproval,
-  sameBriefEditSubmission, settleBriefEditSubmission,
+  sameBriefEditSubmission, settleBriefEditSubmission, validBriefEditLabels,
   type BriefEditApproval, type BriefEditFormDraft, type BriefEditSubmission
 } from '../core/research-brief-edit-draft';
 
@@ -103,7 +103,7 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
   return <section className="research-brief-edit" aria-label="Research brief edit">
     <h4>Edit the research brief</h4>
     <p>{state ? phases[state.phase] : 'The exact edit request is saved. Waiting for the document specialist.'}</p>
-    <section className="research-brief-edit-intent" aria-label="Requested change"><h5>Requested change</h5><p>{request.intent}</p></section>
+    <section className="research-brief-edit-intent" aria-label="Requested change"><h5>Requested change</h5><p>{request.intent}</p>{request.sentenceLabels && <><p>Requested sentence labels: {request.sentenceLabels.join(' / ')}</p><small>The host adds these exact labels to two native-written factual sentences. The model supplies their content; the host does not add facts.</small></>}</section>
     <small>This edit changes only the factual brief paragraph. The title, complete personal notes, accepted research and literal citation evidence are preserved. It is not an arbitrary PDF-layout edit.</small>
     {(pending || unknownApproval) && <div className="research-brief-edit-notice" aria-label="Unconfirmed edit approval">
       <p>Apply needs inspection before another approval. Opening or reloading this window does not replay it.</p>
@@ -116,6 +116,7 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
     </div>}
     {state?.draftCheck && <p>{state.draftCheck.accepted ? 'Host proposal checks passed: ' : 'Host proposal checks need attention: '}{state.draftCheck.reason}</p>}
     {state?.supportReview && <p>{state.supportReview.supported ? 'Native support review passed: ' : 'Native support review needs attention: '}{state.supportReview.reason}</p>}
+    {state?.projection && <details><summary>Host sentence formatting</summary><p>{state.projection.method}</p><small>The native response remains unchanged in the operation inspection below. The displayed proposal includes your exact requested labels.</small><small>{state.projection.version}</small><small>Native response SHA-256 {state.projection.rawSha256}</small><small>Proposed wording SHA-256 {state.projection.proposalSha256}</small></details>}
     {canApply && !pending && !unknownApproval && <div className="research-brief-edit-approval">
       <p>Compare the wording above. Apply saves one revised version and uses the updated document presentation. The original files remain available below.</p>
       <button type="button" disabled={busy || !loaded} onClick={() => void apply()}>Apply proposed edit</button>
@@ -189,12 +190,24 @@ function EditCreation({goal, onCreated}: Props) {
     if (!current.current) save({version: 1, requestKey: crypto.randomUUID(), intent: ''});
     setOpen(true); requestAnimationFrame(() => intentInput.current?.focus());
   }
+  function sentenceMode(enabled: boolean) {
+    const previous = current.current;
+    if (!previous) return;
+    const {sentenceLabels, labelDraft, ...rest} = previous, labels = sentenceLabels || labelDraft || ['', ''];
+    save({...rest, ...(enabled ? {sentenceLabels: [labels[0], labels[1]] as [string, string]} : {labelDraft: [labels[0], labels[1]] as [string, string]})});
+  }
+  function editLabel(index: 0 | 1, value: string) {
+    const previous = current.current;
+    if (!previous?.sentenceLabels) return;
+    const sentenceLabels: [string, string] = [...previous.sentenceLabels]; sentenceLabels[index] = value;
+    save({...previous, sentenceLabels});
+  }
   function confirmed(child: EditGoal, submitted: BriefEditSubmission) {
     if (child.parentGoalId !== goal.id || child.documentEdit?.parentGoalId !== goal.id || !sameBriefEditSubmission(child.documentEdit, submitted)) throw new Error('The saved edit does not match the exact requested change and submission identity.');
     if (!current.current) throw new Error('The pending edit draft is missing. Inspect saved goals before submitting again.');
     const next = settleBriefEditSubmission(current.current, submitted, () => crypto.randomUUID());
     save(next); setCheckedMissing(false); if (!next) setOpen(false);
-    setMessage(next ? 'The submitted edit is saved. Your newer requested change remains here as an unsent draft.' : 'The exact requested change is saved in a linked edit goal. Review its proposal before applying.');
+    setMessage(next ? 'The submitted edit is saved. Your unsent requested change or sentence labels remain here as a separate browser draft.' : 'The exact requested change and format are saved in a linked edit goal. Review its proposal before applying.');
     onCreated(child);
   }
   async function submit(retry = false) {
@@ -233,13 +246,20 @@ function EditCreation({goal, onCreated}: Props) {
       <p>The local AI proposes a change to this saved brief’s factual paragraph. Review the before/after wording before applying one new version. The complete notes and citation evidence remain unchanged.</p>
       <label>Requested brief change<textarea ref={intentInput} aria-label="Requested brief change" value={draft.intent} maxLength={500} onChange={event => {if (current.current) save({...current.current, intent: event.target.value});}} placeholder="Describe the specific paragraph change you want."/></label>
       <small>Up to 500 characters. This request stays in this browser until you explicitly save it. This action creates the first edit of an unchanged brief; existing revisions, imported PDF layouts and arbitrary page edits are outside its scope.</small>
+      <fieldset className="research-brief-edit-format"><legend>Optional sentence format</legend>
+        <label className="goal-option"><input type="checkbox" aria-label="Two labelled sentences" checked={!!draft.sentenceLabels} onChange={event => sentenceMode(event.target.checked)}/>Two labelled sentences</label>
+        <label>First sentence label<input aria-label="First sentence label" value={(draft.sentenceLabels || draft.labelDraft)?.[0] || ''} maxLength={32} disabled={!draft.sentenceLabels} onChange={event => editLabel(0, event.target.value)} placeholder="Tests:"/></label>
+        <label>Second sentence label<input aria-label="Second sentence label" value={(draft.sentenceLabels || draft.labelDraft)?.[1] || ''} maxLength={32} disabled={!draft.sentenceLabels} onChange={event => editLabel(1, event.target.value)} placeholder="Browser results:"/></label>
+        <small>When checked, the local model writes two factual sentences and the host adds your labels exactly. Labels stay in this browser when unchecked and are not sent with a free-prose request.</small>
+        {draft.sentenceLabels && !validBriefEditLabels(draft.sentenceLabels) && <p role="status">Enter two different nonempty sentence labels, at most 32 characters each, without leading or trailing spaces.</p>}
+      </fieldset>
       {draft.submitted && <div className="research-brief-edit-notice" aria-label="Unconfirmed edit submission">
         <p>The original submission needs inspection. Any newer wording above is kept as a separate unsent draft.</p>
-        <details><summary>Original submitted change</summary><p>{draft.submitted.intent}</p><small>Submission {draft.submitted.requestKey}</small></details>
+        <details><summary>Original submitted change</summary><p>{draft.submitted.intent}</p>{draft.submitted.sentenceLabels && <p>Submitted sentence labels: {draft.submitted.sentenceLabels.join(' / ')}</p>}<small>Submission {draft.submitted.requestKey}</small></details>
         <button ref={inspectButton} type="button" disabled={busy} onClick={() => void inspect()}>Inspect saved edits</button>
         {checkedMissing && <button type="button" disabled={busy || unavailable} onClick={() => void submit(true)}>Retry saved edit submission</button>}
       </div>}
-      <div className="goal-actions research-brief-actions"><button type="submit" disabled={busy || unavailable || !!draft.submitted || !draft.intent.trim()}>Save edit and propose changes</button><button type="button" onClick={() => setOpen(false)}>Close edit form</button></div>
+      <div className="goal-actions research-brief-actions"><button type="submit" disabled={busy || unavailable || !!draft.submitted || !draft.intent.trim() || (!!draft.sentenceLabels && !validBriefEditLabels(draft.sentenceLabels))}>Save edit and propose changes</button><button type="button" onClick={() => setOpen(false)}>Close edit form</button></div>
     </form>}
     {storageError && <p role="status">{storageError}</p>}
     <p ref={notice} role="status" tabIndex={-1}>{message}</p>

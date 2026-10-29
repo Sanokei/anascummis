@@ -17,7 +17,8 @@ test('document edit UI preserves an uncertain request and approval without repla
       before: {paragraphs: [{text: 'The test location and results are described together.', citations: [1, 2]}]},
       proposal: {paragraphs: [{text: 'Tests: See the saved test location. Browser results: See the saved results location.', citations: [1, 2]}]}, proposalSha256: proposalHash,
       preserved: {title: parent.brief.title, notes: parent.brief.notes, citations: [{number: 1, quote: 'Literal `source` [label](https://example.com/source)', sourceId: 'source', offset: 3, textSha256: 'e'.repeat(64)}]},
-      writingAttempt: {sha256: 'd'.repeat(64), raw: {paragraphs: [{text: '<script>window.editExecuted=true</script>', citations: [1, 2]}]}},
+      writingAttempt: {sha256: 'd'.repeat(64), raw: {first: {text: '<script>window.editExecuted=true</script>', citations: [1]}, second: {text: 'Native results sentence.', citations: [2]}}},
+      projection: {version: 'brief-labelled-sentences-v1', method: 'The host adds the exact requested labels to two native-written sentences; it does not supply facts.', rawSha256: 'd'.repeat(64), proposalSha256: proposalHash},
       draftCheck: {accepted: true, reason: 'The exact proposal passes the bounded host checks.'}, supportReview: {supported: true, reason: 'The retained evidence supports both locations.'}}});
   const entry = join(folder, 'entry.tsx');
   await Bun.write(entry, `import React from 'react';import{createRoot}from'react-dom/client';import{ResearchBriefEdit}from ${JSON.stringify(resolve('components/ResearchBriefEdit.tsx'))};const root=createRoot(document.getElementById('root'));window.showEdit=goal=>root.render(<ResearchBriefEdit goal={goal} onCreated={next=>{window.lastCreated=next;if(location.search)window.showEdit(next);}} onOpenDocument={id=>window.lastOpened=id}/>);if(location.search)fetch('/api/goals/00fab2c6-23dd-4db1-a875-e17ae7121cdf').then(r=>r.json()).then(window.showEdit);else window.showEdit(${JSON.stringify(parent)});`);
@@ -47,8 +48,33 @@ test('document edit UI preserves an uncertain request and approval without repla
     await page.getByRole('button', {name: 'Edit brief', exact: true}).click();
     const intent = 'Use two sentences labelled Tests: and Browser results:. Keep all notes and citation evidence.';
     await page.getByLabel('Requested brief change', {exact: true}).fill(intent);
+    await page.getByRole('checkbox', {name: 'Two labelled sentences', exact: true}).check();
+    await page.getByLabel('First sentence label', {exact: true}).fill('Tests:');
+    expect(await page.getByRole('button', {name: 'Save edit and propose changes', exact: true}).isDisabled()).toBe(true);
     await page.reload();
     expect(await page.getByLabel('Requested brief change', {exact: true}).inputValue()).toBe(intent);
+    expect(await page.getByRole('checkbox', {name: 'Two labelled sentences', exact: true}).isChecked()).toBe(true);
+    expect(await page.getByLabel('First sentence label', {exact: true}).inputValue()).toBe('Tests:');
+    expect(await page.getByLabel('Second sentence label', {exact: true}).inputValue()).toBe('');
+    expect(await page.getByRole('button', {name: 'Save edit and propose changes', exact: true}).isDisabled()).toBe(true);
+    await page.getByLabel('Second sentence label', {exact: true}).fill('Tests:');
+    expect(await page.getByRole('button', {name: 'Save edit and propose changes', exact: true}).isDisabled()).toBe(true);
+    await page.getByLabel('Second sentence label', {exact: true}).fill('Browser results:');
+    await page.getByLabel('First sentence label', {exact: true}).fill(' Tests:');
+    expect(await page.getByRole('button', {name: 'Save edit and propose changes', exact: true}).isDisabled()).toBe(true);
+    expect(await page.getByLabel('First sentence label', {exact: true}).inputValue()).toBe(' Tests:');
+    await page.getByLabel('First sentence label', {exact: true}).fill('Tests:');
+    expect(await page.getByRole('checkbox', {name: 'Two labelled sentences', exact: true}).evaluate(input => input.closest('label')!.getBoundingClientRect().height)).toBeGreaterThanOrEqual(44);
+    await page.getByRole('checkbox', {name: 'Two labelled sentences', exact: true}).uncheck();
+    await page.reload();
+    expect(await page.getByRole('checkbox', {name: 'Two labelled sentences', exact: true}).isChecked()).toBe(false);
+    expect(await page.getByLabel('First sentence label', {exact: true}).isDisabled()).toBe(true);
+    expect(await page.getByLabel('First sentence label', {exact: true}).inputValue()).toBe('Tests:');
+    expect(await page.getByLabel('Second sentence label', {exact: true}).inputValue()).toBe('Browser results:');
+    await page.getByRole('checkbox', {name: 'Two labelled sentences', exact: true}).check();
+    await page.getByRole('button', {name: 'Close edit form', exact: true}).click();
+    await page.getByRole('button', {name: 'Continue edit draft', exact: true}).click();
+    expect(await page.getByLabel('Second sentence label', {exact: true}).inputValue()).toBe('Browser results:');
     expect(posts).toBe(0); expect(applies).toBe(0);
     await page.route('**/api/goals/*/document-edit', async route => {await route.fetch(); await route.abort('failed');});
     await page.getByRole('button', {name: 'Save edit and propose changes', exact: true}).click();
@@ -58,15 +84,21 @@ test('document edit UI preserves an uncertain request and approval without repla
     await page.getByRole('button', {name: 'Inspect saved edits', exact: true}).waitFor();
     expect(posts).toBe(1); expect(applies).toBe(0);
     await page.getByLabel('Requested brief change', {exact: true}).fill('A newer unsent request');
+    await page.getByLabel('First sentence label', {exact: true}).fill('Checks:');
     await page.getByRole('button', {name: 'Inspect saved edits', exact: true}).click();
     await page.waitForFunction(() => !!(window as any).lastCreated);
     expect(posts).toBe(1); expect(applies).toBe(0);
     expect(await page.getByLabel('Requested brief change', {exact: true}).inputValue()).toBe('A newer unsent request');
+    expect(await page.getByLabel('First sentence label', {exact: true}).inputValue()).toBe('Checks:');
     expect(await page.evaluate(() => (window as any).lastCreated.documentEdit.intent)).toBe(intent);
+    expect(await page.evaluate(() => (window as any).lastCreated.documentEdit.sentenceLabels)).toEqual(['Tests:', 'Browser results:']);
 
     await page.goto(server.url.href + '?child=1');
     await page.getByRole('region', {name: 'Before edit', exact: true}).waitFor();
     expect(await page.getByRole('region', {name: 'Proposed edit', exact: true}).innerText()).toContain('Tests:');
+    expect(await page.getByText('Requested sentence labels: Tests: / Browser results:', {exact: true}).isVisible()).toBe(true);
+    await page.getByText('Host sentence formatting', {exact: true}).click();
+    expect(await page.getByText('The host adds the exact requested labels to two native-written sentences; it does not supply facts.', {exact: true}).isVisible()).toBe(true);
     const apply = page.getByRole('button', {name: 'Apply proposed edit', exact: true});
     await apply.scrollIntoViewIfNeeded();
     expect((await apply.boundingBox())!.height).toBeGreaterThanOrEqual(44);
@@ -109,6 +141,7 @@ test('document edit UI preserves an uncertain request and approval without repla
     await page.getByLabel('Requested brief change', {exact: true}).waitFor();
     await page.evaluate(next => (window as any).showEdit(next), {...parent, briefEditEligibility: {canEdit: false, reason: 'This document already has a newer version. Open the linked edit goal.'}});
     expect(await page.getByLabel('Requested brief change', {exact: true}).inputValue()).toBe('A newer unsent request');
+    expect(await page.getByLabel('First sentence label', {exact: true}).inputValue()).toBe('Checks:');
     expect(await page.getByRole('button', {name: 'Save edit and propose changes', exact: true}).isDisabled()).toBe(true);
     expect(await page.getByText('This document already has a newer version. Open the linked edit goal.', {exact: true}).isVisible()).toBe(true);
     expect(posts).toBe(1); expect(applies).toBe(1);

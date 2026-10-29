@@ -4,9 +4,9 @@ import {join,resolve} from 'node:path';
 import {mkdtemp,rm,readFile,writeFile,readdir,symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {ResearchBriefStore,BRIEF_WRITER_ROLE} from '../core/research-brief';
-import {ResearchBriefEditStore,DOCUMENT_EDIT_ROLE} from '../core/research-brief-edit';
+import {ResearchBriefEditStore,DOCUMENT_EDIT_ROLE,DOCUMENT_EDIT_LABELLED_ROLE,validateDocumentEditLabels} from '../core/research-brief-edit';
 import {PublicSourceLedger,describePublicSource,sourceHash} from '../core/public-source';
-import type {GoalRecord,GoalTask,SourceAnswer} from '../core/goal-orchestrator';
+import {GoalOrchestrator,type GoalRecord,type GoalTask,type SourceAnswer} from '../core/goal-orchestrator';
 import type {Infer} from '../core/model';
 
 const signal=()=>new AbortController().signal,noop=()=>{};
@@ -210,4 +210,56 @@ test('Stop while Apply verifies the original wins over its stale needs-input sna
     expect((JSON.parse((f.db.query('SELECT body FROM goal_tasks WHERE id=?').get(f.goal.id) as {body:string}).body) as GoalRecord).status).toBe('cancelled');expect(f.calls.length).toBe(2);expect(f.counts().renders).toBe(1);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:1});
     expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'brief.html'))).toEqual(f.originalHtml);
   }finally{release();await f.close();}
+});
+
+async function requestLabels(f:Awaited<ReturnType<typeof fixture>>,editIntent=intent){
+  const request=await f.store.prepare(f.parent,{requestKey:crypto.randomUUID(),intent:editIntent,sentenceLabels:['Tests:','Browser results:']});
+  f.goal.documentEdit=request;f.goal.request=editIntent;f.db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(f.goal),f.goal.id);return request;
+}
+
+test('typed sentence format preserves two exact native fields and a disclosed pure label projection across interrupted retry and one apply',async()=>{
+  const f=await fixture();try{
+    await requestLabels(f);
+    const raw={first:{text:'  Fetch tests are kept in fetch/ in web-platform-tests/wpt.  ',citations:[1]},second:{text:'Browser results are displayed at wpt.fyi/results/fetch.',citations:[1]}};let writers=0,reviews=0;
+    const infer:Infer=async(role,packet)=>{if(role===DOCUMENT_EDIT_LABELLED_ROLE){writers++;expect(JSON.parse(packet).sentenceLabels).toEqual(['Tests:','Browser results:']);return raw;}reviews++;return {supported:true,reason:'Injected support checks both exact native location statements; not genuine model-quality evidence.'};};
+    await expect(f.store.execute(f.task,f.goal,signal(),infer,phase=>{if(phase==='edit_proposal_saved')throw new Error('injected projected-proposal stop');})).rejects.toThrow('projected-proposal stop');
+    const saved=f.store.state(f.goal.id)!,projected='Tests: '+raw.first.text.trim()+' Browser results: '+raw.second.text.trim();
+    expect(saved.writingAttempt?.raw).toEqual(raw);expect(saved.proposal).toEqual({paragraphs:[{text:projected,citations:[1]}]});expect(saved.projection).toMatchObject({version:'brief-labelled-sentences-v1',rawSha256:sourceHash(JSON.stringify(raw)),proposalSha256:sourceHash(JSON.stringify(saved.proposal))});expect(saved.projection?.method).toContain('Every factual sentence remains native-authored');
+    await expect(f.restart().execute(f.task,f.goal,signal(),infer,noop)).rejects.toThrow('proposal is ready');expect(writers).toBe(1);expect(reviews).toBe(1);
+    f.goal.status='needs_input';await approve(f);const result=await f.restart().execute(f.task,f.goal,signal(),infer,noop);expect(result.documentEditArtifact?.revision).toBe(1);expect(writers).toBe(1);expect(reviews).toBe(1);
+    const provenance=JSON.parse(new TextDecoder().decode((await f.store.export(f.goal,'provenance-json')).bytes));expect(provenance.evidence.nativeEdit.raw).toEqual(raw);expect(provenance.evidence.projection).toEqual(saved.projection);expect(provenance.evidence.originalBrief.input.notes).toBe(f.notes);expect(provenance.evidence.request.sentenceLabels).toEqual(['Tests:','Browser results:']);
+    expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'brief.html'))).toEqual(f.originalHtml);
+  }finally{await f.close();}
+});
+
+test('a historical native-like single-sentence proposal and false positive model review cannot waive exact quoted prefixes on Apply or Continue',async()=>{
+  const f=await fixture();try{
+    const exactIntent='Rewrite the brief summary into two short sentences. Start the first sentence with “Tests:” and the second with “Browser results:”. Keep both exact locations and citation numbers; do not change my notes or evidence.';
+    f.goal.documentEdit!.intent=exactIntent;f.goal.request=exactIntent;f.db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(f.goal),f.goal.id);
+    const bad={paragraphs:[{text:'Tests: The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).',citations:[1]}]};let calls=0;
+    await expect(f.store.execute(f.task,f.goal,signal(),async()=>{calls++;return bad;},noop)).rejects.toThrow('exact requested sentence prefix');
+    const row=f.db.query('SELECT body FROM research_brief_edits WHERE goal=?').get(f.goal.id) as {body:string},historical=JSON.parse(row.body);
+    historical.phase='awaiting_approval';historical.draftCheck={accepted:true,reason:'Injected historical pre-fix guard accepted changed prose.'};historical.supportReview={supported:true,reason:'Injected false positive: it claims a second Browser results: prefix exists.'};
+    f.db.query('UPDATE research_brief_edits SET body=? WHERE goal=?').run(JSON.stringify(historical),f.goal.id);f.goal.status='needs_input';f.db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(f.goal),f.goal.id);
+    await expect(f.store.approve(f.goal,{operationId:historical.operationId,proposalSha256:historical.proposalSha256})).rejects.toThrow('current literal edit requirements');
+    expect(f.store.state(f.goal.id)?.phase).toBe('rejected');expect(f.store.state(f.goal.id)?.draftCheck?.accepted).toBe(false);
+    await expect(f.restart().execute(f.task,f.goal,signal(),async()=>{throw new Error('must never replace the rejected native response');},noop)).rejects.toThrow('exact requested sentence prefix');
+    const rejected=f.store.state(f.goal.id)!;expect(rejected.phase).toBe('rejected');expect(rejected.writingAttempt?.raw).toEqual(bad);expect(rejected.supportReview).toEqual(historical.supportReview);expect(rejected.approvedProposalSha256).toBeUndefined();expect(calls).toBe(1);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:1});
+  }finally{await f.close();}
+});
+
+test('typed formatting rejects empty, repeated, multi-sentence or citation-duplicated native fields without authored fallback',async()=>{
+  const good={first:{text:'Fetch tests are kept in fetch/ in web-platform-tests/wpt.',citations:[1]},second:{text:'Browser results are displayed at wpt.fyi/results/fetch.',citations:[1]}};
+  for(const change of [(raw:typeof good)=>{raw.first.text='   ';},(raw:typeof good)=>{raw.first.text='Tests: '+raw.first.text;},(raw:typeof good)=>{raw.second.text+=' This is another sentence.';},(raw:typeof good)=>{raw.first.citations=[1,1];},(raw:typeof good)=>{raw.second.text=raw.first.text;}]){
+    const f=await fixture();try{await requestLabels(f);const raw=structuredClone(good);change(raw);let calls=0;await expect(f.store.execute(f.task,f.goal,signal(),async()=>{calls++;return raw;},noop)).rejects.toThrow('original edit response is unusable');const saved=f.store.state(f.goal.id)!;expect(saved.phase).toBe('rejected');expect(saved.writingAttempt?.raw).toEqual(raw);expect(saved.writingAttempt?.error).toBeTruthy();expect(saved.proposal).toBeUndefined();expect(saved.supportReview).toBeUndefined();expect(calls).toBe(1);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});}finally{await f.close();}
+  }
+});
+
+test('sentence labels are explicit, bounded and part of the exact submission identity',async()=>{
+  const f=await fixture();try{
+    for(const labels of [['','Browser results:'],['Tests:','Tests:'],[' Tests:','Browser results:'],['a'.repeat(33),'b'],['Tests:\n','b'],['one']] as unknown[]){await expect(f.store.prepare(f.parent,{requestKey:crypto.randomUUID(),intent,sentenceLabels:labels as [string,string]})).rejects.toThrow('two distinct');}
+    const literal='Start the first sentence with “Tests:” and the second with “Browser results:”.';expect(validateDocumentEditLabels(literal,['Tests:','Browser results:'])).toEqual(['Tests:','Browser results:']);expect(()=>validateDocumentEditLabels(literal,['Other:','Results:'])).toThrow('conflict');
+    const request=await f.store.prepare(f.parent,{requestKey:crypto.randomUUID(),intent,sentenceLabels:['Tests:','Browser results:']}),goals=new GoalOrchestrator(f.db,{infer:f.infer,execute:async()=>{throw new Error('must not run');},reviewDocumentEdit:async()=>({accepted:true,reason:'Injected registration fixture'})});
+    const child=goals.createDocumentEdit(f.parent.id,request);expect(goals.createDocumentEdit(f.parent.id,request).id).toBe(child.id);expect(()=>goals.createDocumentEdit(f.parent.id,{...request,sentenceLabels:['Changed:','Browser results:']})).toThrow('another intent or sentence format');expect(()=>goals.createDocumentEdit(f.parent.id,{...request,sentenceLabels:undefined})).toThrow('another intent or sentence format');expect(child.documentEdit?.sentenceLabels).toEqual(['Tests:','Browser results:']);expect(f.calls.length).toBe(0);
+  }finally{await f.close();}
 });
