@@ -4,6 +4,8 @@ The original Anascummis cyan orb on its white ground, with voice as the working 
 
 ## Current verification status
 
+For current end-to-end product checks, use [user-goal journeys](apps/studio/USER-JOURNEYS.md): `cd apps/studio && bun run test:e2e`. They exercise the ordinary UI on desktop and phone-sized viewports, inspect actual downloaded artifacts, and fail the completion gate when a requested goal is blocked. Recovery assertions and scripted model tests are kept separate from achieving the user's goal.
+
 The Bun backend has 23 passing tests and passes TypeScript checking. Tests exercise immutable PDF revisions, real PyMuPDF text edits and PNG rendering, website escaping, vault encryption, local request guards, ZIP exports, specialist tool permissions, handoff isolation, shared agent budgets, duplicate prevention, verification and cancellation.
 
 The Next.js production build and full frontend TypeScript check pass. Browser checks verify the original orb renderer and the absence of dashboard/editor/composer controls. A browser CPU round-trip synthesizes “Show my website.” with Supertonic and recognizes it with Whisper tiny English. The matching ORT factory and explicitly decompressed WASM binary ship with the app. Actual Qwen3-0.6B Q4_0 inference on four CPU threads successfully delegated a website title change, generated grounded arguments and verified the saved value in 2.66 seconds across three calls. This excludes recognition and speech; broader Qwen workflows, browser inference accuracy, native Piper and desktop installation still need verification.

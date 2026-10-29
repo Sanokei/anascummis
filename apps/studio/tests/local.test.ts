@@ -81,6 +81,18 @@ test('resource activity APIs paginate real records with strict input and existin
  }finally{manager.stopSoftwareTask(software.id);await request('/api/goals/'+goal.id+'/stop',{});cookie=previousCookie;}
 });
 test('websites escape source, reject credential leakage and require uploaded assets',()=>{const s=initialSite();s.title='<script>alert(1)</script>';expect(renderSite(s)).not.toContain('<script>alert');s.sections[0].imageId='missing';expect(checkSite(s,[]).ok).toBe(false);delete s.sections[0].imageId;s.subtitle='sk_live_testprivatekey';expect(checkSite(s,[]).ok).toBe(false);expect(()=>validateSite({...s,paymentLink:'https://buy.stripe.com.evil.test/foo'})).toThrow();expect(()=>validateSite({...s,scene:[{id:'x',kind:'box',color:'#ffffff',x:Infinity,y:0,z:0,size:1}]})).toThrow();});
+test('standalone website HTML preserves uploaded images and explicit unsupported exports fail',async()=>{
+  const project=storage.createProject('Standalone website');
+  const image=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jOioAAAAASUVORK5CYII=','base64');
+  const id=crypto.randomUUID();await Bun.write(join(storage.DATA,'assets',id),image);storage.db.query('INSERT INTO assets VALUES(?,?,?)').run(id,'logo.png','image/png');
+  project.site.sections[0].imageId=id;storage.saveProject(project.id,project.site,'Upload logo');
+  const response=await request('/api/projects/'+project.id+'/export?format=html');
+  expect(response.status).toBe(200);expect(response.headers.get('content-type')).toStartWith('text/html');
+  const html=await response.text();expect(html).toContain('data:image/png;base64,'+image.toString('base64'));expect(html).not.toContain('/api/assets/');
+  const bad=await request('/api/projects/'+project.id+'/export?format=pdf');expect(bad.status).toBe(400);
+  project.site.scene.push({id:'box',kind:'box',color:'#ffffff',x:0,y:0,z:0,size:1});storage.saveProject(project.id,project.site,'3D scene');
+  const scene=await request('/api/projects/'+project.id+'/export?format=html');expect(scene.status).toBe(400);expect((await scene.json()).error).toContain('ZIP');
+});
 test('manual edits use revision fences and restore preserves history',async()=>{const p=storage.createProject('Test studio');const s={...p.site,title:'Revision one'};expect((await request('/api/projects/'+p.id,{site:s,revision:0})).status).toBe(200);expect((await request('/api/projects/'+p.id,{site:s,revision:0})).status).toBe(400);const restored=storage.restore(p.id,0);expect(restored.revision).toBe(2);expect(restored.site.title).toBe(p.site.title);expect(storage.history(p.id)).toHaveLength(3);});
 test('typed harness rejects malformed arguments before execution',async()=>{let calls=0;const values=[{tool:'write',message:''},{value:123},{tool:'write',message:''},{value:456}];const result=await runHarness('write',{},[{name:'write',description:'write',schema:objectSchema({value:{type:'string'}}),run:async()=>{calls++;}}],new AbortController().signal,async()=>values.shift());expect(calls).toBe(0);expect(result.trace.every(x=>!x.ok)).toBe(true);expect(result.trace).toHaveLength(2);});
 test('harness executes bounded decisions and stops repeated mutations',async()=>{let calls=0;const values=[{tool:'write',message:''},{value:'x'},{tool:'write',message:''},{value:'x'},{tool:'ask',message:'The repeated write failed. Review the recorded result.'}];const result=await runHarness('write',{},[{name:'write',description:'write',schema:objectSchema({value:{type:'string'}}),run:async()=>{calls++;return {verified:true};}}],new AbortController().signal,async()=>values.shift());expect(calls).toBe(1);expect(result.trace[0].ok).toBe(true);expect(result.trace[1].ok).toBe(false);});

@@ -1,0 +1,27 @@
+# User-goal browser journeys
+
+Run from `apps/studio`, with the supported production UI already built, Bun on `PATH` (or `BUN_PATH`), Node and installed Chrome/Chromium (`CHROME_PATH` if needed):
+
+```sh
+node scripts/test-user-journeys.mjs --viewport all
+node scripts/test-user-journeys.mjs --journey website-pdf-exports --viewport narrow
+node scripts/test-user-journeys.mjs --journey bakery-website --require-model
+```
+
+`--list` lists concrete user goals. `--output DIR` chooses a new evidence directory; the default is a fresh timestamped `.test-data/user-journeys/` directory. Do not reuse a previous result directory: each journey gets a fresh database and browser session. The runner starts/stops only its own ordinary production server on a free loopback port. It does not build/package implicitly, download models/browsers, install providers, seed mutation APIs, or add scripted inference.
+
+The journeys use visible text entry, actual windows/buttons and a native file chooser. Independent GETs verify saved requests, output state and artifact identity. Actual downloaded HTML, ZIP, PDF and PNG bytes are inspected. Every AI goal is submitted through the interface and reaches a persisted outcome before its real runtime blocker is classified.
+
+| Journey | User outcome |
+| --- | --- |
+| `discover-capabilities` | Ask what is possible, then find/open Goals, Work and Software through visible actions. |
+| `bakery-website` | Ask for exact bakery copy, inspect it, reload and download it. Missing inference keeps the goal blocked while request preservation/recovery are verified separately. |
+| `website-pdf-exports` | Reject an export with no PDF honestly, import a real generated PDF through the chooser, preview a website while the PDF is attached, then export the explicitly requested website HTML/ZIP and PDF/PNG. |
+| `public-source-answer` | Save a question and real public-source snapshot, inspect it after reload, and check literal citations only when an actual model-produced answer exists. |
+| `counter-application` | Request a counter app, inspect persistent build/artifact, verify the downloaded ZIP hash, independently start the produced task's standalone bundle and exercise heading, Increment0→1→2, Reset→0 and reload→0. This uses the produced bundle, not a fresh installation of downloaded source. A blocked build instead verifies the exact kept request and explicit Resume action without claiming success. |
+
+Exit codes are **0** only when every attempted goal was achieved, **1** for failed assertions/setup, and **2** for blocked user goals. `--allow-blocked` is an explicit diagnostic override; the JSON/HTML report still says `incomplete` and keeps blocked counts. `--require-goals` enforces the default blocking gate even with that diagnostic flag. `--require-model` also fails the gate if the measured local model is unavailable. A health response alone never establishes answer quality or task completion.
+
+Each run writes `report.json` and a browsable `report.html`, with per-journey `result.json`, screenshots, local downloads, a readable Playwright trace and a host log. Source/runner and served HTML/JS/CSS build fingerprints identify what actually ran. Browser HTTP requests outside the owned host/application origins are blocked and recorded; real server-side permitted public-source fetch remains untouched. The trace is rewritten to remove ephemeral session cookies/auth headers before saving. The generated fixture databases, pairing keys, host logs and private data directories are **local diagnostics**; do not commit or publish them. Share selected screenshots, redacted traces and receipts after review. Reports contain no installed credentials or real user inputs because all user content comes from these public fixtures.
+
+To extend the suite, add a record to `journeys.mjs` with `id`, a concrete `goal`, optional `prerequisite`, and `async run(context)`. Context includes `page`, `runtime`, `readApi` (GET only), `send`, `type`, `closeComposer`, `screenshot`, `download`, `zipEntries`, `until`, `assert` and `blocked`. Assertions record verified steps; they do not mark the goal complete. `blocked(reason, evidence)` must retain a concrete unmet user outcome. Unsupported or broken behavior must not become a fake pass.

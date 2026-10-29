@@ -17,7 +17,9 @@
     "model:start": "bun scripts/model.ts start",
     "demo:build": "bun run build && bun scripts/prepare-demo.ts",
     "demo:deploy": "wrangler deploy --config wrangler.demo.jsonc",
-    "kit:build": "bun scripts/publish-sources.ts"
+    "kit:build": "bun scripts/publish-sources.ts",
+    "test:e2e": "node scripts/test-user-journeys.mjs",
+    "test:local-ai": "bun scripts/check-local-ai.ts"
   },
   "dependencies": {
     "@babylonjs/core": "^9.14.0",
