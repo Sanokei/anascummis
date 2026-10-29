@@ -1,0 +1,219 @@
+{
+  "fixture": "Scripted loopback inference with actual source mutation, provider503 after measured revision1, real persistence/context restoration and explicit verified new attempt. Native Qwen/voice not established; no speech mocking.",
+  "first": {
+    "id": "a11c01f1-1aa6-4ecc-be62-b58d4e173e8e",
+    "projectId": "beef8b7c-2c7d-4721-a9f8-11209d728712",
+    "request": "Update the website title and subtitle. Set title to Retained After Provider Failure, then set subtitle to Pending after title.",
+    "status": "failed",
+    "created": 1793271863841,
+    "updated": 1793271863896,
+    "progress": {
+      "phase": "failed",
+      "agent": "website",
+      "taskId": "task-1"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793271863841
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793271863845
+      },
+      {
+        "phase": "delegating",
+        "agent": "website",
+        "taskId": "task-1",
+        "time": 1793271863871
+      },
+      {
+        "phase": "failed",
+        "agent": "website",
+        "taskId": "task-1",
+        "time": 1793271863894
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793271863896,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "second": {
+    "id": "8bcc4ffc-481a-4b28-85a1-1f735f292f0d",
+    "projectId": "beef8b7c-2c7d-4721-a9f8-11209d728712",
+    "request": "Set website title to Explicit Retry Verified",
+    "status": "complete",
+    "created": 1793271868321,
+    "updated": 1793271868338,
+    "progress": {
+      "phase": "finished",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793271868321
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793271868323
+      },
+      {
+        "phase": "delegating",
+        "agent": "website",
+        "taskId": "task-1",
+        "time": 1793271868328
+      },
+      {
+        "phase": "verifying",
+        "agent": "website",
+        "taskId": "task-1",
+        "time": 1793271868336
+      },
+      {
+        "phase": "completed",
+        "agent": "website",
+        "taskId": "task-1",
+        "time": 1793271868337
+      },
+      {
+        "phase": "finished",
+        "agent": "coordinator",
+        "time": 1793271868337
+      },
+      {
+        "phase": "complete",
+        "agent": "coordinator",
+        "time": 1793271868338,
+        "detail": "Your website title is now Explicit Retry Verified."
+      }
+    ],
+    "outcome": "finished",
+    "message": "Your website title is now Explicit Retry Verified.",
+    "specialists": [
+      {
+        "id": "task-1",
+        "agent": "website",
+        "task": "Set website title to Explicit Retry Verified",
+        "status": "completed",
+        "message": "Your website title is now Explicit Retry Verified."
+      }
+    ]
+  },
+  "observedFailureRevision": 1,
+  "retainedTitle": "Retained After Provider Failure",
+  "finalRevision": 2,
+  "finalTitle": "Explicit Retry Verified",
+  "oldRecordAndActivityUnchanged": true,
+  "unrelatedProjectRevision": 0,
+  "posts": [
+    {
+      "project": "beef8b7c-2c7d-4721-a9f8-11209d728712",
+      "text": "Update the website title and subtitle. Set title to Retained After Provider Failure, then set subtitle to Pending after title.",
+      "research": false,
+      "savedDetails": []
+    },
+    {
+      "project": "beef8b7c-2c7d-4721-a9f8-11209d728712",
+      "text": "Set website title to Explicit Retry Verified",
+      "research": false,
+      "savedDetails": []
+    }
+  ],
+  "readinessAfterFailureBeforeManualCheck": "unavailable",
+  "modelCalls": [
+    {
+      "path": "/health",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/health",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/v1/chat/completions",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/v1/chat/completions",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/v1/chat/completions",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/v1/chat/completions",
+      "mode": "fail-after-write"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "unavailable"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "unavailable"
+    },
+    {
+      "path": "/health",
+      "mode": "unavailable"
+    },
+    {
+      "path": "/health",
+      "mode": "unavailable"
+    },
+    {
+      "path": "/health",
+      "mode": "ready"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "ready"
+    },
+    {
+      "path": "/v1/chat/completions",
+      "mode": "ready"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "ready"
+    },
+    {
+      "path": "/v1/chat/completions",
+      "mode": "ready"
+    },
+    {
+      "path": "/tokenize",
+      "mode": "ready"
+    },
+    {
+      "path": "/v1/chat/completions",
+      "mode": "ready"
+    }
+  ],
+  "pageErrors": []
+}

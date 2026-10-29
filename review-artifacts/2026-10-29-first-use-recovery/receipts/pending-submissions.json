@@ -1,0 +1,67 @@
+{
+  "fixture": "Actual ordinary server/native unavailable model. Only acceptance response delivery is held; actual APIs save/run records and no task endpoint is mocked.",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "witnesses": [
+    {
+      "path": "/api/goals",
+      "payload": {
+        "request": "Explain the first pending goal.\nOriginal payload marker ONE.",
+        "project": "83ecdcce-c3e4-40f6-9ccb-50855e81a57e",
+        "research": false
+      },
+      "status": 202,
+      "acceptedId": "4535602c-feb2-4a9f-9ce2-6292b2047ab5"
+    },
+    {
+      "path": "/api/goals/4535602c-feb2-4a9f-9ce2-6292b2047ab5/resume",
+      "payload": {
+        "note": "Original continuation guidance."
+      },
+      "status": 200,
+      "acceptedId": "4535602c-feb2-4a9f-9ce2-6292b2047ab5"
+    },
+    {
+      "path": "/api/software",
+      "payload": {
+        "goal": "Create a Bun Nextjs counter app.\nFirst pending build marker ONE."
+      },
+      "status": 200,
+      "acceptedId": "ae53180f-71bf-4b87-9b83-6c62adf4219b"
+    },
+    {
+      "path": "/api/software/ae53180f-71bf-4b87-9b83-6c62adf4219b/resume",
+      "payload": {
+        "note": "Original continuation guidance."
+      },
+      "status": 200,
+      "acceptedId": "ae53180f-71bf-4b87-9b83-6c62adf4219b"
+    },
+    {
+      "path": "/api/software/1b49605d-1e2c-4a0e-b2d4-605746429921/revise",
+      "payload": {
+        "note": "Keep the accepted counter unchanged in a separate child."
+      },
+      "status": 202,
+      "acceptedId": "f371c2f5-31f9-4e8f-8993-4880d6be367c"
+    }
+  ],
+  "newerGoalVisible": true,
+  "newerGoalGuidanceVisible": true,
+  "newerBuildVisible": true,
+  "newerSoftwareGuidanceVisible": true,
+  "newerRevisionNotePreserved": true,
+  "onePostPerPendingAction": true,
+  "noImplicitNewerDraftSubmission": true,
+  "noDuplicateSoftwareCardAfterPolling": true,
+  "acceptedParentUnchanged": true,
+  "parentZipSha": "e96cd00d5e8a108e56bfef4428fbee117935acfd5f52402f6e98e19432d16ede",
+  "pageErrors": []
+}

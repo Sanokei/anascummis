@@ -1,0 +1,234 @@
+{
+  "sourceHead": "3a9d642c1e6d8ffc52b4226f040346e27ebce5e0",
+  "fixture": "Ordinary production server and real native-unavailable inference/voice failures; isolated data; NO model, voice or API mocking.",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "work": {
+    "record": {
+      "id": "1a34aa76-43a4-4149-bbe0-9cd7d08fb860",
+      "projectId": "a8eabba7-5e1f-4541-b244-bfeb75311b00",
+      "request": "Change the website title to First Use Recovery Probe and keep the existing sections.",
+      "status": "failed",
+      "created": 1793268225902,
+      "updated": 1793268225912,
+      "progress": {
+        "phase": "routing",
+        "agent": "coordinator"
+      },
+      "events": [
+        {
+          "phase": "queued",
+          "agent": "coordinator",
+          "time": 1793268225902
+        },
+        {
+          "phase": "routing",
+          "agent": "coordinator",
+          "time": 1793268225907
+        },
+        {
+          "phase": "failed",
+          "agent": "coordinator",
+          "time": 1793268225912,
+          "detail": "Error: Unable to connect. Is the computer able to access the url?"
+        }
+      ],
+      "error": "Error: Unable to connect. Is the computer able to access the url?"
+    },
+    "visible": "Change the website title to First Use Recovery Probe and keep the existing sections.\n\nNeeds attention\n\nError: Unable to connect. Is the computer able to access the url?\n\nUpdated 10/29/2026, 10:03:45 AM\nProgress history\nOpen website",
+    "buttons": [
+      "Open website"
+    ],
+    "orbStatus": "Preparing voice…"
+  },
+  "goal": {
+    "record": {
+      "id": "86aee3d7-9e4d-4478-b71b-beecdb6833e4",
+      "request": "Set the website title to First Use Goal Probe, then explain the saved change.",
+      "projectId": "a8eabba7-5e1f-4541-b244-bfeb75311b00",
+      "research": false,
+      "status": "needs_input",
+      "phase": "needs_input",
+      "message": "Error: Unable to connect. Is the computer able to access the url?",
+      "tasks": [],
+      "created": 1793268226699,
+      "updated": 1793268226706,
+      "events": [
+        {
+          "time": 1793268226699,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "The full goal is saved and queued for planning."
+        },
+        {
+          "time": 1793268226701,
+          "role": "planner",
+          "phase": "planning",
+          "detail": "Reading the saved goal and assigning bounded, checkable milestones."
+        },
+        {
+          "time": 1793268226706,
+          "role": "coordinator",
+          "phase": "needs_input",
+          "detail": "Error: Unable to connect. Is the computer able to access the url?"
+        }
+      ],
+      "planningOffset": 0,
+      "planningDone": false,
+      "planningCalls": 1,
+      "coverageOffset": 0,
+      "coverageDone": false,
+      "notes": []
+    },
+    "visible": "Set the website title to First Use Goal Probe, then explain the saved change.\n\nNeeds attention · needs input\n\nError: Unable to connect. Is the computer able to access the url?\n\nUpdated 10/29/2026, 10:03:46 AM\n\nCoordinator · needs input\n\nGuidance for continuing\nAccepted milestones are kept. Only unfinished work is retried; review any saved changes before continuing.\nContinue remaining work\nOrchestrator history\nOpen website"
+  },
+  "software": {
+    "record": {
+      "id": "1811505e-4b6e-47e2-883a-5006326dacf5",
+      "goal": "Create a counter app titled First Use Software Probe. Count starts at zero, Increment adds one, and reload resets the count.",
+      "status": "needs_input",
+      "phase": "needs_input",
+      "revision": 0,
+      "requirements": [],
+      "events": [
+        {
+          "time": 1793268325252,
+          "phase": "queued",
+          "detail": "Queued for the local builder.",
+          "revision": 0
+        },
+        {
+          "time": 1793268325254,
+          "phase": "starting",
+          "detail": "Resuming the full saved goal and workspace.",
+          "revision": 0
+        },
+        {
+          "time": 1793268325262,
+          "phase": "planning",
+          "detail": "Extracting concrete requirements from goal page 1.",
+          "revision": 0
+        },
+        {
+          "time": 1793268325278,
+          "phase": "retrying",
+          "detail": "Retrying from the saved checkpoint: Error: Unable to connect. Is the computer able to access the url?",
+          "revision": 0
+        },
+        {
+          "time": 1793268325279,
+          "phase": "starting",
+          "detail": "Resuming the full saved goal and workspace.",
+          "revision": 0
+        },
+        {
+          "time": 1793268325280,
+          "phase": "planning",
+          "detail": "Extracting concrete requirements from goal page 1.",
+          "revision": 0
+        },
+        {
+          "time": 1793268325307,
+          "phase": "retrying",
+          "detail": "Retrying from the saved checkpoint: Error: Unable to connect. Is the computer able to access the url?",
+          "revision": 0
+        },
+        {
+          "time": 1793268325309,
+          "phase": "starting",
+          "detail": "Resuming the full saved goal and workspace.",
+          "revision": 0
+        },
+        {
+          "time": 1793268325309,
+          "phase": "planning",
+          "detail": "Extracting concrete requirements from goal page 1.",
+          "revision": 0
+        },
+        {
+          "time": 1793268325311,
+          "phase": "needs_input",
+          "detail": "Could not make verified progress: Error: Unable to connect. Is the computer able to access the url?",
+          "revision": 0
+        }
+      ],
+      "created": 1793268325235,
+      "updated": 1793268325311,
+      "calls": 3,
+      "errors": 3,
+      "message": "Could not make verified progress: Error: Unable to connect. Is the computer able to access the url?",
+      "milestoneMs": [],
+      "milestoneStarted": 1793268325235,
+      "planOffset": 0,
+      "planningDone": false,
+      "targets": [
+        "zip",
+        "exe"
+      ]
+    },
+    "visible": "Selected build\nCreate a counter app titled First Use Software Probe. Count starts at zero, Increment adds one, and reload resets the count.\n\nneeds_input · needs_input · revision 0\n\nCould not make verified progress: Error: Unable to connect. Is the computer able to access the url?\n\nElapsed 0 min · 3 model decisions\n\nPaused; no completion estimate.\n\nGuidance for continuing\nContinue this saved build. Leave guidance empty to reuse its existing instructions.\nResume checkpoint\nActivity history"
+  },
+  "existingDownloadInstructions": "×\nAnascummis on your computer\n\nThe local source kit includes the app, setup scripts and licenses. It requires Bun and Python, plus a first-time download of dependencies and models.\n\nDownload local source ZIP\n\nExtract the ZIP, open a terminal in studio, and follow LOCAL-INSTALL.md:\n\nbun install\nbun run setup\nbun run model:setup\nbun run speech:setup\nbun run build\n\nThen run bun run model:start and bun run start in separate terminals. Open http://127.0.0.1:3211.\n\nWindows x64 model setup installs llama.cpp automatically. macOS and Linux need a compatible llama.cpp installation and LLAMA_SERVER. Video tools also need FFmpeg/FFprobe. Allow several GB of disk space; device compatibility varies.",
+  "responses": [
+    {
+      "path": "/api/projects",
+      "status": 200
+    },
+    {
+      "path": "/api/jobs",
+      "status": 200
+    },
+    {
+      "path": "/api/goals",
+      "status": 200
+    },
+    {
+      "path": "/api/projects/a8eabba7-5e1f-4541-b244-bfeb75311b00",
+      "status": 200
+    },
+    {
+      "path": "/api/goals",
+      "status": 200
+    },
+    {
+      "path": "/api/jobs",
+      "status": 200
+    },
+    {
+      "path": "/api/assets",
+      "status": 200
+    },
+    {
+      "path": "/api/software",
+      "status": 200
+    },
+    {
+      "path": "/api/goals",
+      "status": 200
+    },
+    {
+      "path": "/api/jobs",
+      "status": 200
+    },
+    {
+      "path": "/api/software",
+      "status": 200
+    },
+    {
+      "path": "/api/software",
+      "status": 200
+    },
+    {
+      "path": "/api/software",
+      "status": 200
+    }
+  ],
+  "pageErrors": []
+}

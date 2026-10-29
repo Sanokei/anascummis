@@ -1,0 +1,186 @@
+{
+  "fixture": "Ordinary production server with actual absent native model/voice. No provider/voice response mocking. Two additional cases control only browser request/response delivery and are explicitly recorded.",
+  "sourceBase": "5dd2008e6a9ff1072dc2e6ea28de09e76b2b70f8",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "original": {
+    "id": "67b6a30b-e180-42cc-b0a8-70026d7a1708",
+    "projectId": "dcef928d-0b32-4b65-9433-1483f40daf56",
+    "request": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.",
+    "status": "failed",
+    "created": 1793271757424,
+    "updated": 1793271757436,
+    "progress": {
+      "phase": "routing",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793271757424
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793271757429
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793271757436,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "retry": {
+    "id": "03475b93-d4b4-4fa1-b6be-985594a0aa7c",
+    "projectId": "dcef928d-0b32-4b65-9433-1483f40daf56",
+    "request": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.\nExplicitly reviewed new attempt: KEEP-RETRY-SUFFIX.",
+    "status": "failed",
+    "created": 1793271760069,
+    "updated": 1793271760073,
+    "progress": {
+      "phase": "routing",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793271760069
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793271760071
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793271760073,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "oldRecordAndActivityUnchanged": true,
+  "alternateProjectRevision": 0,
+  "exactMultilineAndSuffixRetained": true,
+  "conflictingNewerDraftPreserved": true,
+  "onlyExplicitRetryPost": true,
+  "retryContext": {
+    "project": "dcef928d-0b32-4b65-9433-1483f40daf56",
+    "text": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.\nExplicitly reviewed new attempt: KEEP-RETRY-SUFFIX.",
+    "research": false,
+    "savedDetails": []
+  },
+  "lostAcceptance": {
+    "record": {
+      "id": "964f7b9e-5564-4bbe-8e61-913981873ac5",
+      "projectId": "dcef928d-0b32-4b65-9433-1483f40daf56",
+      "request": "Change the website title to Lost Acknowledgement Probe.",
+      "status": "failed",
+      "created": 1793271762930,
+      "updated": 1793271762937,
+      "progress": {
+        "phase": "routing",
+        "agent": "coordinator"
+      },
+      "events": [
+        {
+          "phase": "queued",
+          "agent": "coordinator",
+          "time": 1793271762930
+        },
+        {
+          "phase": "routing",
+          "agent": "coordinator",
+          "time": 1793271762931
+        },
+        {
+          "phase": "failed",
+          "agent": "coordinator",
+          "time": 1793271762937,
+          "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+        }
+      ],
+      "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+    },
+    "serverRows": 1,
+    "posts": 1,
+    "automaticReplay": false
+  },
+  "lateReply": {
+    "request": "Explain why this local first-use request cannot run yet.",
+    "newerDraftPreserved": true,
+    "keptSnapshotRecovered": true,
+    "automaticReplay": false
+  },
+  "typedVoiceStreamPosts": 0,
+  "allThreeWindowsAccessible": true,
+  "mobileTapWithoutShortcut": true,
+  "keyboardHeightViewport": [
+    360,
+    420
+  ],
+  "readiness": {
+    "model": "unavailable",
+    "voice": "unavailable"
+  },
+  "pageErrors": [],
+  "posts": [
+    {
+      "path": "/api/chat",
+      "body": {
+        "project": "dcef928d-0b32-4b65-9433-1483f40daf56",
+        "text": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.",
+        "research": false,
+        "savedDetails": []
+      }
+    },
+    {
+      "path": "/api/chat",
+      "body": {
+        "project": "dcef928d-0b32-4b65-9433-1483f40daf56",
+        "text": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.\nExplicitly reviewed new attempt: KEEP-RETRY-SUFFIX.",
+        "research": false,
+        "savedDetails": []
+      }
+    },
+    {
+      "path": "/api/chat",
+      "body": {
+        "project": "dcef928d-0b32-4b65-9433-1483f40daf56",
+        "text": "Change the website title to Lost Acknowledgement Probe.",
+        "research": false,
+        "savedDetails": []
+      }
+    },
+    {
+      "path": "/api/answer-stream",
+      "body": {
+        "text": "Explain why this local first-use request cannot run yet.",
+        "history": [
+          {
+            "role": "user",
+            "content": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.\nExplicitly reviewed new attempt: KEEP-RETRY-SUFFIX."
+          },
+          {
+            "role": "assistant",
+            "content": "I'll work on that in the background. You can keep talking to me."
+          }
+        ],
+        "news": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+Passed: actual delayed202 responses preserve newer Goal/build/revision/resume drafts, one pendingPOST, no hidden new-draft submission, no duplicate cards after polls, and unchanged accepted parent/download.
+Pending-form evidence: /workspace/.cloud-env/anascummis/first-use/pending-real-jHilsD

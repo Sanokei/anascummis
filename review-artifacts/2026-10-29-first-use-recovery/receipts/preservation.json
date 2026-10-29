@@ -1,0 +1,13 @@
+{
+  "parentId": "a45515b9-b3aa-40e9-803d-67309bcbc70a",
+  "metadataUnchanged": true,
+  "fileHashesUnchanged": {
+    "app/page.tsx": true,
+    "tests/app.test.tsx": true,
+    "package.json": true,
+    "bun.lock": true,
+    "artifacts/source.zip": true
+  },
+  "priorReviewManifestUnchanged": true,
+  "patchedParentPreserved": true
+}

@@ -1,0 +1,2 @@
+Passed: distinct UI-created child, unavailable stale download, checkpoint restart, real rebuilt heading/counter/ZIP, unchanged accepted parent, desktop+narrow lineage and downloads
+Review evidence: /workspace/.cloud-env/anascummis/security-upgrade/repair-842a4be5-d2e7-4043-a745-52cd884e6514

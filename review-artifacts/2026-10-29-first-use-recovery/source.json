@@ -1,0 +1,51 @@
+{
+  "repository": "Sanokei/anascummis",
+  "branch": "codex/first-use-recovery-20261029",
+  "sourceBase": "5dd2008e6a9ff1072dc2e6ea28de09e76b2b70f8",
+  "sourceHead": "a4b80165fa657bfd364932f5233ff5a8bfaeee57",
+  "sourceTree": "b91ddeed64b8116c59411cf996ae0326a3a4f2c7",
+  "beforeSourceHead": "3a9d642c1e6d8ffc52b4226f040346e27ebce5e0",
+  "mainUnchanged": "df70f5ccdb9c3474f04d3f83ad7f60a8f7ecf917",
+  "checkpointUnchanged": "5dd2008e6a9ff1072dc2e6ea28de09e76b2b70f8",
+  "sourceChangedPaths": [
+    "README.md",
+    "apps/studio/SURFACES.md",
+    "apps/studio/app/page.tsx",
+    "apps/studio/app/style.css",
+    "apps/studio/components/DownloadLocal.tsx",
+    "apps/studio/components/GoalPanel.tsx",
+    "apps/studio/components/SoftwarePanel.tsx",
+    "apps/studio/components/WorkPanel.tsx",
+    "apps/studio/core/model.ts",
+    "apps/studio/tests/model-runtime.test.ts",
+    "review-artifacts/2026-10-29-first-use-recovery/PLAN.md"
+  ],
+  "validation": {
+    "tests": 192,
+    "failures": 0,
+    "assertions": 1105,
+    "testFiles": 18,
+    "bothTypeScriptTargets": "passed",
+    "productionBuild": "passed Next.js16.4.3 webpack",
+    "nativeModelReady": false,
+    "nativeVoiceReady": false,
+    "nativeQualityEstablished": false,
+    "serverIdempotencyImplemented": false,
+    "publicApplicationPreview": null
+  },
+  "screenshots": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "narrow": [
+      360,
+      800
+    ],
+    "shortViewport": [
+      360,
+      420
+    ],
+    "shortViewportLimitation": "Chromium reduced viewport and actual touch/focus, not a physical phone virtual keyboard."
+  }
+}

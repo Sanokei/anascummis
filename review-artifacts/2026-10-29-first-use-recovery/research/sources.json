@@ -1,0 +1,64 @@
+[
+  {
+    "name": "whatwg-fetch",
+    "url": "https://raw.githubusercontent.com/whatwg/fetch/main/fetch.bs",
+    "file": "/workspace/.cloud-env/anascummis/first-use/research/whatwg-fetch.txt",
+    "bytes": 444131,
+    "sha256": "ffa13a962874f83fab93e10206727173ce1262e5e6725720148b8849f4092121",
+    "status": "fetched"
+  },
+  {
+    "name": "whatwg-dom",
+    "url": "https://raw.githubusercontent.com/whatwg/dom/main/dom.bs",
+    "file": "/workspace/.cloud-env/anascummis/first-use/research/whatwg-dom.txt",
+    "bytes": 482379,
+    "sha256": "26f356aa503d2f92df5292376983d0a9cb7a90ef341d7a085c91f537c6af6cb9",
+    "status": "fetched"
+  },
+  {
+    "name": "rfc9110-official",
+    "url": "https://www.rfc-editor.org/rfc/rfc9110.txt",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+    "status": "unavailable"
+  },
+  {
+    "name": "httpwg-semantics",
+    "url": "https://raw.githubusercontent.com/httpwg/http-core/main/draft-ietf-httpbis-semantics-latest.xml",
+    "file": "/workspace/.cloud-env/anascummis/first-use/research/httpwg-semantics.txt",
+    "bytes": 603614,
+    "sha256": "6c1321d48c213f7577f738cf0f62d4b2a0178f36a4ee6cae341dee4300fc3ebe",
+    "status": "fetched"
+  },
+  {
+    "name": "react-input",
+    "url": "https://raw.githubusercontent.com/reactjs/react.dev/main/src/content/reference/react-dom/components/input.md",
+    "file": "/workspace/.cloud-env/anascummis/first-use/research/react-input.txt",
+    "bytes": 26225,
+    "sha256": "452755484b8856746a91b574a5975e54404ea193f91b72257a2caf163da75544",
+    "status": "fetched"
+  },
+  {
+    "name": "react-effect",
+    "url": "https://raw.githubusercontent.com/reactjs/react.dev/main/src/content/reference/react/useEffect.md",
+    "file": "/workspace/.cloud-env/anascummis/first-use/research/react-effect.txt",
+    "bytes": 65342,
+    "sha256": "d4fd102c75df4194f5fa4eae8387f3a0aa7b4ba773c3a5ba29e41bf997a61cdb",
+    "status": "fetched"
+  },
+  {
+    "name": "rfc9110-httpwg",
+    "url": "https://raw.githubusercontent.com/httpwg/httpwg.github.io/main/specs/rfc9110.html",
+    "file": "/workspace/.cloud-env/anascummis/first-use/research/rfc9110-httpwg.txt",
+    "bytes": 915065,
+    "sha256": "5313be9ca076b6470ca9e6fecc3c2deaecb1eb9f6d79cd53c51b3bd65f4fbac6",
+    "status": "fetched"
+  },
+  {
+    "name": "rfc9110-source",
+    "url": "https://raw.githubusercontent.com/httpwg/http-core/main/rfc9110.xml",
+    "file": "/workspace/.cloud-env/anascummis/first-use/research/rfc9110-source.txt",
+    "bytes": 601561,
+    "sha256": "22797e1c392d3a08cca9dca4d8affd7f3461fe574b333658c97b397627efb4d1",
+    "status": "fetched"
+  }
+]

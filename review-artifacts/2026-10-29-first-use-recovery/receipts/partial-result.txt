@@ -1,0 +1,2 @@
+Passed: real host write followed by provider failure, preserved partial result/history, no replay from Edit, restored original target, explicit distinct new verified run and actual website output.
+Supplemental evidence: /workspace/.cloud-env/anascummis/first-use/partial-Mzqval

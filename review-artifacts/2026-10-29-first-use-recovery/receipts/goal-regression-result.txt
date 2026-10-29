@@ -1,0 +1,4 @@
+Passed: planner assigns dependent website/analysis milestones and Goals window restores during execution
+Passed: restart preserves verified writes; guided continuation runs analysis, independent acceptance and full-goal coverage checks
+Passed: Goals window Stop prevents late analysis completion
+Scripted inference lifecycle evidence: /workspace/.cloud-env/anascummis/goals-data/run-2KKy62

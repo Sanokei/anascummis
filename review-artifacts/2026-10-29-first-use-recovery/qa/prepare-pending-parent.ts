@@ -1,0 +1,12 @@
+import {Database} from 'bun:sqlite';
+import {cp,mkdir} from 'node:fs/promises';
+import {join,relative} from 'node:path';
+import {db,DATA} from '/workspace/anascummis/apps/studio/core/storage';
+import '/workspace/anascummis/apps/studio/core/software-task';
+const accepted=await Bun.file('/workspace/.cloud-env/anascummis/security-upgrade/repair-parent.json').json();
+const source=new Database(join(accepted.data,'studio.sqlite'),{readonly:true});
+const row=source.query('SELECT body,updated FROM software_tasks WHERE id=?').get(accepted.parentId) as {body:string;updated:number};source.close();
+const target=join(DATA,'software',accepted.parentId);await mkdir(target,{recursive:true});
+await cp(accepted.root,target,{recursive:true,filter:path=>!relative(accepted.root,path).split(/[\\/]/).some(part=>['node_modules','.next','.git'].includes(part))});
+db.query('INSERT INTO software_tasks(id,body,updated) VALUES(?,?,?)').run(accepted.parentId,row.body,row.updated);
+await Bun.write(join(DATA,'accepted-parent.json'),JSON.stringify({id:accepted.parentId,record:JSON.parse(row.body)},null,2));db.close();
