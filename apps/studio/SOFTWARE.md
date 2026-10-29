@@ -50,7 +50,7 @@ Failed checks are cached during a work slice to avoid a blind retry loop. An exp
 
 The first task-list native run exposed a QA error: a global alert check counted Next's hidden accessibility route announcer as a persistence failure. The fixed check targets the task collection's own error region and still rejects real storage errors. A copy of that actual failed checkpoint then completed real verification and ZIP delivery after one visible Resume, with unchanged source bytes, source revision and model-call count. The original failed fixture stayed unchanged. This is recovery of previously generated work, not a new inference claim.
 
-Current native output, counter keyboard/phone usability, downloaded-project start, retry receipts, original failures and limits are pinned in [the software-goal review pack](../../review-artifacts/2026-10-29-software-goals/README.md). Fresh source extraction reused matching installed dependencies; it was not a new online install or Windows/macOS pass.
+Current native output, counter keyboard/phone usability, downloaded-project start, retry receipts, original failures and limits are pinned in [the software-goal review pack](https://github.com/Sanokei/anascummis/blob/codex/task-list-e2e-20261029/review-artifacts/2026-10-29-software-goals/README.md). Fresh source extraction reused matching installed dependencies; it was not a new online install or Windows/macOS pass.
 
 ## Evidence and capability limits
 
