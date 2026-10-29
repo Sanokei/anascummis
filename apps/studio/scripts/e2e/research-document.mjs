@@ -70,6 +70,7 @@ function acceptedAnswer(goal) {
 }
 const briefTask = goal => goal.tasks.find(task => task.id === 'source-brief');
 const artifactOf = goal => briefTask(goal)?.execution?.briefArtifact || goal.briefState?.artifact;
+const goalDiagnostic = goal => [goal.message, goal.briefState?.draftCheck?.reason, goal.briefState?.writingAttempt?.error].filter(Boolean).join(' · ');
 
 async function runCase(browser, viewportName, options) {
   const folder = join(options.output, 'research-document-' + viewportName); await mkdir(folder);
@@ -229,7 +230,8 @@ async function runCase(browser, viewportName, options) {
     assertStep('Dependent child reuses accepted source/answer milestones with zero attempts, distinct verified copies, original retrieval identities and no parent mutation or refetch.');
 
     child = await pollGoal(child.id, goal => briefTask(goal)?.status === 'running' || ['completed', 'needs_input', 'cancelled'].includes(goal.status), 'actual native writing starts');
-    assert.equal(briefTask(child).status, 'running', 'The real brief must remain active for an explicit user Stop.');
+    if (child.status === 'needs_input') record.failedChild = structuredClone(child);
+    assert.equal(briefTask(child).status, 'running', 'The real brief must remain active for an explicit user Stop. ' + goalDiagnostic(child));
     await card(child.id).getByRole('button', {name: 'Stop goal', exact: true}).click();
     child = await pollGoal(child.id, goal => goal.status === 'cancelled', 'visible Stop saves cancellation'); record.stoppedChild = structuredClone(child);
     const stoppedPosts = mutationCount(); await closeGoals(); await openGoals(); await page.reload({waitUntil: 'networkidle'}); await openGoals();
@@ -243,8 +245,9 @@ async function runCase(browser, viewportName, options) {
 
     await card(child.id).getByRole('button', {name: 'Continue remaining work', exact: true}).click();
     child = await pollGoal(child.id, goal => !!goal.briefState?.draft || ['completed', 'needs_input', 'cancelled'].includes(goal.status), 'a real native writing decision is persisted before artifact creation');
-    assert(child.briefState?.draft && child.briefState.draftSha256, 'A real persisted native draft is required.');
-    assert.equal(briefTask(child).status, 'running', 'The owned host must be interrupted during the real draft/review/render lifecycle, not after completion.');
+    if (child.status === 'needs_input') record.failedChild = structuredClone(child);
+    assert(child.briefState?.draft && child.briefState.draftSha256, 'A real persisted native draft is required. ' + goalDiagnostic(child));
+    assert.equal(briefTask(child).status, 'running', 'The owned host must be interrupted during the real draft/review/render lifecycle. ' + goalDiagnostic(child));
     assert.notEqual(child.briefState.phase, 'saved', 'The real interruption must precede saved artifact completion.');
     record.interruptedCheckpoint = structuredClone(child); const draft = structuredClone(child.briefState.draft), draftSha256 = child.briefState.draftSha256;
     const postsBeforeRestart = mutationCount(); await stopHost(host, 'SIGKILL'); host = undefined; await boot();
@@ -255,7 +258,17 @@ async function runCase(browser, viewportName, options) {
     const resume = card(child.id).getByRole('button', {name: 'Continue remaining work', exact: true}); await resume.waitFor();
     const savedWriting = card(child.id).locator('summary').filter({hasText: /^Saved native writing and support review$/}).locator('..');
     if (!await savedWriting.evaluate(element => element.open)) await savedWriting.locator('> summary').click();
-    for (const paragraph of draft.paragraphs) assert((await savedWriting.innerText()).includes(paragraph.text), 'The interrupted native draft must remain inspectable in the actual work window.');
+    for (const paragraph of draft.paragraphs) assert((await savedWriting.innerText()).includes(paragraph.text), 'The original interrupted native draft must remain inspectable in the actual work window.');
+    const originalDecision = savedWriting.locator('summary').filter({hasText: /^Original native writing decision$/}).locator('..');
+    if (!await originalDecision.evaluate(element => element.open)) await originalDecision.locator('> summary').click();
+    const originalJson = originalDecision.getByLabel('Original native writing decision JSON', {exact: true});
+    assert.deepEqual(JSON.parse(await originalJson.textContent()), child.briefState.writingAttempt.raw, 'The original saved native decision must be inspectable without presentation rewriting.');
+    await screenshot('interrupted-original-native-writing', originalJson);
+    if (child.briefState.presentation) {
+      const presented = card(child.id).getByRole('region', {name: 'Presented brief', exact: true}); await presented.waitFor();
+      for (const paragraph of child.briefState.presentation.draft.paragraphs) assert((await presented.innerText()).includes(paragraph.text), 'The separately labelled presented brief must show the exact supported projection.');
+      await screenshot('interrupted-presented-brief', presented);
+    }
     await screenshot('interrupted-saved-native-writing', savedWriting);
     await screenshot('interrupted-native-draft-explicit-continuation', resume);
     assertStep('A real SIGKILL after native draft persistence restarts into needs_input; accepted research, exact saved draft/hash/title/notes survive without automatic replay.', {draftSha256, phaseBeforeKill: record.interruptedCheckpoint.briefState.phase});
@@ -263,12 +276,26 @@ async function runCase(browser, viewportName, options) {
     child = await pollGoal(child.id, goal => ['completed', 'needs_input', 'cancelled'].includes(goal.status), 'native support and actual document artifact reach acceptance');
     assert.equal(child.status, 'completed', child.message); assert.equal(briefTask(child).status, 'verified'); assert.equal(briefTask(child).review?.accepted, true);
     assert.deepEqual(child.briefState.draft, draft); assert.equal(child.briefState.draftSha256, draftSha256); assert.equal(child.briefState.supportReview?.supported, true);
-    assert.equal(child.briefState.draft.paragraphs.length, 1, 'This focused brief needs one useful paragraph without repetitive filler.');
-    const written = child.briefState.draft.paragraphs[0].text;
+    const rawWriting = child.briefState.writingAttempt;
+    assert(rawWriting?.raw && rawWriting.sha256, 'The original native decision and its content identity must be retained.');
+    assert.equal(sha(JSON.stringify(rawWriting.raw)), rawWriting.sha256, 'The original native writing decision hash must match its exact retained object.');
+    assert.deepEqual(rawWriting.raw, child.briefState.draft, 'A valid native draft must preserve its original decision exactly.');
+    assert.deepEqual(rawWriting, record.interruptedCheckpoint.briefState.writingAttempt, 'Explicit continuation must retain the exact raw native decision captured before interruption.');
+    const presentation = child.briefState.presentation;
+    if (presentation) {
+      assert.equal(presentation.version, 'brief-inline-v1'); assert.equal(sha(JSON.stringify(presentation.draft)), presentation.sha256);
+      assert(presentation.method?.trim(), 'Any fixed host presentation projection must identify its method.');
+      assert.deepEqual(presentation.draft.paragraphs.map(paragraph => paragraph.citations), draft.paragraphs.map(paragraph => paragraph.citations), 'Presentation must preserve native citation selections.');
+    }
+    record.presentationChecks = {rawNativeSha256: rawWriting.sha256, presentationVersion: presentation?.version, presentationSha256: presentation?.sha256, method: presentation?.method, scope: 'Raw native decision retained; any format-only host presentation is separately identified.'};
+    const displayedDraft = presentation?.draft || child.briefState.draft;
+    assert.equal(displayedDraft.paragraphs.length, 1, 'This focused brief needs one useful paragraph without repetitive filler.');
+    const written = displayedDraft.paragraphs[0].text;
     for (const pattern of [/web-platform-tests\/wpt/i, /fetch\//i, /wpt\.fyi\/results\/fetch/i]) assert.match(written, pattern, 'The actual written prose must supply both requested locations, not merely include them in references.');
     assert(!compact(written).includes(compact(answer.limit)), 'Host-provenance text must not appear in the factual paragraph with a source citation.');
     record.boundedDocumentCritique = {oneFocusedParagraph: true, actualProseGivesBothLocations: true, reproducedProvenanceMisattributionAbsent: true, scope: 'Specific Fetch facts and exact host-limit regression, not a general semantic citation validator.'};
     assert.equal(child.briefState.phase, 'saved'); const artifact = artifactOf(child); assert(artifact?.documentId); assert.equal(artifact.draftSha256, draftSha256); assert.equal(artifact.inputSha256, child.briefState.inputSha256); assert.equal(artifact.title, title);
+    if (presentation) {assert.equal(artifact.presentationVersion, presentation.version); assert.equal(artifact.presentationSha256, presentation.sha256);}
     assert.equal(child.events.filter(event => event.phase === 'writing_document').length, record.interruptedCheckpoint.events.filter(event => event.phase === 'writing_document').length, 'Explicit continuation after the persisted draft must not repeat native writing.');
     assert(child.tasks.filter(task => task.id !== 'source-brief').every(task => task.status === 'verified' && task.attempts === 0));
     assert(!child.events.some(event => event.phase === 'fetching_source'));
@@ -342,6 +369,27 @@ async function runCase(browser, viewportName, options) {
       await screenshot('actual-pdf-window-' + viewport.width + 'x' + viewport.height, fit);
     }
     assertStep('The ordinary PDF window decodes each actual page, exposes reachable controls, supports real zoom/pan/fit on desktop/phone/short viewports and retains the last inspected page.', {pagesSeen: record.pdfPagesSeen, multiPageExercised: record.multiPageWindowExercised});
+    const postsBeforeReturn = mutationCount();
+    await page.getByRole('tab', {name: 'PDF', exact: true}).focus(); await page.keyboard.press('Control+Delete'); await page.locator('.pdf-preview').waitFor({state: 'hidden'});
+    await page.getByRole('tab', {name: 'Goals', exact: true}).click(); await card(child.id).waitFor();
+    assert.equal(await card(child.id).locator('h3').textContent(), title);
+    const returnedBrief = card(child.id).getByRole('region', {name: 'Presented brief', exact: true}); await returnedBrief.waitFor();
+    assert((await returnedBrief.innerText()).includes(written));
+    const returnedNotes = card(child.id).locator('summary').filter({hasText: /^Saved notes and document identity$/}).locator('..');
+    if (!await returnedNotes.evaluate(element => element.open)) await returnedNotes.locator('> summary').click();
+    assert((await returnedNotes.innerText()).includes(notes));
+    await page.setViewportSize({width: 360, height: 800}); await screenshot('returned-to-correct-brief-work-window', returnedBrief);
+    await screenshot('returned-brief-keeps-personal-note', returnedNotes);
+    for (const source of child.sources) {
+      const shownSource = card(child.id).getByRole('article', {name: 'Saved source ' + source.taskId, exact: true}); await shownSource.waitFor();
+      assert.equal(await shownSource.getByRole('link', {name: source.url, exact: true}).getAttribute('href'), source.url);
+      const identity = shownSource.locator('summary').filter({hasText: /^Content identity$/}).locator('..');
+      if (!await identity.evaluate(element => element.open)) await identity.locator('> summary').click();
+      for (const expected of [source.sha256, source.textSha256, source.id]) assert((await identity.innerText()).includes(expected));
+      await screenshot('returned-brief-source-identity-' + source.taskId, identity);
+    }
+    assert.equal(mutationCount(), postsBeforeReturn); assert.deepEqual(await snapshotGoal(child.id), record.completedChild); assert.deepEqual(await snapshotGoal(parent.id), parent);
+    assertStep('Closing the actual PDF and explicitly activating Goals returns to the correct saved brief, presented prose, personal note and checked source identity on a phone viewport without another mutation.');
     const exported = await context.newPage(); exported.setDefaultTimeout(12_000); await exported.goto(pathToFileURL(html.path).href, {waitUntil: 'load'});
     const body = await exported.locator('body').innerText();
     for (const expected of [title, notes, 'web-platform-tests/wpt', 'wpt.fyi/results/fetch', sourceUrl, ...child.sources.flatMap(source => [source.title, source.retrievedAt, source.sha256, source.textSha256]), ...answer.citations.map(citation => citation.quote)]) assert(compact(body).includes(compact(expected)), 'Opened actual HTML must include ' + expected);
@@ -366,6 +414,10 @@ async function runCase(browser, viewportName, options) {
     assert.deepEqual(record.pageErrors, []); record.status = 'passed';
   } catch (error) {
     record.status = error instanceof BlockedGoal ? 'blocked' : 'failed'; record.reason = error.stack || String(error);
+    if (page && !page.isClosed() && host?.exitCode === null && !host.signalCode) {
+      try {if (child?.id) record.failedChild = await snapshotGoal(child.id); else if (parent?.id) record.failedParent = await snapshotGoal(parent.id);}
+      catch (snapshotError) {record.failureSnapshotError = String(snapshotError);}
+    }
     if (page && !page.isClosed()) try {await screenshot('failure');} catch {}
   } finally {
     if (context) {try {const path = join(folder, 'trace.zip'); await context.tracing.stop({path}); await redactTrace(path); record.trace = 'trace.zip'; record.traceSessionHeadersRedacted = true;} catch (error) {record.traceError = String(error); record.status = 'failed';} await context.close().catch(() => {});}

@@ -28,6 +28,17 @@ function SavedBrief({goal, onOpenDocument}: Pick<Props, 'goal' | 'onOpenDocument
       </div>
       <small>The PDF opens in the editor. Brief downloads keep the original checked document.</small>
     </>}
+    {state?.presentation && <section className="research-brief-presentation" aria-label="Presented brief">
+      <h5 style={{fontSize: 13, margin: '10px 0 6px'}}>Presented brief</h5>
+      {state.presentation.draft.paragraphs.map((paragraph, index) => <p key={index}>{paragraph.text} {paragraph.citations.map(citation => '[' + citation + ']').join(' ')}</p>)}
+      <details>
+        <summary>Presentation method and identity</summary>
+        <p>{state.presentation.method}</p>
+        <small>{state.presentation.version}</small>
+        <small>Presented wording SHA-256 {state.presentation.sha256}</small>
+        <small>The original native wording and decision remain in the writing inspection below.</small>
+      </details>
+    </section>}
     <details>
       <summary>Saved notes and document identity</summary>
       <p className="research-brief-notes">{brief.notes || 'No personal notes were added.'}</p>
@@ -45,8 +56,9 @@ function SavedBrief({goal, onOpenDocument}: Pick<Props, 'goal' | 'onOpenDocument
       <summary>Saved native writing and support review</summary>
       {state.draftCheck && <p>{state.draftCheck.accepted ? 'Host content check passed: ' : 'Host content check rejected the writing: '}{state.draftCheck.reason}</p>}
       {state.writingAttempt?.error && <p>Native writing was retained but could not be used: {state.writingAttempt.error}</p>}
+      {state.presentation && state.draft && <small>Original native wording before host presentation:</small>}
       {state.draft?.paragraphs.map((paragraph, index) => <p key={index}>{paragraph.text} {paragraph.citations.map(citation => '[' + citation + ']').join(' ')}</p>)}
-      {state.supportReview && <p>{state.supportReview.supported ? 'Native support review passed: ' : 'Native support review needs attention: '}{state.supportReview.reason}</p>}
+      {state.supportReview && <p>{state.presentation ? state.supportReview.supported ? 'Native support review of the presented brief passed: ' : 'Native support review of the presented brief needs attention: ' : state.supportReview.supported ? 'Native support review passed: ' : 'Native support review needs attention: '}{state.supportReview.reason}</p>}
       {state.writingAttempt && <details>
         <summary>Original native writing decision</summary>
         <small>Writing decision SHA-256 {state.writingAttempt.sha256}</small>

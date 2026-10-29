@@ -13,10 +13,10 @@ const noop=()=>{};
 const question='Where are the compatibility tests and browser results?';
 const quote='Compatibility tests live at web-platform-tests/wpt in fetch/. Browser results are at wpt.fyi/results/fetch/.';
 const answerText='The compatibility tests are in web-platform-tests/wpt under fetch/. Browser results are displayed at wpt.fyi/results/fetch/.';
-async function fixture(options:{real?:boolean;long?:boolean;notes?:string}={}){
+async function fixture(options:{real?:boolean;long?:boolean;notes?:string;extraEvidence?:string}={}){
   const dir=await mkdtemp(join(tmpdir(),'research-brief-test-')),db=new Database(join(dir,'studio.sqlite'));
   db.exec('CREATE TABLE documents(id TEXT PRIMARY KEY,name TEXT,revision INTEGER,pages INTEGER); CREATE TABLE pdf_versions(doc TEXT,revision INTEGER,label TEXT,PRIMARY KEY(doc,revision));');
-  const url='https://example.org/'+(options.long?'evidence'.repeat(90)+'/':'')+'readme',body='# Compatibility guide\n'+quote+'\n',ledger=new PublicSourceLedger(db,async requested=>describePublicSource(requested,{bytes:new TextEncoder().encode(body),type:'text/plain',url:requested}));
+  const url='https://example.org/'+(options.long?'evidence'.repeat(90)+'/':'')+'readme',body='# Compatibility guide\n'+quote+'\n'+(options.extraEvidence||''),ledger=new PublicSourceLedger(db,async requested=>describePublicSource(requested,{bytes:new TextEncoder().encode(body),type:'text/plain',url:requested}));
   const parent=crypto.randomUUID(),id=crypto.randomUUID(),snapshot=await ledger.capture(parent,'source-1',url,signal(),noop);
   let source:any;db.transaction(()=>{source=ledger.copySnapshots(parent,id,[snapshot.id])[0];})();
   const {plan}=ledger.prepareReading(id,'source-answer',question),range=plan.ranges[0];
@@ -141,6 +141,60 @@ test('introduced URLs and raw Markdown fail the local factual guard and preserve
       await expect(f.store.execute(f.task,f.goal,signal(),async()=>({paragraphs:[{text:paragraph,citations:[1]}]}),noop)).rejects.toThrow('host factual-paragraph check');expect(f.store.state(f.id)?.draft?.paragraphs[0].text).toBe(paragraph);expect(f.store.state(f.id)?.supportReview).toBeUndefined();expect(f.counts().renders).toBe(0);
     }finally{await f.close();}
   }
+});
+
+test('actual native inline-format failure is projected deterministically without rewriting facts, raw output or citation IDs',async()=>{
+  // Replay of the actual rejected native wording; model decisions here are
+  // scripted so this isolates presentation, not a new native-quality result.
+  const text='The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).';
+  const displayed='The Fetch Standard’s tests are kept in the fetch/ directory of web-platform-tests/wpt and can be seen at https://wpt.fyi/results/fetch.';
+  const f=await fixture({extraEvidence:'Browser results: [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n'});try{
+    const secondQuote='Browser results are at wpt.fyi/results/fetch/.';f.answer.citations.push({...f.answer.citations[0],quote:secondQuote,offset:f.ledger.get(f.id,f.source.id).text.indexOf(secondQuote),spanId:'source-1:2'});
+    const raw={paragraphs:[{text,citations:[1,2]}]},seen:any[]=[];let writingCalls=0;
+    const infer:Infer=async(role,packet)=>{if(role===BRIEF_WRITER_ROLE){writingCalls++;return raw;}seen.push(JSON.parse(packet));return {supported:true,reason:'Both facts in the displayed paragraph match its literal citations.'};};
+    await expect(f.store.execute(f.task,f.goal,signal(),infer,phase=>{if(phase==='draft_saved')throw new Error('Synthetic stop after exact native draft saved');})).rejects.toThrow('Synthetic stop');
+    const before=f.store.state(f.id)!;expect(before.draft).toEqual(raw);expect(before.draftSha256).toBe(sourceHash(JSON.stringify(raw)));expect(before.presentation).toBeUndefined();
+    const restarted=new ResearchBriefStore(f.db,f.ledger,f.dir,f.engine),result=await restarted.execute(f.task,f.goal,signal(),infer,noop),state=restarted.state(f.id)!;
+    expect(writingCalls).toBe(1);expect(state.writingAttempt?.raw).toEqual(raw);expect(state.draft).toEqual(raw);expect(state.draftSha256).toBe(before.draftSha256);expect(state.presentation?.version).toBe('brief-inline-v1');expect(state.presentation?.draft).toEqual({paragraphs:[{text:displayed,citations:[1,2]}]});expect(state.presentation?.sha256).toBe(sourceHash(JSON.stringify(state.presentation!.draft)));expect(state.presentation?.sha256).not.toBe(state.draftSha256);expect(state.draftCheck?.accepted).toBe(true);expect(seen[0].paragraphs).toEqual(state.presentation!.draft.paragraphs);expect(result.briefArtifact?.presentationVersion).toBe('brief-inline-v1');expect(result.briefArtifact?.presentationSha256).toBe(state.presentation?.sha256);
+    const html=new TextDecoder().decode((await restarted.exportHtml(f.goal)).bytes);expect(html).toContain(displayed);expect(html).not.toContain(text);expect(html).toContain(quote);expect(await restarted.review(f.task,f.goal,result,signal())).toMatchObject({accepted:true});
+  }finally{await f.close();}
+});
+
+test('a nonredundant HTTPS link preserves both its exact label and full target in displayed prose',async()=>{
+  const f=await fixture({extraEvidence:'Browser results: https://wpt.fyi/results/fetch.\n'});try{
+    const raw={paragraphs:[{text:answerText+' See [browser comparison](https://wpt.fyi/results/fetch).',citations:[1]}]};
+    await f.store.execute(f.task,f.goal,signal(),async(role)=>role===BRIEF_WRITER_ROLE?raw:{supported:true,reason:'Synthetic semantic decision; test checks format projection only.'},noop);
+    expect(f.store.state(f.id)?.presentation?.draft.paragraphs[0].text).toBe(answerText+' See browser comparison (https://wpt.fyi/results/fetch).');expect(f.store.state(f.id)?.draft).toEqual(raw);
+  }finally{await f.close();}
+});
+
+test('explicit continuation of a legacy format rejection publishes a consistent readable checkpoint before awaiting support review',async()=>{
+  const f=await fixture({extraEvidence:'Browser results: https://wpt.fyi/results/fetch.\n'});let reader:Database|undefined;try{
+    const raw={paragraphs:[{text:'The tests are in `web-platform-tests/wpt` under `fetch/`; see [results](https://wpt.fyi/results/fetch).',citations:[1]}]};
+    await expect(f.store.execute(f.task,f.goal,signal(),async()=>raw,phase=>{if(phase==='draft_saved')throw new Error('stop');})).rejects.toThrow('stop');
+    const legacy=f.store.state(f.id)!;legacy.phase='rejected';legacy.draftCheck={accepted:false,reason:'Legacy host rejected all inline Markdown.'};f.db.query('UPDATE research_briefs SET body=? WHERE goal=?').run(JSON.stringify(legacy),f.id);
+    expect(f.store.state(f.id)?.phase).toBe('rejected');let reviewStarted!:()=>void,release!:(value:unknown)=>void;const started=new Promise<void>(resolve=>{reviewStarted=resolve;}),pending=new Promise(resolve=>{release=resolve;});let writing=0;
+    const run=f.store.execute(f.task,f.goal,signal(),async(role)=>{if(role===BRIEF_WRITER_ROLE){writing++;throw new Error('must reuse the original native draft');}reviewStarted();return pending;},noop);
+    await started;const checkpoint=f.store.state(f.id)!;expect(checkpoint.phase).toBe('draft_saved');expect(checkpoint.draftCheck?.accepted).toBe(true);expect(checkpoint.presentation?.version).toBe('brief-inline-v1');expect(checkpoint.draftSha256).toBe(legacy.draftSha256);expect(checkpoint.draft).toEqual(raw);
+    reader=new Database(join(f.dir,'studio.sqlite'));const restored=new ResearchBriefStore(reader,new PublicSourceLedger(reader),f.dir,f.engine);expect(restored.state(f.id)).toEqual(checkpoint);
+    release({supported:true,reason:'Synthetic support of the displayed prose.'});const result=await run;expect(result.verified).toBe(true);expect(writing).toBe(0);expect(f.store.state(f.id)?.phase).toBe('saved');
+  }finally{reader?.close();await f.close();}
+});
+
+test('inline formatting never launders provenance, invented link targets or unsupported markup',async()=>{
+  for(const text of [answerText+' `The citations are verified.`',answerText+' [results](https://invented.example.org/path).',answerText+' `unmatched code.',answerText+' [results](https://wpt.fyi/results/fetch',answerText+' ```block```',answerText+' <b>raw HTML</b>']){
+    const f=await fixture();try{
+      const raw={paragraphs:[{text,citations:[1]}]};let reviews=0;
+      await expect(f.store.execute(f.task,f.goal,signal(),async role=>{if(role===BRIEF_WRITER_ROLE)return raw;reviews++;return {supported:true,reason:'Must not reach this synthetic reviewer.'};},noop)).rejects.toThrow('host factual-paragraph check');
+      const state=f.store.state(f.id)!;expect(state.writingAttempt?.raw).toEqual(raw);expect(state.draft).toEqual(raw);expect(state.draftCheck?.accepted).toBe(false);expect(state.artifact).toBeUndefined();expect(reviews).toBe(0);expect(f.counts().renders).toBe(0);
+    }finally{await f.close();}
+  }
+});
+
+test('a self-consistently rehashed presentation cannot diverge from its retained raw writing',async()=>{
+  const f=await fixture();try{
+    await f.store.execute(f.task,f.goal,signal(),f.infer,noop);const state=f.store.state(f.id)!;state.presentation!.draft.paragraphs[0].text='A forged different fact.';state.presentation!.sha256=sourceHash(JSON.stringify(state.presentation!.draft));f.db.query('UPDATE research_briefs SET body=? WHERE goal=?').run(JSON.stringify(state),f.id);expect(()=>f.store.state(f.id)).toThrow('presentation changed');
+  }finally{await f.close();}
 });
 
 test('early HTML/PDF export is read-only and later document edits do not change accepted original downloads',async()=>{

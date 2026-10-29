@@ -76,12 +76,22 @@ test('brief UI keeps drafts and uncertain submissions without replaying them', a
     expect(posts).toBe(2);
     await page.evaluate((parent) => (window as any).showBrief({...parent, id: 'f725b77e-e7ce-44a6-aafe-a1dd734f6f5a',
       brief: {parentGoalId: parent.id, requestKey: '4f5688b1-8192-498f-9f19-c88c98e6268c', title: 'Saved brief', notes: '<script>literal note</script>'},
-      briefState: {phase: 'saved', draft: {paragraphs: [{text: 'One cited fact', citations: [1]}]}, artifact: {documentId: 'owned-document', pages: 2}}}), parent);
+      briefState: {phase: 'saved', draft: {paragraphs: [{text: 'One `cited` fact', citations: [1]}]},
+        presentation: {version: 'brief-inline-v1', sha256: 'b'.repeat(64), method: 'Inline formatting changed; factual wording and citation numbers are retained.',
+          draft: {paragraphs: [{text: 'One cited fact <script>window.presentationExecuted=true</script>', citations: [1]}]}},
+        supportReview: {supported: true, reason: 'Presented wording is supported.'}, artifact: {documentId: 'owned-document', pages: 2}}}), parent);
     await page.getByRole('button', {name: 'Open brief PDF', exact: true}).click();
     expect(await page.evaluate(() => (window as any).lastOpened)).toBe('owned-document');
     expect(await page.getByRole('link', {name: 'Download brief PDF', exact: true}).getAttribute('href')).toBe('/api/goals/f725b77e-e7ce-44a6-aafe-a1dd734f6f5a/brief/export?format=pdf');
+    const presented = page.getByRole('region', {name: 'Presented brief', exact: true});
+    expect(await presented.getByText('One cited fact <script>window.presentationExecuted=true</script> [1]', {exact: true}).isVisible()).toBe(true);
+    await presented.getByText('Presentation method and identity', {exact: true}).click();
+    expect(await presented.getByText('brief-inline-v1', {exact: true}).isVisible()).toBe(true);
+    expect(await presented.getByText('Presented wording SHA-256 ' + 'b'.repeat(64), {exact: true}).isVisible()).toBe(true);
+    expect(await page.evaluate(() => (window as any).presentationExecuted)).toBeUndefined();
     await page.getByText('Saved native writing and support review', {exact: true}).click();
-    expect(await page.getByText('One cited fact [1]', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('One `cited` fact [1]', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('Native support review of the presented brief passed: Presented wording is supported.', {exact: true}).isVisible()).toBe(true);
     expect(posts).toBe(2);
     await page.evaluate((parent) => (window as any).showBrief({...parent, id: 'f725b77e-e7ce-44a6-aafe-a1dd734f6f5a',
       brief: {parentGoalId: parent.id, requestKey: '4f5688b1-8192-498f-9f19-c88c98e6268c', title: 'Rejected writing', notes: 'Keep this note'},

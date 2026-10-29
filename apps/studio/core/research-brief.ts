@@ -30,6 +30,37 @@ function packet(input:BriefInput){
   return {question:input.question,...(input.guidance?{guidance:input.guidance}:{}),acceptedAnswer:{text:input.answer.text},
     selectedPassages:input.answer.selections.map(range=>({label:range.label,text:range.text})),citations:input.answer.citations.map((citation,index)=>({number:index+1,quote:citation.quote}))};
 }
+const inlineMethod='Host presentation only: remove matched single-backtick code delimiters and expand matched HTTPS Markdown links to their unchanged label and exact target; redundant URL labels use the target. Facts, citation IDs and literal source quotes are not rewritten.';
+function suppliedFacts(input:BriefInput){return [input.answer.text,...input.answer.selections.map(range=>range.text),...input.answer.citations.map(c=>c.quote)].join('\n');}
+function suppliedUrls(input:BriefInput){return new Set((suppliedFacts(input).match(/https?:\/\/[^\s<>"“”]+/g)||[]).map(url=>url.replace(/[),.;!?]+$/u,'')));}
+function inlinePresentation(input:BriefInput,draft:BriefDraft):NonNullable<BriefState['presentation']>{
+  checkedDraft(draft,input.answer.citations.length);
+  const urls=suppliedUrls(input);
+  const paragraphs=draft.paragraphs.map(paragraph=>{
+    const raw=paragraph.text;let text='';
+    for(let i=0;i<raw.length;){
+      if(raw[i]==='`'){
+        const end=raw.indexOf('`',i+1);
+        if(raw[i+1]==='`'||raw[i-1]==='\\'||end<=i+1||raw[end+1]==='`'||/[\r\n]/u.test(raw.slice(i+1,end)))fail('Only matched single-backtick inline code is supported; unmatched or block markup remains preserved for inspection.');
+        text+=raw.slice(i+1,end);i=end+1;continue;
+      }
+      if(raw[i]==='['){
+        const labelEnd=raw.indexOf(']',i+1);
+        if(labelEnd>=0&&raw[labelEnd+1]==='('){
+          const targetEnd=raw.indexOf(')',labelEnd+2),label=raw.slice(i+1,labelEnd),target=raw.slice(labelEnd+2,targetEnd);
+          if(raw[i-1]==='!'||raw[i-1]==='\\'||targetEnd<0||!label||/[\[\]`\r\n]/u.test(label)||!/^https:\/\/[^\s<>()[\]`]+$/u.test(target))fail('Only matched inline HTTPS links are supported; images, nested links and unmatched markup were not rendered.');
+          const parsed=new URL(target);if(parsed.username||parsed.password||!urls.has(target))fail('An inline link target was absent from the accepted answer and saved evidence.');
+          text+=label===target||label===target.slice('https://'.length)?target:label+' ('+target+')';i=targetEnd+1;continue;
+        }
+        if(raw.indexOf('](',i)>=0)fail('An unmatched inline link was preserved without rendering.');
+      }
+      text+=raw[i];i++;
+    }
+    if(/`|\[[^\]]*\]\(|<\/?[A-Za-z][^>]*>/u.test(text))fail('Unsupported inline or HTML markup was preserved without rendering.');
+    return {text,citations:[...paragraph.citations]};
+  });
+  const projected={paragraphs};return {version:'brief-inline-v1',draft:projected,sha256:sourceHash(JSON.stringify(projected)),method:inlineMethod};
+}
 function factualCheck(input:BriefInput,draft:BriefDraft):{accepted:boolean;reason:string}{
   if(draft.paragraphs.length!==1)return {accepted:false,reason:'A short brief must contain exactly one factual paragraph. The original writing is preserved.'};
   const text=draft.paragraphs[0].text;
@@ -38,8 +69,8 @@ function factualCheck(input:BriefInput,draft:BriefDraft):{accepted:boolean;reaso
   const normalized=normalize(text),limit=normalize(input.answer.limit),uncertainty=normalize(input.answer.uncertainty);
   const assertedCheck=/\b(?:(?:sources?|citations?|quotes?|excerpts?|text)\s+(?:are|is|were|was|have been|has been)\s+(?:exactly |literally )?(?:checked|verified|validated|copied|matched)|(?:host|model)\s+(?:copied|checked|verified|rendered|generated|wrote|executed))\b/iu;
   if((limit.length>30&&normalized.includes(limit))||(uncertainty.length>30&&normalized.includes(uncertainty))||assertedCheck.test(text)||/\b(?:factual accuracy|independently (?:verified|checked)|(?:host|model|source|citation|text) (?:identity|verification|checks?)|(?:quoted|cited|supplied|selected) (?:source )?(?:excerpts?|quotations?) match|(?:written|generated|rendered) by (?:the )?(?:local )?(?:model|host)|(?:I|we)\s+(?:(?:have|just)\s+)*(?:searched|browsed|visited|looked up|verified|checked|read|consulted|confirmed))\b/iu.test(text))return {accepted:false,reason:'The cited factual paragraph contains a scope, provenance or verification claim. Those host statements belong in the separate footer and are not supported source facts.'};
-  const supplied=[input.answer.text,...input.answer.selections.map(range=>range.text),...input.answer.citations.map(c=>c.quote)].join('\n');
-  for(const candidate of text.match(/https?:\/\/[^\s<>"“”]+/g)||[]){const url=candidate.replace(/[),.;!?]+$/u,'');if(!supplied.includes(url))return {accepted:false,reason:'The factual paragraph introduced a URL absent from the accepted answer and saved evidence.'};}
+  const urls=suppliedUrls(input);
+  for(const candidate of text.match(/https?:\/\/[^\s<>"“”]+/g)||[]){const url=candidate.replace(/[),.;!?]+$/u,'');if(!urls.has(url))return {accepted:false,reason:'The factual paragraph introduced a URL absent from the accepted answer and saved evidence.'};}
   return {accepted:true,reason:'Host checked one plain-prose paragraph, citation selections and absence of introduced URLs or host-provenance claims. Semantic support still requires the separate native review.'};
 }
 function bounded(value:unknown){const body=JSON.stringify(value);if(body.length>3600)fail('The complete research-brief decision exceeds 3,600 characters. Create a shorter focused source question; no evidence was omitted or sent.');return body;}
@@ -80,6 +111,7 @@ export class ResearchBriefStore{
     if(!uuid.test(row.id)||state.id!==row.id||state.goalId!==row.goal||state.inputSha256!==row.input_hash||sourceHash(row.input)!==row.input_hash||!['preparing','draft_saved','reviewed','rejected','saved'].includes(state.phase))fail('The saved brief identity is damaged. Preserve it and create a new brief.');
     if(state.writingAttempt&&sourceHash(JSON.stringify(state.writingAttempt.raw))!==state.writingAttempt.sha256)fail('The original writing attempt changed. Create a new brief; it was not regenerated.');
     if(state.draft){const input=JSON.parse(row.input) as BriefInput;checkedDraft(state.draft,input.answer.citations.length,true);if(sourceHash(JSON.stringify(state.draft))!==state.draftSha256)fail('The saved brief draft changed. Create a new brief; it was not regenerated.');}
+    if(state.presentation){const input=JSON.parse(row.input) as BriefInput;if(!state.draft||JSON.stringify(inlinePresentation(input,state.draft))!==JSON.stringify(state.presentation))fail('The saved inline presentation changed. Its original writing is preserved; create a new brief.');}
     if(state.supportReview){validate(supportSchema,state.supportReview);if(!state.supportReview.reason.trim())fail('Saved brief support review has no reason.');}
     if((state.phase==='saved')!==!!state.artifact||['draft_saved','reviewed','saved'].includes(state.phase)&&!state.draft||['reviewed','saved'].includes(state.phase)&&state.supportReview?.supported!==true||state.phase==='rejected'&&!(state.supportReview?.supported===false||state.draftCheck?.accepted===false||state.writingAttempt?.error))fail('The saved brief checkpoint is inconsistent.');
     return state;
@@ -112,18 +144,20 @@ export class ResearchBriefStore{
   private existing(input:BriefInput){const row=this.row(input.goalId);if(!row)fail('No research brief has been saved yet. Wait for the work or explicitly Continue it.');const encoded=JSON.stringify(input);if(row.input!==encoded||row.input_hash!==sourceHash(encoded))fail('The saved brief input changed. Its original artifact is preserved.');return this.readState(row);}
   private paths(state:BriefState){const folder=join(this.dataDir,'documents',state.id);return {folder,pdf:join(folder,'0.pdf'),html:join(folder,'brief.html')};}
   private async verifyArtifact(input:BriefInput,state:BriefState){
-    if(!state.draft||!factualCheck(input,state.draft).accepted)fail('This retained writing does not pass the current factual-paragraph checks. Its original artifact is preserved; create a new brief.');
+    const presentation=state.draft&&(state.presentation||inlinePresentation(input,state.draft)),draft=presentation?.draft;
+    if(!draft||!factualCheck(input,draft).accepted)fail('This retained writing does not pass the current factual-paragraph checks. Its original artifact is preserved; create a new brief.');
     const artifact=state.artifact;if(!artifact||artifact.id!==state.id||artifact.documentId!==state.id||artifact.inputSha256!==state.inputSha256||artifact.draftSha256!==state.draftSha256||artifact.title!==input.title||!hash.test(artifact.pdfSha256)||!hash.test(artifact.htmlSha256))fail('The saved document receipt changed.');
+    if((artifact.presentationVersion||artifact.presentationSha256)&&(artifact.presentationVersion!==presentation!.version||artifact.presentationSha256!==presentation!.sha256))fail('The saved artifact presentation identity changed.');
     const paths=this.paths(state),base=await realpath(this.dataDir),folder=await realpath(paths.folder);
     if(folder!==join(base,'documents',state.id))fail('The saved brief folder is not an owned directory.');
     for(const path of [paths.pdf,paths.html])if(!(await lstat(path)).isFile()||(await lstat(path)).isSymbolicLink())fail('The saved document must be an ordinary owned file.');
     const [pdf,html]=await Promise.all([readFile(paths.pdf),readFile(paths.html)]);
-    if(pdf.subarray(0,5).toString()!=='%PDF-'||sourceHash(pdf)!==artifact.pdfSha256||sourceHash(html)!==artifact.htmlSha256||html.toString()!==htmlFor(input,state.draft!))fail('The saved document bytes changed. Preserve them and create a new brief.');
+    if(pdf.subarray(0,5).toString()!=='%PDF-'||sourceHash(pdf)!==artifact.pdfSha256||sourceHash(html)!==artifact.htmlSha256||html.toString()!==htmlFor(input,draft))fail('The saved document bytes changed. Preserve them and create a new brief.');
     const doc=this.db.query('SELECT id,name,revision,pages FROM documents WHERE id=?').get(state.id) as {id:string;name:string;revision:number;pages:number}|null;
     const version=this.db.query('SELECT revision,label FROM pdf_versions WHERE doc=? AND revision=0').get(state.id) as {revision:number;label:string}|null;
     if(!doc||doc.name!==input.title+'.pdf'||(doc.revision===0&&doc.pages!==artifact.pages)||!version||version.label!=='Research brief')fail('The saved document registration is inconsistent.');
     const expectedLinks=input.sources.filter(source=>input.answer.citations.some(c=>c.sourceId===source.id)).map(source=>source.url);
-    const inspected=await this.pdfEngine({op:'verify_research_brief',input:paths.pdf,args:{expected:sections(input,state.draft!).map(s=>s.text),expectedLinks}});
+    const inspected=await this.pdfEngine({op:'verify_research_brief',input:paths.pdf,args:{expected:sections(input,draft).map(s=>s.text),expectedLinks}});
     if(inspected.pageCount!==artifact.pages||inspected.complete!==true||inspected.contained!==true||inspected.linksContained!==true||JSON.stringify(inspected.links)!==JSON.stringify(expectedLinks))fail('The saved document no longer passes complete-text, source-link and layout checks.');
     return artifact;
   }
@@ -144,11 +178,23 @@ export class ResearchBriefStore{
         progress('draft_saved','Native brief draft '+state.draftSha256+' saved before review or rendering. Explicit retry reuses this decision.');
       }else progress('draft_saved','Reusing saved native brief draft '+state.draftSha256+'; writing was not repeated.');
       signal.throwIfAborted();
-      if(!state.draftCheck){state.draftCheck=factualCheck(input,state.draft);if(!state.draftCheck.accepted)state.phase='rejected';this.save(state);}
+      if(!state.presentation){
+        let presentation:NonNullable<BriefState['presentation']>;
+        try{presentation=inlinePresentation(input,state.draft);}catch(error){state.draftCheck={accepted:false,reason:error instanceof Error?error.message:String(error)};state.phase='rejected';this.save(state);fail('The saved writing failed its host factual-paragraph check: '+state.draftCheck.reason+' The original draft is preserved. Create a new brief.');}
+        if(state.supportReview&&presentation.sha256!==state.draftSha256)fail('The retained support decision covered different presentation text. Its original writing and review are preserved; create a new brief.');
+        // A legacy format rejection remains readable through the complete
+        // transition: publish the projection, host check and consistent phase
+        // in one body write, including if the process stops before review.
+        state.presentation=presentation;state.draftCheck=factualCheck(input,presentation.draft);
+        state.phase=!state.draftCheck.accepted||state.supportReview?.supported===false?'rejected':state.supportReview?.supported===true?'reviewed':'draft_saved';
+        this.save(state);
+      }
+      const presented=state.presentation.draft;
+      if(!state.draftCheck){state.draftCheck=factualCheck(input,presented);state.phase=!state.draftCheck.accepted||state.supportReview?.supported===false?'rejected':state.supportReview?.supported===true?'reviewed':'draft_saved';this.save(state);}
       if(!state.draftCheck.accepted)fail('The saved writing failed its host factual-paragraph check: '+state.draftCheck.reason+' The original draft is preserved. Create a new brief; retry does not replace it.');
       if(!state.supportReview){
         progress('reviewing_document','Checking the actual saved paragraphs against the original accepted answer and their complete chosen literal citations.');
-        const raw=await infer(BRIEF_SUPPORT_ROLE,bounded({...packet(input),paragraphs:state.draft.paragraphs}),supportSchema,signal);signal.throwIfAborted();validate(supportSchema,raw);
+        const raw=await infer(BRIEF_SUPPORT_ROLE,bounded({...packet(input),paragraphs:presented.paragraphs}),supportSchema,signal);signal.throwIfAborted();validate(supportSchema,raw);
         const review=raw as {supported:boolean;reason:string};if(!review.reason.trim())fail('The document support reviewer did not explain its decision.');state.supportReview={supported:review.supported,reason:review.reason};state.phase=review.supported?'reviewed':'rejected';this.save(state);
       }
       if(!state.supportReview.supported)fail('The saved brief draft needs more source support: '+state.supportReview.reason+' The draft and review are preserved. Create a new brief with clearer source evidence; retry does not silently replace this draft.');
@@ -157,12 +203,12 @@ export class ResearchBriefStore{
       const folder=await realpath(paths.folder),base=await realpath(this.dataDir);if(folder!==join(base,'documents',state.id))fail('The document folder is not an owned directory.');
       const temporaryPdf=join(paths.folder,'.'+crypto.randomUUID()+'.pdf'),temporaryHtml=join(paths.folder,'.'+crypto.randomUUID()+'.html');
       try{
-        const expected=sections(input,state.draft).map(s=>s.text),expectedLinks=input.sources.filter(source=>input.answer.citations.some(c=>c.sourceId===source.id)).map(source=>source.url),rendered=await this.pdfEngine({op:'research_brief',output:temporaryPdf,args:{html:htmlFor(input,state.draft,true),title:input.title,expected,expectedLinks}});signal.throwIfAborted();
+        const expected=sections(input,presented).map(s=>s.text),expectedLinks=input.sources.filter(source=>input.answer.citations.some(c=>c.sourceId===source.id)).map(source=>source.url),rendered=await this.pdfEngine({op:'research_brief',output:temporaryPdf,args:{html:htmlFor(input,presented,true),title:input.title,expected,expectedLinks}});signal.throwIfAborted();
         if(!Number.isInteger(rendered.pageCount)||rendered.pageCount<1||rendered.pageCount>20||rendered.complete!==true||rendered.contained!==true||rendered.linksContained!==true||JSON.stringify(rendered.links)!==JSON.stringify(expectedLinks))fail('The rendered document did not preserve all text and exact source links within its pages.');
-        const pdf=await readFile(temporaryPdf),html=new TextEncoder().encode(htmlFor(input,state.draft));
+        const pdf=await readFile(temporaryPdf),html=new TextEncoder().encode(htmlFor(input,presented));
         if(pdf.subarray(0,5).toString()!=='%PDF-')fail('The document renderer did not produce PDF bytes.');
         await writeFile(temporaryHtml,html,{flag:'wx'});signal.throwIfAborted();await rename(temporaryPdf,paths.pdf);await rename(temporaryHtml,paths.html);signal.throwIfAborted();
-        const artifact:BriefArtifact={id:state.id,documentId:state.id,title:input.title,created:state.created,pages:rendered.pageCount,inputSha256:state.inputSha256,draftSha256:state.draftSha256!,pdfSha256:sourceHash(pdf),htmlSha256:sourceHash(html)};
+        const artifact:BriefArtifact={id:state.id,documentId:state.id,title:input.title,created:state.created,pages:rendered.pageCount,inputSha256:state.inputSha256,draftSha256:state.draftSha256!,pdfSha256:sourceHash(pdf),htmlSha256:sourceHash(html),presentationVersion:state.presentation.version,presentationSha256:state.presentation.sha256};
         this.db.transaction(()=>{if(this.db.query('SELECT id FROM documents WHERE id=?').get(state.id))fail('A different document already owns this brief identity.');this.db.query('INSERT INTO documents VALUES(?,?,?,?)').run(state.id,input.title+'.pdf',0,artifact.pages);this.db.query('INSERT INTO pdf_versions VALUES(?,?,?)').run(state.id,0,'Research brief');state.artifact=artifact;state.phase='saved';this.save(state);})();
       }finally{await Promise.all([unlink(temporaryPdf).catch(()=>{}),unlink(temporaryHtml).catch(()=>{})]);}
       await this.verifyArtifact(input,state);signal.throwIfAborted();progress('document_saved','One PDF and self-contained HTML saved under document '+state.id+'; every expected text section and page bounds checked.');signal.throwIfAborted();return this.receipt(state.artifact!);
