@@ -19,7 +19,67 @@ const origin='http://127.0.0.1:3298';
 let cookie='';
 async function request(path:string,body?:unknown,headers:Record<string,string>={}){return server.handle(new Request(origin+path,{method:body===undefined?'GET':'POST',headers:{Host:'127.0.0.1:3298',...(body===undefined?{}:{Origin:origin,'X-Requested-With':'Anascummis',Cookie:cookie,...(body instanceof FormData?{}:{'Content-Type':'application/json'})}),...headers},body:body===undefined?undefined:body instanceof FormData?body:JSON.stringify(body)}));}
 afterAll(()=>{vault.lock();storage.db.close();});
+test('background goal locks wait for current edits and can be cancelled while waiting',async()=>{
+  const key=crypto.randomUUID(),events:string[]=[];let release!:()=>void;
+  const first=storage.exclusive(key,async()=>{events.push('first');await new Promise<void>(resolve=>release=resolve);});
+  const controller=new AbortController(),cancelled=storage.exclusive(key,async()=>{events.push('cancelled-write');},controller.signal);
+  controller.abort();await expect(cancelled).rejects.toThrow();
+  const second=storage.exclusive(key,async()=>{events.push('second');},new AbortController().signal);
+  release();await first;await second;expect(events).toEqual(['first','second']);
+});
+test('coordinated goal API preserves full requests and protects stop and continuation controls',async()=>{
+  const previousCookie=cookie;
+  try{
+  const shell=await request('/');cookie=shell.headers.get('set-cookie')!.split(';')[0];
+  const project=storage.createProject('Goal API test'),goalText='Set the title, inspect the saved change, and explain it. '+('Keep this requirement. '.repeat(80));
+  const denied=await request('/api/goals',{project:project.id,request:goalText},{Origin:'https://evil.example'});expect(denied.status).toBe(403);
+  const created=await request('/api/goals',{project:project.id,request:goalText});expect(created.status).toBe(202);
+  const goal=await created.json();expect(goal.request).toBe(goalText);expect(goal.status).toBe('queued');
+  const listed=await(await request('/api/goals')).json();expect(listed.some((item:any)=>item.id===goal.id)).toBe(true);
+  expect((await request('/api/goals/'+crypto.randomUUID())).status).toBe(404);
+  expect((await request('/api/goals/'+goal.id+'/stop',{})).status).toBe(200);
+  expect((await(await request('/api/goals/'+goal.id)).json()).status).toBe('cancelled');
+  const continued=await(await request('/api/goals/'+goal.id+'/resume',{note:'Keep the saved acceptance requirements.'})).json();
+  expect(continued.status).toBe('queued');expect(continued.guidance).toBe('Keep the saved acceptance requirements.');expect(continued.request).toBe(goalText);
+  expect((await request('/api/goals/'+goal.id+'/resume',{note:'x'.repeat(2001)})).status).toBe(400);
+  expect((await request('/api/goals',{project:'missing-project',request:'Do not enqueue this.'})).status).toBe(400);
+  }finally{cookie=previousCookie;}
+});
+test('software detail returns the complete saved goal while list summaries stay bounded',async()=>{
+  const {createSoftwareTask,stopSoftwareTask}=await import('../core/software-task');
+  const goal='Preserve all of this software request. '+('A concrete acceptance requirement. '.repeat(45));
+  const task=await createSoftwareTask(goal,['zip']);
+  try{
+    const detail=await(await request('/api/software/'+task.id)).json();expect(detail.goal).toBe(goal);
+    const list=await(await request('/api/software')).json();expect(list.find((item:any)=>item.id===task.id).goal).toBe(goal.slice(0,800));
+  }finally{stopSoftwareTask(task.id);}
+});
 test('host, origin and local session gates protect mutations',async()=>{expect((await request('/api/projects',{name:'Denied'})).status).toBe(403);const shell=await request('/');cookie=shell.headers.get('set-cookie')!.split(';')[0];expect((await request('/api/projects',{name:'Denied'},{Origin:'https://evil.example'})).status).toBe(403);expect((await request('/api/status',undefined,{Host:'evil.example'})).status).toBe(403);const created=await request('/api/projects',{name:'Wood shop'});expect(created.status).toBe(200);expect((await created.json()).site.name).toBe('Wood shop');});
+test('resource activity APIs paginate real records with strict input and existing pairing protections',async()=>{
+ const previousCookie=cookie;const shell=await request('/');cookie=shell.headers.get('set-cookie')!.split(';')[0];
+ const manager=await import('../core/software-task'),project=storage.createProject('Activity API test');
+ const goal=await(await request('/api/goals',{project:project.id,request:'Inspect activity without executing model work.'})).json();
+ const software=await manager.createSoftwareTask('Track software activity APIs',['zip']),workId=crypto.randomUUID(),time=Date.now();
+ const work={id:workId,projectId:project.id,request:'An existing work record',status:'running',created:time,updated:time,progress:{phase:'working',agent:'website'},events:[{time,phase:'queued',agent:'coordinator'},{time,phase:'working',agent:'website'}]};
+ storage.db.query('INSERT INTO work_journal VALUES(?,?,?,?)').run(workId,'running',time,JSON.stringify(work));
+ try{
+  const routes=['/api/goals/'+goal.id+'/activity','/api/jobs/'+workId+'/activity','/api/software/'+software.id+'/activity'];
+  for(const route of routes){
+   const first=await request(route+'?limit=1');expect(first.status).toBe(200);const page=await first.json();expect(Array.isArray(page.events)).toBe(true);expect(typeof page.importedHistory).toBe('boolean');expect(typeof page.earlierHistoryMayBeMissing).toBe('boolean');
+   if(page.nextCursor){const older=await(await request(route+'?limit=1&before='+page.nextCursor)).json();expect(older.events.every((event:any)=>event.sequence<Number(page.nextCursor))).toBe(true);}
+   for(const query of ['limit=0','limit=101','limit=1.5','limit=1e1','limit=','before=0','before=-1','before=01','before=1e2','before=9007199254740992','before='])expect((await request(route+'?'+query)).status).toBe(400);
+   expect((await request(route,{})).status).toBe(405);
+   expect((await server.handle(new Request(origin+route,{method:'HEAD',headers:{Host:'127.0.0.1:3298'}}))).status).toBe(405);
+   expect((await request(route,undefined,{Origin:'https://evil.example'})).status).toBe(403);
+  }
+  for(const resource of ['goals','jobs','software'])expect((await request('/api/'+resource+'/'+crypto.randomUUID()+'/activity')).status).toBe(404);
+  const online={Origin:'https://anascummis.com'};expect((await request(routes[2],undefined,online)).status).toBe(403);
+  const pairing=await(await request('/api/software-pairing',undefined,{Cookie:cookie})).json();
+  const paired={...online,'X-Anascummis-Pair':pairing.key};const allowed=await request(routes[2],undefined,paired);expect(allowed.status).toBe(200);expect(allowed.headers.get('Access-Control-Allow-Origin')).toBe('https://anascummis.com');
+  expect((await request(routes[0],undefined,paired)).status).toBe(403);expect((await request(routes[1],undefined,paired)).status).toBe(403);
+  const once=await(await request(routes[1])).json();await request('/api/jobs/'+workId+'/stop',{});await request('/api/jobs/'+workId+'/stop',{});const terminal=await(await request(routes[1])).json();expect(terminal.events.filter((event:any)=>event.phase==='cancelled')).toHaveLength(1);expect(terminal.events.length).toBe(once.events.length+1);
+ }finally{manager.stopSoftwareTask(software.id);await request('/api/goals/'+goal.id+'/stop',{});cookie=previousCookie;}
+});
 test('websites escape source, reject credential leakage and require uploaded assets',()=>{const s=initialSite();s.title='<script>alert(1)</script>';expect(renderSite(s)).not.toContain('<script>alert');s.sections[0].imageId='missing';expect(checkSite(s,[]).ok).toBe(false);delete s.sections[0].imageId;s.subtitle='sk_live_testprivatekey';expect(checkSite(s,[]).ok).toBe(false);expect(()=>validateSite({...s,paymentLink:'https://buy.stripe.com.evil.test/foo'})).toThrow();expect(()=>validateSite({...s,scene:[{id:'x',kind:'box',color:'#ffffff',x:Infinity,y:0,z:0,size:1}]})).toThrow();});
 test('manual edits use revision fences and restore preserves history',async()=>{const p=storage.createProject('Test studio');const s={...p.site,title:'Revision one'};expect((await request('/api/projects/'+p.id,{site:s,revision:0})).status).toBe(200);expect((await request('/api/projects/'+p.id,{site:s,revision:0})).status).toBe(400);const restored=storage.restore(p.id,0);expect(restored.revision).toBe(2);expect(restored.site.title).toBe(p.site.title);expect(storage.history(p.id)).toHaveLength(3);});
 test('typed harness rejects malformed arguments before execution',async()=>{let calls=0;const values=[{tool:'write',message:''},{value:123},{tool:'write',message:''},{value:456}];const result=await runHarness('write',{},[{name:'write',description:'write',schema:objectSchema({value:{type:'string'}}),run:async()=>{calls++;}}],new AbortController().signal,async()=>values.shift());expect(calls).toBe(0);expect(result.trace.every(x=>!x.ok)).toBe(true);expect(result.trace).toHaveLength(2);});

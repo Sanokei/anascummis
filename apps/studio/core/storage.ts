@@ -20,6 +20,6 @@ export function saveProject(id:string,site:Site,label:string){validateSite(site)
 export function history(id:string){getProject(id);return db.query('SELECT revision,label,created FROM versions WHERE project=? ORDER BY revision DESC').all(id);}
 export function restore(id:string,revision:number){getProject(id);const v=db.query('SELECT body FROM versions WHERE project=? AND revision=?').get(id,revision) as {body:string}|null;if(!v)throw new Error('Revision not found');return saveProject(id,validateSite(JSON.parse(v.body)),`Restore version ${revision}`);}
 const busy=new Set<string>();
-export async function exclusive<T>(id:string,run:()=>Promise<T>):Promise<T>{if(busy.has(id))throw new Error('This item is busy');busy.add(id);try{return await run();}finally{busy.delete(id);}}
+export async function exclusive<T>(id:string,run:()=>Promise<T>,signal?:AbortSignal):Promise<T>{while(busy.has(id)){if(!signal)throw new Error('This item is busy');signal.throwIfAborted();await new Promise(resolve=>setTimeout(resolve,50));}signal?.throwIfAborted();busy.add(id);try{return await run();}finally{busy.delete(id);}}
 export function asset(id:string){const a=db.query('SELECT * FROM assets WHERE id=?').get(id) as {id:string;name:string;mime:string}|null;if(!a)throw new Error('Image not found');return {...a,path:join(DATA,'assets',a.id)};}
 export function listAssets(){return db.query('SELECT * FROM assets ORDER BY rowid DESC').all() as {id:string;name:string;mime:string}[];}

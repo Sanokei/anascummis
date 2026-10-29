@@ -4,6 +4,9 @@ export function indexedRoute(user:string,schema:Record<string,any>){
   const names=schema.properties?.tool?.enum;
   if(!Array.isArray(names)||!names.length)return undefined;
   let packet:any;try{packet=JSON.parse(user);}catch{return undefined;}
+  // Other orchestrators also use tool enums, but their goal/source packets
+  // must reach the model intact rather than being rewritten as empty choices.
+  if(!packet||typeof packet.request!=='string'||!Array.isArray(packet.tools))return undefined;
   const tools=Array.isArray(packet.tools)?packet.tools:[];
   const words=(value:string)=>new Set(value.toLowerCase().match(/[a-z][a-z0-9]+/g)?.filter(w=>!new Set('the and for with from this that user website current requested change read use supplied only before after'.split(' ')).has(w)).map(w=>w.replace(/s$/,''))??[]);
   const request=words(String(packet.request??''));

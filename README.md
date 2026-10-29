@@ -75,6 +75,20 @@ One quantized Qwen3 0.6B model performs routing and argument generation across s
 
 This follows the useful small-decision idea behind NanoJev without assuming a game-trained checkpoint understands websites. There is no claim of perfect understanding. The current tests use a scripted inference adapter to test host behavior; actual Qwen task accuracy and CPU performance still need evaluation.
 
+Local specialist tasks now keep a durable work history with their full goals, progress, specialist summaries and outcomes. Say **show work** to open its floating window and inspect the associated website or PDF. Local tasks continue when the page closes, and history returns after reloading. After a backend restart, unfinished specialist work is marked interrupted for review; software builds retain their separate resumable checkpoints. This does not automatically replay edits that may already have been saved.
+
+For goals with several steps, say **show goals** to open the local Goals window, or begin a message with **plan this goal:** followed by the full request. A planner creates dependent milestones, specialist executors work within their existing capabilities, and a separate reviewer checks each milestone against its acceptance condition. The window shows recorded progress, host evidence and review decisions together. It also provides an optional open-PDF attachment and explicit public-research opt-in. Closing the page leaves local work running; Stop keeps the plan, and Continue remaining work preserves accepted milestones while retrying unfinished work with your guidance. Reopened windows restore saved goals and show work that needs attention after an interruption.
+
+Each software milestone links to its saved child build. **Open software build** selects that build in the Software work window, where its actual checks, screenshots and verified downloads can be inspected. Active child builds are linked while work continues, and older builds load directly even when they have moved out of recent history.
+
+Completed software builds offer **Revision guidance** and **Create revised build**. Guidance creates a separate child build from the accepted revision, reconciles its acceptance criteria and queues fresh checks. The Software work window selects the child and shows its requested revision and parent link. The accepted parent and its verified downloads remain available while the child is checked. New downloads appear after the child's own checks and artifact verification pass.
+
+Paused or stopped builds offer optional **Guidance for continuing** before **Resume checkpoint**. New guidance is saved separately from the original revision request and remains visible after reloading. Leave it empty to continue with the saved instructions. Each build shows its own pending action and any resume error.
+
+Software cards show current status, activity and parent links before the saved request. Open **Full saved goal** to read the complete request. Floating windows fit the viewport when it narrows and retain their tab state and user layout choices as space changes.
+
+Goals, Work and Software windows also have saved activity timelines with dates, roles, milestone references and revisions. Open a history disclosure, use **Show earlier activity** to read older pages, and choose **Refresh activity** when you want a fresh snapshot. Reading position and loaded pages stay in place while the live status updates. Failed requests keep the loaded history available for retry. Imported history is identified, with an explicit notice when older events may already be missing.
+
 Optional research tools read public HTTPS pages with DNS pinning/private-address checks. Brave web/news search requires `BRAVE_SEARCH_KEY`. Web content is treated as untrusted evidence and carries source URLs and retrieval timestamps. Without network tools, current events should not be represented as verified.
 
 ## Recording and video skills

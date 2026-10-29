@@ -7,11 +7,93 @@ export type RuntimeCheck={id:string;ok:boolean;detail:string;milliseconds:number
 export type RuntimeEvidence={revision:number;checks:RuntimeCheck[];dom:string;headings?:string[];screenshot?:string;artifacts:{kind:'zip'|'exe';name:string;sha256:string;bytes:number;smokeTested:boolean}[]};
 export const BUILD_ROOT=resolve(process.env.STUDIO_TEST_DATA||DATA,'software');
 export function taskRoot(id:string){if(!/^[a-f0-9-]{36}$/.test(id))throw new Error('Invalid software task');return join(BUILD_ROOT,id);}
-export function buildPath(root:string,path:string){if(!path||path.length>180||path.includes('\\')||path.startsWith('/')||path.split('/').some(p=>p==='..'||p==='.'||!p)||!/^[-a-zA-Z0-9_./\[\]]+$/.test(path)||/^(?:node_modules|\.next|\.git|\.data|artifacts|\.qa)(?:\/|$)/.test(path.toLowerCase())||path.split('/').some(part=>part.toLowerCase().startsWith('.env'))||['.npmrc','bunfig.toml','.bunfig.toml'].includes(path.toLowerCase()))throw new Error('Invalid software path');const full=resolve(root,path);if(!full.startsWith(resolve(root)+sep))throw new Error('Software path escaped workspace');return full;}
+export function buildPath(root:string,path:string){if(!path||path.length>180||path.includes('\\')||path.startsWith('/')||path.split('/').some(p=>p==='..'||p==='.'||!p)||!/^[-a-zA-Z0-9_./\[\]]+$/.test(path)||/^(?:node_modules|\.next|\.git|\.data|\.studio|artifacts|\.qa)(?:\/|$)/.test(path.toLowerCase())||path.split('/').some(part=>part.toLowerCase().startsWith('.env'))||['.npmrc','bunfig.toml','.bunfig.toml'].includes(path.toLowerCase()))throw new Error('Invalid software path');const full=resolve(root,path);if(!full.startsWith(resolve(root)+sep))throw new Error('Software path escaped workspace');return full;}
 export async function writeSource(root:string,path:string,source:string){const full=buildPath(root,path);if(source.length>100000)throw new Error('Source exceeds file limit');await mkdir(dirname(full),{recursive:true});const parent=await realpath(dirname(full));if(parent!==dirname(full))throw new Error('Linked workspace directories are forbidden');if(await Bun.file(full).exists()&&await realpath(full)!==full)throw new Error('Linked source files are forbidden');await Bun.write(full,source);}
 export async function workspaceFiles(root:string){const paths:string[]=[];async function walk(folder:string,prefix=''){for(const entry of await readdir(folder,{withFileTypes:true})){if(['node_modules','.next','.git','.qa','artifacts','.studio','.runtime','.test-data'].includes(entry.name.toLowerCase())||entry.name.startsWith('.env'))continue;const path=prefix+entry.name;if(entry.isSymbolicLink())continue;if(entry.isDirectory())await walk(join(folder,entry.name),path+'/');else if(entry.isFile())paths.push(path);if(paths.length>250)throw new Error('Software workspace exceeds 250 source files');}}await walk(root);return paths.sort();}
+export type SoftwareBrowserContract={kind:'counter';label:string;button:string;initial?:number;delta?:number}|{kind:'counter_absent';label:string;button:string};
+export function validateSoftwareBrowserContract(raw:unknown):SoftwareBrowserContract{
+ const value=raw as Partial<SoftwareBrowserContract>;
+ if(!value||!['counter','counter_absent'].includes(String(value.kind))||typeof value.label!=='string'||!value.label.trim()||value.label.length>60||typeof value.button!=='string'||!value.button.trim()||value.button.length>60)throw new Error('The accepted browser contract is unsupported; it cannot be dropped silently');
+ if(value.kind==='counter_absent')return {kind:'counter_absent',label:value.label,button:value.button};
+ const numeric=value as {initial?:number;delta?:number};
+ for(const number of [numeric.initial,numeric.delta])if(number!==undefined&&(typeof number!=='number'||!Number.isFinite(number)||Math.abs(number)>1000000))throw new Error('Counter contract initial and delta must be finite numbers within 1000000');
+ return {kind:'counter',label:value.label,button:value.button,...(numeric.initial!==undefined?{initial:numeric.initial}:{}),...(numeric.delta!==undefined?{delta:numeric.delta}:{})};
+}
+/** Only explicit numeric/removal instructions can amend host QA; model output never supplies this contract. */
+export function deriveSoftwareRevisionBrowserContract(base:SoftwareBrowserContract|undefined,guidance:string):SoftwareBrowserContract|undefined{
+ if(typeof guidance!=='string')throw new Error('Revision guidance must be text');
+ // A new heading may itself contain counter-like words; those are caption data, not QA amendments.
+ const instructions=guidance.replace(/(\b(?:heading|title)\s+(?:to|as)\s+)(?:"[^"]*"|“[^”]*”|'[^']*')/gi,(match,prefix)=>prefix+' '.repeat(match.length-prefix.length)).replace(/(\b(?:heading|title)\s+(?:to|as)\s+)([^;.!?\n]*?)(?=\s+\b(?:and|then|but)\b|[;.!?\n]|$)/gi,(match,prefix)=>prefix+' '.repeat(match.length-prefix.length));
+ const contract=base?validateSoftwareBrowserContract(base):undefined,recognized:{start:number;end:number}[]=[];
+ const initial:number[]=[],delta:number[]=[];let remove=false;
+ const words:Record<string,number>={zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
+ const parse=(raw:string)=>{let token=raw.toLowerCase().replace(/^["'“”‘’]+|["'“”‘’.]+$/g,'');let sign=1;if(/^(?:minus|negative)\s+/.test(token)){sign=-1;token=token.replace(/^(?:minus|negative)\s+/,'');}const number=sign*(Object.hasOwn(words,token)?words[token]:Number(token));if(!token||!Number.isFinite(number)||Math.abs(number)>1000000)throw new Error('Unsupported counter number: use a finite numeric literal or zero through ten within 1000000');return number;};
+ const negated=(index:number)=>/(?:\bnot|\bnever|\bdon't|\bdo not|\bwithout)\s*$/i.test(instructions.slice(0,index));
+ const token='((?:(?:minus|negative)\\s+)?[^\\s,;!?]+)';
+ const collect=(prefix:string,kind:'initial'|'increment'|'decrement')=>{for(const match of instructions.matchAll(new RegExp(prefix+token,'gi'))){if(negated(match.index!))throw new Error('Negated numeric counter amendments are ambiguous; state the exact desired initial value or increment');if(/^\s+(?:or|point|plus|minus|more|less|hundred|thousand|million|after|before|until|unless|if|when|for\s+the\s+first|(?:every|each)\s+(?:other|second|third|[2-9])|and\s+(?:(?:a\s+)?half|zero|one|two|three|four|five|six|seven|eight|nine|ten|[0-9])|then\s+(?:at|by)|to\s+(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|[0-9]))\b/i.test(instructions.slice(match.index!+match[0].length)))throw new Error('Conflicting or calculated counter values are unsupported; state one exact value');const value=parse(match[1]);if(kind==='decrement'&&value<0)throw new Error('A decrement amount must be nonnegative');(kind==='initial'?initial:delta).push(kind==='decrement'?-value:value);recognized.push({start:match.index!,end:match.index!+match[0].length});}};
+ collect('\\bcounter\\s+(?:starts?|starting)\\s+(?:at|from)\\s+','initial');
+ collect('\\bcounter(?:\'s)?\\s+(?:initial|starting)\\s+value\\s+(?:is|to|at)\\s+','initial');
+ collect('\\b(?:set|change)\\s+(?:the\\s+)?counter(?:\'s)?\\s+(?:initial|starting)\\s+(?:value\\s+)?(?:to|at|is)\\s+','initial');
+ collect('\\bincrement(?:s|ing)?\\s+by\\s+','increment');
+ collect('\\bdecrement(?:s|ing)?\\s+by\\s+','decrement');
+ for(const match of instructions.matchAll(/\b(?:remove|delete)\s+(?:the\s+)?counter\b/gi)){recognized.push({start:match.index!,end:match.index!+match[0].length});if(!negated(match.index!))remove=true;}
+ const intents=/\bcounter\s+(?:starts?|starting|initial|step|delta)\b|\b(?:increment(?:s|ing)?|decrement(?:s|ing)?)\s+(?:by|to)\b|\b(?:remove|delete|hide|disable)\s+(?:the\s+)?(?:counter|increment|decrement)\b|\b(?:set|change|adjust|modify)\s+(?:the\s+)?counter(?:'s)?\s+(?:initial|starting|step|delta|behavior|behaviour)\b|\brename\s+(?:the\s+)?(?:counter|button|increment|output)\b/gi;
+ for(const match of instructions.matchAll(intents))if(!recognized.some(span=>match.index!>=span.start&&match.index!<span.end))throw new Error('Unsupported counter contract amendment; use counter starts at N, increment by N, decrement by N, or remove the counter');
+ if(new Set(initial).size>1||new Set(delta).size>1)throw new Error('Conflicting counter contract amendments specify more than one initial value or increment');
+ if(remove&&(initial.length||delta.length||/\b(?:keep|retain|preserve)\s+(?:the\s+)?counter\b/i.test(instructions)))throw new Error('Conflicting counter contract amendments both remove and retain/change the counter');
+ if(!remove&&!initial.length&&!delta.length)return contract;
+ if(!contract)throw new Error('A counter amendment requires a known host browser contract');
+ if(remove)return {kind:'counter_absent',label:contract.label,button:contract.button};
+ if(contract.kind==='counter_absent')throw new Error('Restoring an absent counter requires a new explicit host contract; its prior numeric behavior cannot be inferred');
+ return validateSoftwareBrowserContract({...contract,...(initial.length?{initial:initial[0]}:{}),...(delta.length?{delta:delta[0]}:{})});
+}
+export async function writeSoftwareRevisionBrowserContract(id:string,contract:SoftwareBrowserContract|undefined){
+ if(!contract)return;const value=validateSoftwareBrowserContract(contract),root=taskRoot(id),folder=join(root,'.qa'),target=join(folder,'browser-contract.json');
+ if(await realpath(root)!==root)throw new Error('Linked revision workspaces are forbidden');await mkdir(folder,{recursive:true});if(await realpath(folder)!==folder||await Bun.file(target).exists()&&await realpath(target)!==target)throw new Error('Linked revision browser contracts are forbidden');await Bun.write(target,JSON.stringify(value));
+}
+export type SoftwareRevisionStage={copiedFiles:number;parentSourceHash:string;browserContract?:SoftwareBrowserContract;cleanup:()=>Promise<void>};
+/** Clone editable inputs into a newly owned workspace; accepted outputs and caches stay with the parent. */
+export async function copySoftwareRevisionWorkspace(parentId:string,childId:string):Promise<SoftwareRevisionStage>{
+ const parent=taskRoot(parentId),child=taskRoot(childId);if(parent===child)throw new Error('A revision needs a distinct software workspace');
+ if(await realpath(parent)!==parent)throw new Error('Linked parent workspaces cannot be revised');
+ let owned=false;
+ const cleanup=async()=>{if(!owned)return;if(await realpath(child).catch(()=>null)!==child)throw new Error('Revision stage identity changed; refusing cleanup');await rm(child,{recursive:true,force:true,maxRetries:5,retryDelay:200});owned=false;};
+ try{
+  await mkdir(child);owned=true;
+  const paths=(await workspaceFiles(parent)).filter(path=>{
+   const first=path.split('/')[0].toLowerCase();
+   if(first.startsWith('.')&&!['.gitignore','.gitattributes'].includes(path))return false;
+   if(['dist','build','out','coverage','private','secrets'].includes(first)||/\.tsbuildinfo$/i.test(path))return false;
+   if(/\.(?:key|pem|p12|pfx|keystore)$/i.test(path)||/(?:^|\/)id_(?:rsa|dsa|ecdsa|ed25519)(?:\.pub)?$/i.test(path))return false;
+   // Runtime/media assets and extensionless scripts are source inputs too. Never silently drop an unknown eligible file.
+   try{buildPath(parent,path);}catch{throw new Error('Unsupported revision source path: '+path);}
+   return true;
+  });
+  if(!paths.includes('package.json'))throw new Error('The accepted parent has no editable package manifest');
+  const digest=createHash('sha256'),recorded:{path:string;hash:string}[]=[];let total=0;
+  for(const path of paths){
+   const source=buildPath(parent,path),target=buildPath(child,path);
+   if(await realpath(source)!==source)throw new Error('Linked parent source cannot be copied');
+   const info=await stat(source);total+=info.size;if(!info.isFile()||info.size>50000000||total>250000000)throw new Error('Revision source exceeds copy limits');
+   const before=createHash('sha256').update(new Uint8Array(await Bun.file(source).arrayBuffer())).digest('hex');
+   await mkdir(dirname(target),{recursive:true});await copyFile(source,target);
+   const copied=createHash('sha256').update(new Uint8Array(await Bun.file(target).arrayBuffer())).digest('hex');
+   if(copied!==before)throw new Error('Parent source changed while creating its revision');
+   digest.update(path+'\n'+before+'\n');recorded.push({path,hash:before});
+  }
+  let browserContract:SoftwareBrowserContract|undefined;
+  const contractPath=join(parent,'.qa','browser-contract.json');
+  if(await Bun.file(contractPath).exists()){
+   if(await realpath(contractPath)!==contractPath)throw new Error('Linked browser contracts cannot be copied');
+   browserContract=validateSoftwareBrowserContract(await Bun.file(contractPath).json());await mkdir(join(child,'.qa'),{recursive:true});await Bun.write(join(child,'.qa','browser-contract.json'),JSON.stringify(browserContract));
+   digest.update('host-browser-contract\n'+JSON.stringify(browserContract)+'\n');
+  }
+  for(const record of recorded){const source=buildPath(parent,record.path);if(await realpath(source)!==source||createHash('sha256').update(new Uint8Array(await Bun.file(source).arrayBuffer())).digest('hex')!==record.hash)throw new Error('Parent source changed before the revision could be saved');}
+  return {copiedFiles:paths.length,parentSourceHash:digest.digest('hex'),browserContract,cleanup};
+ }catch(error){await cleanup();throw error;}
+}
 export async function seedWorkspace(root:string){await mkdir(root,{recursive:true});const seed:Record<string,string>={
- 'package.json':JSON.stringify({name:'anascummis-built-app',version:'0.1.0',private:true,type:'module',scripts:{dev:'next dev --webpack -H 127.0.0.1',build:'next build --webpack',start:'next start -H 127.0.0.1',test:'bun test',typecheck:'tsc --noEmit'},dependencies:{next:'16.4.0',react:'19.2.7','react-dom':'19.2.7'},devDependencies:{typescript:'5.9.3','@types/react':'19.2.0','@types/react-dom':'19.2.0','@types/bun':'1.3.0'}},null,2),
+ 'package.json':JSON.stringify({name:'anascummis-built-app',version:'0.1.0',private:true,type:'module',scripts:{dev:'next dev --webpack -H 127.0.0.1',build:'next build --webpack',start:'next start -H 127.0.0.1',test:'bun test',typecheck:'tsc --noEmit'},dependencies:{next:'16.4.3',react:'19.2.7','react-dom':'19.2.7'},devDependencies:{typescript:'5.9.3','@types/react':'19.2.0','@types/react-dom':'19.2.0','@types/bun':'1.3.0'},overrides:{sharp:'0.35.5'}},null,2),
  'next.config.ts':"export default {output:'standalone',outputFileTracingRoot:process.cwd(),images:{unoptimized:true},experimental:{cpus:1}};\n",
  'tsconfig.json':JSON.stringify({compilerOptions:{target:'ES2022',lib:['dom','dom.iterable','esnext'],strict:true,noEmit:true,skipLibCheck:true,module:'esnext',moduleResolution:'bundler',jsx:'react-jsx',esModuleInterop:true,resolveJsonModule:true,plugins:[{name:'next'}]},include:['**/*.ts','**/*.tsx','.next/types/**/*.ts'],exclude:['node_modules','.qa','artifacts']},null,2),
  'app/layout.tsx':"import type {ReactNode} from 'react';\nexport default function Layout({children}:{children:ReactNode}){return <html lang=\"en\"><body>{children}</body></html>;}\n",
@@ -19,7 +101,7 @@ export async function seedWorkspace(root:string){await mkdir(root,{recursive:tru
  'tests/app.test.tsx':"import {test,expect} from 'bun:test';import {renderToStaticMarkup} from 'react-dom/server';import Page from '../app/page';test('application renders',()=>{expect(renderToStaticMarkup(<Page/>)).toContain('<main>');});\n",
  'README.md':'Generated by the Anascummis local builder. Run bun install, bun test and bun run build. Progress, tests and acceptance evidence are included separately. Model weights and personal files are not bundled automatically.\n'
  };for(const [path,body]of Object.entries(seed))if(!await Bun.file(buildPath(root,path)).exists())await writeSource(root,path,body);}
-export async function command(args:string[],cwd:string,signal:AbortSignal,timeout=180000){signal.throwIfAborted();const env=Object.fromEntries(['PATH','SystemRoot','WINDIR','TEMP','TMP','USERPROFILE','HOME','LOCALAPPDATA','APPDATA','PROCESSOR_ARCHITECTURE'].flatMap(key=>process.env[key]?[[key,process.env[key]!]]:[]));const child=Bun.spawn(args,{cwd,env:{...env,NEXT_TELEMETRY_DISABLED:'1'},stdout:'pipe',stderr:'pipe'});let output='';const collect=async(stream:ReadableStream<Uint8Array>)=>{const reader=stream.getReader(),decoder=new TextDecoder();for(;;){const next=await reader.read();if(next.done)break;output=(output+decoder.decode(next.value,{stream:true})).slice(-16000);}};let timedOut=false;const kill=()=>{void terminateOwned(child);};signal.addEventListener('abort',kill,{once:true});const timer=setTimeout(()=>{timedOut=true;kill();},timeout),start=performance.now();try{const [code]=await Promise.all([child.exited,collect(child.stdout),collect(child.stderr)]);signal.throwIfAborted();return {ok:code===0&&!timedOut,detail:timedOut?'Command timed out. '+output:output,milliseconds:Math.round(performance.now()-start)};}finally{clearTimeout(timer);signal.removeEventListener('abort',kill);}}
+export async function command(args:string[],cwd:string,signal:AbortSignal,timeout=180000){signal.throwIfAborted();const install=args[0]===process.execPath&&args[1]==='install'&&args.includes('--ignore-scripts');const keys=['PATH','SystemRoot','WINDIR','TEMP','TMP','USERPROFILE','HOME','LOCALAPPDATA','APPDATA','PROCESSOR_ARCHITECTURE','STUDIO_BROWSER_EXE','STUDIO_CHROME','BUN_INSTALL_CACHE_DIR','NPM_CONFIG_CACHE','XDG_CACHE_HOME',...(install?['HTTP_PROXY','HTTPS_PROXY','http_proxy','https_proxy','NO_PROXY','no_proxy','SSL_CERT_FILE','NODE_EXTRA_CA_CERTS']:[])];const env=Object.fromEntries(keys.flatMap(key=>process.env[key]?[[key,process.env[key]!]]:[]));const child=Bun.spawn(args,{cwd,env:{...env,NEXT_TELEMETRY_DISABLED:'1'},stdout:'pipe',stderr:'pipe'});let output='';const collect=async(stream:ReadableStream<Uint8Array>)=>{const reader=stream.getReader(),decoder=new TextDecoder();for(;;){const next=await reader.read();if(next.done)break;output=(output+decoder.decode(next.value,{stream:true})).slice(-16000);}};let timedOut=false;const kill=()=>{void terminateOwned(child);};signal.addEventListener('abort',kill,{once:true});const timer=setTimeout(()=>{timedOut=true;kill();},timeout),start=performance.now();try{const [code]=await Promise.all([child.exited,collect(child.stdout),collect(child.stderr)]);signal.throwIfAborted();return {ok:code===0&&!timedOut,detail:timedOut?'Command timed out. '+output:output,milliseconds:Math.round(performance.now()-start)};}finally{clearTimeout(timer);signal.removeEventListener('abort',kill);}}
 const node=Bun.which('node');
 async function snapshotZip(root:string,extra:Record<string,Uint8Array>={}){const files={...extra};for(const path of await workspaceFiles(root))files[path]=new Uint8Array(await Bun.file(buildPath(root,path)).arrayBuffer());return zip(files);}
 async function treeBytes(folder:string,prefix:string,result:Record<string,Uint8Array>){for(const entry of await readdir(folder,{withFileTypes:true})){const full=join(folder,entry.name);if(entry.name.startsWith('.env')||['.studio','.runtime'].includes(entry.name)||entry.isSymbolicLink())continue;if(entry.isDirectory())await treeBytes(full,prefix+entry.name+'/',result);else if(entry.isFile())result[prefix+entry.name]=new Uint8Array(await Bun.file(full).arrayBuffer());}if(Object.values(result).reduce((n,b)=>n+b.length,0)>250000000)throw new Error('Executable payload exceeds 250 MB');}
