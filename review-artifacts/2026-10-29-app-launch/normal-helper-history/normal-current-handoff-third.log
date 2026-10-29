@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+NaN !== 1832950
+
+    at file:///workspace/.cloud-env/anascummis/app-launch/capture-normal-handoff.mjs:30:342 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: NaN,
+  expected: 1832950,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

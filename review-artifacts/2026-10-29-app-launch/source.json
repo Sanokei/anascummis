@@ -1,0 +1,62 @@
+{
+  "pins": {
+    "base": "f331e280f1cb4a5a396d0048adc316a1d326d0d3",
+    "initial": "2318ced4a96fb019fe271128f40d98718c08b31a",
+    "layout": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+    "documentation": "37044f05d7adb90bc1b1262aa690d44574c56f04",
+    "finalGuard": "ade3e43479654e60415876ba681d965c5a8ff296"
+  },
+  "trees": {
+    "base": "15a278d09cf6e388ffc4509a411d0a19808117cb",
+    "initial": "517e2a84563649860b34c8eb7382dccd2c2b7ee0",
+    "layout": "a1a315fff952a585191d7eabd606842f0e77af42",
+    "documentation": "bdf7d4fed2c0f951f59168ef788cd3b0176e12f1",
+    "finalGuard": "368e6537507324a75d8de3105c2f91b98fdff8ad"
+  },
+  "sourcePathsFromBase": [
+    "PROJECT-ROADMAP.md",
+    "README.md",
+    "apps/studio/SOFTWARE.md",
+    "apps/studio/USER-JOURNEYS.md",
+    "apps/studio/app/page.tsx",
+    "apps/studio/app/style.css",
+    "apps/studio/components/SoftwareLaunch.tsx",
+    "apps/studio/components/SoftwarePanel.tsx",
+    "apps/studio/core/app-launch-package.ts",
+    "apps/studio/core/app-launch-process.ts",
+    "apps/studio/core/server.ts",
+    "apps/studio/core/software-api.ts",
+    "apps/studio/core/software-launch.ts",
+    "apps/studio/scripts/e2e/app-launch.mjs",
+    "apps/studio/scripts/e2e/runner.mjs",
+    "apps/studio/scripts/e2e/window-routing.mjs",
+    "apps/studio/scripts/spike-app-launch.ts",
+    "apps/studio/tests/app-launch-package.test.ts",
+    "apps/studio/tests/app-launch-process.test.ts",
+    "apps/studio/tests/software-launch.test.ts",
+    "apps/studio/worker/app-launch.ts",
+    "review-artifacts/2026-10-29-app-launch/PLAN.md"
+  ],
+  "commitUrls": {
+    "base": "https://github.com/Sanokei/anascummis/commit/f331e280f1cb4a5a396d0048adc316a1d326d0d3",
+    "initial": "https://github.com/Sanokei/anascummis/commit/2318ced4a96fb019fe271128f40d98718c08b31a",
+    "layout": "https://github.com/Sanokei/anascummis/commit/32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+    "documentation": "https://github.com/Sanokei/anascummis/commit/37044f05d7adb90bc1b1262aa690d44574c56f04",
+    "finalGuard": "https://github.com/Sanokei/anascummis/commit/ade3e43479654e60415876ba681d965c5a8ff296"
+  },
+  "productReport": "product/report.json",
+  "productSourceDirty": false,
+  "productCases": 4,
+  "productAssertions": 44,
+  "routingReport": "routing/report.json",
+  "routingSource": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "routingCases": 2,
+  "routingAssertions": 8,
+  "scope": "Frozen current source with four actual product-managed existing-app lifecycle cases and separate read-only routing; no fresh inference or arbitrary server execution.",
+  "historicalReports": {
+    "before-layout/report.json": "2318ced4a96fb019fe271128f40d98718c08b31a",
+    "before-reload-guard/report.json": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad"
+  },
+  "preservedPriorQa": "62c81b4e5e48f505da323a5f0ed215167a58dd8d",
+  "preservedPriorDelivery": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411"
+}

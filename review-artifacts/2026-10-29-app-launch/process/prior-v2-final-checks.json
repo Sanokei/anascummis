@@ -1,0 +1,107 @@
+{
+  "checkedAt": "2026-10-29T20:12:57.435377+00:00",
+  "phase": "Working-tree process/ownership gate before product integration; no native inference or model quality claim",
+  "unitChecks": {
+    "command": [
+      "bun",
+      "test",
+      "tests/app-launch-process.test.ts"
+    ],
+    "exitCode": 0,
+    "passed": 5,
+    "failed": 0,
+    "assertions": 28
+  },
+  "explicitWorkerTypecheck": {
+    "command": [
+      "bun",
+      "node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "--incremental",
+      "false",
+      "--strict",
+      "--target",
+      "ES2022",
+      "--module",
+      "ESNext",
+      "--moduleResolution",
+      "bundler",
+      "--lib",
+      "ES2022,DOM,DOM.Iterable",
+      "--types",
+      "bun",
+      "--skipLibCheck",
+      "worker/app-launch.ts",
+      "core/app-launch-process.ts",
+      "tests/app-launch-process.test.ts",
+      "scripts/spike-app-launch.ts"
+    ],
+    "exitCode": 0
+  },
+  "sourceFiles": [
+    {
+      "path": "core/app-launch-process.ts",
+      "sha256": "4691a110e3ad1b82842e78917ca34be4e85e10c7a218470785e640fe799066cd",
+      "bytes": 7008
+    },
+    {
+      "path": "worker/app-launch.ts",
+      "sha256": "28c20db72387f5053c6d3b8e84dc6e0a6159936303ec7d3870c455ec7eb85c9a",
+      "bytes": 5682
+    },
+    {
+      "path": "tests/app-launch-process.test.ts",
+      "sha256": "894b8018872150b0f7c9fac0bf21055dcd80bc15e7987a23a60f48a8336c61ec",
+      "bytes": 6219
+    },
+    {
+      "path": "scripts/spike-app-launch.ts",
+      "sha256": "c2d3ad056efde7a3fe497b2394bfb4cfcee8c1d08afebe24c46091a77b0a3905",
+      "bytes": 12683
+    }
+  ],
+  "spikeReport": {
+    "path": "ownership-spike-final-v2/report.json",
+    "sha256": "54d79d7edc15339f408f17eeec3a0f9a267585644d736fc1e82ada038954646c",
+    "checks": 8,
+    "status": "passed"
+  },
+  "actualAcceptedPageSmoke": {
+    "path": "accepted-runtime-boundary/report.json",
+    "scope": "Separate actual accepted-Page iframe smoke; product UI acceptance remains independent",
+    "checks": 3,
+    "status": "passed"
+  },
+  "ownedWorkerStates": [
+    {
+      "pid": 42371,
+      "state": "absent",
+      "running": false
+    },
+    {
+      "pid": 42497,
+      "state": "absent",
+      "running": false
+    },
+    {
+      "pid": 42513,
+      "state": "Z",
+      "running": false
+    },
+    {
+      "pid": 42521,
+      "state": "absent",
+      "running": false
+    }
+  ],
+  "sharedServices": [
+    {
+      "pid": 37402,
+      "stillPresent": true
+    },
+    {
+      "pid": 18848,
+      "stillPresent": true
+    }
+  ]
+}

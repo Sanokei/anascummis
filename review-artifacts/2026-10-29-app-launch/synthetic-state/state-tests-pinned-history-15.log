@@ -1,0 +1,23 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/software-launch.test.ts:
+(pass) explicit Start persists preparation; reads and repeated Start never duplicate work, and Stop waits for preparation [42.07ms]
+(pass) running identity survives GET/reopen; Stop awaits owned exit and explicit restart retains its exact origin [44.83ms]
+(pass) Stop during an unconfirmed process startup closes the late owned handle without publishing Running [43.24ms]
+(pass) compatible child launch requires explicit parent Stop, reuses lineage address/storage identity and never rewrites accepted records [44.02ms]
+(pass) incompatible/unsupported lineages and the third active app fail before spawning, while accepted records remain intact [44.66ms]
+(pass) launch-row and activity SQL failures roll back together before any package or process starts [45.48ms]
+(pass) startup reconciliation records interruption without starting or killing a persisted PID; explicit continuation retains the origin [43.50ms]
+(pass) stale exit callbacks cannot overwrite a new launch, and a live crash stays failed until explicit Start [43.82ms]
+(pass) package tamper and occupied-address failures keep the saved origin and source identity without a fallback start [46.42ms]
+(pass) shutdown waits for owned cleanup, blocks new starts, and does not resume a request still undergoing eligibility checks [46.03ms]
+(pass) explicit Stop retries failed prior cleanup and never records Stopped before the owned exit is confirmed [48.58ms]
+(pass) shutdown waits for every owned Stop even when one rejects, retaining failed cleanup for explicit retry [47.34ms]
+(pass) a cleanup rejection without an attached Stop is observed and retains the owned handle for later confirmed Stop [55.05ms]
+(pass) old active apps stay pinned beyond twenty builds through Stop and restart recovery without automatic execution [52.94ms]
+(pass) merging pinned builds preserves recent order and object identity, reads only missing IDs and never mutates inputs [41.62ms]
+
+ 15 pass
+ 0 fail
+ 45 expect() calls
+Ran 15 tests across 1 file. [708.00ms]

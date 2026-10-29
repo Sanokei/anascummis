@@ -1,0 +1,15 @@
+{
+  "phase": "partial finalade3 handoff before optional HTTP metadata assertion repair; no complete handoff pass",
+  "source": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "kitVersion": "c9c84ba6a1c9844a5e252cd926ce5cc20c827bfdb91b925b76b5cb39207e0326",
+  "actualDownloadCompleted": false,
+  "originalScreenshots": [
+    "desktop-initial-readiness.png",
+    "desktop-typing-empty-without-send.png",
+    "desktop-download-current-kit.png"
+  ],
+  "helperFailure": {
+    "log": "../normal-current-handoff-third.log",
+    "cause": "The normal HEAD response omits optional Content-Length; the helper incorrectly required it. Existing UI permits omission. Actual ZIP bytes/hash check remains required."
+  }
+}

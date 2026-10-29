@@ -1,0 +1,118 @@
+{
+  "scope": "Actual SoftwareLaunch React component in installed Chromium with explicitly synthetic API state and a simple synthetic frame. No product process/runtime/native inference or actual storage-boundary claim. SoftwarePanel is recorded only as integration context; its full product layout is not exercised by this fixture.",
+  "sourceFiles": [
+    "components/SoftwareLaunch.tsx",
+    "components/SoftwarePanel.tsx",
+    "app/style.css"
+  ],
+  "sourceIdentity": [
+    {
+      "path": "components/SoftwareLaunch.tsx",
+      "sha256": "2a543fdcbaf23dfb95c4f632c997a5d986ab5d15293f991899185ce8058ac579"
+    },
+    {
+      "path": "components/SoftwarePanel.tsx",
+      "sha256": "ba58e5462f4aea1fc227fb99e41fc57af1a6f47f375a81abbf438d952939a33c"
+    },
+    {
+      "path": "app/style.css",
+      "sha256": "2efef53065b9da1590d5be46439bc0211af99cd8274877d4f0e661e49508a07b"
+    }
+  ],
+  "driverSha256": "31433715132e92f07fd02d6bc961cab66da48b76903de9a9d5753c843c7c5d1e",
+  "results": [
+    {
+      "name": "explicit-start-stop-start-reopen",
+      "passed": true,
+      "launchPosts": [
+        "start",
+        "stop",
+        "start"
+      ],
+      "reopenAndPageReloadAddedPosts": 0,
+      "frameAfterRestart": true,
+      "controlsAtLeast44px": true,
+      "keyboardFocus": true,
+      "noOverflow": true
+    },
+    {
+      "name": "lost-start-no-replay",
+      "passed": true,
+      "launchPosts": [
+        "start"
+      ],
+      "automaticReplay": false,
+      "explicitStatusInspectionRecoversControls": true
+    },
+    {
+      "name": "unconfirmed-stop-stopping-retry",
+      "passed": true,
+      "launchPosts": [
+        "start",
+        "stop",
+        "stop"
+      ],
+      "explicitInspectionRequiredBeforeRetry": true,
+      "stoppingRetryUsable": true
+    },
+    {
+      "name": "same-Studio-origin-refused",
+      "passed": true,
+      "frameCount": 0,
+      "launchPosts": [],
+      "unsafeAddressVisible": true
+    },
+    {
+      "name": "stale-read-cannot-revert-start",
+      "passed": true,
+      "staleReadIgnored": true,
+      "manualSpinnerRecovered": true,
+      "launchPosts": [
+        "start"
+      ]
+    },
+    {
+      "name": "readonly-status-error-retains-frame-input-focus",
+      "passed": true,
+      "sameFrameElement": true,
+      "unsentAppInputRetained": true,
+      "frameInputFocusRetained": true,
+      "launchPosts": [
+        "start"
+      ]
+    },
+    {
+      "name": "old-tab-reconnect-keeps-unsent-Studio-draft",
+      "passed": true,
+      "documentIdentityUnchanged": true,
+      "unsentStudioDraftPreserved": true,
+      "ordinaryHtmlFetches": 1,
+      "htmlNotExecuted": true,
+      "httpOnlyCookieRefreshed": true,
+      "launchPosts": [
+        "start"
+      ],
+      "noAutomaticRestart": true
+    },
+    {
+      "name": "unsupported-manual-fallback",
+      "passed": true,
+      "startControlAbsent": true,
+      "launchPosts": [],
+      "manualFallbackVisible": true
+    },
+    {
+      "name": "paired-online-no-launch",
+      "passed": true,
+      "launchRegionAbsent": true,
+      "statusGets": 0,
+      "launchPosts": []
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0
+  },
+  "viewportProof": "Desktop1440 and360x800 browser emulation only.",
+  "services": "Only owned temporary fixture servers/browser were started and stopped; normal Studio/model untouched."
+}

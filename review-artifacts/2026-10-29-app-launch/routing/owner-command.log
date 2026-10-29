@@ -1,0 +1,4 @@
+$ node scripts/test-user-journeys.mjs --journey software-window-routing --viewport all --output ".test-data/user-journeys/app-launch-routing-ade3e43"
+PASSED software-window-routing [desktop] Find software progress, revision guidance, honest run instructions and Work history without accidentally starting or changing an application.
+PASSED software-window-routing [narrow] Find software progress, revision guidance, honest run instructions and Work history without accidentally starting or changing an application.
+User goals: 2 achieved, 0 blocked, 0 failed. Report: /workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-routing-ade3e43/report.html

@@ -1,0 +1,4 @@
+$ bun scripts/publish-sources.ts
+Source kit c9c84ba6a1c9844a: anascummis-studio-c9c84ba6a1c9844a.zip
+SHA-256 d5ab598227fe7e1674c2751db4704b6589495f7ffab5a0bbd622130f977a7bec
+247 payload files; 1832950 bytes; source ade3e43479654e60415876ba681d965c5a8ff296

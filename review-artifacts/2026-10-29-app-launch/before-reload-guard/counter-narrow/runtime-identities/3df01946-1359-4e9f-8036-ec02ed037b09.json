@@ -1,0 +1,80 @@
+{
+  "format": "anascummis.trusted-browser-runtime.v1",
+  "id": "1e640b34c14f743300a8c79e9efd2ea219055e03d5f88dc4ce6c78a37424fa81",
+  "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+  "revision": 1,
+  "zipSha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+  "kind": "counter",
+  "title": "Bakery Orders",
+  "wrapperVersion": 1,
+  "reactVersion": "19.2.7",
+  "sourceFiles": [
+    {
+      "path": "BUILD-EVIDENCE.json",
+      "bytes": 2211,
+      "sha256": "3038081756a88f37fb86f61b990b05f1a6405879d17e10d636d70c28ad09adc8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1151,
+      "sha256": "a27944edb6b1579c0164d8b0d6108e4c4cca8f491fa5b1f031f3589b5e1ffa74"
+    },
+    {
+      "path": "app/layout.tsx",
+      "bytes": 158,
+      "sha256": "51f36435e18eb03bd81e6c590823ea47735c2931112d76de87fa243e51e6b168"
+    },
+    {
+      "path": "app/page.tsx",
+      "bytes": 4115,
+      "sha256": "0895e47453fdde1693b8046ad5854d05c997ca1a69ab285d12b3ecc68d4a5484"
+    },
+    {
+      "path": "bun.lock",
+      "bytes": 15635,
+      "sha256": "cc171eff287591876e4274387dc90c7bc5ccdb82de44eae0073e8946adf8f3e8"
+    },
+    {
+      "path": "next-env.d.ts",
+      "bytes": 288,
+      "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b"
+    },
+    {
+      "path": "next.config.ts",
+      "bytes": 122,
+      "sha256": "0b41dce12b69d63240f2324391408b20b450c99727f049bf99d8cfcacffc79c9"
+    },
+    {
+      "path": "package.json",
+      "bytes": 581,
+      "sha256": "37cb102599381dd933c50d8568edc21d6e5ec2a36852a18427872d3bf56bfead"
+    },
+    {
+      "path": "tests/app.test.tsx",
+      "bytes": 928,
+      "sha256": "84998542539d63a7e2e562a92f43d4756a3abfb38d3b7dd05c20a358beeb1721"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 646,
+      "sha256": "bd2a31e9623a9a3ea44f857a7fabe88fd382f31744951dc47d2ec664e51be56a"
+    },
+    {
+      "path": "tsconfig.tsbuildinfo",
+      "bytes": 143948,
+      "sha256": "bcf9fe5fea15649d3d7c13009d298dcd59e00dfadaa60b91efa26c3edad71426"
+    }
+  ],
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 248,
+      "sha256": "6148731ebbe69143858fd57a08d36f7e82b81714b651cdd9ed7559e3aa3f8fd3"
+    },
+    {
+      "path": "app.js",
+      "bytes": 189544,
+      "sha256": "2ee6c49091784027bcaf85d03c1e473a719e2ea8ace11187116a1264f22e50d1"
+    }
+  ]
+}

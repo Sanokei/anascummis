@@ -1,0 +1,9 @@
+{
+  "base": "f331e280f1cb4a5a396d0048adc316a1d326d0d3",
+  "preservedQa": "62c81b4e5e48f505da323a5f0ed215167a58dd8d",
+  "delivery": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+  "normalStudioPid": 37402,
+  "nativeModelPid": 18848,
+  "scope": "First explicit trusted client app launch; no arbitrary app server execution",
+  "createdAt": "2026-10-29T20:04:40.446511+00:00"
+}

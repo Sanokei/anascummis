@@ -1,0 +1,103 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-software.test.ts:
+(pass) actual software creation rolls task and parent link back together before a successful retry [95.67ms]
+(pass) a failed atomic link leaves no queued build and retries reuse the committed whole-app build [5.78ms]
+(pass) concurrent duplicate creation commits only one child and both monitors use that child [2.85ms]
+(pass) completed linked output is not presented as a newly repaired build after rejected acceptance [0.64ms]
+(pass) guided repair atomically links a distinct completed child while preserving its accepted parent [1.05ms]
+(pass) cancelled revision staging rolls its child and link back and never changes the accepted parent [0.61ms]
+(pass) a completed build requires explicit repair guidance before a child can be created [0.34ms]
+(pass) startup reconciliation stops unfinished children of paused/cancelled parents and preserves completed children [0.71ms]
+(pass) shutdown leaves a recoverable checkpoint that startup reconciliation pauses until explicit continuation [8.77ms]
+(pass) explicit cancellation stops a live child and missing artifact checks cannot certify completion [2.99ms]
+
+tests/software-revisions.test.ts:
+(pass) revision creation clones editable input while leaving the accepted parent and release bytes unchanged [91.97ms]
+(pass) a failed synchronous parent-link callback rolls back the child and cleans only its owned workspace [103.74ms]
+(pass) revision acceptance replaces the old heading, keeps unaffected counter criteria, and discards old review stamps [99.48ms]
+(pass) invalid guidance, changed accepted artifacts, and unsupported browser contracts create no child [78.76ms]
+(pass) queued revision cancellation and continuation preserve the same child and copied source checkpoint [124.00ms]
+(pass) late revision-planning responses cannot change a cancelled child or its accepted parent [132.75ms]
+(pass) a restarted revision resumes its saved acceptance checkpoint without fresh-app seeding [169.91ms]
+(pass) counter revision decisions retain inspected edit tools while fresh numeric tasks keep their typed recipe [104.78ms]
+(pass) continuation guidance B to C to B uses the current plan rather than suppressing the original note [121.27ms]
+(pass) host-derived counter amendments ground numeric steps and starts while preserving unrelated contracts [71.19ms]
+(pass) numeric and removal QA amendments are persisted only in their child and never delete the host contract [115.04ms]
+(pass) retiring a changed heading cannot complete a revision from only kept counter proof [104.65ms]
+(pass) coverage pagination resumes from persisted offset without replaying accepted writes and stale review revisions reset [213.63ms]
+(pass) public binary runtime assets and extensionless scripts survive a revision clone byte for byte [154.62ms]
+(pass) an unsupported eligible input fails the clone cleanly instead of silently losing application files [90.38ms]
+
+tests/software.test.ts:
+(pass) software repairs are read first, retested, and gated by host evidence [3.27ms]
+(pass) blocked QA, missing executable and stale evidence cannot produce completion [0.27ms]
+(pass) software source capability excludes credentials and path traversal [88.46ms]
+(pass) software edits require inspected unique source and cancellation blocks verification completion [0.57ms]
+(pass) an app request cannot be completed by editing a website [5.01ms]
+(pass) long software requests stay paginated outside the small model packet [1.76ms]
+(pass) harness rejects completion before executing any work [0.36ms]
+(pass) typed React screen rejects invalid state and keeps hostile labels as data [0.99ms]
+(pass) counter skill scope accepts phrasing changes but never absorbs additional features [0.93ms]
+
+tests/app-launch-process.test.ts:
+(pass) fixed asset boundary drops all browser credentials and response cookies [0.84ms]
+(pass) real owned IPC bind, immutable assets, strict HTTP boundary and awaited Stop [99.37ms]
+(pass) unrelated HTTP200 occupying saved address cannot impersonate readiness [35.51ms]
+(pass) tampered runtime asset fails before readiness and same-origin Studio is forbidden [47.72ms]
+(pass) aborted preparation does not leave an owned app running [3.05ms]
+(pass) worker disables Bun dotenv loading as well as inherited environment values [65.91ms]
+
+tests/software-validation-retry.test.ts:
+(pass) explicit Resume archives a full text-only failed receipt while queuing unchanged saved source for real revalidation [116.60ms]
+(pass) failed checks stay cached without explicit Resume, and passing/stale evidence or completed parents are untouched [100.86ms]
+(pass) a queued-state SQL failure rolls back the archive, evidence clearing and retry projection together [62.88ms]
+(pass) archive SQL failures and invalid guidance cannot clear the only saved failure receipt [98.18ms]
+
+tests/window-requests.test.ts:
+(pass) whole build goals containing progress, remaining tasks and collaboration remain build requests [0.85ms]
+(pass) actual whole status questions stay read-only without consuming appended work [0.26ms]
+(pass) collaboration shortcuts target the existing panel without matching app descriptions [0.17ms]
+(pass) existing app requests need visible revision/run controls rather than status or fabricated completion [0.12ms]
+
+tests/app-launch-package.test.ts:
+(pass) stored ZIP reader accounts for every path and CRC, rejecting duplicates, traversal, compression, links and trailing data [2.11ms]
+(pass) counter recognition requires exact known Page/layout, matching current browser contract and full-revision checks [1.51ms]
+(pass) collection recognition retains the accepted key and refuses custom code or forged provenance [1.26ms]
+(pass) incomplete, stale and unchecked builds remain unsupported before any preparation [1.06ms]
+(pass) explicit preparation uses exact ZIP code, is deterministic, and does not mutate accepted source or install dependencies [184.73ms]
+(pass) poisoned bundle and self-consistent forged cache metadata cannot attest a runtime; accepted ZIP remains intact [155.24ms]
+(pass) missing dependencies, changed archive, linked files and cancellation fail without silent repair [50.19ms]
+
+tests/software-launch.test.ts:
+(pass) explicit Start persists preparation; reads and repeated Start never duplicate work, and Stop waits for preparation [65.26ms]
+(pass) running identity survives GET/reopen; Stop awaits owned exit and explicit restart retains its exact origin [57.92ms]
+(pass) Stop during an unconfirmed process startup closes the late owned handle without publishing Running [65.03ms]
+(pass) compatible child launch requires explicit parent Stop, reuses lineage address/storage identity and never rewrites accepted records [58.41ms]
+(pass) incompatible/unsupported lineages and the third active app fail before spawning, while accepted records remain intact [62.57ms]
+(pass) launch-row and activity SQL failures roll back together before any package or process starts [65.76ms]
+(pass) startup reconciliation records interruption without starting or killing a persisted PID; explicit continuation retains the origin [78.13ms]
+(pass) stale exit callbacks cannot overwrite a new launch, and a live crash stays failed until explicit Start [92.27ms]
+(pass) package tamper and occupied-address failures keep the saved origin and source identity without a fallback start [74.46ms]
+(pass) shutdown waits for owned cleanup, blocks new starts, and does not resume a request still undergoing eligibility checks [81.18ms]
+(pass) explicit Stop retries failed prior cleanup and never records Stopped before the owned exit is confirmed [79.97ms]
+(pass) shutdown waits for every owned Stop even when one rejects, retaining failed cleanup for explicit retry [165.99ms]
+(pass) a cleanup rejection without an attached Stop is observed and retains the owned handle for later confirmed Stop [157.86ms]
+(pass) old active apps stay pinned beyond twenty builds through Stop and restart recovery without automatic execution [88.07ms]
+(pass) merging pinned builds preserves recent order and object identity, reads only missing IDs and never mutates inputs [73.61ms]
+
+tests/software-counter-contracts.test.ts:
+(pass) Reset and literal-heading host contracts validate and evolve in a child without changing their parent [65.00ms]
+
+tests/software-collection-contracts.test.ts:
+(pass) collection browser contracts normalize complete behavior and a literal heading amendment retains its storage identity [41.97ms]
+(pass) a bounded child changes only known compiler fields, keeps full collection acceptance and leaves its accepted parent byte-identical [82.18ms]
+(pass) custom source, tampered provenance or additional accepted criteria cannot be replaced by the heading recipe [96.19ms]
+(pass) late cancellation does not save a compiler checkpoint or overwrite copied child source [90.79ms]
+(pass) a persisted compiler checkpoint finishes partial own writes after process reopen without another model call [142.36ms]
+(pass) unsupported extra revision guidance keeps the guarded worker path and never receives a typed collection shortcut [77.43ms]
+
+ 77 pass
+ 0 fail
+ 345 expect() calls
+Ran 77 tests across 10 files. [5.00s]

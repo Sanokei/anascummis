@@ -1,0 +1,20 @@
+{
+  "phase": "partial pre-Reload-guard capture only; no complete handoff pass",
+  "source": "37044f05d7adb90bc1b1262aa690d44574c56f04",
+  "kitVersion": "bdba43c540ba410f5a81c789ef7c4987a9d9d122d30b6fb6a2dec7a85bd5e45b",
+  "originalScreenshots": [
+    "desktop-initial-readiness.png"
+  ],
+  "actualDownloadCompleted": false,
+  "helperFailures": [
+    {
+      "log": "../normal-current-handoff-first.log",
+      "cause": "Strict text locator matched hidden dialog and visible conversation readiness."
+    },
+    {
+      "log": "../normal-current-handoff-second.log",
+      "cause": "Focus wait checked textarea aria-label; actual accessible name uses associated label and textarea id orb-text."
+    }
+  ],
+  "noSourceBuildModelOrServiceChanges": true
+}

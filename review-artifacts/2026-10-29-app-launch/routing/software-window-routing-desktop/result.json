@@ -1,0 +1,73 @@
+{
+  "id": "software-window-routing",
+  "viewport": "desktop",
+  "goal": "Find software progress, revision guidance, honest run instructions and Work history without accidentally starting or changing an application.",
+  "startedAt": "2026-10-29T20:58:56.236Z",
+  "status": "passed",
+  "lane": "real-local-runtime",
+  "prerequisite": "None",
+  "assertions": [
+    {
+      "name": "Show build progress opens Software without creating a task.",
+      "passed": true
+    },
+    {
+      "name": "Existing-app edit shows explicit revision instructions and preserves exact text without applying or submitting it.",
+      "passed": true
+    },
+    {
+      "name": "Open my app explains explicit Start and the source ZIP fallback without creating a launch.",
+      "passed": true
+    },
+    {
+      "name": "Show tasks reaches Work history; navigation produces no build, revision, chat or goal mutations.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-software-progress-routing.png",
+    "03-revision-request-kept.png",
+    "04-honest-open-app-handoff.png",
+    "05-show-tasks-work-history.png"
+  ],
+  "downloads": [],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T20:58:56.773Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 52556,
+    "port": 40483,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T20:59:00.879Z",
+  "recoveryChecksPassed": 4
+}

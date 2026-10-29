@@ -1,0 +1,41 @@
+{
+  "scope": "Four guarded-final trace ZIPs remain local. Integrity/redaction and actual pairing-key absence were verified; only identities/metadata are distributed.",
+  "traces": [
+    {
+      "path": "collection-desktop/trace.zip",
+      "bytes": 44987999,
+      "sha256": "b4295e925bf94d63d2b2ed23c32030d26c172cb22d59a6ee532ed719b650ffff",
+      "entries": 1159,
+      "jsonlRecords": 3809,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "collection-narrow/trace.zip",
+      "bytes": 55380799,
+      "sha256": "39d29af2f66ea2f61e8a596d04fc790d4504f8de375bc8441fb74293f7f5451a",
+      "entries": 1091,
+      "jsonlRecords": 4095,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "counter-desktop/trace.zip",
+      "bytes": 24905856,
+      "sha256": "febf3a44fb23d44224ed0dafca479f1afd73d27621d1823d8d28603468c6431f",
+      "entries": 519,
+      "jsonlRecords": 1630,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "counter-narrow/trace.zip",
+      "bytes": 27237906,
+      "sha256": "0dc922b4a30f65782e6ebf70edb81aef48040cd7b30ecd87944d20ea5f8c5ddd",
+      "entries": 438,
+      "jsonlRecords": 1960,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    }
+  ]
+}

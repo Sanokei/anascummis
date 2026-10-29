@@ -1,0 +1,519 @@
+{
+  "format": "anascummis.app-launch.qa-staging.v1",
+  "createdAt": "2026-10-29T20:25:53.750921+00:00",
+  "scope": "Original prerequisite/isolated/synthetic evidence staging only. Includes historical2318 gates and current32bb layout/history gates. The six new layout originals exercise actual host components and accepted app bytes under synthetic read-only status with zero POST; they are not actual product launch lifecycle acceptance. Root adds confirmed final product reports separately.",
+  "frozenSource": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+  "assemblyCheckoutHead": "2318ced4a96fb019fe271128f40d98718c08b31a",
+  "preservedQa": "62c81b4e5e48f505da323a5f0ed215167a58dd8d",
+  "preservedDelivery": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+  "preservedPlan": "f331e280f1cb4a5a396d0048adc316a1d326d0d3",
+  "originalFiles": 54,
+  "originalBytes": 623603,
+  "originalPngs": 14,
+  "excluded": [
+    "fixture databases",
+    "pairing keys",
+    "environment files",
+    "caches",
+    "installed dependencies",
+    "model weights",
+    "private-data directories",
+    "full traces",
+    "large third-party documents",
+    "unconfirmed actual product UI reports"
+  ],
+  "evidenceGaps": [
+    {
+      "phase": "ownership-spike-final-v3",
+      "missing": "original PNG",
+      "reason": "No PNG exists in this retained spike directory and the exact driver has no screenshot call; no image was fabricated."
+    }
+  ],
+  "privacyBlockers": [],
+  "files": [
+    {
+      "path": "gates/implementation-gates.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/implementation-gates.json",
+      "bytes": 2918,
+      "sha256": "9d147adab58a70f3b4de40df0f042b21cea51a9aaa88101efe59edbb6fc4973d",
+      "phase": "frozen implementation owner gates at 2318; actual product UI separate",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/final-affected-tests.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/final-affected-tests.log",
+      "bytes": 8938,
+      "sha256": "a9286f7bad9454f0cb0207f81a17adc52acfe608e1072beb15d79f5cd240704f",
+      "phase": "frozen implementation owner gates at 2318; actual product UI separate",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/frontend-typecheck-final.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/frontend-typecheck-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": "frozen implementation owner gates at 2318; actual product UI separate",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/root-typecheck.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/root-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": "frozen implementation owner gates at 2318; actual product UI separate",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/production-build-final.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/production-build-final.log",
+      "bytes": 516,
+      "sha256": "ef7320c1d10d44bd3d75120a6e27055f0bb89fa6197a5d3a9cb409a520f602fc",
+      "phase": "frozen implementation owner gates at 2318; actual product UI separate",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "baseline.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/baseline.json",
+      "bytes": 372,
+      "sha256": "8b8d3de185e8fca40cd608fbde593c6f8b36692d2682f80954dc3b7df2b789e6",
+      "phase": "preserved launch increment baseline",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "process/final-checks-v3.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/process-final-checks-v3.json",
+      "bytes": 2533,
+      "sha256": "e31f3863924b9b280c7cb753e4b6eb5abdc308ab4b708ac04b4f2af83be62beb",
+      "phase": "fixed host-owned process spike; synthetic client, not product UI",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "process/ownership-v3/report.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ownership-spike-final-v3/report.json",
+      "bytes": 3248,
+      "sha256": "b31d098345a6bea25cf770c32545a1193f70170b4895c4c23b99fe62aee3fff4",
+      "phase": "fixed host-owned process spike; synthetic client, not product UI",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "process/ownership-v3/owned-parent.ts",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ownership-spike-final-v3/owned-parent.ts",
+      "bytes": 1019,
+      "sha256": "9c06347eec025a83bf277c5678377d8561cca16af67f4ece6cf59df30117a41f",
+      "phase": "fixed host-owned process spike; synthetic client, not product UI",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "process/spike-app-launch.ts",
+      "original": "/workspace/anascummis/apps/studio/scripts/spike-app-launch.ts",
+      "bytes": 12815,
+      "sha256": "fd1bb9ab7bb802977bb6a8ed20c62f031bbf06ee3a7c8b839bdfe71b42fc5316",
+      "phase": "driver for fixed host-owned process spike",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "process/prior-v2-final-checks.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/process-final-checks.json",
+      "bytes": 2521,
+      "sha256": "2ad8a906fb747f2a6a8a3af3394888286e83110d01c5da4ee130dac050c71691",
+      "phase": "preserved pre-dotenv-hardening metadata; historical, not current acceptance",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "process/prior-v2-report.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ownership-spike-final-v2/report.json",
+      "bytes": 3230,
+      "sha256": "54d79d7edc15339f408f17eeec3a0f9a267585644d736fc1e82ada038954646c",
+      "phase": "preserved prior ownership spike metadata; historical",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "accepted-page-boundary/report.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/accepted-runtime-boundary/report.json",
+      "bytes": 2139,
+      "sha256": "7379490ac7a77722d087128c5e0ae694717a0e3cd1706706e8768dee08e45701",
+      "phase": "actual accepted Page code in isolated iframe host; not product UI or new inference",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "accepted-page-boundary/accepted-my-week-narrow.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/accepted-runtime-boundary/accepted-my-week-narrow.png",
+      "bytes": 19497,
+      "sha256": "52df4fcb338812fe5dce3c69aceee09bfa80a7d51014f7425a3b6783c1bb5676",
+      "phase": "actual accepted Page code in isolated iframe host; not product UI or new inference",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "accepted-page-boundary/accepted-my-tasks-narrow.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/accepted-runtime-boundary/accepted-my-tasks-narrow.png",
+      "bytes": 19313,
+      "sha256": "654a6180af8e2b1b9722aa12927ec1a4ccc487644832fd0809ad90fc002ab3e5",
+      "phase": "actual accepted Page code in isolated iframe host; not product UI or new inference",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "accepted-page-boundary/accepted-counter-narrow.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/accepted-runtime-boundary/accepted-counter-narrow.png",
+      "bytes": 14230,
+      "sha256": "c73a33085ca48aeb94ad73289fbc9ddae029bfd918c0f89b1322bdebed8e3e69",
+      "phase": "actual accepted Page code in isolated iframe host; not product UI or new inference",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "accepted-page-boundary/check.ts",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/accepted-runtime-boundary/check.ts",
+      "bytes": 5116,
+      "sha256": "1cd7cca121a3bc5ab69abc948b30929e8597fc5a926d128884384a7c61961cb7",
+      "phase": "actual accepted Page code in isolated iframe host; not product UI or new inference",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "package/counter-receipt.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/runtime-package-proof/counter/receipt.json",
+      "bytes": 3533,
+      "sha256": "64b370771d629f2bc239e0a3becd08a6b1a4abbcfe0c265ecdcb37b73aac3688",
+      "phase": "actual accepted native-generated artifact preparation; no new inference or browser",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "package/collection-receipt.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/runtime-package-proof/collection/receipt.json",
+      "bytes": 8133,
+      "sha256": "91c0fbcb9ae5085f5a5db6c86ee017247db2c67d6fae2693df4da0af3718279b",
+      "phase": "actual accepted native-generated artifact preparation; no new inference or browser",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "package/affected-package-tests.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/runtime-package-proof/affected-package-tests.log",
+      "bytes": 989,
+      "sha256": "5b22a25e923bb380d240d6f6ae70c9d773671de7839d375115fd5df33ede1406",
+      "phase": "seven isolated package guard tests",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "package/prepare-proof.ts",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/runtime-package-proof/prepare.ts",
+      "bytes": 2294,
+      "sha256": "e0fcb8b02252b46dda29afccc44538c3031ad73568a54e64ded1f83d0ac9a758",
+      "phase": "read-only native-artifact preparation driver",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-state/state-tests-observed-cleanup-13.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/state-tests-observed-cleanup-13.log",
+      "bytes": 1802,
+      "sha256": "246c877ccd7e8f5c847168c5315eb08082ac631a717f3f3c7d47cf47c1160270",
+      "phase": "injected state-machine/process stub only; no real app, OS child or native model",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-state/state-unobserved-cleanup-diagnostic.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/state-unobserved-cleanup-diagnostic.json",
+      "bytes": 1389,
+      "sha256": "cd529aba195d85fbd42fc359decc6850a303082778862760b27658f887ef3596",
+      "phase": "injected state-machine/process stub only; no real app, OS child or native model",
+      "copy": "byte-identical original",
+      "outcome": "preserved failed synthetic diagnostic"
+    },
+    {
+      "path": "synthetic-state/state-unobserved-cleanup-diagnostic.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/state-unobserved-cleanup-diagnostic.log",
+      "bytes": 1221,
+      "sha256": "50a0fa7c8e16c30b0f1aa5b6ee97b527e52793c298fe1294110d65c7619a1d95",
+      "phase": "injected state-machine/process stub only; no real app, OS child or native model",
+      "copy": "byte-identical original",
+      "outcome": "preserved failed synthetic diagnostic"
+    },
+    {
+      "path": "synthetic-state/state-unobserved-cleanup-diagnostic.ts",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/state-unobserved-cleanup-diagnostic.ts",
+      "bytes": 4394,
+      "sha256": "ba5797dba208d2b18927d6899a2dfa26bafdaa26aea84288973e1fefe1f7771d",
+      "phase": "injected state-machine/process stub only; no real app, OS child or native model",
+      "copy": "byte-identical original",
+      "outcome": "preserved failed synthetic diagnostic"
+    },
+    {
+      "path": "synthetic-state/state-observed-cleanup-diagnostic-fixed.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/state-observed-cleanup-diagnostic-fixed.json",
+      "bytes": 393,
+      "sha256": "f8c476dfaef50f17c3fb1c7fe61b936ceac9287917c96757db70dfb77e362481",
+      "phase": "injected state-machine/process stub only; no real app, OS child or native model",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-state/state-observed-cleanup-diagnostic-fixed.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/state-observed-cleanup-diagnostic-fixed.log",
+      "bytes": 51,
+      "sha256": "1f7f4ba2e5f202ea1fcf5eda3c6f7bc1d77196116a9a2845fe003477642daeb7",
+      "phase": "injected state-machine/process stub only; no real app, OS child or native model",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-component/desktop-invalid-address.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-proof/desktop-invalid-address.png",
+      "bytes": 48545,
+      "sha256": "29a22b715ae52985a3144f6b122600026cf3985f65c0a5513acc363056b3adb5",
+      "phase": "actual React component with synthetic API and frame; not full product layout/process/runtime/native acceptance",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 800
+    },
+    {
+      "path": "synthetic-component/narrow-read-error-retained-frame.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-proof/narrow-read-error-retained-frame.png",
+      "bytes": 49078,
+      "sha256": "0b715ef72dc45c6fb2d2edb5e991ce480339588f6cccd4c57c3ede40f21bacf3",
+      "phase": "actual React component with synthetic API and frame; not full product layout/process/runtime/native acceptance",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "synthetic-component/narrow-reconnected-draft-preserved.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-proof/narrow-reconnected-draft-preserved.png",
+      "bytes": 43073,
+      "sha256": "d88ac5e7c35dea9671aa2fd258959303f32148efd03d50a52bf105c6f17e8793",
+      "phase": "actual React component with synthetic API and frame; not full product layout/process/runtime/native acceptance",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "synthetic-component/narrow-running-after-restart.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-proof/narrow-running-after-restart.png",
+      "bytes": 39078,
+      "sha256": "8332c1d79049a739abc54226170830a9448d556c3f43ecee136b66142e3388ee",
+      "phase": "actual React component with synthetic API and frame; not full product layout/process/runtime/native acceptance",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "synthetic-component/narrow-unconfirmed-stop.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-proof/narrow-unconfirmed-stop.png",
+      "bytes": 42483,
+      "sha256": "39bda8a5321fcc9961fdb5ea2b72039df2de7918990512768a409459229a6254",
+      "phase": "actual React component with synthetic API and frame; not full product layout/process/runtime/native acceptance",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "synthetic-component/receipt.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-proof/receipt.json",
+      "bytes": 3336,
+      "sha256": "14e90ee001bfc905b54000089edce3ce6119afa2c1c0584a6a56779c4dc63fef",
+      "phase": "actual React component with synthetic API and frame; not full product layout/process/runtime/native acceptance",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-component/driver.ts",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-proof.ts",
+      "bytes": 17177,
+      "sha256": "31433715132e92f07fd02d6bc961cab66da48b76903de9a9d5753c843c7c5d1e",
+      "phase": "synthetic API component fixture driver",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-component/first-fixture-failure.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-proof-first.log",
+      "bytes": 3003,
+      "sha256": "8e3a445dfab8e60a717eaaff67e5c12dbe30ed091c868b32e18ef76ccfc45cdd",
+      "phase": "preserved first synthetic API fixture failure; not a product acceptance run",
+      "copy": "byte-identical original",
+      "outcome": "failed diagnostic, preserved unchanged"
+    },
+    {
+      "path": "research/goal-acceptance-plan.md",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/goal-acceptance-plan.md",
+      "bytes": 4814,
+      "sha256": "c563566fad1fc26bfd5e6b20c181d8c942c0bab23d9247fc2fdbbe30ec704ff1",
+      "phase": "implementation acceptance plan; not a result",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "research/preserved-f331-plan.md",
+      "original": "/workspace/anascummis/review-artifacts/2026-10-29-app-launch-plan/PLAN.md",
+      "bytes": 6626,
+      "sha256": "1641120e03fe76bb681559efd4f2bc471fdc568eeb94626139417021f1bd8c8a",
+      "phase": "source-pinned original launch plan at f331e280; not delivered capability",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "research/primary-source-identities.json",
+      "original": "/workspace/anascummis/review-artifacts/2026-10-29-app-launch-plan/next-launch-research/sources.json",
+      "bytes": 3522,
+      "sha256": "73860723b8f9791861500ce8f066076f60324a6060aaa24eb9db57486760107d",
+      "phase": "nine compact official-source retrieval/hash records; full documents excluded",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "research/preserved-f331-manifest.json",
+      "original": "/workspace/anascummis/review-artifacts/2026-10-29-app-launch-plan/manifest.json",
+      "bytes": 773,
+      "sha256": "4c2fda5b1fc2151147b0f5fea1fce6315f40b529c1e49246b0d9f9fce66238fa",
+      "phase": "source-pinned original plan identity at f331e280",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/layout/layout-implementation-gates.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/layout-implementation-gates.json",
+      "bytes": 1964,
+      "sha256": "2bc7f94dd8d49c28a88c9e52769aca25d6009c20ba71cee5ffed7224cad6ac27",
+      "phase": "current frozen32bb implementation owner gates; no actual product UI claim",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/layout/layout-affected-tests.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/layout-affected-tests.log",
+      "bytes": 9204,
+      "sha256": "3310ace0e361cf6a16d402f3d8233ca5fafcf43de8fc69442ab99ab8c8845bd9",
+      "phase": "current frozen32bb implementation owner gates; no actual product UI claim",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/layout/layout-frontend-typecheck.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/layout-frontend-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": "current frozen32bb implementation owner gates; no actual product UI claim",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/layout/layout-root-typecheck.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/layout-root-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": "current frozen32bb implementation owner gates; no actual product UI claim",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "gates/layout/layout-production-build.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/layout-production-build.log",
+      "bytes": 517,
+      "sha256": "59ca160f295e482e32030466afc53858f1d558f8a3431adf5d37f507f5d09b3b",
+      "phase": "current frozen32bb implementation owner gates; no actual product UI claim",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-state/state-tests-pinned-history-15.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/state-tests-pinned-history-15.log",
+      "bytes": 2061,
+      "sha256": "795e2bf2e929a8ffa1963a07323cf01c6a2220cb04a819995de1eb12d066a46e",
+      "phase": "15 injected state-machine/process-stub tests, including pinned history; no real OS child, app or native model",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-layout/desktop-active-items.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof/desktop-active-items.png",
+      "bytes": 42781,
+      "sha256": "fbf8cedf02395b6f2e6d2db66c965582f723ce66eefbb1006b7b21bdd5cd80c8",
+      "phase": "actual FloatingPanels/SoftwarePanel/SoftwareLaunch plus byte-identical accepted My Tasks assets; synthetic read-only status API, zero POST; layout proof only",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "synthetic-layout/desktop-controls-app.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof/desktop-controls-app.png",
+      "bytes": 41797,
+      "sha256": "343149e6f19979bdebbb20816cb0fe1177fbae01109d336240ed179bce01b49a",
+      "phase": "actual FloatingPanels/SoftwarePanel/SoftwareLaunch plus byte-identical accepted My Tasks assets; synthetic read-only status API, zero POST; layout proof only",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "synthetic-layout/narrow-420-active-items.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof/narrow-420-active-items.png",
+      "bytes": 27991,
+      "sha256": "76269bb766eebda1ceff419b39830680e7ec9422a9ef937d6c634f93786c9cec",
+      "phase": "actual FloatingPanels/SoftwarePanel/SoftwareLaunch plus byte-identical accepted My Tasks assets; synthetic read-only status API, zero POST; layout proof only",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "synthetic-layout/narrow-420-controls-app.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof/narrow-420-controls-app.png",
+      "bytes": 27994,
+      "sha256": "6d2c91bdcf5dc4528a41bb0000ad6a39e17edf492b424fe8c0072a2cbfddda52",
+      "phase": "actual FloatingPanels/SoftwarePanel/SoftwareLaunch plus byte-identical accepted My Tasks assets; synthetic read-only status API, zero POST; layout proof only",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "synthetic-layout/narrow-800-active-items.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof/narrow-800-active-items.png",
+      "bytes": 33627,
+      "sha256": "904d04c588bbb318defe02a049d208a8137cdbf36a2fdb3d3f7e3bc882cc062b",
+      "phase": "actual FloatingPanels/SoftwarePanel/SoftwareLaunch plus byte-identical accepted My Tasks assets; synthetic read-only status API, zero POST; layout proof only",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "synthetic-layout/narrow-800-controls-app.png",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof/narrow-800-controls-app.png",
+      "bytes": 33391,
+      "sha256": "51a542bd8f4a18fec550fd736740c764d2a29ef708ffd451b3d2f37f1037ebb0",
+      "phase": "actual FloatingPanels/SoftwarePanel/SoftwareLaunch plus byte-identical accepted My Tasks assets; synthetic read-only status API, zero POST; layout proof only",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "synthetic-layout/receipt.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof/receipt.json",
+      "bytes": 4002,
+      "sha256": "29f0257781bd3013e3582673eeef1ed4a39bb59c4de58934615750035f1e1564",
+      "phase": "actual FloatingPanels/SoftwarePanel/SoftwareLaunch plus byte-identical accepted My Tasks assets; synthetic read-only status API, zero POST; layout proof only",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-layout/driver.ts",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof.ts",
+      "bytes": 10246,
+      "sha256": "739e3a2581c8a53c09f2a3cebabf7dbea3b448c4919cc4c7d6f2d423b5ee104b",
+      "phase": "synthetic read-only layout driver; no product process ownership or new launch acceptance",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "synthetic-layout/driver.log",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/ui-layout-proof.log",
+      "bytes": 3916,
+      "sha256": "615ff812440b5ed698903426d5787c06cb953673c94c31a58aff672bbff71e30",
+      "phase": "synthetic read-only layout driver; no product process ownership or new launch acceptance",
+      "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+      "copy": "byte-identical original"
+    }
+  ],
+  "priorFrozenSource": "2318ced4a96fb019fe271128f40d98718c08b31a",
+  "updatedAt": "2026-10-29T20:40:38.235019+00:00",
+  "lastAssemblyCheckoutHead": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+  "priorOriginalFilesPreserved": 39,
+  "allOriginalCopiesReverifiedByteEqual": true
+}

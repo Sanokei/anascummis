@@ -1,0 +1,22 @@
+{
+  "format": "anascummis.app-launch-plan.v1",
+  "phase": "proposed acceptance; no launch implementation",
+  "createdAt": "2026-10-29T19:51:22.611712+00:00",
+  "baselineRuntime": "345b82bcc8dee4591bf93c98029624667185a0b9",
+  "baselineDelivery": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+  "preservedQa": "62c81b4e5e48f505da323a5f0ed215167a58dd8d",
+  "primarySourceArchivesVerified": 9,
+  "sourceCodeOrServicesChanged": false,
+  "filesExcludingManifest": [
+    {
+      "path": "PLAN.md",
+      "bytes": 6626,
+      "sha256": "1641120e03fe76bb681559efd4f2bc471fdc568eeb94626139417021f1bd8c8a"
+    },
+    {
+      "path": "next-launch-research/sources.json",
+      "bytes": 3522,
+      "sha256": "73860723b8f9791861500ce8f066076f60324a6060aaa24eb9db57486760107d"
+    }
+  ]
+}

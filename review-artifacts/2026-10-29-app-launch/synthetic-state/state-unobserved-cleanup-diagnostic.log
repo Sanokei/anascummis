@@ -1,0 +1,13 @@
+Host remained available for explicit Stop recovery
+32 |  const events=id=>database.query('SELECT event_json FROM activity_entries WHERE kind=? AND stream_id=? ORDER BY sequence').all('software',id).map(x=>JSON.parse(x.event_json));
+33 |  return {database,tasks,metadata,processes,calls,deps,manager,fixture,prepared,fakeProcess,row,events,setPrepare(fn){prepareHook=fn;},setStart(fn){startHook=fn;}};
+34 | }
+35 | const h=harness(),task=h.fixture();
+36 | h.database.exec("CREATE TRIGGER reject_running BEFORE UPDATE OF body ON software_launches WHEN json_extract(NEW.body,'$.state')='running' BEGIN SELECT RAISE(ABORT,'synthetic running publication failed'); END");
+37 | h.setStart(async(options,signal,onExit)=>{const child=h.fakeProcess(options,onExit);child.stop=async()=>{throw new Error('synthetic owned cleanup failed');};return child;});
+                                                                                                                        ^
+error: synthetic owned cleanup failed
+      at <anonymous> (/workspace/.cloud-env/anascummis/app-launch/state-unobserved-cleanup-diagnostic.ts:37:116)
+      at run (/workspace/anascummis/apps/studio/core/software-launch.ts:75:37)
+
+Bun v1.3.14 (Linux x64)

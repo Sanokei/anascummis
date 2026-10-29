@@ -1,0 +1,233 @@
+{
+  "copiedAt": "2026-10-29T20:47:06.291981+00:00",
+  "originalCopies": [
+    {
+      "path": "product-before/report.json",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/report.json",
+      "bytes": 181628,
+      "sha256": "5fc1c237089133edae4364d542f210156d9e3bf9089c94a56d5d28d357f91a2d"
+    },
+    {
+      "path": "product-before/report.html",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/report.html",
+      "bytes": 7218,
+      "sha256": "4a4d68e3db6a3b3e5ce4b04615d2a23d6a959ec43f373b515a73eb0fffed8503"
+    },
+    {
+      "path": "product-before/collection-desktop/result.json",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/result.json",
+      "bytes": 53913,
+      "sha256": "032c5417a48ef7101d1776eaf7d0dad5b1e80627b814e08997ea35dfb29d30cd"
+    },
+    {
+      "path": "product-before/collection-desktop/01-checked-build-explicit-start.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/01-checked-build-explicit-start.png",
+      "bytes": 364079,
+      "sha256": "b7438b9765cd8cbae044542461982d4d8974a8dfbff33f537eb8ead9425c6a2f"
+    },
+    {
+      "path": "product-before/collection-desktop/02-inspect-accepted-runtime-identity.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/02-inspect-accepted-runtime-identity.png",
+      "bytes": 353951,
+      "sha256": "c578df246c47580dbe72290d014d6924d51dd61a9269c88277982321779b7781"
+    },
+    {
+      "path": "product-before/collection-desktop/03-running-my-tasks.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/03-running-my-tasks.png",
+      "bytes": 343214,
+      "sha256": "deb2faab45faea8bf7fc26931df3ce3607b18964d85836c61c0f90083d8a18dd"
+    },
+    {
+      "path": "product-before/collection-desktop/04-temporary-status-failure-keeps-app-draft.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/04-temporary-status-failure-keeps-app-draft.png",
+      "bytes": 365147,
+      "sha256": "b06aae8cabf917270edcdfe6aeea9ebd97e196d852d9417dc5e48f2f3a4fc006"
+    },
+    {
+      "path": "product-before/collection-desktop/05-sigterm-session-reconnect-keeps-draft.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/05-sigterm-session-reconnect-keeps-draft.png",
+      "bytes": 369923,
+      "sha256": "2beb61bccff656aec8fd8d8c35d8186f1d0c59fad26275b5f4f754cc99f132eb"
+    },
+    {
+      "path": "product-before/collection-desktop/06-sigterm-explicit-restart.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/06-sigterm-explicit-restart.png",
+      "bytes": 365669,
+      "sha256": "885116a573d29d63206163c09be767ec0a9995098f1751924b45ed38bd07a930"
+    },
+    {
+      "path": "product-before/collection-desktop/07-sigkill-session-reconnect-keeps-draft.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/07-sigkill-session-reconnect-keeps-draft.png",
+      "bytes": 369938,
+      "sha256": "5bcfb6e014f24c591fda162e59f5e5425a5d31ef6057a3a7f5128dd98f5ae458"
+    },
+    {
+      "path": "product-before/collection-desktop/08-sigkill-explicit-restart.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/08-sigkill-explicit-restart.png",
+      "bytes": 366815,
+      "sha256": "5ee3a4e99f7757b1e8dee8466b65c99b5b940d1cf115af5fc014ad9fc3429355"
+    },
+    {
+      "path": "product-before/collection-desktop/09-my-week-keeps-existing-items.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/09-my-week-keeps-existing-items.png",
+      "bytes": 349874,
+      "sha256": "2accb134dfe5aaee38925327bd455ce6f74823449c1667be8821fa5b69b2919c"
+    },
+    {
+      "path": "product-before/collection-desktop/10-occupied-origin-fails-honestly.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/10-occupied-origin-fails-honestly.png",
+      "bytes": 369364,
+      "sha256": "b7db7aa9c0547a91294ef6fe381674523d94196c4a95e504dd85334a67815c0a"
+    },
+    {
+      "path": "product-before/collection-narrow/result.json",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/result.json",
+      "bytes": 53559,
+      "sha256": "4016708b1ddd8f2d78f3f6091db14dbdc3bb096e341661d1756bf562d5202a13"
+    },
+    {
+      "path": "product-before/collection-narrow/01-checked-build-explicit-start.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/01-checked-build-explicit-start.png",
+      "bytes": 69872,
+      "sha256": "1d071d7876c08906be12c42ddd274ca716f6a8e8d1f6362c8b6b00d11999ab75"
+    },
+    {
+      "path": "product-before/collection-narrow/02-inspect-accepted-runtime-identity.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/02-inspect-accepted-runtime-identity.png",
+      "bytes": 62851,
+      "sha256": "48f3f51add75aaf545c09e912722f7c65f82acc62bf14d246b0748447b9281fb"
+    },
+    {
+      "path": "product-before/collection-narrow/03-running-my-tasks.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/03-running-my-tasks.png",
+      "bytes": 56586,
+      "sha256": "0c8bded499369a8e93099b4839407bef4d02c68ed44f2946da0f9a77c5267498"
+    },
+    {
+      "path": "product-before/collection-narrow/04-temporary-status-failure-keeps-app-draft.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/04-temporary-status-failure-keeps-app-draft.png",
+      "bytes": 65311,
+      "sha256": "a1fa9d6a1ee3ba81924d722a006cdac347c4664e73b31438080dba0a8b5fcc18"
+    },
+    {
+      "path": "product-before/collection-narrow/05-sigterm-session-reconnect-keeps-draft.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/05-sigterm-session-reconnect-keeps-draft.png",
+      "bytes": 67022,
+      "sha256": "938284666530d954836f02080eaa709a50dc562e21095cea91f31e7130bc1253"
+    },
+    {
+      "path": "product-before/collection-narrow/06-sigterm-explicit-restart.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/06-sigterm-explicit-restart.png",
+      "bytes": 66230,
+      "sha256": "4b4ff532cd3e376fd00a00f72314aa18b13affcd5fc0127608486a7bb66a747a"
+    },
+    {
+      "path": "product-before/collection-narrow/07-sigkill-session-reconnect-keeps-draft.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/07-sigkill-session-reconnect-keeps-draft.png",
+      "bytes": 70230,
+      "sha256": "04cdfada52c78bc5a8fb4c6f96a89f41888ddec162bee25eeec000186e98fc26"
+    },
+    {
+      "path": "product-before/collection-narrow/08-sigkill-explicit-restart.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/08-sigkill-explicit-restart.png",
+      "bytes": 68207,
+      "sha256": "2c076b59c8cab97faf9021c691ec084fb42aa455d5b705d6e824d88bda19896c"
+    },
+    {
+      "path": "product-before/collection-narrow/09-my-week-keeps-existing-items.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/09-my-week-keeps-existing-items.png",
+      "bytes": 56490,
+      "sha256": "017e6825a4f4cd2e6d0a14c99573d608111bc1db60944ebb54b5f4909fb2feed"
+    },
+    {
+      "path": "product-before/collection-narrow/10-occupied-origin-fails-honestly.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/10-occupied-origin-fails-honestly.png",
+      "bytes": 71789,
+      "sha256": "f820d28513d776e04c1875a6715a6b7e59858be16934f9446301d2288bffdec4"
+    },
+    {
+      "path": "product-before/counter-desktop/result.json",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-desktop/result.json",
+      "bytes": 18293,
+      "sha256": "fa95f0a00ab00fdbffc4744f7e0f47aec6a492847b5ce34def493f8915fc9bd3"
+    },
+    {
+      "path": "product-before/counter-desktop/01-checked-build-explicit-start.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-desktop/01-checked-build-explicit-start.png",
+      "bytes": 366527,
+      "sha256": "4ca468b3b065b6f92a536f93a8d3ec9c2fb9670057eb15920deb19f7cda70c20"
+    },
+    {
+      "path": "product-before/counter-desktop/02-unconfirmed-start-inspect-before-retry.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-desktop/02-unconfirmed-start-inspect-before-retry.png",
+      "bytes": 366293,
+      "sha256": "1a35319bd7c5286e309f3d35a08d3275d9ca74484c6734bead2e06daf350f7d5"
+    },
+    {
+      "path": "product-before/counter-desktop/03-inspect-accepted-runtime-identity.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-desktop/03-inspect-accepted-runtime-identity.png",
+      "bytes": 355296,
+      "sha256": "ae6564d2a749b24353131ce111e037cbb4ee63fc747720b01c11dd4ebdac30e9"
+    },
+    {
+      "path": "product-before/counter-desktop/04-counter-reset-keyboard-feedback.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-desktop/04-counter-reset-keyboard-feedback.png",
+      "bytes": 342711,
+      "sha256": "aba140cb2f253bb0a08a754a56d1561d8154b557abbc12b471c970b0dbc061e9"
+    },
+    {
+      "path": "product-before/counter-desktop/05-failure.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-desktop/05-failure.png",
+      "bytes": 342711,
+      "sha256": "aba140cb2f253bb0a08a754a56d1561d8154b557abbc12b471c970b0dbc061e9"
+    },
+    {
+      "path": "product-before/counter-narrow/result.json",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-narrow/result.json",
+      "bytes": 18159,
+      "sha256": "422bf9223bea40fc0e2eac5fdc3e706a19100d4f7c10c9ee753cfadf17311cf0"
+    },
+    {
+      "path": "product-before/counter-narrow/01-checked-build-explicit-start.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-narrow/01-checked-build-explicit-start.png",
+      "bytes": 69807,
+      "sha256": "464011ab497f96c22207267fcb78e0b30587c4993c838ff8ecb52d85ee163720"
+    },
+    {
+      "path": "product-before/counter-narrow/02-unconfirmed-start-inspect-before-retry.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-narrow/02-unconfirmed-start-inspect-before-retry.png",
+      "bytes": 67012,
+      "sha256": "80323ab0b784325be2a1160d0941fd305de66ba95eda826e3f9ed37efb3c32d7"
+    },
+    {
+      "path": "product-before/counter-narrow/03-inspect-accepted-runtime-identity.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-narrow/03-inspect-accepted-runtime-identity.png",
+      "bytes": 62184,
+      "sha256": "f5bf274fe16d1efa8c2dc4de6072dc529e1ea381d6827e43a4af14281a2981bd"
+    },
+    {
+      "path": "product-before/counter-narrow/04-counter-reset-keyboard-feedback.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-narrow/04-counter-reset-keyboard-feedback.png",
+      "bytes": 60414,
+      "sha256": "de1e64e0908de17febdd603bd35e455338161462f9b619acc0583da184d8b6a5"
+    },
+    {
+      "path": "product-before/counter-narrow/05-failure.png",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/counter-narrow/05-failure.png",
+      "bytes": 60414,
+      "sha256": "de1e64e0908de17febdd603bd35e455338161462f9b619acc0583da184d8b6a5"
+    },
+    {
+      "path": "product-before/first-ui-layout-review.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/first-ui-layout-review.json",
+      "bytes": 2067,
+      "sha256": "7d95c3b50622412f4309ea9a422348283c3f008597421b2364c35dc2378cd0aa"
+    },
+    {
+      "path": "product-before/first-ui-cleanup.json",
+      "original": "/workspace/.cloud-env/anascummis/app-launch/first-ui-cleanup.json",
+      "bytes": 2020,
+      "sha256": "aaeb41a0148021e4dff0915dfd5ffc1636bb49733c6d089b86184bc62930fd3d"
+    }
+  ]
+}

@@ -1,0 +1,779 @@
+{
+  "format": "anascummis.app-launch-product-post-validation.v1",
+  "checkedAt": "2026-10-29T20:43:33.477Z",
+  "testedSource": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+  "reportSha256": "0618764e0670aba0912598434ad832f8b3aa0a46f7fde63017a03ce898d3c054",
+  "summary": {
+    "passed": 4,
+    "blocked": 0,
+    "failed": 0
+  },
+  "assertions": 44,
+  "sourceFingerprintsVerified": 20,
+  "servedBuildFingerprintsVerified": 88,
+  "traces": [
+    {
+      "path": "collection-desktop/trace.zip",
+      "bytes": 44512795,
+      "sha256": "912b54e1a6e5f944573116ac582a807670d797d6858f0e6c0b68eb88dfc87ac7",
+      "entries": 1148,
+      "jsonlRecords": 3754,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "collection-narrow/trace.zip",
+      "bytes": 62762502,
+      "sha256": "36ba7d1c584abb285bab8b210a331b879355f09310ecee9aca7ec5a76f68cd18",
+      "entries": 1288,
+      "jsonlRecords": 4250,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "counter-desktop/trace.zip",
+      "bytes": 22560806,
+      "sha256": "2988b9a2d8052994452ee4609b22ede8d743ec6f7b32acf61b4dfc599b63ce7c",
+      "entries": 443,
+      "jsonlRecords": 1530,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "counter-narrow/trace.zip",
+      "bytes": 26501333,
+      "sha256": "e07a2134c5ec0768e2566ef4a75a76f6ed5e525fb0bb41955d8c6cbd390b3349",
+      "entries": 418,
+      "jsonlRecords": 1917,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    }
+  ],
+  "traceObjectsExamined": 40236,
+  "downloads": [
+    {
+      "case": "collection-desktop",
+      "path": "accepted-parent-after-launch.zip",
+      "bytes": 176377,
+      "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "archiveEntries": 14
+    },
+    {
+      "case": "collection-desktop",
+      "path": "accepted-child-after-launch.zip",
+      "bytes": 177189,
+      "sha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546",
+      "archiveEntries": 14
+    },
+    {
+      "case": "collection-narrow",
+      "path": "accepted-parent-after-launch.zip",
+      "bytes": 176377,
+      "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "archiveEntries": 14
+    },
+    {
+      "case": "collection-narrow",
+      "path": "accepted-child-after-launch.zip",
+      "bytes": 177189,
+      "sha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546",
+      "archiveEntries": 14
+    },
+    {
+      "case": "counter-desktop",
+      "path": "accepted-counter-after-launch.zip",
+      "bytes": 170945,
+      "sha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+      "archiveEntries": 11
+    },
+    {
+      "case": "counter-narrow",
+      "path": "accepted-counter-after-launch.zip",
+      "bytes": 170945,
+      "sha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+      "archiveEntries": 11
+    }
+  ],
+  "runtimeIdentities": [
+    {
+      "case": "collection-desktop",
+      "path": "private-data/app-launch/runtimes/71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97-e261cd74-7630-4210-960e-6602b417e178-1/manifest.json",
+      "manifestSha256": "fdfb7d0eccda005d0429852463f79a4594278ab06689801f246c6c17e74430c2",
+      "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "revision": 1,
+      "zipSha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "runtimeId": "e1d696a094bc48e36fede8f0203b2b5655449aa373be8a1e2700f6e6179b7e07",
+      "kind": "collection",
+      "reactVersion": "19.2.7",
+      "files": [
+        {
+          "path": "index.html",
+          "bytes": 243,
+          "sha256": "7d679724dd67103fad6f596d7df772994f7627dc944dc703be1ed77369f8341f"
+        },
+        {
+          "path": "app.js",
+          "bytes": 190415,
+          "sha256": "3f36f06bb5d866e9eade62fbf9a78814476a8880188dea09cfe5349f84b63fc1"
+        }
+      ]
+    },
+    {
+      "case": "collection-desktop",
+      "path": "private-data/app-launch/runtimes/de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546-3913421e-e224-4968-9045-622f161a2d0c-1/manifest.json",
+      "manifestSha256": "8a74ef17e745dcf337de939afd6f5306777d0912468fb740ef29e31b9ab1a28c",
+      "taskId": "3913421e-e224-4968-9045-622f161a2d0c",
+      "revision": 1,
+      "zipSha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546",
+      "runtimeId": "ddafc469ad908614eb1fd6550c1b48a01131a13dda541b43dd5b731d72a0af79",
+      "kind": "collection",
+      "reactVersion": "19.2.7",
+      "files": [
+        {
+          "path": "index.html",
+          "bytes": 242,
+          "sha256": "74bde09e8b0e2da11e5d9c0707b8f99e5357ac8ba9668cf1377f454cc9e21520"
+        },
+        {
+          "path": "app.js",
+          "bytes": 190414,
+          "sha256": "8f25f6e3db983ac3e980788699e63ff3de65ca25faa9e4a18b9a7469c2f8e74e"
+        }
+      ]
+    },
+    {
+      "case": "collection-narrow",
+      "path": "private-data/app-launch/runtimes/71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97-e261cd74-7630-4210-960e-6602b417e178-1/manifest.json",
+      "manifestSha256": "fdfb7d0eccda005d0429852463f79a4594278ab06689801f246c6c17e74430c2",
+      "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "revision": 1,
+      "zipSha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "runtimeId": "e1d696a094bc48e36fede8f0203b2b5655449aa373be8a1e2700f6e6179b7e07",
+      "kind": "collection",
+      "reactVersion": "19.2.7",
+      "files": [
+        {
+          "path": "index.html",
+          "bytes": 243,
+          "sha256": "7d679724dd67103fad6f596d7df772994f7627dc944dc703be1ed77369f8341f"
+        },
+        {
+          "path": "app.js",
+          "bytes": 190415,
+          "sha256": "3f36f06bb5d866e9eade62fbf9a78814476a8880188dea09cfe5349f84b63fc1"
+        }
+      ]
+    },
+    {
+      "case": "collection-narrow",
+      "path": "private-data/app-launch/runtimes/de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546-3913421e-e224-4968-9045-622f161a2d0c-1/manifest.json",
+      "manifestSha256": "8a74ef17e745dcf337de939afd6f5306777d0912468fb740ef29e31b9ab1a28c",
+      "taskId": "3913421e-e224-4968-9045-622f161a2d0c",
+      "revision": 1,
+      "zipSha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546",
+      "runtimeId": "ddafc469ad908614eb1fd6550c1b48a01131a13dda541b43dd5b731d72a0af79",
+      "kind": "collection",
+      "reactVersion": "19.2.7",
+      "files": [
+        {
+          "path": "index.html",
+          "bytes": 242,
+          "sha256": "74bde09e8b0e2da11e5d9c0707b8f99e5357ac8ba9668cf1377f454cc9e21520"
+        },
+        {
+          "path": "app.js",
+          "bytes": 190414,
+          "sha256": "8f25f6e3db983ac3e980788699e63ff3de65ca25faa9e4a18b9a7469c2f8e74e"
+        }
+      ]
+    },
+    {
+      "case": "counter-desktop",
+      "path": "private-data/app-launch/runtimes/458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7-3df01946-1359-4e9f-8036-ec02ed037b09-1/manifest.json",
+      "manifestSha256": "5ed2fbe5addbdd42ec2b67c87d1f93c966676dc822abbe249d05f817b8a8deba",
+      "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "revision": 1,
+      "zipSha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+      "runtimeId": "1e640b34c14f743300a8c79e9efd2ea219055e03d5f88dc4ce6c78a37424fa81",
+      "kind": "counter",
+      "reactVersion": "19.2.7",
+      "files": [
+        {
+          "path": "index.html",
+          "bytes": 248,
+          "sha256": "6148731ebbe69143858fd57a08d36f7e82b81714b651cdd9ed7559e3aa3f8fd3"
+        },
+        {
+          "path": "app.js",
+          "bytes": 189544,
+          "sha256": "2ee6c49091784027bcaf85d03c1e473a719e2ea8ace11187116a1264f22e50d1"
+        }
+      ]
+    },
+    {
+      "case": "counter-narrow",
+      "path": "private-data/app-launch/runtimes/458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7-3df01946-1359-4e9f-8036-ec02ed037b09-1/manifest.json",
+      "manifestSha256": "5ed2fbe5addbdd42ec2b67c87d1f93c966676dc822abbe249d05f817b8a8deba",
+      "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "revision": 1,
+      "zipSha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+      "runtimeId": "1e640b34c14f743300a8c79e9efd2ea219055e03d5f88dc4ce6c78a37424fa81",
+      "kind": "counter",
+      "reactVersion": "19.2.7",
+      "files": [
+        {
+          "path": "index.html",
+          "bytes": 248,
+          "sha256": "6148731ebbe69143858fd57a08d36f7e82b81714b651cdd9ed7559e3aa3f8fd3"
+        },
+        {
+          "path": "app.js",
+          "bytes": 189544,
+          "sha256": "2ee6c49091784027bcaf85d03c1e473a719e2ea8ace11187116a1264f22e50d1"
+        }
+      ]
+    }
+  ],
+  "originalImages": [
+    {
+      "path": "collection-desktop/01-checked-build-explicit-start.png",
+      "bytes": 369077,
+      "sha256": "0b8b1ea76c45504657acac3027f0d57980251dbcff338788aa5781f7800d8898",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/02-inspect-accepted-runtime-identity.png",
+      "bytes": 358337,
+      "sha256": "c9caefa05920d7f5f38353c381d3d5e41d71f53728ff2aae41186c82e4d9095b",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/03-running-my-tasks.png",
+      "bytes": 347914,
+      "sha256": "4aa37b7fc8afebb4caa19ec2670d1ee44de907c2dda7653dd8db235100f3adba",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/04-running-collection-heading-and-controls.png",
+      "bytes": 352448,
+      "sha256": "af7686bffef9f22d3b92a76cd2a489b7129a0667f570a54ee5c17fa29546c6ee",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/05-running-collection-readable-items-and-controls.png",
+      "bytes": 348322,
+      "sha256": "62e81865bb953350d55035d931c08b53f922f9bdf5c37d60571f8e8fa6641b0d",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/06-return-to-collection-controls.png",
+      "bytes": 349326,
+      "sha256": "e0a8cd8f166afcea713add58552ac43c3a00d0a178160573f910f8a3a72cbcde",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/07-temporary-status-failure-keeps-app-draft.png",
+      "bytes": 353471,
+      "sha256": "93f9e35263c1d92a83679d5f22e6b075f21608ebb77b25f2d0e5586795b40f3b",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/08-sigterm-session-reconnect-keeps-draft.png",
+      "bytes": 367947,
+      "sha256": "82302ee4b3b2599d0784105f06054ca58cb6ec6c45d2c2ff404842c4ee880db9",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/09-sigterm-explicit-restart.png",
+      "bytes": 366887,
+      "sha256": "71b69f5696b3e8e7eca8438e04ce975584a9a65a92bddbbf456c4c8112bf3228",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/10-sigkill-session-reconnect-keeps-draft.png",
+      "bytes": 372585,
+      "sha256": "2c0142b266f6f2a6e4bc4b6b779d167d3f453e963e0177fa9f617360b6430dfc",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/11-sigkill-explicit-restart.png",
+      "bytes": 368650,
+      "sha256": "8d381f3ebaab53dd3b2d622f742bf35c890cbacbcbe55140b2506fce60937f8b",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/12-my-week-keeps-existing-items.png",
+      "bytes": 352089,
+      "sha256": "7d7fcffa5b4ddbc9c3d1b26babdfc541092269ffa2cce0e42403b1577be9b8d5",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/13-occupied-origin-fails-honestly.png",
+      "bytes": 371766,
+      "sha256": "5e54bfaa649cc79a239b003677dfaa137a5361e3afd861fae0d633b11c5a07dd",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-desktop/14-occupied-origin-retry-controls.png",
+      "bytes": 371766,
+      "sha256": "5e54bfaa649cc79a239b003677dfaa137a5361e3afd861fae0d633b11c5a07dd",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "collection-narrow/01-checked-build-explicit-start.png",
+      "bytes": 72021,
+      "sha256": "17dd6467093d93d072485887493cafa311d698f8f36368f5ca9f81a1be90bba9",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/02-inspect-accepted-runtime-identity.png",
+      "bytes": 70306,
+      "sha256": "740203fe82cfd828835059cbb832237f16809067da6072d26dc46566dd72e026",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/03-running-my-tasks.png",
+      "bytes": 60143,
+      "sha256": "c2dea66cc0f15ace266789ae0ebfea745fec6a6be302898794a1b58d7fb2f1df",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/04-running-collection-heading-and-controls.png",
+      "bytes": 65785,
+      "sha256": "58ce3c8ddb33eb3363a4856fd6d5bab123ca7632fb0c57b7cf4e5f1979e31a7d",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/05-running-collection-readable-items-and-controls.png",
+      "bytes": 62785,
+      "sha256": "9ccbcfdc22dd6c2e991f889b04602c0144a8eda4ee4398fecc806402613f306a",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/06-return-to-collection-controls.png",
+      "bytes": 65441,
+      "sha256": "31956de14a49394737931b2ec2fd1a626c7baa594b829aa29768811d5fde0565",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/07-short-collection-heading-and-controls.png",
+      "bytes": 40405,
+      "sha256": "a1565d2fc20b2de07ed9150f267a480618d49bcdfae58a07efb7c20c23d25e9f",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "collection-narrow/08-short-collection-interaction-and-controls.png",
+      "bytes": 35603,
+      "sha256": "d97a929145587ffee85e4acfe1635af3a2a01e4f350d2b7603d9969029514924",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "collection-narrow/09-short-collection-return-to-controls.png",
+      "bytes": 39677,
+      "sha256": "0a1a52d603f2dde4bcaa3f301552c66b88e98817a2fd07d30c2602e74e187211",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "collection-narrow/10-temporary-status-failure-keeps-app-draft.png",
+      "bytes": 65604,
+      "sha256": "d9838f2d56093be5385d5cbcb3a19e042a2ca633378e1169bd9ab788856b232f",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/11-sigterm-session-reconnect-keeps-draft.png",
+      "bytes": 75349,
+      "sha256": "26dd6e5f8deec7339795c05df53aa1765ce36259731f6b4dd7417dade3cf5551",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/12-sigterm-explicit-restart.png",
+      "bytes": 72925,
+      "sha256": "c6a00401a564b05900f883a6ad7aefe769e30c2e6bc087129086635595afc897",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/13-sigkill-session-reconnect-keeps-draft.png",
+      "bytes": 73805,
+      "sha256": "73c149fceb89b90f53796eb38f0927e53b225aa58b87571bb8457e879a527111",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/14-sigkill-explicit-restart.png",
+      "bytes": 72541,
+      "sha256": "66147984e5f8029406853dda9094ce599eb4d54a7aa5801361601e4178fd49d9",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/15-my-week-keeps-existing-items.png",
+      "bytes": 61449,
+      "sha256": "f07d32144ef556324d03743e47aed6d9a542ee64c024301c28780463fbdef9cb",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/16-occupied-origin-fails-honestly.png",
+      "bytes": 73645,
+      "sha256": "de96635daf70041273fb64c87b9a5322587d405c4cfd4813c16764a9d15843e7",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "collection-narrow/17-occupied-origin-retry-controls.png",
+      "bytes": 73645,
+      "sha256": "de96635daf70041273fb64c87b9a5322587d405c4cfd4813c16764a9d15843e7",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "counter-desktop/01-checked-build-explicit-start.png",
+      "bytes": 374870,
+      "sha256": "5972b55774300de2ac0c19cc21f39433d4bf6bc0fa299f607467d060c6d17c8d",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "counter-desktop/02-unconfirmed-start-inspect-before-retry.png",
+      "bytes": 367351,
+      "sha256": "6e30b5f248a10e33866b970bf14fb38b939f6f3e65bf44bb8884fba48849c1ce",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "counter-desktop/03-inspect-accepted-runtime-identity.png",
+      "bytes": 358881,
+      "sha256": "eaf94a7327307032b17691ab424a65b2eb7666075ef6585b8b97363e9ca007bb",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "counter-desktop/04-counter-reset-keyboard-feedback.png",
+      "bytes": 348391,
+      "sha256": "26ac19c13e3803885caddd12cd57a7f4d7940e4fb5c042578abfb02fae8eddbc",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "counter-desktop/05-running-counter-heading-and-controls.png",
+      "bytes": 350119,
+      "sha256": "514e547a0eed1ea24c0d3e02337a015042e634406bd111dc2c88226b48602d97",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "counter-desktop/06-return-to-counter-controls.png",
+      "bytes": 350117,
+      "sha256": "deae399dc57596653ffd7751e4bd04760ad927ab4af8b2912985d48634fa40e5",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "counter-desktop/07-counter-in-software-work.png",
+      "bytes": 350651,
+      "sha256": "28f34fc3e60f79aede0a027b5d9af9ab1fb6ef5bf0101c002d2b57bdf1a41fcb",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "counter-desktop/08-unconfirmed-stop-inspect-before-retry.png",
+      "bytes": 372652,
+      "sha256": "5eb5ba50f237ad104ef66c17982c8386b9fbfc8e14f43ad59e96d7d54d023f2b",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "counter-narrow/01-checked-build-explicit-start.png",
+      "bytes": 74641,
+      "sha256": "833a9210ec236c333099337028e69513ee3c18bd5eb91f5846ba95d25e102a49",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "counter-narrow/02-unconfirmed-start-inspect-before-retry.png",
+      "bytes": 74506,
+      "sha256": "56a092394358c99a83a6d0ff6263cfe769b7dd625587a333edb8e56552312fae",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "counter-narrow/03-inspect-accepted-runtime-identity.png",
+      "bytes": 70505,
+      "sha256": "eb789fd0061d4d9445b37072b11e465ff1278b85974f5392c30d8e819cc24865",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "counter-narrow/04-counter-reset-keyboard-feedback.png",
+      "bytes": 61983,
+      "sha256": "b728fba9f2054c34d0199151d347c72fb9eb02b2f8aff7466e2bf42ad8a7e330",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "counter-narrow/05-running-counter-heading-and-controls.png",
+      "bytes": 64910,
+      "sha256": "e8a7c2cf9dcbe8ff7f542ffddddb8488d432aafb8b7a7c7f0e672dbf88f48d0c",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "counter-narrow/06-return-to-counter-controls.png",
+      "bytes": 65731,
+      "sha256": "a551fb71ae3d5c4281d5765dbda156b6567c831512e62051d64151594a4ddd0b",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "counter-narrow/07-short-counter-heading-and-controls.png",
+      "bytes": 39530,
+      "sha256": "ba12976ea3a07a7bbda3e10f0e504fd3446132d1f32ce543dcf2494bf1dbfe3f",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "counter-narrow/08-short-counter-interaction-and-controls.png",
+      "bytes": 37374,
+      "sha256": "527195deb17eb4d207d54c17f131c9238a587170c536b596328d403275d4518f",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "counter-narrow/09-short-counter-return-to-controls.png",
+      "bytes": 40087,
+      "sha256": "9d642f0a2db6b64cc49bde663aa5f9dd05f3449b1af452da1a6eb5c7d042595d",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "counter-narrow/10-counter-in-software-work.png",
+      "bytes": 60282,
+      "sha256": "d5085330cfffb4c7cd86a1a834656dbb057fa563582d8472fa50a042d1057843",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "counter-narrow/11-unconfirmed-stop-inspect-before-retry.png",
+      "bytes": 75926,
+      "sha256": "ccc1521f21df24e4fb35718e0bc437be5d5e619317159e7a95a84a5e6728ed81",
+      "width": 360,
+      "height": 800
+    }
+  ],
+  "ownedProcessesExited": [
+    {
+      "pid": 48906,
+      "state": "absent"
+    },
+    {
+      "pid": 48965,
+      "state": "absent"
+    },
+    {
+      "pid": 48973,
+      "state": "absent"
+    },
+    {
+      "pid": 48991,
+      "state": "absent"
+    },
+    {
+      "pid": 48999,
+      "state": "absent"
+    },
+    {
+      "pid": 49014,
+      "state": "Z",
+      "startTimeTicks": "1557068"
+    },
+    {
+      "pid": 49027,
+      "state": "absent"
+    },
+    {
+      "pid": 49042,
+      "state": "absent"
+    },
+    {
+      "pid": 49051,
+      "state": "absent"
+    },
+    {
+      "pid": 49069,
+      "state": "absent"
+    },
+    {
+      "pid": 49091,
+      "state": "absent"
+    },
+    {
+      "pid": 49142,
+      "state": "absent"
+    },
+    {
+      "pid": 49150,
+      "state": "absent"
+    },
+    {
+      "pid": 49182,
+      "state": "absent"
+    },
+    {
+      "pid": 49191,
+      "state": "absent"
+    },
+    {
+      "pid": 49205,
+      "state": "Z",
+      "startTimeTicks": "1560133"
+    },
+    {
+      "pid": 49213,
+      "state": "absent"
+    },
+    {
+      "pid": 49227,
+      "state": "absent"
+    },
+    {
+      "pid": 49235,
+      "state": "absent"
+    },
+    {
+      "pid": 49251,
+      "state": "absent"
+    },
+    {
+      "pid": 49260,
+      "state": "absent"
+    },
+    {
+      "pid": 49313,
+      "state": "absent"
+    },
+    {
+      "pid": 49321,
+      "state": "absent"
+    },
+    {
+      "pid": 49334,
+      "state": "absent"
+    },
+    {
+      "pid": 49346,
+      "state": "absent"
+    },
+    {
+      "pid": 49398,
+      "state": "absent"
+    },
+    {
+      "pid": 49407,
+      "state": "absent"
+    },
+    {
+      "pid": 49417,
+      "state": "absent"
+    }
+  ],
+  "noUntrackedOwnedWorkerRemains": true,
+  "sharedServicesUnchanged": [
+    {
+      "pid": 37402,
+      "state": "S",
+      "startTimeTicks": "1190976"
+    },
+    {
+      "pid": 18848,
+      "state": "S",
+      "startTimeTicks": "845300"
+    }
+  ],
+  "scope": "Product-managed launches of copied previously native-generated accepted work, not fresh inference, packaged Next-server execution, clean online install or native device/voice verification. Z states are exited zombies, not fully reaped PIDs.",
+  "rawAcceptedTaskBodiesUnchanged": [
+    {
+      "case": "collection-desktop",
+      "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "rawAcceptedBodySha256": "bbd1f0e79ac86a3af063fc9b0d1a63ba280a4b2c22fc85208c5dc4194326ddf4",
+      "unchanged": true,
+      "calls": 1,
+      "revision": 1,
+      "status": "completed"
+    },
+    {
+      "case": "collection-desktop",
+      "taskId": "3913421e-e224-4968-9045-622f161a2d0c",
+      "rawAcceptedBodySha256": "1e0f19b1061500616e12e8446d357d5265b28df801ecfc9a2a7e45e45a308f7b",
+      "unchanged": true,
+      "calls": 2,
+      "revision": 1,
+      "status": "completed"
+    },
+    {
+      "case": "collection-narrow",
+      "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "rawAcceptedBodySha256": "bbd1f0e79ac86a3af063fc9b0d1a63ba280a4b2c22fc85208c5dc4194326ddf4",
+      "unchanged": true,
+      "calls": 1,
+      "revision": 1,
+      "status": "completed"
+    },
+    {
+      "case": "collection-narrow",
+      "taskId": "3913421e-e224-4968-9045-622f161a2d0c",
+      "rawAcceptedBodySha256": "1e0f19b1061500616e12e8446d357d5265b28df801ecfc9a2a7e45e45a308f7b",
+      "unchanged": true,
+      "calls": 2,
+      "revision": 1,
+      "status": "completed"
+    },
+    {
+      "case": "counter-desktop",
+      "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "rawAcceptedBodySha256": "7cb053885f02cb6e26229d611017d50573a2f0ba3c9cc5809287021fec273fea",
+      "unchanged": true,
+      "calls": 1,
+      "revision": 1,
+      "status": "completed"
+    },
+    {
+      "case": "counter-narrow",
+      "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "rawAcceptedBodySha256": "7cb053885f02cb6e26229d611017d50573a2f0ba3c9cc5809287021fec273fea",
+      "unchanged": true,
+      "calls": 1,
+      "revision": 1,
+      "status": "completed"
+    }
+  ],
+  "originalDatabaseBytesUntouchedByValidation": true,
+  "allPngsDecoded": true,
+  "allTraceAndSourceZipCrcsValid": true,
+  "completedAt": "2026-10-29T20:43:58.905426+00:00"
+}

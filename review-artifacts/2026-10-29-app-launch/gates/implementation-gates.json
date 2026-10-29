@@ -1,0 +1,88 @@
+{
+  "recordedAt": "2026-10-29T20:23:35.127558+00:00",
+  "source": "2318ced4a96fb019fe271128f40d98718c08b31a",
+  "sourceDirty": false,
+  "scope": "Owner tool-returned exit statuses from immediately pre-commit frozen implementation gates; actual product UI checks are separate.",
+  "affectedTests": {
+    "passed": 75,
+    "failed": 0,
+    "assertions": 339,
+    "files": 10
+  },
+  "checks": [
+    {
+      "command": "bun test [10 affected files]",
+      "exitCode": 0,
+      "log": "final-affected-tests.log",
+      "bytes": 8938,
+      "sha256": "a9286f7bad9454f0cb0207f81a17adc52acfe608e1072beb15d79f5cd240704f"
+    },
+    {
+      "command": "bun node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "exitCode": 0,
+      "log": "frontend-typecheck-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "bun node_modules/typescript/bin/tsc --noEmit --incremental false (root)",
+      "exitCode": 0,
+      "log": "root-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "bun node_modules/next/dist/bin/next build --webpack",
+      "exitCode": 0,
+      "log": "production-build-final.log",
+      "bytes": 516,
+      "sha256": "ef7320c1d10d44bd3d75120a6e27055f0bb89fa6197a5d3a9cb409a520f602fc"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "components/SoftwareLaunch.tsx",
+      "sha256": "2a543fdcbaf23dfb95c4f632c997a5d986ab5d15293f991899185ce8058ac579"
+    },
+    {
+      "path": "components/SoftwarePanel.tsx",
+      "sha256": "ba58e5462f4aea1fc227fb99e41fc57af1a6f47f375a81abbf438d952939a33c"
+    },
+    {
+      "path": "app/style.css",
+      "sha256": "2efef53065b9da1590d5be46439bc0211af99cd8274877d4f0e661e49508a07b"
+    },
+    {
+      "path": "app/page.tsx",
+      "sha256": "afd0b5272673043fbac529e7d70b91a3854cda93cdbcb95bb6c7b4d634fc5a22"
+    },
+    {
+      "path": "core/app-launch-package.ts",
+      "sha256": "622232b0d30e682c169e4e534a8697be6f4995ab3a90161e8b604e4a05bd139e"
+    },
+    {
+      "path": "core/app-launch-process.ts",
+      "sha256": "ff970e6fc1aa3592b3fdb3e4b60ccc8a8b052840026e09a726f7bfe9c6cda1c4"
+    },
+    {
+      "path": "core/software-launch.ts",
+      "sha256": "5c689cfcda8eb443f486119ea83e2450dc4d7da45657bcf8265d0569240af837"
+    },
+    {
+      "path": "core/software-api.ts",
+      "sha256": "5d8edcf2e934b48dc940c12fc5159951193e749bdc669034335b8f4b8172e24b"
+    },
+    {
+      "path": "core/server.ts",
+      "sha256": "4d72629d2a903b69cdad424f36d781e0a2c963f881ffe960a26c42a3bb65f4c8"
+    },
+    {
+      "path": "worker/app-launch.ts",
+      "sha256": "8c4bf43bedf682fd23d07588bb3fa806f3a7f3a1789f0f49222b4d0ffe03173d"
+    },
+    {
+      "path": "scripts/e2e/app-launch.mjs",
+      "sha256": "5e22bbd3cdc5973f8b06b5f7baff75db2380b7b522057c04138a00c485b44057"
+    }
+  ]
+}

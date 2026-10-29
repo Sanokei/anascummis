@@ -1,0 +1,125 @@
+{
+  "checkedAt": "2026-10-29T20:25:19.305090+00:00",
+  "reportSha256": "5fc1c237089133edae4364d542f210156d9e3bf9089c94a56d5d28d357f91a2d",
+  "source": "2318ced4a96fb019fe271128f40d98718c08b31a",
+  "allOwnedProcessesExited": true,
+  "states": [
+    {
+      "pid": 45853,
+      "state": "absent"
+    },
+    {
+      "pid": 45914,
+      "state": "absent"
+    },
+    {
+      "pid": 45923,
+      "state": "absent"
+    },
+    {
+      "pid": 45934,
+      "state": "absent"
+    },
+    {
+      "pid": 45942,
+      "state": "absent"
+    },
+    {
+      "pid": 45956,
+      "state": "Z"
+    },
+    {
+      "pid": 45964,
+      "state": "absent"
+    },
+    {
+      "pid": 45978,
+      "state": "absent"
+    },
+    {
+      "pid": 45987,
+      "state": "absent"
+    },
+    {
+      "pid": 46003,
+      "state": "absent"
+    },
+    {
+      "pid": 46032,
+      "state": "absent"
+    },
+    {
+      "pid": 46086,
+      "state": "absent"
+    },
+    {
+      "pid": 46094,
+      "state": "absent"
+    },
+    {
+      "pid": 46108,
+      "state": "absent"
+    },
+    {
+      "pid": 46116,
+      "state": "absent"
+    },
+    {
+      "pid": 46131,
+      "state": "Z"
+    },
+    {
+      "pid": 46287,
+      "state": "absent"
+    },
+    {
+      "pid": 46306,
+      "state": "absent"
+    },
+    {
+      "pid": 46315,
+      "state": "absent"
+    },
+    {
+      "pid": 46384,
+      "state": "absent"
+    },
+    {
+      "pid": 46393,
+      "state": "absent"
+    },
+    {
+      "pid": 46452,
+      "state": "absent"
+    },
+    {
+      "pid": 46460,
+      "state": "absent"
+    },
+    {
+      "pid": 46472,
+      "state": "absent"
+    },
+    {
+      "pid": 46524,
+      "state": "absent"
+    },
+    {
+      "pid": 46535,
+      "state": "absent"
+    }
+  ],
+  "sharedServicesStillRunning": [
+    {
+      "pid": 37402,
+      "state": "S",
+      "startTimeTicks": "1190976"
+    },
+    {
+      "pid": 18848,
+      "state": "S",
+      "startTimeTicks": "845300"
+    }
+  ],
+  "scope": "Exited zombies are identified as Z, not represented as fully reaped PIDs."
+}

@@ -1,0 +1,41 @@
+{
+  "format": "anascummis.launch-qa-final-visual-review.v1",
+  "reviewedAt": "2026-10-29T21:00:13.365475+00:00",
+  "source": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "reviewerRole": "Product journey operator and direct image reviewer, distinct from independent supervisor acceptance",
+  "blockingFindings": [],
+  "originalsDirectlyInspected": [
+    {
+      "path": "collection-narrow/08-short-collection-interaction-and-controls.png",
+      "sha256": "d97a929145587ffee85e4acfe1635af3a2a01e4f350d2b7603d9969029514924",
+      "bytes": 35603
+    },
+    {
+      "path": "counter-narrow/04-counter-reset-keyboard-feedback.png",
+      "sha256": "b728fba9f2054c34d0199151d347c72fb9eb02b2f8aff7466e2bf42ad8a7e330",
+      "bytes": 61983
+    },
+    {
+      "path": "collection-narrow/10-temporary-status-failure-keeps-app-draft.png",
+      "sha256": "879b4cd3dc8c3caec0ce203ee0cbe5d146296ed31a37e056e50341da25f397ba",
+      "bytes": 64319
+    },
+    {
+      "path": "collection-narrow/13-sigkill-session-reconnect-keeps-draft.png",
+      "sha256": "f3dcc3385861bc3a3a7490cc43c1f9177010cbc54151c251a21e63a91d78cc94",
+      "bytes": 74209
+    },
+    {
+      "path": "counter-narrow/02-unconfirmed-start-inspect-before-retry.png",
+      "sha256": "a9beaad0ad42c2c0e77d5c3784b63fd4e826331fad1f9df78909e33d6f0818dc",
+      "bytes": 74783
+    }
+  ],
+  "findings": [
+    "Short phone task labels are readable beside Remove; opaque sticky title/state/Stop/Check/Reload/Focus controls remain contained with intentional inner scrolling.",
+    "Counter Reset has visible native keyboard focus and actual0feedback while app controls remain reachable.",
+    "Reload is visibly disabled in uncertain Start, temporary status failure and expired-session recovery; same existing app view is retained. Actual DOM isDisabled/enabled and iframe/input identity checks passed.",
+    "Reconnect and Check controls are readable and available; no visual completion claim replaces the actual host/persistence proof."
+  ],
+  "scope": "Installed Chromium desktop/touch emulation, copied previously native-generated accepted Page in a fixed trusted runtime; no fresh inference, packaged Next server, hostile-code isolation, physical handset/native OS/voice quality claim."
+}

@@ -1,0 +1,1790 @@
+{
+  "id": "in-window-collection",
+  "viewport": "desktop",
+  "startedAt": "2026-10-29T20:55:21.038Z",
+  "status": "passed",
+  "artifactDirectory": "collection-desktop",
+  "lane": "actual-previously-native-generated-checkpoint",
+  "goal": "Start and use an accepted My Tasks app inside Software work, retain items across close/reload/Stop/restart, and explicitly open its accepted My Week child without changing accepted work.",
+  "assertions": [
+    {
+      "name": "A valid paired-online key still cannot launch locally; unknown Start command fields are rejected without changing launch state.",
+      "passed": true,
+      "statuses": [
+        403,
+        403,
+        400
+      ]
+    },
+    {
+      "name": "Only a visible Start creates the product-managed trusted runtime, pinned to accepted ZIP/source and a separate origin.",
+      "passed": true,
+      "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "lineageId": "e261cd74-7630-4210-960e-6602b417e178",
+      "supported": true,
+      "state": "running",
+      "message": "App is running. Closing this window leaves it running; Stop app ends this session and keeps browser data.",
+      "updated": 1793307323495,
+      "activeTaskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "revision": 1,
+      "zipSha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "port": 45473,
+      "origin": "http://127.0.0.1:45473",
+      "launchId": "b3b64bfe-9317-4dd9-9013-2ac867bcb725",
+      "created": 1793307323366,
+      "kind": "collection",
+      "title": "My Tasks",
+      "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+      "runtimeId": "e1d696a094bc48e36fede8f0203b2b5655449aa373be8a1e2700f6e6179b7e07",
+      "processId": 51448,
+      "startedAt": 1793307323464
+    },
+    {
+      "name": "A second Studio attempt on the same data/address fails its bind without interrupting or relabelling the original running app.",
+      "passed": true
+    },
+    {
+      "name": "A temporary aborted status GET keeps the same iframe and unsubmitted app draft; Reload is disabled until explicit real status inspection recovers without POST or process recreation.",
+      "passed": true,
+      "transport": "One browser status GET was deliberately aborted while the real host/runtime stayed healthy.",
+      "reloadDisabledUntilInspection": true
+    },
+    {
+      "name": "Close/reopen and Studio reload retain the same process/start identity, saved items and source without another POST or preparation.",
+      "passed": true
+    },
+    {
+      "name": "Actual embedded storage works while parent DOM/storage/top navigation and Studio HttpOnly cookie reads are blocked.",
+      "passed": true,
+      "origin": "http://127.0.0.1:45473",
+      "parentDom": "SecurityError",
+      "parentStorage": "SecurityError",
+      "topNavigation": "SecurityError",
+      "readableStudioCookie": false
+    },
+    {
+      "name": "Explicit Stop awaits owned exit; a later explicit Start uses the same saved-data origin and retained items.",
+      "passed": true
+    },
+    {
+      "name": "After SIGTERM, an old-tab status GET is rejected403; explicit reconnect uses only GET, preserves the unsent draft, does not navigate, POST or start an app/model.",
+      "passed": true,
+      "rejectedOldSessionStatus": 403
+    },
+    {
+      "name": "Studio SIGTERM cleans up the owned app; restart stays stopped until explicit Start and preserves its origin/items.",
+      "passed": true
+    },
+    {
+      "name": "After SIGKILL, an old-tab status GET is rejected403; explicit reconnect uses only GET, preserves the unsent draft, does not navigate, POST or start an app/model.",
+      "passed": true,
+      "rejectedOldSessionStatus": 403
+    },
+    {
+      "name": "Studio SIGKILL cleans up the owned app; restart stays stopped until explicit Start and preserves its origin/items.",
+      "passed": true
+    },
+    {
+      "name": "Explicit Stop(parent) then Start(accepted child) retains the lineage origin, existing tasks and continued edits without changing accepted parent work.",
+      "passed": true
+    },
+    {
+      "name": "An occupied reserved origin/unrelated HTTP200 fails visibly without changing port, attaching to it or killing its owner; explicit retry succeeds after the owned blocker closes.",
+      "passed": true
+    },
+    {
+      "name": "Accepted task records, ZIPs, source, model-call counts and original stopped fixtures remain unchanged; only explicit launch controls POST.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-checked-build-explicit-start.png",
+    "02-inspect-accepted-runtime-identity.png",
+    "03-running-my-tasks.png",
+    "04-running-collection-heading-and-controls.png",
+    "05-running-collection-readable-items-and-controls.png",
+    "06-return-to-collection-controls.png",
+    "07-temporary-status-failure-keeps-app-draft.png",
+    "08-sigterm-session-reconnect-keeps-draft.png",
+    "09-sigterm-explicit-restart.png",
+    "10-sigkill-session-reconnect-keeps-draft.png",
+    "11-sigkill-explicit-restart.png",
+    "12-my-week-keeps-existing-items.png",
+    "13-occupied-origin-fails-honestly.png",
+    "14-occupied-origin-retry-controls.png"
+  ],
+  "apiMutations": [
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "time": "2026-10-29T20:55:23.348Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/stop",
+      "time": "2026-10-29T20:55:30.250Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "time": "2026-10-29T20:55:30.374Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "time": "2026-10-29T20:55:33.376Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "time": "2026-10-29T20:55:35.824Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/stop",
+      "time": "2026-10-29T20:55:36.992Z"
+    },
+    {
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch/start",
+      "time": "2026-10-29T20:55:37.144Z"
+    },
+    {
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch/stop",
+      "time": "2026-10-29T20:55:40.153Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "time": "2026-10-29T20:55:40.296Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "time": "2026-10-29T20:55:41.961Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/stop",
+      "time": "2026-10-29T20:55:44.237Z"
+    }
+  ],
+  "pageErrors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/css/459f7aa1967f3e21.css",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/app/page-28ffbf899600e93f.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/status",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/projects",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/jobs",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/goals",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/projects/b9e504e9-f1a5-4f1b-ac95-343c8dd259f2",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/assets",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/screenshots/revision-1.png",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/screenshots/revision-1.png",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/screenshots/revision-1.png",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/screenshots/revision-1.png",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/css/459f7aa1967f3e21.css",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/app/page-28ffbf899600e93f.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/status",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/projects",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/jobs",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/goals",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/projects/b9e504e9-f1a5-4f1b-ac95-343c8dd259f2",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/assets",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/screenshots/revision-1.png",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/screenshots/revision-1.png",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/stop",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/stop",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch/start",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/artifacts/source.zip",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/artifacts/source.zip",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch/stop",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/start",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:45473",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "POST",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch/stop",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/3913421e-e224-4968-9045-622f161a2d0c/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35953",
+      "path": "/api/software",
+      "blocked": false
+    }
+  ],
+  "processes": [
+    {
+      "pid": 51390,
+      "port": 35953,
+      "command": "bun core/server.ts",
+      "startedAt": "2026-10-29T20:55:21.099Z"
+    },
+    {
+      "duplicateStudioPid": 51457,
+      "exitCode": 1,
+      "rejectedOccupiedBind": true,
+      "originalAppProcessId": 51448
+    },
+    {
+      "appPid": 51448,
+      "explicitStopExit": {
+        "state": "absent"
+      }
+    },
+    {
+      "appPid": 51471,
+      "parentSignal": "SIGTERM",
+      "exit": {
+        "state": "absent"
+      }
+    },
+    {
+      "pid": 51480,
+      "port": 35953,
+      "command": "bun core/server.ts",
+      "startedAt": "2026-10-29T20:55:32.213Z"
+    },
+    {
+      "appPid": 51494,
+      "parentSignal": "SIGKILL",
+      "exit": {
+        "state": "Z",
+        "startTime": "1659044"
+      }
+    },
+    {
+      "pid": 51502,
+      "port": 35953,
+      "command": "bun core/server.ts",
+      "startedAt": "2026-10-29T20:55:34.709Z"
+    },
+    {
+      "appPid": 51516,
+      "explicitStopExit": {
+        "state": "absent"
+      }
+    },
+    {
+      "appPid": 51524,
+      "explicitStopExit": {
+        "state": "absent"
+      }
+    },
+    {
+      "appPid": 51541,
+      "explicitStopExit": {
+        "state": "absent"
+      }
+    }
+  ],
+  "downloads": [
+    {
+      "path": "accepted-parent-after-launch.zip",
+      "bytes": 176377,
+      "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97"
+    },
+    {
+      "path": "accepted-child-after-launch.zip",
+      "bytes": 177189,
+      "sha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546"
+    }
+  ],
+  "mainNavigations": [
+    {
+      "url": "http://127.0.0.1:35953/",
+      "time": "2026-10-29T20:55:21.429Z"
+    },
+    {
+      "url": "http://127.0.0.1:35953/",
+      "time": "2026-10-29T20:55:21.631Z"
+    },
+    {
+      "url": "http://127.0.0.1:35953/",
+      "time": "2026-10-29T20:55:28.717Z"
+    },
+    {
+      "url": "http://127.0.0.1:35953/",
+      "time": "2026-10-29T20:55:28.788Z"
+    }
+  ],
+  "limitations": [
+    "This launches copied, previously native-generated accepted work; it is not fresh inference or arbitrary model-written server execution.",
+    "Fixed trusted React browser runtime executes exact accepted client Page code; this is not the packaged Next server.",
+    "Existing matching dependencies are reused; no online installation, native OS or physical handset/voice pass."
+  ],
+  "fixture": {
+    "source": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/private-data",
+    "copiedToOwnedData": true,
+    "excludedBuildCaches": true,
+    "dependencies": [
+      {
+        "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+        "existingDependencyTree": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/private-data/software/e261cd74-7630-4210-960e-6602b417e178/node_modules",
+        "packages": {
+          "react": {
+            "version": "19.2.7",
+            "packageSha256": "51966ae9c8c377ff592b5d69c980966992101bc6791bf83a1e5c7ad9bcefa7f4"
+          },
+          "react-dom": {
+            "version": "19.2.7",
+            "packageSha256": "447acd72cdb6a966d9db967729e286e7cbb4a09ea61fddd45e12c2a97fd4cfb6"
+          }
+        }
+      },
+      {
+        "taskId": "3913421e-e224-4968-9045-622f161a2d0c",
+        "existingDependencyTree": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/private-data/software/3913421e-e224-4968-9045-622f161a2d0c/node_modules",
+        "packages": {
+          "react": {
+            "version": "19.2.7",
+            "packageSha256": "51966ae9c8c377ff592b5d69c980966992101bc6791bf83a1e5c7ad9bcefa7f4"
+          },
+          "react-dom": {
+            "version": "19.2.7",
+            "packageSha256": "447acd72cdb6a966d9db967729e286e7cbb4a09ea61fddd45e12c2a97fd4cfb6"
+          }
+        }
+      }
+    ]
+  },
+  "acceptedBefore": {
+    "e261cd74-7630-4210-960e-6602b417e178": {
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "requirements": [
+        {
+          "id": "collection",
+          "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+          "status": "verified",
+          "files": [
+            "app/page.tsx",
+            "lib/collection.ts"
+          ],
+          "tests": [
+            "tests/app.test.tsx",
+            "tests/collection.test.ts"
+          ],
+          "reviewRevision": 1,
+          "note": "Bounded collection contract verified by actual production-browser interactions: Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key"
+        }
+      ],
+      "events": [
+        {
+          "time": 1793301518811,
+          "phase": "typecheck",
+          "detail": "Running typecheck.",
+          "revision": 1
+        },
+        {
+          "time": 1793301520055,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793301520113,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793301545580,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793301549089,
+          "phase": "install",
+          "detail": "Running install.",
+          "revision": 1
+        },
+        {
+          "time": 1793301549097,
+          "phase": "typecheck",
+          "detail": "Running typecheck.",
+          "revision": 1
+        },
+        {
+          "time": 1793301550715,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793301550764,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793301573149,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793301576588,
+          "phase": "source_zip",
+          "detail": "Running source_zip.",
+          "revision": 1
+        },
+        {
+          "time": 1793301605379,
+          "phase": "packaging",
+          "detail": "Packaging checked source ZIP.",
+          "revision": 1
+        },
+        {
+          "time": 1793301605415,
+          "phase": "completed",
+          "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+          "revision": 1
+        }
+      ],
+      "created": 1793301516223,
+      "updated": 1793301605415,
+      "calls": 1,
+      "errors": 0,
+      "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+      "milestoneMs": [],
+      "milestoneStarted": 1793301516223,
+      "planOffset": 0,
+      "planningDone": true,
+      "targets": [
+        "zip"
+      ],
+      "collectionContract": {
+        "kind": "collection",
+        "heading": "My Tasks",
+        "inputLabel": "New task",
+        "addButton": "Add",
+        "removeButton": "Remove",
+        "listLabel": "Tasks",
+        "storage": "localStorage",
+        "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+        "maxItems": 100,
+        "maxTextLength": 200
+      },
+      "lastProgressCall": 1,
+      "evidence": {
+        "revision": 1,
+        "checks": [
+          {
+            "id": "install",
+            "ok": true,
+            "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [4.00ms]\n",
+            "milliseconds": 7
+          },
+          {
+            "id": "typecheck",
+            "ok": true,
+            "detail": "",
+            "milliseconds": 1616
+          },
+          {
+            "id": "tests",
+            "ok": true,
+            "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [7.83ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.41ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.22ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [41.00ms]\n",
+            "milliseconds": 47
+          },
+          {
+            "id": "build",
+            "ok": true,
+            "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 25ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1471ms\n  Running TypeScript ...\n  Finished TypeScript in 1295ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 175ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+            "milliseconds": 22367
+          },
+          {
+            "id": "browser",
+            "ok": true,
+            "detail": "Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key",
+            "milliseconds": 3438
+          },
+          {
+            "id": "source_zip",
+            "ok": true,
+            "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+            "milliseconds": 28789
+          }
+        ],
+        "dom": "My Tasks\n\nSaved in this browser. Up to 100 tasks, 200 characters each.\n\nNew task\nAdd\nKeep this task\nRemove\nAdded after reload\nRemove",
+        "artifacts": [
+          {
+            "kind": "zip",
+            "name": "source.zip",
+            "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+            "bytes": 176377,
+            "smokeTested": true
+          }
+        ],
+        "headings": [
+          "My Tasks"
+        ],
+        "screenshot": "revision-1.png",
+        "browserContract": {
+          "kind": "collection",
+          "heading": "My Tasks",
+          "inputLabel": "New task",
+          "addButton": "Add",
+          "removeButton": "Remove",
+          "listLabel": "Tasks",
+          "storage": "localStorage",
+          "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+          "maxItems": 100,
+          "maxTextLength": 200
+        }
+      }
+    },
+    "3913421e-e224-4968-9045-622f161a2d0c": {
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.\n\nRevision requested (replaces conflicting earlier criteria; preserve other behavior):\nChange heading to My Week; keep existing add/remove/persistence behavior",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "requirements": [
+        {
+          "id": "collection",
+          "description": "Show exactly \"My Week\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+          "status": "verified",
+          "files": [
+            "app/page.tsx",
+            "lib/collection.ts"
+          ],
+          "tests": [
+            "tests/app.test.tsx",
+            "tests/collection.test.ts"
+          ],
+          "reviewRevision": 1,
+          "note": "Bounded collection contract verified by actual production-browser interactions: Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Week\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key"
+        }
+      ],
+      "events": [
+        {
+          "time": 1793301633349,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793301633398,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793301659122,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793301662972,
+          "phase": "install",
+          "detail": "Running install.",
+          "revision": 1
+        },
+        {
+          "time": 1793301662983,
+          "phase": "typecheck",
+          "detail": "Running typecheck.",
+          "revision": 1
+        },
+        {
+          "time": 1793301664890,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793301664943,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793301687312,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793301690892,
+          "phase": "source_zip",
+          "detail": "Running source_zip.",
+          "revision": 1
+        },
+        {
+          "time": 1793301719522,
+          "phase": "packaging",
+          "detail": "Packaging checked source ZIP.",
+          "revision": 1
+        },
+        {
+          "time": 1793301719557,
+          "phase": "revision_coverage",
+          "detail": "Checking full revision guidance against current output, QA and acceptance changes.",
+          "revision": 1
+        },
+        {
+          "time": 1793301727228,
+          "phase": "completed",
+          "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+          "revision": 1
+        }
+      ],
+      "created": 1793301630058,
+      "updated": 1793301727228,
+      "calls": 2,
+      "errors": 0,
+      "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+      "milestoneMs": [],
+      "milestoneStarted": 1793301630058,
+      "planOffset": 72,
+      "planningDone": true,
+      "targets": [
+        "zip"
+      ],
+      "parentTaskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "parentRevision": 1,
+      "revisionNote": "Change heading to My Week; keep existing add/remove/persistence behavior",
+      "revisionPlan": {
+        "criteria": [
+          {
+            "id": "collection",
+            "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+            "files": [
+              "app/page.tsx",
+              "lib/collection.ts"
+            ],
+            "tests": [
+              "tests/app.test.tsx",
+              "tests/collection.test.ts"
+            ]
+          }
+        ],
+        "criterionOffset": 1,
+        "guidance": "Change heading to My Week; keep existing add/remove/persistence behavior",
+        "guidanceOffset": 72,
+        "stage": "ready",
+        "decisions": [
+          {
+            "id": "collection",
+            "action": "replace",
+            "description": "Show exactly \"My Week\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+            "reason": "Only the explicitly requested literal heading changes; stable storage key, Add, individual Remove and reload persistence remain in the host browser contract."
+          }
+        ],
+        "parentSourceHash": "729173fd50fea8e71f246f5482b49d2e679e5dfd885acd25c98cec18535018e5",
+        "browserContract": {
+          "kind": "collection",
+          "heading": "My Week",
+          "inputLabel": "New task",
+          "addButton": "Add",
+          "removeButton": "Remove",
+          "listLabel": "Tasks",
+          "storage": "localStorage",
+          "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+          "maxItems": 100,
+          "maxTextLength": 200
+        },
+        "collectionRecipe": {
+          "before": {
+            "title": "My Tasks",
+            "inputLabel": "New task",
+            "addButtonLabel": "Add",
+            "removeButtonLabel": "Remove",
+            "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178"
+          },
+          "after": {
+            "title": "My Week",
+            "inputLabel": "New task",
+            "addButtonLabel": "Add",
+            "removeButtonLabel": "Remove",
+            "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178"
+          },
+          "revision": 1
+        },
+        "coverageOffset": 72,
+        "coverageRejected": false,
+        "coverageRevision": 1
+      },
+      "collectionContract": {
+        "kind": "collection",
+        "heading": "My Week",
+        "inputLabel": "New task",
+        "addButton": "Add",
+        "removeButton": "Remove",
+        "listLabel": "Tasks",
+        "storage": "localStorage",
+        "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+        "maxItems": 100,
+        "maxTextLength": 200
+      },
+      "lastProgressCall": 1,
+      "evidence": {
+        "revision": 1,
+        "checks": [
+          {
+            "id": "install",
+            "ok": true,
+            "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [3.00ms]\n",
+            "milliseconds": 10
+          },
+          {
+            "id": "typecheck",
+            "ok": true,
+            "detail": "",
+            "milliseconds": 1903
+          },
+          {
+            "id": "tests",
+            "ok": true,
+            "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [8.85ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.53ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.30ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [49.00ms]\n",
+            "milliseconds": 51
+          },
+          {
+            "id": "build",
+            "ok": true,
+            "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 29ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1531ms\n  Running TypeScript ...\n  Finished TypeScript in 1407ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 173ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+            "milliseconds": 22354
+          },
+          {
+            "id": "browser",
+            "ok": true,
+            "detail": "Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Week\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key",
+            "milliseconds": 3580
+          },
+          {
+            "id": "source_zip",
+            "ok": true,
+            "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+            "milliseconds": 28627
+          }
+        ],
+        "dom": "My Week\n\nSaved in this browser. Up to 100 tasks, 200 characters each.\n\nNew task\nAdd\nKeep this task\nRemove\nAdded after reload\nRemove",
+        "artifacts": [
+          {
+            "kind": "zip",
+            "name": "source.zip",
+            "sha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546",
+            "bytes": 177189,
+            "smokeTested": true
+          }
+        ],
+        "headings": [
+          "My Week"
+        ],
+        "screenshot": "revision-1.png",
+        "browserContract": {
+          "kind": "collection",
+          "heading": "My Week",
+          "inputLabel": "New task",
+          "addButton": "Add",
+          "removeButton": "Remove",
+          "listLabel": "Tasks",
+          "storage": "localStorage",
+          "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+          "maxItems": 100,
+          "maxTextLength": 200
+        }
+      }
+    }
+  },
+  "rejectedApiGuards": [
+    {
+      "method": "GET",
+      "contract": "paired-online launch",
+      "status": 403,
+      "error": "Open the local Studio window before using this action"
+    },
+    {
+      "method": "POST",
+      "contract": "paired-online launch",
+      "status": 403,
+      "error": "Open the local Studio window before using this action"
+    },
+    {
+      "method": "POST",
+      "contract": "nonempty Start body",
+      "status": 400,
+      "error": "App launch takes no commands or runtime arguments"
+    }
+  ],
+  "firstLaunch": {
+    "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+    "lineageId": "e261cd74-7630-4210-960e-6602b417e178",
+    "supported": true,
+    "state": "running",
+    "message": "App is running. Closing this window leaves it running; Stop app ends this session and keeps browser data.",
+    "updated": 1793307323495,
+    "activeTaskId": "e261cd74-7630-4210-960e-6602b417e178",
+    "revision": 1,
+    "zipSha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+    "port": 45473,
+    "origin": "http://127.0.0.1:45473",
+    "launchId": "b3b64bfe-9317-4dd9-9013-2ac867bcb725",
+    "created": 1793307323366,
+    "kind": "collection",
+    "title": "My Tasks",
+    "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+    "runtimeId": "e1d696a094bc48e36fede8f0203b2b5655449aa373be8a1e2700f6e6179b7e07",
+    "processId": 51448,
+    "startedAt": 1793307323464
+  },
+  "appLayouts": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "frame": {
+        "x": 1022,
+        "y": 272.390625,
+        "width": 388,
+        "height": 229
+      },
+      "logical": {
+        "width": 388,
+        "height": 227
+      }
+    }
+  ],
+  "controlLayouts": [
+    {
+      "label": "running-collection-heading",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "metrics": [
+        {
+          "name": "Stop running app",
+          "x": 1034,
+          "y": 161.796875,
+          "width": 132.59375,
+          "height": 44
+        },
+        {
+          "name": "Check app status",
+          "x": 1172.59375,
+          "y": 161.796875,
+          "width": 129.984375,
+          "height": 44
+        },
+        {
+          "name": "Focus app view",
+          "x": 1165.21875,
+          "y": 211.796875,
+          "width": 118.40625,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "label": "running-collection-items",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "metrics": [
+        {
+          "name": "Stop running app",
+          "x": 1034,
+          "y": 161.796875,
+          "width": 132.59375,
+          "height": 44
+        },
+        {
+          "name": "Check app status",
+          "x": 1172.59375,
+          "y": 161.796875,
+          "width": 129.984375,
+          "height": 44
+        },
+        {
+          "name": "Focus app view",
+          "x": 1165.21875,
+          "y": 211.796875,
+          "width": 118.40625,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "label": "return-to-collection-controls",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "metrics": [
+        {
+          "name": "Stop running app",
+          "x": 1034,
+          "y": 161.796875,
+          "width": 132.59375,
+          "height": 44
+        },
+        {
+          "name": "Check app status",
+          "x": 1172.59375,
+          "y": 161.796875,
+          "width": 129.984375,
+          "height": 44
+        },
+        {
+          "name": "Focus app view",
+          "x": 1165.21875,
+          "y": 211.796875,
+          "width": 118.40625,
+          "height": 44
+        }
+      ]
+    }
+  ],
+  "browserBoundary": {
+    "origin": "http://127.0.0.1:45473",
+    "parentDom": "SecurityError",
+    "parentStorage": "SecurityError",
+    "topNavigation": "SecurityError",
+    "readableStudioCookie": false
+  },
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T20:55:47.960Z",
+  "goalAchieved": true
+}

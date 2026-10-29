@@ -1,0 +1,17 @@
+30 | try{
+31 |  let c=await open('explicit-start-stop-start-reopen','normal');await c.page.getByRole('button',{name:'Start app',exact:true}).waitFor();assert.deepEqual(c.fixture.posts,[]);await c.page.getByRole('button',{name:'Start app',exact:true}).click();await c.page.locator('iframe').waitFor();await c.page.getByRole('button',{name:'Stop running app',exact:true}).click();await c.page.locator('iframe').waitFor({state:'detached'});await c.page.getByRole('button',{name:'Start app',exact:true}).click();await c.page.locator('iframe').waitFor();assert.deepEqual(c.fixture.posts,['start','stop','start']);await c.page.getByRole('button',{name:'Hide card',exact:true}).click();await c.page.getByRole('button',{name:'Show card',exact:true}).click();await c.page.locator('iframe').waitFor();assert.deepEqual(c.fixture.posts,['start','stop','start']);await c.page.reload({waitUntil:'networkidle'});await c.page.locator('iframe').waitFor();assert.deepEqual(c.fixture.posts,['start','stop','start']);
+32 |  assert.equal(await c.page.locator('iframe').getAttribute('sandbox'),'allow-scripts allow-same-origin allow-forms');assert.equal(await c.page.locator('iframe').getAttribute('referrerpolicy'),'no-referrer');assert(await c.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));for(const button of await c.page.locator('.software-launch-actions button').all()){const b=await button.boundingBox();assert(b&&b.height>=44&&b.x>=0&&b.x+b.width<=360);}
+33 |  await c.page.getByRole('button',{name:'Stop running app',exact:true}).focus();await c.page.keyboard.press('Tab');assert.equal(await c.page.getByRole('button',{name:'Check app status',exact:true}).evaluate((n:any)=>document.activeElement===n),true);assert(await c.page.getByRole('button',{name:'Check app status',exact:true}).evaluate((n:any)=>getComputedStyle(n).outlineStyle!=='none'));
+34 |  await c.page.screenshot({path:join(output,'narrow-running-after-restart.png')});await finish(c,{launchPosts:['start','stop','start'],reopenAndPageReloadAddedPosts:0,frameAfterRestart:true,controlsAtLeast44px:true,keyboardFocus:true,noOverflow:true});
+35 |  c=await open('lost-start-no-replay','lost-start');await c.page.getByRole('button',{name:'Start app',exact:true}).click();await c.page.getByRole('alert').filter({hasText:'Start was not confirmed'}).waitFor();await c.page.waitForTimeout(3000);assert.deepEqual(c.fixture.posts,['start']);await c.page.getByRole('button',{name:'Check app status',exact:true}).click();await c.page.getByRole('button',{name:'Stop running app',exact:true}).waitFor();assert(await c.page.getByRole('button',{name:'Stop running app',exact:true}).isEnabled());await finish(c,{launchPosts:['start'],automaticReplay:false,explicitStatusInspectionRecoversControls:true});
+
+AssertionError: false == true
+ generatedMessage: true,
+     actual: false,
+   expected: true,
+   operator: "==",
+       code: "ERR_ASSERTION"
+
+      at /workspace/.cloud-env/anascummis/app-launch/ui-proof.ts:35:445
+
+Bun v1.3.14 (Linux x64)

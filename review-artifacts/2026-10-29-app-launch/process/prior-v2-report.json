@@ -1,0 +1,123 @@
+{
+  "scope": "Host-owned fixed-client spike only; no accepted ZIP, native inference or product integration proof.",
+  "startedAt": "2026-10-29T20:11:42.511Z",
+  "origin": "http://127.0.0.1:42907",
+  "studioOrigin": "http://127.0.0.1:41083",
+  "checks": [
+    {
+      "name": "actual separate-origin iframe, storage and session boundary",
+      "passed": true,
+      "detail": {
+        "proof": {
+          "parentDOMBlocked": true,
+          "parentStorageBlocked": true,
+          "topNavigationBlocked": true,
+          "popupBlocked": true,
+          "fetchBlocked": true,
+          "fetchTargetParsed": true,
+          "cookieVisible": false
+        },
+        "sessionCookieUnchanged": true,
+        "parentLeakRequests": 0,
+        "externalRequests": []
+      }
+    },
+    {
+      "name": "close/reopen/reload reuse the same process and browser storage",
+      "passed": true,
+      "detail": {
+        "pid": 42371,
+        "items": [
+          "Keep this task"
+        ]
+      }
+    },
+    {
+      "name": "credentials observed only at edge; no app-facing credentials or response cookies",
+      "passed": true,
+      "detail": {
+        "requests": 7,
+        "credentialRequests": 7,
+        "sanitizedCredentialRequests": 0,
+        "responseCookieHeaders": 0,
+        "rejectedRequests": 0
+      }
+    },
+    {
+      "name": "worker receives only minimal runtime environment",
+      "passed": true,
+      "detail": {
+        "names": [
+          "PATH",
+          "NODE_CHANNEL_FD",
+          "NODE_CHANNEL_SERIALIZATION_MODE"
+        ]
+      }
+    },
+    {
+      "name": "awaited Stop and explicit Start retain stable address/items",
+      "passed": true,
+      "detail": {
+        "origin": "http://127.0.0.1:42907",
+        "oldPid": 42371,
+        "newPid": 42497,
+        "items": [
+          "Keep this task"
+        ]
+      }
+    },
+    {
+      "name": "actual parent SIGKILL closes IPC and removes the owned listener",
+      "passed": true,
+      "detail": {
+        "parentPid": 42505,
+        "workerPid": 42513,
+        "childState": "Z",
+        "origin": "http://127.0.0.1:42907"
+      }
+    },
+    {
+      "name": "explicit post-interruption Start preserves same-origin items",
+      "passed": true,
+      "detail": {
+        "items": [
+          "Keep this task"
+        ],
+        "origin": "http://127.0.0.1:42907"
+      }
+    },
+    {
+      "name": "occupied saved address and unrelated HTTP200 are refused",
+      "passed": true,
+      "detail": {
+        "unrelatedServerUntouched": true
+      }
+    }
+  ],
+  "ownedProcesses": [
+    {
+      "stage": "first Start",
+      "pid": 42371
+    },
+    {
+      "stage": "explicit same-origin restart",
+      "pid": 42497
+    },
+    {
+      "stage": "nested parent SIGKILL proof",
+      "parent": 42505,
+      "pid": 42513
+    },
+    {
+      "stage": "explicit restart after parent death",
+      "pid": 42521
+    }
+  ],
+  "limitations": [
+    "Installed Chromium, not a physical handset or native OS distribution proof.",
+    "Cookies reach the host-owned edge because ports do not isolate cookies; fixed asset handlers receive sanitized requests."
+  ],
+  "status": "passed",
+  "finishedAt": "2026-10-29T20:11:43.927Z",
+  "sharedServicesTouched": false
+}

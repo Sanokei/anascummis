@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {chromium} from '/workspace/anascummis/apps/studio/node_modules/playwright-core/index.mjs';
+import {startAppProcess} from '/workspace/anascummis/apps/studio/core/app-launch-process.ts';
+const path='/workspace/.cloud-env/anascummis/app-launch/accepted-runtime-boundary';
+const collections=JSON.parse(await readFile('/workspace/.cloud-env/anascummis/app-launch/runtime-package-proof/collection/receipt.json','utf8')).results;
+const counter=JSON.parse(await readFile('/workspace/.cloud-env/anascummis/app-launch/runtime-package-proof/counter/receipt.json','utf8')).results[0];
+const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+const snapshots=await Promise.all([...collections,counter].flatMap(record=>['manifest.json','index.html','app.js'].map(async file=>({path:record.root+'/'+file,sha256:sha(await readFile(record.root+'/'+file))}))));
+const reserve=()=>{const server=Bun.serve({hostname:'127.0.0.1',port:0,fetch:()=>new Response('owned')});const port=server.port;void server.stop(true);return port;};
+const port=reserve(),appOrigin='http://127.0.0.1:'+port;let studioOrigin='';
+const studio=Bun.serve({hostname:'127.0.0.1',port:0,fetch:()=>new Response('<!doctype html><html><body><h1>Accepted-runtime boundary fixture</h1><iframe title="Actual accepted Page" sandbox="allow-scripts allow-same-origin allow-forms" src="'+appOrigin+'"></iframe></body></html>',{headers:{'content-type':'text/html','set-cookie':'studio=public-test-session; HttpOnly; SameSite=Strict; Path=/'}})});studioOrigin=studio.url.origin;
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true});const context=await browser.newContext({viewport:{width:360,height:800},hasTouch:true});const page=await context.newPage();const report={scope:'Actual accepted native-generated Page code compiled into the host-owned browser runtime, in an isolated iframe host. No product UI, new inference, app server, installation, or native OS claim.',checks:[],runtimeIds:[],pageErrors:[],sourceRuntimeFilesUnchanged:false};page.on('pageerror',error=>report.pageErrors.push(error.message));let app;
+try{
+ for(const [index,record] of collections.entries()){
+  app=await startAppProcess({port,studioOrigin,root:record.root,manifest:record.manifest});report.runtimeIds.push({taskId:record.taskId,zipSha256:record.manifest.zipSha256,runtimeId:app.runtimeId,pid:app.pid});
+  await page.goto(studioOrigin);const frame=page.frameLocator('iframe');await frame.getByRole('heading',{name:record.title,exact:true}).waitFor();
+  if(index===0){for(const text of ['Repeated task','Repeated task','Keep me']){await frame.getByLabel('New task',{exact:true}).fill(text);await frame.getByLabel('New task',{exact:true}).press('Enter');}await frame.getByRole('listitem').nth(0).getByRole('button',{name:'Remove',exact:true}).tap();assert.deepEqual(await frame.getByRole('listitem').allTextContents(),['Repeated taskRemove','Keep meRemove']);await page.reload();await frame.getByRole('heading',{name:record.title,exact:true}).waitFor();await frame.getByRole('textbox',{name:'New task'}).waitFor();}
+  await frame.getByRole('listitem').filter({hasText:'Keep me'}).waitFor();assert.deepEqual(await frame.getByRole('listitem').allTextContents(),['Repeated taskRemove','Keep meRemove']);report.checks.push({title:record.title,actualPageLoaded:true,itemsPreserved:['Repeated task','Keep me'],boundary:app.boundary});await page.screenshot({path:path+'/'+(index===0?'accepted-my-tasks':'accepted-my-week')+'-narrow.png'});await app.stop();
+ }
+ app=await startAppProcess({port,studioOrigin,root:counter.root,manifest:counter.manifest});report.runtimeIds.push({taskId:counter.taskId,zipSha256:counter.manifest.zipSha256,runtimeId:app.runtimeId,pid:app.pid});await page.goto(studioOrigin);const frame=page.frameLocator('iframe');await frame.getByRole('heading',{name:'Bakery Orders',exact:true}).waitFor();const value=frame.getByLabel('Count',{exact:true});assert.equal(await value.textContent(),'0');await frame.getByRole('button',{name:'Increment',exact:true}).tap();await frame.getByRole('button',{name:'Increment',exact:true}).tap();assert.equal(await value.textContent(),'2');await frame.getByRole('button',{name:'Reset',exact:true}).tap();assert.equal(await value.textContent(),'0');report.checks.push({title:'Bakery Orders',actualPageLoaded:true,values:[0,1,2,0],boundary:app.boundary});await page.screenshot({path:path+'/accepted-counter-narrow.png'});
+ for(const file of snapshots)assert.equal(sha(await readFile(file.path)),file.sha256);report.sourceRuntimeFilesUnchanged=true;assert.deepEqual(report.pageErrors,[]);report.status='passed';
+}catch(error){report.status='failed';report.error=error.stack;process.exitCode=1;}
+finally{if(app)await app.stop();await browser.close();await studio.stop(true);await Bun.write(path+'/report.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({status:report.status,checks:report.checks.length,report:path+'/report.json',error:report.error}));}

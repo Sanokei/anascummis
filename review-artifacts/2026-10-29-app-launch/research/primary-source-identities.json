@@ -1,0 +1,89 @@
+[
+  {
+    "file": "html-iframe.html",
+    "url": "https://html.spec.whatwg.org/multipage/iframe-embed-object.html",
+    "retrievedAt": "2026-10-29T19:46:09.529150+00:00",
+    "status": 200,
+    "bytes": 180942,
+    "sha256": "a295635845a20958bbe5b8194b1e5c45f50b268b3a6771393deaebe357f7ed72",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "file": "html-origins.html",
+    "url": "https://html.spec.whatwg.org/multipage/browsers.html",
+    "retrievedAt": "2026-10-29T19:46:09.529772+00:00",
+    "status": 200,
+    "bytes": 208938,
+    "sha256": "5e2eac8c2bf8c86fb0922fc490f249918673fec853fdf2046c2f2daea670e1fa",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "file": "bun-child-process.mdx",
+    "url": "https://raw.githubusercontent.com/oven-sh/bun/main/docs/runtime/child-process.mdx",
+    "retrievedAt": "2026-10-29T19:46:09.530235+00:00",
+    "status": 200,
+    "bytes": 25096,
+    "sha256": "1215e9b377bf1a2b8e533b6ddbf58002f04b73f28528a831c82e7a1743d3b238",
+    "contentType": "text/plain; charset=utf-8"
+  },
+  {
+    "file": "node24-child-process.md",
+    "url": "https://raw.githubusercontent.com/nodejs/node/v24.x/doc/api/child_process.md",
+    "retrievedAt": "2026-10-29T19:46:09.530703+00:00",
+    "status": 200,
+    "bytes": 89116,
+    "sha256": "595e2f320b9b8dd16ed1a538fee0dc78048555f64bf3f9d3d30437d3e3e3ba41",
+    "contentType": "text/plain; charset=utf-8"
+  },
+  {
+    "file": "node24-process.md",
+    "url": "https://raw.githubusercontent.com/nodejs/node/v24.x/doc/api/process.md",
+    "retrievedAt": "2026-10-29T19:46:09.531640+00:00",
+    "status": 200,
+    "bytes": 134429,
+    "sha256": "59bc0c7ab9f0ddac953bc8cce0e1b806d9b5f96a5f07808189f4e1f4f3b7006b",
+    "contentType": "text/plain; charset=utf-8"
+  },
+  {
+    "file": "rfc6265.txt",
+    "url": "https://www.rfc-editor.org/rfc/rfc6265.txt",
+    "retrievedAt": "2026-10-29T19:46:09.535146+00:00",
+    "status": 200,
+    "bytes": 79724,
+    "sha256": "dc4177094813e85a44a7897b892b76bc09160b3a03aea44f0f511f3a98f91933",
+    "contentType": "text/plain;charset=utf-8"
+  },
+  {
+    "file": "react-useEffect.md",
+    "url": "https://raw.githubusercontent.com/reactjs/react.dev/main/src/content/reference/react/useEffect.md",
+    "retrievedAt": "2026-10-29T18:41:27.384807+00:00",
+    "status": 200,
+    "bytes": 65342,
+    "sha256": "d4fd102c75df4194f5fa4eae8387f3a0aa7b4ba773c3a5ba29e41bf997a61cdb",
+    "contentType": "text/plain; charset=utf-8",
+    "archivePath": "/workspace/.cloud-env/anascummis/task-list/research/react-useEffect.md",
+    "reused": true
+  },
+  {
+    "file": "html-webstorage.html",
+    "url": "https://html.spec.whatwg.org/multipage/webstorage.html",
+    "retrievedAt": "2026-10-29T18:41:27.385290+00:00",
+    "status": 200,
+    "bytes": 70485,
+    "sha256": "0ea170654503697f3ec3bcda6fa93da476e6ddfc0e8b8d243a4ab12409a63272",
+    "contentType": "text/html; charset=utf-8",
+    "archivePath": "/workspace/.cloud-env/anascummis/task-list/research/html-webstorage.html",
+    "reused": true
+  },
+  {
+    "file": "next-output.mdx",
+    "url": "https://raw.githubusercontent.com/vercel/next.js/canary/docs/01-app/03-api-reference/05-config/01-next-config-js/output.mdx",
+    "retrievedAt": "2026-10-29T18:41:27.385718+00:00",
+    "status": 200,
+    "bytes": 8298,
+    "sha256": "03806058f1390e719a8e007ce02e66eee6837765c669a869c675e2ca22e6780d",
+    "contentType": "text/plain; charset=utf-8",
+    "archivePath": "/workspace/.cloud-env/anascummis/task-list/research/next-output.mdx",
+    "reused": true
+  }
+]

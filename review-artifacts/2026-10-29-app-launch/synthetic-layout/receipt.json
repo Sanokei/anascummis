@@ -1,0 +1,156 @@
+{
+  "scope": "Actual FloatingPanels, SoftwarePanel and SoftwareLaunch with current CSS in installed Chromium. Status API is a read-only fixture, and the child serves byte-identical accepted My Tasks runtime files. This proves host layout, not product process ownership, native inference or a new launch.",
+  "sourceIdentity": [
+    {
+      "path": "components/SoftwareLaunch.tsx",
+      "sha256": "32ea940a77ae114b6f9ddac858f68c01b15236a7539f965891fa245fd3ea4452"
+    },
+    {
+      "path": "components/SoftwarePanel.tsx",
+      "sha256": "ba58e5462f4aea1fc227fb99e41fc57af1a6f47f375a81abbf438d952939a33c"
+    },
+    {
+      "path": "components/FloatingPanels.tsx",
+      "sha256": "2cdf762832a40e2cc2bf961198adf308e5c01f4088eee20760d520491a00f34c"
+    },
+    {
+      "path": "app/style.css",
+      "sha256": "833eb5340736579aa03c079182677c9b49c3f97e7b309e2a3aa20bcc90d48f12"
+    }
+  ],
+  "acceptedRuntime": {
+    "id": "e1d696a094bc48e36fede8f0203b2b5655449aa373be8a1e2700f6e6179b7e07",
+    "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+    "zipSha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+    "unchanged": true,
+    "files": [
+      {
+        "path": "/index.html",
+        "sha256": "7d679724dd67103fad6f596d7df772994f7627dc944dc703be1ed77369f8341f",
+        "bytes": 243
+      },
+      {
+        "path": "/app.js",
+        "sha256": "3f36f06bb5d866e9eade62fbf9a78814476a8880188dea09cfe5349f84b63fc1",
+        "bytes": 190415
+      }
+    ]
+  },
+  "apiPosts": 0,
+  "results": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "frame": {
+        "x": 1022,
+        "y": 268.546875,
+        "width": 388,
+        "height": 229
+      },
+      "bar": {
+        "x": 1022,
+        "y": 123.796875,
+        "width": 388,
+        "height": 137
+      },
+      "panel": {
+        "x": 1022,
+        "y": 123.796875,
+        "width": 388,
+        "height": 378.203125
+      },
+      "taskText": {
+        "x": 1070.390625,
+        "y": 386.125,
+        "width": 173.34375,
+        "height": 48
+      },
+      "opaqueStickyControlsHitTest": true,
+      "backControlsAndFocusApp": true,
+      "outerScrollWidthFits": true,
+      "floatingWrapperNotScrolled": true
+    },
+    {
+      "name": "narrow-800",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "frame": {
+        "x": 22,
+        "y": 268.53125,
+        "width": 316,
+        "height": 229
+      },
+      "bar": {
+        "x": 22,
+        "y": 123.796875,
+        "width": 316,
+        "height": 137
+      },
+      "panel": {
+        "x": 22,
+        "y": 123.796875,
+        "width": 316,
+        "height": 378.203125
+      },
+      "taskText": {
+        "x": 67,
+        "y": 365.71875,
+        "width": 108.125,
+        "height": 72
+      },
+      "opaqueStickyControlsHitTest": true,
+      "backControlsAndFocusApp": true,
+      "outerScrollWidthFits": true,
+      "floatingWrapperNotScrolled": true
+    },
+    {
+      "name": "narrow-420",
+      "viewport": {
+        "width": 360,
+        "height": 420
+      },
+      "frame": {
+        "x": 22,
+        "y": 250.53125,
+        "width": 316,
+        "height": 139
+      },
+      "bar": {
+        "x": 22,
+        "y": 123.796875,
+        "width": 316,
+        "height": 119
+      },
+      "panel": {
+        "x": 22,
+        "y": 123.796875,
+        "width": 316,
+        "height": 270.203125
+      },
+      "taskText": {
+        "x": 67,
+        "y": 283.71875,
+        "width": 108.125,
+        "height": 72
+      },
+      "opaqueStickyControlsHitTest": true,
+      "backControlsAndFocusApp": true,
+      "outerScrollWidthFits": true,
+      "floatingWrapperNotScrolled": true
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0
+  },
+  "limitations": [
+    "Browser emulation, not physical handset.",
+    "Actual product lifecycle is covered separately by root QA."
+  ],
+  "driverSha256": "739e3a2581c8a53c09f2a3cebabf7dbea3b448c4919cc4c7d6f2d423b5ee104b"
+}

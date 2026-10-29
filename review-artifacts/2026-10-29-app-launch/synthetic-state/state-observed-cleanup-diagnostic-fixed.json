@@ -1,0 +1,9 @@
+{
+  "scope": "Same unchanged injected state diagnostic with current manager; no real application, OS child, or native model process was started",
+  "scriptSha256": "ba5797dba208d2b18927d6899a2dfa26bafdaa26aea84288973e1fefe1f7771d",
+  "exitCode": 0,
+  "stdout": "Host remained available for explicit Stop recovery\n",
+  "stderr": "",
+  "baselineExitCode": 1,
+  "priorEvidenceUnchanged": true
+}

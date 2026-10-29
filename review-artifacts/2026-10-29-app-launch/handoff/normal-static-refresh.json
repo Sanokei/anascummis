@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-29T20:56:56.538402+00:00",
+  "source": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "normalStudioPid": 50046,
+  "modelPid": 18848,
+  "backendMatchesAlreadyRunning32bbCode": [
+    {
+      "path": "core/server.ts",
+      "sha256": "4d72629d2a903b69cdad424f36d781e0a2c963f881ffe960a26c42a3bb65f4c8"
+    },
+    {
+      "path": "core/software-api.ts",
+      "sha256": "58385ad6892051714fc333aeffc4b48ca03a8f16c4e6204f4d7daa9a9f6c765c"
+    },
+    {
+      "path": "core/software-launch.ts",
+      "sha256": "fb356eef5f2e7f88b8782f3afbee2a4d634cb0ab0c82eca5b2e44e8a49c34714"
+    },
+    {
+      "path": "core/app-launch-package.ts",
+      "sha256": "622232b0d30e682c169e4e534a8697be6f4995ab3a90161e8b604e4a05bd139e"
+    },
+    {
+      "path": "core/app-launch-process.ts",
+      "sha256": "ff970e6fc1aa3592b3fdb3e4b60ccc8a8b052840026e09a726f7bfe9c6cda1c4"
+    },
+    {
+      "path": "worker/app-launch.ts",
+      "sha256": "8c4bf43bedf682fd23d07588bb3fa806f3a7f3a1789f0f49222b4d0ffe03173d"
+    }
+  ],
+  "servedHtmlSha256": "76d56b2201926c3e3285a8e4e1582e3e859a9c879daadb01f12681dfa05fce69",
+  "staticFrontendAndDownloadUpdated": true,
+  "serverRestartedAgain": false,
+  "httpSourceKitMatches": "d5ab598227fe7e1674c2751db4704b6589495f7ffab5a0bbd622130f977a7bec",
+  "scope": "Guard changes only client-side ownership action; existing idle-activated backend is byte-identical and remains running."
+}

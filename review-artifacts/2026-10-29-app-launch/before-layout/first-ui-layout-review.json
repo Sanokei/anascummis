@@ -1,0 +1,37 @@
+{
+  "reviewedAt": "2026-10-29T20:27:02.835794+00:00",
+  "source": "2318ced4a96fb019fe271128f40d98718c08b31a",
+  "method": "Direct visual inspection of original ordinary-product screenshots; no image/DOM/CSS edits",
+  "findings": [
+    {
+      "severity": "P1",
+      "state": "running collection at360x800",
+      "issue": "Nested host window/card/launch padding leaves an approximately234px app iframe; task text next to Remove wraps into one or two characters per line. The directly-opened360px app acceptance does not establish this embedded layout.",
+      "action": "Fix host preview width while preserving accepted Page and ZIP; capture actual running app top/controls and readable task text at360."
+    },
+    {
+      "severity": "test evidence synchronization",
+      "state": "occupied origin image",
+      "issue": "Driver photographed transient preparing while authoritative saved state was failed. This image is not a failed-state layout proof.",
+      "action": "Driver now waits for visible failed state; fresh source pin/rerun required."
+    }
+  ],
+  "originals": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/03-running-my-tasks.png",
+      "sha256": "0c8bded499369a8e93099b4839407bef4d02c68ed44f2946da0f9a77c5267498",
+      "bytes": 56586
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-desktop/03-running-my-tasks.png",
+      "sha256": "deb2faab45faea8bf7fc26931df3ce3607b18964d85836c61c0f90083d8a18dd",
+      "bytes": 343214
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/10-occupied-origin-fails-honestly.png",
+      "sha256": "f820d28513d776e04c1875a6715a6b7e59858be16934f9446301d2288bffdec4",
+      "bytes": 71789
+    }
+  ],
+  "functionalScope": "Both collection lifecycle cases passed at this source. Counter cases failed a separate strict driver locator after actions; no overall UI acceptance claimed."
+}

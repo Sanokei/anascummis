@@ -1,0 +1,661 @@
+{
+  "phase": "ordinary server handoff, no app launch since user data has 0 builds",
+  "source": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "deliverySource": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "productSource": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "origin": "http://127.0.0.1:3211",
+  "manifest": {
+    "format": 1,
+    "version": "c9c84ba6a1c9844a5e252cd926ce5cc20c827bfdb91b925b76b5cb39207e0326",
+    "filename": "anascummis-studio-c9c84ba6a1c9844a.zip",
+    "sha256": "d5ab598227fe7e1674c2751db4704b6589495f7ffab5a0bbd622130f977a7bec",
+    "bytes": 1832950,
+    "files": 247,
+    "source": {
+      "commit": "ade3e43479654e60415876ba681d965c5a8ff296",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "cases": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshots": [
+        "desktop-initial-readiness.png",
+        "desktop-typing-empty-without-send.png",
+        "desktop-download-current-kit.png",
+        "desktop-download-checksum.png",
+        "desktop-download-instructions.png"
+      ],
+      "typing": {
+        "openedAndFocused": true,
+        "empty": true,
+        "sent": false,
+        "closed": true
+      },
+      "software": {
+        "opened": false,
+        "note": "No labelled Open Software work button was available in the initial normal view. No help/navigation command was sent; the real four-case product suite separately covers Software."
+      },
+      "download": {
+        "suggestedFilename": "anascummis-studio-c9c84ba6a1c9844a.zip",
+        "bytes": 1832950,
+        "sha256": "d5ab598227fe7e1674c2751db4704b6589495f7ffab5a0bbd622130f977a7bec",
+        "signature": "PK0304",
+        "headContentType": "application/zip",
+        "headContentLength": null
+      },
+      "closeVisibleAndHitTestedAtKitChecksumAndInstructions": [
+        {
+          "x": 912.3125,
+          "y": 54.359375,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 912.3125,
+          "y": 45,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 912.3125,
+          "y": 45,
+          "width": 52.6875,
+          "height": 40
+        }
+      ],
+      "sourceVersionAndChecksumVisible": true,
+      "dialogClosed": true
+    },
+    {
+      "name": "narrow",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "screenshots": [
+        "narrow-initial-readiness.png",
+        "narrow-typing-empty-without-send.png",
+        "narrow-download-current-kit.png",
+        "narrow-download-checksum.png",
+        "narrow-download-instructions.png"
+      ],
+      "typing": {
+        "openedAndFocused": true,
+        "empty": true,
+        "sent": false,
+        "closed": true
+      },
+      "software": {
+        "opened": false,
+        "note": "No labelled Open Software work button was available in the initial normal view. No help/navigation command was sent; the real four-case product suite separately covers Software."
+      },
+      "download": {
+        "suggestedFilename": "anascummis-studio-c9c84ba6a1c9844a.zip",
+        "bytes": 1832950,
+        "sha256": "d5ab598227fe7e1674c2751db4704b6589495f7ffab5a0bbd622130f977a7bec",
+        "signature": "PK0304",
+        "headContentType": "application/zip",
+        "headContentLength": null
+      },
+      "closeVisibleAndHitTestedAtKitChecksumAndInstructions": [
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        }
+      ],
+      "sourceVersionAndChecksumVisible": true,
+      "dialogClosed": true
+    }
+  ],
+  "blockedExternalRequests": [
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json"
+    }
+  ],
+  "mutationAttempts": [],
+  "pageErrors": [],
+  "requests": [
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/459f7aa1967f3e21.css"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/app/page-28ffbf899600e93f.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/status"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/jobs"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/goals"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects/:id"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/assets"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/software"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/manifest.json"
+    },
+    {
+      "case": "desktop",
+      "method": "HEAD",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/anascummis-studio-c9c84ba6a1c9844a.zip"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/459f7aa1967f3e21.css"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/app/page-28ffbf899600e93f.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/status"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/jobs"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/goals"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects/:id"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/assets"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/software"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/manifest.json"
+    },
+    {
+      "case": "narrow",
+      "method": "HEAD",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/anascummis-studio-c9c84ba6a1c9844a.zip"
+    }
+  ],
+  "apiRecordsUnchanged": true,
+  "apiRecordSummary": {
+    "projects": 1,
+    "goals": 0,
+    "software": 0,
+    "jobsActive": 0,
+    "jobsHistory": 0
+  },
+  "apiRecordHashes": {
+    "/api/projects": "13e608f4c535fb6f6841d5a815a3ffcd37e415ed7b9b18f39bee4e6d139e2130",
+    "/api/goals": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "/api/jobs": "97dc79c9e7ea9d0e786a46d812c7253f1c8337f2b0d8f2369f8c49ece2324cf7",
+    "/api/software": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "processesBefore": [
+    {
+      "pid": 50046,
+      "startTimeTicks": "1604035",
+      "command": [
+        "/workspace/.cloud-tools/node_modules/bun/bin/bun.exe",
+        "core/server.ts"
+      ]
+    },
+    {
+      "pid": 18848,
+      "startTimeTicks": "845300",
+      "command": [
+        "/workspace/.cloud-tools/llama/llama-b11960/llama-server",
+        "-m",
+        "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8081",
+        "-ngl",
+        "0",
+        "-c",
+        "2048",
+        "-t",
+        "4",
+        "--parallel",
+        "1",
+        "--jinja",
+        "--reasoning",
+        "off",
+        "--cors-origins",
+        "localhost"
+      ]
+    }
+  ],
+  "processesAfter": [
+    {
+      "pid": 50046,
+      "startTimeTicks": "1604035",
+      "command": [
+        "/workspace/.cloud-tools/node_modules/bun/bin/bun.exe",
+        "core/server.ts"
+      ]
+    },
+    {
+      "pid": 18848,
+      "startTimeTicks": "845300",
+      "command": [
+        "/workspace/.cloud-tools/llama/llama-b11960/llama-server",
+        "-m",
+        "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8081",
+        "-ngl",
+        "0",
+        "-c",
+        "2048",
+        "-t",
+        "4",
+        "--parallel",
+        "1",
+        "--jinja",
+        "--reasoning",
+        "off",
+        "--cors-origins",
+        "localhost"
+      ]
+    }
+  ],
+  "processesUnchanged": true,
+  "sourceInputsUnchanged": [
+    {
+      "path": "out/opensource/manifest.json",
+      "sha256": "4d526e892f5b924e964a99905f13bd9469c5178b899b0a1a771fb6dc3144f2db"
+    },
+    {
+      "path": "out/opensource/anascummis-studio-c9c84ba6a1c9844a.zip",
+      "sha256": "d5ab598227fe7e1674c2751db4704b6589495f7ffab5a0bbd622130f977a7bec"
+    },
+    {
+      "path": "out/index.html",
+      "sha256": "76d56b2201926c3e3285a8e4e1582e3e859a9c879daadb01f12681dfa05fce69"
+    }
+  ],
+  "scope": "Normal already-running server, fresh desktop/touch browser contexts, typing entry and actual current Download only. No app launch, fixture import, model inference, setup, build, provider, service or source modification.",
+  "limitations": [
+    "External browser requests were deliberately blocked, including Whisper initialization; unavailable voice is qualified and no native voice or physical handset proof is claimed.",
+    "Existing data contains no Software builds, so actual app Start/Stop remains evidenced by the separate source-pinned product journey suite.",
+    "Current kit HTTP/browser download is verified; no new extraction, dependency installation or native-OS installation pass is claimed."
+  ],
+  "completedAtFromReceiptWrite": "2026-10-29T20:58:15.588753+00:00",
+  "captureDriverSha256": "d239ac48653fa3e8a3989ba34c57caa8b18823192cd4a3025d15d1a533fdb746",
+  "originalScreenshotIdentities": [
+    {
+      "path": "desktop-download-checksum.png",
+      "bytes": 261313,
+      "sha256": "58b0d75faa724c851df2f13a8c735a24dbf05b44e92fdbdbcfe0a5e16d5a6d7c",
+      "width": 1440,
+      "height": 1000,
+      "personallyViewed": false
+    },
+    {
+      "path": "desktop-download-current-kit.png",
+      "bytes": 262263,
+      "sha256": "24eda702999f900d58f80479c4642a2dd7251147f516c9c1bb3890d30642d647",
+      "width": 1440,
+      "height": 1000,
+      "personallyViewed": false
+    },
+    {
+      "path": "desktop-download-instructions.png",
+      "bytes": 261313,
+      "sha256": "58b0d75faa724c851df2f13a8c735a24dbf05b44e92fdbdbcfe0a5e16d5a6d7c",
+      "width": 1440,
+      "height": 1000,
+      "personallyViewed": false
+    },
+    {
+      "path": "desktop-initial-readiness.png",
+      "bytes": 341228,
+      "sha256": "557fcbdca2dfc9bb82baf9e58cffa70a29578e352d74eae06919046af0c9cdba",
+      "width": 1440,
+      "height": 1000,
+      "personallyViewed": true
+    },
+    {
+      "path": "desktop-typing-empty-without-send.png",
+      "bytes": 351161,
+      "sha256": "214ce76f5434df9c6213dff8bee8673f16ea9ed4226c4ca934c160fe3665a828",
+      "width": 1440,
+      "height": 1000,
+      "personallyViewed": false
+    },
+    {
+      "path": "narrow-download-checksum.png",
+      "bytes": 62874,
+      "sha256": "5d8fc698dd22d92b448e9c2747849574717525c0e95cc72b9982d0b42f0dc9c4",
+      "width": 360,
+      "height": 800,
+      "personallyViewed": false
+    },
+    {
+      "path": "narrow-download-current-kit.png",
+      "bytes": 57150,
+      "sha256": "60408987aad775eb3077655e0ee8f7938f77f274967d39d2480ce32536d5582a",
+      "width": 360,
+      "height": 800,
+      "personallyViewed": true
+    },
+    {
+      "path": "narrow-download-instructions.png",
+      "bytes": 71305,
+      "sha256": "6b5828f8dc3271c05509af324cc8d85216f7bff17a4705f4fc5f412b916ebf06",
+      "width": 360,
+      "height": 800,
+      "personallyViewed": true
+    },
+    {
+      "path": "narrow-initial-readiness.png",
+      "bytes": 133140,
+      "sha256": "5c3568341644b4d846bfa1c48cb233d1dcb5b75fe89c3e51eb3998f0db367fd7",
+      "width": 360,
+      "height": 800,
+      "personallyViewed": false
+    },
+    {
+      "path": "narrow-typing-empty-without-send.png",
+      "bytes": 120800,
+      "sha256": "da2eb96740bce61c822a98840fb5208d0efa864469d392f5e1b7f7d08a526443",
+      "width": 360,
+      "height": 800,
+      "personallyViewed": true
+    }
+  ],
+  "visualReview": {
+    "viewedAt": "2026-10-29T21:00:10.484442+00:00",
+    "findings": "Fresh desktop readiness and phone empty composer/current kit/instructions are contained and readable; labelled typing entry, Close and explicit Send are visible. Dialog Close remained visible and pointer-hit-tested while showing current version, checksum and scrolled commands. No image, rendered content or style edits were made.",
+    "softwareViewNotOpened": "No labelled Open Software work button was available in this initial view, so no help/navigation message was submitted. Existing real product suite supplies Software evidence."
+  },
+  "helperFailureHistory": [
+    {
+      "path": "../normal-current-handoff-first.log",
+      "sha256": "4a0675625d1b8e00a2c8bfe20a880e20cf374be01821f9a51948b6c0c5d445ef",
+      "scope": "Capture-helper text locator matched hidden Download and visible conversation readiness; corrected to visible conversation region."
+    },
+    {
+      "path": "../normal-current-handoff-second.log",
+      "sha256": "70ff8bfdf18abfcc2fdab3964328e3e0a608372e9f4d19caab95b8d7c9d448f1",
+      "scope": "Capture-helper focus predicate used aria-label although textarea uses associated label/id orb-text; corrected predicate."
+    },
+    {
+      "path": "../normal-current-handoff-third.log",
+      "sha256": "89c0908c6490f666eaf47e752a65ac70a8d6ede936c98cff0da7287435bf577c",
+      "scope": "Capture-helper incorrectly required optional HEAD Content-Length; repaired conditional. Final actual download bytes/signature/hash remain mandatory and pass."
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "phase": "qualified isolated component Reload ownership guard proof",
+  "scope": "Actual SoftwareLaunch component and current CSS, synthetic API status and frame. Real HttpOnly fixture-cookie renewal is exercised. No actual Studio restart, product process ownership, inference or native device claim.",
+  "sourceIdentity": [
+    {
+      "path": "components/SoftwareLaunch.tsx",
+      "sha256": "1be3cb92c568cac7b12979031d1a3e6d7e0f327e395f62c707f6c4acf2b35d85"
+    },
+    {
+      "path": "app/style.css",
+      "sha256": "833eb5340736579aa03c079182677c9b49c3f97e7b309e2a3aa20bcc90d48f12"
+    }
+  ],
+  "driverSha256": "75a06bbf09ca09657c7f9050bbc2e207ce36be4f4696f7472462cbfe4cc17205",
+  "results": [
+    {
+      "name": "unconfirmed-start-reload-disabled",
+      "passed": true,
+      "reloadDisabledUntilExplicitInspection": true,
+      "enabledAfterVerifiedStatus": true,
+      "sameFrameRetained": true,
+      "unsentInputRetained": true,
+      "launchPosts": [
+        "start"
+      ]
+    },
+    {
+      "name": "readonly-error-reload-disabled-frame-input-retained",
+      "passed": true,
+      "reloadDisabledOnGetError": true,
+      "enabledAfterManualVerifiedStatus": true,
+      "sameFrameAndInputFocusRetained": true,
+      "launchPosts": [
+        "start"
+      ]
+    },
+    {
+      "name": "old-session-reload-disabled-and-no-autostart",
+      "passed": true,
+      "reloadDisabledForOldCookie": true,
+      "verifiedInterruptedStateHasNoReloadAction": true,
+      "reconnectDidNotNavigateOrRestart": true,
+      "unsentStudioDraftRetained": true,
+      "launchPosts": [
+        "start"
+      ]
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0
+  },
+  "limitations": [
+    "Separate from the actual clean-source product lifecycle suite.",
+    "Only owned temporary fixture servers and browser were created/stopped; normal Studio50046 and Qwen18848 were untouched."
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "checkedAt": "2026-10-29T20:21:23.701280+00:00",
+  "phase": "Working-tree hardening gate before source freeze; not a new inference or product UI claim",
+  "unitChecks": {
+    "command": [
+      "bun",
+      "test",
+      "tests/app-launch-process.test.ts"
+    ],
+    "exitCode": 0,
+    "passed": 6,
+    "failed": 0,
+    "assertions": 33
+  },
+  "explicitWorkerTypecheck": {
+    "command": [
+      "bun",
+      "node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "--incremental",
+      "false",
+      "--strict",
+      "--target",
+      "ES2022",
+      "--module",
+      "ESNext",
+      "--moduleResolution",
+      "bundler",
+      "--lib",
+      "ES2022,DOM,DOM.Iterable",
+      "--types",
+      "bun",
+      "--skipLibCheck",
+      "worker/app-launch.ts",
+      "core/app-launch-process.ts",
+      "tests/app-launch-process.test.ts",
+      "scripts/spike-app-launch.ts"
+    ],
+    "exitCode": 0
+  },
+  "workerFixedArguments": [
+    "--no-env-file",
+    "--no-install"
+  ],
+  "dotenvControl": {
+    "syntheticFixtureWouldLoadWithoutFlags": true,
+    "markerAbsentFromHardenedWorkerActualProcessEnvironment": true,
+    "actualEnvironmentNamesOnlyViaOwnedIPC": true,
+    "valuesLogged": false
+  },
+  "sourceFiles": [
+    {
+      "path": "core/app-launch-process.ts",
+      "sha256": "ff970e6fc1aa3592b3fdb3e4b60ccc8a8b052840026e09a726f7bfe9c6cda1c4",
+      "bytes": 7436
+    },
+    {
+      "path": "worker/app-launch.ts",
+      "sha256": "8c4bf43bedf682fd23d07588bb3fa806f3a7f3a1789f0f49222b4d0ffe03173d",
+      "bytes": 5730
+    },
+    {
+      "path": "tests/app-launch-process.test.ts",
+      "sha256": "cae34951f7196b24f0b4b4122e4633c582f1226a30414e04dde250bd4a120847",
+      "bytes": 7291
+    },
+    {
+      "path": "scripts/spike-app-launch.ts",
+      "sha256": "fd1bb9ab7bb802977bb6a8ed20c62f031bbf06ee3a7c8b839bdfe71b42fc5316",
+      "bytes": 12815
+    }
+  ],
+  "spikeReport": {
+    "path": "ownership-spike-final-v3/report.json",
+    "sha256": "b31d098345a6bea25cf770c32545a1193f70170b4895c4c23b99fe62aee3fff4",
+    "checks": 8,
+    "status": "passed"
+  },
+  "priorReceiptsPreserved": [
+    "process-final-checks.json",
+    "ownership-spike-final-v2/report.json"
+  ],
+  "ownedWorkerStates": [
+    {
+      "pid": 44502,
+      "state": "absent",
+      "running": false
+    },
+    {
+      "pid": 44633,
+      "state": "absent",
+      "running": false
+    },
+    {
+      "pid": 44651,
+      "state": "Z",
+      "running": false
+    },
+    {
+      "pid": 44660,
+      "state": "absent",
+      "running": false
+    }
+  ]
+}

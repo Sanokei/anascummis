@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-10-29T21:04:15.384064+00:00",
+  "currentSource": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "acceptedParent": {
+    "id": "a45515b9-b3aa-40e9-803d-67309bcbc70a",
+    "currentRawRecordSha256": "fb4c0893655e90e7b12cee622191cd23a7eb98caf92180b6543b980d161d5445",
+    "acceptedFilesAndZipUnchanged": {
+      "app/page.tsx": "e968c101351f5154f7816e3ccdd1807fb2d9c6a832d8c98538672c6281c8e076",
+      "tests/app.test.tsx": "79520ab657481fc5baae19d2a23b6fe851fa2fd14b80fc8f4bae4bdba84ad774",
+      "package.json": "73477dc5ade568b5e335ff17bc107a36119139bc661e0b864813aa583b527b8d",
+      "bun.lock": "55dd5b2f59415930d662c808feac28120418c382a246d64a3bb68228202fe2ec",
+      "artifacts/source.zip": "e4b818bc6409ac439587c86a2a44fdad5f915a4ff2a28bcc23a84d697780ed3b"
+    },
+    "recordJsonUnchanged": true
+  },
+  "earliestReviewManifestUnchanged": "75187826677d7747c009ee0cce84a0153e4fb236c0d65934644c4a785f516918",
+  "frozenKitsUnchanged": {
+    "review-artifacts/2026-10-29-source-kit/anascummis-studio-c5735e970e817eed.zip": "b73cc2f7f7950efb6ade3d2a7ec5f296a9950f30af0afe760efbe5fa80439f47",
+    "review-artifacts/2026-10-29-software-goals/kit/anascummis-studio-3298a9e9adb589b2.zip": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16"
+  },
+  "olderTrackedReviewArtifactsUnchanged": true,
+  "newNativeFixturePreservation": "Guarded product post-validation separately checks six case/task raw-body, revision and model-call pairs, six accepted source ZIP/runtime identities, and the original source fixtures."
+}

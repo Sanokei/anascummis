@@ -1,0 +1,347 @@
+{
+  "format": "anascummis.app-launch-static-visual-review.v1",
+  "reviewedAt": "2026-10-29T20:43:26.566195+00:00",
+  "reviewer": "/root/launch_ui",
+  "reviewerRole": "UI implementation agent, reviewing original real-server captures separately from the executing agent. This is not an independent authorship review.",
+  "status": "accepted_with_nonblocking_notes",
+  "blockingFindings": [],
+  "scope": "Static image/source-integrity review only. No tests, browser automation, API request, model call, build, code edit, process or service change was performed by this review. Reported execution results belong to the original owner.",
+  "report": {
+    "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/report.json",
+    "sha256": "0618764e0670aba0912598434ad832f8b3aa0a46f7fde63017a03ce898d3c054",
+    "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+    "sourceTree": "a1a315fff952a585191d7eabd606842f0e77af42",
+    "sourceDirty": false,
+    "sourceAfter": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+    "ownerReportedSummary": {
+      "passed": 4,
+      "blocked": 0,
+      "failed": 0
+    },
+    "ownerReportedAssertions": 44,
+    "ownerReportedExitCode": 0
+  },
+  "fingerprintVerification": {
+    "applicationSource": {
+      "matchedCurrentFiles": 20,
+      "allHashesAndBytesMatch": true
+    },
+    "servedBuild": {
+      "matchedCurrentFiles": 88,
+      "allHashesAndBytesMatch": true
+    }
+  },
+  "beforeImage": {
+    "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-first-2318ced/collection-narrow/03-running-my-tasks.png",
+    "sha256": "0c8bded499369a8e93099b4839407bef4d02c68ed44f2946da0f9a77c5267498",
+    "bytes": 56586,
+    "width": 360,
+    "height": 800,
+    "observed": "Nested padding leaves a narrow task column; Keep/this wrap into1\u20132letter fragments next to Remove."
+  },
+  "directlyViewedOriginals": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-desktop/04-running-collection-heading-and-controls.png",
+      "reportRelativePath": "collection-desktop/04-running-collection-heading-and-controls.png",
+      "purpose": "Desktop collection heading, source title and sticky controls",
+      "sha256": "af7686bffef9f22d3b92a76cd2a489b7129a0667f570a54ee5c17fa29546c6ee",
+      "bytes": 352448,
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/04-running-collection-heading-and-controls.png",
+      "reportRelativePath": "collection-narrow/04-running-collection-heading-and-controls.png",
+      "purpose": "360px collection heading/input and controls",
+      "sha256": "58ce3c8ddb33eb3363a4856fd6d5bab123ca7632fb0c57b7cf4e5f1979e31a7d",
+      "bytes": 65785,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/05-running-collection-readable-items-and-controls.png",
+      "reportRelativePath": "collection-narrow/05-running-collection-readable-items-and-controls.png",
+      "purpose": "360px readable saved items/Remove and controls",
+      "sha256": "9ccbcfdc22dd6c2e991f889b04602c0144a8eda4ee4398fecc806402613f306a",
+      "bytes": 62785,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/08-short-collection-interaction-and-controls.png",
+      "reportRelativePath": "collection-narrow/08-short-collection-interaction-and-controls.png",
+      "purpose": "360x420 collection items and intentional inner scrolling",
+      "sha256": "d97a929145587ffee85e4acfe1635af3a2a01e4f350d2b7603d9969029514924",
+      "bytes": 35603,
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/counter-desktop/04-counter-reset-keyboard-feedback.png",
+      "reportRelativePath": "counter-desktop/04-counter-reset-keyboard-feedback.png",
+      "purpose": "Desktop counter count0/Reset focus and controls",
+      "sha256": "26ac19c13e3803885caddd12cd57a7f4d7940e4fb5c042578abfb02fae8eddbc",
+      "bytes": 348391,
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/counter-narrow/05-running-counter-heading-and-controls.png",
+      "reportRelativePath": "counter-narrow/05-running-counter-heading-and-controls.png",
+      "purpose": "360px exact counter heading and controls",
+      "sha256": "e8a7c2cf9dcbe8ff7f542ffddddb8488d432aafb8b7a7c7f0e672dbf88f48d0c",
+      "bytes": 64910,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/counter-narrow/08-short-counter-interaction-and-controls.png",
+      "reportRelativePath": "counter-narrow/08-short-counter-interaction-and-controls.png",
+      "purpose": "360x420 counter Increment/Reset and action feedback",
+      "sha256": "527195deb17eb4d207d54c17f131c9238a587170c536b596328d403275d4518f",
+      "bytes": 37374,
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/counter-narrow/02-unconfirmed-start-inspect-before-retry.png",
+      "reportRelativePath": "counter-narrow/02-unconfirmed-start-inspect-before-retry.png",
+      "purpose": "Unconfirmed Start with explicit Check app status",
+      "sha256": "56a092394358c99a83a6d0ff6263cfe769b7dd625587a333edb8e56552312fae",
+      "bytes": 74506,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/counter-narrow/11-unconfirmed-stop-inspect-before-retry.png",
+      "reportRelativePath": "counter-narrow/11-unconfirmed-stop-inspect-before-retry.png",
+      "purpose": "Unconfirmed Stop with explicit inspection and disabled repeat",
+      "sha256": "ccc1521f21df24e4fb35718e0bc437be5d5e619317159e7a95a84a5e6728ed81",
+      "bytes": 75926,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/17-occupied-origin-retry-controls.png",
+      "reportRelativePath": "collection-narrow/17-occupied-origin-retry-controls.png",
+      "purpose": "Failed occupied origin with Start/Check and retained-state guidance",
+      "sha256": "de96635daf70041273fb64c87b9a5322587d405c4cfd4813c16764a9d15843e7",
+      "bytes": 73645,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/13-sigkill-session-reconnect-keeps-draft.png",
+      "reportRelativePath": "collection-narrow/13-sigkill-session-reconnect-keeps-draft.png",
+      "purpose": "Old-tab session reconnect after SIGKILL",
+      "sha256": "73c149fceb89b90f53796eb38f0927e53b225aa58b87571bb8457e879a527111",
+      "bytes": 73805,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/02-inspect-accepted-runtime-identity.png",
+      "reportRelativePath": "collection-narrow/02-inspect-accepted-runtime-identity.png",
+      "purpose": "Page-only scope qualification and wrapped active build identity",
+      "sha256": "740203fe82cfd828835059cbb832237f16809067da6072d26dc46566dd72e026",
+      "bytes": 70306,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/15-my-week-keeps-existing-items.png",
+      "reportRelativePath": "collection-narrow/15-my-week-keeps-existing-items.png",
+      "purpose": "Current My Week title and retained saved task",
+      "sha256": "f07d32144ef556324d03743e47aed6d9a542ee64c024301c28780463fbdef9cb",
+      "bytes": 61449,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/09-short-collection-return-to-controls.png",
+      "reportRelativePath": "collection-narrow/09-short-collection-return-to-controls.png",
+      "purpose": "360x420 Back controls, Focus action and source/history access",
+      "sha256": "0a1a52d603f2dde4bcaa3f301552c66b88e98817a2fd07d30c2602e74e187211",
+      "bytes": 39677,
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/counter-narrow/04-counter-reset-keyboard-feedback.png",
+      "reportRelativePath": "counter-narrow/04-counter-reset-keyboard-feedback.png",
+      "purpose": "360px visible native Reset focus and Reset Count0 feedback",
+      "sha256": "b728fba9f2054c34d0199151d347c72fb9eb02b2f8aff7466e2bf42ad8a7e330",
+      "bytes": 61983,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-narrow/10-temporary-status-failure-keeps-app-draft.png",
+      "reportRelativePath": "collection-narrow/10-temporary-status-failure-keeps-app-draft.png",
+      "purpose": "Read-only failure keeps frame and Last checked running label",
+      "sha256": "d9838f2d56093be5385d5cbcb3a19e042a2ca633378e1169bd9ab788856b232f",
+      "bytes": 65604,
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/app-launch-final-32bbce6/collection-desktop/08-sigterm-session-reconnect-keeps-draft.png",
+      "reportRelativePath": "collection-desktop/08-sigterm-session-reconnect-keeps-draft.png",
+      "purpose": "Desktop explicit session reconnect after SIGTERM",
+      "sha256": "82302ee4b3b2599d0784105f06054ca58cb6ec6c45d2c2ff404842c4ee880db9",
+      "bytes": 367947,
+      "width": 1440,
+      "height": 1000
+    }
+  ],
+  "acceptedVisualFindings": [
+    "The original cramped2318 column is corrected: task words are readable beside per-item Remove in the final360px and360x420 views.",
+    "Actual My Tasks/My Week/Bakery Orders source titles and running/last-checked/failed state labels remain readable in their own existing Software window.",
+    "Stop running app, Check app status, Reload app view and Focus app view occupy an opaque toolbar; viewed content does not show through or overlap it.",
+    "Short views intentionally show a subset of the embedded page at a time. Header Close and toolbar remain visible; the Back-to-controls capture exposes Focus and identity/history access.",
+    "Counter captures preserve exact heading, labelled Count, large Increment/Reset, visible Reset keyboard focus and action feedback.",
+    "Unconfirmed Start/Stop clearly call for explicit status inspection. Occupied-origin failure is visibly failed with retained-data language and available Start/Check controls.",
+    "The runtime-identity disclosure explicitly qualifies the preview as the checked counter/task-list page from its accepted ZIP, with other apps using manual instructions."
+  ],
+  "nonBlockingFindings": [
+    {
+      "severity": "P2-copy",
+      "path": "collection-narrow/17-occupied-origin-retry-controls.png",
+      "finding": "The blue historical Start acknowledgment still says the saved app state will show when ready beneath a clear terminal failed-state message. Neutral acknowledgment wording would reduce this stale future-facing instruction.",
+      "blocking": false,
+      "whyNotBlocking": "Failed/port-in-use is the first state shown, no completion is claimed, and Start/Check controls remain readable."
+    }
+  ],
+  "captureLimits": [
+    "The viewed reconnect and temporary-read-error screenshots show the recovery controls/current frame, but do not visibly expose the unsent textarea value itself. Draft retention is supported by owner assertions/traces, not directly proved by those PNGs.",
+    "Static captures cannot independently certify button hit-testing, keyboard execution, cookie stripping, process ownership/cleanup, no POST replay or data preservation; those remain execution-owner evidence.",
+    "The reported20 source and88 build hashes match current files, including corrected UI/CSS. This does not establish arbitrary generated application behavior, new native inference quality, voice, physical-handset compatibility or full accessibility compliance."
+  ],
+  "ownerReportedLayoutMetrics": [
+    {
+      "id": "in-window-collection",
+      "viewport": "desktop",
+      "appLayouts": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "frame": {
+            "x": 1022,
+            "y": 272.390625,
+            "width": 388,
+            "height": 229
+          },
+          "logical": {
+            "width": 388,
+            "height": 227
+          }
+        }
+      ],
+      "controlMinimumHeight": 44
+    },
+    {
+      "id": "in-window-collection",
+      "viewport": "narrow",
+      "appLayouts": [
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "frame": {
+            "x": 22,
+            "y": 272.625,
+            "width": 316,
+            "height": 229
+          },
+          "logical": {
+            "width": 316,
+            "height": 227
+          }
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 420
+          },
+          "frame": {
+            "x": 22,
+            "y": 254.625,
+            "width": 316,
+            "height": 139
+          },
+          "logical": {
+            "width": 316,
+            "height": 137
+          }
+        }
+      ],
+      "controlMinimumHeight": 44
+    },
+    {
+      "id": "in-window-counter",
+      "viewport": "desktop",
+      "appLayouts": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "frame": {
+            "x": 1022,
+            "y": 273.140625,
+            "width": 388,
+            "height": 229
+          },
+          "logical": {
+            "width": 388,
+            "height": 227
+          }
+        }
+      ],
+      "controlMinimumHeight": 44
+    },
+    {
+      "id": "in-window-counter",
+      "viewport": "narrow",
+      "appLayouts": [
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "frame": {
+            "x": 22,
+            "y": 273.125,
+            "width": 316,
+            "height": 229
+          },
+          "logical": {
+            "width": 316,
+            "height": 227
+          }
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 420
+          },
+          "frame": {
+            "x": 22,
+            "y": 255.125,
+            "width": 316,
+            "height": 139
+          },
+          "logical": {
+            "width": 316,
+            "height": 137
+          }
+        }
+      ],
+      "controlMinimumHeight": 44
+    }
+  ],
+  "writesByThisReview": "This one JSON receipt outside the checkout only; source, kits, originals and shared processes were not modified."
+}

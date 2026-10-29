@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Configured local runtime is reachable",
+      "passed": true
+    },
+    {
+      "name": "Compute 23 plus 19.",
+      "passed": true,
+      "actual": 42
+    },
+    {
+      "name": "Compute 9 minus 14.",
+      "passed": true,
+      "actual": -5
+    },
+    {
+      "name": "Compute 22 minus 30.",
+      "passed": true,
+      "actual": -8
+    },
+    {
+      "name": "Compute 7 minus 12.",
+      "passed": true,
+      "actual": -5
+    }
+  ],
+  "limitation": "Health, tokenization, constrained generation and four basic calculations only. Run test:e2e for real user-goal acceptance; this is not voice or general reasoning-quality certification.",
+  "model": {
+    "ready": true,
+    "name": "qwen3-0.6b"
+  }
+}

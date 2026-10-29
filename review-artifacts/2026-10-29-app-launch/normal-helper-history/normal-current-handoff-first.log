@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Error: strict mode violation: getByText('AI model: Local service reachable.', { exact: true }) resolved to 2 elements:
+    1) <p>…</p> aka locator('dialog').getByText('AI model: Local service')
+    2) <p>…</p> aka getByRole('region', { name: 'Conversation with Anascummis' }).getByText('AI model: Local service')
+
+Call log:
+[2m  - waiting for getByText('AI model: Local service reachable.', { exact: true }) to be visible[22m
+
+    at /workspace/.cloud-env/anascummis/app-launch/capture-normal-handoff.mjs:24:167 {
+  log: [
+    "  - waiting for getByText('AI model: Local service reachable.', { exact: true }) to be visible"
+  ]
+}
+
+Node.js v24.19.0

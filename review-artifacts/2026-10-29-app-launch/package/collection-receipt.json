@@ -1,0 +1,217 @@
+{
+  "scope": "Real accepted native-generated task artifacts, fixed trusted Page runtime preparation only. No new inference, browser, Next build, app server, install or model quality claim.",
+  "results": [
+    {
+      "taskId": "0b32e8e8-2fe5-4c21-9348-30a43a391f83",
+      "revision": 1,
+      "kind": "collection",
+      "originalModelCalls": 1,
+      "title": "My Tasks",
+      "manifest": {
+        "format": "anascummis.trusted-browser-runtime.v1",
+        "id": "386de80c3e8a3baf22816374d5040da812cf8d560c564cb787f64974a2ea0fdf",
+        "taskId": "0b32e8e8-2fe5-4c21-9348-30a43a391f83",
+        "revision": 1,
+        "zipSha256": "6d2a8aaaea9f9c5c694912a4e7766bf2714e82b3294ec07e0a19c3d024fc656d",
+        "kind": "collection",
+        "title": "My Tasks",
+        "storageKey": "anascummis.collection.0b32e8e8-2fe5-4c21-9348-30a43a391f83",
+        "wrapperVersion": 1,
+        "reactVersion": "19.2.7",
+        "sourceFiles": [
+          {
+            "path": "BUILD-EVIDENCE.json",
+            "bytes": 2776,
+            "sha256": "56dcb203d70a59da8143711241cea8a5f812d685f91027d54565fad38194cfe2"
+          },
+          {
+            "path": "BUILD-PROVENANCE.json",
+            "bytes": 1260,
+            "sha256": "c5f30fea579b13c2b654ac88e481d04ee61680f7a6b7122a4977a34301cddbde"
+          },
+          {
+            "path": "README.md",
+            "bytes": 1608,
+            "sha256": "d6cd8bbaed7e901cafdb1ccb49762abfc1868e6272821061d692698312ec117a"
+          },
+          {
+            "path": "app/layout.tsx",
+            "bytes": 158,
+            "sha256": "51f36435e18eb03bd81e6c590823ea47735c2931112d76de87fa243e51e6b168"
+          },
+          {
+            "path": "app/page.tsx",
+            "bytes": 4431,
+            "sha256": "79fe46aba3643bb04b8d3ffb8b4d1874b8472d02b7d10ce428703e2ca30b4343"
+          },
+          {
+            "path": "bun.lock",
+            "bytes": 15635,
+            "sha256": "cc171eff287591876e4274387dc90c7bc5ccdb82de44eae0073e8946adf8f3e8"
+          },
+          {
+            "path": "lib/collection.ts",
+            "bytes": 1168,
+            "sha256": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d"
+          },
+          {
+            "path": "next-env.d.ts",
+            "bytes": 288,
+            "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b"
+          },
+          {
+            "path": "next.config.ts",
+            "bytes": 122,
+            "sha256": "0b41dce12b69d63240f2324391408b20b450c99727f049bf99d8cfcacffc79c9"
+          },
+          {
+            "path": "package.json",
+            "bytes": 581,
+            "sha256": "37cb102599381dd933c50d8568edc21d6e5ec2a36852a18427872d3bf56bfead"
+          },
+          {
+            "path": "tests/app.test.tsx",
+            "bytes": 754,
+            "sha256": "dbe0622a672ea8ae8c2de42f325cc00992209d9251c4596cff5b06515bea8aa7"
+          },
+          {
+            "path": "tests/collection.test.ts",
+            "bytes": 1074,
+            "sha256": "fc0f6b188e1034c8352e0d8b2adcd557c6312874c3cc6a9f9db524c997336c8b"
+          },
+          {
+            "path": "tsconfig.json",
+            "bytes": 646,
+            "sha256": "bd2a31e9623a9a3ea44f857a7fabe88fd382f31744951dc47d2ec664e51be56a"
+          },
+          {
+            "path": "tsconfig.tsbuildinfo",
+            "bytes": 144362,
+            "sha256": "3b5eb9da058e0746f7b60721ee3212565cf69defe4f07175eccd76b80b16abd3"
+          }
+        ],
+        "files": [
+          {
+            "path": "index.html",
+            "bytes": 243,
+            "sha256": "7d679724dd67103fad6f596d7df772994f7627dc944dc703be1ed77369f8341f"
+          },
+          {
+            "path": "app.js",
+            "bytes": 190415,
+            "sha256": "d7387a4df44b1b465d9fa99d9a03d76a630f0fe24dcc07caab4d990512fa9bd9"
+          }
+        ]
+      },
+      "root": "/workspace/.cloud-env/anascummis/app-launch/runtime-package-proof/collection/app-launch/runtimes/6d2a8aaaea9f9c5c694912a4e7766bf2714e82b3294ec07e0a19c3d024fc656d-0b32e8e8-2fe5-4c21-9348-30a43a391f83-1",
+      "acceptedSourceAndTaskUnchanged": true,
+      "deterministicSecondPreparation": true
+    },
+    {
+      "taskId": "c9430193-7086-46de-9de5-dce295ca93c5",
+      "revision": 1,
+      "kind": "collection",
+      "originalModelCalls": 2,
+      "title": "My Week",
+      "manifest": {
+        "format": "anascummis.trusted-browser-runtime.v1",
+        "id": "bed08c63ea2b50222e1812dfae8b57405e9ce52082779a70426f743393d6cfad",
+        "taskId": "c9430193-7086-46de-9de5-dce295ca93c5",
+        "revision": 1,
+        "zipSha256": "74fb91867d0d4d733e478f4e00d9ec1244d4dcbfc44ff3a31c056db02662f995",
+        "kind": "collection",
+        "title": "My Week",
+        "storageKey": "anascummis.collection.0b32e8e8-2fe5-4c21-9348-30a43a391f83",
+        "wrapperVersion": 1,
+        "reactVersion": "19.2.7",
+        "sourceFiles": [
+          {
+            "path": "BUILD-EVIDENCE.json",
+            "bytes": 2772,
+            "sha256": "852bc68df4d80c7ff6111373eb5208779bc4cbbdd727eaec08c0b458b66f9073"
+          },
+          {
+            "path": "BUILD-PROVENANCE.json",
+            "bytes": 1259,
+            "sha256": "c11600edd6a3ece66098e711c4db1fa6914a91a45fa09687ad9adc7d32a22f3a"
+          },
+          {
+            "path": "README.md",
+            "bytes": 1607,
+            "sha256": "a24e21cb0cbd0aea895ec23270d075a86bcbcbaa46fb55682bdf7f8367b45db0"
+          },
+          {
+            "path": "app/layout.tsx",
+            "bytes": 158,
+            "sha256": "51f36435e18eb03bd81e6c590823ea47735c2931112d76de87fa243e51e6b168"
+          },
+          {
+            "path": "app/page.tsx",
+            "bytes": 4430,
+            "sha256": "49f94cacd1b0a5509d5211721b4988d5b5d6c4ba30ba464b1ba3d170c4c84407"
+          },
+          {
+            "path": "bun.lock",
+            "bytes": 15635,
+            "sha256": "cc171eff287591876e4274387dc90c7bc5ccdb82de44eae0073e8946adf8f3e8"
+          },
+          {
+            "path": "lib/collection.ts",
+            "bytes": 1168,
+            "sha256": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d"
+          },
+          {
+            "path": "next-env.d.ts",
+            "bytes": 288,
+            "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b"
+          },
+          {
+            "path": "next.config.ts",
+            "bytes": 122,
+            "sha256": "0b41dce12b69d63240f2324391408b20b450c99727f049bf99d8cfcacffc79c9"
+          },
+          {
+            "path": "package.json",
+            "bytes": 581,
+            "sha256": "37cb102599381dd933c50d8568edc21d6e5ec2a36852a18427872d3bf56bfead"
+          },
+          {
+            "path": "tests/app.test.tsx",
+            "bytes": 753,
+            "sha256": "2b656daf18a9addc4bbfb92efccf88f403d2608276dd7553b2ca4641380d2d78"
+          },
+          {
+            "path": "tests/collection.test.ts",
+            "bytes": 1074,
+            "sha256": "fc0f6b188e1034c8352e0d8b2adcd557c6312874c3cc6a9f9db524c997336c8b"
+          },
+          {
+            "path": "tsconfig.json",
+            "bytes": 646,
+            "sha256": "bd2a31e9623a9a3ea44f857a7fabe88fd382f31744951dc47d2ec664e51be56a"
+          },
+          {
+            "path": "tsconfig.tsbuildinfo",
+            "bytes": 145181,
+            "sha256": "9feb36cbe3a6e985b356d9230deb40d0e185ad1e0bc7efae692aee2aec9d099b"
+          }
+        ],
+        "files": [
+          {
+            "path": "index.html",
+            "bytes": 242,
+            "sha256": "74bde09e8b0e2da11e5d9c0707b8f99e5357ac8ba9668cf1377f454cc9e21520"
+          },
+          {
+            "path": "app.js",
+            "bytes": 190414,
+            "sha256": "1c55bd788a0f306288b0f11dc67ecacab44025eaa14fb5ad180f61b4b244effe"
+          }
+        ]
+      },
+      "root": "/workspace/.cloud-env/anascummis/app-launch/runtime-package-proof/collection/app-launch/runtimes/74fb91867d0d4d733e478f4e00d9ec1244d4dcbfc44ff3a31c056db02662f995-c9430193-7086-46de-9de5-dce295ca93c5-1",
+      "acceptedSourceAndTaskUnchanged": true,
+      "deterministicSecondPreparation": true
+    }
+  ]
+}

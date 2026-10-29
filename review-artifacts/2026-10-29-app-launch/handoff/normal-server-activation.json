@@ -1,0 +1,40 @@
+{
+  "activatedAt": "2026-10-29T20:46:23.549048+00:00",
+  "deliverySource": "37044f05d7adb90bc1b1262aa690d44574c56f04",
+  "testedRuntime": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+  "oldStudioPid": 37402,
+  "newStudioPid": 50046,
+  "command": "bun core/server.ts",
+  "idleBeforeRestart": true,
+  "sameRuntimeEnvironmentPreserved": true,
+  "apiRecordsUnchanged": {
+    "/api/goals": true,
+    "/api/jobs": true,
+    "/api/software": true,
+    "/api/projects": true
+  },
+  "apiCounts": {
+    "/api/goals": 0,
+    "/api/jobs": {
+      "active": 0,
+      "history": 0
+    },
+    "/api/software": 0,
+    "/api/projects": 1
+  },
+  "modelPidUnchanged": 18848,
+  "modelStatus": {
+    "ready": true,
+    "name": "qwen3-0.6b"
+  },
+  "servedHtmlSha256": "b52f0f740867b8cdbda6258b9095ec39af4fe0e75db71737f96b1d0fc1af2799",
+  "httpSourceKit": {
+    "manifestMatches": true,
+    "archiveMatches": true,
+    "version": "bdba43c540ba410f5a81c789ef7c4987a9d9d122d30b6fb6a2dec7a85bd5e45b",
+    "sha256": "bd472344e98ed980a67df569dfe5d2189f1bdd98c8e5bc61b971989f5cc78ba1",
+    "bytes": 1831754,
+    "contentType": "application/zip"
+  },
+  "scope": "Ordinary local server activation; no public deployment/main promotion or fixture import."
+}

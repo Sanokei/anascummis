@@ -1,0 +1,64 @@
+{
+  "recordedAt": "2026-10-29T20:39:56.640986+00:00",
+  "source": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+  "sourceDirty": false,
+  "scope": "Current implementation owner gates; actual product lifecycle reports are separate. Worker/processv3 gates remain source-identical.",
+  "affectedTests": {
+    "passed": 77,
+    "failed": 0,
+    "assertions": 345,
+    "files": 10
+  },
+  "checks": [
+    {
+      "log": "layout-affected-tests.log",
+      "exitCode": 0,
+      "bytes": 9204,
+      "sha256": "3310ace0e361cf6a16d402f3d8233ca5fafcf43de8fc69442ab99ab8c8845bd9"
+    },
+    {
+      "log": "layout-frontend-typecheck.log",
+      "exitCode": 0,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "log": "layout-root-typecheck.log",
+      "exitCode": 0,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "log": "layout-production-build.log",
+      "exitCode": 0,
+      "bytes": 517,
+      "sha256": "59ca160f295e482e32030466afc53858f1d558f8a3431adf5d37f507f5d09b3b"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "app/style.css",
+      "sha256": "833eb5340736579aa03c079182677c9b49c3f97e7b309e2a3aa20bcc90d48f12"
+    },
+    {
+      "path": "components/SoftwareLaunch.tsx",
+      "sha256": "32ea940a77ae114b6f9ddac858f68c01b15236a7539f965891fa245fd3ea4452"
+    },
+    {
+      "path": "core/software-api.ts",
+      "sha256": "58385ad6892051714fc333aeffc4b48ca03a8f16c4e6204f4d7daa9a9f6c765c"
+    },
+    {
+      "path": "core/software-launch.ts",
+      "sha256": "fb356eef5f2e7f88b8782f3afbee2a4d634cb0ab0c82eca5b2e44e8a49c34714"
+    },
+    {
+      "path": "tests/software-launch.test.ts",
+      "sha256": "adc729ca7f0c6c09598ad367e284e021b6353edec2e7f09e43c6d8b02431563e"
+    },
+    {
+      "path": "scripts/e2e/app-launch.mjs",
+      "sha256": "a2f86c3e965cd8554d6d5722a2218a8c3ba0c6ff0f50547a2f3116bca743f57f"
+    }
+  ]
+}

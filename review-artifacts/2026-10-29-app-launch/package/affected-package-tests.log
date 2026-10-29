@@ -1,0 +1,15 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/app-launch-package.test.ts:
+(pass) stored ZIP reader accounts for every path and CRC, rejecting duplicates, traversal, compression, links and trailing data [9.98ms]
+(pass) counter recognition requires exact known Page/layout, matching current browser contract and full-revision checks [2.20ms]
+(pass) collection recognition retains the accepted key and refuses custom code or forged provenance [2.66ms]
+(pass) incomplete, stale and unchecked builds remain unsupported before any preparation [3.25ms]
+(pass) explicit preparation uses exact ZIP code, is deterministic, and does not mutate accepted source or install dependencies [188.24ms]
+(pass) poisoned bundle and self-consistent forged cache metadata cannot attest a runtime; accepted ZIP remains intact [140.03ms]
+(pass) missing dependencies, changed archive, linked files and cancellation fail without silent repair [49.57ms]
+
+ 7 pass
+ 0 fail
+ 33 expect() calls
+Ran 7 tests across 1 file. [470.00ms]

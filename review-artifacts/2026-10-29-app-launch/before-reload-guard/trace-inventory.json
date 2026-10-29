@@ -1,0 +1,41 @@
+{
+  "scope": "Four final redacted trace ZIPs remain local, with their integrity/redaction checked. They are not distributed in this review payload.",
+  "traces": [
+    {
+      "path": "collection-desktop/trace.zip",
+      "bytes": 44512795,
+      "sha256": "912b54e1a6e5f944573116ac582a807670d797d6858f0e6c0b68eb88dfc87ac7",
+      "entries": 1148,
+      "jsonlRecords": 3754,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "collection-narrow/trace.zip",
+      "bytes": 62762502,
+      "sha256": "36ba7d1c584abb285bab8b210a331b879355f09310ecee9aca7ec5a76f68cd18",
+      "entries": 1288,
+      "jsonlRecords": 4250,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "counter-desktop/trace.zip",
+      "bytes": 22560806,
+      "sha256": "2988b9a2d8052994452ee4609b22ede8d743ec6f7b32acf61b4dfc599b63ce7c",
+      "entries": 443,
+      "jsonlRecords": 1530,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    },
+    {
+      "path": "counter-narrow/trace.zip",
+      "bytes": 26501333,
+      "sha256": "e07a2134c5ec0768e2566ef4a75a76f6ed5e525fb0bb41955d8c6cbd390b3349",
+      "entries": 418,
+      "jsonlRecords": 1917,
+      "headersAndCookiesRedacted": true,
+      "pairingValueAbsent": true
+    }
+  ]
+}

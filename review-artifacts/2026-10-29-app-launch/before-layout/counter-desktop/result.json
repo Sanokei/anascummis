@@ -1,0 +1,541 @@
+{
+  "id": "in-window-counter",
+  "viewport": "desktop",
+  "startedAt": "2026-10-29T20:24:26.940Z",
+  "status": "failed",
+  "artifactDirectory": "counter-desktop",
+  "lane": "actual-previously-native-generated-checkpoint",
+  "goal": "Use an accepted counter inside Software work through pointer/touch and keyboard, Stop it, and reopen the same checked app.",
+  "assertions": [
+    {
+      "name": "A valid paired-online key still cannot launch locally; unknown Start command fields are rejected without changing launch state.",
+      "passed": true,
+      "statuses": [
+        403,
+        403,
+        400
+      ]
+    },
+    {
+      "name": "Only a visible Start creates the product-managed trusted runtime, pinned to accepted ZIP/source and a separate origin.",
+      "passed": true,
+      "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "lineageId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "supported": true,
+      "state": "running",
+      "message": "App is running. Closing this window leaves it running; Stop app ends this session and keeps browser data.",
+      "updated": 1793305469295,
+      "activeTaskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "revision": 1,
+      "zipSha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+      "port": 35581,
+      "origin": "http://127.0.0.1:35581",
+      "launchId": "2e15c4d3-1ec9-49d4-9b8a-32439993df66",
+      "created": 1793305469138,
+      "kind": "counter",
+      "title": "Bakery Orders",
+      "runtimeId": "1e640b34c14f743300a8c79e9efd2ea219055e03d5f88dc4ce6c78a37424fa81",
+      "processId": 46452,
+      "startedAt": 1793305469241
+    },
+    {
+      "name": "A dropped real Start response is inspected through GET; the saved launch is not replayed or duplicated.",
+      "passed": true,
+      "transport": "The real host accepted Start; only its browser response was deliberately dropped."
+    },
+    {
+      "name": "A second Studio attempt on the same data/address fails its bind without interrupting or relabelling the original running app.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-checked-build-explicit-start.png",
+    "02-unconfirmed-start-inspect-before-retry.png",
+    "03-inspect-accepted-runtime-identity.png",
+    "04-counter-reset-keyboard-feedback.png",
+    "05-failure.png"
+  ],
+  "apiMutations": [
+    {
+      "path": "/api/software/3df01946-1359-4e9f-8036-ec02ed037b09/launch/start",
+      "time": "2026-10-29T20:24:29.120Z"
+    }
+  ],
+  "pageErrors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/css/16504bb1ea984a55.css",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/app/page-1d23a35d558609dd.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/status",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/projects",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/jobs",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/goals",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/projects/a8c06501-4e98-48c0-be79-ec86ed8a5cd1",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/assets",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software/3df01946-1359-4e9f-8036-ec02ed037b09/screenshots/revision-1.png",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software/3df01946-1359-4e9f-8036-ec02ed037b09/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software/3df01946-1359-4e9f-8036-ec02ed037b09/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software/3df01946-1359-4e9f-8036-ec02ed037b09/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35581",
+      "path": "/",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:35581",
+      "path": "/app.js",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software/3df01946-1359-4e9f-8036-ec02ed037b09/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software/3df01946-1359-4e9f-8036-ec02ed037b09/launch",
+      "blocked": false
+    },
+    {
+      "method": "GET",
+      "origin": "http://127.0.0.1:34509",
+      "path": "/api/software",
+      "blocked": false
+    }
+  ],
+  "processes": [
+    {
+      "pid": 46393,
+      "port": 34509,
+      "command": "bun core/server.ts",
+      "startedAt": "2026-10-29T20:24:26.998Z"
+    },
+    {
+      "duplicateStudioPid": 46460,
+      "exitCode": 1,
+      "rejectedOccupiedBind": true,
+      "originalAppProcessId": 46452
+    }
+  ],
+  "downloads": [],
+  "mainNavigations": [
+    {
+      "url": "http://127.0.0.1:34509/",
+      "time": "2026-10-29T20:24:27.273Z"
+    },
+    {
+      "url": "http://127.0.0.1:34509/",
+      "time": "2026-10-29T20:24:27.471Z"
+    }
+  ],
+  "limitations": [
+    "This launches copied, previously native-generated accepted work; it is not fresh inference or arbitrary model-written server execution.",
+    "Fixed trusted React browser runtime executes exact accepted client Page code; this is not the packaged Next server.",
+    "Existing matching dependencies are reused; no online installation, native OS or physical handset/voice pass."
+  ],
+  "fixture": {
+    "source": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data",
+    "copiedToOwnedData": true,
+    "excludedBuildCaches": true,
+    "dependencies": [
+      {
+        "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+        "existingDependencyTree": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/node_modules",
+        "packages": {
+          "react": {
+            "version": "19.2.7",
+            "packageSha256": "51966ae9c8c377ff592b5d69c980966992101bc6791bf83a1e5c7ad9bcefa7f4"
+          },
+          "react-dom": {
+            "version": "19.2.7",
+            "packageSha256": "447acd72cdb6a966d9db967729e286e7cbb4a09ea61fddd45e12c2a97fd4cfb6"
+          }
+        }
+      }
+    ]
+  },
+  "acceptedBefore": {
+    "3df01946-1359-4e9f-8036-ec02ed037b09": {
+      "id": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "goal": "Build a small counter application with heading Bakery Orders, a count starting at zero, an Increment button that adds one, and a Reset button that returns to zero. Include browser checks and give me the source ZIP.",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "requirements": [
+        {
+          "id": "counter",
+          "description": "Render zero, increment to one then two, return to zero with the Reset button and increment again, and reset to zero after reload. Show the exact heading \"Bakery Orders\".",
+          "status": "verified",
+          "files": [
+            "app/page.tsx"
+          ],
+          "tests": [
+            "tests/app.test.tsx"
+          ],
+          "reviewRevision": 1,
+          "note": "Bounded counter skill acceptance: Production app loaded; real browser screenshot and DOM captured. counter acceptance passed: 0 → 1 → 2, Reset → 0, Increment → 1, reload → 0; exact heading \"Bakery Orders\""
+        }
+      ],
+      "events": [
+        {
+          "time": 1793302037665,
+          "phase": "typecheck",
+          "detail": "Running typecheck.",
+          "revision": 1
+        },
+        {
+          "time": 1793302038926,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793302038978,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793302065344,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793302068192,
+          "phase": "install",
+          "detail": "Running install.",
+          "revision": 1
+        },
+        {
+          "time": 1793302068198,
+          "phase": "typecheck",
+          "detail": "Running typecheck.",
+          "revision": 1
+        },
+        {
+          "time": 1793302069903,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793302069955,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793302093399,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793302096050,
+          "phase": "source_zip",
+          "detail": "Running source_zip.",
+          "revision": 1
+        },
+        {
+          "time": 1793302124031,
+          "phase": "packaging",
+          "detail": "Packaging checked source ZIP.",
+          "revision": 1
+        },
+        {
+          "time": 1793302124058,
+          "phase": "completed",
+          "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+          "revision": 1
+        }
+      ],
+      "created": 1793302032950,
+      "updated": 1793302124058,
+      "calls": 1,
+      "errors": 0,
+      "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+      "milestoneMs": [],
+      "milestoneStarted": 1793302032950,
+      "planOffset": 0,
+      "planningDone": true,
+      "targets": [
+        "zip"
+      ],
+      "counterContract": true,
+      "lastProgressCall": 1,
+      "evidence": {
+        "revision": 1,
+        "checks": [
+          {
+            "id": "install",
+            "ok": true,
+            "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [2.00ms]\n",
+            "milliseconds": 4
+          },
+          {
+            "id": "typecheck",
+            "ok": true,
+            "detail": "",
+            "milliseconds": 1703
+          },
+          {
+            "id": "tests",
+            "ok": true,
+            "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested numeric screen renders its exact heading and accessible controls [8.95ms]\n\n 1 pass\n 0 fail\n 5 expect() calls\nRan 1 test across 1 file. [44.00ms]\n",
+            "milliseconds": 47
+          },
+          {
+            "id": "build",
+            "ok": true,
+            "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 23ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1489ms\n  Running TypeScript ...\n  Finished TypeScript in 1347ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 197ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+            "milliseconds": 23435
+          },
+          {
+            "id": "browser",
+            "ok": true,
+            "detail": "Production app loaded; real browser screenshot and DOM captured. counter acceptance passed: 0 → 1 → 2, Reset → 0, Increment → 1, reload → 0; exact heading \"Bakery Orders\"",
+            "milliseconds": 2651
+          },
+          {
+            "id": "source_zip",
+            "ok": true,
+            "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+            "milliseconds": 27978
+          }
+        ],
+        "dom": "Bakery Orders\n\nIncrement adds 1 each time.\n\nCount\n0\nIncrement\nReset\n\nReady when you are.\n\nReloading starts again at 0.",
+        "artifacts": [
+          {
+            "kind": "zip",
+            "name": "source.zip",
+            "sha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+            "bytes": 170945,
+            "smokeTested": true
+          }
+        ],
+        "headings": [
+          "Bakery Orders"
+        ],
+        "screenshot": "revision-1.png",
+        "browserContract": {
+          "kind": "counter",
+          "label": "Count",
+          "button": "Increment",
+          "heading": "Bakery Orders",
+          "resetButton": "Reset"
+        }
+      }
+    }
+  },
+  "rejectedApiGuards": [
+    {
+      "method": "GET",
+      "contract": "paired-online launch",
+      "status": 403,
+      "error": "Open the local Studio window before using this action"
+    },
+    {
+      "method": "POST",
+      "contract": "paired-online launch",
+      "status": 403,
+      "error": "Open the local Studio window before using this action"
+    },
+    {
+      "method": "POST",
+      "contract": "nonempty Start body",
+      "status": 400,
+      "error": "App launch takes no commands or runtime arguments"
+    }
+  ],
+  "firstLaunch": {
+    "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+    "lineageId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+    "supported": true,
+    "state": "running",
+    "message": "App is running. Closing this window leaves it running; Stop app ends this session and keeps browser data.",
+    "updated": 1793305469295,
+    "activeTaskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+    "revision": 1,
+    "zipSha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+    "port": 35581,
+    "origin": "http://127.0.0.1:35581",
+    "launchId": "2e15c4d3-1ec9-49d4-9b8a-32439993df66",
+    "created": 1793305469138,
+    "kind": "counter",
+    "title": "Bakery Orders",
+    "runtimeId": "1e640b34c14f743300a8c79e9efd2ea219055e03d5f88dc4ce6c78a37424fa81",
+    "processId": 46452,
+    "startedAt": 1793305469241
+  },
+  "reason": "locator.innerText: Error: strict mode violation: getByRole('status') resolved to 2 elements:\n    1) <output aria-live=\"off\" id=\"counter-value\" aria-label=\"Count\">0</output> aka getByRole('status', { name: 'Count' })\n    2) <p role=\"status\" aria-live=\"polite\" aria-atomic=\"true\" class=\"counter-feedback\">…</p> aka getByRole('status').filter({ hasText: 'Reset: Count is' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('status')\u001b[22m\n\n    at runCase (/workspace/anascummis/apps/studio/scripts/e2e/app-launch.mjs:328:110)\n    at async runAppLaunchSuite (/workspace/anascummis/apps/studio/scripts/e2e/app-launch.mjs:379:109)\n    at async main (/workspace/anascummis/apps/studio/scripts/e2e/app-launch.mjs:400:89)",
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T20:24:34.225Z",
+  "goalAchieved": false
+}

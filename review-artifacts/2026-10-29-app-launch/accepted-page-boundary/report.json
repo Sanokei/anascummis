@@ -1,0 +1,75 @@
+{
+  "scope": "Actual accepted native-generated Page code compiled into the host-owned browser runtime, in an isolated iframe host. No product UI, new inference, app server, installation, or native OS claim.",
+  "checks": [
+    {
+      "title": "My Tasks",
+      "actualPageLoaded": true,
+      "itemsPreserved": [
+        "Repeated task",
+        "Keep me"
+      ],
+      "boundary": {
+        "requests": 4,
+        "credentialRequests": 4,
+        "sanitizedCredentialRequests": 0,
+        "responseCookieHeaders": 0,
+        "rejectedRequests": 0
+      }
+    },
+    {
+      "title": "My Week",
+      "actualPageLoaded": true,
+      "itemsPreserved": [
+        "Repeated task",
+        "Keep me"
+      ],
+      "boundary": {
+        "requests": 2,
+        "credentialRequests": 2,
+        "sanitizedCredentialRequests": 0,
+        "responseCookieHeaders": 0,
+        "rejectedRequests": 0
+      }
+    },
+    {
+      "title": "Bakery Orders",
+      "actualPageLoaded": true,
+      "values": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "boundary": {
+        "requests": 2,
+        "credentialRequests": 2,
+        "sanitizedCredentialRequests": 0,
+        "responseCookieHeaders": 0,
+        "rejectedRequests": 0
+      }
+    }
+  ],
+  "runtimeIds": [
+    {
+      "taskId": "0b32e8e8-2fe5-4c21-9348-30a43a391f83",
+      "zipSha256": "6d2a8aaaea9f9c5c694912a4e7766bf2714e82b3294ec07e0a19c3d024fc656d",
+      "runtimeId": "386de80c3e8a3baf22816374d5040da812cf8d560c564cb787f64974a2ea0fdf",
+      "pid": 41641
+    },
+    {
+      "taskId": "c9430193-7086-46de-9de5-dce295ca93c5",
+      "zipSha256": "74fb91867d0d4d733e478f4e00d9ec1244d4dcbfc44ff3a31c056db02662f995",
+      "runtimeId": "bed08c63ea2b50222e1812dfae8b57405e9ce52082779a70426f743393d6cfad",
+      "pid": 41654
+    },
+    {
+      "taskId": "554c2f10-ce13-412e-899e-dcf844f17994",
+      "zipSha256": "e3a84cb69e8c978e77a876f1a09a773a8b8edabca1e1478f477fd88948d40845",
+      "runtimeId": "cdb1c97536b0c7c6bd0a9ec4117126aee9b237e82b46c761a4b9ed4d4132b0b3",
+      "pid": 41665
+    }
+  ],
+  "pageErrors": [],
+  "sourceRuntimeFilesUnchanged": true,
+  "status": "passed"
+}

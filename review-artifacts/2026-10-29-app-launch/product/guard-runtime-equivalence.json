@@ -1,0 +1,31 @@
+{
+  "preGuardSource": "32bbce6888a1902e4f8dfec0ae4832c84ba02cad",
+  "guardedSource": "ade3e43479654e60415876ba681d965c5a8ff296",
+  "scope": "The guard changes host UI navigation eligibility; accepted client Page/ZIP/runtime bytes remain identical. No app/model regeneration occurred.",
+  "cases": [
+    {
+      "case": "collection-desktop",
+      "runtimeId": "e1d696a094bc48e36fede8f0203b2b5655449aa373be8a1e2700f6e6179b7e07",
+      "acceptedZipSha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "clientRuntimeUnchanged": true
+    },
+    {
+      "case": "collection-narrow",
+      "runtimeId": "e1d696a094bc48e36fede8f0203b2b5655449aa373be8a1e2700f6e6179b7e07",
+      "acceptedZipSha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "clientRuntimeUnchanged": true
+    },
+    {
+      "case": "counter-desktop",
+      "runtimeId": "1e640b34c14f743300a8c79e9efd2ea219055e03d5f88dc4ce6c78a37424fa81",
+      "acceptedZipSha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+      "clientRuntimeUnchanged": true
+    },
+    {
+      "case": "counter-narrow",
+      "runtimeId": "1e640b34c14f743300a8c79e9efd2ea219055e03d5f88dc4ce6c78a37424fa81",
+      "acceptedZipSha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+      "clientRuntimeUnchanged": true
+    }
+  ]
+}

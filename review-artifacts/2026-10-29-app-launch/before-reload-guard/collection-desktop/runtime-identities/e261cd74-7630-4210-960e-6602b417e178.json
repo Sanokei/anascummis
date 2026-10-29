@@ -1,0 +1,96 @@
+{
+  "format": "anascummis.trusted-browser-runtime.v1",
+  "id": "e1d696a094bc48e36fede8f0203b2b5655449aa373be8a1e2700f6e6179b7e07",
+  "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+  "revision": 1,
+  "zipSha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+  "kind": "collection",
+  "title": "My Tasks",
+  "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+  "wrapperVersion": 1,
+  "reactVersion": "19.2.7",
+  "sourceFiles": [
+    {
+      "path": "BUILD-EVIDENCE.json",
+      "bytes": 2776,
+      "sha256": "9d0a25efc914822712fcbe94bc3bd50df30e993818fad626836edd6e514023dc"
+    },
+    {
+      "path": "BUILD-PROVENANCE.json",
+      "bytes": 1260,
+      "sha256": "3183a36bf30c163c6b83a65b1a7534d7b735f13602abca78bcbfbb09db1da722"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1608,
+      "sha256": "d6cd8bbaed7e901cafdb1ccb49762abfc1868e6272821061d692698312ec117a"
+    },
+    {
+      "path": "app/layout.tsx",
+      "bytes": 158,
+      "sha256": "51f36435e18eb03bd81e6c590823ea47735c2931112d76de87fa243e51e6b168"
+    },
+    {
+      "path": "app/page.tsx",
+      "bytes": 4431,
+      "sha256": "31a10f64832dde9d31cb8327e0eb2c897706dd7de5c0967be30332cba3ba3640"
+    },
+    {
+      "path": "bun.lock",
+      "bytes": 15635,
+      "sha256": "cc171eff287591876e4274387dc90c7bc5ccdb82de44eae0073e8946adf8f3e8"
+    },
+    {
+      "path": "lib/collection.ts",
+      "bytes": 1168,
+      "sha256": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d"
+    },
+    {
+      "path": "next-env.d.ts",
+      "bytes": 288,
+      "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b"
+    },
+    {
+      "path": "next.config.ts",
+      "bytes": 122,
+      "sha256": "0b41dce12b69d63240f2324391408b20b450c99727f049bf99d8cfcacffc79c9"
+    },
+    {
+      "path": "package.json",
+      "bytes": 581,
+      "sha256": "37cb102599381dd933c50d8568edc21d6e5ec2a36852a18427872d3bf56bfead"
+    },
+    {
+      "path": "tests/app.test.tsx",
+      "bytes": 754,
+      "sha256": "db2a3402a821120033664c39a8d04972d9038de0dfd8c0f3c0e9828a8215c2d8"
+    },
+    {
+      "path": "tests/collection.test.ts",
+      "bytes": 1074,
+      "sha256": "fc0f6b188e1034c8352e0d8b2adcd557c6312874c3cc6a9f9db524c997336c8b"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 646,
+      "sha256": "bd2a31e9623a9a3ea44f857a7fabe88fd382f31744951dc47d2ec664e51be56a"
+    },
+    {
+      "path": "tsconfig.tsbuildinfo",
+      "bytes": 144362,
+      "sha256": "9a246f86714ad4058e92d15a2ff31978e91ebe850776d6e3e22d8052e80c0160"
+    }
+  ],
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 243,
+      "sha256": "7d679724dd67103fad6f596d7df772994f7627dc944dc703be1ed77369f8341f"
+    },
+    {
+      "path": "app.js",
+      "bytes": 190415,
+      "sha256": "3f36f06bb5d866e9eade62fbf9a78814476a8880188dea09cfe5349f84b63fc1"
+    }
+  ]
+}
