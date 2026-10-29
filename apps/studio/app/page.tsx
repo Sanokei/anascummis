@@ -55,7 +55,7 @@ export default function Anascummis(){
   const [openSurfaces,setOpenSurfaces]=useState<PreviewKind[]>([]);
   function setSurface(next:PreviewKind|null){if(next)setHiddenPanels(current=>new Set([...current].filter(id=>id!=='preview-'+next)));selectSurface(next);setOpenSurfaces(current=>next?current.includes(next)?current:[...current,next]:current.filter(p=>p!==surface));}
   const [backgroundTasks,setBackgroundTasks]=useState<BackgroundTask[]>([]),taskControls=useRef(new Map<string,{control:AbortController;jobId?:string}>());
-  const textInput=useRef<HTMLTextAreaElement|null>(null),spaceTime=useRef<number|null>(null),dragDepth=useRef(0);
+  const textInput=useRef<HTMLTextAreaElement|null>(null),textPanel=useRef<HTMLFormElement|null>(null),textTrigger=useRef<HTMLButtonElement|null>(null),spaceTime=useRef<number|null>(null),dragDepth=useRef(0);
   const [local,setLocal]=useState(false),[workspaceReady,setWorkspaceReady]=useState(false),[state,setState]=useState<OrbState>('idle'),[level,setLevel]=useState(0),[status,setStatus]=useState('Touch the orb to talk, or type a message.'),[caption,setCaption]=useState(''),[site,setSite]=useState<Site>(initialSite),[assets,setAssets]=useState<Asset[]>([]),[doc,setDoc]=useState<Doc|null>(null),[video,setVideo]=useState<{id:string;name:string;projectId?:string}|null>(null),[timeline,setTimeline]=useState<string|null>(null),[surface,selectSurface]=useState<PreviewKind|null>(null),[size,setSize]=useState(300),[reduced,setReduced]=useState(false);
   const timings=useRef<Record<string,number>>({}),[lastTiming,setLastTiming]=useState<Record<string,number>>({});
   const mic=useRef<Microphone|null>(null),conversation=useRef(false),warm=useRef<Promise<void>|null>(null),history=useRef<{role:string;content:string}[]>([]);
@@ -67,10 +67,17 @@ export default function Anascummis(){
   function writeDraft(text:string){draftRef.current=text;draftVersion.current++;setDraft(text);}
   function setDraftRecovery(value:RecoveredRequest|undefined){recoveredRequestRef.current=value;setRecoveredRequest(value);setRecoveryResearch(false);}
   function setDocument(value:Doc|null){documentRef.current=value;setDoc(value);}
-  function openText(){setTextOpen(true);requestAnimationFrame(()=>{textInput.current?.focus();textInput.current?.scrollIntoView({block:'center',behavior:'smooth'});});}
+  function openText(){setTextOpen(true);requestAnimationFrame(()=>{textInput.current?.focus({preventScroll:true});textInput.current?.scrollIntoView({block:'nearest'});});}
+  function closeText(){setTextOpen(false);requestAnimationFrame(()=>textTrigger.current?.focus({preventScroll:true}));}
   function openSetup(){setSetupRequest(current=>current+1);}
   function openWorkHistory(){setWorkOpen(true);raisePanel('background-work');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='background-work')));}
-  function inspectUnconfirmed(){if(failedDraft&&softwareRequested(failedDraft.text)){setSoftwareOpen(true);raisePanel('software-work');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='software-work')));}else if(failedDraft&&/^\s*(?:please\s+)?(?:plan|pursue|start|work on)\s+(?:this |a |my )?(?:goal|long task)\s*:/i.test(failedDraft.text)){setGoalsOpen(true);raisePanel('coordinated-goals');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='coordinated-goals')));}else openWorkHistory();}
+  function inspectUnconfirmed(){
+    setTextOpen(false);let target='.work-journal';
+    if(failedDraft&&softwareRequested(failedDraft.text)){target='.software-panel';setSoftwareOpen(true);raisePanel('software-work');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='software-work')));}
+    else if(failedDraft&&/^\s*(?:please\s+)?(?:plan|pursue|start|work on)\s+(?:this |a |my )?(?:goal|long task)\s*:/i.test(failedDraft.text)){target='.goal-panel';setGoalsOpen(true);raisePanel('coordinated-goals');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='coordinated-goals')));}
+    else openWorkHistory();
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{const panel=document.querySelector<HTMLElement>(target);if(panel){panel.tabIndex=-1;panel.focus({preventScroll:true});}else textTrigger.current?.focus({preventScroll:true});}));
+  }
   async function checkRuntime(){
     if(location.hostname!=='127.0.0.1')return;
     readinessCheck.current.control?.abort();const control=new AbortController(),id=readinessCheck.current.id+1;readinessCheck.current={id,control};
@@ -99,10 +106,25 @@ export default function Anascummis(){
     const resize=()=>setSize(Math.max(160,Math.round(Math.min(innerWidth*.65,innerHeight*.48,360))));resize();window.addEventListener('resize',resize);setReduced(matchMedia('(prefers-reduced-motion: reduce)').matches);
     void (async()=>{try{if(isLocal){const projects=await api('/projects',undefined,initialize.signal),current=projects.length?await api('/projects/'+projects[0].id,undefined,initialize.signal):await api('/projects',{name:'My business'},initialize.signal),loadedAssets=await api('/assets',undefined,initialize.signal),builds=await api('/software',undefined,initialize.signal);if(initialize.signal.aborted)return;project.current=current;setSite(current.site);setAssets(loadedAssets);if(builds.length)setSoftwareOpen(true);}else{const raw=localStorage.getItem('anascummis.demo.site');if(raw)setSite(validateSite(JSON.parse(raw)));}if(initialize.signal.aborted)return;setWorkspaceReady(true);void warmLocalVoice(isLocal,initialize.signal).catch(()=>{});}catch(e){if(!initialize.signal.aborted)setStatus(String(e));}})();
     if(location.hash.startsWith('#goal='))setPeersOpen(true);
-    const key=(e:KeyboardEvent)=>{const target=e.target as HTMLElement;if(document.querySelector('dialog.download-local-dialog[open]')||target?.closest('.download-local-trigger')){spaceTime.current=null;return;}if(e.key==='Escape'){setTextOpen(false);spaceTime.current=null;stop();}if(e.code!=='Space'||e.repeat||e.altKey||e.ctrlKey||e.metaKey)return;if(target?.closest('input,textarea,select,button,summary,a[href],[role="button"],[role="link"],[tabindex]:not([tabindex="-1"]),[contenteditable="true"]')){spaceTime.current=null;return;}e.preventDefault();e.stopPropagation();const now=performance.now();if(spaceTime.current!==null&&now-spaceTime.current<=450){spaceTime.current=null;openText();}else spaceTime.current=now;};window.addEventListener('keydown',key,true);
+    const key=(e:KeyboardEvent)=>{const target=e.target as HTMLElement;if(document.querySelector('dialog.download-local-dialog[open]')||target?.closest('.download-local-trigger')){spaceTime.current=null;return;}if(e.key==='Escape'){spaceTime.current=null;if(textPanel.current){e.preventDefault();e.stopPropagation();closeText();return;}setTextOpen(false);stop();}if(e.code!=='Space'||e.repeat||e.altKey||e.ctrlKey||e.metaKey)return;if(target?.closest('input,textarea,select,button,summary,a[href],[role="button"],[role="link"],[tabindex]:not([tabindex="-1"]),[contenteditable="true"]')){spaceTime.current=null;return;}e.preventDefault();e.stopPropagation();const now=performance.now();if(spaceTime.current!==null&&now-spaceTime.current<=450){spaceTime.current=null;openText();}else spaceTime.current=now;};window.addEventListener('keydown',key,true);
     const progress=(e:Event)=>{if(!busy.current)setStatus((e as CustomEvent<string>).detail);};window.addEventListener('anascummis-model-progress',progress);
     return()=>{mounted.current=false;initialize.abort();readinessCheck.current.control?.abort();contextLoad.current?.abort();voiceAttemptId.current++;warm.current=null;window.removeEventListener('resize',resize);window.removeEventListener('keydown',key,true);window.removeEventListener('anascummis-model-progress',progress);controller.current?.abort();for(const task of taskControls.current.values())task.control.abort();stopVoice();stopBrowserModel();mic.current?.close();source.current?.stop();player.current?.pause();void audio.current?.close();};
   },[]);
+  useEffect(()=>{
+    if(!textOpen)return;
+    const panel=textPanel.current,viewport=window.visualViewport;let frame:number|undefined;
+    function fit(){
+      frame=undefined;if(!panel)return;
+      // A phone keyboard may shrink only the visual viewport, leaving CSS viewport units unchanged.
+      const width=viewport?.width||innerWidth,height=viewport?.height||innerHeight;
+      panel.style.setProperty('--composer-viewport-width',width+'px');panel.style.setProperty('--composer-viewport-height',height+'px');
+      panel.style.setProperty('--composer-bottom-offset',Math.max(0,innerHeight-height-(viewport?.offsetTop||0))+'px');
+      panel.style.setProperty('--composer-right-offset',Math.max(0,innerWidth-width-(viewport?.offsetLeft||0))+'px');
+    }
+    function schedule(){if(frame!==undefined)cancelAnimationFrame(frame);frame=requestAnimationFrame(fit);}
+    fit();viewport?.addEventListener('resize',schedule);viewport?.addEventListener('scroll',schedule);window.addEventListener('resize',schedule);
+    return()=>{if(frame!==undefined)cancelAnimationFrame(frame);viewport?.removeEventListener('resize',schedule);viewport?.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
+  },[textOpen]);
   useEffect(()=>{if(!local)return;const control=new AbortController();void api('/jobs?limit=1',undefined,control.signal).then(page=>{if(!control.signal.aborted&&(page.active.length||page.history.length))setWorkOpen(true);}).catch(()=>{});void api('/goals',undefined,control.signal).then(goals=>{if(!control.signal.aborted&&Array.isArray(goals)&&goals.length)setGoalsOpen(true);}).catch(()=>{});return()=>control.abort();},[local]);
   function stop(){conversation.current=false;micCancelled.current=true;controller.current?.abort();try{source.current?.stop();}catch{}source.current=null;player.current?.pause();mic.current?.close();recording.current=false;if(job.current)void api('/jobs/'+job.current+'/stop',{}).catch(()=>{});busy.current=false;setLevel(0);setState('idle');setStatus('Stopped. Touch the orb to talk.');}
   function prepareVoice(signal:AbortSignal){if(!local)warmBrowserModel();return warmLocalVoice(local,signal);}
@@ -305,28 +327,35 @@ export default function Anascummis(){
       <button className="orb-control" aria-label={state==='listening'?'Finish speaking':busy.current?'Stop Anascummis':'Talk to Anascummis'} disabled={!workspaceReady} onClick={()=>void toggleOrb()}><Orb state={state} level={level} reducedMotion={reduced} size={size}/></button>
       {dragging&&<div className="drop-hint" role="status">Drop your files here</div>}
       <p role="status" className="voice-status">{visibleStatus}</p>
-      <button className="type-message-button" type="button" aria-expanded={textOpen} aria-controls="orb-composer" onClick={openText}>Type a message</button>
-      {textOpen&&<div className="typed-entry">
-        <form id="orb-composer" className="text-composer" onSubmit={event=>{event.preventDefault();void sendText();}}>
-          <label className="sr-only" htmlFor="orb-text">Message Anascummis</label>
-          <textarea id="orb-text" ref={textInput} value={draft} onChange={event=>writeDraft(event.target.value)} placeholder="Tell me what you need…" autoComplete="off" maxLength={8000} rows={3} onKeyDown={event=>{if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)&&!event.nativeEvent.isComposing){event.preventDefault();void sendText();}}}/>
-          <button type="submit" disabled={!draft.trim()||!workspaceReady||sendingText||stagingRequest} aria-label="Send message">{sendingText?'…':'↑'}</button>
-          <button type="button" aria-label="Close text input" onClick={()=>setTextOpen(false)}>×</button>
-        </form>
-        <p className="composer-hint">Enter adds a line. Send or Ctrl/Command+Enter submits.</p>
-        {recoveredRequest&&<div className="request-context">
-          <p>{recoveredRequest.unconfirmed?'A previous submission was not confirmed. Inspect saved work before sending again.':'Editing a saved request in its original website'+(recoveredRequest.context.documentId?' and PDF':'')+'. Send starts a new run; review earlier changes first.'}</p>
-          <label><input type="checkbox" checked={recoveryResearch} onChange={event=>setRecoveryResearch(event.target.checked)}/>Allow public web research for this new request</label>
-          <small>Research is off unless you enable it here. Saved private details are not restored.</small>
-        </div>}
-      </div>}
-      {failedDraft&&<aside className="request-recovery">
-        <p>Submission was not confirmed. It may have started. Inspect saved work before sending again.</p>
-        <details><summary>Kept message</summary><pre>{failedDraft.text}</pre><p>{failedDraft.message}</p></details>
-        <button type="button" disabled={stagingRequest||sendingText} onClick={()=>void editFailedDraft()}>Edit unconfirmed message</button>
-        <button type="button" onClick={inspectUnconfirmed}>Inspect saved work</button>
-        <button type="button" onClick={()=>setFailedDraft(undefined)}>Dismiss notice</button>
-      </aside>}
+      <button ref={textTrigger} className="type-message-button" type="button" aria-label="Type a message" aria-describedby={failedDraft?'composer-kept-status':undefined} aria-expanded={textOpen} aria-controls="orb-composer" onClick={openText}>Type a message{failedDraft&&<span id="composer-kept-status" className="composer-kept-status">Message kept</span>}</button>
+      {textOpen&&<form ref={textPanel} id="orb-composer" className="typed-entry composer-panel" aria-label="Message composer" onBlur={event=>{if(event.relatedTarget&&!event.currentTarget.contains(event.relatedTarget))setTextOpen(false);}} onSubmit={event=>{event.preventDefault();void sendText();}}>
+        <header className="composer-header">
+          <h2>{failedDraft?'Review kept message':recoveredRequest?'Review saved request':'Message'}</h2>
+          <button type="button" aria-label="Close text input" onClick={closeText}>Close</button>
+        </header>
+        <div className="composer-scroll">
+          <div className="text-composer">
+            <label className="sr-only" htmlFor="orb-text">Message Anascummis</label>
+            <textarea id="orb-text" ref={textInput} value={draft} onChange={event=>writeDraft(event.target.value)} placeholder="Tell me what you need…" aria-describedby="composer-hint" autoComplete="off" maxLength={8000} rows={3} onKeyDown={event=>{if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)&&!event.nativeEvent.isComposing){event.preventDefault();void sendText();}}}/>
+          </div>
+          <p id="composer-hint" className="composer-hint">Enter adds a line. Send or Ctrl/Command+Enter submits.</p>
+          {recoveredRequest&&<div className="request-context">
+            <p>Original website{recoveredRequest.context.documentId?' and PDF':''} selected. {recoveredRequest.unconfirmed?'Review the kept message before sending again.':'Send starts a new run; review saved changes first.'}</p>
+            <label><input type="checkbox" checked={recoveryResearch} onChange={event=>setRecoveryResearch(event.target.checked)} onKeyDown={event=>{if(event.key==='Enter')event.preventDefault();}}/>Allow public web research for this new request</label>
+            <small>Saved private details are not restored.</small>
+          </div>}
+          {failedDraft&&<aside className="request-recovery" aria-label="Unconfirmed delivery">
+            <p>Submission was not confirmed. It may have started. Inspect saved work before sending again.</p>
+            <details><summary>Kept message</summary><pre>{failedDraft.text}</pre><p>{failedDraft.message}</p></details>
+            <button type="button" disabled={stagingRequest||sendingText} onClick={()=>void editFailedDraft()}>Edit unconfirmed message</button>
+            <button type="button" onClick={()=>setFailedDraft(undefined)}>Dismiss notice</button>
+          </aside>}
+        </div>
+        <footer className="composer-actions">
+          {(recoveredRequest||failedDraft)&&<button type="button" onClick={inspectUnconfirmed}>Inspect saved work</button>}
+          <button type="submit" disabled={!draft.trim()||!workspaceReady||sendingText||stagingRequest} aria-label="Send message">{sendingText?'Sending…':'Send'}</button>
+        </footer>
+      </form>}
       {transfers.length>0&&<div className="file-transfers" aria-label="File transfers" aria-live="polite">{transfers.map(transfer=><div key={transfer.id} className={`file-transfer ${transfer.phase}`}><span className="file-symbol" aria-hidden="true">{transfer.phase==='attached'?'✓':transfer.phase==='failed'?'!':'↓'}</span><div><span className="file-name">{transfer.name}</span><span className="file-detail">{transfer.phase==='uploading'?`Receiving · ${transfer.percent}%`:transfer.phase==='processing'?transfer.detail||'Preparing your file…':transfer.phase==='attached'?'Received · '+(transfer.detail||'ready'):transfer.detail}</span>{transfer.phase==='uploading'&&<progress max={100} value={transfer.percent} aria-label={`Receiving ${transfer.name}`}/>}</div></div>)}</div>}
       {local&&<LocalReadiness state={runtimeState} checking={checkingRuntime} onCheck={checkRuntime} onSetup={openSetup}/>}
       <p className="setup-note">Double-Space also opens typing. Drop files onto the orb.</p>
