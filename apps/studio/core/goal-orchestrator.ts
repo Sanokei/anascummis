@@ -462,7 +462,7 @@ export class GoalOrchestrator {
       const execution = await this.options.execute(structuredClone(task), structuredClone(goal), signal, (phase, detail) => {
         signal.throwIfAborted();
         const validSource=goal.sourceQuestion&&['fetching_source', 'source_saved', 'source_reused', 'selection_saved', 'selection_reused', 'answering_sources', ...(goal.brief && task.sourceBrief ? ['writing_document', 'draft_saved', 'reviewing_document', 'rendering_document', 'document_saved'] : [])].includes(phase);
-        const validEdit=goal.documentEdit&&task.documentEdit&&['proposing_document_edit','edit_proposal_saved','reviewing_document_edit','edit_awaiting_approval','rendering_document_edit','edit_rendered','document_edit_saved'].includes(phase);
+        const validEdit=goal.documentEdit&&task.documentEdit&&['proposing_document_edit','first_sentence_saved','second_sentence_saved','edit_proposal_saved','reviewing_document_edit','edit_awaiting_approval','rendering_document_edit','edit_rendered','document_edit_saved'].includes(phase);
         if (!validSource&&!validEdit) throw new Error('Invalid source progress phase');
         this.event(goal, 'executor', phase, detail.slice(0, 2300), task.id);
       });

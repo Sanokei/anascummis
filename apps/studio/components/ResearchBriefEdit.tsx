@@ -100,11 +100,18 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
   const artifact = state?.phase === 'saved' ? state.artifact : undefined, base = '/api/goals/' + encodeURIComponent(goal.id) + '/document-edit';
   const original = '/api/goals/' + encodeURIComponent(request.parentGoalId) + '/brief';
   const canApply = state?.phase === 'awaiting_approval' && goal.status === 'needs_input' && !!state.proposalSha256;
+  const sequential = state?.writingMode === 'sequential-labelled-sentences-v2';
+  const savedSentences = Number(!!state?.sentenceAttempts?.first) + Number(!!state?.sentenceAttempts?.second);
   return <section className="research-brief-edit" aria-label="Research brief edit">
     <h4>Edit the research brief</h4>
-    <p>{state ? phases[state.phase] : 'The exact edit request is saved. Waiting for the document specialist.'}</p>
+    <p>{state ? state.phase === 'preparing' && sequential ? savedSentences === 1 ? 'First native sentence saved; the second is not yet saved' : savedSentences === 2 ? 'Both native sentences saved; preparing the proposal' : 'Preparing two native sentence-writing decisions' : phases[state.phase] : 'The exact edit request is saved. Waiting for the document specialist.'}</p>
     <section className="research-brief-edit-intent" aria-label="Requested change"><h5>Requested change</h5><p>{request.intent}</p>{request.sentenceLabels && <><p>Requested sentence labels: {request.sentenceLabels.join(' / ')}</p><small>The host adds these exact labels to two native-written factual sentences. The model supplies their content; the host does not add facts.</small></>}</section>
     <small>This edit changes only the factual brief paragraph. The title, complete personal notes, accepted research and literal citation evidence are preserved. It is not an arbitrary PDF-layout edit.</small>
+    {sequential && <section aria-label="Native sentence progress">
+      <p>{savedSentences} of 2 native sentence-writing decisions saved.</p>
+      <small>First sentence: {state?.sentenceAttempts?.first ? state.sentenceAttempts.first.error ? 'saved; needs attention.' : 'saved.' : 'not saved.'} Second sentence: {state?.sentenceAttempts?.second ? state.sentenceAttempts.second.error ? 'saved; needs attention.' : 'saved.' : 'not saved.'}</small>
+      <small>Each sentence-writing call reads its target label, exact request, original factual paragraph, full accepted answer and all literal citation quotes. It does not receive the longer selected passages or your personal notes. The original sources and complete notes remain preserved.</small>
+    </section>}
     {(pending || unknownApproval) && <div className="research-brief-edit-notice" aria-label="Unconfirmed edit approval">
       <p>Apply needs inspection before another approval. Opening or reloading this window does not replay it.</p>
       <button ref={inspectButton} type="button" disabled={busy || !loaded} onClick={() => void inspect()}>Inspect saved edit</button>
@@ -116,7 +123,7 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
     </div>}
     {state?.draftCheck && <p>{state.draftCheck.accepted ? 'Host proposal checks passed: ' : 'Host proposal checks need attention: '}{state.draftCheck.reason}</p>}
     {state?.supportReview && <p>{state.supportReview.supported ? 'Native support review passed: ' : 'Native support review needs attention: '}{state.supportReview.reason}</p>}
-    {state?.projection && <details><summary>Host sentence formatting</summary><p>{state.projection.method}</p><small>The native response remains unchanged in the operation inspection below. The displayed proposal includes your exact requested labels.</small><small>{state.projection.version}</small><small>Native response SHA-256 {state.projection.rawSha256}</small><small>Proposed wording SHA-256 {state.projection.proposalSha256}</small></details>}
+    {state?.projection && <details><summary>Host sentence formatting</summary><p>{state.projection.method}</p><small>{sequential ? 'The two native responses remain unchanged and separately inspectable below, with an aggregate JSON copy. The host may remove one exact repeated label before adding your exact labels; it does not rewrite factual sentence content.' : 'The native response remains unchanged in the operation inspection below. The displayed proposal includes your exact requested labels.'}</small><small>{state.projection.version}</small><small>{sequential ? 'Aggregate native response' : 'Native response'} SHA-256 {state.projection.rawSha256}</small><small>Proposed wording SHA-256 {state.projection.proposalSha256}</small></details>}
     {canApply && !pending && !unknownApproval && <div className="research-brief-edit-approval">
       <p>Compare the wording above. Apply saves one revised version and uses the updated document presentation. The original files remain available below.</p>
       <button type="button" disabled={busy || !loaded} onClick={() => void apply()}>Apply proposed edit</button>
@@ -147,7 +154,14 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
       {state.proposalSha256 && <small>Proposed wording SHA-256 {state.proposalSha256}</small>}
       {state.approvedProposalSha256 && <small>Approved wording SHA-256 {state.approvedProposalSha256}</small>}
       {artifact && <><small>Revised PDF SHA-256 {artifact.pdfSha256}</small><small>Revised HTML SHA-256 {artifact.htmlSha256}</small><small>Provenance SHA-256 {artifact.provenanceSha256}</small></>}
-      {state.writingAttempt && <><small>Native decision SHA-256 {state.writingAttempt.sha256}</small>
+      {state.sentenceAttempts && <section aria-label="Saved native sentence decisions">
+        {(['first', 'second'] as const).map((part, index) => {
+          const attempt = state.sentenceAttempts?.[part], label = index === 0 ? 'First' : 'Second';
+          return attempt ? <section key={part}><h5>{label} sentence decision{request.sentenceLabels ? ': ' + request.sentenceLabels[index] : ''}</h5><small>{label} sentence decision SHA-256 {attempt.sha256}</small>{attempt.error && <p>{attempt.error}</p>}<pre tabIndex={0} aria-label={label + ' native sentence decision JSON'}>{JSON.stringify(attempt.raw, null, 2)}</pre></section> : <p key={part}>{label} native sentence decision has not been saved.</p>;
+        })}
+      </section>}
+      {state.writingAttempt && <><small>{sequential ? 'Aggregate decision' : 'Native decision'} SHA-256 {state.writingAttempt.sha256}</small>
+        {sequential && <small>This aggregate JSON combines two saved native sentence decisions. Their individual original responses and identities are shown above.</small>}
         {state.writingAttempt.error && <p>{state.writingAttempt.error}</p>}
         <pre tabIndex={0} aria-label="Original native edit decision JSON">{JSON.stringify(state.writingAttempt.raw, null, 2)}</pre></>}
       <small>A native support review is bounded model evidence; it does not independently verify the source’s claims.</small>

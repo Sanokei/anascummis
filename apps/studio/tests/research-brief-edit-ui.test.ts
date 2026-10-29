@@ -18,7 +18,9 @@ test('document edit UI preserves an uncertain request and approval without repla
       proposal: {paragraphs: [{text: 'Tests: See the saved test location. Browser results: See the saved results location.', citations: [1, 2]}]}, proposalSha256: proposalHash,
       preserved: {title: parent.brief.title, notes: parent.brief.notes, citations: [{number: 1, quote: 'Literal `source` [label](https://example.com/source)', sourceId: 'source', offset: 3, textSha256: 'e'.repeat(64)}]},
       writingAttempt: {sha256: 'd'.repeat(64), raw: {first: {text: '<script>window.editExecuted=true</script>', citations: [1]}, second: {text: 'Native results sentence.', citations: [2]}}},
-      projection: {version: 'brief-labelled-sentences-v1', method: 'The host adds the exact requested labels to two native-written sentences; it does not supply facts.', rawSha256: 'd'.repeat(64), proposalSha256: proposalHash},
+      writingMode: 'sequential-labelled-sentences-v2',
+      sentenceAttempts: {first: {raw: {text: '<script>window.editExecuted=true</script>', citations: [1]}, sha256: '2'.repeat(64)}, second: {raw: {text: 'Native results sentence.', citations: [2]}, sha256: '3'.repeat(64)}},
+      projection: {version: 'brief-labelled-sentences-v2', method: 'The host adds exact labels to two separately saved native sentences; it does not supply facts.', rawSha256: 'd'.repeat(64), proposalSha256: proposalHash, sentenceSha256: {first: '2'.repeat(64), second: '3'.repeat(64)}},
       draftCheck: {accepted: true, reason: 'The exact proposal passes the bounded host checks.'}, supportReview: {supported: true, reason: 'The retained evidence supports both locations.'}}});
   const entry = join(folder, 'entry.tsx');
   await Bun.write(entry, `import React from 'react';import{createRoot}from'react-dom/client';import{ResearchBriefEdit}from ${JSON.stringify(resolve('components/ResearchBriefEdit.tsx'))};const root=createRoot(document.getElementById('root'));window.showEdit=goal=>root.render(<ResearchBriefEdit goal={goal} onCreated={next=>{window.lastCreated=next;if(location.search)window.showEdit(next);}} onOpenDocument={id=>window.lastOpened=id}/>);if(location.search)fetch('/api/goals/00fab2c6-23dd-4db1-a875-e17ae7121cdf').then(r=>r.json()).then(window.showEdit);else window.showEdit(${JSON.stringify(parent)});`);
@@ -95,10 +97,27 @@ test('document edit UI preserves an uncertain request and approval without repla
 
     await page.goto(server.url.href + '?child=1');
     await page.getByRole('region', {name: 'Before edit', exact: true}).waitFor();
+    const partial = structuredClone(child);
+    partial.status = 'needs_input'; partial.documentEditState.phase = 'preparing';
+    for (const field of ['writingAttempt', 'proposal', 'proposalSha256', 'projection', 'draftCheck', 'supportReview']) delete partial.documentEditState[field];
+    delete partial.documentEditState.sentenceAttempts.second;
+    await page.evaluate(next => (window as any).showEdit(next), partial);
+    expect(await page.getByText('1 of 2 native sentence-writing decisions saved.', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('First native sentence saved; the second is not yet saved', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByRole('button', {name: 'Apply proposed edit', exact: true}).count()).toBe(0);
+    await page.getByText('Edit operation and native decision', {exact: true}).click();
+    expect(JSON.parse(await page.getByLabel('First native sentence decision JSON', {exact: true}).innerText())).toEqual(child.documentEditState.sentenceAttempts.first.raw);
+    expect(await page.getByText('First sentence decision SHA-256 ' + '2'.repeat(64), {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('Second native sentence decision has not been saved.', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByLabel('Original native edit decision JSON', {exact: true}).count()).toBe(0);
+    expect(await page.evaluate(() => (window as any).editExecuted)).toBeUndefined();
+    await page.evaluate(next => (window as any).showEdit(next), child);
     expect(await page.getByRole('region', {name: 'Proposed edit', exact: true}).innerText()).toContain('Tests:');
+    expect(await page.getByText('2 of 2 native sentence-writing decisions saved.', {exact: true}).isVisible()).toBe(true);
     expect(await page.getByText('Requested sentence labels: Tests: / Browser results:', {exact: true}).isVisible()).toBe(true);
     await page.getByText('Host sentence formatting', {exact: true}).click();
-    expect(await page.getByText('The host adds the exact requested labels to two native-written sentences; it does not supply facts.', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('The host adds exact labels to two separately saved native sentences; it does not supply facts.', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('brief-labelled-sentences-v2', {exact: true}).isVisible()).toBe(true);
     const apply = page.getByRole('button', {name: 'Apply proposed edit', exact: true});
     await apply.scrollIntoViewIfNeeded();
     expect((await apply.boundingBox())!.height).toBeGreaterThanOrEqual(44);
