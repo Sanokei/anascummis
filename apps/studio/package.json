@@ -19,6 +19,7 @@
     "demo:deploy": "wrangler deploy --config wrangler.demo.jsonc",
     "kit:build": "bun scripts/publish-sources.ts",
     "test:e2e": "node scripts/test-user-journeys.mjs",
+    "test:e2e:research-document": "node scripts/e2e/research-document.mjs",
     "test:local-ai": "bun scripts/check-local-ai.ts"
   },
   "dependencies": {

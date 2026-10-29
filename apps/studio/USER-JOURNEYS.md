@@ -14,6 +14,9 @@ bun run test:e2e --journey website-pdf-exports --viewport narrow
 bun run test:e2e --journey discover-capabilities --viewport desktop
 bun run test:e2e --journey task-list-application --viewport narrow --require-model
 
+# A fresh research → cited document goal, including actual owned-host interruption:
+bun run test:e2e:research-document --viewport all --output .test-data/user-journeys/research-document-NEW
+
 # List goals and options:
 bun run test:e2e --list
 bun run test:e2e --help
@@ -36,6 +39,8 @@ Use `CHROME_PATH` if Chrome is outside the detected platform paths, `BUN_PATH` i
 The supported task-list example and its bounds are in [SOFTWARE.md](SOFTWARE.md#bounded-persistent-task-list). It is a trusted typed compiler workflow, not unrestricted source generation. The separately invoked `scripts/e2e/recover-software.mjs` diagnostic continues a **copy of an actual stopped native-generated checkpoint** through one explicit Resume; it is not a fresh generation or part of the fresh-user matrix.
 
 The separate `scripts/e2e/app-launch.mjs` suite copies stopped, previously native-generated accepted counter/task-list checkpoints and uses the product's visible **Start app**, iframe, **Stop running app** and status controls. It checks actual use, close/reopen/reload without another launch, host interruption and explicit same-address continuation, compatible child replacement, saved items and immutable accepted artifacts. Its fixed React runtime executes the actual accepted client page, not the packaged Next server. Matching installed dependencies are reused; no new inference, API-seeded tasks or dependency installation is claimed. Use a fresh output folder and retained local fixtures; `--collection-fixture`, `--parent`, `--child`, `--counter-fixture` and `--counter` select them. Fixture databases and local logs stay private.
+
+The separate `test:e2e:research-document` suite begins with fresh private data and a real public-source question. It requires genuine native answer and writing decisions, creates a linked brief through the visible **Create research brief** form, and checks saved notes, source attribution and actual PDF/HTML downloads. The child reuses the complete accepted answer and hash-checked source copies. Its fixed host renderer creates document files; it does not execute model-written code. The suite deliberately stops/restarts only its own Studio processes and requires explicit continuation with the accepted parent and saved writing unchanged. Choose a fresh output folder. A blocked or incorrect native answer/document is an unmet user goal, even when recovery works.
 
 ## Outcomes and evidence
 

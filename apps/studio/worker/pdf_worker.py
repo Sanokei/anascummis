@@ -1,6 +1,7 @@
 """One bounded PDF operation per process. Paths are supplied only by the Bun harness."""
-import json, sys, os, math
+import json, sys, os, math, re
 from pathlib import Path
+from html.parser import HTMLParser
 import pymupdf as fitz
 from PIL import Image
 
@@ -73,9 +74,83 @@ def inspect(doc, pages=None):
             'scanned': bool(result) and all(not p['text'].strip() for p in result)}
 
 
+class BriefMarkup(HTMLParser):
+    """The research renderer accepts only the host's inert document vocabulary."""
+    tags = {'html', 'head', 'meta', 'title', 'style', 'body', 'main', 'h1', 'h2', 'p', 'br'}
+    attributes = {'lang', 'charset', 'name', 'content', 'http-equiv'}
+
+    def __init__(self):
+        super().__init__()
+        self.in_style = False
+
+    def handle_starttag(self, tag, attrs):
+        if tag not in self.tags or any(key not in self.attributes for key, value in attrs):
+            raise ValueError('Research brief markup must be inert host-generated text')
+        if tag == 'style':
+            self.in_style = True
+
+    def handle_endtag(self, tag):
+        if tag not in self.tags:
+            raise ValueError('Unsupported research brief markup')
+        if tag == 'style':
+            self.in_style = False
+
+    def handle_data(self, data):
+        if self.in_style and re.search(r'url\s*\(|@import', data, re.I):
+            raise ValueError('Research brief styles cannot fetch resources')
+
+
+def verify_brief(doc, expected):
+    if not isinstance(expected, list) or not expected or len(expected) > 100 or any(
+            not isinstance(value, str) or len(value) > 12000 for value in expected):
+        raise ValueError('Research brief text expectations are invalid')
+    if not 1 <= len(doc) <= 20:
+        raise ValueError('Research brief must contain 1 to 20 pages')
+    # Expand PDF font ligatures (for example the glyph ﬁ back to fi).
+    text = ''.join(page.get_text(flags=fitz.TEXTFLAGS_TEXT & ~fitz.TEXT_PRESERVE_LIGATURES, sort=True) for page in doc)
+    ligatures = str.maketrans({'ﬀ': 'ff', 'ﬁ': 'fi', 'ﬂ': 'fl', 'ﬃ': 'ffi', 'ﬄ': 'ffl', 'ﬅ': 'st', 'ﬆ': 'st'})
+    compact = lambda value: ''.join(value.translate(ligatures).split())
+    actual, position = compact(text), 0
+    # Expectations are ordered, so repeated notes/quotations must really occur
+    # again rather than matching a different earlier section.
+    for index, value in enumerate(expected):
+        wanted = compact(value)
+        found = actual.find(wanted, position)
+        if found < 0:
+            raise ValueError('Research brief rendering omitted or changed expected text at section ' + str(index + 1))
+        position = found + len(wanted)
+    for page in doc:
+        for block in page.get_text('dict')['blocks']:
+            for line in block.get('lines', []):
+                for span in line['spans']:
+                    x0, y0, x1, y1 = span['bbox']
+                    if not all(math.isfinite(v) for v in span['bbox']) or x0 < 47 or y0 < 47 or x1 > 548 or y1 > 795:
+                        raise ValueError('Research brief text exceeds the printable page bounds')
+    return {'pageCount': len(doc), 'complete': True, 'contained': True}
+
+
 def run(job):
     op, a = job['op'], job.get('args', {})
     output = job.get('output')
+    if op == 'research_brief':
+        html = a.get('html')
+        if not isinstance(html, str) or len(html) > 100000:
+            raise ValueError('Research brief markup is invalid or contains a resource reference')
+        parser = BriefMarkup()
+        parser.feed(html)
+        story = fitz.Story(html, user_css='body {font-family:sans-serif;font-size:11pt;}')
+        def page_rect(number, filled):
+            if number > 20:
+                raise ValueError('Research brief exceeds 20 pages')
+            return fitz.Rect(0, 0, 595, 842), fitz.Rect(48, 48, 547, 794), None
+        doc = story.write_with_links(page_rect)
+        doc.set_metadata({'title': a.get('title', 'Research brief'), 'producer': 'Anascummis fixed research-brief renderer'})
+        result = verify_brief(doc, a.get('expected'))
+        doc.save(output, garbage=4, deflate=True)
+        return result
+    if op == 'verify_research_brief':
+        with fitz.open(job['input']) as doc:
+            return verify_brief(doc, a.get('expected'))
     if op == 'image_info':
         with Image.open(job['image']) as im:
             if im.format not in ('PNG', 'JPEG') or im.width * im.height > 40_000_000:
