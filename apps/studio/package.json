@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "bun scripts/dev.ts",
     "backend": "bun core/server.ts",
-    "build": "bun scripts/build-scene.ts && next build --webpack",
+    "build": "bun scripts/build-scene.ts && next build --webpack && bun run kit:build",
     "start": "bun scripts/dev.ts --production",
     "test": "bun scripts/test.ts",
     "test:research:edge": "bun scripts/test-research-edge.ts",
@@ -15,8 +15,9 @@
     "speech:setup": "bun scripts/speech-setup.ts",
     "model:setup": "bun scripts/model.ts setup",
     "model:start": "bun scripts/model.ts start",
-    "demo:build": "bun run build && bun scripts/prepare-demo.ts && bun scripts/publish-sources.ts",
-    "demo:deploy": "wrangler deploy --config wrangler.demo.jsonc"
+    "demo:build": "bun run build && bun scripts/prepare-demo.ts",
+    "demo:deploy": "wrangler deploy --config wrangler.demo.jsonc",
+    "kit:build": "bun scripts/publish-sources.ts"
   },
   "dependencies": {
     "@babylonjs/core": "^9.14.0",

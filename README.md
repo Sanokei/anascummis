@@ -12,34 +12,24 @@ The public demo is deployed at https://anascummis.com (2026-10-07), Worker `anas
 
 ## Install and run locally
 
-Use the **Download** button at the top right of https://anascummis.com to get the local source ZIP. Extract it and follow `studio/LOCAL-INSTALL.md`; it includes setup requirements and platform limits. This is a source kit that needs installation, not a prebuilt desktop executable.
+Use **Download** in the running app to obtain its versioned local source ZIP and SHA-256. The supported build prepares that copy's same-origin kit and manifest, including source provenance, payload hashes, lockfile, setup guide and existing licenses. Extract it and follow `studio/LOCAL-INSTALL.md`. This is a source kit to install, not a prebuilt desktop executable; private data, installed dependencies, caches and model weights are excluded.
 
-Install Bun and Python (or uv). Allow several GB of free disk space for dependencies and models. A modern 64-bit computer with 8 GB RAM is a practical starting target; this is not a measured minimum or a guarantee for every consumer device.
+Install Bun, Node 20.9 or newer and Python. The bounded Linux packaging workflow uses Bun 1.3.14, Node 24.19.0 and Python 3.12.14; other platforms/native runtimes remain separately unverified. Allow several GB of free space. A modern 64-bit computer with 8 GB RAM is a practical target, not a measured minimum.
+
+From `apps/studio`, or `studio` inside the extracted ZIP:
 
 ```sh
-cd apps/studio
-bun install
+bun install --frozen-lockfile
 bun run setup
-bun run model:setup
-bun run speech:setup
 bun run build
-```
-
-Open two terminals:
-
-```sh
-# Terminal 1: CPU-only Qwen3 0.6B server
-bun run model:start
-
-# Terminal 2: local studio
 bun run start
 ```
 
-Open `http://127.0.0.1:3211`. For frontend development use `bun run dev` instead of `start`; the Bun backend proxies the Next development server on port 3212.
+Open `http://127.0.0.1:3211`. This opens the UI before model/voice setup and honestly reports unavailable services. The build also creates its versioned download under `out/opensource`; `bun run kit:build` packages source only. `bun run demo:build` copies that output for the existing demo without deploying. Missing/invalid manifests show a retry instead of silently downloading an unknown external version.
 
-The model installer automatically installs an official llama.cpp CPU build on Windows x64. On macOS/Linux/other architectures install llama.cpp for the platform and set `LLAMA_SERVER` to its executable. The model uses CPU inference, four threads, one inference slot and a 2048-token context. No hosted model fallback is used by the studio. See `apps/studio/.env.example` for optional runtime overrides.
+To enable native AI/voice, follow `LOCAL-INSTALL.md`: run `bun run model:setup` and `bun run speech:setup` when their providers are accessible, then keep `bun run model:start` and `bun run start` in separate terminals. Windows x64 model setup obtains an official CPU llama.cpp runtime. macOS/Linux/other architectures need a compatible runtime and `LLAMA_SERVER`. Model/speech files are not bundled; failed downloads do not establish readiness. Cloud checks still observe Hugging Face 403 and cannot establish native Qwen/voice readiness.
 
-Model and voice setup download files once. With runtimes and dependencies installed, local website editing, PDF tools, saved details, model inference and speech need no internet connection. Research, account login, payments and deployment necessarily require a connection.
+For frontend development use `bun run dev`; the backend proxies Next on 3212. Once required dependencies/runtimes/models are successfully installed, supported local features can work offline. Research, cooperation, payments and deployment need connectivity. No hosted model fallback is used.
 
 ## Voice interaction
 

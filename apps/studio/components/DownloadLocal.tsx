@@ -1,5 +1,6 @@
 'use client';
 import {useEffect, useRef, useState} from 'react';
+import {readSourceKitSummary,sourceKitManifestPath,type SourceKitSummary} from '../core/source-kit-manifest';
 
 type RuntimeAvailability = 'checking' | 'ready' | 'unavailable' | 'unknown';
 export type LocalRuntimeState = {model: RuntimeAvailability; voice: RuntimeAvailability; error?: string};
@@ -34,20 +35,41 @@ export function LocalReadiness({state, checking = false, onCheck, onSetup}: Read
 export function DownloadLocal({local = false, openRequest, state, checking, onCheck}: {local?: boolean; openRequest?: number; state?: LocalRuntimeState; checking?: boolean; onCheck?: () => void | Promise<void>} = {}){
   const dialog=useRef<HTMLDialogElement>(null);
   const handledOpen=useRef<number|undefined>(undefined);
-  function open(){if(dialog.current?.isConnected&&!dialog.current.open)dialog.current.showModal();}
+  const kitControl=useRef<AbortController|undefined>(undefined);
+  const [kit,setKit]=useState<SourceKitSummary>(),[kitLoading,setKitLoading]=useState(false),[kitError,setKitError]=useState('');
+  async function checkSourceKit(){
+    kitControl.current?.abort();const control=new AbortController();kitControl.current=control;setKit(undefined);setKitError('');setKitLoading(true);
+    try{const response=await fetch(sourceKitManifestPath,{cache:'no-store',redirect:'error',signal:control.signal});if(!response.ok)throw new Error(`Source kit request failed (${response.status}).`);const value=readSourceKitSummary(await response.json());if(!control.signal.aborted)setKit(value);}
+    catch(error){if(!control.signal.aborted)setKitError(error instanceof Error?error.message:'The source kit could not be checked.');}
+    finally{if(kitControl.current===control)setKitLoading(false);}
+  }
+  function open(){if(dialog.current?.isConnected&&!dialog.current.open){dialog.current.showModal();void checkSourceKit();}}
+  useEffect(()=>()=>kitControl.current?.abort(),[]);
   useEffect(()=>{if(!openRequest||handledOpen.current===openRequest||!dialog.current?.isConnected)return;handledOpen.current=openRequest;open();},[openRequest]);
   return <>
     <button className="download-local-trigger" type="button" onClick={open}>Download</button>
-    <dialog ref={dialog} className="download-local-dialog" aria-labelledby="download-local-title">
-      <form method="dialog"><button className="download-local-close" aria-label="Close download instructions">×</button></form>
-      <h2 id="download-local-title">Anascummis on your computer</h2>
+    <dialog ref={dialog} className="download-local-dialog" aria-labelledby="download-local-title" onClose={()=>kitControl.current?.abort()}>
+      <header className="download-local-header"><h2 id="download-local-title">Anascummis on your computer</h2><form method="dialog"><button className="download-local-close" aria-label="Close download instructions">Close</button></form></header>
+      <div className="download-local-content">
       {local && state && <LocalReadiness state={state} checking={checking} onCheck={onCheck}/>}
-      <p>The local source kit includes the app, setup scripts and licenses. It requires Bun and Python, plus a first-time download of dependencies and models.</p>
-      <a className="download-local-link" href="https://anascummis.com/opensource/anascummis-studio-source.zip" download="anascummis-studio-source.zip">Download local source ZIP</a>
-      <p>Extract the ZIP, open a terminal in <code>studio</code>, and follow <code>LOCAL-INSTALL.md</code>:</p>
-      <pre>{'bun install\nbun run setup\nbun run model:setup\nbun run speech:setup\nbun run build'}</pre>
-      <p>Then run <code>bun run model:start</code> and <code>bun run start</code> in separate terminals. Open <code>http://127.0.0.1:3211</code>.</p>
-      <p className="download-local-note">Windows x64 model setup installs llama.cpp automatically. macOS and Linux need a compatible llama.cpp installation and <code>LLAMA_SERVER</code>. Video tools also need FFmpeg/FFprobe. Allow several GB of disk space; device compatibility varies.</p>
+      <p>The local source kit includes this app, setup scripts, lockfile and licenses. It is source to install, not a desktop executable. Dependencies, model weights and runtime binaries are not included.</p>
+      <section className="download-source-kit" aria-label="Local source kit">
+        {kitLoading?<p role="status">Checking this app's source kit…</p>:kit?<>
+          <p><strong>Source kit <code>{kit.version.slice(0,16)}</code></strong> · {(kit.bytes/1024**2).toFixed(2)} MiB</p>
+          {kit.source.commit&&<p>{kit.source.dirty?'Working copy based on':'Source'} <code>{kit.source.commit.slice(0,12)}</code></p>}
+          <a className="download-local-link" href={'/opensource/'+kit.filename} download={kit.filename}>Download local source ZIP</a>
+          <details><summary>Verify this download</summary><p>ZIP SHA-256</p><code className="source-kit-checksum">{kit.sha256}</code><p>The ZIP includes <code>studio/SOURCE-KIT.json</code> with every source file's hash. Keep the licenses and <code>bun.lock</code>.</p></details>
+        </>:<>
+          <p role="alert">A verified source kit is unavailable from this copy of the app. {kitError}</p>
+          <p>Ask the person who supplied this copy for its current source kit. If you have the source, <code>bun run build</code> also prepares its download.</p>
+          <button type="button" onClick={()=>void checkSourceKit()}>Check source kit again</button>
+        </>}
+      </section>
+      <p>Install Bun, Node 20.9 or newer and Python first. Extract the ZIP, open a terminal in <code>studio</code>, and follow <code>LOCAL-INSTALL.md</code>:</p>
+      <pre>{'bun install --frozen-lockfile\nbun run setup\nbun run build\nbun run start'}</pre>
+      <p>Open <code>http://127.0.0.1:3211</code>. The app can open before AI/voice setup and will show unavailable services. To enable them, follow the guide's <code>model:setup</code> and <code>speech:setup</code> steps, then keep <code>bun run model:start</code> and <code>bun run start</code> in separate terminals. Failed or blocked downloads do not mean setup succeeded.</p>
+      <p className="download-local-note">Setup requires connectivity and several GB of free disk space. Windows x64 model setup obtains the official CPU llama.cpp runtime; macOS/Linux need a compatible runtime and <code>LLAMA_SERVER</code>. Optional video tools need FFmpeg/FFprobe. Device and native voice compatibility remain unverified here.</p>
+      </div>
     </dialog>
   </>;
 }
