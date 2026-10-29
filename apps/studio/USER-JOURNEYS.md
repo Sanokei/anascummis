@@ -12,6 +12,7 @@ bun run test:local-ai
 # A focused desktop or phone-sized journey:
 bun run test:e2e --journey website-pdf-exports --viewport narrow
 bun run test:e2e --journey discover-capabilities --viewport desktop
+bun run test:e2e --journey task-list-application --viewport narrow --require-model
 
 # List goals and options:
 bun run test:e2e --list
@@ -27,7 +28,11 @@ Use `CHROME_PATH` if Chrome is outside the detected platform paths, `BUN_PATH` i
 | Export the intended file | Start with a missing-PDF request and require a clear error with no wrong download. Open a real PDF via the picker; preview the website; obtain actual website HTML/ZIP and PDF/PNG, without confusing their targets or editing the original. |
 | Answer from a public source | Submit a focused question and public URL through Goals; inspect retained source identity, reload, and require an actual answer with literal source citations. Source retention alone is not an answered question. |
 | Read later evidence and follow up | Ask for two facts beyond the opening excerpt, inspect the persisted reading and exact citations, then explicitly ask a linked question from the saved copies. Require both real answers, no refetch or parent change, and an unsupported-address control that stays unfinished. |
-| Build a counter application | Submit a real software request, retain progress across reload, and require the actual checked download. Independent interactive app acceptance is a separate required stage; absent execution proof remains blocked rather than being counted as an achieved goal. |
+| Build a counter application | Submit the real goal, inspect the actual produced app and independently rebuild/start its downloaded ZIP. Check exact heading, visible Count label, comfortable controls, touch, keyboard focus/feedback, Increment/Reset and reload behavior. |
+| Build and revise a persistent task list | Use the ordinary message field; require the complete saved goal, actual Add/Remove/duplicate handling and reload persistence. Rebuild/start both parent and child downloaded ZIPs. A separate My Week revision preserves the parent and existing browser items when replacing it at the same origin. |
+| Find Software controls honestly | Status/history commands stay read-only. Untargeted edits and app-launch requests open the existing controls/instructions without pretending to revise or launch anything. This diagnostic does not require inference. |
+
+The supported task-list example and its bounds are in [SOFTWARE.md](SOFTWARE.md#bounded-persistent-task-list). It is a trusted typed compiler workflow, not unrestricted source generation. The separately invoked `scripts/e2e/recover-software.mjs` diagnostic continues a **copy of an actual stopped native-generated checkpoint** through one explicit Resume; it is not a fresh generation or part of the fresh-user matrix.
 
 ## Outcomes and evidence
 

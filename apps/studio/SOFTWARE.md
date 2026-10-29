@@ -24,7 +24,33 @@ Every child starts without inherited completion, downloads or verification stamp
 
 Counter revisions use bounded host-owned browser contracts. Unchanged controls keep their existing checks; explicitly requested start/step changes are checked through actual clicks and reload reset, and removal checks that the named controls are absent. These contracts do not cover arbitrary application behavior. Other changes require their own meaningful tests and acceptance evidence. Browser checks await observable state, following the official [Playwright assertion guidance](https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/test-assertions-js.md#auto-retrying-assertions).
 
-The measured Linux lifecycle used scripted inference with real source edits, production builds, Chromium checks and ZIP verification: a child changed the heading from “Repair Baseline” to “Repair Verified”, preserved counter behavior through 0 → 1 → 2 and reload reset, and retained the same child after a backend restart during planning. Parent source and artifact hashes stayed unchanged. Separate Chromium fixtures verified an increment of two and counter removal, and rejected the stale prior behavior. Real Qwen interpretation of revision guidance and Windows executable revisions remain unvalidated.
+The earlier measured Linux counter lifecycle used scripted inference with real source edits, production builds, Chromium checks and ZIP verification: a child changed the heading from “Repair Baseline” to “Repair Verified”, preserved counter behavior through 0 → 1 → 2 and reload reset, and retained the same child after a backend restart during planning. Parent source and artifact hashes stayed unchanged. Separate Chromium fixtures verified an increment of two and counter removal, and rejected the stale prior behavior. The bounded collection heading revision below now has genuine Qwen/production/ZIP evidence; arbitrary revision interpretation and Windows executable revisions remain unvalidated.
+
+## Bounded persistent task list
+
+This complete request has an exercised native path through the ordinary message field:
+
+> Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.
+
+The model supplies a schema-checked behavior decision; a trusted compiler grounds the literal requested fields and owns the React source. This is an initially empty, single-browser text collection, not arbitrary model-authored code. The closed request grammar consumes the whole supported request; extra requirements never silently gain this recipe's acceptance. Headings and control labels may vary within their bounds. A shorter or different request may use the general worker and is not covered by this evidence.
+
+The app adds nonblank text, removes only the chosen item even when text repeats, and retains remaining items after reload. Its visible limits are 100 tasks of 200 characters. It reads versioned localStorage after client mount before enabling edits. Unreadable/malformed data stays untouched; failed writes keep the draft and previous list with a visible error. Storage belongs to the browser origin. Account sync, item editing, completion states, concurrent-tab conflict resolution and transfer between different ports/origins are outside this contract.
+
+From the completed parent's Software card, this full revision creates a separate checked child:
+
+> Change heading to My Week; keep existing add/remove/persistence behavior.
+
+Automatic compilation requires the known compiler/provenance bytes to match. A saved before/after checkpoint permits only its own exact partial writes on recovery. The child keeps the storage key and other behavior; parent source and ZIP are unchanged. Actual desktop/360px journeys rebuilt and ran both downloaded ZIPs, then replaced the produced parent with its child at the **same origin** in the same browser context and retained existing items. This does not imply cross-origin data migration.
+
+Completed source-ZIP cards show **Run this app locally**. Extract the ZIP, install Bun and Node 20.9+, run `bun install --frozen-lockfile --ignore-scripts`, `bun run build`, then `bun run start --port 3216`. Open the address printed by the terminal; use another free port when needed. The pure task-list/counter app does not need the Studio model. Studio currently offers screenshots, downloads and revisions; these instructions do not launch an interactive generated app inside Studio.
+
+## Explicit verification retry
+
+Failed checks are cached during a work slice to avoid a blind retry loop. An explicit **Resume checkpoint** now archives the complete failed text receipt in durable activity history, clears only current-revision failed verification and queues actual checks again. The normal polling projection stays small. Archive, cache invalidation and queued state share one transaction. Passing/stale evidence and completed parents are preserved. The archive explicitly omits an unpreserved screenshot; later verification may replace that image.
+
+The first task-list native run exposed a QA error: a global alert check counted Next's hidden accessibility route announcer as a persistence failure. The fixed check targets the task collection's own error region and still rejects real storage errors. A copy of that actual failed checkpoint then completed real verification and ZIP delivery after one visible Resume, with unchanged source bytes, source revision and model-call count. The original failed fixture stayed unchanged. This is recovery of previously generated work, not a new inference claim.
+
+Current native output, counter keyboard/phone usability, downloaded-project start, retry receipts, original failures and limits are pinned in [the software-goal review pack](../../review-artifacts/2026-10-29-software-goals/README.md). Fresh source extraction reused matching installed dependencies; it was not a new online install or Windows/macOS pass.
 
 ## Evidence and capability limits
 
@@ -32,7 +58,7 @@ A real persistent task, using local Qwen for a bounded exact-heading operation, 
 
 The earlier unrestricted Qwen source-routing probe failed after two invalid evidence reads; host-selected reading worked. These observations remain material. Automated source/test/DOM review cannot establish journalistic accuracy, subjective video quality or pixel-level visual QA. A screenshot is real evidence for human inspection, not a claim that a text-only model saw it.
 
-An additional real counter-generation test failed: Qwen emitted invalid source and then truncated its repair JSON. It was retained as needs_input with compiler evidence and no released artifacts. Failed check results are now cached per workspace revision and compiler diagnostics direct small-file repair steps. This remains evidence that arbitrary software authorship is not yet reliable.
+An additional real counter-generation test failed: Qwen emitted invalid source and then truncated its repair JSON. It was retained as needs_input with compiler evidence and no released artifacts. Failed check results are cached per workspace revision until an explicit retry or source change; compiler diagnostics direct small-file repair steps. This remains evidence that arbitrary software authorship is not yet reliable.
 
 The same failed counter checkpoint subsequently completed at revision 2 using the numeric React screen skill. Qwen supplied initial=0, delta=1 and accessible control labels; a host compiler emitted React syntax. Independent production-browser clicks verified 0 → 1 → 2 and reload reset, followed by a clean source ZIP install/test/build. This is constrained skill composition, not general free-form Qwen coding. The numeric skill is also exposed to generic software tasks; arbitrary-source and larger application acceptance remain separate.
 

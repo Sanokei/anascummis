@@ -22,7 +22,7 @@ Acceptance exercised:
 
 Owner reproduction: `/workspace/.cloud-env/anascummis/later-source-before/native-Zo9600/receipt.json`. The source is the public WHATWG Fetch repository README, content SHA-256 `d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa`. Code baseline: `678264ac5fd075921ef7e780f333c00432857423`.
 
-## Active: usable generated software and a persistent task list
+## Verified bounded increment: usable generated software and a persistent task list
 
 Actual task-list goal:
 
@@ -30,13 +30,17 @@ Actual task-list goal:
 
 Two baseline failures were reproduced against the real model: the message route treated “remaining tasks” as a status query and saved no build; the unchanged request through the existing Software form reached Qwen but stopped at revision 0 after four decisions with “Inspect a target source file first.” The current counter compiler also produced browser-default controls only 21px high, with no visible Count label.
 
-Current work combines narrowly bounded fixes: whole-request command routing, the existing counter's responsive/keyboard usability, a disclosed trusted collection compiler with storage/error/revision acceptance, actual downloaded-source start checks, visible run instructions, and correct model-launcher exit reporting. [Acceptance plan](review-artifacts/2026-10-29-software-goals/PLAN.md) records the real baseline and required output proof. None of these claims arbitrary model-authored apps. The absence of an ordinary one-click generated-app launch remains a separate product gap; source-download instructions must be honest.
+The increment verifies narrowly bounded fixes: whole-request command routing, the existing counter's responsive/keyboard usability, a disclosed trusted collection compiler with storage/error/revision acceptance, actual downloaded-source start checks, visible run instructions, and correct model-launcher exit reporting. A real saved native-generated checkpoint recovered through explicit validation retry with unchanged source/revision/model calls; old failed text checks remain inspectable. Fresh desktop/360px task-list/revision and counter journeys passed, including actual downloaded projects. [Pinned evidence and limits](review-artifacts/2026-10-29-software-goals/README.md) accompany the [acceptance plan](review-artifacts/2026-10-29-software-goals/PLAN.md). None of these claims arbitrary model-authored apps.
+
+## Next observed product gap: use the finished application
+
+Completed Software cards expose screenshots, downloads and revision controls. They have no ordinary interactive app-launch action; the E2E inspector's own server is not that product feature. The next acceptance target is an explicit, inspectable launch of a checked app in an existing work window, with source identity, safe origin/process lifecycle, and reopen/restart behavior that preserves user data without surprise execution. Research the browser/process boundaries before implementation. Until then, download/start instructions remain the supported path.
 
 ## Remaining capability milestones
 
 | Milestone | Current evidence/gap | User-result acceptance |
 | --- | --- | --- |
-| Software beyond the counter recipe | The original real general-worker counter attempt omitted Reset/changed the heading and stalled reading source. A typed counter recipe fixed that class only. | Build a task-list app with add/remove/persistence; independently run the delivered app and downloaded source, then revise it without losing the accepted parent. |
+| Software beyond the typed recipes | Counter and bounded persistent collections have genuine output/revision evidence. The unrestricted worker still failed the original task-list request before it acquired a registered compiler. | Reproduce and complete a useful request outside these recipe classes, preserving the full goal and meaningful output tests; do not count a new template as arbitrary coding ability. |
 | Useful native document editing | Backend PDF edits/rendering and simple import/export work; a multi-page native edit journey is absent. | Edit a supplied multi-page document, preserve unrelated content/layout, inspect actual pages and download the correct revised file. |
 | Cross-specialist work | Individual capabilities and bounded evidence handoffs exist; realistic research→draft→artifact work is not broadly proven. | Use cited research to produce a requested brief or website section, with source provenance and acceptance for every dependent step. |
 | Real long-job recovery | Earlier host-flow interruption/revision tests include scripted inference; current native benchmark mainly covers close/reload. | Interrupt a genuine multi-stage native job, restart, inspect exactly what finished, and explicitly continue without repeating accepted writes. |
