@@ -1,0 +1,27 @@
+{
+  "archive": "anascummis-studio-c5735e970e817eed.zip",
+  "version": "c5735e970e817eed43877b610e7bb79af6dde2ad05c452eaf2a320e74f09acd4",
+  "zipSha256": "b73cc2f7f7950efb6ade3d2a7ec5f296a9950f30af0afe760efbe5fa80439f47",
+  "payloadFiles": 199,
+  "source": {
+    "commit": "f8329ebabfa55e99633831501b9952867a47acb3",
+    "dirty": false
+  },
+  "crcAndAllPayloadHashesPassed": true,
+  "privacyExclusionsPassed": true,
+  "requiredLockfilesLicensesAndSourcePassed": true,
+  "standaloneAliasPassed": true,
+  "currentSourceHashes": {
+    "app/page.tsx": "81602e937bbc5f07eeab74f775460bb699ed2d3905b68f41c7c17ab14e1ede49",
+    "app/style.css": "1aaf2fef270f7b3f2e90a027f7c4f1b4c8820609b9df7b832882f3ab71da0b21",
+    "components/DownloadLocal.tsx": "754211208635aa40bd5bfcdc364b4896ab23b6845a7960e07824d0ececea2107",
+    "components/WorkPanel.tsx": "2bd605ed4fe5200f6e41dfc3f28d4f631c5d8a1272a15a49b622552e320c02ae",
+    "core/goal-orchestrator.ts": "c9fdddfde44166f8e2b08a412b016492755db091e2b7f4de08fa08cc905cc2b1",
+    "core/source-kit-manifest.ts": "5961151c356d58aceff27825948bdc63453b321bb27e717ae43d8aa9c6509b98",
+    "scripts/publish-sources.ts": "75d66e140e589cdecf670b4d251b8ed0e54077c228bf0f9cedc2dbc0ef92da31",
+    "LOCAL-INSTALL.md": "8dd68a16e158c5bc2b9909b58cfb9b6234dec9dd6ae026e3cc2eae7a4c6596b1"
+  },
+  "extractRoot": "/workspace/.cloud-env/anascummis/distribution/package-check-TZP20E/extract/studio",
+  "dependencyReuse": "The next stage links the already installed matching node_modules and uses the existing Python environment; no clean online install is claimed."
+}
+Package checks passed: /workspace/.cloud-env/anascummis/distribution/package-check-TZP20E

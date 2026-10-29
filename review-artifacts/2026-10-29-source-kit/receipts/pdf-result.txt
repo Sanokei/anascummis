@@ -1,0 +1,2 @@
+Passed: exact saved PDF request restored original website/PDF together, explicit new attempt, unchanged old record/history/PDF bytes, and missing PDF never partially switched the selected context.
+PDF-context evidence: /workspace/.cloud-env/anascummis/distribution/pdf-context-ei3drV

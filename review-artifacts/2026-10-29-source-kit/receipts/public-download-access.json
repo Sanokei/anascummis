@@ -1,0 +1,7 @@
+{
+  "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+  "url": "https://anascummis.com/opensource/anascummis-studio-source.zip",
+  "method": "HEAD",
+  "checkedAtUtc": "2026-10-29T12:28:17.964633+00:00",
+  "normalProxyRoute": true
+}

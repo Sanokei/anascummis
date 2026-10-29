@@ -1,0 +1,11 @@
+{
+  "sourceVersion": "c5735e970e817eed43877b610e7bb79af6dde2ad05c452eaf2a320e74f09acd4",
+  "sameBuiltOutput": {
+    "manifest.json": true,
+    "anascummis-studio-c5735e970e817eed.zip": true,
+    "anascummis-studio-c5735e970e817eed.zip.sha256": true,
+    "source-catalog.json": true,
+    "etro-GPL-3.0.txt": true
+  },
+  "deployed": false
+}

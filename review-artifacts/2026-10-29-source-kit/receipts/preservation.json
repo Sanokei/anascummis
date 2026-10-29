@@ -1,0 +1,13 @@
+{
+  "checkedAtUtc": "2026-10-29T13:25:12.264654+00:00",
+  "originalParentMetadataUnchanged": true,
+  "originalParentFileHashesUnchanged": {
+    "app/page.tsx": true,
+    "tests/app.test.tsx": true,
+    "package.json": true,
+    "bun.lock": true,
+    "artifacts/source.zip": true
+  },
+  "priorReviewManifestUnchanged": true,
+  "patchedParentSourceAndZipUnchanged": true
+}

@@ -1,0 +1,55 @@
+{
+  "repository": "Sanokei/anascummis",
+  "branch": "codex/source-kit-20261029",
+  "base": "7fabdbb2d1ff8b70a1717af77be881e0e7c3d2bf",
+  "sourceHead": "f8329ebabfa55e99633831501b9952867a47acb3",
+  "sourceTree": "c787c4ee990ef2ac7e1388e01ce96929f459d13f",
+  "kit": {
+    "format": 1,
+    "version": "c5735e970e817eed43877b610e7bb79af6dde2ad05c452eaf2a320e74f09acd4",
+    "filename": "anascummis-studio-c5735e970e817eed.zip",
+    "sha256": "b73cc2f7f7950efb6ade3d2a7ec5f296a9950f30af0afe760efbe5fa80439f47",
+    "bytes": 1251163,
+    "files": 199,
+    "source": {
+      "commit": "f8329ebabfa55e99633831501b9952867a47acb3",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "changedPaths": [
+    "README.md",
+    "apps/studio/LOCAL-INSTALL.md",
+    "apps/studio/app/style.css",
+    "apps/studio/components/DownloadLocal.tsx",
+    "apps/studio/core/source-kit-manifest.ts",
+    "apps/studio/package.json",
+    "apps/studio/scripts/publish-sources.ts",
+    "apps/studio/tests/source-kit-manifest.test.ts",
+    "review-artifacts/2026-10-29-source-kit/PLAN.md"
+  ],
+  "validation": {
+    "focusedManifestTests": 3,
+    "focusedAssertions": 22,
+    "studioTypeScript": "passed",
+    "supportedProductionBuild": "passed",
+    "cleanExtractedBuildTypeScriptAndStart": "passed with matching installed dependencies/Python reused",
+    "currentVersionBrowserDownloads": 1,
+    "currentVersionRebuildByteIdentical": true,
+    "pdfContext": "passed with reused Python",
+    "previous192Tests": "preserved baseline; not rerun",
+    "nativeQwenReady": false,
+    "nativeVoiceReady": "unavailable in captured UI; not otherwise established",
+    "freshOnlineInstall": false,
+    "physicalHandsetWindowsMacOSNativeValidation": false,
+    "publicDeployment": false
+  },
+  "runs": {
+    "handoff": "handoff-r97YeF",
+    "privacy": "package-check-TZP20E",
+    "pdf": "pdf-context-ei3drV"
+  }
+}

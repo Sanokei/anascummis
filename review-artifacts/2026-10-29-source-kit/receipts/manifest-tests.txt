@@ -1,0 +1,11 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/source-kit-manifest.test.ts:
+(pass) a source-kit download has an exact version, source provenance and archive checksum [0.34ms]
+(pass) untrusted metadata cannot direct Download outside the versioned same-origin source path [0.16ms]
+(pass) partial, malformed or unbounded metadata does not advertise a verified download [0.13ms]
+
+ 3 pass
+ 0 fail
+ 22 expect() calls
+Ran 3 tests across 1 file. [16.00ms]

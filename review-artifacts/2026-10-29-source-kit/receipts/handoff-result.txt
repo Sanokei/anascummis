@@ -1,0 +1,5 @@
+Started root-start PID 60254 /workspace/anascummis/apps/studio
+Running run build PID 60282 cwd /workspace/.cloud-env/anascummis/distribution/handoff-r97YeF/extracted/studio
+Running run typecheck PID 60629 cwd /workspace/.cloud-env/anascummis/distribution/handoff-r97YeF/extracted/studio
+Started extracted-start PID 60637 /workspace/.cloud-env/anascummis/distribution/handoff-r97YeF/extracted/studio
+Handoff validation passed: /workspace/.cloud-env/anascummis/distribution/handoff-r97YeF

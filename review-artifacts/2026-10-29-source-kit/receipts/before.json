@@ -1,0 +1,16 @@
+{
+  "source": "7fabdbb2d1ff8b70a1717af77be881e0e7c3d2bf",
+  "fixture": "Ordinary production server, no API/provider/voice mocks",
+  "href": "https://anascummis.com/opensource/anascummis-studio-source.zip",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "localManifestStatus": 503,
+  "dialogText": "×\nAnascummis on your computer\n\nAI model: Local service unavailable.\n\nVoice: Initialization unavailable.\n\nThe local AI service is unavailable. Open local setup and check again when it is running.\n\nCheck again\n\nThe local source kit includes the app, setup scripts and licenses. It requires Bun and Python, plus a first-time download of dependencies and models.\n\nDownload local source ZIP\n\nExtract the ZIP, open a terminal in studio, and follow LOCAL-INSTALL.md:\n\nbun install\nbun run setup\nbun run model:setup\nbun run speech:setup\nbun run build\n\nThen run bun run model:start and bun run start in separate terminals. Open http://127.0.0.1:3211.\n\nWindows x64 model setup installs llama.cpp automatically. macOS and Linux need a compatible llama.cpp installation and LLAMA_SERVER. Video tools also need FFmpeg/FFprobe. Allow several GB of disk space; device compatibility varies."
+}

@@ -1,0 +1,38 @@
+{
+  "humanScope": "Direct human messages in this task authorize continuing improvements to the same AI/harness/work-window project. Installation details here preserve the repository source-kit contract; no unseen human requirement for a new installer/platform is inferred.",
+  "repositoryContract": {
+    "ref": "7fabdbb2d1ff8b70a1717af77be881e0e7c3d2bf",
+    "paths": [
+      "apps/studio/LOCAL-INSTALL.md",
+      "apps/studio/components/DownloadLocal.tsx",
+      "apps/studio/scripts/publish-sources.ts",
+      "apps/studio/package.json",
+      "apps/studio/licenses/VOICE.md",
+      "apps/studio/licenses/etro-GPL-3.0.txt"
+    ]
+  },
+  "installedNextPrimaryArtifact": {
+    "version": "16.4.3",
+    "engines": {
+      "node": ">=20.9.0"
+    },
+    "packageSha256": "b67bad7944d603b27dd2d2719b57203fd3b3e5c147b2efa6dea5ceb135274caf",
+    "cliFirstLine": "#!/usr/bin/env node"
+  },
+  "httpPrimarySource": {
+    "url": "https://raw.githubusercontent.com/httpwg/http-core/main/rfc9110.xml",
+    "sha256": "22797e1c392d3a08cca9dca4d8affd7f3461fe574b333658c97b397627efb4d1",
+    "sections": [
+      "8.6 Content-Length",
+      "9.3.2 HEAD"
+    ],
+    "retrieval": "Reused the already fetched official HTTPWG source over verified TLS; no repeated standards download or policy bypass."
+  },
+  "toolchainObserved": {
+    "bun": "1.3.14",
+    "node": "24.19.0",
+    "python": "3.12.14",
+    "platform": "Linux x64"
+  },
+  "publicZipAccess": "Normal HEAD to the old public ZIP returned proxy403; published bytes/version remain unverified."
+}

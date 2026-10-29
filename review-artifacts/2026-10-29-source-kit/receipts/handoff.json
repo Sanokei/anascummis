@@ -1,0 +1,177 @@
+{
+  "fixture": "Actual ordinary production servers and source ZIP over same-origin HTTP. Matching existing node_modules/Python reused; no dependency/model installation or provider/voice response mocks. Missing/invalid manifest states use only the owned extracted output files, restored afterward.",
+  "manifest": {
+    "format": 1,
+    "version": "c5735e970e817eed43877b610e7bb79af6dde2ad05c452eaf2a320e74f09acd4",
+    "filename": "anascummis-studio-c5735e970e817eed.zip",
+    "sha256": "b73cc2f7f7950efb6ade3d2a7ec5f296a9950f30af0afe760efbe5fa80439f47",
+    "bytes": 1251163,
+    "files": 199,
+    "source": {
+      "commit": "f8329ebabfa55e99633831501b9952867a47acb3",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "actualBrowserDownloadsThisRun": 1,
+  "totalArchiveDownloadsAcrossResumedValidation": 1,
+  "priorDownload": null,
+  "archiveSha256Verified": true,
+  "cleanExtractionBuild": true,
+  "cleanExtractionTypeScript": true,
+  "extractedRebuildByteIdentical": true,
+  "supportedStartCommand": "bun run start",
+  "isolatedPort": 3213,
+  "views": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "bounds": {
+        "x": 450,
+        "y": 24,
+        "width": 540,
+        "height": 952
+      },
+      "checksumVisible": true,
+      "closeRemainsVisibleAfterScrolling": true,
+      "draftPreserved": true,
+      "automaticTaskPosts": 0
+    },
+    {
+      "name": "narrow",
+      "width": 360,
+      "height": 800,
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 322,
+        "height": 752
+      },
+      "checksumVisible": true,
+      "closeRemainsVisibleAfterScrolling": true,
+      "draftPreserved": true,
+      "automaticTaskPosts": 0
+    },
+    {
+      "name": "short",
+      "width": 360,
+      "height": 420,
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 322,
+        "height": 372
+      },
+      "checksumVisible": true,
+      "closeRemainsVisibleAfterScrolling": true,
+      "draftPreserved": true,
+      "automaticTaskPosts": 0
+    }
+  ],
+  "missingAndInvalidManifestDisabled": true,
+  "missingArchiveDisabled": true,
+  "initialDownloadActionVisibleWithoutScrolling": true,
+  "retryRestoredSameKit": true,
+  "draftPreservedAcrossDownload": true,
+  "conflictingDraftPreserved": true,
+  "old": {
+    "id": "342b8909-1e5a-444c-93d1-237ac885a82b",
+    "projectId": "9dd8ed82-5fd0-4e8c-9465-689a2f490ce4",
+    "request": "Change the website title to Source Kit Recovery.\nKeep the exact final marker KIT-RECOVERY-Ω.",
+    "status": "failed",
+    "created": 1793279834402,
+    "updated": 1793279834417,
+    "progress": {
+      "phase": "routing",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793279834402
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793279834410
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793279834417,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "retry": {
+    "id": "ed1b69e7-23a7-466b-a06b-b74541459f29",
+    "projectId": "9dd8ed82-5fd0-4e8c-9465-689a2f490ce4",
+    "request": "Change the website title to Source Kit Recovery.\nKeep the exact final marker KIT-RECOVERY-Ω.\nExplicit reviewed new attempt.",
+    "status": "failed",
+    "created": 1793279837466,
+    "updated": 1793279837473,
+    "progress": {
+      "phase": "routing",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793279837466
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793279837468
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793279837473,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "oldRecordActivityPreserved": true,
+  "unrelatedProjectRevision": 0,
+  "automaticReplay": false,
+  "nativeStatus": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "pageErrors": [],
+  "posts": [
+    {
+      "path": "/api/chat",
+      "body": {
+        "project": "9dd8ed82-5fd0-4e8c-9465-689a2f490ce4",
+        "text": "Change the website title to Source Kit Recovery.\nKeep the exact final marker KIT-RECOVERY-Ω.",
+        "research": false,
+        "savedDetails": []
+      }
+    },
+    {
+      "path": "/api/chat",
+      "body": {
+        "project": "9dd8ed82-5fd0-4e8c-9465-689a2f490ce4",
+        "text": "Change the website title to Source Kit Recovery.\nKeep the exact final marker KIT-RECOVERY-Ω.\nExplicit reviewed new attempt.",
+        "research": false,
+        "savedDetails": []
+      }
+    }
+  ],
+  "extractedRoot": "/workspace/.cloud-env/anascummis/distribution/handoff-r97YeF/extracted/studio"
+}

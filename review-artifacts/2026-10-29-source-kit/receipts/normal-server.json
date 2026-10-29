@@ -1,0 +1,33 @@
+{
+  "normalServerStatus": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "sourceKit": {
+    "format": 1,
+    "version": "c5735e970e817eed43877b610e7bb79af6dde2ad05c452eaf2a320e74f09acd4",
+    "filename": "anascummis-studio-c5735e970e817eed.zip",
+    "sha256": "b73cc2f7f7950efb6ade3d2a7ec5f296a9950f30af0afe760efbe5fa80439f47",
+    "bytes": 1251163,
+    "files": 199,
+    "source": {
+      "commit": "f8329ebabfa55e99633831501b9952867a47acb3",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "archiveHead": {
+    "status": 200,
+    "contentType": "application/zip",
+    "contentLength": null
+  },
+  "noProviderMocks": true
+}

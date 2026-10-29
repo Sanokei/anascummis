@@ -1,0 +1,8 @@
+{
+  "oldId": "342b8909-1e5a-444c-93d1-237ac885a82b",
+  "retryId": "ed1b69e7-23a7-466b-a06b-b74541459f29",
+  "oldRecordExactlyUnchangedAfterRetryAndShutdown": true,
+  "retryMatchesRealSavedRecord": true,
+  "savedWorkRecords": 2,
+  "distinctExplicitAttempts": true
+}
