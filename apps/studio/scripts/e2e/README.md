@@ -31,4 +31,12 @@ Exit codes are **0** only when every attempted goal was achieved, **1** for fail
 
 Each run writes `report.json` and a browsable `report.html`, with per-journey `result.json`, screenshots, local downloads, a readable Playwright trace and a host log. Source/runner and served HTML/JS/CSS build fingerprints identify what actually ran. Browser HTTP requests outside the owned host/application origins are blocked and recorded; real server-side permitted public-source fetch remains untouched. The trace is rewritten to remove ephemeral session cookies/auth headers before saving. The generated fixture databases, pairing keys, host logs and private data directories are **local diagnostics**; do not commit or publish them. Share selected screenshots, redacted traces and receipts after review. Reports contain no installed credentials or real user inputs because all user content comes from these public fixtures.
 
+The separately invoked checkpoint diagnostic copies a **stopped**, real task-list fixture to a fresh owned data directory. It is not part of the fresh-user matrix and supplies no inference or mutation API seed:
+
+```sh
+node scripts/e2e/recover-software.mjs --fixture <stopped-private-data> --task <saved-task-id> --output <fresh-evidence-directory>
+```
+
+It verifies the original failed browser check remains paused until a visible Resume click, then requires real validation/artifact success, unchanged native call count/source revision/source hashes, and retained exact failed-check history. It starts the recovered output independently and checks persistence, while proving the original failed fixture/database hashes stayed unchanged. This is recovery of previously generated work, not a claim of a new model-generated application.
+
 To extend the suite, add a record to `journeys.mjs` with `id`, a concrete `goal`, optional `prerequisite`, and `async run(context)`. Context includes `page`, `runtime`, `readApi` (GET only), `send`, `type`, `closeComposer`, `screenshot`, `download`, `zipEntries`, `until`, `assert`, `blocked` and `inspectSoftware(taskId, {name, sourceZip?}, inspectPage)`. The last helper starts only an owned task's real delivered application, optionally rebuilding the supplied downloaded ZIP with matching installed dependencies. Assertions record verified steps; they do not mark the goal complete. `blocked(reason, evidence)` must retain a concrete unmet user outcome. Unsupported or broken behavior must not become a fake pass.

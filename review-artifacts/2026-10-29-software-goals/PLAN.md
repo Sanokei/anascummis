@@ -8,6 +8,8 @@ The exact request is recorded in [the working roadmap](../../PROJECT-ROADMAP.md)
 
 The existing counter compiler is still bare `<main>/<h1>/<output>/<button>` HTML. Fresh before captures from a copied accepted production bundle confirm the count has only an ARIA label, its buttons are 21px high, and mouse counter behavior works. That existing source ZIP/bundle is immutable.
 
+The first native implementation run at `f62573da5e935e6c19b3e62a7113f439d3e7edd9` reached a real revision-1 app, but its host QA mistook Next.js's hidden route-announcer `role=alert` for a storage failure. The actual app retained its tasks. Verification must inspect the collection's own error region; an unrelated framework announcer must pass while a real application storage error still fails. The saved failed task also exposed a recovery bug: explicit Resume reused cached failed checks. Archive those full text receipts in the existing durable activity journal, keep normal polling summaries small, and clear failed verification only on explicit retry. Then resume a copy of that actual native checkpoint without regenerating source, changing its revision or repeating model decisions; preserve the original failed fixture.
+
 On continuation, the prior native model process was defunct while its verified weights remained installed. Normal cached `model:start` restored real inference; four actual calculation checks passed. The termination cause is unknown; cgroup OOM counters and logs do not establish a cause. Separately, the launcher ignored the child's exit status; isolated tests reproduced exit 23 being reported as 0. This fix must preserve actual failure reporting without claiming to explain the earlier termination.
 
 ## Acceptance before completion
@@ -19,6 +21,7 @@ On continuation, the prior native model process was defunct while its verified w
 5. Explicit Software revision guidance `Change heading to My Week; keep existing add/remove/persistence behavior.` creates a separate child. The complete known compiler/provenance must match before automatic compilation. A durable before/after checkpoint permits only its own exact partial writes on restart. Keep the storage key; validate a same-origin replacement with existing browser items. Different ports/origins do not share storage, and no cross-device or concurrent-tab sync is claimed. Parent source/ZIP stay unchanged; the child needs its own checks and download.
 6. A completed ZIP offers actual run instructions in the existing Software card and its generated README. Source inspection and E2E-owned app servers are not an in-product one-click launch action.
 7. The model launcher propagates native child exit codes. Isolated fake-child tests are explicitly launcher tests; genuine inference/user-goal proof remains separate. Reuse installed verified weights, dependencies and the working normal services.
+8. Explicit failed-verification retry archives its exact text receipt atomically with cache invalidation and queueing. The old image is not claimed as an archived immutable image. Passing/stale evidence and completed parents remain unchanged. A copied real failed checkpoint must remain paused until Resume is clicked, then obtain real checks/artifacts with unchanged source bytes, revision and model-call count; inspect its old failure through the existing activity history.
 
 ## Source-backed design
 

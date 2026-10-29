@@ -43,9 +43,10 @@ try {
       await textEquals(heading, contract.heading, 'The actual application heading does not match the requested literal');
     }
     if (contract?.kind === 'collection') {
-      const input = page.getByRole('textbox', {name: contract.inputLabel, exact: true});
-      const add = page.getByRole('button', {name: contract.addButton, exact: true});
-      const list = page.getByRole('list', {name: contract.listLabel, exact: true});
+      const collection = page.getByRole('region', {name: 'Task collection', exact: true});
+      const input = collection.getByRole('textbox', {name: contract.inputLabel, exact: true});
+      const add = collection.getByRole('button', {name: contract.addButton, exact: true});
+      const list = collection.getByRole('list', {name: contract.listLabel, exact: true});
       const rows = list.getByRole('listitem');
       async function collectionEquals(expected, failure) {
         const deadline = Date.now() + 5000;
@@ -80,7 +81,8 @@ try {
       await collectionEquals(['Keep this task', 'Added after reload'], 'Collection controls failed after restoring saved data');
       await page.reload({waitUntil: 'networkidle'});
       await collectionEquals(['Keep this task', 'Added after reload'], 'Later Add/Remove changes did not persist');
-      if (await page.getByRole('alert').count()) throw new Error('The application reported a persistence failure during collection acceptance');
+      const alerts = collection.getByRole('alert');
+      if (await alerts.count()) throw new Error('The application reported a persistence failure during collection acceptance: ' + (await alerts.allTextContents()).join(' ').slice(0, 500));
       behavior = 'collection acceptance passed: exact heading ' + JSON.stringify(contract.heading) + '; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key';
     } else if (contract?.kind === 'counter') {
       const initial = contract.initial ?? 0, delta = contract.delta ?? 1;

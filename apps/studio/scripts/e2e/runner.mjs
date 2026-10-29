@@ -1,7 +1,7 @@
 import {spawn} from 'node:child_process';
 import {createServer} from 'node:net';
-import {createWriteStream} from 'node:fs';
-import {access, mkdir, readFile, writeFile} from 'node:fs/promises';
+import {createWriteStream, constants} from 'node:fs';
+import {access, cp, mkdir, readFile, writeFile} from 'node:fs/promises';
 import {resolve, join, relative} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {setTimeout as delay} from 'node:timers/promises';
@@ -53,6 +53,13 @@ export async function runJourney(browser, journey, viewportName, output) {
   let host, context, page, steps = 0, hostError;
   const env = {...process.env, STUDIO_DATA: data, STUDIO_PORT: String(port), STUDIO_DEV: '0'};
   try {
+    if (journey.fixtureData) {
+      const source = resolve(journey.fixtureData);
+      if (source === data || data.startsWith(source + '/')) throw new Error('Checkpoint recovery output must be separate from its source fixture.');
+      await cp(source, data, {recursive: true, mode: constants.COPYFILE_FICLONE, verbatimSymlinks: true});
+      record.lane = 'real-checkpoint-recovery';
+      record.checkpoint = {source, copiedToOwnedData: true, note: 'Copy of a stopped real native-generated fixture; no mutation API seeding or inference substitute.'};
+    }
     host = spawn(process.env.BUN_PATH || 'bun', ['core/server.ts'], {cwd: studioRoot, env, stdio: ['ignore', 'pipe', 'pipe']});
     activeHosts.add(host);
     host.once('error', error => {hostError = error;}); host.stdout.pipe(log); host.stderr.pipe(log);
@@ -159,7 +166,7 @@ export async function runSuite(journeys, options) {
   try {report.source = execFileSync('git', ['rev-parse', 'HEAD'], {cwd: studioRoot, encoding: 'utf8'}).trim();} catch {}
   try {report.sourceDirty = !!execFileSync('git', ['status', '--porcelain'], {cwd: studioRoot, encoding: 'utf8'}).trim();} catch {}
   report.runnerSource = [];
-  for (const name of ['scripts/test-user-journeys.mjs', 'scripts/e2e/runner.mjs', 'scripts/e2e/journeys.mjs', 'scripts/e2e/artifacts.mjs', 'scripts/e2e/source-reading.mjs', 'scripts/e2e/task-list.mjs', 'scripts/e2e/software-artifact.mjs', 'scripts/e2e/counter-ux.mjs', 'scripts/e2e/window-routing.mjs']) {
+  for (const name of ['scripts/test-user-journeys.mjs', 'scripts/e2e/runner.mjs', 'scripts/e2e/journeys.mjs', 'scripts/e2e/artifacts.mjs', 'scripts/e2e/source-reading.mjs', 'scripts/e2e/task-list.mjs', 'scripts/e2e/software-artifact.mjs', 'scripts/e2e/counter-ux.mjs', 'scripts/e2e/window-routing.mjs', 'scripts/e2e/recover-software.mjs']) {
     report.runnerSource.push({path: name, sha256: sha(await readFile(join(studioRoot, name)))});
   }
   report.servedBuild = [];
