@@ -32,9 +32,15 @@ Two baseline failures were reproduced against the real model: the message route 
 
 The increment verifies narrowly bounded fixes: whole-request command routing, the existing counter's responsive/keyboard usability, a disclosed trusted collection compiler with storage/error/revision acceptance, actual downloaded-source start checks, visible run instructions, and correct model-launcher exit reporting. A real saved native-generated checkpoint recovered through explicit validation retry with unchanged source/revision/model calls; old failed text checks remain inspectable. Fresh desktop/360px task-list/revision and counter journeys passed, including actual downloaded projects. [Pinned evidence and limits](review-artifacts/2026-10-29-software-goals/README.md) accompany the [acceptance plan](review-artifacts/2026-10-29-software-goals/PLAN.md). None of these claims arbitrary model-authored apps.
 
-## Next observed product gap: use the finished application
+## Verified increment: use a checked application in its work window
 
-Completed Software cards expose screenshots, downloads and revision controls. They have no ordinary interactive app-launch action; the E2E inspector's own server is not that product feature. The next acceptance target is an explicit, inspectable launch of a checked app in an existing work window, with source identity, safe origin/process lifecycle, and reopen/restart behavior that preserves user data without surprise execution. Research the browser/process boundaries before implementation. Until then, download/start instructions remain the supported path.
+Supported counter and task-list cards now offer explicit Start/Stop and a real interactive preview of the accepted client page. Preparation checks the exact accepted ZIP and known compiler source, uses existing matching React dependencies, and pins a separate runtime identity. A fixed owned asset worker serves that page at a stable lineage address; other applications retain manual source instructions. Launch performs no model call or dependency installation.
+
+The [launch review](review-artifacts/2026-10-29-app-launch/README.md) records four ordinary-server launch journeys at source `32bbce68`, with 44 outcome assertions, plus two read-only navigation cases. Actual desktop/360px/360×420 views retain readable app content and reachable Stop/status controls. Checks cover saved items across Stop/Start, graceful/forced host interruption and explicit reconnect, same-origin parent/child use, source/download preservation, collision refusal and unconfirmed delivery without replay. Live builds remain discoverable beyond the recent-build page. These tests reuse previously native-generated accepted work; they do not establish fresh inference or arbitrary app-server execution. Physical devices, Windows/macOS and voice remain unverified.
+
+## Next user-result target: a native multi-specialist deliverable
+
+The individual research/answer and artifact paths have bounded evidence, but a useful research→written brief→downloaded document job with genuine native decisions and interrupted continuation is not yet proven. Reproduce that complete user goal before changing the harness: require cited source identity, inspectable dependent handoffs, an actual usable exported artifact, and explicit continuation after restart without repeating accepted work. This is the next acceptance target, not a delivered capability or a substitute for the remaining general-worker failures.
 
 ## Remaining capability milestones
 
