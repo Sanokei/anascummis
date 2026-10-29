@@ -17,7 +17,18 @@ const viewports = {desktop: {width: 1440, height: 1000}, narrow: {width: 360, he
 const sourceUrl = 'https://raw.githubusercontent.com/whatwg/fetch/main/README.md';
 const question = 'Where are the Fetch Standard’s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.';
 const title = 'Fetch test contributor brief';
-const notes = 'Check the live dashboard before filing a browser bug. This is my personal next step, not a claim from the source.';
+const shortNotes = 'Check the live dashboard before filing a browser bug. This is my personal next step, not a claim from the source.';
+const phoneNotes = `Personal handoff for my next Fetch test contribution. These are my own proposed actions and working notes, not instructions or verified claims from the source.
+
+Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details and private URLs from anything I share.
+
+1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with the current README. If the evidence changed, ask a new focused question instead of editing the accepted copy.
+2. Open the browser-results location from the brief. Write down the engine and platform I inspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test passes.
+3. Search the cited test directory for a related case before proposing another test. Keep the candidate filename, my reason for choosing it and any unresolved question in my own draft.
+4. Separate reproduction from implementation. First describe a small public fixture and expected behavior; then explain the proposed test and the observation it should distinguish.
+5. Read the project's current contribution and review instructions before submitting anything. I have not checked those instructions yet, and this brief does not establish them.
+6. Keep a handoff log of what I tried, which evidence I saved and what remains uncertain. After interruption, inspect saved work and continue deliberately rather than repeating accepted research.
+7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for missing guidance instead of guessing. My personal checklist is not a source-backed conclusion.`;
 const activeHosts = new Set();
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const compact = text => text.replace(/\s+/g, '');
@@ -73,13 +84,15 @@ const artifactOf = goal => briefTask(goal)?.execution?.briefArtifact || goal.bri
 const goalDiagnostic = goal => [goal.message, goal.briefState?.draftCheck?.reason, goal.briefState?.writingAttempt?.error].filter(Boolean).join(' · ');
 
 async function runCase(browser, viewportName, options) {
+  const notes = viewportName === 'narrow' ? phoneNotes : shortNotes, pointer = viewportName === 'narrow' ? 'tap' : 'click';
+  if (viewportName === 'narrow') assert(notes.length >= 1500 && notes.length <= 1800, 'The phone goal uses a meaningful bounded personal handoff, not repeated padding.');
   const folder = join(options.output, 'research-document-' + viewportName); await mkdir(folder);
   const data = join(folder, 'private-data'); await mkdir(data);
   const port = await freePort(), base = 'http://127.0.0.1:' + port;
   const record = {id: 'native-research-document', viewport: viewportName, artifactDirectory: 'research-document-' + viewportName,
-    goal: 'Retrieve real Fetch evidence, create a genuinely native-written cited brief, recover stopped/interrupted work explicitly and reopen actual PDF/HTML downloads without losing notes or repeating accepted research.',
+    goal: viewportName === 'narrow' ? 'Use touch to create a real native-written Fetch brief with a substantial personal contributor handoff; preserve the complete note/citations across stop and interruption, inspect every page at 300% zoom and reopen the actual multipage PDF/HTML without repeated research.' : 'Retrieve real Fetch evidence, create a genuinely native-written cited brief, recover stopped/interrupted work explicitly and reopen actual PDF/HTML downloads without losing notes or repeating accepted research.',
     startedAt: new Date().toISOString(), status: 'running', lane: 'fresh-real-native-research-and-document',
-    assertions: [], screenshots: [], processes: [], apiMutations: [], requests: [], externalBrowserRequests: [], downloads: [], pageErrors: [], progress: [],
+    personalNoteCharacters: notes.length, pointerActions: pointer, assertions: [], screenshots: [], processes: [], apiMutations: [], requests: [], externalBrowserRequests: [], downloads: [], pageErrors: [], progress: [],
     limitations: ['Installed local Qwen is used through the ordinary application, never a scripted model, proxy or mutation API seed.', 'Fixed host code renders PDF/HTML from native decisions; this is not arbitrary generated software execution.', 'Desktop Chromium/touch emulation and installed PDF dependencies; no physical handset, voice or fresh online installation claim.', 'One focused Fetch brief: required facts, literal citation identity and a reproduced provenance-misattribution regression; not general semantic citation or answer-quality proof.']};
   let host, context, page, sequence = 0, parent, child, submittedKey;
   const save = () => writeFile(join(folder, 'result.json'), JSON.stringify(record, null, 2) + '\n');
@@ -104,20 +117,25 @@ async function runCase(browser, viewportName, options) {
     }, 'owned ordinary Studio readiness');
   }
   async function get(path) {const response = await page.request.get(base + path); assert(response.ok(), path + ' returned ' + response.status()); return response.json();}
-  async function closeComposer() {const button = page.getByRole('button', {name: 'Close text input', exact: true}); if (await button.isVisible()) await button.click();}
+  async function closeComposer() {const button = page.getByRole('button', {name: 'Close text input', exact: true}); if (await button.isVisible()) await button[pointer]();}
   async function send(text) {
-    if (!await page.getByRole('textbox', {name: 'Message Anascummis', exact: true}).isVisible()) await page.getByRole('button', {name: 'Type a message', exact: true}).click();
-    await page.getByRole('textbox', {name: 'Message Anascummis', exact: true}).fill(text); await page.getByRole('button', {name: 'Send message', exact: true}).click(); await closeComposer();
+    if (!await page.getByRole('textbox', {name: 'Message Anascummis', exact: true}).isVisible()) await page.getByRole('button', {name: 'Type a message', exact: true})[pointer]();
+    await page.getByRole('textbox', {name: 'Message Anascummis', exact: true}).fill(text); await page.getByRole('button', {name: 'Send message', exact: true})[pointer](); await closeComposer();
   }
   async function openGoals() {
     if (await page.locator('.goal-panel').isVisible()) return;
     const help = page.getByRole('region', {name: 'Getting started', exact: true});
     if (!await help.isVisible()) await send('What can you do?');
-    await help.getByRole('button', {name: 'Open Goals', exact: true}).click(); await page.locator('.goal-panel').waitFor();
+    await help.getByRole('button', {name: 'Open Goals', exact: true})[pointer](); await page.locator('.goal-panel').waitFor();
   }
-  async function closeGoals() {
-    await page.getByRole('tab', {name: 'Goals', exact: true}).focus(); await page.keyboard.press('Control+Delete'); await page.locator('.goal-panel').waitFor({state: 'hidden'});
+  async function closeWindow(name, content) {
+    const tab = page.getByRole('tab', {name, exact: true});
+    if (viewportName === 'narrow') await tab.getByTitle('Close', {exact: true}).tap();
+    else {await tab.focus(); await page.keyboard.press('Control+Delete');}
+    await content.waitFor({state: 'hidden'});
   }
+  async function closeGoals() {await closeWindow('Goals', page.locator('.goal-panel'));}
+
   async function restoredBriefForm(id) {
     await card(id).waitFor();
     const input = card(id).getByRole('textbox', {name: 'Brief title', exact: true});
@@ -126,7 +144,7 @@ async function runCase(browser, viewportName, options) {
     // Wait for the hydrated state before choosing whether the form needs opening.
     await until(async () => {
       if (await input.isVisible()) return true;
-      if (await reveal.isVisible() && await reveal.isEnabled()) await reveal.click();
+      if (await reveal.isVisible() && await reveal.isEnabled()) await reveal[pointer]();
       return input.isVisible();
     }, 'saved brief form and browser draft hydrate after opening Goals');
   }
@@ -161,7 +179,7 @@ async function runCase(browser, viewportName, options) {
     assert(href, 'A document download must expose its exact export URL.');
     const url = new URL(href, base); assert.equal(url.origin, base, 'Document exports stay on the owned Studio origin.');
     const pending = page.waitForEvent('download', {timeout: 20_000}); pending.catch(() => {});
-    await control.click(); const file = await pending; assert.equal(await file.failure(), null);
+    await control[pointer](); const file = await pending; assert.equal(await file.failure(), null);
     const path = join(folder, filename); await file.saveAs(path); const bytes = await readFile(path);
     // Chromium exposes downloads through the documented Download event. A
     // download is not required to emit a normal page response event. Save those
@@ -189,14 +207,14 @@ async function runCase(browser, viewportName, options) {
     await page.getByRole('checkbox', {name: 'Question from public sources', exact: true}).check();
     await page.getByRole('textbox', {name: 'Exact question', exact: true}).fill(question); await page.getByRole('textbox', {name: 'Public source URLs', exact: true}).fill(sourceUrl);
     await page.getByRole('checkbox', {name: 'Allow public web research for this goal', exact: true}).check(); await screenshot('explicit-source-question');
-    await page.getByRole('button', {name: 'Save question and read sources', exact: true}).click();
+    await page.getByRole('button', {name: 'Save question and read sources', exact: true})[pointer]();
     await until(async () => {parent = (await get('/api/goals')).find(goal => goal.request === question); return parent;}, 'the exact question is saved');
     parent = await pollGoal(parent.id, goal => ['completed', 'needs_input', 'cancelled'].includes(goal.status), 'genuine native cited parent answer');
     const answer = acceptedAnswer(parent); await verifiedCitations(parent, answer); record.acceptedParentBefore = structuredClone(parent);
     await screenshot('supported-parent-answer', card(parent.id).getByRole('region', {name: 'Source-grounded answer', exact: true}));
     assertStep('Fresh ordinary source question has genuine local native decisions, both required facts, actual support acceptance and literal hash-checked retrieved citations.', {goalId: parent.id, answer: answer.text});
 
-    await card(parent.id).getByRole('button', {name: 'Create research brief', exact: true}).click();
+    await card(parent.id).getByRole('button', {name: 'Create research brief', exact: true})[pointer]();
     const titleInput = card(parent.id).getByRole('textbox', {name: 'Brief title', exact: true}), notesInput = card(parent.id).getByRole('textbox', {name: 'Your notes for the brief', exact: true});
     await titleInput.fill(title); await notesInput.fill(notes); const postsBeforeDraft = mutationCount();
     await screenshot('unsaved-exact-title-and-notes', notesInput); await closeGoals(); await openGoals();
@@ -214,12 +232,12 @@ async function runCase(browser, viewportName, options) {
       record.lostSubmission = {transport: 'The real host accepted the actual UI POST; only its browser acknowledgement was aborted.', status: response.status(), requestKey: submittedKey, goalId: deliveredChild.id};
       await route.abort('connectionfailed');
     }, {times: 1});
-    await card(parent.id).getByRole('button', {name: 'Save and write brief', exact: true}).click();
+    await card(parent.id).getByRole('button', {name: 'Save and write brief', exact: true})[pointer]();
     const inspect = card(parent.id).getByRole('button', {name: 'Inspect saved briefs', exact: true}); await inspect.waitFor();
     await until(() => inspect.isEnabled(), 'uncertain submission settles before inspection');
     const unconfirmedNotice = card(parent.id).locator('.research-brief-create').getByRole('status').filter({hasText: 'Submission was not confirmed.'}); await unconfirmedNotice.waitFor();
     record.lostSubmission.notice = await unconfirmedNotice.innerText();
-    const oneCreate = createCount(); assert.equal(oneCreate, 1); await screenshot('unconfirmed-creation-inspect-before-retry', inspect); await screenshot('unconfirmed-creation-explicit-notice', unconfirmedNotice); await inspect.click();
+    const oneCreate = createCount(); assert.equal(oneCreate, 1); await screenshot('unconfirmed-creation-inspect-before-retry', inspect); await screenshot('unconfirmed-creation-explicit-notice', unconfirmedNotice); await inspect[pointer]();
     await until(() => deliveredChild, 'delivered child receipt');
     child = await snapshotGoal(deliveredChild.id); await card(child.id).waitFor();
     assert.equal(createCount(), oneCreate); assert.equal(child.brief.requestKey, submittedKey); assert.equal(child.brief.title, title); assert.equal(child.brief.notes, notes); assert.equal(child.parentGoalId, parent.id); assert.equal(child.projectId, parent.projectId);
@@ -235,18 +253,18 @@ async function runCase(browser, viewportName, options) {
     child = await pollGoal(child.id, goal => briefTask(goal)?.status === 'running' || ['completed', 'needs_input', 'cancelled'].includes(goal.status), 'actual native writing starts');
     if (child.status === 'needs_input') record.failedChild = structuredClone(child);
     assert.equal(briefTask(child).status, 'running', 'The real brief must remain active for an explicit user Stop. ' + goalDiagnostic(child));
-    await card(child.id).getByRole('button', {name: 'Stop goal', exact: true}).click();
+    await card(child.id).getByRole('button', {name: 'Stop goal', exact: true})[pointer]();
     child = await pollGoal(child.id, goal => goal.status === 'cancelled', 'visible Stop saves cancellation'); record.stoppedChild = structuredClone(child);
     const stoppedPosts = mutationCount(); await closeGoals(); await openGoals(); await page.reload({waitUntil: 'networkidle'}); await openGoals();
     const stopped = await snapshotGoal(child.id); assert.deepEqual(stopped, child); assert.equal(mutationCount(), stoppedPosts); assert.equal(stopped.brief.title, title); assert.equal(stopped.brief.notes, notes);
     const savedNotes = card(child.id).locator('summary').filter({hasText: /^Saved notes and document identity$/}).locator('..');
-    if (!await savedNotes.evaluate(element => element.open)) await savedNotes.locator('> summary').click();
+    if (!await savedNotes.evaluate(element => element.open)) await savedNotes.locator('> summary')[pointer]();
     assert((await savedNotes.innerText()).includes(notes));
     await screenshot('stopped-child-saved-personal-note', savedNotes);
     await screenshot('stopped-child-keeps-notes-and-dependencies', card(child.id).getByRole('button', {name: 'Continue remaining work', exact: true}));
     assertStep('Visible Stop retains exact saved title/note, dependencies and evidence through actual window close/reload; reopening does not resume or repeat accepted work.');
 
-    await card(child.id).getByRole('button', {name: 'Continue remaining work', exact: true}).click();
+    await card(child.id).getByRole('button', {name: 'Continue remaining work', exact: true})[pointer]();
     child = await pollGoal(child.id, goal => !!goal.briefState?.draft || ['completed', 'needs_input', 'cancelled'].includes(goal.status), 'a real native writing decision is persisted before artifact creation');
     if (child.status === 'needs_input') record.failedChild = structuredClone(child);
     assert(child.briefState?.draft && child.briefState.draftSha256, 'A real persisted native draft is required. ' + goalDiagnostic(child));
@@ -260,10 +278,10 @@ async function runCase(browser, viewportName, options) {
     assert(child.tasks.filter(task => task.id !== 'source-brief').every(task => task.status === 'verified' && task.attempts === 0));
     const resume = card(child.id).getByRole('button', {name: 'Continue remaining work', exact: true}); await resume.waitFor();
     const savedWriting = card(child.id).locator('summary').filter({hasText: /^Saved native writing and support review$/}).locator('..');
-    if (!await savedWriting.evaluate(element => element.open)) await savedWriting.locator('> summary').click();
+    if (!await savedWriting.evaluate(element => element.open)) await savedWriting.locator('> summary')[pointer]();
     for (const paragraph of draft.paragraphs) assert((await savedWriting.innerText()).includes(paragraph.text), 'The original interrupted native draft must remain inspectable in the actual work window.');
     const originalDecision = savedWriting.locator('summary').filter({hasText: /^Original native writing decision$/}).locator('..');
-    if (!await originalDecision.evaluate(element => element.open)) await originalDecision.locator('> summary').click();
+    if (!await originalDecision.evaluate(element => element.open)) await originalDecision.locator('> summary')[pointer]();
     const originalJson = originalDecision.getByLabel('Original native writing decision JSON', {exact: true});
     assert.deepEqual(JSON.parse(await originalJson.textContent()), child.briefState.writingAttempt.raw, 'The original saved native decision must be inspectable without presentation rewriting.');
     await screenshot('interrupted-original-native-writing', originalJson);
@@ -275,7 +293,7 @@ async function runCase(browser, viewportName, options) {
     await screenshot('interrupted-saved-native-writing', savedWriting);
     await screenshot('interrupted-native-draft-explicit-continuation', resume);
     assertStep('A real SIGKILL after native draft persistence restarts into needs_input; accepted research, exact saved draft/hash/title/notes survive without automatic replay.', {draftSha256, phaseBeforeKill: record.interruptedCheckpoint.briefState.phase});
-    await resume.click();
+    await resume[pointer]();
     child = await pollGoal(child.id, goal => ['completed', 'needs_input', 'cancelled'].includes(goal.status), 'native support and actual document artifact reach acceptance');
     assert.equal(child.status, 'completed', child.message); assert.equal(briefTask(child).status, 'verified'); assert.equal(briefTask(child).review?.accepted, true);
     assert.deepEqual(child.briefState.draft, draft); assert.equal(child.briefState.draftSha256, draftSha256); assert.equal(child.briefState.supportReview?.supported, true);
@@ -302,6 +320,7 @@ async function runCase(browser, viewportName, options) {
     assert.equal(child.events.filter(event => event.phase === 'writing_document').length, record.interruptedCheckpoint.events.filter(event => event.phase === 'writing_document').length, 'Explicit continuation after the persisted draft must not repeat native writing.');
     assert(child.tasks.filter(task => task.id !== 'source-brief').every(task => task.status === 'verified' && task.attempts === 0));
     assert(!child.events.some(event => event.phase === 'fetching_source'));
+    if (viewportName === 'narrow') assert(artifact.pages >= 2, 'The substantive personal handoff must produce a real multipage phone artifact, not a single-page navigation substitute.');
     record.completedChild = structuredClone(child); record.artifact = artifact;
     assert.equal((await get('/api/goals')).filter(goal => goal.brief?.requestKey === submittedKey).length, 1); assert.equal((await get('/api/documents')).length, 1);
     assert.deepEqual(await snapshotGoal(parent.id), parent);
@@ -328,7 +347,7 @@ async function runCase(browser, viewportName, options) {
       for (const name of ['Open brief PDF', 'Open brief HTML', 'Download brief PDF', 'Download brief HTML']) await reachable(action(card(child.id), name), name);
       await screenshot('saved-brief-actions-' + viewport.width + 'x' + viewport.height, action(card(child.id), 'Open brief PDF'));
     }
-    await action(card(child.id), 'Open brief PDF').click();
+    await action(card(child.id), 'Open brief PDF')[pointer]();
     async function decodedPdfPage(number) {
       const image = page.getByRole('img', {name: 'PDF page ' + number, exact: true}); await image.waitFor();
       await until(() => image.evaluate((element, expected) => element.complete && element.naturalWidth > 0 && new URL(element.src).searchParams.get('page') === String(expected), number), 'ordinary PDF window actually decodes saved page ' + number);
@@ -339,47 +358,60 @@ async function runCase(browser, viewportName, options) {
       const image = await decodedPdfPage(number); record.pdfPagesSeen.push(number);
       await page.getByText('Page ' + number + ' of ' + artifact.pages, {exact: true}).waitFor();
       if (number === 1 || number === artifact.pages) await screenshot('actual-pdf-page-' + number, image);
-      if (number < artifact.pages) {const next = page.getByRole('button', {name: 'Next PDF page', exact: true}); await reachable(next, 'Next PDF page'); await next.click();}
+      if (number < artifact.pages) {const next = page.getByRole('button', {name: 'Next PDF page', exact: true}); await reachable(next, 'Next PDF page'); await next[pointer]();}
     }
     record.multiPageWindowExercised = artifact.pages > 1;
     const lastPageNumber = artifact.pages;
     assert(await page.getByRole('button', {name: 'Next PDF page', exact: true}).isDisabled());
     if (artifact.pages > 1) {
-      const previous = page.getByRole('button', {name: 'Previous PDF page', exact: true}); await reachable(previous, 'Previous PDF page'); await previous.press('Enter'); await decodedPdfPage(lastPageNumber - 1);
-      await page.getByRole('button', {name: 'Next PDF page', exact: true}).click(); await decodedPdfPage(lastPageNumber);
+      const previous = page.getByRole('button', {name: 'Previous PDF page', exact: true}); await reachable(previous, 'Previous PDF page'); if (viewportName === 'narrow') await previous.tap(); else await previous.press('Enter'); await decodedPdfPage(lastPageNumber - 1);
+      await page.getByRole('button', {name: 'Next PDF page', exact: true})[pointer](); await decodedPdfPage(lastPageNumber);
     } else assert(await page.getByRole('button', {name: 'Previous PDF page', exact: true}).isDisabled());
     for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {
       await page.setViewportSize(viewport); const image = await decodedPdfPage(lastPageNumber);
       const fit = page.getByRole('button', {name: 'Fit PDF width', exact: true}), zoomIn = page.getByRole('button', {name: 'Zoom in PDF', exact: true}), zoomOut = page.getByRole('button', {name: 'Zoom out PDF', exact: true});
-      if (await fit.isEnabled()) await fit.click();
+      if (await fit.isEnabled()) await fit[pointer]();
       assert(await fit.isDisabled()); assert(await zoomOut.isDisabled()); await reachable(zoomIn, 'Zoom in PDF');
       const before = await image.boundingBox(); assert(before && before.width > 0);
-      await zoomIn.click(); await until(async () => (await image.boundingBox())?.width > before.width + 1, 'Zoom in makes the actual PDF image larger');
+      const targetZoom = viewportName === 'narrow' ? 3 : 1.25;
+      while ((await image.boundingBox()).width < before.width * targetZoom - 1) {
+        const priorWidth = (await image.boundingBox()).width; assert(await zoomIn.isEnabled()); await zoomIn[pointer]();
+        await until(async () => (await image.boundingBox())?.width > priorWidth + 1, 'Zoom tap increases the actual PDF image width');
+      }
+      const magnified = await image.boundingBox();
+      if (viewportName === 'narrow') {assert(magnified.width >= before.width * 2.99); await page.locator('.pdf-zoom-controls').getByText('300%', {exact: true}).waitFor(); assert(await zoomIn.isDisabled());}
       for (const [control, name] of [[fit, 'Fit PDF width'], [zoomOut, 'Zoom out PDF']]) await reachable(control, name);
       const pan = await image.evaluate(element => {
         let scroller = element.parentElement;
         while (scroller && !/auto|scroll/.test(getComputedStyle(scroller).overflowX)) scroller = scroller.parentElement;
         if (!scroller) return {scrollContainer: false};
-        const beforeLeft = element.getBoundingClientRect().left; scroller.scrollLeft = scroller.scrollWidth;
-        return {scrollContainer: true, clientWidth: scroller.clientWidth, scrollWidth: scroller.scrollWidth, scrollLeft: scroller.scrollLeft, beforeLeft, afterLeft: element.getBoundingClientRect().left};
+        const beforeLeft = element.getBoundingClientRect().left, beforeTop = element.getBoundingClientRect().top;
+        scroller.scrollLeft = scroller.scrollWidth; scroller.scrollTop = scroller.scrollHeight;
+        return {scrollContainer: true, clientWidth: scroller.clientWidth, clientHeight: scroller.clientHeight, scrollWidth: scroller.scrollWidth, scrollHeight: scroller.scrollHeight, scrollLeft: scroller.scrollLeft, scrollTop: scroller.scrollTop, beforeLeft, afterLeft: element.getBoundingClientRect().left, beforeTop, afterTop: element.getBoundingClientRect().top};
       });
       assert(pan.scrollContainer && pan.scrollWidth > pan.clientWidth && pan.scrollLeft > 0 && pan.afterLeft < pan.beforeLeft, 'Zoomed actual PDF image must allow intentional horizontal panning.');
-      await screenshot('actual-pdf-zoom-pan-' + viewport.width + 'x' + viewport.height, zoomIn);
-      await zoomOut.click(); await until(async () => (await image.boundingBox())?.width <= before.width + 1, 'Zoom out restores the page width');
-      await zoomIn.click(); await fit.click(); await until(async () => (await image.boundingBox())?.width <= before.width + 1, 'Fit restores a contained readable page width');
+      if (viewportName === 'narrow') assert(pan.scrollHeight > pan.clientHeight && pan.scrollTop > 0 && pan.afterTop < pan.beforeTop, 'The actual 300% phone page must allow vertical panning as well.');
+      await screenshot('actual-pdf-zoom-pan-' + viewport.width + 'x' + viewport.height, zoomOut);
+      if (viewportName === 'narrow') {
+        await image.evaluate(element => {const scroller = element.closest('.pdf-page-scroll'); scroller.scrollLeft = 0; scroller.scrollTop = Math.min(180, scroller.scrollHeight - scroller.clientHeight);});
+        await screenshot('actual-pdf-readable-300pct-' + viewport.width + 'x' + viewport.height, zoomOut);
+      }
+      await zoomOut[pointer](); await until(async () => (await image.boundingBox())?.width < magnified.width - 1, 'Zoom out reduces the actual page width');
+      if (!await fit.isEnabled()) await zoomIn[pointer]();
+      await fit[pointer](); await until(async () => (await image.boundingBox())?.width <= before.width + 1, 'Fit restores a contained readable page width');
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'PDF zoom must not make the application body overflow.');
-      (record.pdfZoomChecks ||= []).push({viewport, beforeWidth: before.width, ...pan, fitRestored: true});
+      (record.pdfZoomChecks ||= []).push({viewport, pointer, targetZoom, beforeWidth: before.width, magnifiedWidth: magnified.width, ...pan, panMechanism: 'Actual overflow view scroll positions; browser touch taps operate zoom controls. No physical swipe claim.', fitRestored: true});
       await screenshot('actual-pdf-window-' + viewport.width + 'x' + viewport.height, fit);
     }
     assertStep('The ordinary PDF window decodes each actual page, exposes reachable controls, supports real zoom/pan/fit on desktop/phone/short viewports and retains the last inspected page.', {pagesSeen: record.pdfPagesSeen, multiPageExercised: record.multiPageWindowExercised});
     const postsBeforeReturn = mutationCount();
-    await page.getByRole('tab', {name: 'PDF', exact: true}).focus(); await page.keyboard.press('Control+Delete'); await page.locator('.pdf-preview').waitFor({state: 'hidden'});
-    await page.getByRole('tab', {name: 'Goals', exact: true}).click(); await card(child.id).waitFor();
+    await closeWindow('PDF', page.locator('.pdf-preview'));
+    await page.getByRole('tab', {name: 'Goals', exact: true})[pointer](); await card(child.id).waitFor();
     assert.equal(await card(child.id).locator('h3').textContent(), title);
     const returnedBrief = card(child.id).getByRole('region', {name: 'Presented brief', exact: true}); await returnedBrief.waitFor();
     assert((await returnedBrief.innerText()).includes(written));
     const returnedNotes = card(child.id).locator('summary').filter({hasText: /^Saved notes and document identity$/}).locator('..');
-    if (!await returnedNotes.evaluate(element => element.open)) await returnedNotes.locator('> summary').click();
+    if (!await returnedNotes.evaluate(element => element.open)) await returnedNotes.locator('> summary')[pointer]();
     assert((await returnedNotes.innerText()).includes(notes));
     await page.setViewportSize({width: 360, height: 800}); await screenshot('returned-to-correct-brief-work-window', returnedBrief);
     await screenshot('returned-brief-keeps-personal-note', returnedNotes);
@@ -387,7 +419,7 @@ async function runCase(browser, viewportName, options) {
       const shownSource = card(child.id).getByRole('article', {name: 'Saved source ' + source.taskId, exact: true}); await shownSource.waitFor();
       assert.equal(await shownSource.getByRole('link', {name: source.url, exact: true}).getAttribute('href'), source.url);
       const identity = shownSource.locator('summary').filter({hasText: /^Content identity$/}).locator('..');
-      if (!await identity.evaluate(element => element.open)) await identity.locator('> summary').click();
+      if (!await identity.evaluate(element => element.open)) await identity.locator('> summary')[pointer]();
       for (const expected of [source.sha256, source.textSha256, source.id]) assert((await identity.innerText()).includes(expected));
       await screenshot('returned-brief-source-identity-' + source.taskId, identity);
     }
@@ -395,7 +427,7 @@ async function runCase(browser, viewportName, options) {
     assertStep('Closing the actual PDF and explicitly activating Goals returns to the correct saved brief, presented prose, personal note and checked source identity on a phone viewport without another mutation.');
     const htmlControl = action(card(child.id), 'Open brief HTML'), previewHref = await htmlControl.getAttribute('href');
     assert(previewHref, 'The supported HTML opening action must identify its saved document URL.'); const previewUrl = new URL(previewHref, base); assert.equal(previewUrl.origin, base); assert.equal(previewUrl.pathname, '/api/goals/' + child.id + '/brief/preview');
-    const pendingPreview = context.waitForEvent('page'); pendingPreview.catch(() => {}); await htmlControl.click(); const exported = await pendingPreview; exported.setDefaultTimeout(12_000);
+    const pendingPreview = context.waitForEvent('page'); pendingPreview.catch(() => {}); await htmlControl[pointer](); const exported = await pendingPreview; exported.setDefaultTimeout(12_000);
     await exported.waitForURL(previewUrl.href); await exported.waitForLoadState('domcontentloaded');
     const previewResponse = await page.request.get(previewUrl.href); assert(previewResponse.ok()); assert.deepEqual(await previewResponse.body(), html.bytes, 'The supported inline preview must display the exact actual browser-downloaded HTML bytes.');
     const previewHeaders = previewResponse.headers(); assert.match(previewHeaders['content-type'], /^text\/html\b/i); assert.match(previewHeaders['content-security-policy'] || '', /\bsandbox\b/); assert.match(previewHeaders['content-security-policy'] || '', /(?:script-src|default-src)\s+'none'/); assert.equal(previewHeaders['x-content-type-options'], 'nosniff'); assert.equal(previewHeaders['referrer-policy'], 'no-referrer');
@@ -415,7 +447,7 @@ async function runCase(browser, viewportName, options) {
 
     const finished = await snapshotGoal(child.id), completedPosts = mutationCount(); await stopHost(host, 'SIGTERM'); host = undefined; await boot(); await page.reload({waitUntil: 'networkidle'}); await openGoals();
     assert.deepEqual(await snapshotGoal(child.id), finished); assert.deepEqual(await snapshotGoal(parent.id), parent); assert.equal(mutationCount(), completedPosts);
-    await card(child.id).waitFor(); await action(card(child.id), 'Open brief PDF').click(); await decodedPdfPage(lastPageNumber);
+    await card(child.id).waitFor(); await action(card(child.id), 'Open brief PDF')[pointer](); await decodedPdfPage(lastPageNumber);
     await page.getByText('Page ' + lastPageNumber + ' of ' + artifact.pages, {exact: true}).waitFor();
     await screenshot('reopened-pdf-keeps-last-inspected-page', page.getByRole('button', {name: 'Fit PDF width', exact: true}));
     assert.equal((await get('/api/documents')).length, 1); assert.equal((await get('/api/goals')).filter(goal => goal.brief?.requestKey === submittedKey).length, 1);
