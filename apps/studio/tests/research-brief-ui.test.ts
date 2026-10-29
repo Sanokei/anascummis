@@ -82,6 +82,10 @@ test('brief UI keeps drafts and uncertain submissions without replaying them', a
         supportReview: {supported: true, reason: 'Presented wording is supported.'}, artifact: {documentId: 'owned-document', pages: 2}}}), parent);
     await page.getByRole('button', {name: 'Open brief PDF', exact: true}).click();
     expect(await page.evaluate(() => (window as any).lastOpened)).toBe('owned-document');
+    const openHtml = page.getByRole('link', {name: 'Open brief HTML', exact: true});
+    expect(await openHtml.getAttribute('href')).toBe('/api/goals/f725b77e-e7ce-44a6-aafe-a1dd734f6f5a/brief/preview');
+    expect(await openHtml.getAttribute('target')).toBe('_blank');
+    expect(await openHtml.getAttribute('rel')).toBe('noopener noreferrer');
     expect(await page.getByRole('link', {name: 'Download brief PDF', exact: true}).getAttribute('href')).toBe('/api/goals/f725b77e-e7ce-44a6-aafe-a1dd734f6f5a/brief/export?format=pdf');
     const presented = page.getByRole('region', {name: 'Presented brief', exact: true});
     expect(await presented.getByText('One cited fact <script>window.presentationExecuted=true</script> [1]', {exact: true}).isVisible()).toBe(true);

@@ -23,6 +23,7 @@ function SavedBrief({goal, onOpenDocument}: Pick<Props, 'goal' | 'onOpenDocument
       <p>{artifact.pages} {artifact.pages === 1 ? 'page' : 'pages'} · {goal.status === 'completed' ? 'Document and goal checks passed.' : 'The files are saved; goal acceptance is still shown above.'}</p>
       <div className="goal-actions research-brief-actions">
         <button type="button" onClick={() => onOpenDocument(artifact.documentId)}>Open brief PDF</button>
+        <a href={'/api/goals/' + encodeURIComponent(goal.id) + '/brief/preview'} target="_blank" rel="noopener noreferrer">Open brief HTML</a>
         <a href={'/api/goals/' + encodeURIComponent(goal.id) + '/brief/export?format=pdf'} download>Download brief PDF</a>
         <a href={'/api/goals/' + encodeURIComponent(goal.id) + '/brief/export?format=html'} download>Download brief HTML</a>
       </div>

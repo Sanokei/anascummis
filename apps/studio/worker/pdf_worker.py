@@ -77,7 +77,7 @@ def inspect(doc, pages=None):
 
 class BriefMarkup(HTMLParser):
     """The research renderer accepts only the host's inert document vocabulary."""
-    tags = {'html', 'head', 'meta', 'title', 'style', 'body', 'main', 'h1', 'h2', 'p', 'br', 'a'}
+    tags = {'html', 'head', 'meta', 'title', 'style', 'body', 'main', 'h1', 'h2', 'p', 'br', 'a', 'b'}
     attributes = {'lang', 'charset', 'name', 'content', 'http-equiv'}
 
     def __init__(self):
@@ -85,6 +85,10 @@ class BriefMarkup(HTMLParser):
         self.in_style = False
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'b':
+            if attrs:
+                raise ValueError('Research brief bold prefixes cannot have attributes')
+            return
         if tag == 'a':
             if len(attrs) != 1 or attrs[0][0] != 'href' or not safe_brief_link(attrs[0][1]):
                 raise ValueError('Research brief links must be exact public HTTPS source links')

@@ -216,7 +216,10 @@ async function runCase(browser, viewportName, options) {
     }, {times: 1});
     await card(parent.id).getByRole('button', {name: 'Save and write brief', exact: true}).click();
     const inspect = card(parent.id).getByRole('button', {name: 'Inspect saved briefs', exact: true}); await inspect.waitFor();
-    const oneCreate = createCount(); assert.equal(oneCreate, 1); await screenshot('unconfirmed-creation-inspect-before-retry', inspect); await inspect.click();
+    await until(() => inspect.isEnabled(), 'uncertain submission settles before inspection');
+    const unconfirmedNotice = card(parent.id).locator('.research-brief-create').getByRole('status').filter({hasText: 'Submission was not confirmed.'}); await unconfirmedNotice.waitFor();
+    record.lostSubmission.notice = await unconfirmedNotice.innerText();
+    const oneCreate = createCount(); assert.equal(oneCreate, 1); await screenshot('unconfirmed-creation-inspect-before-retry', inspect); await screenshot('unconfirmed-creation-explicit-notice', unconfirmedNotice); await inspect.click();
     await until(() => deliveredChild, 'delivered child receipt');
     child = await snapshotGoal(deliveredChild.id); await card(child.id).waitFor();
     assert.equal(createCount(), oneCreate); assert.equal(child.brief.requestKey, submittedKey); assert.equal(child.brief.title, title); assert.equal(child.brief.notes, notes); assert.equal(child.parentGoalId, parent.id); assert.equal(child.projectId, parent.projectId);
@@ -311,7 +314,7 @@ async function runCase(browser, viewportName, options) {
     const inspected = await exec(python, ['-c', "import json,sys,pathlib,pymupdf as fitz\np=fitz.open(sys.argv[1]);out=pathlib.Path(sys.argv[2]);pages=[]\nfor i,page in enumerate(p):\n page.get_pixmap(matrix=fitz.Matrix(1.25,1.25)).save(str(out/('downloaded-pdf-page-'+str(i+1)+'.png')))\n pages.append({'number':i+1,'width':page.rect.width,'height':page.rect.height,'text':page.get_text(),'links':[{'uri':link.get('uri'),'kind':link.get('kind'),'rect':list(link['from'])} for link in page.get_links()]})\nprint(json.dumps({'pages':pages,'pageCount':len(p),'metadata':p.metadata}))", pdf.path, folder], {maxBuffer: 4_000_000});
     const pdfInspection = JSON.parse(inspected.stdout); await writeFile(join(folder, 'pdf-inspection.json'), JSON.stringify(pdfInspection, null, 2) + '\n'); record.pdfInspection = {path: 'pdf-inspection.json', pages: pdfInspection.pageCount, textComparison: 'Unicode NFKC for standard font ligatures, then layout whitespace removed; no other characters omitted.'};
     assert.equal(pdfInspection.pageCount, artifact.pages); assert(pdfInspection.pageCount >= 1); const extracted = pdfInspection.pages.map(value => value.text).join('\n');
-    for (const expected of [title, notes, 'web-platform-tests/wpt', 'wpt.fyi/results/fetch', sourceUrl, ...child.sources.flatMap(source => [source.title, source.retrievedAt, source.sha256, source.textSha256]), ...answer.citations.map(citation => citation.quote)]) assert(pdfCompact(extracted).includes(pdfCompact(expected)), 'Actual PDF text must include ' + expected);
+    for (const expected of [title, notes, written, 'web-platform-tests/wpt', 'wpt.fyi/results/fetch', sourceUrl, ...child.sources.flatMap(source => [source.title, source.retrievedAt, source.sha256, source.textSha256]), ...answer.citations.map(citation => citation.quote)]) assert(pdfCompact(extracted).includes(pdfCompact(expected)), 'Actual PDF text must include ' + expected);
     assert.equal(pdfCompact(extracted).split(pdfCompact(answer.limit)).length - 1, 1, 'The actual PDF keeps the host provenance once in its separate scope section.');
     const pdfLinks = pdfInspection.pages.flatMap(value => value.links);
     for (const source of child.sources) assert(pdfLinks.some(link => link.uri === source.url), 'Actual PDF annotations must preserve each complete original source URL without inserted layout spaces.');
@@ -322,7 +325,7 @@ async function runCase(browser, viewportName, options) {
 
     for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {
       await page.setViewportSize(viewport); await openGoals();
-      for (const name of ['Open brief PDF', 'Download brief PDF', 'Download brief HTML']) await reachable(action(card(child.id), name), name);
+      for (const name of ['Open brief PDF', 'Open brief HTML', 'Download brief PDF', 'Download brief HTML']) await reachable(action(card(child.id), name), name);
       await screenshot('saved-brief-actions-' + viewport.width + 'x' + viewport.height, action(card(child.id), 'Open brief PDF'));
     }
     await action(card(child.id), 'Open brief PDF').click();
@@ -390,9 +393,15 @@ async function runCase(browser, viewportName, options) {
     }
     assert.equal(mutationCount(), postsBeforeReturn); assert.deepEqual(await snapshotGoal(child.id), record.completedChild); assert.deepEqual(await snapshotGoal(parent.id), parent);
     assertStep('Closing the actual PDF and explicitly activating Goals returns to the correct saved brief, presented prose, personal note and checked source identity on a phone viewport without another mutation.');
-    const exported = await context.newPage(); exported.setDefaultTimeout(12_000); await exported.goto(pathToFileURL(html.path).href, {waitUntil: 'load'});
+    const htmlControl = action(card(child.id), 'Open brief HTML'), previewHref = await htmlControl.getAttribute('href');
+    assert(previewHref, 'The supported HTML opening action must identify its saved document URL.'); const previewUrl = new URL(previewHref, base); assert.equal(previewUrl.origin, base); assert.equal(previewUrl.pathname, '/api/goals/' + child.id + '/brief/preview');
+    const pendingPreview = context.waitForEvent('page'); pendingPreview.catch(() => {}); await htmlControl.click(); const exported = await pendingPreview; exported.setDefaultTimeout(12_000);
+    await exported.waitForURL(previewUrl.href); await exported.waitForLoadState('domcontentloaded');
+    const previewResponse = await page.request.get(previewUrl.href); assert(previewResponse.ok()); assert.deepEqual(await previewResponse.body(), html.bytes, 'The supported inline preview must display the exact actual browser-downloaded HTML bytes.');
+    const previewHeaders = previewResponse.headers(); assert.match(previewHeaders['content-type'], /^text\/html\b/i); assert.match(previewHeaders['content-security-policy'] || '', /\bsandbox\b/); assert.match(previewHeaders['content-security-policy'] || '', /(?:script-src|default-src)\s+'none'/); assert.equal(previewHeaders['x-content-type-options'], 'nosniff'); assert.equal(previewHeaders['referrer-policy'], 'no-referrer');
+    record.htmlOpenability = {transport: 'Actual visible Open brief HTML link opens the verified saved document through ordinary Studio HTTP.', path: previewUrl.pathname, byteIdenticalToBrowserDownload: true, sha256: sha(html.bytes), headers: Object.fromEntries(['content-type', 'content-security-policy', 'x-content-type-options', 'referrer-policy', 'content-disposition', 'cache-control'].filter(name => previewHeaders[name] !== undefined).map(name => [name, previewHeaders[name]])), fileUrlLimitation: 'The earlier genuine desktop file:// attempt was blocked with ERR_BLOCKED_BY_ADMINISTRATOR; no browser flags or policy settings were changed. Local-file opening remains unverified in this managed browser.'};
     const body = await exported.locator('body').innerText();
-    for (const expected of [title, notes, 'web-platform-tests/wpt', 'wpt.fyi/results/fetch', sourceUrl, ...child.sources.flatMap(source => [source.title, source.retrievedAt, source.sha256, source.textSha256]), ...answer.citations.map(citation => citation.quote)]) assert(compact(body).includes(compact(expected)), 'Opened actual HTML must include ' + expected);
+    for (const expected of [title, notes, written, 'web-platform-tests/wpt', 'wpt.fyi/results/fetch', sourceUrl, ...child.sources.flatMap(source => [source.title, source.retrievedAt, source.sha256, source.textSha256]), ...answer.citations.map(citation => citation.quote)]) assert(compact(body).includes(compact(expected)), 'Opened actual HTML must include ' + expected);
     assert.equal(compact(body).split(compact(answer.limit)).length - 1, 1, 'The actual HTML keeps the host provenance once in its separate scope section.');
     const htmlLinks = await exported.locator('a[href]').evaluateAll(elements => elements.map(element => element.getAttribute('href')));
     for (const source of child.sources) assert(htmlLinks.includes(source.url), 'Actual HTML anchors must preserve each complete original source URL.');
@@ -402,7 +411,7 @@ async function runCase(browser, viewportName, options) {
       await exported.setViewportSize(viewport); assert(await exported.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Downloaded HTML must fit the viewport.');
       const file = 'downloaded-html-' + viewport.width + 'x' + viewport.height + '.png'; await exported.screenshot({path: join(folder, file)}); if (!record.screenshots.includes(file)) record.screenshots.push(file);
     }
-    await exported.close(); assertStep('Actual HTML download opens independently with complete attribution/notes, no generated executable elements and viewport-contained desktop/phone/short document layout.');
+    await exported.close(); assertStep('The visible Studio HTML action opens bytes identical to the actual download with complete presented prose/attribution/notes, restrictive sandbox headers, no generated executable elements and contained desktop/phone/short layout; managed file-URL opening remains blocked.');
 
     const finished = await snapshotGoal(child.id), completedPosts = mutationCount(); await stopHost(host, 'SIGTERM'); host = undefined; await boot(); await page.reload({waitUntil: 'networkidle'}); await openGoals();
     assert.deepEqual(await snapshotGoal(child.id), finished); assert.deepEqual(await snapshotGoal(parent.id), parent); assert.equal(mutationCount(), completedPosts);
