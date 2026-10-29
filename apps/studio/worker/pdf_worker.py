@@ -2,6 +2,7 @@
 import json, sys, os, math, re
 from pathlib import Path
 from html.parser import HTMLParser
+from urllib.parse import urlsplit
 import pymupdf as fitz
 from PIL import Image
 
@@ -76,7 +77,7 @@ def inspect(doc, pages=None):
 
 class BriefMarkup(HTMLParser):
     """The research renderer accepts only the host's inert document vocabulary."""
-    tags = {'html', 'head', 'meta', 'title', 'style', 'body', 'main', 'h1', 'h2', 'p', 'br'}
+    tags = {'html', 'head', 'meta', 'title', 'style', 'body', 'main', 'h1', 'h2', 'p', 'br', 'a'}
     attributes = {'lang', 'charset', 'name', 'content', 'http-equiv'}
 
     def __init__(self):
@@ -84,6 +85,10 @@ class BriefMarkup(HTMLParser):
         self.in_style = False
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            if len(attrs) != 1 or attrs[0][0] != 'href' or not safe_brief_link(attrs[0][1]):
+                raise ValueError('Research brief links must be exact public HTTPS source links')
+            return
         if tag not in self.tags or any(key not in self.attributes for key, value in attrs):
             raise ValueError('Research brief markup must be inert host-generated text')
         if tag == 'style':
@@ -100,12 +105,22 @@ class BriefMarkup(HTMLParser):
             raise ValueError('Research brief styles cannot fetch resources')
 
 
-def verify_brief(doc, expected):
+def safe_brief_link(value):
+    if not isinstance(value, str) or len(value) > 2000:
+        return False
+    url = urlsplit(value)
+    return url.scheme == 'https' and bool(url.hostname) and not url.username and not url.password and url.port in (None, 443)
+
+
+def verify_brief(doc, expected, expected_links):
     if not isinstance(expected, list) or not expected or len(expected) > 100 or any(
             not isinstance(value, str) or len(value) > 12000 for value in expected):
         raise ValueError('Research brief text expectations are invalid')
     if not 1 <= len(doc) <= 20:
         raise ValueError('Research brief must contain 1 to 20 pages')
+    if not isinstance(expected_links, list) or not 1 <= len(expected_links) <= 2 or any(
+            not safe_brief_link(value) for value in expected_links) or len(set(expected_links)) != len(expected_links):
+        raise ValueError('Research brief source link expectations are invalid')
     # Expand PDF font ligatures (for example the glyph ﬁ back to fi).
     text = ''.join(page.get_text(flags=fitz.TEXTFLAGS_TEXT & ~fitz.TEXT_PRESERVE_LIGATURES, sort=True) for page in doc)
     ligatures = str.maketrans({'ﬀ': 'ff', 'ﬁ': 'fi', 'ﬂ': 'fl', 'ﬃ': 'ffi', 'ﬄ': 'ffl', 'ﬅ': 'st', 'ﬆ': 'st'})
@@ -119,6 +134,7 @@ def verify_brief(doc, expected):
         if found < 0:
             raise ValueError('Research brief rendering omitted or changed expected text at section ' + str(index + 1))
         position = found + len(wanted)
+    links = []
     for page in doc:
         for block in page.get_text('dict')['blocks']:
             for line in block.get('lines', []):
@@ -126,7 +142,17 @@ def verify_brief(doc, expected):
                     x0, y0, x1, y1 = span['bbox']
                     if not all(math.isfinite(v) for v in span['bbox']) or x0 < 47 or y0 < 47 or x1 > 548 or y1 > 795:
                         raise ValueError('Research brief text exceeds the printable page bounds')
-    return {'pageCount': len(doc), 'complete': True, 'contained': True}
+        for link in page.get_links():
+            uri, rect = link.get('uri'), link.get('from')
+            if uri not in expected_links or rect is None or not fitz.Rect(47, 47, 548, 795).contains(rect):
+                raise ValueError('Research brief has an unexpected or out-of-bounds link')
+            links.append(uri)
+    # Story may emit several adjacent URI annotations for one anchor's words.
+    # Every annotation above is checked; compare the ordered distinct exact URIs.
+    unique_links = list(dict.fromkeys(links))
+    if unique_links != expected_links:
+        raise ValueError('Research brief did not preserve each exact source URL as a usable PDF link')
+    return {'pageCount': len(doc), 'complete': True, 'contained': True, 'links': unique_links, 'linksContained': True, 'linkAnnotations': len(links)}
 
 
 def run(job):
@@ -145,12 +171,12 @@ def run(job):
             return fitz.Rect(0, 0, 595, 842), fitz.Rect(48, 48, 547, 794), None
         doc = story.write_with_links(page_rect)
         doc.set_metadata({'title': a.get('title', 'Research brief'), 'producer': 'Anascummis fixed research-brief renderer'})
-        result = verify_brief(doc, a.get('expected'))
+        result = verify_brief(doc, a.get('expected'), a.get('expectedLinks'))
         doc.save(output, garbage=4, deflate=True)
         return result
     if op == 'verify_research_brief':
         with fitz.open(job['input']) as doc:
-            return verify_brief(doc, a.get('expected'))
+            return verify_brief(doc, a.get('expected'), a.get('expectedLinks'))
     if op == 'image_info':
         with Image.open(job['image']) as im:
             if im.format not in ('PNG', 'JPEG') or im.width * im.height > 40_000_000:

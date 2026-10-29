@@ -8,5 +8,7 @@ export type BriefState = {
   id: string; goalId: string; inputSha256: string; created: number;
   phase: 'preparing' | 'draft_saved' | 'reviewed' | 'rejected' | 'saved';
   draft?: BriefDraft; draftSha256?: string;
+  writingAttempt?: {raw: unknown; sha256: string; error?: string};
+  draftCheck?: {accepted: boolean; reason: string};
   supportReview?: {supported: boolean; reason: string}; artifact?: BriefArtifact;
 };

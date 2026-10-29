@@ -83,6 +83,18 @@ test('brief UI keeps drafts and uncertain submissions without replaying them', a
     await page.getByText('Saved native writing and support review', {exact: true}).click();
     expect(await page.getByText('One cited fact [1]', {exact: true}).isVisible()).toBe(true);
     expect(posts).toBe(2);
+    await page.evaluate((parent) => (window as any).showBrief({...parent, id: 'f725b77e-e7ce-44a6-aafe-a1dd734f6f5a',
+      brief: {parentGoalId: parent.id, requestKey: '4f5688b1-8192-498f-9f19-c88c98e6268c', title: 'Rejected writing', notes: 'Keep this note'},
+      briefState: {phase: 'rejected', draftCheck: {accepted: false, reason: 'Host scope was wrongly cited.'},
+        writingAttempt: {sha256: 'a'.repeat(64), error: 'A host verification limit was attributed to a source.', raw: {paragraphs: [{text: '<script>window.nativeExecuted=true</script>', citations: [1]}]}}}}), parent);
+    await page.getByText('Writing needs attention', {exact: true}).waitFor();
+    expect(await page.getByRole('link', {name: 'Download brief PDF', exact: true}).count()).toBe(0);
+    const writing = page.locator('.research-brief-writing');
+    if (await writing.getAttribute('open') === null) await page.getByText('Saved native writing and support review', {exact: true}).click();
+    expect(await page.getByText('Host content check rejected the writing: Host scope was wrongly cited.', {exact: true}).isVisible()).toBe(true);
+    await page.getByText('Original native writing decision', {exact: true}).click();
+    expect(await page.getByLabel('Original native writing decision JSON', {exact: true}).innerText()).toContain('<script>window.nativeExecuted=true</script>');
+    expect(await page.evaluate(() => (window as any).nativeExecuted)).toBeUndefined();
     await context.close();
 
     const unavailable = await browser.newContext();

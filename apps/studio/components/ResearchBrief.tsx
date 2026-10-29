@@ -8,15 +8,17 @@ type BriefGoal = GoalRecord & {brief?: BriefRequest; briefState?: BriefState};
 type Props = {goal: BriefGoal; onCreated: (child: GoalRecord) => void; onOpenDocument: (id: string) => void};
 const phaseLabels: Record<BriefState['phase'], string> = {
   preparing: 'Preparing the writing handoff', draft_saved: 'Native writing draft saved',
-  reviewed: 'Writing support review saved', rejected: 'Writing needs more support', saved: 'Document files saved'
+  reviewed: 'Writing support review saved', rejected: 'Writing needs attention', saved: 'Document files saved'
 };
 
 function SavedBrief({goal, onOpenDocument}: Pick<Props, 'goal' | 'onOpenDocument'>) {
   const brief = goal.brief!, state = goal.briefState;
   const artifact = state?.artifact || (goal.tasks.find(task => (task as {sourceBrief?: boolean}).sourceBrief)?.execution as {briefArtifact?: BriefArtifact} | undefined)?.briefArtifact;
+  const writingRejected = state?.phase === 'rejected' || state?.draftCheck?.accepted === false || !!state?.writingAttempt?.error;
   return <section className="research-brief" aria-label="Research brief">
     <h4>{brief.title}</h4>
     <p>{state ? phaseLabels[state.phase] : 'Title and notes saved. Waiting for the document specialist.'}</p>
+    {writingRejected && <p role="status">This writing has not passed the document checks. Open the parent question to refine its evidence or create a new brief. Continuing keeps the rejected decision; it does not silently rewrite it.</p>}
     {artifact && <>
       <p>{artifact.pages} {artifact.pages === 1 ? 'page' : 'pages'} · {goal.status === 'completed' ? 'Document and goal checks passed.' : 'The files are saved; goal acceptance is still shown above.'}</p>
       <div className="goal-actions research-brief-actions">
@@ -39,13 +41,20 @@ function SavedBrief({goal, onOpenDocument}: Pick<Props, 'goal' | 'onOpenDocument
         <small>HTML SHA-256 {artifact.htmlSha256}</small>
       </>}
     </details>
-    {state?.draft && <details className="research-brief-writing">
+    {(state?.draft || state?.writingAttempt) && <details className="research-brief-writing">
       <summary>Saved native writing and support review</summary>
-      {state.draft.paragraphs.map((paragraph, index) => <p key={index}>{paragraph.text} {paragraph.citations.map(citation => '[' + citation + ']').join(' ')}</p>)}
-      {state.supportReview && <p>{state.supportReview.supported ? 'Writing support check passed: ' : 'Writing support check needs attention: '}{state.supportReview.reason}</p>}
+      {state.draftCheck && <p>{state.draftCheck.accepted ? 'Host content check passed: ' : 'Host content check rejected the writing: '}{state.draftCheck.reason}</p>}
+      {state.writingAttempt?.error && <p>Native writing was retained but could not be used: {state.writingAttempt.error}</p>}
+      {state.draft?.paragraphs.map((paragraph, index) => <p key={index}>{paragraph.text} {paragraph.citations.map(citation => '[' + citation + ']').join(' ')}</p>)}
+      {state.supportReview && <p>{state.supportReview.supported ? 'Native support review passed: ' : 'Native support review needs attention: '}{state.supportReview.reason}</p>}
+      {state.writingAttempt && <details>
+        <summary>Original native writing decision</summary>
+        <small>Writing decision SHA-256 {state.writingAttempt.sha256}</small>
+        <pre tabIndex={0} aria-label="Original native writing decision JSON" style={{maxHeight: 240, overflow: 'auto', whiteSpace: 'pre-wrap', overflowWrap: 'anywhere'}}>{JSON.stringify(state.writingAttempt.raw, null, 2)}</pre>
+      </details>}
       <small>Model support checks do not independently verify source claims. The source copies and literal citations remain inspectable below.</small>
     </details>}
-    {!artifact && <p>The saved title and notes are kept through interruption. Use Stop goal or Continue remaining work in this goal; accepted source work is reused.</p>}
+    {!artifact && !writingRejected && <p>The saved title and notes are kept through interruption. Use Stop goal or Continue remaining work in this goal; accepted source work is reused.</p>}
   </section>;
 }
 

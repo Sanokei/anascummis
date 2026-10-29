@@ -79,7 +79,7 @@ async function runCase(browser, viewportName, options) {
     goal: 'Retrieve real Fetch evidence, create a genuinely native-written cited brief, recover stopped/interrupted work explicitly and reopen actual PDF/HTML downloads without losing notes or repeating accepted research.',
     startedAt: new Date().toISOString(), status: 'running', lane: 'fresh-real-native-research-and-document',
     assertions: [], screenshots: [], processes: [], apiMutations: [], requests: [], externalBrowserRequests: [], downloads: [], pageErrors: [], progress: [],
-    limitations: ['Installed local Qwen is used through the ordinary application, never a scripted model, proxy or mutation API seed.', 'Fixed host code renders PDF/HTML from native decisions; this is not arbitrary generated software execution.', 'Desktop Chromium/touch emulation and installed PDF dependencies; no physical handset, voice or fresh online installation claim.']};
+    limitations: ['Installed local Qwen is used through the ordinary application, never a scripted model, proxy or mutation API seed.', 'Fixed host code renders PDF/HTML from native decisions; this is not arbitrary generated software execution.', 'Desktop Chromium/touch emulation and installed PDF dependencies; no physical handset, voice or fresh online installation claim.', 'One focused Fetch brief: required facts, literal citation identity and a reproduced provenance-misattribution regression; not general semantic citation or answer-quality proof.']};
   let host, context, page, sequence = 0, parent, child, submittedKey;
   const save = () => writeFile(join(folder, 'result.json'), JSON.stringify(record, null, 2) + '\n');
   const assertStep = (name, evidence = {}) => record.assertions.push({name, passed: true, ...evidence});
@@ -144,14 +144,25 @@ async function runCase(browser, viewportName, options) {
     (record.controlLayout ||= []).push({name, viewport: await page.viewportSize(), ...layout});
   }
   async function download(label, filename) {
+    const control = action(card(child.id), label), href = await control.getAttribute('href');
+    assert(href, 'A document download must expose its exact export URL.');
+    const url = new URL(href, base); assert.equal(url.origin, base, 'Document exports stay on the owned Studio origin.');
     const pending = page.waitForEvent('download', {timeout: 20_000}); pending.catch(() => {});
-    const response = page.waitForResponse(value => value.request().method() === 'GET' && /\/(?:export|brief\/export)\?/.test(value.url()), {timeout: 20_000}); response.catch(() => {});
-    await action(card(child.id), label).click();
-    const [file, served] = await Promise.all([pending, response]); assert.equal(await file.failure(), null); assert(served.ok());
+    await control.click(); const file = await pending; assert.equal(await file.failure(), null);
     const path = join(folder, filename); await file.saveAs(path); const bytes = await readFile(path);
-    const receipt = {path: filename, bytes: bytes.length, sha256: sha(bytes), suggestedFilename: file.suggestedFilename(), type: served.headers()['content-type']}; record.downloads.push(receipt);
+    // Chromium exposes downloads through the documented Download event. A
+    // download is not required to emit a normal page response event. Save those
+    // actual browser bytes first, then independently inspect headers using an
+    // exact-URL read-only GET and require its body to be byte-identical.
+    const receipt = {path: filename, bytes: bytes.length, sha256: sha(bytes), suggestedFilename: file.suggestedFilename(),
+      mimeEvidence: 'Independent exact-URL GET headers; its complete body must equal the actual browser download.'};
+    record.downloads.push(receipt);
+    const served = await page.request.get(url.href); assert(served.ok(), 'The same read-only document export must remain available.');
+    const servedBytes = await served.body(); assert.deepEqual(servedBytes, bytes, 'Read-only header inspection must return the exact actual browser-downloaded bytes.');
+    receipt.type = served.headers()['content-type']; receipt.headerProbe = {method: 'GET', path: url.pathname + url.search, status: served.status(), sha256: sha(servedBytes), byteIdentical: true};
     return {path, bytes, receipt};
   }
+
   try {
     await boot(); if (!record.runtime.model?.ready) throw new BlockedGoal('Local Qwen is unavailable; the requested native research/document goal cannot be achieved.');
     context = await browser.newContext({viewport: viewports[viewportName], hasTouch: viewportName === 'narrow', reducedMotion: 'reduce', timezoneId: 'America/New_York', acceptDownloads: true});
@@ -230,12 +241,21 @@ async function runCase(browser, viewportName, options) {
     assert.deepEqual(child.briefState.draft, draft); assert.equal(child.briefState.draftSha256, draftSha256); assert.equal(child.brief.notes, notes); assert.equal(mutationCount(), postsBeforeRestart);
     assert(child.tasks.filter(task => task.id !== 'source-brief').every(task => task.status === 'verified' && task.attempts === 0));
     const resume = card(child.id).getByRole('button', {name: 'Continue remaining work', exact: true}); await resume.waitFor();
+    const savedWriting = card(child.id).locator('summary').filter({hasText: /^Saved native writing and support review$/}).locator('..');
+    if (!await savedWriting.evaluate(element => element.open)) await savedWriting.locator('> summary').click();
+    for (const paragraph of draft.paragraphs) assert((await savedWriting.innerText()).includes(paragraph.text), 'The interrupted native draft must remain inspectable in the actual work window.');
+    await screenshot('interrupted-saved-native-writing', savedWriting);
     await screenshot('interrupted-native-draft-explicit-continuation', resume);
     assertStep('A real SIGKILL after native draft persistence restarts into needs_input; accepted research, exact saved draft/hash/title/notes survive without automatic replay.', {draftSha256, phaseBeforeKill: record.interruptedCheckpoint.briefState.phase});
     await resume.click();
     child = await pollGoal(child.id, goal => ['completed', 'needs_input', 'cancelled'].includes(goal.status), 'native support and actual document artifact reach acceptance');
     assert.equal(child.status, 'completed', child.message); assert.equal(briefTask(child).status, 'verified'); assert.equal(briefTask(child).review?.accepted, true);
     assert.deepEqual(child.briefState.draft, draft); assert.equal(child.briefState.draftSha256, draftSha256); assert.equal(child.briefState.supportReview?.supported, true);
+    assert.equal(child.briefState.draft.paragraphs.length, 1, 'This focused brief needs one useful paragraph without repetitive filler.');
+    const written = child.briefState.draft.paragraphs[0].text;
+    for (const pattern of [/web-platform-tests\/wpt/i, /fetch\//i, /wpt\.fyi\/results\/fetch/i]) assert.match(written, pattern, 'The actual written prose must supply both requested locations, not merely include them in references.');
+    assert(!compact(written).includes(compact(answer.limit)), 'Host-provenance text must not appear in the factual paragraph with a source citation.');
+    record.boundedDocumentCritique = {oneFocusedParagraph: true, actualProseGivesBothLocations: true, reproducedProvenanceMisattributionAbsent: true, scope: 'Specific Fetch facts and exact host-limit regression, not a general semantic citation validator.'};
     assert.equal(child.briefState.phase, 'saved'); const artifact = artifactOf(child); assert(artifact?.documentId); assert.equal(artifact.draftSha256, draftSha256); assert.equal(artifact.inputSha256, child.briefState.inputSha256); assert.equal(artifact.title, title);
     assert.equal(child.events.filter(event => event.phase === 'writing_document').length, record.interruptedCheckpoint.events.filter(event => event.phase === 'writing_document').length, 'Explicit continuation after the persisted draft must not repeat native writing.');
     assert(child.tasks.filter(task => task.id !== 'source-brief').every(task => task.status === 'verified' && task.attempts === 0));
@@ -249,23 +269,74 @@ async function runCase(browser, viewportName, options) {
     assert.equal(pdf.bytes.subarray(0, 5).toString(), '%PDF-'); assert.match(pdf.receipt.type, /^application\/pdf\b/i); assert.equal(pdf.receipt.sha256, artifact.pdfSha256);
     assert.match(html.bytes.toString('utf8'), /<!doctype html/i); assert.match(html.receipt.type, /^text\/html\b/i); assert.equal(html.receipt.sha256, artifact.htmlSha256);
     const python = process.env.PYTHON_PATH || join(studioRoot, '.venv', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
-    const inspected = await exec(python, ['-c', "import json,sys,pathlib,pymupdf as fitz\np=fitz.open(sys.argv[1]);out=pathlib.Path(sys.argv[2]);pages=[]\nfor i,page in enumerate(p):\n page.get_pixmap(matrix=fitz.Matrix(1.25,1.25)).save(str(out/('downloaded-pdf-page-'+str(i+1)+'.png')))\n pages.append({'number':i+1,'width':page.rect.width,'height':page.rect.height,'text':page.get_text(),'links':page.get_links()})\nprint(json.dumps({'pages':pages,'pageCount':len(p),'metadata':p.metadata}))", pdf.path, folder], {maxBuffer: 4_000_000});
+    const inspected = await exec(python, ['-c', "import json,sys,pathlib,pymupdf as fitz\np=fitz.open(sys.argv[1]);out=pathlib.Path(sys.argv[2]);pages=[]\nfor i,page in enumerate(p):\n page.get_pixmap(matrix=fitz.Matrix(1.25,1.25)).save(str(out/('downloaded-pdf-page-'+str(i+1)+'.png')))\n pages.append({'number':i+1,'width':page.rect.width,'height':page.rect.height,'text':page.get_text(),'links':[{'uri':link.get('uri'),'kind':link.get('kind'),'rect':list(link['from'])} for link in page.get_links()]})\nprint(json.dumps({'pages':pages,'pageCount':len(p),'metadata':p.metadata}))", pdf.path, folder], {maxBuffer: 4_000_000});
     const pdfInspection = JSON.parse(inspected.stdout); await writeFile(join(folder, 'pdf-inspection.json'), JSON.stringify(pdfInspection, null, 2) + '\n'); record.pdfInspection = {path: 'pdf-inspection.json', pages: pdfInspection.pageCount, textComparison: 'Unicode NFKC for standard font ligatures, then layout whitespace removed; no other characters omitted.'};
     assert.equal(pdfInspection.pageCount, artifact.pages); assert(pdfInspection.pageCount >= 1); const extracted = pdfInspection.pages.map(value => value.text).join('\n');
     for (const expected of [title, notes, 'web-platform-tests/wpt', 'wpt.fyi/results/fetch', sourceUrl, ...child.sources.flatMap(source => [source.title, source.retrievedAt, source.sha256, source.textSha256]), ...answer.citations.map(citation => citation.quote)]) assert(pdfCompact(extracted).includes(pdfCompact(expected)), 'Actual PDF text must include ' + expected);
+    assert.equal(pdfCompact(extracted).split(pdfCompact(answer.limit)).length - 1, 1, 'The actual PDF keeps the host provenance once in its separate scope section.');
+    const pdfLinks = pdfInspection.pages.flatMap(value => value.links);
+    for (const source of child.sources) assert(pdfLinks.some(link => link.uri === source.url), 'Actual PDF annotations must preserve each complete original source URL without inserted layout spaces.');
+    for (const value of pdfInspection.pages) for (const link of value.links) {const [left, top, right, bottom] = link.rect; assert(left >= 0 && top >= 0 && right <= value.width && bottom <= value.height && right > left && bottom > top, 'Actual PDF source-link rectangles must fit their pages.');}
+    for (const [index, citation] of answer.citations.entries()) {const label = 'Reference [' + (index + 1) + ']'; const referencePage = pdfInspection.pages.find(value => pdfCompact(value.text).includes(pdfCompact(label))); assert(referencePage, 'Each PDF reference label must be present.'); assert(pdfCompact(referencePage.text).includes(pdfCompact(citation.quote.slice(0, 45))), 'A PDF reference label must stay on the page with its quotation opening.');}
     record.renderedPages = Array.from({length: pdfInspection.pageCount}, (_, index) => 'downloaded-pdf-page-' + (index + 1) + '.png');
-    assertStep('Actual downloaded PDF MIME/signature/hash, independent PyMuPDF page rendering/extracted text and every requested fact/note/source identity/literal citation match the saved artifact.', {pages: pdfInspection.pageCount, pdfSha256: pdf.receipt.sha256});
+    assertStep('Actual browser PDF download signature/hash and independent exact-URL matching-body MIME pass; PyMuPDF rendering/extracted text preserves every requested fact/note/source identity/literal citation.', {pages: pdfInspection.pageCount, pdfSha256: pdf.receipt.sha256});
 
     for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {
       await page.setViewportSize(viewport); await openGoals();
       for (const name of ['Open brief PDF', 'Download brief PDF', 'Download brief HTML']) await reachable(action(card(child.id), name), name);
       await screenshot('saved-brief-actions-' + viewport.width + 'x' + viewport.height, action(card(child.id), 'Open brief PDF'));
     }
-    await action(card(child.id), 'Open brief PDF').click(); const firstPage = page.getByRole('img', {name: 'PDF page 1', exact: true}); await firstPage.waitFor(); await until(() => firstPage.evaluate(image => image.complete && image.naturalWidth > 0), 'ordinary PDF window actually decodes the saved brief');
-    for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {await page.setViewportSize(viewport); await screenshot('actual-pdf-window-' + viewport.width + 'x' + viewport.height, firstPage);}
+    await action(card(child.id), 'Open brief PDF').click();
+    async function decodedPdfPage(number) {
+      const image = page.getByRole('img', {name: 'PDF page ' + number, exact: true}); await image.waitFor();
+      await until(() => image.evaluate((element, expected) => element.complete && element.naturalWidth > 0 && new URL(element.src).searchParams.get('page') === String(expected), number), 'ordinary PDF window actually decodes saved page ' + number);
+      return image;
+    }
+    record.pdfPagesSeen = [];
+    for (let number = 1; number <= artifact.pages; number++) {
+      const image = await decodedPdfPage(number); record.pdfPagesSeen.push(number);
+      await page.getByText('Page ' + number + ' of ' + artifact.pages, {exact: true}).waitFor();
+      if (number === 1 || number === artifact.pages) await screenshot('actual-pdf-page-' + number, image);
+      if (number < artifact.pages) {const next = page.getByRole('button', {name: 'Next PDF page', exact: true}); await reachable(next, 'Next PDF page'); await next.click();}
+    }
+    record.multiPageWindowExercised = artifact.pages > 1;
+    const lastPageNumber = artifact.pages;
+    assert(await page.getByRole('button', {name: 'Next PDF page', exact: true}).isDisabled());
+    if (artifact.pages > 1) {
+      const previous = page.getByRole('button', {name: 'Previous PDF page', exact: true}); await reachable(previous, 'Previous PDF page'); await previous.press('Enter'); await decodedPdfPage(lastPageNumber - 1);
+      await page.getByRole('button', {name: 'Next PDF page', exact: true}).click(); await decodedPdfPage(lastPageNumber);
+    } else assert(await page.getByRole('button', {name: 'Previous PDF page', exact: true}).isDisabled());
+    for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {
+      await page.setViewportSize(viewport); const image = await decodedPdfPage(lastPageNumber);
+      const fit = page.getByRole('button', {name: 'Fit PDF width', exact: true}), zoomIn = page.getByRole('button', {name: 'Zoom in PDF', exact: true}), zoomOut = page.getByRole('button', {name: 'Zoom out PDF', exact: true});
+      if (await fit.isEnabled()) await fit.click();
+      assert(await fit.isDisabled()); assert(await zoomOut.isDisabled()); await reachable(zoomIn, 'Zoom in PDF');
+      const before = await image.boundingBox(); assert(before && before.width > 0);
+      await zoomIn.click(); await until(async () => (await image.boundingBox())?.width > before.width + 1, 'Zoom in makes the actual PDF image larger');
+      for (const [control, name] of [[fit, 'Fit PDF width'], [zoomOut, 'Zoom out PDF']]) await reachable(control, name);
+      const pan = await image.evaluate(element => {
+        let scroller = element.parentElement;
+        while (scroller && !/auto|scroll/.test(getComputedStyle(scroller).overflowX)) scroller = scroller.parentElement;
+        if (!scroller) return {scrollContainer: false};
+        const beforeLeft = element.getBoundingClientRect().left; scroller.scrollLeft = scroller.scrollWidth;
+        return {scrollContainer: true, clientWidth: scroller.clientWidth, scrollWidth: scroller.scrollWidth, scrollLeft: scroller.scrollLeft, beforeLeft, afterLeft: element.getBoundingClientRect().left};
+      });
+      assert(pan.scrollContainer && pan.scrollWidth > pan.clientWidth && pan.scrollLeft > 0 && pan.afterLeft < pan.beforeLeft, 'Zoomed actual PDF image must allow intentional horizontal panning.');
+      await screenshot('actual-pdf-zoom-pan-' + viewport.width + 'x' + viewport.height, zoomIn);
+      await zoomOut.click(); await until(async () => (await image.boundingBox())?.width <= before.width + 1, 'Zoom out restores the page width');
+      await zoomIn.click(); await fit.click(); await until(async () => (await image.boundingBox())?.width <= before.width + 1, 'Fit restores a contained readable page width');
+      assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'PDF zoom must not make the application body overflow.');
+      (record.pdfZoomChecks ||= []).push({viewport, beforeWidth: before.width, ...pan, fitRestored: true});
+      await screenshot('actual-pdf-window-' + viewport.width + 'x' + viewport.height, fit);
+    }
+    assertStep('The ordinary PDF window decodes each actual page, exposes reachable controls, supports real zoom/pan/fit on desktop/phone/short viewports and retains the last inspected page.', {pagesSeen: record.pdfPagesSeen, multiPageExercised: record.multiPageWindowExercised});
     const exported = await context.newPage(); exported.setDefaultTimeout(12_000); await exported.goto(pathToFileURL(html.path).href, {waitUntil: 'load'});
     const body = await exported.locator('body').innerText();
     for (const expected of [title, notes, 'web-platform-tests/wpt', 'wpt.fyi/results/fetch', sourceUrl, ...child.sources.flatMap(source => [source.title, source.retrievedAt, source.sha256, source.textSha256]), ...answer.citations.map(citation => citation.quote)]) assert(compact(body).includes(compact(expected)), 'Opened actual HTML must include ' + expected);
+    assert.equal(compact(body).split(compact(answer.limit)).length - 1, 1, 'The actual HTML keeps the host provenance once in its separate scope section.');
+    const htmlLinks = await exported.locator('a[href]').evaluateAll(elements => elements.map(element => element.getAttribute('href')));
+    for (const source of child.sources) assert(htmlLinks.includes(source.url), 'Actual HTML anchors must preserve each complete original source URL.');
+    record.sourceLinkChecks = {pdfUris: pdfLinks.map(link => link.uri).filter(Boolean), htmlHrefs: htmlLinks, containedPdfLinkRectangles: true, referenceLabelsWithQuoteOpenings: true};
     assert.equal(await exported.locator('script,iframe,form,object,embed').count(), 0, 'The document must not execute generated code or embed remote content.');
     for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {
       await exported.setViewportSize(viewport); assert(await exported.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Downloaded HTML must fit the viewport.');
@@ -275,7 +346,9 @@ async function runCase(browser, viewportName, options) {
 
     const finished = await snapshotGoal(child.id), completedPosts = mutationCount(); await stopHost(host, 'SIGTERM'); host = undefined; await boot(); await page.reload({waitUntil: 'networkidle'}); await openGoals();
     assert.deepEqual(await snapshotGoal(child.id), finished); assert.deepEqual(await snapshotGoal(parent.id), parent); assert.equal(mutationCount(), completedPosts);
-    await card(child.id).waitFor(); await action(card(child.id), 'Open brief PDF').click(); await firstPage.waitFor(); await until(() => firstPage.evaluate(image => image.complete && image.naturalWidth > 0), 'reopened saved PDF still decodes after orderly Studio restart');
+    await card(child.id).waitFor(); await action(card(child.id), 'Open brief PDF').click(); await decodedPdfPage(lastPageNumber);
+    await page.getByText('Page ' + lastPageNumber + ' of ' + artifact.pages, {exact: true}).waitFor();
+    await screenshot('reopened-pdf-keeps-last-inspected-page', page.getByRole('button', {name: 'Fit PDF width', exact: true}));
     assert.equal((await get('/api/documents')).length, 1); assert.equal((await get('/api/goals')).filter(goal => goal.brief?.requestKey === submittedKey).length, 1);
     assertStep('Completed work reopens after actual SIGTERM/restart with exact unchanged parent/child/artifact identities, one PDF and no mutation or automatic replay.');
     assert.deepEqual(record.pageErrors, []); record.status = 'passed';

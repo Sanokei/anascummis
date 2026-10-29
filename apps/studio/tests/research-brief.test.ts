@@ -34,7 +34,7 @@ async function fixture(options:{real?:boolean;long?:boolean;notes?:string}={}){
       proc.stdin.write(JSON.stringify(job));proc.stdin.end();const [out,err,code]=await Promise.all([new Response(proc.stdout).text(),new Response(proc.stderr).text(),proc.exited]);const value=JSON.parse(out);if(code||!value.ok)throw new Error(value.error||err);return value.result;
     }
     if(job.op==='research_brief')await writeFile(job.output,'%PDF-1.7\nSynthetic renderer receipt, not PDF output acceptance.\n');
-    return {pageCount:2,complete:true,contained:true};
+    return {pageCount:2,complete:true,contained:true,links:job.args?.expectedLinks||[],linksContained:true};
   };
   const infer:Infer=async(role,raw)=>{calls.push({role,packet:JSON.parse(raw)});return role===BRIEF_WRITER_ROLE?{paragraphs:[{text:answerText,citations:[1]}]}:{supported:true,reason:'The actual paragraph supplies both locations and is supported by citation 1.'};};
   const store=new ResearchBriefStore(db,ledger,dir,engine);
@@ -100,6 +100,49 @@ test('the complete context budget refuses oversized evidence without omission or
   }finally{await f.close();}
 });
 
+test('new factual packets exclude host scope while retaining full accepted text, passages and literal citations',async()=>{
+  const f=await fixture();try{
+    await f.store.execute(f.task,f.goal,signal(),f.infer,noop);
+    for(const call of f.calls){expect(call.packet.acceptedAnswer).toEqual({text:answerText});expect(JSON.stringify(call.packet)).not.toContain(f.answer.limit);expect(call.packet.selectedPassages[0].text).toBe(f.answer.selections[0].text);expect(call.packet.citations[0].quote).toBe(quote);}
+    const state=f.store.state(f.id)!;expect(state.writingAttempt?.raw).toEqual(state.draft);expect(state.draftCheck?.accepted).toBe(true);
+    const html=new TextDecoder().decode((await f.store.exportHtml(f.goal)).bytes);expect(html).toContain(f.answer.limit);
+  }finally{await f.close();}
+});
+
+test('host rejects provenance as a cited source claim before native over-acceptance and preserves the raw failed writing',async()=>{
+  const f=await fixture();try{
+    const draft={paragraphs:[{text:answerText+' '+f.answer.limit,citations:[1]}]};let calls=0;
+    await expect(f.store.execute(f.task,f.goal,signal(),async()=>{calls++;return draft;},noop)).rejects.toThrow('scope, provenance or verification');
+    const state=f.store.state(f.id)!;expect(state.writingAttempt?.raw).toEqual(draft);expect(state.draft).toEqual(draft);expect(state.draftCheck?.accepted).toBe(false);expect(state.supportReview).toBeUndefined();expect(state.phase).toBe('rejected');expect(f.counts().renders).toBe(0);expect(calls).toBe(1);
+    await expect(f.store.execute(f.task,f.goal,signal(),async()=>{throw new Error('must not rewrite');},noop)).rejects.toThrow('original draft is preserved');expect(f.store.state(f.id)).toEqual(state);
+  }finally{await f.close();}
+});
+
+test('paraphrased host execution and citation-verification claims cannot masquerade as source facts',async()=>{
+  for(const assertion of ['The citations are verified.', 'The host copied the source text.', 'The selected excerpts match the saved source.']){
+    const f=await fixture();try{
+      const raw={paragraphs:[{text:answerText+' '+assertion,citations:[1]}]};await expect(f.store.execute(f.task,f.goal,signal(),async()=>raw,noop)).rejects.toThrow('scope, provenance or verification');expect(f.store.state(f.id)?.writingAttempt?.raw).toEqual(raw);expect(f.store.state(f.id)?.supportReview).toBeUndefined();expect(f.counts().renders).toBe(0);
+    }finally{await f.close();}
+  }
+});
+
+test('malformed multiple-paragraph output is saved and stays inspectable without re-inference on retry',async()=>{
+  const f=await fixture();try{
+    const raw={paragraphs:[{text:answerText,citations:[1]},{text:answerText,citations:[1]}]};
+    await expect(f.store.execute(f.task,f.goal,signal(),async()=>raw,noop)).rejects.toThrow('original writing attempt');const state=f.store.state(f.id)!;
+    expect(state.writingAttempt?.raw).toEqual(raw);expect(state.writingAttempt?.error).toBeDefined();expect(state.draft).toBeUndefined();expect(state.phase).toBe('rejected');
+    await expect(f.store.execute(f.task,f.goal,signal(),async()=>{throw new Error('must not rewrite');},noop)).rejects.toThrow('preserved for inspection');expect(f.counts().renders).toBe(0);expect(f.store.state(f.id)).toEqual(state);
+  }finally{await f.close();}
+});
+
+test('introduced URLs and raw Markdown fail the local factual guard and preserve their original drafts',async()=>{
+  for(const paragraph of [answerText+' See https://invented.example.org/unknown.', '**'+answerText+'**']){
+    const f=await fixture();try{
+      await expect(f.store.execute(f.task,f.goal,signal(),async()=>({paragraphs:[{text:paragraph,citations:[1]}]}),noop)).rejects.toThrow('host factual-paragraph check');expect(f.store.state(f.id)?.draft?.paragraphs[0].text).toBe(paragraph);expect(f.store.state(f.id)?.supportReview).toBeUndefined();expect(f.counts().renders).toBe(0);
+    }finally{await f.close();}
+  }
+});
+
 test('early HTML/PDF export is read-only and later document edits do not change accepted original downloads',async()=>{
   const f=await fixture();try{
     await expect(f.store.exportHtml(f.goal)).rejects.toThrow('No research brief');await expect(f.store.exportPdf(f.goal)).rejects.toThrow('No research brief');expect(f.db.query('SELECT COUNT(*) AS n FROM research_briefs').get()).toEqual({n:0});
@@ -123,8 +166,13 @@ test('synthetic filesystem boundary: a pre-created document-folder symlink is re
 
 test('real fixed PDF renderer paginates and preserves every title/note/citation/long URL/hash; HTML is escaped and self-contained',async()=>{
   const note='Literal note <img src="https://example.org/private" onerror="alert(1)"> & keep this exact. CSS url(example) and @import are inert note text.\n'+'User planning note with deliberately repeated words for a real pagination check. '.repeat(12),f=await fixture({real:true,long:true,notes:note});try{
+    const secondQuote='Browser results are at wpt.fyi/results/fetch/.';f.answer.citations.push({...f.answer.citations[0],quote:secondQuote,offset:f.ledger.get(f.id,f.source.id).text.indexOf(secondQuote),spanId:'source-1:2'});
     const result=await f.store.execute(f.task,f.goal,signal(),f.infer,noop),artifact=result.briefArtifact!;expect(artifact.pages).toBeGreaterThan(1);expect(artifact.pages).toBeLessThan(20);
     const exported=await f.store.exportHtml(f.goal),html=new TextDecoder().decode(exported.bytes);expect(sourceHash(exported.bytes)).toBe(artifact.htmlSha256);expect(html).toContain('&lt;img src=&quot;https://example.org/private&quot; onerror=&quot;alert(1)&quot;&gt;');expect(html).not.toContain('<img');expect(html).toContain(f.source.url);expect(html).toContain(f.source.textSha256);expect(html).toContain('Your note — supplied by you, not a source claim');
     const pdf=await readFile(join(f.dir,'documents',artifact.documentId,'0.pdf'));expect(pdf.subarray(0,5).toString()).toBe('%PDF-');expect(sourceHash(pdf)).toBe(artifact.pdfSha256);expect(await f.store.review(f.task,f.goal,result,signal())).toMatchObject({accepted:true});expect(f.calls.map(c=>c.role===BRIEF_WRITER_ROLE?'writer':'reviewer')).toEqual(['writer','reviewer']);expect(f.calls[0].packet.acceptedAnswer.text).toBe(answerText);expect(f.calls[0].packet.citations[0].quote).toBe(quote);expect(f.calls[0].packet.selectedPassages[0].text).toBe(f.answer.selections[0].text);
+    const pages=await f.engine({op:'inspect',input:join(f.dir,'documents',artifact.documentId,'0.pdf'),args:{pages:Array.from({length:artifact.pages},(_,index)=>index+1)}});
+    for(const [index,opening] of [[1,'Compatibility tests'],[2,'Browser results']] as const){const page=pages.pages.find((page:any)=>page.text.includes('Reference ['+index+']'));expect(page).toBeDefined();expect(page.text).toContain(opening);}
+    const allText=pages.pages.map((page:any)=>page.text).join('\n');expect(allText.match(/Response SHA-256:/g)?.length).toBe(1);expect(allText.match(/Text SHA-256:/g)?.length).toBe(1);
+    const verified=await f.engine({op:'verify_research_brief',input:join(f.dir,'documents',artifact.documentId,'0.pdf'),args:{expected:[f.goal.brief!.title],expectedLinks:[f.source.url]}});expect(verified.links).toEqual([f.source.url]);expect(verified.linksContained).toBe(true);
   }finally{await f.close();}
 },20000);
