@@ -19,7 +19,7 @@ An explicit linked follow-up copies independently verified source snapshots, pre
 1. A genuine local-AI UI journey supplies both requested locations with literal citations from positions beyond 800; check retained source identity and absolute quote offsets independently.
 2. Close/reload preserves the question, evidence and completed answer. Inspect actions display the selected saved text on desktop and 360px width.
 3. Stage and explicitly submit a linked question asking about quick local iteration and its web-service dependency. Verify a new parent-linked goal, identical source identity/retrieval, no fetch activity, and an unchanged accepted parent.
-4. A postal-address question unsupported by the README stays `needs_input`; it must not count as an achieved answer. Preserve its failed/unfinished evidence and a usable explicit continuation.
+4. A postal-address question unsupported by the README stays `needs_input`; it must not count as an achieved answer. Explicitly retry it once without retyping, preserve source/reading identity without refetching, and inspect its archived failed draft and support check after reload.
 5. Focused host tests cover selection budgets, separated relevant passages, Unicode offsets, immutable reading reuse/history, source ownership, atomic copies and continuation/restart behavior. Scripted inference tests establish host behavior only. Native browser results establish only the actual bounded questions tested.
 
 No new search key, model download, provider, dashboard, public deployment or main-branch promotion is part of this increment. Voice and physical handset behavior remain unverified.

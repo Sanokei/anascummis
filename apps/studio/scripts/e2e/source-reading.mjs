@@ -10,7 +10,7 @@ const answerOf = goal => goal.tasks.find(task => task.sourceAnswer)?.execution?.
 const cardFor = (ctx, id) => ctx.page.locator('[data-goal-id="' + id + '"]');
 const submitted = ctx => ctx.record.apiMutations.filter(item => item.path === '/api/goals').length;
 
-async function goalOutcome(ctx, question) {
+async function goalOutcome(ctx, question, minimumAnswerAttempts = 0) {
   let goal;
   await ctx.until(async () => {
     goal = (await ctx.readApi('/api/goals')).find(item => item.request === question);
@@ -19,10 +19,25 @@ async function goalOutcome(ctx, question) {
       (ctx.record.readingObservedBeforeAnswer ||= {})[goal.id] ||= {observedAt: new Date().toISOString(), phase: goal.phase,
         readingId: goal.reading.id, created: goal.reading.created, answerPresent: false};
     }
-    return ['completed', 'needs_input', 'cancelled'].includes(goal.status);
+    return ['completed', 'needs_input', 'cancelled'].includes(goal.status)
+      && (goal.tasks.find(task => task.sourceAnswer)?.attempts || 0) >= minimumAnswerAttempts;
   }, 'exact source question reaches a persisted result', 120_000);
   assert.equal(goal.request, question);
   return goal;
+}
+
+async function inspectSupport(ctx, region, answer) {
+  assert(answer.draftAssessment && typeof answer.draftAssessment.text === 'string' && answer.draftAssessment.text.trim());
+  assert(answer.supportReview && typeof answer.supportReview.supported === 'boolean' && answer.supportReview.reason.trim());
+  assert.equal(answer.supportError, undefined, 'A missing/failed verifier decision cannot count as evidence support or a correct refusal.');
+  const checks = region.locator('details.goal-answer-checks'); await checks.waitFor();
+  if (!await checks.evaluate(element => element.open)) await checks.locator('> summary').click();
+  assert((await checks.innerText()).includes(answer.draftAssessment.reason));
+  assert((await checks.innerText()).includes(answer.supportReview.reason));
+  const original = checks.locator('summary').filter({hasText: /^Original model draft$/}).locator('..');
+  if (!await original.evaluate(element => element.open)) await original.locator('> summary').click();
+  assert.equal(await original.locator('> p').textContent(), answer.draftAssessment.text);
+  return {checks, original};
 }
 
 async function verifyReading(ctx, goal, requireLater) {
@@ -43,6 +58,8 @@ async function verifyReading(ctx, goal, requireLater) {
   assert(savedAt >= 0 && inferenceAt > savedAt, 'The saved selection must precede the answering phase.');
   assert(plan.created <= goal.events[savedAt].time && goal.events[savedAt].time <= goal.events[inferenceAt].time);
   const answer = answerOf(goal); assert(answer); assert.equal(answer.readingId, plan.id); assert.equal(answer.answerable, true);
+  assert.equal(answer.citationMethod, 'host-spans-v1'); assert.equal(answer.supportReview?.supported, true);
+  assert.equal(answer.supportError, undefined); assert(answer.draftAssessment);
   assert(answer.answerabilityReason.trim()); assert(answer.citations.length > 0);
   if (requireLater) assert(answer.citations.every(citation => citation.offset > 800), 'Requested later facts must use actual later-document citations.');
   for (const citation of answer.citations) {
@@ -90,6 +107,8 @@ async function verifyReading(ctx, goal, requireLater) {
   const shownAnswer = card.getByRole('region', {name: 'Source-grounded answer', exact: true}); await shownAnswer.waitFor();
   assert((await shownAnswer.innerText()).includes(answer.text));
   await ctx.screenshot('later-answer-' + goal.id.slice(0, 8), shownAnswer.locator('h4'));
+  const support = await inspectSupport(ctx, shownAnswer, answer);
+  await support.checks.locator('> summary').click();
   ctx.assert('Hashed question passages were saved before the answering phase; absolute later citations and visible inspected text match.',
     {goalId: goal.id, readingId: plan.id, citations: answer.citations.map(item => ({offset: item.offset, quote: item.quote}))});
 }
@@ -130,6 +149,37 @@ async function stageFromSaved(ctx, parent, question) {
   assert.deepEqual(await ctx.readApi('/api/goals/' + parent.id), parent, 'The original parent record and answer must stay unchanged.');
   ctx.assert('A new explicit linked question reuses distinct hash-checked source copies, keeps the original retrieval time, and does not fetch or mutate its parent.', {parentGoalId: parent.id, childGoalId: child.id});
   return child;
+}
+
+function rejectedEvidence(goal) {
+  assert.equal(goal.status, 'needs_input');
+  const answer = answerOf(goal); assert(answer, 'This matched-source control needs a retained native draft and real support decision.');
+  assert.equal(goal.reading?.match, 'matched'); assert.equal(answer.answerable, false);
+  assert.equal(answer.supportReview?.supported, false, 'An actual negative support decision is required, not a transport/validator failure.');
+  assert.equal(answer.supportError, undefined); assert(answer.draftAssessment?.text.trim());
+  return answer;
+}
+
+async function archivedRefusal(ctx, goal, expectedAnswer) {
+  const card = cardFor(ctx, goal.id), history = card.locator('details.goal-reading-history');
+  if (!await history.evaluate(element => element.open)) await history.locator('> summary').click();
+  await card.getByRole('button', {name: 'Inspect saved reading plan ' + goal.reading.id, exact: true}).click();
+  let detail;
+  await ctx.until(async () => {detail = await ctx.readApi('/api/goals/' + goal.id + '/readings/' + goal.reading.id); return detail.resultCount >= 1 && detail.result;}, 'the explicit native retry archives the prior draft and its support decision');
+  assert.equal(detail.result.question, goal.request); assert.equal(detail.result.goalId, goal.id); assert.equal(detail.result.readingId, goal.reading.id);
+  assert.deepEqual(detail.result.execution.sourceAnswer, expectedAnswer);
+  const archived = card.getByRole('region', {name: 'Archived reading result', exact: true}); await archived.waitFor();
+  assert.equal(await archived.getAttribute('data-reading-result-id'), detail.result.id);
+  const exact = archived.locator('summary').filter({hasText: /^Archived exact question$/}).locator('..');
+  if (!await exact.evaluate(element => element.open)) await exact.locator('> summary').click();
+  assert.equal(await exact.locator('> p').textContent(), goal.request);
+  const inspected = await inspectSupport(ctx, archived, expectedAnswer);
+  await ctx.screenshot('archived-native-refusal-' + goal.id.slice(0, 8), archived.locator('h4'));
+  await ctx.screenshot('archived-native-draft-and-check-' + goal.id.slice(0, 8), inspected.original.locator('> p'));
+  await history.locator('> summary').click();
+  (ctx.record.archivedNativeReadingChecks ||= []).push({goalId: goal.id, readingId: goal.reading.id, resultId: detail.result.id,
+    attemptsSaved: detail.resultCount, originalDraftMatched: true, actualSupportReviewMatched: true});
+  return detail.result;
 }
 
 export const laterSourceFollowupJourney = {
@@ -186,18 +236,47 @@ export const laterSourceFollowupJourney = {
     assert(insufficient.reading, 'The insufficient-evidence result must keep its reading plan.');
     assert.equal(insufficient.reading.question, missingQuestion); assert.equal(insufficient.reading.questionSha256, hash(missingQuestion));
     assert(!insufficient.events.some(event => event.phase === 'completed'));
-    const uncertain = answerOf(insufficient);
-    assert((uncertain && uncertain.answerable === false) || (insufficient.reading?.match === 'none' && /no question-term match/i.test(insufficient.message)),
-      'The control must specifically lack supporting evidence, not pass because an unrelated runtime or validation error occurred.');
+    const uncertain = rejectedEvidence(insufficient);
     const negativeCard = cardFor(ctx, insufficient.id); await negativeCard.waitFor();
     const negativePlan = negativeCard.getByRole('region', {name: 'Saved reading plan', exact: true}); await negativePlan.waitFor();
     assert.equal(await negativePlan.getAttribute('data-reading-id'), insufficient.reading.id);
     await negativeCard.getByRole('button', {name: 'Continue remaining work', exact: true}).waitFor();
     await ctx.screenshot('insufficient-source-needs-input', negativeCard.locator('h3'));
+    const continuation = negativeCard.getByRole('button', {name: 'Continue remaining work', exact: true});
+    assert.equal(await negativeCard.getByRole('textbox', {name: 'Guidance for continuing', exact: true}).inputValue(), '');
+    await continuation.focus();
+    const focus = await continuation.evaluate(element => {const box = element.getBoundingClientRect(), hit = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2); return {x: box.x, y: box.y, right: box.right, bottom: box.bottom,
+      width: innerWidth, height: innerHeight, focused: document.activeElement === element, hit: hit === element || element.contains(hit)};});
+    assert(focus.focused && focus.hit && focus.x >= 0 && focus.y >= 0 && focus.right <= focus.width && focus.bottom <= focus.height);
+    ctx.record.refusalContinueFocus = focus; await ctx.screenshot('insufficient-focusable-continue');
+    const oldAttempt = insufficient.tasks.find(task => task.sourceAnswer).attempts;
+    const beforeRetryPosts = submitted(ctx);
+    await continuation.click();
+    const retry = await goalOutcome(ctx, missingQuestion, oldAttempt + 1); ctx.record.laterSource.insufficientRetry = retry;
+    rejectedEvidence(retry);
+    assert.equal(retry.id, insufficient.id); assert.equal(retry.request, missingQuestion);
+    assert.deepEqual(retry.reading, insufficient.reading); assert.deepEqual(retry.sources, insufficient.sources);
+    assert.deepEqual(retry.guidance, insufficient.guidance); assert.deepEqual(retry.notes, insufficient.notes);
+    assert.equal(retry.tasks.find(task => task.sourceAnswer).attempts, oldAttempt + 1);
+    assert(retry.tasks.filter(task => task.sourceUrl).every(task => task.attempts === 0 && task.status === 'verified'));
+    assert(!retry.events.some(event => event.phase === 'fetching_source'));
+    assert.equal(submitted(ctx), beforeRetryPosts, 'Continue retries the same question; it must not create another one.');
+    const archived = await archivedRefusal(ctx, retry, uncertain);
+    const resumePosts = ctx.record.apiMutations.filter(item => item.path === '/api/goals/' + retry.id + '/resume').length;
+    assert.equal(resumePosts, 1);
+    await ctx.page.getByRole('tab', {name: 'Goals', exact: true}).focus(); await ctx.page.keyboard.press('Control+Delete');
+    await ctx.page.locator('.goal-panel').waitFor({state: 'hidden'});
+    await ctx.send('What can you do?'); await ctx.closeComposer();
+    await ctx.page.getByRole('region', {name: 'Getting started', exact: true}).getByRole('button', {name: 'Open Goals', exact: true}).click();
+    await ctx.page.reload({waitUntil: 'networkidle'}); await cardFor(ctx, retry.id).waitFor();
+    const afterReload = await ctx.readApi('/api/goals/' + retry.id); assert.deepEqual(afterReload, retry);
+    const restoredArchive = await archivedRefusal(ctx, afterReload, uncertain); assert.equal(restoredArchive.id, archived.id);
+    assert.equal(ctx.record.apiMutations.filter(item => item.path === '/api/goals/' + retry.id + '/resume').length, resumePosts);
     ctx.record.insufficientEvidenceControl = {request: missingQuestion, status: insufficient.status, goalAchieved: false,
-      answered: false, answerable: uncertain?.answerable ?? false, reason: uncertain?.answerabilityReason || insufficient.message};
+      answered: false, answerable: false, supportReview: uncertain.supportReview, reason: uncertain.answerabilityReason,
+      explicitRetries: 1, archivedReadingResultId: archived.id};
     assert.deepEqual(await ctx.readApi('/api/goals/' + parent.id), immutable);
     assert.deepEqual(await ctx.readApi('/api/goals/' + child.id), child);
-    ctx.assert('The insufficient-evidence control remains needs_input with a usable recovery action; the unknown address is not counted as answered.');
+    ctx.assert('The insufficient-evidence control remains needs_input through one explicit native retry, keeps exact source/reading identity, and preserves its prior draft/support decision across close/reload. The unknown address is not counted as answered.');
   }
 };

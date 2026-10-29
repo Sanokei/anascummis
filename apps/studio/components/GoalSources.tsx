@@ -1,11 +1,47 @@
 'use client';
 import {useEffect, useRef, useState} from 'react';
-import type {GoalRecord} from '../core/goal-orchestrator';
+import type {GoalRecord, SourceAnswer} from '../core/goal-orchestrator';
 import type {SourceReadingPlan, SourceReadingResult, SourceReadingSummary, SourceSnapshot} from '../core/public-source';
 
 type Selection = {sourceId: string; label: string; start: number; end: number; textSha256: string; rangeSha256?: string; text?: string; matchedTerms?: string[]; score?: number};
 type SavedText = {offset: number; end: number; text: string; selected?: boolean; readingId?: string; rangeVerified?: boolean};
 type ReadingDetail = SourceReadingPlan & {result?: SourceReadingResult; resultCount: number};
+
+function AnswerSupportChecks({answer}: {answer: SourceAnswer}) {
+  const draft = answer.draftAssessment, review = answer.supportReview;
+  const rejected = answer.answerable === false || review?.supported === false || !!answer.supportError;
+  if (!draft && !review && !answer.supportError && !rejected) return null;
+  return <details className="goal-answer-checks">
+    <summary>Answer support checks</summary>
+    <p>The draft self-assessment is separate from the later model review of the final answer and only its chosen literal citation spans. This review does not independently verify source claims.</p>
+    {draft ? <>
+      <p>Draft self-assessment: {draft.answerable ? 'marked answerable' : 'marked not answerable'}.</p>
+      <p>Recorded draft reason: {draft.reason}</p>
+      <p>Recorded draft uncertainty: {draft.uncertainty || '(empty)'}</p>
+      <details><summary>Original model draft</summary><p>{draft.text}</p></details>
+    </> : <p>No separate draft self-assessment was recorded for this older answer.</p>}
+    {review ? <><p>Citation support review: {review.supported ? 'supported' : 'not supported'}.</p><p>Recorded support-review reason: {review.reason}</p></> : <p>No citation support decision was recorded.</p>}
+    {answer.supportError && <p>Support review did not complete: {answer.supportError}</p>}
+    {draft && review && draft.answerable !== review.supported && <p>The two model checks disagree.</p>}
+    {!draft && rejected && <details><summary>Original model draft</summary><p>{answer.text}</p><p>{answer.answerabilityReason}</p><p>{answer.uncertainty}</p></details>}
+    {answer.answerabilityReason && <p>Recorded final assessment: {answer.answerabilityReason}</p>}
+  </details>;
+}
+
+function SourceAnswerContent({answer}: {answer: SourceAnswer}) {
+  const rejected = answer.answerable === false || answer.supportReview?.supported === false || !!answer.supportError;
+  const notice = answer.supportReview?.supported === false ? 'The selected citations do not support the complete answer.' : answer.supportError ? 'The citation support review did not complete. No support decision was recorded.' : 'The saved model draft was not accepted as a complete answer.';
+  return <>
+    {rejected ? <p role="status">{notice}</p> : <p>{answer.text}</p>}
+    <AnswerSupportChecks answer={answer}/>
+    {!!answer.citations.length && <ul>{answer.citations.map((citation, index) => <li key={index}>
+      <blockquote>“{citation.quote}”</blockquote>
+      <small>[{citation.label}] text {citation.offset}–{citation.offset + citation.quote.length} · snapshot {citation.sourceId} · text SHA-256 {citation.textSha256}</small>
+    </li>)}</ul>}
+    {!rejected && answer.uncertainty && <p>{answer.uncertainty}</p>}
+    <p>{answer.limit}</p>
+  </>;
+}
 
 function ReadingHistory({goalId, currentId, onSelect}: {goalId: string; currentId?: string; onSelect: (plan: ReadingDetail, trigger: HTMLElement) => void}) {
   const [plans, setPlans] = useState<SourceReadingSummary[]>([]), [initialized, setInitialized] = useState(false), [nextCursor, setNextCursor] = useState<string>();
@@ -168,10 +204,7 @@ export function GoalSources({goal, onAskAnother, message}: {goal: GoalRecord; on
       <h4>Latest archived {archivedAnswer ? 'answer' : 'result'} ({inspected?.resultCount || 1} saved {(inspected?.resultCount || 1) === 1 ? 'attempt' : 'attempts'})</h4>
       <small>Recorded attempt {archived.attempt} · Saved {new Date(archived.created).toLocaleString()} · {archived.status} · {archived.execution.verified ? 'execution checks recorded as verified' : 'execution checks were not satisfied'}</small>
       <details><summary>Archived exact question</summary><p>{archived.question}</p></details>
-      <p>{archivedAnswer?.text || archived.execution.message}</p>
-      {archivedAnswer?.answerable === false && <p>{archivedAnswer.answerabilityReason || 'This earlier result did not support every requested fact.'}</p>}
-      {!!archivedAnswer?.citations.length && <ul>{archivedAnswer.citations.map((citation, index) => <li key={index}><blockquote>“{citation.quote}”</blockquote><small>[{citation.label}] text {citation.offset}–{citation.offset + citation.quote.length} · snapshot {citation.sourceId} · text SHA-256 {citation.textSha256}</small></li>)}</ul>}
-      {archivedAnswer && <p>{archivedAnswer.uncertainty} {archivedAnswer.limit}</p>}
+      {archivedAnswer ? <SourceAnswerContent answer={archivedAnswer}/> : <p>{archived.execution.message}</p>}
       {archived.review && <p>Saved acceptance review · {archived.review.accepted ? 'accepted' : 'needs more work'}: {archived.review.reason}</p>}
       {!!archived.execution.evidence.length && <details><summary>Archived execution evidence</summary><ul>{archived.execution.evidence.map((item, index) => <li key={index}>{item}</li>)}</ul></details>}
     </section>}
@@ -181,15 +214,9 @@ export function GoalSources({goal, onAskAnother, message}: {goal: GoalRecord; on
       return source ? <SavedSource key={goal.id + ':' + source.id} goalId={goal.id} source={source} label={'source-' + (index + 1)} selections={selections} reading={reading}/> : <p className="goal-source" key={url}>[source-{index + 1}] Waiting for a saved copy: {url}</p>;
     })}
     {answer ? <section className="goal-source-answer" aria-label="Source-grounded answer">
-      <h4>Answer · {answer.answerable === false ? 'needs more source support' : goal.tasks.find(task => task.sourceAnswer)?.status === 'verified' ? 'acceptance passed' : 'awaiting acceptance'}</h4>
-      {answer.answerable === false && <p role="status">{answer.answerabilityReason || 'The selected passages do not support every requested fact.'}</p>}
+      <h4>Answer · {answer.supportError ? 'support review incomplete' : answer.answerable === false || answer.supportReview?.supported === false ? 'needs more citation support' : goal.tasks.find(task => task.sourceAnswer)?.status === 'verified' ? 'acceptance passed' : 'awaiting acceptance'}</h4>
       {answer.readingId && <small>Answer reading plan: {answer.readingId}</small>}
-      <p>{answer.text}</p>
-      <ul>{answer.citations.map((citation, index) => <li key={index}>
-        <blockquote>“{citation.quote}”</blockquote>
-        <small>[{citation.label}] text {citation.offset}–{citation.offset + citation.quote.length} · snapshot {citation.sourceId} · text SHA-256 {citation.textSha256}</small>
-      </li>)}</ul>
-      <p>{answer.uncertainty} {answer.limit}</p>
+      <SourceAnswerContent answer={answer}/>
     </section> : <p>No answer saved yet. A local model is required after source acquisition and passage selection. If it is unavailable, set it up and explicitly Continue remaining work; saved sources will be reused.</p>}
     {onAskAnother && <div className="goal-source-followup">
       <button type="button" disabled={!reusable} onClick={() => onAskAnother(goal)}>Ask another question from saved sources</button>

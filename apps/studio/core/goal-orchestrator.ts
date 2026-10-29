@@ -9,6 +9,8 @@ export type GoalSpecialist = typeof GOAL_SPECIALISTS[number];
 export type GoalStatus = 'queued' | 'planning' | 'running' | 'needs_input' | 'completed' | 'cancelled';
 export type SourceAnswer = {text: string; uncertainty: string; limit: string;
   readingId?: string; answerable?: boolean; answerabilityReason?: string;citationMethod?:'host-spans-v1';
+  draftAssessment?:{answerable:boolean;reason:string;uncertainty:string;text:string};
+  supportReview?:{supported:boolean;reason:string};supportError?:string;
   selections: {sourceId: string; label: string; start: number; end: number; textSha256: string; rangeSha256?:string; text?:string}[];
   citations: {sourceId: string; label: string; quote: string; offset: number; textSha256: string;spanId?:string}[]};
 export type GoalExecution = {message: string; verified: boolean; evidence: string[]; softwareTaskId?: string; sourceId?: string; sourceAnswer?: SourceAnswer};
@@ -64,8 +66,8 @@ export type GoalOrchestratorOptions = {
 
 const PAGE = 650, MAX_TASKS = 8;
 function sourceAnswerPacket(goal:GoalRecord,task:GoalTask,answer:SourceAnswer){
-  if(answer.answerable!==true||!answer.readingId||answer.selections.some(range=>typeof range.text!=='string'))throw new Error('This source answer lacks a complete persisted reading and answerability receipt. Continue with a new answer from the saved source copies.');
-  return {exactQuestion:goal.request,guidance:goal.guidance,acceptance:task.acceptance,selectedPassages:answer.selections.map(range=>({label:range.label,text:range.text})),answer:{text:answer.text,uncertainty:answer.uncertainty,answerable:answer.answerable,reason:answer.answerabilityReason,citations:answer.citations.map(citation=>({label:citation.label,quote:citation.quote}))}};
+  if(answer.answerable!==true||answer.supportReview?.supported!==true||!answer.readingId||answer.selections.some(range=>typeof range.text!=='string'))throw new Error('This source answer lacks a complete persisted reading and citation-support receipt. Continue with a new answer from the saved source copies.');
+  return {exactQuestion:goal.request,guidance:goal.guidance,acceptance:task.acceptance,selectedPassages:answer.selections.map(range=>({label:range.label,text:range.text})),answer:{text:answer.text,uncertainty:answer.uncertainty,citations:answer.citations.map(citation=>({label:citation.label,quote:citation.quote}))}};
 }
 const reviewSchema = objectSchema({accepted: {type: 'boolean'}, reason: {type: 'string', maxLength: 500}});
 const capabilities: Record<GoalSpecialist, string> = {
@@ -219,13 +221,13 @@ export class GoalOrchestrator {
     let reanswer=false;
     this.db.transaction(()=>{
     const previousQuestion=goal.request+(goal.guidance?'\nContinuation guidance: '+goal.guidance:'');
-    if(goal.sourceQuestion)for(const task of goal.tasks)if(task.sourceAnswer&&task.status==='verified'&&(note.trim()||!task.execution?.sourceAnswer?.readingId||task.execution.sourceAnswer.answerable!==true||task.execution.sourceAnswer.selections.some(range=>typeof range.text!=='string'))){
+    if(goal.sourceQuestion)for(const task of goal.tasks)if(task.sourceAnswer&&task.status==='verified'&&(note.trim()||!task.execution?.sourceAnswer?.readingId||task.execution.sourceAnswer.answerable!==true||task.execution.sourceAnswer.supportReview?.supported!==true||task.execution.sourceAnswer.selections.some(range=>typeof range.text!=='string'))){
       if(!this.options.sourceLedger)throw new Error('The saved-source answer history host is not connected.');
       this.options.sourceLedger.archiveAnswer(goal.id,task,previousQuestion);task.status='pending';delete task.execution;delete task.review;reanswer=true;
     }
     if (note.trim()) {goal.guidance = note; goal.notes.push(note);}
     for (const task of goal.tasks) if (task.status === 'needs_input') {
-      const reset=task.review||!task.execution?.verified||(task.sourceAnswer&&(note.trim()||!task.execution?.sourceAnswer?.readingId||task.execution.sourceAnswer.answerable!==true||task.execution.sourceAnswer.selections.some(range=>typeof range.text!=='string')));
+      const reset=task.review||!task.execution?.verified||(task.sourceAnswer&&(note.trim()||!task.execution?.sourceAnswer?.readingId||task.execution.sourceAnswer.answerable!==true||task.execution.sourceAnswer.supportReview?.supported!==true||task.execution.sourceAnswer.selections.some(range=>typeof range.text!=='string')));
       if(reset&&goal.sourceQuestion&&task.sourceAnswer&&task.execution?.sourceAnswer){if(!this.options.sourceLedger)throw new Error('The saved-source answer history host is not connected.');this.options.sourceLedger.archiveAnswer(goal.id,task,previousQuestion);}
       task.status = 'pending';
       if (task.review?.accepted === false) task.retryReason = 'acceptance_rejected';
