@@ -1,0 +1,8 @@
+file:///workspace/.cloud-env/anascummis/recovery-layout/layout-lifecycle.mjs:163
+}catch(error){if(browser)for(const context of browser.contexts())for(const page of context.pages())await delay(350);await page.screenshot({path:data+'/failure.png'}).catch(()=>{});throw error;}
+                                                                                                                    ^
+
+ReferenceError: page is not defined
+    at file:///workspace/.cloud-env/anascummis/recovery-layout/layout-lifecycle.mjs:163:117
+
+Node.js v24.19.0

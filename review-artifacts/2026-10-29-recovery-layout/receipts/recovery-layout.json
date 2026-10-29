@@ -1,0 +1,566 @@
+{
+  "fixture": "Ordinary production server with actual absent native model/voice. No provider/voice response mocking. Two additional cases control only browser request/response delivery and are explicitly recorded.",
+  "sourceBase": "8788f7545c5091dfaf86dc569304f77e80e66019",
+  "phase": "after",
+  "layoutChecks": [
+    {
+      "state": "recovered",
+      "height": 800,
+      "panel": {
+        "x": 16,
+        "y": 374.4375,
+        "width": 328,
+        "height": 413.5625,
+        "bottom": 788
+      },
+      "viewport": {
+        "top": 0,
+        "left": 0,
+        "width": 360,
+        "height": 800
+      },
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": "auto",
+      "bodyClientHeight": 298,
+      "bodyScrollHeight": 298,
+      "bodyScrollTop": 0,
+      "allPartsOwned": true,
+      "workOpen": true,
+      "workInside": false,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Close text input",
+          "box": {
+            "x": 274.53125,
+            "y": 383.4375,
+            "width": 56.46875,
+            "height": 40,
+            "bottom": 423.4375
+          },
+          "hit": true
+        },
+        {
+          "label": "Inspect saved work",
+          "box": {
+            "x": 116.5,
+            "y": 739,
+            "width": 134.5,
+            "height": 40,
+            "bottom": 779
+          },
+          "hit": true
+        },
+        {
+          "label": "Send message",
+          "box": {
+            "x": 259,
+            "y": 739,
+            "width": 72,
+            "height": 40,
+            "bottom": 779
+          },
+          "hit": true
+        }
+      ],
+      "tabLabels": [
+        "INPUT",
+        "Inspect saved work",
+        "Send message"
+      ],
+      "tabExitClosedEditor": true,
+      "closeFocusReturned": true,
+      "escapeFocusReturned": true,
+      "inspectFocusedWork": true,
+      "draftSurvivedClose": true,
+      "automaticPosts": 0,
+      "researchOptInDefaultOff": true,
+      "scrollingDoesNotExposeWork": true
+    },
+    {
+      "state": "recovered",
+      "height": 420,
+      "panel": {
+        "x": 16,
+        "y": 128,
+        "width": 328,
+        "height": 280,
+        "bottom": 408
+      },
+      "viewport": {
+        "top": 0,
+        "left": 0,
+        "width": 360,
+        "height": 420
+      },
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": "auto",
+      "bodyClientHeight": 164,
+      "bodyScrollHeight": 298,
+      "bodyScrollTop": 0,
+      "allPartsOwned": true,
+      "workOpen": true,
+      "workInside": false,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Close text input",
+          "box": {
+            "x": 274.53125,
+            "y": 137,
+            "width": 56.46875,
+            "height": 40,
+            "bottom": 177
+          },
+          "hit": true
+        },
+        {
+          "label": "Inspect saved work",
+          "box": {
+            "x": 116.5,
+            "y": 359,
+            "width": 134.5,
+            "height": 40,
+            "bottom": 399
+          },
+          "hit": true
+        },
+        {
+          "label": "Send message",
+          "box": {
+            "x": 259,
+            "y": 359,
+            "width": 72,
+            "height": 40,
+            "bottom": 399
+          },
+          "hit": true
+        }
+      ],
+      "tabLabels": [
+        "INPUT",
+        "Inspect saved work",
+        "Send message"
+      ],
+      "tabExitClosedEditor": true,
+      "closeFocusReturned": true,
+      "escapeFocusReturned": true,
+      "inspectFocusedWork": true,
+      "draftSurvivedClose": true,
+      "automaticPosts": 0,
+      "researchOptInDefaultOff": true,
+      "scrollingDoesNotExposeWork": true
+    },
+    {
+      "state": "unconfirmed",
+      "height": 800,
+      "panel": {
+        "x": 16,
+        "y": 188,
+        "width": 328,
+        "height": 600,
+        "bottom": 788
+      },
+      "viewport": {
+        "top": 0,
+        "left": 0,
+        "width": 360,
+        "height": 800
+      },
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": "auto",
+      "bodyClientHeight": 484,
+      "bodyScrollHeight": 537,
+      "bodyScrollTop": 0,
+      "allPartsOwned": true,
+      "workOpen": true,
+      "workInside": false,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Close text input",
+          "box": {
+            "x": 274.53125,
+            "y": 197,
+            "width": 56.46875,
+            "height": 40,
+            "bottom": 237
+          },
+          "hit": true
+        },
+        {
+          "label": "Inspect saved work",
+          "box": {
+            "x": 116.5,
+            "y": 739,
+            "width": 134.5,
+            "height": 40,
+            "bottom": 779
+          },
+          "hit": true
+        },
+        {
+          "label": "Send message",
+          "box": {
+            "x": 259,
+            "y": 739,
+            "width": 72,
+            "height": 40,
+            "bottom": 779
+          },
+          "hit": true
+        }
+      ],
+      "tabLabels": [
+        "INPUT",
+        "Kept message",
+        "Edit unconfirmed message",
+        "Dismiss notice",
+        "Inspect saved work",
+        "Send message"
+      ],
+      "tabExitClosedEditor": true,
+      "closeFocusReturned": true,
+      "escapeFocusReturned": true,
+      "inspectFocusedWork": true,
+      "draftSurvivedClose": true,
+      "automaticPosts": 0,
+      "researchOptInDefaultOff": true,
+      "scrollingDoesNotExposeWork": true
+    },
+    {
+      "state": "unconfirmed",
+      "height": 420,
+      "panel": {
+        "x": 16,
+        "y": 128,
+        "width": 328,
+        "height": 280,
+        "bottom": 408
+      },
+      "viewport": {
+        "top": 0,
+        "left": 0,
+        "width": 360,
+        "height": 420
+      },
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": "auto",
+      "bodyClientHeight": 164,
+      "bodyScrollHeight": 537,
+      "bodyScrollTop": 0,
+      "allPartsOwned": true,
+      "workOpen": true,
+      "workInside": false,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Close text input",
+          "box": {
+            "x": 274.53125,
+            "y": 137,
+            "width": 56.46875,
+            "height": 40,
+            "bottom": 177
+          },
+          "hit": true
+        },
+        {
+          "label": "Inspect saved work",
+          "box": {
+            "x": 116.5,
+            "y": 359,
+            "width": 134.5,
+            "height": 40,
+            "bottom": 399
+          },
+          "hit": true
+        },
+        {
+          "label": "Send message",
+          "box": {
+            "x": 259,
+            "y": 359,
+            "width": 72,
+            "height": 40,
+            "bottom": 399
+          },
+          "hit": true
+        }
+      ],
+      "tabLabels": [
+        "INPUT",
+        "Kept message",
+        "Edit unconfirmed message",
+        "Dismiss notice",
+        "Inspect saved work",
+        "Send message"
+      ],
+      "tabExitClosedEditor": true,
+      "closeFocusReturned": true,
+      "escapeFocusReturned": true,
+      "inspectFocusedWork": true,
+      "draftSurvivedClose": true,
+      "automaticPosts": 0,
+      "researchOptInDefaultOff": true,
+      "scrollingDoesNotExposeWork": true
+    },
+    {
+      "case": "Controlled VisualViewport resize/scroll offsets and missing-API fallback; not a physical keyboard test",
+      "geometry": [
+        {
+          "simulatedVisualViewport": {
+            "height": 420,
+            "width": 360,
+            "offsetTop": 120,
+            "offsetLeft": 0
+          },
+          "panel": {
+            "x": 16,
+            "y": 256.40625,
+            "width": 328,
+            "height": 271.59375,
+            "bottom": 528
+          },
+          "bottomOffset": "260px",
+          "rightOffset": "0px"
+        },
+        {
+          "simulatedVisualViewport": {
+            "height": 300,
+            "width": 320,
+            "offsetTop": 200,
+            "offsetLeft": 20
+          },
+          "panel": {
+            "x": 36,
+            "y": 220,
+            "width": 288,
+            "height": 268,
+            "bottom": 488
+          },
+          "bottomOffset": "300px",
+          "rightOffset": "20px"
+        }
+      ],
+      "fallback": true,
+      "automaticPosts": 0
+    },
+    {
+      "case": "Real accepted /api/goals POST with browser acknowledgement deliberately lost",
+      "acceptedId": "9d989a31-e93c-49e0-b0c3-8b78f2157c3b",
+      "target": ".goal-panel",
+      "actualStatus": "needs_input",
+      "focusedCorrectWindow": true,
+      "retainedDraft": true,
+      "explicitPosts": 1,
+      "automaticReplay": false
+    },
+    {
+      "case": "Real accepted /api/software POST with browser acknowledgement deliberately lost",
+      "acceptedId": "ebe98713-eb85-4ae4-8fe0-c7286d0d7c51",
+      "target": ".software-panel",
+      "actualStatus": "needs_input",
+      "focusedCorrectWindow": true,
+      "retainedDraft": true,
+      "explicitPosts": 1,
+      "automaticReplay": false
+    }
+  ],
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "original": {
+    "id": "c82760ca-2d57-4728-bb98-e6ac20363a5d",
+    "projectId": "971d1f5d-87b9-4c2f-8cfc-49efa4096097",
+    "request": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.",
+    "status": "failed",
+    "created": 1793274481517,
+    "updated": 1793274481530,
+    "progress": {
+      "phase": "routing",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793274481517
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793274481525
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793274481530,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "retry": {
+    "id": "021a0a4a-1463-476b-b3ee-4a4b2aba2aa8",
+    "projectId": "971d1f5d-87b9-4c2f-8cfc-49efa4096097",
+    "request": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.\nExplicitly reviewed new attempt: KEEP-RETRY-SUFFIX.",
+    "status": "failed",
+    "created": 1793274490849,
+    "updated": 1793274490853,
+    "progress": {
+      "phase": "routing",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793274490849
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793274490850
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793274490853,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "oldRecordAndActivityUnchanged": true,
+  "alternateProjectRevision": 0,
+  "exactMultilineAndSuffixRetained": true,
+  "conflictingNewerDraftPreserved": true,
+  "onlyExplicitRetryPost": true,
+  "retryContext": {
+    "project": "971d1f5d-87b9-4c2f-8cfc-49efa4096097",
+    "text": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.\nExplicitly reviewed new attempt: KEEP-RETRY-SUFFIX.",
+    "research": false,
+    "savedDetails": []
+  },
+  "lostAcceptance": {
+    "record": {
+      "id": "57f557ec-8eb1-4864-a61f-b089da16a4df",
+      "projectId": "971d1f5d-87b9-4c2f-8cfc-49efa4096097",
+      "request": "Change the website title to Lost Acknowledgement Probe.",
+      "status": "failed",
+      "created": 1793274492183,
+      "updated": 1793274492190,
+      "progress": {
+        "phase": "routing",
+        "agent": "coordinator"
+      },
+      "events": [
+        {
+          "phase": "queued",
+          "agent": "coordinator",
+          "time": 1793274492183
+        },
+        {
+          "phase": "routing",
+          "agent": "coordinator",
+          "time": 1793274492185
+        },
+        {
+          "phase": "failed",
+          "agent": "coordinator",
+          "time": 1793274492190,
+          "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+        }
+      ],
+      "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+    },
+    "serverRows": 1,
+    "posts": 1,
+    "automaticReplay": false
+  },
+  "lateReply": {
+    "request": "Explain why this local first-use request cannot run yet.",
+    "newerDraftPreserved": true,
+    "keptSnapshotRecovered": true,
+    "automaticReplay": false
+  },
+  "typedVoiceStreamPosts": 0,
+  "allThreeWindowsAccessible": true,
+  "mobileTapWithoutShortcut": true,
+  "keyboardHeightViewport": [
+    360,
+    420
+  ],
+  "readiness": {
+    "model": "unavailable",
+    "voice": "unavailable"
+  },
+  "pageErrors": [],
+  "posts": [
+    {
+      "path": "/api/chat",
+      "body": {
+        "project": "971d1f5d-87b9-4c2f-8cfc-49efa4096097",
+        "text": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.",
+        "research": false,
+        "savedDetails": []
+      }
+    },
+    {
+      "path": "/api/chat",
+      "body": {
+        "project": "971d1f5d-87b9-4c2f-8cfc-49efa4096097",
+        "text": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.\nExplicitly reviewed new attempt: KEEP-RETRY-SUFFIX.",
+        "research": false,
+        "savedDetails": []
+      }
+    },
+    {
+      "path": "/api/chat",
+      "body": {
+        "project": "971d1f5d-87b9-4c2f-8cfc-49efa4096097",
+        "text": "Change the website title to Lost Acknowledgement Probe.",
+        "research": false,
+        "savedDetails": []
+      }
+    },
+    {
+      "path": "/api/answer-stream",
+      "body": {
+        "text": "Explain why this local first-use request cannot run yet.",
+        "history": [
+          {
+            "role": "user",
+            "content": "Change the website title to First Use Recovery Probe.\nKeep the existing sections.\nPreserve this exact multiline request; the final marker is RECOVERY-SUFFIX-Ω.\nExplicitly reviewed new attempt: KEEP-RETRY-SUFFIX."
+          },
+          {
+            "role": "assistant",
+            "content": "I'll work on that in the background. You can keep talking to me."
+          }
+        ],
+        "news": false
+      }
+    },
+    {
+      "path": "/api/goals",
+      "body": {
+        "request": "Explain the unavailable local AI setup.",
+        "project": "971d1f5d-87b9-4c2f-8cfc-49efa4096097",
+        "research": false
+      }
+    },
+    {
+      "path": "/api/software",
+      "body": {
+        "goal": "Create a Bun Nextjs app with a counter and a heading."
+      }
+    }
+  ]
+}

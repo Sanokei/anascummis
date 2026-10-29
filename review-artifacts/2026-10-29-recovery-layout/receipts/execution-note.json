@@ -1,0 +1,11 @@
+{
+  "checkedAtUtc": "2026-10-29 11:48 UTC",
+  "completedCommand": "source /workspace/.cloud-env/anascummis/env.sh; node /workspace/.cloud-env/anascummis/recovery-layout/layout-lifecycle.mjs after > /workspace/.cloud-env/anascummis/recovery-layout/after-result.log 2>&1 && node /workspace/.cloud-env/anascummis/recovery-layout/pdf-context.mjs > /workspace/.cloud-env/anascummis/recovery-layout/pdf-context-result.log 2>&1",
+  "execSession": 23727,
+  "exitCode": 0,
+  "subsequentReadError": "exec_command failed: CreateProcess { message: \"Rejected(\\\"Failed to create unified exec process: exec-server transport disconnected\\\")\" }",
+  "recovery": "The next ordinary exec_command read succeeded; both completed logs and lifecycle JSON files were present. No validation replacement or alternate access route was needed.",
+  "normalServer": {"pid": 50989, "startedAtUtc": "2026-10-29 11:08:44", "command": "bun core/server.ts", "port": 3211},
+  "isolatedValidationPort": 3212,
+  "finalRuns": {"layout": "after-mwU09H", "pdf": "pdf-context-5w4usG"}
+}

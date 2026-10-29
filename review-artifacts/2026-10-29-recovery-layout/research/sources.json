@@ -1,0 +1,29 @@
+[
+  {
+    "name": "cssom-view",
+    "url": "https://raw.githubusercontent.com/w3c/csswg-drafts/main/cssom-view-1/Overview.bs",
+    "sha256": "0d5bd6513facd05262c8fd1311d247ee543ee1431b9ecab5dc5c25020f83a970",
+    "bytes": 162673,
+    "status": "fetched"
+  },
+  {
+    "name": "chrome-viewport",
+    "url": "https://developer.chrome.com/blog/viewport-resize-behavior/",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+    "status": "unavailable"
+  },
+  {
+    "name": "chrome-viewport-source",
+    "url": "https://raw.githubusercontent.com/GoogleChrome/developer.chrome.com/main/site/en/blog/viewport-resize-behavior/index.md",
+    "status": "fetched",
+    "bytes": 11234,
+    "sha256": "f4e104757b2bc45dcf4286282ac36b2bfe5b1f5e4f96eb28c9a93d44d487803f"
+  },
+  {
+    "name": "css-values",
+    "url": "https://raw.githubusercontent.com/w3c/csswg-drafts/main/css-values-4/Overview.bs",
+    "status": "fetched",
+    "bytes": 231898,
+    "sha256": "a4ae9f7ed3eea2353f3535efda83d0c202ef0178d0fa69318699f277ee9c9100"
+  }
+]

@@ -1,0 +1,30 @@
+Focused QA original failure: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await target.textContent()).includes(spec.path==='/api/goals'?'Explain the unavailable local AI setup.':spec.text))
+
+    at file:///workspace/.cloud-env/anascummis/recovery-layout/layout-lifecycle.mjs:154:90 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await target.textContent()).includes(spec.path==='/api/goals'?'Explain the unavailable local AI setup.':spec.text))
+
+    at file:///workspace/.cloud-env/anascummis/recovery-layout/layout-lifecycle.mjs:154:90 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

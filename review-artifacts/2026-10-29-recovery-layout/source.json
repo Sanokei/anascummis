@@ -1,0 +1,46 @@
+{
+  "repository": "Sanokei/anascummis",
+  "branch": "codex/recovery-layout-20261029",
+  "base": "8788f7545c5091dfaf86dc569304f77e80e66019",
+  "sourceHead": "619844a4fbfbde736389cd7065313766e94b8537",
+  "sourceTree": "4024234d0fa366c715ec636093065653524addda",
+  "changedApplicationPaths": [
+    "apps/studio/app/page.tsx",
+    "apps/studio/app/style.css"
+  ],
+  "beforeSource": "8788f7545c5091dfaf86dc569304f77e80e66019",
+  "beforeApplicationSource": "a4b80165fa657bfd364932f5233ff5a8bfaeee57",
+  "sourceCheckpointPreserved": true,
+  "unmodifiedMain": "df70f5ccdb9c3474f04d3f83ad7f60a8f7ecf917",
+  "checks": {
+    "studioTypeScript": "passed",
+    "productionBuild": "passed",
+    "normalServerRecoveryAndKeyboardMatrix": "passed at360x800 and360x420",
+    "originalWebsiteAndPdfRecovery": "passed",
+    "controlledVisualViewportOffsetsAndFallback": "passed; not physical keyboard proof",
+    "realGoalAndSoftwareAcceptedButLostAcknowledgementInspection": "passed",
+    "nativeQwenReady": false,
+    "nativeVoiceReady": false,
+    "previous192TestSuite": "recorded at base; not repeated for this focused UI correction"
+  },
+  "captureRuns": {
+    "before": "before-TuJGY4",
+    "after": "after-mwU09H",
+    "pdf": "pdf-context-5w4usG"
+  },
+  "screenshotSizes": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "narrow": [
+      360,
+      800
+    ],
+    "short": [
+      360,
+      420
+    ]
+  },
+  "preview": "Source-pinned GitHub screenshots; no deployed application preview."
+}

@@ -1,0 +1,34 @@
+{
+  "ordinaryServer": true,
+  "providerMocks": false,
+  "results": {
+    "/": {
+      "status": 200,
+      "bytes": 9813
+    },
+    "/api/status": {
+      "status": 200,
+      "body": {
+        "runtime": "local",
+        "model": {
+          "ready": false,
+          "name": "qwen3-0.6b"
+        },
+        "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+        "network": "Opt-in actions only"
+      }
+    },
+    "/api/jobs": {
+      "status": 200,
+      "bytes": 26
+    },
+    "/api/goals": {
+      "status": 200,
+      "bytes": 2
+    },
+    "/api/software": {
+      "status": 200,
+      "bytes": 2
+    }
+  }
+}

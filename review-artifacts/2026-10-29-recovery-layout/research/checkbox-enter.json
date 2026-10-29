@@ -1,0 +1,7 @@
+{
+  "browser": "Chromium",
+  "fixture": "Minimal native HTML form in an isolated browser page, no server or provider.",
+  "observation": "Pressing Enter on a checkbox invokes the containing form submit handler.",
+  "submitsBeforeGuard": 1,
+  "implementation": "The research checkbox prevents Enter default; Space retains native toggling. The actual app lifecycle checks zero POSTs for Enter/Space/navigation."
+}

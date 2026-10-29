@@ -1,0 +1,7 @@
+{
+  "url": "https://huggingface.co",
+  "normalProxyRoute": true,
+  "verifiedTls": true,
+  "status": "unavailable",
+  "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+}

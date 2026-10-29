@@ -1,0 +1,101 @@
+{
+  "fixture": "Ordinary server, actual PyMuPDF imports/native unavailable inference; one explicitly controlled404 delivery for original-PDF metadata tests atomic failure.",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "original": {
+    "id": "4638a48a-8ddc-4998-9111-112f0b17ee72",
+    "projectId": "e2d72d9c-ba08-4b7e-b664-ea8dddb7fe4e",
+    "documentId": "039b6aa0-6003-44cb-b5b7-cd7f43628e98",
+    "request": "Inspect the original attached PDF and preserve its wording.\nExact saved target marker: ORIGINAL-PDF-CONTEXT.",
+    "status": "failed",
+    "created": 1793274509343,
+    "updated": 1793274509354,
+    "progress": {
+      "phase": "routing",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793274509343
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793274509347
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793274509354,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "retry": {
+    "id": "79573d39-587e-47b9-81f4-8e0762bc3e9d",
+    "projectId": "e2d72d9c-ba08-4b7e-b664-ea8dddb7fe4e",
+    "documentId": "039b6aa0-6003-44cb-b5b7-cd7f43628e98",
+    "request": "Inspect the original attached PDF and preserve its wording.\nExact saved target marker: ORIGINAL-PDF-CONTEXT.\nReviewed new PDF attempt.",
+    "status": "failed",
+    "created": 1793274511379,
+    "updated": 1793274511384,
+    "progress": {
+      "phase": "routing",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793274511379
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793274511381
+      },
+      {
+        "phase": "failed",
+        "agent": "coordinator",
+        "time": 1793274511384,
+        "detail": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+      }
+    ],
+    "error": "Error: Local AI is unavailable. Open Download for setup instructions, then start or check the local AI server."
+  },
+  "originalActivityUnchanged": true,
+  "oldRecordUnchanged": true,
+  "restoredProject": "e2d72d9c-ba08-4b7e-b664-ea8dddb7fe4e",
+  "restoredPdf": "039b6aa0-6003-44cb-b5b7-cd7f43628e98",
+  "unrelatedProject": "96aabeb5-3593-4f6a-8697-ed387f4e2fd0",
+  "unrelatedPdf": "e05f296e-7c88-4897-9284-92cfc3bf8b45",
+  "missingPdfDidNotPartiallySwitchContext": true,
+  "pdfBytesAndRevisionsUnchanged": true,
+  "posts": [
+    {
+      "project": "e2d72d9c-ba08-4b7e-b664-ea8dddb7fe4e",
+      "document": "039b6aa0-6003-44cb-b5b7-cd7f43628e98",
+      "text": "Inspect the original attached PDF and preserve its wording.\nExact saved target marker: ORIGINAL-PDF-CONTEXT.\nReviewed new PDF attempt.",
+      "research": false,
+      "savedDetails": []
+    },
+    {
+      "project": "96aabeb5-3593-4f6a-8697-ed387f4e2fd0",
+      "document": "e05f296e-7c88-4897-9284-92cfc3bf8b45",
+      "text": "Inspect the currently selected PDF after the missing-context guard.",
+      "research": true,
+      "savedDetails": []
+    }
+  ],
+  "pageErrors": []
+}
