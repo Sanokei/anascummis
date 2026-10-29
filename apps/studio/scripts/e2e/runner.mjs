@@ -9,6 +9,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright-core';
 import {redactTrace, zipEntries} from './artifacts.mjs';
+import {inspectSoftwareArtifact, exerciseCounter} from './software-artifact.mjs';
 
 export const studioRoot = fileURLToPath(new URL('../../', import.meta.url));
 export const viewports = {desktop: {width: 1440, height: 1000}, narrow: {width: 360, height: 800}};
@@ -32,9 +33,11 @@ async function browserPath() {
   throw new Error('Installed Chrome/Chromium is required. Set CHROME_PATH to its executable; this runner does not download browsers.');
 }
 async function stop(child) {
-  if (!child?.pid || child.exitCode !== null || child.signalCode) return;
-  const exited = new Promise(resolve => child.once('exit', resolve)); child.kill('SIGTERM');
-  const timer = setTimeout(() => child.kill('SIGKILL'), 5000); timer.unref(); await exited; clearTimeout(timer);
+  if (!child?.pid) return;
+  const signal = name => {try {if (child.e2eProcessGroup && process.platform !== 'win32') process.kill(-child.pid, name); else child.kill(name);} catch (error) {if (error.code !== 'ESRCH') throw error;}};
+  if (child.exitCode !== null || child.signalCode) {if (child.e2eProcessGroup) signal('SIGTERM'); return;}
+  const exited = new Promise(resolve => child.once('exit', resolve)); signal('SIGTERM');
+  const timer = setTimeout(() => signal('SIGKILL'), 5000); timer.unref(); await exited; clearTimeout(timer);
 }
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
@@ -90,6 +93,11 @@ export async function runJourney(browser, journey, viewportName, output) {
         const path = join(folder, filename); await download.saveAs(path); const bytes = await readFile(path);
         record.downloads.push({path: filename, suggestedFilename: download.suggestedFilename(), bytes: bytes.length, sha256: sha(bytes)}); return bytes;
       },
+      inspectSoftware(taskId, options, inspect) {return inspectSoftwareArtifact({browser, data, folder, record, viewport: viewports[viewportName], activeHosts, stop, freePort, until}, taskId, options, inspect);},
+      async inspectCounterSource(taskId, sourceZip) {
+        await helpers.inspectSoftware(taskId, {name: 'downloaded-counter', sourceZip}, async (actual, receipt) => {receipt.behavior = await exerciseCounter(actual);});
+        helpers.assert('Actual downloaded counter source: fresh extraction/typecheck/tests/build/start with installed matching dependencies; keyboard, Increment/Reset/reload and contained 44px controls pass.');
+      },
       async inspectCounter(taskId) {
         if (!/^[a-f0-9-]{36}$/.test(taskId)) throw new Error('Invalid produced application reference.');
         const application = join(data, 'software', taskId, '.next/standalone'); await access(join(application, 'server.js'));
@@ -105,14 +113,9 @@ export async function runJourney(browser, journey, viewportName, output) {
           await appContext.route('**/*', route => {const url = new URL(route.request().url()); if (['http:', 'https:'].includes(url.protocol) && url.origin !== appOrigin) {record.externalBrowserRequests.push({origin: url.origin, path: url.pathname, blocked: true}); return route.abort();} return route.continue();});
           await appContext.tracing.start({screenshots: true, snapshots: true, sources: false});
           const actual = await appContext.newPage(); actual.setDefaultTimeout(12_000); await actual.goto(appOrigin, {waitUntil: 'networkidle'});
-          await actual.getByRole('heading', {name: 'Bakery Orders', exact: true}).waitFor();
-          const count = number => actual.getByText(new RegExp('^(?:count\\s*:?\\s*)?' + number + '$', 'i')).first();
-          await count(0).waitFor(); await actual.getByRole('button', {name: 'Increment', exact: true}).click(); await count(1).waitFor();
-          await actual.getByRole('button', {name: 'Increment', exact: true}).click(); await count(2).waitFor();
-          await actual.getByRole('button', {name: 'Reset', exact: true}).click(); await count(0).waitFor();
-          await actual.reload({waitUntil: 'networkidle'}); await count(0).waitFor();
+          record.deliveredApp.behavior = await exerciseCounter(actual);
           await actual.screenshot({path: join(folder, 'produced-counter.png')}); record.screenshots.push('produced-counter.png');
-          helpers.assert('Independently launched produced bundle: Bakery Orders; Increment 0→1→2; Reset→0; reload→0.');
+          helpers.assert('Independently launched produced bundle: Bakery Orders; keyboard and pointer Increment 0→1→2; Reset→0; reload→0; contained 44px controls.');
         } finally {
           try {if (appContext) {const trace = join(folder, 'produced-app-trace.zip'); await appContext.tracing.stop({path: trace}); await redactTrace(trace); record.deliveredApp.trace = 'produced-app-trace.zip';}}
           finally {await appContext?.close().catch(() => {}); await stop(app); activeHosts.delete(app);}
@@ -156,7 +159,7 @@ export async function runSuite(journeys, options) {
   try {report.source = execFileSync('git', ['rev-parse', 'HEAD'], {cwd: studioRoot, encoding: 'utf8'}).trim();} catch {}
   try {report.sourceDirty = !!execFileSync('git', ['status', '--porcelain'], {cwd: studioRoot, encoding: 'utf8'}).trim();} catch {}
   report.runnerSource = [];
-  for (const name of ['scripts/test-user-journeys.mjs', 'scripts/e2e/runner.mjs', 'scripts/e2e/journeys.mjs', 'scripts/e2e/artifacts.mjs', 'scripts/e2e/source-reading.mjs']) {
+  for (const name of ['scripts/test-user-journeys.mjs', 'scripts/e2e/runner.mjs', 'scripts/e2e/journeys.mjs', 'scripts/e2e/artifacts.mjs', 'scripts/e2e/source-reading.mjs', 'scripts/e2e/task-list.mjs', 'scripts/e2e/software-artifact.mjs', 'scripts/e2e/counter-ux.mjs', 'scripts/e2e/window-routing.mjs']) {
     report.runnerSource.push({path: name, sha256: sha(await readFile(join(studioRoot, name)))});
   }
   report.servedBuild = [];
@@ -171,10 +174,10 @@ export async function runSuite(journeys, options) {
   }
   await fingerprint(join(studioRoot, 'out'));
   report.applicationSource = [];
-  const applicationPaths = ['app/page.tsx', 'app/style.css', 'components/GoalPanel.tsx', 'components/GoalSources.tsx', 'core/server.ts', 'core/workspace-export.ts',
+  const applicationPaths = ['app/page.tsx', 'app/style.css', 'components/GoalPanel.tsx', 'components/GoalSources.tsx', 'components/SoftwarePanel.tsx', 'core/window-requests.ts', 'scripts/model.ts', 'core/server.ts', 'core/workspace-export.ts',
     'core/orchestrator.ts', 'core/harness.ts', 'core/model.ts', 'core/model-scheduler.ts', 'core/decision-routing.ts', 'core/working-memory.ts', 'core/tools.ts',
     'core/analysis-harness.ts', 'core/source-question.ts', 'core/source-passages.ts', 'core/source-citation-spans.ts', 'core/public-source.ts', 'core/goal-executor.ts', 'core/goal-orchestrator.ts',
-    'core/software-api.ts', 'core/software-task.ts', 'core/software-runner.ts', 'core/software-recipes.ts', 'worker/software-browser.mjs'];
+    'core/software-api.ts', 'core/software-task.ts', 'core/software-runner.ts', 'core/software-recipes.ts', 'core/collection-screen.ts', 'core/react-screen.ts', 'worker/software-browser.mjs'];
   for (const name of applicationPaths) {try {report.applicationSource.push({path: name, sha256: sha(await readFile(join(studioRoot, name)))});} catch {}}
   const browser = await chromium.launch({executablePath: await browserPath(), headless: true});
   let interrupted = false;

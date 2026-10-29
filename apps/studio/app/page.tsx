@@ -2,6 +2,7 @@
 import {exportRequest,resolveExport,type ExportTarget} from '../core/workspace-export';
 import {taskVoice,identityReply} from '../core/character';
 import {softwareRequested} from '../core/software-tools';
+import {softwareStatusRequest,collaborationPanelRequest,existingSoftwareRequest} from '../core/window-requests';
 import {browserSoftwareTools} from '../components/software-tools';
 import {SoftwarePanel,buildApi,builderPair} from '../components/SoftwarePanel';
 import {WorkPanel} from '../components/WorkPanel';
@@ -252,7 +253,7 @@ export default function Anascummis(){
     const exportIntent=exportRequest(command);
     const goalRequest=/^\s*(?:please\s+)?(?:plan|pursue|start|work on)\s+(?:this |a |my )?(?:goal|long task)\s*:\s*([\s\S]+)$/i.exec(text);
     if(goalRequest){if(!local)throw new Error('Coordinated goals need the downloaded local app.');setGoalsOpen(true);raisePanel('coordinated-goals');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='coordinated-goals')));await api('/goals',{request:goalRequest[1],project:project.current.id,document:documentRef.current?.id,research:research??requestsOnlineTools(goalRequest[1])},signal);onAccepted?.();await deliver('The full goal is saved. Its plan, specialist work and acceptance reviews will appear in the goals window.',signal,delivery);return;}
-    if(/\b(collaborat(?:e|ion)|shared goal|peer instances|work together)\b/i.test(command)){setPeersOpen(true);setHiddenPanels(current=>new Set([...current].filter(id=>id!=='shared-goal')));await deliver('The shared goal panel is open. Create an invite or join a collaborator’s goal.',signal,delivery);return;}
+    if(collaborationPanelRequest(text)){setPeersOpen(true);setHiddenPanels(current=>new Set([...current].filter(id=>id!=='shared-goal')));await deliver('The shared goal panel is open. Create an invite or join a collaborator’s goal.',signal,delivery);return;}
     if(/^(please )?(show|preview|let me see)( me)? (the |my )?(website|site)$/.test(command))action='show_website';
     else if(/^(please )?(show|preview)( me)? (the |my )?(3d|three dimensional|scene)( preview)?$/.test(command))action='show_scene';
     else if(/^(please )?(show|preview)( me)? (the |my )?pdf$/.test(command))action='show_pdf';
@@ -265,7 +266,9 @@ export default function Anascummis(){
     if(/^(?:please )?(?:show|open) (?:my |the )?(?:goals|goal progress|long tasks|coordinated goals)$/.test(command)){if(!local){await deliver('Coordinated goals run in the downloaded local app.',signal,delivery);return;}setGoalsOpen(true);raisePanel('coordinated-goals');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='coordinated-goals')));await deliver('Your coordinated goals window is open.',signal,delivery);return;}
     if(/^(?:please )?(?:show|open) (?:my |the )?(?:work|tasks|work history|task history|background work)$/.test(command)){openWorkHistory();await deliver(local?'Your saved work history is open.':'Your background work panel is open.',signal,delivery);return;}
     if(/^(?:please )?(?:show|open) (?:my |the )?(?:software work|builds|build tasks|software tasks|builder)$/.test(command)){setSoftwareOpen(true);raisePanel('software-work');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='software-work')));await deliver('Your persistent software work panel is open.',signal,delivery);return;}
-    if(/\b(?:build|app|task)\b/.test(command)&&/\b(?:progress|status|how long|remaining|finished|done)\b/.test(command)){const tasks=await buildApi('/software',local);const task=tasks[0];await deliver(task?taskVoice(task):'There are no software builds yet.',signal,delivery);return;}
+    if(softwareStatusRequest(text)){setSoftwareOpen(true);raisePanel('software-work');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='software-work')));const tasks=await buildApi('/software',local);const task=tasks[0];await deliver(task?taskVoice(task):'There are no software builds yet.',signal,delivery);return;}
+    const existingSoftware=existingSoftwareRequest(text);
+    if(existingSoftware){setSoftwareOpen(true);raisePanel('software-work');setHiddenPanels(current=>new Set([...current].filter(id=>id!=='software-work')));if(delivery==='text'&&!draftRef.current)writeDraft(text);await deliver(existingSoftware==='revise'?'Choose the completed build in Software work and put this request in Revision guidance. Create revised build saves a separate version; nothing has been revised yet. The request has not been applied.':'Software work is open. A completed build offers its checked source ZIP and run instructions. It has not been launched; download the source and follow its README to run it on your computer.',signal,delivery);return;}
 
     if(action){try{message=await workspaceAction(action,exportIntent?.format||'',exportIntent?.target);}catch(error){signal.throwIfAborted();throw new WorkspaceRequestError(error instanceof Error?error.message:String(error));}}
     else if(softwareRequested(text))message=await launchBackground(text,signal,onAccepted,research);

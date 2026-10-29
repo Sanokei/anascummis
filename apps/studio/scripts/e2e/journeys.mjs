@@ -4,6 +4,8 @@ import {writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {laterSourceFollowupJourney} from './source-reading.mjs';
+import {taskListJourney} from './task-list.mjs';
+import {windowRoutingJourney} from './window-routing.mjs';
 
 const unavailable = /Local AI is unavailable|local (?:AI|model|service).*unavailable|connect.*local|not ready/i;
 async function preview(ctx, title) {
@@ -203,7 +205,10 @@ export const journeys = [
       assert.equal(createHash('sha256').update(bytes).digest('hex'), artifact.sha256); const files = ctx.zipEntries(bytes); assert([...files.keys()].some(name => name.endsWith('package.json')));
       ctx.record.downloads.push({path: 'counter-source.zip', bytes: bytes.length, sha256: artifact.sha256}); ctx.assert('Downloaded app source matches its checked artifact identity.');
       await ctx.inspectCounter(task.id);
+      await ctx.inspectCounterSource(task.id, bytes);
     }
   },
-  laterSourceFollowupJourney
+  laterSourceFollowupJourney,
+  taskListJourney,
+  windowRoutingJourney
 ];

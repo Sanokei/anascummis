@@ -21,7 +21,10 @@ try {
     if (error?.code === 'ENOENT') return null;
     throw new Error('The host browser contract is unreadable or invalid: ' + error.message);
   }) : null;
-  if (contract && (!['counter', 'counter_absent'].includes(contract.kind) || typeof contract.label !== 'string' || !contract.label.trim() || typeof contract.button !== 'string' || !contract.button.trim())) throw new Error('Unsupported host browser contract');
+  if (contract?.kind === 'collection') {
+    for (const [key, limit] of [['heading', 80], ['inputLabel', 60], ['addButton', 60], ['removeButton', 60]]) if (typeof contract[key] !== 'string' || !contract[key].trim() || contract[key].length > limit) throw new Error('Invalid accessible collection browser contract');
+    if (contract.addButton === contract.removeButton || contract.listLabel !== 'Tasks' || contract.storage !== 'localStorage' || typeof contract.storageKey !== 'string' || !/^[-a-zA-Z0-9._:]{1,120}$/.test(contract.storageKey) || contract.maxItems !== 100 || contract.maxTextLength !== 200) throw new Error('Unsupported collection persistence browser contract');
+  } else if (contract && (!['counter', 'counter_absent'].includes(contract.kind) || typeof contract.label !== 'string' || !contract.label.trim() || typeof contract.button !== 'string' || !contract.button.trim())) throw new Error('Unsupported host browser contract');
   if (contract?.heading !== undefined && (typeof contract.heading !== 'string' || !contract.heading.trim() || contract.heading.length > 80)) throw new Error('Invalid literal heading browser contract');
   if (contract?.resetButton !== undefined && (typeof contract.resetButton !== 'string' || !contract.resetButton.trim() || contract.resetButton.length > 60 || contract.resetButton === contract.button)) throw new Error('Invalid Reset browser contract');
   async function textEquals(locator, expected, failure) {
@@ -39,7 +42,47 @@ try {
       const heading = page.getByRole('heading', {level: 1});
       await textEquals(heading, contract.heading, 'The actual application heading does not match the requested literal');
     }
-    if (contract?.kind === 'counter') {
+    if (contract?.kind === 'collection') {
+      const input = page.getByRole('textbox', {name: contract.inputLabel, exact: true});
+      const add = page.getByRole('button', {name: contract.addButton, exact: true});
+      const list = page.getByRole('list', {name: contract.listLabel, exact: true});
+      const rows = list.getByRole('listitem');
+      async function collectionEquals(expected, failure) {
+        const deadline = Date.now() + 5000;
+        do {
+          if (await rows.count() === expected.length) {
+            let equal = true;
+            for (let i = 0; i < expected.length; i++) if (await rows.nth(i).getByText(expected[i], {exact: true}).count() !== 1 || await rows.nth(i).getByRole('button', {name: contract.removeButton, exact: true}).count() !== 1) equal = false;
+            if (equal) return;
+          }
+          await page.waitForTimeout(50);
+        } while (Date.now() < deadline);
+        throw new Error(failure + '; actual list ' + JSON.stringify(await rows.allTextContents()));
+      }
+      await input.waitFor({state: 'visible'});
+      await collectionEquals([], 'The collection did not start empty');
+      await input.fill('   '); await input.press('Enter');
+      await collectionEquals([], 'Blank text created an item');
+      await input.fill('First task'); await input.press('Enter');
+      await collectionEquals(['First task'], 'Keyboard submission did not add the exact text');
+      if (await input.inputValue() !== '') throw new Error('A saved item did not clear its submitted draft');
+      await input.fill('Keep this task'); await add.click();
+      await input.fill('First task'); await add.click();
+      await collectionEquals(['First task', 'Keep this task', 'First task'], 'Add did not preserve separate duplicate items');
+      await rows.nth(0).getByRole('button', {name: contract.removeButton, exact: true}).click();
+      await collectionEquals(['Keep this task', 'First task'], 'Remove did not delete only its selected item');
+      await page.reload({waitUntil: 'networkidle'});
+      await collectionEquals(['Keep this task', 'First task'], 'Remaining items did not persist after reload');
+      const saved = await page.evaluate(key => localStorage.getItem(key), contract.storageKey);
+      if (!saved) throw new Error('The collection did not use its stable application storage key');
+      await rows.nth(1).getByRole('button', {name: contract.removeButton, exact: true}).click();
+      await input.fill('Added after reload'); await input.press('Enter');
+      await collectionEquals(['Keep this task', 'Added after reload'], 'Collection controls failed after restoring saved data');
+      await page.reload({waitUntil: 'networkidle'});
+      await collectionEquals(['Keep this task', 'Added after reload'], 'Later Add/Remove changes did not persist');
+      if (await page.getByRole('alert').count()) throw new Error('The application reported a persistence failure during collection acceptance');
+      behavior = 'collection acceptance passed: exact heading ' + JSON.stringify(contract.heading) + '; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key';
+    } else if (contract?.kind === 'counter') {
       const initial = contract.initial ?? 0, delta = contract.delta ?? 1;
       if (![initial, delta].every(value => typeof value === 'number' && Number.isFinite(value) && Math.abs(value) <= 1000000)) throw new Error('Counter browser targets must be finite numbers within supported limits');
       const first = initial + delta, second = first + delta;

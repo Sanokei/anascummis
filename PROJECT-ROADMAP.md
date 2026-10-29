@@ -6,11 +6,13 @@ The project is unfinished. A passing small benchmark demonstrates those specific
 
 Real local Qwen inference is installed and running in the prepared environment. The source-pinned [native user-goal checkpoint](review-artifacts/2026-10-29-user-goal-e2e/README.md) verifies five goals on desktop and narrow viewports: discovering actions, exact website copy, correct website/PDF exports, one cited document answer, and a bounded counter application. The counter uses a trusted typed compiler; it does not establish arbitrary software generation. Voice and physical-device behavior remain unverified.
 
-## Active: read the evidence needed by the actual question
+## Verified research increment: read the evidence needed by the actual question
 
 **Observed P1:** asking where Fetch tests live and where browser results are displayed produced an accepted, completed answer with neither location. The app had retained all 4,815 source characters but fed only 0–800 to inference. Both requested facts were present around positions 1,768–2,200. The native answer admitted its information gap; reviewers still accepted it. This is false completion, not merely a small-context inconvenience.
 
-Acceptance for the current increment:
+The bounded increment passed genuine Qwen desktop/narrow source, linked-follow-up, retry and archived-evidence journeys. [Pinned source/QA, failures, captures and limits](review-artifacts/2026-10-29-research-reading/README.md) remain preserved. Its model-review weaknesses are still documented; this is not general research accuracy.
+
+Acceptance exercised:
 
 - Scan retained public-source text locally for relevant passages, stay within the real inference budget, and persist the exact question, range offsets/hashes and selection rationale before generation. Do not imply the model read the whole document.
 - Require both correct locations and supporting later-document quotations from real inference. A source-insufficient result stays unfinished; exact citation matching alone cannot certify that a question was answered.
@@ -19,6 +21,16 @@ Acceptance for the current increment:
 - Add real user-goal journeys for the later-document answer, saved-source follow-up and honest insufficient-evidence recovery. Preserve the original failed native run for comparison.
 
 Owner reproduction: `/workspace/.cloud-env/anascummis/later-source-before/native-Zo9600/receipt.json`. The source is the public WHATWG Fetch repository README, content SHA-256 `d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa`. Code baseline: `678264ac5fd075921ef7e780f333c00432857423`.
+
+## Active: usable generated software and a persistent task list
+
+Actual task-list goal:
+
+> Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.
+
+Two baseline failures were reproduced against the real model: the message route treated “remaining tasks” as a status query and saved no build; the unchanged request through the existing Software form reached Qwen but stopped at revision 0 after four decisions with “Inspect a target source file first.” The current counter compiler also produced browser-default controls only 21px high, with no visible Count label.
+
+Current work combines narrowly bounded fixes: whole-request command routing, the existing counter's responsive/keyboard usability, a disclosed trusted collection compiler with storage/error/revision acceptance, actual downloaded-source start checks, visible run instructions, and correct model-launcher exit reporting. [Acceptance plan](review-artifacts/2026-10-29-software-goals/PLAN.md) records the real baseline and required output proof. None of these claims arbitrary model-authored apps. The absence of an ordinary one-click generated-app launch remains a separate product gap; source-download instructions must be honest.
 
 ## Remaining capability milestones
 

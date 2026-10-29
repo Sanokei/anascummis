@@ -46,5 +46,5 @@ if(mode==='setup'){
   const exe=process.env.LLAMA_SERVER||join(root,'llama-server.exe');
   if(!(await Bun.file(exe).exists())||!(await Bun.file(model).exists()))throw new Error('Run bun run model:setup first');
   const p=Bun.spawn([exe,'-m',model,'--host','127.0.0.1','--port','8081','-ngl','0','-c','2048','-t','4','--parallel','1','--jinja','--reasoning','off','--cors-origins','localhost'],{stdout:'inherit',stderr:'inherit',cwd:root});
-  process.on('SIGINT',()=>p.kill()); await p.exited;
+  process.on('SIGINT',()=>p.kill()); process.exitCode=await p.exited;
 }
