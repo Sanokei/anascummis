@@ -23,7 +23,14 @@ export async function localModelFetch(url:string,init:RequestInit={}):Promise<Re
 }
 export async function modelStatus() { try {return {ready:(await fetch(base+'/health',{redirect:'error',signal:AbortSignal.timeout(1500)})).ok,name:MODEL_NAME};}catch{return {ready:false,name:MODEL_NAME};} }
 export type Infer = (system:string, user:string, schema:Record<string,unknown>, signal:AbortSignal)=>Promise<unknown>;
-export const infer: Infer = async (system,user,schema,signal) => {
+/** A measured document-rewrite profile for the same local Qwen/runtime.
+ * It is never selected by user JSON and does not change other inference roles. */
+export const DOCUMENT_REWRITE_PROFILE = Object.freeze({
+  id: 'qwen3-document-rewrite-v1',
+  parameters: Object.freeze({temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0, seed: 42,
+    chat_template_kwargs: Object.freeze({enable_thinking: false})})
+});
+async function structuredInfer(system:string,user:string,schema:Record<string,unknown>,signal:AbortSignal,parameters?:typeof DOCUMENT_REWRITE_PROFILE.parameters):Promise<unknown> {
   const lease=await scheduler.acquire(1),originalSignal=signal;signal=AbortSignal.any([signal,lease.signal]);
   try {
     signal.throwIfAborted();
@@ -33,14 +40,16 @@ export const infer: Infer = async (system,user,schema,signal) => {
     if(!tokenized.ok)throw new Error('Local runtime must support token counting');
     const counted=await tokenized.json() as {tokens:unknown[]};
     if(!Array.isArray(counted.tokens)||counted.tokens.length+maxTokens+128>CONTEXT_TOKENS)throw new Error('This decision exceeds the 2,048-token budget. Ask for a smaller step or a specific page.');
-    const r=await localModelFetch(base+'/v1/chat/completions',{method:'POST',redirect:'error',headers:{'Content-Type':'application/json'},signal:AbortSignal.any([signal,AbortSignal.timeout(120000)]),body:JSON.stringify({model:MODEL_NAME,messages:[{role:'system',content:instruction},{role:'user',content:user+'\n/no_think'}],temperature:0,max_tokens:maxTokens,stream:false,response_format:{type:'json_schema',json_schema:{name:'action',strict:true,schema}}})});
+    const r=await localModelFetch(base+'/v1/chat/completions',{method:'POST',redirect:'error',headers:{'Content-Type':'application/json'},signal:AbortSignal.any([signal,AbortSignal.timeout(120000)]),body:JSON.stringify({model:MODEL_NAME,messages:[{role:'system',content:instruction},{role:'user',content:user+'\n/no_think'}],temperature:0,...parameters,max_tokens:maxTokens,stream:false,response_format:{type:'json_schema',json_schema:{name:'action',strict:true,schema}}})});
     if(!r.ok)throw new Error(`Local Qwen runtime returned ${r.status}`);
     const data=await r.json() as any;const content=data.choices?.[0]?.message?.content;
     if(typeof content!=='string'||content.length>30000)throw new Error('Invalid local model response');
     if(data.choices?.[0]?.finish_reason==='length')throw new Error('Local decision reached its output limit');
     const value=JSON.parse(content.replace(/<think>[\s\S]*?<\/think>/g,'').trim());return route?route.decode(value):value;
-  } catch(e){if(lease.signal.aborted&&!originalSignal.aborted){lease.release();return infer(system,user,schema,originalSignal);}throw e;}finally {lease.release();}
-};
+  } catch(e){if(lease.signal.aborted&&!originalSignal.aborted){lease.release();return structuredInfer(system,user,schema,originalSignal,parameters);}throw e;}finally {lease.release();}
+}
+export const infer: Infer = (system,user,schema,signal) => structuredInfer(system,user,schema,signal);
+export const documentRewriteInfer: Infer = (system,user,schema,signal) => structuredInfer(system,user,schema,signal,DOCUMENT_REWRITE_PROFILE.parameters);
 /** A bounded plain reply streams independently of structured tool decisions. */
 export async function* streamAnswer(system:string,user:string,signal:AbortSignal){
   const lease=await scheduler.acquire(0);

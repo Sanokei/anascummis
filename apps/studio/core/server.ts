@@ -17,7 +17,7 @@ import {siteTools,pdfTools,researchTools} from './tools';
 import * as vault from './vault';
 import {objectSchema,validate,type Tool} from './harness';
 import {orchestrate} from './orchestrator';
-import {infer,modelStatus,streamAnswer} from './model';
+import {infer,documentRewriteInfer,modelStatus,streamAnswer} from './model';
 import {speak,warmSpeech,streamSpeak} from './speech';
 import {cloudflareCommand} from './cloudflare';
 import {zip} from './zip';
@@ -38,16 +38,17 @@ let shuttingDown=false;
 const goalSources=new PublicSourceLedger(db);
 const researchBriefs=new ResearchBriefStore(db,goalSources,DATA,pdf);
 const researchBriefEdits=new ResearchBriefEditStore(db,researchBriefs,DATA,pdf);
-const goals=new GoalOrchestrator(db,{infer,sourceLedger:goalSources,execute:(task,goal,signal,progress)=>task.documentEdit?exclusive(goal.documentId!,()=>researchBriefEdits.execute(task,goal,signal,infer,progress)):task.sourceBrief?researchBriefs.execute(task,goal,signal,infer,progress):executeGoalTask(task,goal,signal,()=>shuttingDown,goalSources,progress),reviewSource:(task,goal,execution,signal)=>reviewSourceAcquisition(goalSources,task,goal,execution,signal),reviewBrief:(task,goal,execution,signal)=>researchBriefs.review(task,goal,execution,signal),reviewDocumentEdit:(task,goal,execution,signal)=>researchBriefEdits.review(task,goal,execution,signal),allowedSpecialists:['analysis','website','pdf','scene','commerce','research','video','video_sources','software']});
+const goals=new GoalOrchestrator(db,{infer,sourceLedger:goalSources,execute:(task,goal,signal,progress)=>task.documentEdit?exclusive(goal.documentId!,()=>researchBriefEdits.execute(task,goal,signal,infer,progress,documentRewriteInfer),signal):task.sourceBrief?researchBriefs.execute(task,goal,signal,infer,progress):executeGoalTask(task,goal,signal,()=>shuttingDown,goalSources,progress),reviewSource:(task,goal,execution,signal)=>reviewSourceAcquisition(goalSources,task,goal,execution,signal),reviewBrief:(task,goal,execution,signal)=>researchBriefs.review(task,goal,execution,signal),reviewDocumentEdit:(task,goal,execution,signal)=>researchBriefEdits.review(task,goal,execution,signal),allowedSpecialists:['analysis','website','pdf','scene','commerce','research','video','video_sources','software']});
 function briefEditEligibility(goal:GoalRecord):{canEdit:boolean;reason?:string}|undefined {
-  if(!goal.brief)return undefined;
-  const task=goal.tasks.find(task=>task.sourceBrief),artifact=task?.execution?.briefArtifact;
-  if(goal.status!=='completed'||!goal.coverageDone||!task?.review?.accepted||!artifact)return {canEdit:false,reason:'Finish and accept the original brief before proposing its first summary edit.'};
-  try{if(document(artifact.documentId).revision!==0)return {canEdit:false,reason:'This document already has another revision. This bounded editor supports only the first summary edit of the unchanged original brief. Open the PDF or saved edit to inspect its history.'};}
-  catch{return {canEdit:false,reason:'The original brief document is unavailable. Inspect its saved goal and files before editing.'};}
+  if(!goal.brief&&!goal.documentEdit)return undefined;
+  const task=goal.tasks.find(task=>goal.documentEdit?task.documentEdit:task.sourceBrief),artifact=goal.documentEdit?task?.execution?.documentEditArtifact:task?.execution?.briefArtifact,revision=goal.documentEdit?(artifact as {revision:number}|undefined)?.revision:0;
+  if(goal.status!=='completed'||!goal.coverageDone||!task?.review?.accepted||!artifact||revision===undefined)return {canEdit:false,reason:'Finish and accept this document version before proposing another summary edit.'};
+  try{if(document(artifact.documentId).revision!==revision)return {canEdit:false,reason:'This saved version is no longer current. Open the latest accepted edit to request another change; older files remain available.'};}
+  catch{return {canEdit:false,reason:'The saved brief document is unavailable. Inspect its goal and files before editing.'};}
+  if(revision>=32)return {canEdit:false,reason:'This bounded lineage has reached 32 revisions. Preserve it and start a separate document.'};
   return {canEdit:true};
 }
-const goalResponse=(goal:GoalRecord)=>{const links=goalSoftwareLinks(goal.id),answer=goal.tasks.find(task=>task.sourceAnswer)?.execution?.sourceAnswer;return {...goal,...(goal.brief?{briefEditEligibility:briefEditEligibility(goal)}:{}),...(goal.brief?{briefState:researchBriefs.state(goal.id)}:{}),...(goal.documentEdit?{documentEditState:researchBriefEdits.state(goal.id)}:{}),...(goal.sourceQuestion?{sources:goalSources.list(goal.id),reading:goalSources.reading(goal.id,'source-answer',answer?.readingId?{id:answer.readingId}:{questionSha256:sourceHash(goal.request+(goal.guidance?'\nContinuation guidance: '+goal.guidance:''))},false)}:{}),tasks:goal.tasks.map(task=>({...task,...(links[task.id]?{softwareTaskId:links[task.id]}:{})}))};};
+const goalResponse=(goal:GoalRecord)=>{const links=goalSoftwareLinks(goal.id),answer=goal.tasks.find(task=>task.sourceAnswer)?.execution?.sourceAnswer;return {...goal,...(goal.brief||goal.documentEdit?{briefEditEligibility:briefEditEligibility(goal)}:{}),...(goal.brief?{briefState:researchBriefs.state(goal.id)}:{}),...(goal.documentEdit?{documentEditState:researchBriefEdits.state(goal.id)}:{}),...(goal.sourceQuestion?{sources:goalSources.list(goal.id),reading:goalSources.reading(goal.id,'source-answer',answer?.readingId?{id:answer.readingId}:{questionSha256:sourceHash(goal.request+(goal.guidance?'\nContinuation guidance: '+goal.guidance:''))},false)}:{}),tasks:goal.tasks.map(task=>({...task,...(links[task.id]?{softwareTaskId:links[task.id]}:{})}))};};
 const json=(v:unknown,status=200)=>Response.json(v,{status,headers:{'Cache-Control':'no-store'}});
 function activityPagination(url:URL){const raw=url.searchParams.get('limit');if(raw!==null&&!/^[1-9][0-9]*$/.test(raw))throw new Error('Choose an activity history limit from 1 to 100');return {limit:raw===null?25:Number(raw),before:url.searchParams.get('before')??undefined};}
 const download=(bytes:Uint8Array,type:string,name:string)=>new Response(bytes as any,{headers:{'Content-Type':type,'Content-Disposition':`attachment; filename="${name.replace(/[^\w.-]/g,'_')}"`,'Cache-Control':'no-store'}});
@@ -84,8 +85,10 @@ async function handleLocal(req:Request):Promise<Response>{
         if(req.method!=='POST')return json({error:'Applying a proposal requires explicit confirmation'},405);
         const a=object(await req.json());if(Object.keys(a).some(key=>!['operationId','proposalSha256'].includes(key)))throw new Error('Apply accepts only the saved operation and exact proposal identity.');
         if(goal.status==='cancelled')throw new Error('This edit is stopped. Inspect and explicitly Continue before applying its proposal.');
-        await researchBriefEdits.approve(goal,{operationId:text(a.operationId,100),proposalSha256:text(a.proposalSha256,64)});
-        return json(goalResponse(goals.resume(goal.id)),202);
+        return await exclusive(goal.documentId!,async()=>{
+          await researchBriefEdits.approve(goal,{operationId:text(a.operationId,100),proposalSha256:text(a.proposalSha256,64)});
+          return json(goalResponse(goals.resume(goal.id)),202);
+        });
       }
       if(action){
         if(req.method!=='GET')return json({error:'Saved edit artifacts are read-only'},405);
@@ -103,7 +106,7 @@ async function handleLocal(req:Request):Promise<Response>{
       const a=object(await req.json());if(Object.keys(a).some(key=>!['requestKey','intent','sentenceLabels'].includes(key)))throw new Error('A native edit accepts only its exact intent, optional sentence labels and submission identity.');
       const editIntent=text(a.intent,500),labels=validateDocumentEditLabels(editIntent,a.sentenceLabels),submitted={requestKey:text(a.requestKey,100),intent:editIntent,...(labels?{sentenceLabels:labels}:{})},existing=goals.existingDocumentEdit(goal.id,submitted.requestKey,submitted.intent,submitted.sentenceLabels);
       if(existing)return json(goalResponse(existing),202);
-      const prepared=await researchBriefEdits.prepare(goal,submitted);return json(goalResponse(goals.createDocumentEdit(goal.id,prepared)),202);
+      return await exclusive(goal.documentId!,async()=>{const prepared=await researchBriefEdits.prepare(goal,submitted);return json(goalResponse(goals.createDocumentEdit(goal.id,prepared)),202);});
     }
     const briefMatch=/^\/api\/goals\/([a-f0-9-]{36})\/brief(?:\/(export|preview))?$/.exec(path);
     if(briefMatch){const goal=goals.get(briefMatch[1]);if(briefMatch[2]){if(req.method!=='GET')return json({error:'Document previews and exports are read-only'},405);if(briefMatch[2]==='preview'){const file=await researchBriefs.exportHtml(goal);return new Response(file.bytes as any,{headers:{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; sandbox allow-top-navigation-by-user-activation; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Cache-Control':'no-store'}});}const format=url.searchParams.get('format');if(format!=='html'&&format!=='pdf')throw new Error('Choose HTML or PDF for a brief export.');const file=format==='pdf'?await researchBriefs.exportPdf(goal):await researchBriefs.exportHtml(goal);return download(file.bytes,format==='pdf'?'application/pdf':'text/html; charset=utf-8',file.name);}if(req.method!=='POST')return json({error:'Use the saved goal to inspect its research brief'},405);const a=object(await req.json());if(Object.keys(a).some(key=>!['title','notes','requestKey'].includes(key)))throw new Error('A brief accepts only its title, notes and submission identity.');return json(goalResponse(goals.createBrief(goal.id,{title:text(a.title,120),notes:a.notes===undefined?'':text(a.notes,2000),requestKey:text(a.requestKey,100)})),202);}

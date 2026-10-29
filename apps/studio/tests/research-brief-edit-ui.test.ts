@@ -116,6 +116,7 @@ test('document edit UI preserves an uncertain request and approval without repla
     expect(await page.getByText('No native writing decision has been saved.', {exact: false}).isVisible()).toBe(true);
     expect(await page.getByRole('button', {name: 'Apply proposed edit', exact: true}).count()).toBe(0);
     await page.evaluate(next => (window as any).showEdit(next), partial);
+    await page.getByText('0 of 2 native sentence-writing decisions saved.', {exact: true}).waitFor();
     expect(await page.getByText('0 of 2 native sentence-writing decisions saved.', {exact: true}).isVisible()).toBe(true);
     expect(await page.getByText('Each sentence writer receives only its label and the one literal saved quotation selected by host word matching.', {exact: false}).isVisible()).toBe(true);
     const matching = page.locator('details[data-sentence-selection="first"]');
@@ -131,6 +132,7 @@ test('document edit UI preserves an uncertain request and approval without repla
     partial.documentEditState.sentenceAttempts.first = structuredClone(child.documentEditState.sentenceAttempts.first);
     delete partial.documentEditState.sentenceAttempts.second;
     await page.evaluate(next => (window as any).showEdit(next), partial);
+    await page.getByText('1 of 2 native sentence-writing decisions saved.', {exact: true}).waitFor();
     expect(await page.getByText('1 of 2 native sentence-writing decisions saved.', {exact: true}).isVisible()).toBe(true);
     expect(await page.getByText('First native sentence saved; the second is not yet saved', {exact: true}).isVisible()).toBe(true);
     expect(await page.getByRole('button', {name: 'Apply proposed edit', exact: true}).count()).toBe(0);
@@ -144,6 +146,7 @@ test('document edit UI preserves an uncertain request and approval without repla
     legacy.documentEditState.projection.version = 'brief-labelled-sentences-v2';
     legacy.documentEditState.projection.method = 'The host adds labels to two native decisions that read the original paragraph, accepted answer and all literal quotations.';
     await page.evaluate(next => (window as any).showEdit(next), legacy);
+    await page.getByText('Each sentence-writing call reads its target label, exact request, original factual paragraph, full accepted answer and all literal citation quotes.', {exact: false}).waitFor();
     expect(await page.getByText('Each sentence-writing call reads its target label, exact request, original factual paragraph, full accepted answer and all literal citation quotes.', {exact: false}).isVisible()).toBe(true);
     expect(await page.getByRole('region', {name: 'Host sentence evidence selection', exact: true}).count()).toBe(0);
     await page.evaluate(next => (window as any).showEdit(next), child);

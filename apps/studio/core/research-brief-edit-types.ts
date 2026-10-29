@@ -1,18 +1,21 @@
 import type {BriefDraft} from './research-brief-types';
-export type DocumentEditRequest = {parentGoalId:string;requestKey:string;intent:string;sentenceLabels?:[string,string];documentId:string;baseRevision:number;basePdfSha256:string};
+export type SummaryRequirements = {oneSentence:boolean;shorterThanCharacters:number;locations:string[]};
+export type DocumentEditRequest = {parentGoalId:string;requestKey:string;intent:string;sentenceLabels?:[string,string];documentId:string;baseRevision:number;basePdfSha256:string;
+  originalBriefGoalId?:string;baseOperationId?:string;baseHtmlSha256?:string;baseProvenanceSha256?:string;requirements?:SummaryRequirements;inferenceProfile?:Record<string,unknown>};
 export type DocumentEditArtifact = {operationId:string;documentId:string;revision:number;pages:number;pdfSha256:string;htmlSha256:string;provenanceSha256:string};
 export type DocumentSentenceSelection={version:'literal-citation-label-terms-v1';method:string;label:string;queryTerms:string[];candidates:{order:number;number:number;sourceId:string;offset:number;textSha256:string;quoteSha256:string;matchedTerms:string[];score:number}[];outcome:'matched'|'none';selectedNumber?:number;selectedQuoteSha256?:string;selectedQuote?:string};
 export type DocumentEditState = {
   operationId:string;goalId:string;inputSha256:string;created:number;
   phase:'preparing'|'proposal_saved'|'awaiting_approval'|'approved'|'rendered'|'saved'|'rejected';
   before:BriefDraft;proposal?:BriefDraft;proposalSha256?:string;
-  writingMode?:'sequential-labelled-sentences-v2'|'grounded-labelled-sentences-v3';
+  writingMode?:'sequential-labelled-sentences-v2'|'grounded-labelled-sentences-v3'|'current-summary-rewrite-v4';
   sentenceSelections?:{first?:DocumentSentenceSelection;second?:DocumentSentenceSelection};
   sentenceAttempts?:{first?:{raw:unknown;sha256:string;error?:string};second?:{raw:unknown;sha256:string;error?:string}};
-  writingAttempt?:{raw:unknown;sha256:string;error?:string;origin?:'aggregate-of-two-native-sentence-decisions-v2'|'aggregate-of-two-grounded-native-decisions-v3';decisionHashes?:{first:string;second:string}};
+  writingAttempt?:{raw:unknown;sha256:string;error?:string;format?:'native-current-summary-v1';origin?:'aggregate-of-two-native-sentence-decisions-v2'|'aggregate-of-two-grounded-native-decisions-v3';decisionHashes?:{first:string;second:string}};
   projection?:{version:'brief-labelled-sentences-v1'|'brief-labelled-sentences-v2'|'brief-grounded-labelled-sentences-v3';method:string;rawSha256:string;proposalSha256:string;sentenceSha256?:{first:string;second:string}};
   draftCheck?:{accepted:boolean;reason:string};supportReview?:{supported:boolean;reason:string};
   approvedProposalSha256?:string;artifact?:DocumentEditArtifact;
+  conflict?:{expectedRevision:number;actualRevision:number;reason:string};
   preserved:{title:string;notes:string;citations:{number:number;quote:string;label:string;sourceId:string;offset:number;textSha256:string}[]};
   inspectBase:{pages:unknown[];sha256:string};
 };
