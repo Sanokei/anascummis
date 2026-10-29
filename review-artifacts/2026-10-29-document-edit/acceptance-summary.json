@@ -1,0 +1,114 @@
+{
+  "goal": "Review and apply the exact requested two-sentence factual-summary edit of the existing two-page brief, preserving all notes, source evidence and original files.",
+  "source": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+  "nativeCases": [
+    {
+      "lane": "desktop",
+      "source": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+      "result": "passed",
+      "outcomeAssertions": 8,
+      "operationId": "ba06c920-805b-415c-b946-27defc3c82d1",
+      "artifact": {
+        "operationId": "ba06c920-805b-415c-b946-27defc3c82d1",
+        "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+        "revision": 1,
+        "pages": 1,
+        "pdfSha256": "782b4031bb889a105ac284708a15483e36d8f8da72bda2e000b1bcbc9326b29e",
+        "htmlSha256": "bcf1f06703120d07a3b8021e0173a2a59d88fd6d51432a2318ea06e370ba2f33",
+        "provenanceSha256": "0554523b297517675d6507715a83dbbdf72845bc858e7173e6228a5ec3a2fb27"
+      },
+      "phaseAtSecondKill": "approved",
+      "firstCheckpointMode": "grounded-labelled-sentences-v3",
+      "storedParentByteIdentical": true,
+      "notesCharacters": 1719,
+      "originalFixtureUnchanged": true,
+      "nativeWordingsAreExactSourceQuotes": true,
+      "ownedProcesses": [
+        {
+          "pid": 80287,
+          "port": 38225,
+          "startedAt": "2026-10-29T23:16:02.189Z",
+          "command": "bun core/server.ts"
+        },
+        {
+          "pid": 80361,
+          "port": 38225,
+          "startedAt": "2026-10-29T23:16:12.185Z",
+          "command": "bun core/server.ts"
+        },
+        {
+          "pid": 80392,
+          "port": 38225,
+          "startedAt": "2026-10-29T23:16:24.590Z",
+          "command": "bun core/server.ts"
+        },
+        {
+          "pid": 80488,
+          "port": 38225,
+          "startedAt": "2026-10-29T23:16:36.843Z",
+          "command": "bun core/server.ts"
+        }
+      ],
+      "fullTraceShared": false
+    },
+    {
+      "lane": "phone",
+      "source": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+      "result": "passed",
+      "outcomeAssertions": 8,
+      "operationId": "331acb90-59c6-40ce-ab28-2d450e5491d8",
+      "artifact": {
+        "operationId": "331acb90-59c6-40ce-ab28-2d450e5491d8",
+        "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+        "revision": 1,
+        "pages": 1,
+        "pdfSha256": "434e8e05eb8e96e2ff164374bd943327ac75b6f55d02cf37ccab6bbba528069c",
+        "htmlSha256": "bcf1f06703120d07a3b8021e0173a2a59d88fd6d51432a2318ea06e370ba2f33",
+        "provenanceSha256": "c2ddc3c827e137eee3c203ff24575fb31ad8eb747ea0cfaaf29c2510b8345af5"
+      },
+      "phaseAtSecondKill": "approved",
+      "firstCheckpointMode": "grounded-labelled-sentences-v3",
+      "storedParentByteIdentical": true,
+      "notesCharacters": 1719,
+      "originalFixtureUnchanged": true,
+      "nativeWordingsAreExactSourceQuotes": true,
+      "ownedProcesses": [
+        {
+          "pid": 80674,
+          "port": 46197,
+          "startedAt": "2026-10-29T23:18:05.876Z",
+          "command": "bun core/server.ts"
+        },
+        {
+          "pid": 80990,
+          "port": 46197,
+          "startedAt": "2026-10-29T23:18:16.271Z",
+          "command": "bun core/server.ts"
+        },
+        {
+          "pid": 81143,
+          "port": 46197,
+          "startedAt": "2026-10-29T23:18:26.540Z",
+          "command": "bun core/server.ts"
+        },
+        {
+          "pid": 81254,
+          "port": 46197,
+          "startedAt": "2026-10-29T23:18:38.733Z",
+          "command": "bun core/server.ts"
+        }
+      ],
+      "fullTraceShared": false
+    }
+  ],
+  "casesPassed": 2,
+  "casesBlocked": 0,
+  "casesFailed": 0,
+  "outcomeAssertions": 16,
+  "qualifications": [
+    "This is one bounded user goal in two UI viewports, reusing prior genuine accepted research. It is not a new research-quality pass or broad model benchmark.",
+    "Host label-term retrieval selected the quotations. The actual Qwen responses copied those correct quotations; no novel-prose or native evidence-choice claim.",
+    "Original two-page input reflows to one readable page. Structured-summary first edit only; arbitrary imported layout edits and version2 remain unproven.",
+    "Physical handsets/keyboards, voice, native Windows/macOS and arbitrary model-written application servers remain unverified."
+  ]
+}

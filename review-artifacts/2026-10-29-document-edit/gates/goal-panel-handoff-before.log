@@ -1,0 +1,22 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-panel-handoff.test.ts:
+62 |     expect(await childCard.getAttribute('aria-current')).toBe('true');
+63 |     expect(creates).toBe(1);
+64 |     const oldCreatePoll = page.waitForResponse(response => new URL(response.url()).pathname === '/api/goals' && response.request().method() === 'GET');
+65 |     releases.get(2)!(); await (await oldCreatePoll).finished();
+66 |     await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+67 |     expect(await childCard.count()).toBe(1);
+                                         ^
+error: expect(received).toBe(expected)
+
+Expected: 1
+Received: 0
+
+      at <anonymous> (/workspace/anascummis/apps/studio/tests/goal-panel-handoff.test.ts:67:37)
+(fail) an older goal poll cannot replace a confirmed edit handoff or approval [2765.91ms]
+
+ 0 pass
+ 1 fail
+ 3 expect() calls
+Ran 1 test across 1 file. [3.02s]

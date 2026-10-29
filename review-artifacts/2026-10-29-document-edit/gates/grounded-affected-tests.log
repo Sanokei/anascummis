@@ -1,0 +1,104 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-panel-handoff.test.ts:
+(pass) an older goal poll cannot replace a confirmed edit handoff or approval [4817.95ms]
+
+tests/research-brief-edit-selection.test.ts:
+(pass) host label matching selects the later relevant quote and retains every candidate identity [1.13ms]
+(pass) positive-score ties preserve source citation order rather than choosing the lowest number [0.21ms]
+(pass) unmatched or stopword-only labels retain zero-score evidence and cannot produce a writing prompt [0.68ms]
+(pass) existing source normalization supports fullwidth labels and CJK matching without changing raw quotations [0.81ms]
+(pass) writer receives only its exact label and selected literal quote; citation ownership is constrained but factual text is not scripted [0.50ms]
+
+tests/research-brief-ui.test.ts:
+(pass) brief UI keeps drafts and uncertain submissions without replaying them [1746.49ms]
+
+tests/research-brief-edit-draft.test.ts:
+(pass) document edit browser drafts and uncertain approvals > reload keeps the exact submitted intent separately from newer edits [0.36ms]
+(pass) document edit browser drafts and uncertain approvals > acknowledging the submitted intent clears only that snapshot [0.16ms]
+(pass) document edit browser drafts and uncertain approvals > invalid or oversized storage cannot silently truncate a request [0.23ms]
+(pass) document edit browser drafts and uncertain approvals > an unconfirmed approval retains its exact operation and proposal hash [0.23ms]
+(pass) document edit browser drafts and uncertain approvals > optional sentence format keeps incomplete labels and an exact submitted snapshot [0.62ms]
+(pass) document edit browser drafts and uncertain approvals > unchecked unsent labels survive acknowledgement and invalid labels are not silently shortened [0.16ms]
+
+tests/research-brief-edit-ui.test.ts:
+(pass) document edit UI preserves an uncertain request and approval without replay [2919.95ms]
+
+tests/research-brief.test.ts:
+(pass) synthetic lifecycle: saved draft survives a stop before review, then one artifact is reused without another writing decision [18.43ms]
+(pass) synthetic crash after atomic registration reconciles the same artifact without duplicated writes or native calls [4.92ms]
+(pass) synthetic database failure rolls back document, version and artifact together; retry keeps draft and identity [4.36ms]
+(pass) a saved negative native support decision stays inspectable and is never silently replaced on retry [2.36ms]
+(pass) changed submitted notes and damaged saved draft fail without overwriting the original checkpoint [2.39ms]
+(pass) source hash, accepted range, citation ownership and accepted dependency are checked before writing [4.40ms]
+(pass) the complete context budget refuses oversized evidence without omission or model submission [1.72ms]
+(pass) new factual packets exclude host scope while retaining full accepted text, passages and literal citations [4.32ms]
+(pass) host rejects provenance as a cited source claim before native over-acceptance and preserves the raw failed writing [2.34ms]
+(pass) paraphrased host execution and citation-verification claims cannot masquerade as source facts [7.82ms]
+(pass) malformed multiple-paragraph output is saved and stays inspectable without re-inference on retry [1.88ms]
+(pass) introduced URLs and raw Markdown fail the local factual guard and preserve their original drafts [3.39ms]
+(pass) actual native inline-format failure is projected deterministically without rewriting facts, raw output or citation IDs [9.09ms]
+(pass) a nonredundant HTTPS link preserves both its exact label and full target in displayed prose [4.33ms]
+(pass) explicit continuation of a legacy format rejection publishes a consistent readable checkpoint before awaiting support review [4.14ms]
+(pass) inline formatting never launders provenance, invented link targets or unsupported markup [11.78ms]
+(pass) a self-consistently rehashed presentation cannot diverge from its retained raw writing [3.16ms]
+(pass) early HTML/PDF export is read-only and later document edits do not change accepted original downloads [5.27ms]
+(pass) saved artifact damage and a forged review receipt fail without regeneration [5.77ms]
+(pass) synthetic filesystem boundary: a pre-created document-folder symlink is refused [2.40ms]
+(pass) real fixed PDF renderer paginates and preserves every title/note/citation/long URL/hash; HTML is escaped and self-contained [930.44ms]
+
+tests/research-brief-presentation.test.ts:
+(pass) v2 body formats the real source quotations while keeping every raw string in explicit provenance [2.24ms]
+(pass) model/source HTML and private links cannot execute or become active destinations [0.70ms]
+(pass) real renderer preserves full multi-page notes, formatted claims and exact link annotations without body hashes [508.13ms]
+(pass) long literal user URLs wrap at useful delimiters while exact note and link target remain in provenance [165.26ms]
+(pass) actual native probe wording and complete 1719-character handoff keep the footer with the document [333.60ms]
+
+tests/research-brief-edit.test.ts:
+(pass) proposal is durable read-only work; Continue does not approve and exact approval creates one version without another native decision [41.18ms]
+(pass) interruption immediately after saving the native proposal reuses it and performs only the missing support decision [7.46ms]
+(pass) interrupted rendered-files checkpoint adopts the exact bytes and registers one revision without rerendering or repeat inference [18.07ms]
+(pass) lost completion and a rolled-back SQL registration retain the same operation and rendered files [24.88ms]
+(pass) approval binds the exact operation and proposal; stopped goals and changed intent cannot publish [11.78ms]
+(pass) source-support rejection stays inspectable and cannot be turned into silent regeneration or approval [8.69ms]
+(pass) introduced URLs and changed citation selection fail before native over-acceptance or publication [13.07ms]
+(pass) original-file tampering and a conflicting revision are detected after a proposal without overwriting accepted files [14.49ms]
+(pass) damaged native response, proposal or complete-note checkpoint is rejected while its original saved bytes remain inspectable [18.06ms]
+(pass) real renderer: revised multi-page PDF/HTML retains complete notes and exact raw citations in separate provenance [3519.07ms]
+(pass) duplicated citation numbers are rejected before support review, approval or document revision [8.62ms]
+(pass) an unregistered unknown revision file is preserved and never claimed as this edit after publication collision [24.09ms]
+(pass) an impossible saved phase without its artifact cannot become a false completed revision [9.21ms]
+(pass) a symlink at the prospective revision path cannot overwrite its target or register an edit [15.48ms]
+(pass) Stop during asynchronous original verification or page inspection creates no late edit checkpoint or native decision [15.20ms]
+(pass) Stop while Apply verifies the original wins over its stale needs-input snapshot and cannot save approval [9.45ms]
+(pass) grounded sentence checkpoints preserve the exact host selection and first response across interruption before completing one version [3622.64ms]
+(pass) a historical native-like single-sentence proposal and false positive model review cannot waive exact quoted prefixes on Apply or Continue [13.15ms]
+(pass) sequential formatting rejects empty, repeated-label, multi-sentence and duplicated-citation raw fields without authored fallback [35.71ms]
+(pass) the previous two-field native failure remains exact and cannot be regenerated by the new sequential writer [9.90ms]
+(pass) sentence labels are explicit, bounded and part of the exact submission identity [13.42ms]
+(pass) a crash-window partial raw response stays inspectable and Continue rejects it without another native request [9.00ms]
+(pass) no matching label evidence remains a persisted needs-input goal without any native request or document write [14.73ms]
+(pass) an unmatched second label keeps the saved first native response and never requests or fabricates the missing sentence [10.94ms]
+(pass) changed candidate provenance or a rehashed selected quote cannot retarget an interrupted native sentence [33.78ms]
+(pass) an existing v2 sequential checkpoint retains its original broader reading contract instead of silently switching evidence mode [12.33ms]
+
+tests/research-brief-handoff.test.ts:
+(pass) synthetic brief handoff preserves exact accepted parent, complete answer and remapped reading; child never re-fetches or re-answers [35.15ms]
+(pass) synthetic uncertain submission reconciles exact request identity and refuses changed notes or title [25.70ms]
+(pass) synthetic handoff refuses unfinished/rejected parent work and corrupted citation or persisted reading [24.28ms]
+(pass) synthetic corrupted handoff refuses changed selection text and a literal citation outside its accepted reading [46.84ms]
+(pass) synthetic late handoff transaction failure rolls back child, copied sources/readings and request identity together [26.83ms]
+(pass) synthetic review approval cannot complete a brief lacking its saved artifact descriptor [27.55ms]
+(pass) synthetic Stop then shutdown/reopen needs explicit Continue and reviews checked execution without redoing accepted work [62.35ms]
+
+tests/source-passages.test.ts:
+(pass) local question terms select supporting passages beyond the original prefix without modifying source offsets [3.15ms]
+(pass) two saved sources share the fixed budget and no-match selection is explicit [4.21ms]
+(pass) candidate boundaries never split UTF-16 surrogate pairs [0.51ms]
+(pass) a second nonoverlapping passage covers distinct question terms thousands of positions away [2.72ms]
+(pass) English stopwords do not survive stemming and short code and CJK terms remain selectable [2.13ms]
+
+ 78 pass
+ 0 fail
+ 1042 expect() calls
+Ran 78 tests across 10 files. [19.62s]

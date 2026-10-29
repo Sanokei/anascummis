@@ -1,0 +1,607 @@
+{
+  "startedAt": "2026-10-29T23:19:17.925961+00:00",
+  "source": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+  "beforeProcess": {
+    "pid": 62739,
+    "startTicks": "2067608",
+    "cwd": "/workspace/anascummis/apps/studio",
+    "command": "/workspace/.cloud-tools/node_modules/bun/bin/bun.exe core/server.ts"
+  },
+  "modelBefore": {
+    "pid": 18848,
+    "startTicks": "845300",
+    "cwd": "/workspace/anascummis/apps/studio/.runtime",
+    "command": "/workspace/.cloud-tools/llama/llama-b11960/llama-server -m /workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf --host 127.0.0.1 --port 8081 -ngl 0 -c 2048 -t 4 --parallel 1 --jinja --reasoning off --cors-origins localhost"
+  },
+  "limits": [
+    "Local process refresh only. No main/public/environment-draft promotion. No model restart or fixture imported.",
+    "Database bytes change through empty application schema migrations; every pre-existing table row is compared independently, rather than claiming byte-identical database/WAL files."
+  ],
+  "beforeApis": {
+    "goals": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "documents": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "projects": {
+      "count": 1,
+      "sha256": "13e608f4c535fb6f6841d5a815a3ffcd37e415ed7b9b18f39bee4e6d139e2130"
+    },
+    "software": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "jobs": {
+      "count": null,
+      "sha256": "97dc79c9e7ea9d0e786a46d812c7253f1c8337f2b0d8f2369f8c49ece2324cf7"
+    }
+  },
+  "beforeFiles": [
+    {
+      "path": "software-pairing.key",
+      "bytes": 64,
+      "sha256": "796a96a2339b506370b339ff5a7aa4830d7f524567cfc2282bd4bc0e9ac0476f"
+    },
+    {
+      "path": "studio.sqlite",
+      "bytes": 4096,
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "studio.sqlite-shm",
+      "bytes": 32768,
+      "sha256": "65bb7b9bb092363c29cc0ac0c226b5b67abd59ea5b262a647f6f42d98f829e1e"
+    },
+    {
+      "path": "studio.sqlite-wal",
+      "bytes": 354352,
+      "sha256": "8037cec10aaea7645ea9ada96cb31947b4c765849e8f030cfd4d7d5a9f31d32c"
+    }
+  ],
+  "beforeTables": {
+    "activity_entries": {
+      "columns": [
+        "sequence",
+        "kind",
+        "stream_id",
+        "event_json"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "activity_streams": {
+      "columns": [
+        "kind",
+        "id",
+        "imported_history",
+        "earlier_history_may_be_missing"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "assets": {
+      "columns": [
+        "id",
+        "name",
+        "mime"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "documents": {
+      "columns": [
+        "id",
+        "name",
+        "revision",
+        "pages"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_brief_requests": {
+      "columns": [
+        "parent_id",
+        "request_key",
+        "goal_id"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_software_links": {
+      "columns": [
+        "goal",
+        "milestone",
+        "software"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_source_answer_history": {
+      "columns": [
+        "id",
+        "goal",
+        "task",
+        "reading_id",
+        "attempt",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_source_readings": {
+      "columns": [
+        "id",
+        "goal",
+        "task",
+        "question_hash",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_sources": {
+      "columns": [
+        "id",
+        "goal",
+        "task",
+        "metadata",
+        "body",
+        "text"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_tasks": {
+      "columns": [
+        "id",
+        "body",
+        "updated"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "media": {
+      "columns": [
+        "id",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "messages": {
+      "columns": [
+        "id",
+        "project",
+        "role",
+        "content"
+      ],
+      "rows": 1,
+      "rowDigest": "d054ef9e8fc1f8c6e18cc07b6b689db0f6b9dc07f04905a02bdc38db87fe3633"
+    },
+    "pdf_versions": {
+      "columns": [
+        "doc",
+        "revision",
+        "label"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "projects": {
+      "columns": [
+        "id",
+        "name",
+        "revision"
+      ],
+      "rows": 1,
+      "rowDigest": "3794b2ac1f2b91fb86cdc96ae15a5ec75be72fba2c51c7518b6e8906ac7a81e4"
+    },
+    "research_briefs": {
+      "columns": [
+        "goal",
+        "id",
+        "input_hash",
+        "input",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "software_launches": {
+      "columns": [
+        "lineage_id",
+        "body",
+        "updated"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "software_tasks": {
+      "columns": [
+        "id",
+        "body",
+        "updated"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sqlite_sequence": {
+      "columns": [
+        "name",
+        "seq"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "versions": {
+      "columns": [
+        "project",
+        "revision",
+        "body",
+        "label",
+        "created"
+      ],
+      "rows": 1,
+      "rowDigest": "8e34b6dbd7a8a9b5529e785eb0fc1f38e42cfa6e99706a66db7b0c7ec2f0276d"
+    },
+    "video_plans": {
+      "columns": [
+        "id",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "video_versions": {
+      "columns": [
+        "id",
+        "revision",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "work_journal": {
+      "columns": [
+        "id",
+        "status",
+        "updated",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "privateBackup": {
+    "path": "/workspace/.cloud-env/anascummis/research-document-edit/normal-refresh/private-before-refresh.sqlite",
+    "sha256": "3df3655f4ad8c92bc1be474fa60cf57a499ffd373cc8729692d2178ccf963c33",
+    "shared": false
+  },
+  "afterProcess": {
+    "pid": 81304,
+    "startTicks": "2521497",
+    "cwd": "/workspace/anascummis/apps/studio",
+    "command": "/workspace/.cloud-tools/node_modules/bun/bin/bun.exe core/server.ts"
+  },
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "modelAfter": {
+    "pid": 18848,
+    "startTicks": "845300",
+    "cwd": "/workspace/anascummis/apps/studio/.runtime",
+    "command": "/workspace/.cloud-tools/llama/llama-b11960/llama-server -m /workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf --host 127.0.0.1 --port 8081 -ngl 0 -c 2048 -t 4 --parallel 1 --jinja --reasoning off --cors-origins localhost"
+  },
+  "afterApis": {
+    "goals": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "documents": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "projects": {
+      "count": 1,
+      "sha256": "13e608f4c535fb6f6841d5a815a3ffcd37e415ed7b9b18f39bee4e6d139e2130"
+    },
+    "software": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "jobs": {
+      "count": null,
+      "sha256": "97dc79c9e7ea9d0e786a46d812c7253f1c8337f2b0d8f2369f8c49ece2324cf7"
+    }
+  },
+  "afterTables": {
+    "activity_entries": {
+      "columns": [
+        "sequence",
+        "kind",
+        "stream_id",
+        "event_json"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "activity_streams": {
+      "columns": [
+        "kind",
+        "id",
+        "imported_history",
+        "earlier_history_may_be_missing"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "assets": {
+      "columns": [
+        "id",
+        "name",
+        "mime"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "documents": {
+      "columns": [
+        "id",
+        "name",
+        "revision",
+        "pages"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_brief_requests": {
+      "columns": [
+        "parent_id",
+        "request_key",
+        "goal_id"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_document_edit_requests": {
+      "columns": [
+        "parent_id",
+        "request_key",
+        "goal_id"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_software_links": {
+      "columns": [
+        "goal",
+        "milestone",
+        "software"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_source_answer_history": {
+      "columns": [
+        "id",
+        "goal",
+        "task",
+        "reading_id",
+        "attempt",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_source_readings": {
+      "columns": [
+        "id",
+        "goal",
+        "task",
+        "question_hash",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_sources": {
+      "columns": [
+        "id",
+        "goal",
+        "task",
+        "metadata",
+        "body",
+        "text"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "goal_tasks": {
+      "columns": [
+        "id",
+        "body",
+        "updated"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "media": {
+      "columns": [
+        "id",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "messages": {
+      "columns": [
+        "id",
+        "project",
+        "role",
+        "content"
+      ],
+      "rows": 1,
+      "rowDigest": "d054ef9e8fc1f8c6e18cc07b6b689db0f6b9dc07f04905a02bdc38db87fe3633"
+    },
+    "pdf_versions": {
+      "columns": [
+        "doc",
+        "revision",
+        "label"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "projects": {
+      "columns": [
+        "id",
+        "name",
+        "revision"
+      ],
+      "rows": 1,
+      "rowDigest": "3794b2ac1f2b91fb86cdc96ae15a5ec75be72fba2c51c7518b6e8906ac7a81e4"
+    },
+    "research_brief_edits": {
+      "columns": [
+        "goal",
+        "input_hash",
+        "input",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "research_briefs": {
+      "columns": [
+        "goal",
+        "id",
+        "input_hash",
+        "input",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "software_launches": {
+      "columns": [
+        "lineage_id",
+        "body",
+        "updated"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "software_tasks": {
+      "columns": [
+        "id",
+        "body",
+        "updated"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sqlite_sequence": {
+      "columns": [
+        "name",
+        "seq"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "versions": {
+      "columns": [
+        "project",
+        "revision",
+        "body",
+        "label",
+        "created"
+      ],
+      "rows": 1,
+      "rowDigest": "8e34b6dbd7a8a9b5529e785eb0fc1f38e42cfa6e99706a66db7b0c7ec2f0276d"
+    },
+    "video_plans": {
+      "columns": [
+        "id",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "video_versions": {
+      "columns": [
+        "id",
+        "revision",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "work_journal": {
+      "columns": [
+        "id",
+        "status",
+        "updated",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "addedEmptyTables": {
+    "goal_document_edit_requests": {
+      "columns": [
+        "parent_id",
+        "request_key",
+        "goal_id"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "research_brief_edits": {
+      "columns": [
+        "goal",
+        "input_hash",
+        "input",
+        "body"
+      ],
+      "rows": 0,
+      "rowDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "afterFiles": [
+    {
+      "path": "software-pairing.key",
+      "bytes": 64,
+      "sha256": "796a96a2339b506370b339ff5a7aa4830d7f524567cfc2282bd4bc0e9ac0476f"
+    },
+    {
+      "path": "studio.sqlite",
+      "bytes": 4096,
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "studio.sqlite-shm",
+      "bytes": 32768,
+      "sha256": "41cec48c95aa44202befcf903e2c12296603f57caecfe7669dada54542d7bc96"
+    },
+    {
+      "path": "studio.sqlite-wal",
+      "bytes": 395552,
+      "sha256": "49386a7fb6082d3c7185c2f02a179feed758fb32a701a6cbbb902d381c22fb40"
+    }
+  ],
+  "allExistingRowsUnchanged": true,
+  "nonDatabaseFilesUnchanged": true,
+  "apiDataUnchanged": true,
+  "completedAt": "2026-10-29T23:19:18.155581+00:00",
+  "passed": true
+}

@@ -1,0 +1,70 @@
+{
+  "repository": "Sanokei/anascummis",
+  "branch": "codex/native-document-edit-20261029",
+  "base": "def43327504e652282516a2ff6b0a585160f0f73",
+  "baseTree": "c84239a426a72467e1cad311ee2048b1c352475c",
+  "testedImplementation": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+  "implementationTree": "0bc79060dd16fbfbd6361e4c406bde323cc9a79d",
+  "qaDirectParent": "b1b5618130b4f5a54bbc262ace3e34a92fba2d24",
+  "qaParentTree": "2c48e46cf42f37f637646cd5502859ff7cdab6d9",
+  "implementationToQaParentPaths": [
+    "PROJECT-ROADMAP.md"
+  ],
+  "changedSourcePaths": [
+    ".gitignore",
+    "apps/studio/USER-JOURNEYS.md",
+    "apps/studio/app/style.css",
+    "apps/studio/components/GoalPanel.tsx",
+    "apps/studio/components/ResearchBrief.tsx",
+    "apps/studio/components/ResearchBriefEdit.tsx",
+    "apps/studio/core/goal-orchestrator.ts",
+    "apps/studio/core/public-source.ts",
+    "apps/studio/core/research-brief-edit-draft.ts",
+    "apps/studio/core/research-brief-edit-selection.ts",
+    "apps/studio/core/research-brief-edit-types.ts",
+    "apps/studio/core/research-brief-edit.ts",
+    "apps/studio/core/research-brief-presentation.ts",
+    "apps/studio/core/research-brief.ts",
+    "apps/studio/core/server.ts",
+    "apps/studio/core/source-passages.ts",
+    "apps/studio/package.json",
+    "apps/studio/scripts/e2e/research-document-edit.mjs",
+    "apps/studio/scripts/e2e/research-document.mjs",
+    "apps/studio/tests/goal-panel-handoff.test.ts",
+    "apps/studio/tests/research-brief-edit-draft.test.ts",
+    "apps/studio/tests/research-brief-edit-selection.test.ts",
+    "apps/studio/tests/research-brief-edit-ui.test.ts",
+    "apps/studio/tests/research-brief-edit.test.ts",
+    "apps/studio/tests/research-brief-presentation.test.ts",
+    "apps/studio/tests/research-brief-ui.test.ts",
+    "apps/studio/worker/pdf_worker.py",
+    "review-artifacts/2026-10-29-document-edit/PLAN.md",
+    "review-artifacts/2026-10-29-document-edit/PRESENTATION-RESEARCH.md"
+  ],
+  "sourceKit": {
+    "format": 1,
+    "version": "0ec05b4bfa9d7cddcfcd8705ac4f2117ebd970c90db91e01c674d0324612a138",
+    "filename": "anascummis-studio-0ec05b4bfa9d7cdd.zip",
+    "sha256": "cabd18e2a8bfe494dbc85aefcd63f6831c8dbcb47d92318b3a03e688cbcca0aa",
+    "bytes": 2322091,
+    "files": 271,
+    "source": {
+      "commit": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "normalStudioPid": 81304,
+  "modelPid": 18848,
+  "preparedHostOnlyUrl": "http://127.0.0.1:3211",
+  "publicPreviewUrl": null,
+  "mainExpectedUnchanged": "df70f5ccdb9c3474f04d3f83ad7f60a8f7ecf917",
+  "environmentDraft": {
+    "revision": 13,
+    "changed": false,
+    "published": false
+  }
+}

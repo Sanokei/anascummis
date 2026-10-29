@@ -1,0 +1,18 @@
+[
+  {
+    "url": "https://pymupdf.readthedocs.io/en/latest/story-class.html",
+    "title": "PyMuPDF Story API",
+    "retrievedAt": "2026-10-29T22:34:46.416029+00:00",
+    "bytes": 94872,
+    "sha256": "23489e5c29ac0205fc4bbfc0a5d40c29df6ddbb33e97eed743c5fc61bc4a27ec",
+    "localFile": "/workspace/.cloud-env/anascummis/document-edit/presentation/research/story.html"
+  },
+  {
+    "url": "https://pymupdf.readthedocs.io/en/latest/recipes-stories.html",
+    "title": "PyMuPDF Stories recipes",
+    "retrievedAt": "2026-10-29T22:34:46.768025+00:00",
+    "bytes": 286080,
+    "sha256": "6dd0e1babb514d7869952b428763b819c5681a9d409a3e68aa47b0b65e34ddd8",
+    "localFile": "/workspace/.cloud-env/anascummis/document-edit/presentation/research/html-template.html"
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "recordedAt": "2026-10-29T23:14:19.823711+00:00",
+  "scope": "Test-only PDF fixture subprocess investigation, not a native-model or production-PDF failure diagnosis.",
+  "observations": [
+    {
+      "case": "Combined affected suite, first attempt",
+      "result": "77 pass / 1 fail; grounded real-render checkpoint test hit unchanged 20,000 ms bound."
+    },
+    {
+      "case": "Combined affected suite, repeated after source frozen",
+      "result": "Same 20,000 ms timeout."
+    },
+    {
+      "observedAt": "2026-10-29T23:12:13Z",
+      "parentPid": 78507,
+      "parentCommand": "bun test (10 affected files)",
+      "parentState": "Sl / do_epoll_wait",
+      "childPid": 79050,
+      "childParentPid": 78507,
+      "childState": "Z (defunct Python)",
+      "childElapsed": "16 seconds",
+      "activePdfWorker": false,
+      "source": "Read-only ps inspection while combined repeat was waiting."
+    },
+    {
+      "case": "Earlier dedicated three-file gate",
+      "result": "36 pass / 515 assertions / 8.77 seconds."
+    }
+  ],
+  "hypothesis": "The fixture Bun.spawn streams/exited-promise handling in the mixed Playwright/Bun test host could wait after a worker exited. A zombie child was observed; the specific upstream/runtime cause is unproven. This was not evidence to enlarge the timeout or weaken PDF acceptance.",
+  "boundedChange": {
+    "file": "apps/studio/tests/research-brief-edit.test.ts",
+    "change": "Use node:child_process execFile callback for the same Python executable/pdf_worker.py/job JSON, drain stdout/stderr, report exit/error; UTF-8; 4,000,000-byte buffer; 10,000ms per worker timeout.",
+    "unchanged": [
+      "Overall grounded test 20,000ms timeout",
+      "All actual PDF/HTML/full-note/source/original preservation assertions",
+      "Production core/pdf.ts and PDF engine",
+      "Model/runtime/normal user data"
+    ]
+  },
+  "after": {
+    "directFile": "26 passed / 440 assertions / 7.98 seconds",
+    "activeWorkersAfterDirect": false,
+    "combinedRerun": "Parent owner runs once after this source freeze; not yet inferred passed by this receipt."
+  },
+  "logs": [
+    {
+      "path": "grounded-affected-tests-first-failed.log",
+      "bytes": 10253,
+      "sha256": "3983dd82dd699cb9c5493074b6544196dd3ed38c721b324a19e602b68c08c534"
+    },
+    {
+      "path": "grounded-affected-tests-second-failed.log",
+      "bytes": 10257,
+      "sha256": "899b98b8338c270b2ee382d04765c5a10740a086a2b52f77678b177cf0bf8699"
+    },
+    {
+      "path": "grounded-backend-tests.log",
+      "bytes": 4631,
+      "sha256": "855509e8f9947e5d7781403573bc82fcca9d86cc903867a9fe9d5e9e9782df6a"
+    },
+    {
+      "path": "grounded-backend-execfile-tests.log",
+      "bytes": 3458,
+      "sha256": "37c9fe368819c3506b9bdd17edd3e23fd6a0964e25d30a1b0e5c90ca3072b185"
+    }
+  ]
+}

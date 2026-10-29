@@ -1,0 +1,107 @@
+{
+  "at": "2026-10-29T23:09:46.973335+00:00",
+  "reviewer": "independent child agent, read-only source/receipt audit",
+  "head": "fef2427f84ed335cc3df8adb09b0782c57d65ac8",
+  "workingTree": true,
+  "sourceFingerprints": [
+    {
+      "path": "apps/studio/core/research-brief-edit.ts",
+      "bytes": 44477,
+      "sha256": "ced8de31591ff867572002a06dfefcee56dabeea6ad58f49c9d8a9f5b394ae35"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-selection.ts",
+      "bytes": 2926,
+      "sha256": "47864964190461c8eabd1aa7b8a896ffc97f74930e3d649968bee2eaa531f56f"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-types.ts",
+      "bytes": 2124,
+      "sha256": "4b6cb419c1c67874029f783a0dee3cedd33881adfc622c42fd946b4ce2b47787"
+    },
+    {
+      "path": "apps/studio/core/source-passages.ts",
+      "bytes": 3488,
+      "sha256": "5fb8bd4554d0df2be787ca61a1fceb0c315a3266aee97c91a3fbcc4567511e01"
+    },
+    {
+      "path": "apps/studio/core/server.ts",
+      "bytes": 35378,
+      "sha256": "8fca30ac90f587e7e88c643b968ddab1678b07c57ce81cbdaf4cc21b18169815"
+    },
+    {
+      "path": "apps/studio/core/goal-orchestrator.ts",
+      "bytes": 50576,
+      "sha256": "9f127aff27f8d8ae60b9de1883a70d13fd258a39ac881fb7336e8da0a050ed14"
+    },
+    {
+      "path": "apps/studio/components/ResearchBriefEdit.tsx",
+      "bytes": 32849,
+      "sha256": "5ea37a569badde4e6acd957a3bdc086e2cae8bec6f1249a82bb02ddbf83ed396"
+    },
+    {
+      "path": "apps/studio/scripts/e2e/research-document-edit.mjs",
+      "bytes": 52609,
+      "sha256": "d5a2f90b283ec0fd7e8960f2066d0aeeb9918bb0961f49a6d1901e3d0e056e01"
+    },
+    {
+      "path": "apps/studio/core/research-brief-presentation.ts",
+      "bytes": 9745,
+      "sha256": "dd9035a9a1d919eeaa16166f937dfe723a9d69131052c7e53e0c9fdfee90bdb5"
+    }
+  ],
+  "probeReceipt": {
+    "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-prompt-diagnostic/host-selection-report.json",
+    "sha256": "e51f523d9ac260d3f8df3f8b4b5394a487612b37e50d67b80d5ca28e9de2bdda",
+    "scope": "Two genuine local native quote-only prompt diagnostics. This is not a UI/document acceptance pass.",
+    "modelURLConfigured": null,
+    "resolvedDefaultModelOrigin": "http://127.0.0.1:8081",
+    "readinessBefore": {
+      "pid": 18848,
+      "startTicks": "845300",
+      "health": {
+        "status": "ok"
+      }
+    },
+    "readinessAfter": {
+      "pid": 18848,
+      "startTicks": "845300",
+      "health": {
+        "status": "ok"
+      }
+    }
+  },
+  "blockingFindings": [],
+  "checkedContracts": [
+    "Host label-term selection uses existing sourceTerms and positive score/original-order ties; full candidate identities and selected literal quote are persisted before inference.",
+    "Read-only state reconstructs each selection from immutable accepted citation content and source/offset/text identities; altered rankings or quote hashes fail.",
+    "Grounded writer receives only exact user label plus one selected literal quotation, with native factual text unconstrained and citation identity constrained to that supplied evidence.",
+    "Support review receives complete saved intent, before paragraph, accepted answer and all exact literal quotations. Personal notes are host-preserved and not supplied to the sentence writer.",
+    "First/second raw responses remain independently hashed and inspectable; aggregate reconstructs those exact responses and the disclosed label projection. Partial raw checkpoints stay inspectable before validation; explicit continuation validates without replacing saved responses.",
+    "Apply binds operation and proposal hash, re-reads current goal after asynchronous original verification, rejects cancelled/conflicting state and does not allow Continue/startup to approve a proposal.",
+    "Render/publication paths preserve original0.pdf and brief.html, use owned operation paths and refuse unknown revision bytes; shared document locking and conditional SQL registration prevent registered mutation races.",
+    "Saved-only revised links and explicit GET inspection preserve uncertain create/apply delivery without automatic replay. Existing browser drafts include typed-label constraints and newer draft preservation.",
+    "Driver requires real native content under each label, persisted host ranking/raw identity across actual owned-host SIGKILL, one revision, actual downloaded bytes/MIME/text/source links, original file byte equality and exact provenance."
+  ],
+  "nonblockingObservations": [
+    {
+      "path": "apps/studio/core/research-brief-edit.ts",
+      "finding": "DOCUMENT_EDIT_REVIEW_ROLE says complete saved passages while v3 provides all literal quotations and explicitly omits longer passages. Packet/UI scope is honest; tighten that role wording to all supplied literal quotations and accepted answer for exact alignment.",
+      "severity": "wording",
+      "status": "resolved by root; independently re-read"
+    }
+  ],
+  "limitations": [
+    "Source/receipt audit only; no services started, model calls made, product files edited or normal user data mutated by this reviewer.",
+    "No fresh v3 ordinary UI/native artifact/desktop/narrow/short-window pass was available at audit time.",
+    "Host lexical relevance and same-model support review do not independently certify general semantic or factual accuracy.",
+    "Physical-device, native Windows/macOS and voice behavior are outside this audit."
+  ],
+  "wordingResolution": {
+    "at": "2026-10-29T23:09:56.560646+00:00",
+    "by": "root agent",
+    "path": "apps/studio/core/research-brief-edit.ts",
+    "sha256": "ced8de31591ff867572002a06dfefcee56dabeea6ad58f49c9d8a9f5b394ae35",
+    "verified": "Review role now names supplied literal quotations and accepted answer. No product edit by this reviewer."
+  }
+}

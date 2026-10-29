@@ -1,0 +1,95 @@
+{
+  "at": "2026-10-29T23:19:24.984491+00:00",
+  "reviewer": "independent child agent",
+  "source": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+  "sourceDirty": false,
+  "ownerReport": {
+    "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/report.json",
+    "sha256": "96630f4110480835648065714960b6cc2810dedbc793fa9799da809f994278a6",
+    "status": "passed",
+    "outcomeAssertions": 8,
+    "scope": "Owner ordinary-browser native lifecycle receipt; this reviewer did not rerun that lifecycle."
+  },
+  "status": "bounded_static_pass",
+  "imagesDirectlyViewed": [
+    {
+      "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/research-document-edit-desktop/revised-pdf-page-1.png",
+      "bytes": 143916,
+      "sha256": "b8f99651add12ab38feed5c379de54bb21ac399c8f4e6c266a3ae22797229105"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/research-document-edit-desktop/05-interrupted-first-sentence-explicit-continue-360x420.png",
+      "bytes": 40157,
+      "sha256": "f516bcc222cd77723924e62ec8cdbd4ca7301d7df803c14a0b1b0d5ee7bc638c"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/research-document-edit-desktop/08-inspected-proposal-diff-360x420.png",
+      "bytes": 46323,
+      "sha256": "ac808c50f11effd5f8dca3d55766dbd1a7d38a5d5fbf9d94c3f1b07164609a5d"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/research-document-edit-desktop/09-explicit-apply-360x420.png",
+      "bytes": 41922,
+      "sha256": "c9760988da928e702aade70363167992e8f0069f6f6a00fc5aae3cf725eac379"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/research-document-edit-desktop/11-saved-revision-actions-360x420.png",
+      "bytes": 37891,
+      "sha256": "4c75d8e9c750435e68d9b5e041571121c66aaffe1b1b0fcaed8e99f03091c972"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/research-document-edit-desktop/revised-html-360x420.png",
+      "bytes": 35815,
+      "sha256": "7b2f1df9df991e9408514ff4b947d08d4a0bea718df4ca8c5a5531d6192022bb"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/research-document-edit-desktop/02-host-selected-quote-before-native-continuation.png",
+      "bytes": 382055,
+      "sha256": "779c37f21e2c1dbd61f87099799d5e5da624af3a3c9caa784534c61b9e73b7a0"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/research-document-edit/native-grounded-desktop/research-document-edit-desktop/03-interrupted-first-native-sentence.png",
+      "bytes": 365303,
+      "sha256": "6131b39b79f765fa6409a28d3bc82fb6a4432cc1e0bd2a4e755ffd6df09a21dd"
+    }
+  ],
+  "documentCritique": [
+    "The actual PDF is one readable page with a clear title, labelled factual summary, source question, complete personal notes, numbered references, source/retrieval identity and concise factual limit. The footer is whole on this page; there is no sparse appendix-only extra page.",
+    "Ordinary PDF/HTML present inline code and labelled source anchors instead of raw Markdown/link syntax. Snapshot IDs and response/text hashes do not dominate the reading flow.",
+    "All seven personal-note items are visible and finish with the complete original final sentence. Independent text extraction also verifies all1719 notecharacters once, preserving Unicode ligatures through NFKC comparison and ignoring PDF layout whitespace only.",
+    "The raw native first/second responses copy the two correct source quotations verbatim rather than authoring novel prose. The HOST chose the evidence by lexical label matching; the model did not select the quotations. Labels and inline presentation are disclosed host formatting.",
+    "Minor copy roughness remains in the ordinary brief: Tests: Tests for... repeats the topic word, and reference quotations repeat the factual summary. This is readable and does not block this specific edit goal; source claims were not silently rewritten for polish."
+  ],
+  "uiCritique": [
+    "At360x420 the interrupted state shows Coordinator interrupted, a parent-brief action and a reachable Continue button within an opaque bounded window.",
+    "The proposed before/after text wraps within the phone-sized panel. Raw source Markdown remains visible in this inspection view; it is distinguishable from the formatted final document and does not overlap other content.",
+    "Apply proposed edit is explicit, readable and fully visible in its captured short-window state. The completed-state Open revised PDF/HTML and Download revised PDF controls are likewise visible; further controls use the panel’s intentional scrolling.",
+    "Actual desktop host-selection and partial-native screenshots expose the literal selected quote/hash and the exact saved first native JSON before the second response exists. The same screen identifies voice initialization as unavailable while local AI is reachable.",
+    "The screenshots show no composer/context overlay or text peeking through inside the work panel. Background starting-point text is outside the panel boundary."
+  ],
+  "independentReadOnlyArtifactChecks": {
+    "pdfPages": 1,
+    "personalNoteCharacters": 1719,
+    "completeNotesOnce": true,
+    "pdfSha256": "782b4031bb889a105ac284708a15483e36d8f8da72bda2e000b1bcbc9326b29e",
+    "htmlSha256": "bcf1f06703120d07a3b8021e0173a2a59d88fd6d51432a2318ea06e370ba2f33",
+    "provenanceSha256": "0554523b297517675d6507715a83dbbdf72845bc858e7173e6228a5ec3a2fb27",
+    "actualRawAggregateMatchesOwnerNativeResponses": true,
+    "actualHostSelectionsMatchProvenance": true,
+    "originalPdfBeforeAfterSha256": "92e0223b2160ee34c8fa94275f713b6294c658206ccde328c0686e66e0bb5e0f",
+    "originalHtmlBeforeAfterByteEqual": true
+  },
+  "blockingFindings": [],
+  "nonblockingFindings": [
+    {
+      "severity": "minor copy/style",
+      "finding": "Tests: Tests for... repeats the word Tests; raw source Markdown makes proposal inspection longer than the formatted final brief. Neither blocks this captured bounded flow."
+    }
+  ],
+  "limits": [
+    "Static desktop/360x420 image and saved-artifact review; fresh360x800/touch case is still owned/pending elsewhere.",
+    "No new model calls, UI mutations, services, source changes, tests or builds were run by this reviewer.",
+    "This does not establish general model quality, native evidence selection, arbitrary imported-PDF editing, fixed-layout preservation, physical-device behavior, native Windows/macOS or voice readiness.",
+    "The owner receipt records forced interruption after first native response and after approval, plus restart/continuation/one revision; this reviewer read that evidence but did not independently reproduce the process lifecycle."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "sources": [
+    {
+      "url": "https://www.sqlite.org/atomiccommit.html",
+      "retrievedAt": "2026-10-29T22:39:14.368137+00:00",
+      "bytes": 77968,
+      "sha256": "5a5be7b660217c9408c8a81eaf2faa2d08832ed3790f895a0a713916ad856ea1",
+      "savedLocal": "/workspace/.cloud-env/anascummis/document-edit/backend-primary/sqlite-atomiccommit.html",
+      "excerpt": "An atomic commit is supposed to happen instantaneously. But the processing described above clearly takes a finite amount of time. Suppose the power to the computer were cut part way through the commit operation described above. In order to maintain the illusion that the changes were instantaneous, we have to \"rollback\" any partial changes and restore the database to the state it was in prior to the beginning of the transaction. 4.1. When Something Goes Wrong... Suppose the power loss occurred during step 3.10 above, while the database changes were being written to disk. After power is restored, the situation might be something like what is sh"
+    },
+    {
+      "url": "https://bun.sh/docs/api/sqlite",
+      "retrievedAt": "2026-10-29T22:39:14.413117+00:00",
+      "bytes": 516175,
+      "sha256": "ca44fa183dcf2fbe3bf0682daf30c95006176841bfc1231a0d54091c319e9288",
+      "savedLocal": "/workspace/.cloud-env/anascummis/document-edit/backend-primary/bun-sqlite.html",
+      "excerpt": "A transaction executes multiple queries atomically : either all of them succeed or none do. Create a transaction with the db.transaction() method: db.ts const insertCat = db. prepare ( \" INSERT INTO cats (name) VALUES ($name) \" ); const insertCats = db. transaction ( cats => { for ( const cat of cats) insertCat. run (cat); }); No cats have been inserted yet. db.transaction() returns a new function ( insertCats ) that wraps the function that executes the queries. To execute the transaction, call this function. The transaction function passes its arguments through to the wrapped function and returns the wrapped function's return value. The wrap"
+    }
+  ],
+  "application": "SQL atomically registers document revision and operation state together. This does not make external PDF/HTML file writes one SQLite transaction. The host saves and hashes operation-owned rendered files before conditional SQL registration, then reuses verified files after interruption; existing unknown revision paths are never overwritten. Existing shared document lock covers registered mutation routes. Real host SIGKILL evidence and injected registration-window tests remain distinct."
+}

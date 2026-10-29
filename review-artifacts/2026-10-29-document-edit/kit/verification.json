@@ -1,0 +1,32 @@
+{
+  "manifest": {
+    "format": 1,
+    "version": "0ec05b4bfa9d7cddcfcd8705ac4f2117ebd970c90db91e01c674d0324612a138",
+    "filename": "anascummis-studio-0ec05b4bfa9d7cdd.zip",
+    "sha256": "cabd18e2a8bfe494dbc85aefcd63f6831c8dbcb47d92318b3a03e688cbcca0aa",
+    "bytes": 2322091,
+    "files": 271,
+    "source": {
+      "commit": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "checks": {
+    "actualArchiveBytesHash": true,
+    "allEntryHashesSizes": 271,
+    "versionPayloadRecomputed": true,
+    "crc": true,
+    "safeUniquePathsAndNoSymlinks": true,
+    "privateWeightsCachesCredentialsExcluded": true,
+    "requiredSourcesLicensesLockfiles": true,
+    "pinnedSourceFilesByteCompared": 230,
+    "sharedTypesAndTransformedConfig": true
+  },
+  "limits": [
+    "Offline audit of this versioned source kit; no fresh online installation or clean extraction/start test in this increment."
+  ]
+}

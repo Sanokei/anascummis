@@ -1,0 +1,27 @@
+{
+  "source": "84cbc016732a8a02d1e49f1319fc61efe72af74e",
+  "status": "failed",
+  "classification": "late base checkpoint after explicit Stop",
+  "goalId": "68f9b380-f3c7-4cb1-840c-b71b42d1eba2",
+  "changedApiFields": [
+    "documentEditState"
+  ],
+  "statusBefore": "cancelled",
+  "statusAfter": "cancelled",
+  "editStateBeforePresent": false,
+  "editStateAfterPhase": "preparing",
+  "operationId": "7857c4c6-ef7b-41e7-9725-2a93c1efa782",
+  "nativeWritingBefore": false,
+  "nativeWritingAfter": false,
+  "eventsIdentical": true,
+  "tasksIdentical": true,
+  "nativeModelQualityClaim": false,
+  "fixtureUnchanged": true,
+  "ownedHost": {
+    "pid": 69073,
+    "port": 38311,
+    "startedAt": "2026-10-29T22:42:08.214Z",
+    "command": "bun core/server.ts"
+  },
+  "suggestedCorrection": "After awaited original inspection, check task AbortSignal before persisting the initial edit checkpoint. Keep cancelled goal events unchanged. Do not mask all checkpoint differences in test."
+}

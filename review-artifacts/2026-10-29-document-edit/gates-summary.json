@@ -1,0 +1,40 @@
+{
+  "source": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+  "affected": {
+    "exitCode": 0,
+    "tests": 78,
+    "files": 10,
+    "expectations": 1042,
+    "log": "gates/grounded-affected-tests.log",
+    "scope": "Injected model/transport/host fixtures, real PDF renderer and actual component browsers. Genuine inference is only the separately labelled native cases."
+  },
+  "typescript": {
+    "core": 0,
+    "ui": 0
+  },
+  "productionBuild": {
+    "exitCode": 0,
+    "next": "16.4.3"
+  },
+  "nativeUi": {
+    "desktopExitCode": 0,
+    "phoneExitCode": 0,
+    "cases": 2,
+    "outcomeAssertions": 16
+  },
+  "kit": {
+    "actualBrowserDownloadMatches": true,
+    "allPayloadHashesAndVersionVerified": true,
+    "privateFilesExcluded": true
+  },
+  "earlierFailuresPreserved": {
+    "nativeGoals": 4,
+    "mixedTestRunnerTimeouts": 2,
+    "diagnosticBroadPromptsFailed": 4,
+    "singleHostSelectedQuoteDiagnosticsPassed": 2
+  },
+  "limitations": [
+    "No unrelated full192-test/regression cycle or fresh online install/extraction/start gate repeated.",
+    "Prototype renderer and prompt-only diagnostics do not count as actual UI/native goal passes."
+  ]
+}

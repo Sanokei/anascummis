@@ -1,0 +1,36 @@
+{
+  "source": "fef2427f84ed335cc3df8adb09b0782c57d65ac8",
+  "status": "failed",
+  "goal": "Rewrite the brief summary into two short sentences. Start the first sentence with “Tests:” and the second with “Browser results:”. Keep both exact locations and citation numbers; do not change my notes or evidence.",
+  "reason": "AssertionError [ERR_ASSERTION]: Error: The original second sentence decision is unusable and preserved: Error: Each native labelled field must contain one nonempty factual sentence ending in punctuation, without a repeated host label or duplicated citations. Its raw response is preserved.\n+ actual - expected\n\n+ 'rejected'\n- 'awaiting_approval'\n\n    at runJourney (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-edit.mjs:95:364)\n    at async runCase (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-edit.mjs:66:5)\n    at async runResearchDocumentEditSuite (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-edit.mjs:130:66)\n    at async main (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-edit.mjs:135:390)",
+  "assertionsBeforeFailure": 4,
+  "sentenceAttempts": {
+    "first": {
+      "raw": {
+        "text": "Tests: The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+        "citations": [
+          1,
+          2
+        ]
+      },
+      "sha256": "851ca392f3181e20f4f2983482a9bd54226e4cf7feb220c83267d2a3c239f580"
+    },
+    "second": {
+      "raw": {
+        "text": "Tests: The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+        "citations": [
+          1,
+          2
+        ]
+      },
+      "sha256": "851ca392f3181e20f4f2983482a9bd54226e4cf7feb220c83267d2a3c239f580",
+      "error": "Error: Each native labelled field must contain one nonempty factual sentence ending in punctuation, without a repeated host label or duplicated citations. Its raw response is preserved."
+    }
+  },
+  "sameFirstAndSecondResponse": true,
+  "firstNativeCheckpointAndInterruptedContinuationPassed": true,
+  "noApply": true,
+  "noNewArtifact": true,
+  "originalFixtureUnchanged": true,
+  "nextDiagnostic": "Measure a smaller topic-and-literal-quotations writer packet, retain full edit intent/original summary for acceptance review and provenance; no model/sampling change."
+}

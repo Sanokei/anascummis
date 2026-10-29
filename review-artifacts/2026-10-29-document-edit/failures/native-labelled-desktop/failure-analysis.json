@@ -1,0 +1,35 @@
+{
+  "source": "2d80d4e80d9ed808e29bd89de054087f63d4ba0b",
+  "status": "failed",
+  "actualGoal": "Rewrite the brief summary into two short sentences. Start the first sentence with “Tests:” and the second with “Browser results:”. Keep both exact locations and citation numbers; do not change my notes or evidence.",
+  "typedSentenceLabels": [
+    "Tests:",
+    "Browser results:"
+  ],
+  "assertionsBeforeFailure": 3,
+  "reason": "AssertionError [ERR_ASSERTION]: Genuine local model must produce and save a proposal: Error: The original edit response is unusable and preserved: Error: Each native labelled field must contain one nonempty factual sentence ending in punctuation, without a repeated host label or duplicated citations. Its raw response is preserved.\n    at runJourney (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-edit.mjs:88:227)\n    at async runCase (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-edit.mjs:66:5)\n    at async runResearchDocumentEditSuite (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-edit.mjs:123:66)\n    at async main (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-edit.mjs:128:390)",
+  "rawNativeDecision": {
+    "raw": {
+      "first": {
+        "text": "Tests: The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+        "citations": [
+          1,
+          2
+        ]
+      },
+      "second": {
+        "text": "Browser results: The names are sorted lexicographically, and tests for the Fetch Standard can be found in the `fetch/` directory of `web-platform-tests/wpt`.",
+        "citations": [
+          1,
+          2
+        ]
+      }
+    },
+    "sha256": "4082d2efae63c27b15819b1aeceb76fa65fb2830bbea1ccca6e1ad786559c322",
+    "error": "Error: Each native labelled field must contain one nonempty factual sentence ending in punctuation, without a repeated host label or duplicated citations. Its raw response is preserved."
+  },
+  "noApply": true,
+  "noRevisedArtifact": true,
+  "oldFixtureUnchanged": true,
+  "requiredCorrection": "Two sequential native sentence decisions with durable individual checkpoints; focus on accepted factual answer and exact citation quotations instead of irrelevant surrounding reading text. Preserve this incorrect response; stripping redundant labels alone would not repair the wrong second fact."
+}

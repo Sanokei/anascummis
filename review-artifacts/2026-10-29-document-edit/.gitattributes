@@ -1,0 +1,6 @@
+*.log binary
+*.pdf binary
+*.png binary
+*.zip binary
+*.json -text
+*.html -text
