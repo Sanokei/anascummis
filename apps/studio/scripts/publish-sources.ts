@@ -7,7 +7,7 @@ import type {SourceKitSummary} from '../core/source-kit-manifest';
 type Origin={commit:string|null;dirty:boolean|null};
 type Entry={path:string;bytes:number;sha256:string};
 const roots=['app','components','core','scripts','licenses','worker','acceptance','tests'];
-const names=['package.json','bun.lock','requirements.txt','LOCAL-INSTALL.md','tsconfig.core.json','tsconfig.json','next-env.d.ts','PROVENANCE.md','next.config.ts','VIDEO.md','SMALL-MODEL.md','SURFACES.md','REALTIME.md','PEERS.md','SOFTWARE.md','tsconfig.worker.json','wrangler.demo.jsonc','.env.example'];
+const names=['package.json','bun.lock','requirements.txt','LOCAL-INSTALL.md','USER-JOURNEYS.md','tsconfig.core.json','tsconfig.json','next-env.d.ts','PROVENANCE.md','next.config.ts','VIDEO.md','SMALL-MODEL.md','SURFACES.md','REALTIME.md','PEERS.md','SOFTWARE.md','tsconfig.worker.json','wrangler.demo.jsonc','.env.example'];
 const sha=(body:Uint8Array|string)=>createHash('sha256').update(body).digest('hex');
 const encode=(value:unknown)=>new TextEncoder().encode(JSON.stringify(value,null,2)+'\n');
 const safeCode=/\.(?:ts|tsx|mjs|js|css|py|md|txt|json|yaml)$/i;
