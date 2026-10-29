@@ -1,0 +1,20 @@
+{
+  "checkedDeliverySource": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+  "nativeCompletedGoals": 2,
+  "nativeRecordedOutcomeAssertions": 24,
+  "otherExportGoals": 2,
+  "otherExportRecordedOutcomeAssertions": 14,
+  "focusedTests": {
+    "document": 35,
+    "pdfReader": 1,
+    "totalDistinct": 36,
+    "expectCalls": 432
+  },
+  "typescriptTargetsPassed": 2,
+  "productionBuildPassed": true,
+  "normalDataUnchanged": true,
+  "modelPid": 18848,
+  "normalStudioPid": 62739,
+  "nativeAndSyntheticScopesSeparate": true,
+  "physicalHandsetVoiceNativeOsOrGeneralQualityClaim": false
+}

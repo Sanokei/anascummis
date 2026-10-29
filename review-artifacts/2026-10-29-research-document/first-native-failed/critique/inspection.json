@@ -1,0 +1,20 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "width": 595.0,
+      "height": 842.0,
+      "text": "Fetch test contributor brief\nBrief\nThe Fetch Standard\u2019s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and\ncan be seen at [wpt.fyi/res ults/fetch]( https://wpt. fyi/results/ fetch). [1] [2]\nThe model selected citation span IDs; the host copied their exact saved text. This checks text\nidentity, not independent factual answer accuracy. [1]\nTests for the Fetch Standard can be found in the `fetch/` directory of [`web-platfo rm-tests/wpt\n`](https://g ithub.com/we b-platform-t ests/wpt). [1]\nExact source question\nWhere are the Fetch Standard\u2019s tests kept, and where can I see them running against\nbrowser engines? Cite the README statements supporting both.\nYour note \u2014 supplied by you, not a source claim\nCheck the live dashboard before \ufb01ling a browser bug. This is my personal next step, not a\nclaim from the source.\nReference [1]\nTests for the Fetch Standard can be found in the `fetch/` directory of [`web-platfo rm-tests/wpt\n`](https://g ithub.com/we b-platform-t ests/wpt).\nREADME.md\nURL: https://raw. githubuserco ntent.com/wh atwg/fetch/m ain/README.m d\nRetrieved: 2026-10-29T21:32:00.349Z\nSnapshot: 5b597d39-75d 5-4e65-b463- 5b624e544ccb \u00b7 text positions 1914\u20132055\nResponse SHA-256: d484144421db 3f758ef98fe5 bf13c3dbe1e0 7a357033af52\n88298ea0f4f2 ceaa\nText SHA-256: d484144421db 3f758ef98fe5 bf13c3dbe1e0 7a357033af52 88298ea0f4f2\nceaa\nReference [2]\n"
+    },
+    {
+      "number": 2,
+      "width": 595.0,
+      "height": 842.0,
+      "text": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/res\nults/fetch]( https://wpt. fyi/results/ fetch).\nREADME.md\nURL: https://raw. githubuserco ntent.com/wh atwg/fetch/m ain/README.m d\nRetrieved: 2026-10-29T21:32:00.349Z\nSnapshot: 5b597d39-75d 5-4e65-b463- 5b624e544ccb \u00b7 text positions 2057\u20132189\nResponse SHA-256: d484144421db 3f758ef98fe5 bf13c3dbe1e0 7a357033af52\n88298ea0f4f2 ceaa\nText SHA-256: d484144421db 3f758ef98fe5 bf13c3dbe1e0 7a357033af52 88298ea0f4f2\nceaa\nScope and provenance\nThe model selected citation span IDs; the host copied their exact saved text. This checks text\nidentity, not independent factual answer accuracy.\nWritten by the local model from the accepted answer and selected saved passages. Fixed\nhost code rendered this document. Source claims and general factual accuracy were not\nindependently veri\ufb01ed.\nParent question: 389ab881-47e a-4f16-8752- 30e0b20099a8\nBrief goal: ba8a1882-f94 c-4a03-a0c1- 6e92dda436a0\n"
+    }
+  ],
+  "pageCount": 2,
+  "sourceRun": "native-first-desktop",
+  "lane": "Read-only critique of the genuinely produced but not yet end-to-end-accepted document; no additional inference or application mutation.",
+  "pdfSha256": "40163830498866d9a58e395e9edc7738baa713eef3206bf6378c7dac67206e60"
+}

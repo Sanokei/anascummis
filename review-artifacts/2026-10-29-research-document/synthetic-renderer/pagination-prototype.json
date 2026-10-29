@@ -1,0 +1,85 @@
+{
+  "scope": "Synthetic local rendering proof, not native-generated document or product acceptance",
+  "pymupdfVersion": "1.28.2",
+  "longUrl": "https://example.org/evidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidence/article",
+  "sourceHash": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+  "results": [
+    {
+      "variant": "plain",
+      "pages": 2,
+      "urlCompleteIgnoringWhitespace": false,
+      "hashCompleteIgnoringWhitespace": true,
+      "paragraphOccurrences": 25,
+      "endMarkerPresent": true,
+      "outOfBoundsSpans": [
+        {
+          "page": 2,
+          "text": "evidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidencee",
+          "bbox": [
+            59.0,
+            462.86492919921875,
+            549.3579711914062,
+            477.97894287109375
+          ]
+        }
+      ],
+      "pdfBytes": 104627,
+      "pdfSha256": "ea1cddb2c36bea7eeb9a6383148f0a93eb76040cce6ff44ea3f7f96ea8b78de6"
+    },
+    {
+      "variant": "css-anywhere",
+      "pages": 2,
+      "urlCompleteIgnoringWhitespace": false,
+      "hashCompleteIgnoringWhitespace": true,
+      "paragraphOccurrences": 25,
+      "endMarkerPresent": true,
+      "outOfBoundsSpans": [
+        {
+          "page": 2,
+          "text": "evidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidencee",
+          "bbox": [
+            59.0,
+            462.86492919921875,
+            549.3579711914062,
+            477.97894287109375
+          ]
+        }
+      ],
+      "pdfBytes": 104627,
+      "pdfSha256": "a6ccc8af7c28f9498d089c162987275583b8baf2be6d62f95c0ac47195b82a55"
+    },
+    {
+      "variant": "wbr",
+      "pages": 2,
+      "urlCompleteIgnoringWhitespace": false,
+      "hashCompleteIgnoringWhitespace": true,
+      "paragraphOccurrences": 25,
+      "endMarkerPresent": true,
+      "outOfBoundsSpans": [
+        {
+          "page": 2,
+          "text": "evidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidenceevidencee",
+          "bbox": [
+            59.0,
+            462.86492919921875,
+            549.3579711914062,
+            477.97894287109375
+          ]
+        }
+      ],
+      "pdfBytes": 104627,
+      "pdfSha256": "2844dec9e0f3af2a7c883d079a2f2c4cf80e8ac4c32e6d6b8a4d0e431597ed8a"
+    },
+    {
+      "variant": "spacechunks",
+      "pages": 2,
+      "urlCompleteIgnoringWhitespace": true,
+      "hashCompleteIgnoringWhitespace": true,
+      "paragraphOccurrences": 25,
+      "endMarkerPresent": true,
+      "outOfBoundsSpans": [],
+      "pdfBytes": 104753,
+      "pdfSha256": "1062d32f9d14b574b3dec06c390abdf1d3fc1c096c093ecb617d3a066bd013d7"
+    }
+  ]
+}

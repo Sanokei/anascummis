@@ -1,0 +1,85 @@
+{
+  "lane": "real-native-checkpoint-read-only",
+  "source": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+  "sourceDirty": false,
+  "startedAt": "2026-10-29T21:57:37.942Z",
+  "sourceRun": "native-inline-desktop at 890609bf5ebe848e54e6754e095666b8115647e8",
+  "sourceIdentity": [
+    {
+      "path": "documents/4f8590cc-2a4f-48ec-9d7b-717b2cea5b24/0.pdf",
+      "bytes": 70751,
+      "sha256": "15923a2a9dda69b6c7b1cd49527598392719eebce7fdc565d1cb2d0e01db328c"
+    },
+    {
+      "path": "documents/4f8590cc-2a4f-48ec-9d7b-717b2cea5b24/brief.html",
+      "bytes": 2860,
+      "sha256": "596956a22bc531eae4c9be3006261b86c3b299fc5ca0814f173cdce844b0821d"
+    },
+    {
+      "path": "software-pairing.key",
+      "bytes": 64,
+      "sha256": "3694e3ecf9f804e661628f7d6c83641f2f81ea25bb61794d995f23083b106842"
+    },
+    {
+      "path": "studio.sqlite",
+      "bytes": 4096,
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "studio.sqlite-shm",
+      "bytes": 32768,
+      "sha256": "15e2c23d20cdb5f990a2b223b803a918495c5aee34632b2c8f8216bd38f0331b"
+    },
+    {
+      "path": "studio.sqlite-wal",
+      "bytes": 1952912,
+      "sha256": "7c80fc3b0cc433622f7f165d1d7e7917de05907c861a8e14e70b8532b55caf3a"
+    }
+  ],
+  "status": "passed",
+  "assertions": [
+    "Existing accepted native artifact opens through the actual visible supported HTML action with exact downloaded bytes, source links and restrictive headers.",
+    "Desktop/narrow/short actual HTML is contained; closing returns to the correct saved Goal.",
+    "One accepted document and exact parent/child/source/raw-native/presentation records remain unchanged; zero mutation requests or repeated accepted work.",
+    "The original stopped native fixture file identities remain unchanged."
+  ],
+  "screenshots": [
+    "actual-supported-html-desktop.png",
+    "actual-supported-html-narrow.png",
+    "actual-supported-html-short.png",
+    "returned-correct-goal-narrow.png"
+  ],
+  "mutations": [],
+  "pageErrors": [],
+  "limitations": [
+    "Copied, stopped genuinely native-produced checkpoint; no fresh inference or mutation API seeding.",
+    "Earlier file:// opening was blocked by managed Chromium policy; no policy or browser flags changed. The supported ordinary Studio HTML action is tested instead.",
+    "Desktop/touch viewport emulation, not a physical handset or native-OS installation."
+  ],
+  "host": {
+    "pid": 61953,
+    "port": 37087,
+    "startedAt": "2026-10-29T21:57:37.950Z",
+    "exitCode": 0,
+    "signalCode": null
+  },
+  "preview": {
+    "path": "/api/goals/bc7c2c32-6d1d-4abb-a11f-1cf727a23cc4/brief/preview",
+    "sha256": "596956a22bc531eae4c9be3006261b86c3b299fc5ca0814f173cdce844b0821d",
+    "matchesActualBrowserDownload": true,
+    "presented": "The Fetch Standard’s tests are kept in the fetch/ directory of web-platform-tests/wpt and can be seen at https://wpt.fyi/results/fetch.",
+    "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox allow-top-navigation-by-user-activation; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+      "referrer-policy": "no-referrer",
+      "x-content-type-options": "nosniff",
+      "cache-control": "no-store"
+    },
+    "links": [
+      "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+    ]
+  },
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T21:57:43.660Z"
+}

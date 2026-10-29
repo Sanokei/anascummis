@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "repository": "Sanokei/anascummis",
+  "branch": "codex/native-research-document-20261029",
+  "base": "21f62247ca92311545a553eecdc98c7d39842db2",
+  "baseTree": "ce6653cf5223e56ca67dc317617a08fe16c5b4ad",
+  "testedImplementation": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+  "implementationTree": "e3829a2320ca38e93107cbcb820d1f3dbf28741b",
+  "phoneDriverAndDistribution": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+  "deliveryTree": "7a47ab3e823ea8739e3651d88cb77eb18d738550",
+  "roadmapOnlyCheckpoint": "beb4b6ebf2c63e3556bccb860a85da6c86802ae2",
+  "qaDirectParent": "beb4b6ebf2c63e3556bccb860a85da6c86802ae2",
+  "qaParentTree": "b670b2542a73b587107eb8c02e92a9e6b8ae2313",
+  "implementationAndDeliveryDifference": [
+    "apps/studio/scripts/e2e/research-document.mjs"
+  ],
+  "deliveryToQaParentDifference": [
+    "PROJECT-ROADMAP.md"
+  ],
+  "changedPathsFromBase": [
+    "PROJECT-ROADMAP.md",
+    "apps/studio/USER-JOURNEYS.md",
+    "apps/studio/app/page.tsx",
+    "apps/studio/app/style.css",
+    "apps/studio/components/GoalPanel.tsx",
+    "apps/studio/components/PdfPreview.tsx",
+    "apps/studio/components/ResearchBrief.tsx",
+    "apps/studio/core/goal-orchestrator.ts",
+    "apps/studio/core/public-source.ts",
+    "apps/studio/core/research-brief-draft.ts",
+    "apps/studio/core/research-brief-types.ts",
+    "apps/studio/core/research-brief.ts",
+    "apps/studio/core/server.ts",
+    "apps/studio/package.json",
+    "apps/studio/scripts/e2e/research-document.mjs",
+    "apps/studio/tests/pdf-preview.test.ts",
+    "apps/studio/tests/research-brief-draft.test.ts",
+    "apps/studio/tests/research-brief-handoff.test.ts",
+    "apps/studio/tests/research-brief-ui.test.ts",
+    "apps/studio/tests/research-brief.test.ts",
+    "apps/studio/worker/pdf_worker.py",
+    "review-artifacts/2026-10-29-research-document/PLAN.md"
+  ],
+  "sourceKit": {
+    "format": 1,
+    "version": "6e8a3764bd5ca06d675e721b910ab9300a56ed0eed5913f097503a8a44b46352",
+    "filename": "anascummis-studio-6e8a3764bd5ca06d.zip",
+    "sha256": "2764e1a746c3133f84cae9a4df12001bd14d8485096107b5e767c59bd082636c",
+    "bytes": 2042573,
+    "files": 258,
+    "source": {
+      "commit": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "normalHostOnlyOrigin": "http://127.0.0.1:3211",
+  "publicPreviewUrl": null,
+  "normalStudioPid": 62739,
+  "localModelPid": 18848,
+  "mainUnchangedExpected": "df70f5ccdb9c3474f04d3f83ad7f60a8f7ecf917",
+  "environmentDraft": {
+    "revision": 13,
+    "changedByThisIncrement": false,
+    "published": false
+  },
+  "qualifications": [
+    "Desktop native tests ran at implementation; phone adds only driver coverage and uses identical product/build hashes.",
+    "The roadmap-only checkpoint changes no application or kit payload. The QA commit records additive review artifacts only.",
+    "No public deployment, main promotion, model/provider provisioning, tunnel or browser-policy change."
+  ]
+}

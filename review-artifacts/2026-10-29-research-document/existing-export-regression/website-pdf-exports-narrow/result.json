@@ -1,0 +1,117 @@
+{
+  "id": "website-pdf-exports",
+  "viewport": "narrow",
+  "goal": "Keep a PDF open while previewing my website, then download the requested website HTML/ZIP and the PDF/PNG without getting the wrong artifact.",
+  "startedAt": "2026-10-29T22:07:04.579Z",
+  "status": "passed",
+  "lane": "real-local-runtime",
+  "prerequisite": "None",
+  "assertions": [
+    {
+      "name": "Missing PDF produces a concrete error, preserves the request, and causes no download or fake unconfirmed-delivery notice.",
+      "passed": true
+    },
+    {
+      "name": "PDF upload creates an inspectable page without inference.",
+      "passed": true
+    },
+    {
+      "name": "Explicit website HTML target produces actual HTML despite an attached PDF.",
+      "passed": true
+    },
+    {
+      "name": "The actual downloaded HTML renders its expected website heading in a fresh page.",
+      "passed": true
+    },
+    {
+      "name": "Explicit website ZIP contains website content, not PDF bytes.",
+      "passed": true
+    },
+    {
+      "name": "Explicit PDF and PNG target exports remain correct.",
+      "passed": true
+    },
+    {
+      "name": "Exporting does not edit the original PDF.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-website-with-pdf-attached.png",
+    "rendered-downloaded-website.png",
+    "03-correct-exports.png"
+  ],
+  "downloads": [
+    {
+      "path": "website.html",
+      "suggestedFilename": "My business.html",
+      "bytes": 932,
+      "sha256": "247728e0b61ab5f12c6853b7157f51abc0fea9847ba38325d3575b0be84d78d7"
+    },
+    {
+      "path": "website.zip",
+      "suggestedFilename": "My business.zip",
+      "bytes": 2868,
+      "sha256": "917b276a1a8129bcb486097bdcba5608f2b4ef149adf2f2521a3d39cbc737476"
+    },
+    {
+      "path": "packing-list.pdf",
+      "suggestedFilename": "packing-list.pdf",
+      "bytes": 619,
+      "sha256": "5e17183fe41ff29866aaae0130a910b55c339241a181bbe9a4370b74ebb5b5fe"
+    },
+    {
+      "path": "packing-list.png",
+      "suggestedFilename": "page-1.png",
+      "bytes": 17464,
+      "sha256": "624c4a2c4e6d2fe4ab9e83b29a39056012fbca9ab0762855cd853ab9a1564bef"
+    }
+  ],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T22:07:05.200Z"
+    },
+    {
+      "path": "/api/documents",
+      "time": "2026-10-29T22:07:07.007Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 63479,
+    "port": 45343,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "renderedPdf": {
+    "width": 1224,
+    "height": 1584
+  },
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T22:07:10.556Z",
+  "recoveryChecksPassed": 7
+}

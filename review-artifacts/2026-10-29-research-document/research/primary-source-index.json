@@ -1,0 +1,77 @@
+{
+  "checkedAt": "2026-10-29T21:25:12.733Z",
+  "receipts": [
+    {
+      "id": "pymupdf-story",
+      "status": "retrieved",
+      "identity": {
+        "requestedUrl": "https://pymupdf.readthedocs.io/en/latest/story-class.html",
+        "url": "https://pymupdf.readthedocs.io/en/latest/story-class.html",
+        "title": "Story - PyMuPDF documentation",
+        "retrievedAt": "2026-10-29T21:25:12.596Z",
+        "type": "text/html",
+        "bytes": 94872,
+        "textLength": 17901,
+        "sha256": "23489e5c29ac0205fc4bbfc0a5d40c29df6ddbb33e97eed743c5fc61bc4a27ec",
+        "textSha256": "d95f7d0cd5be795291183e1085d9b8d05f9b159758127471ac492d24e8cc7d26",
+        "normalization": "public-text-v1"
+      },
+      "excerpts": 10,
+      "receiptSha256": "420c3ffcd1f2f28fddbabb115cc81c9dca38f28f86e68f05bd855ae64e226cc4"
+    },
+    {
+      "id": "pymupdf-text",
+      "status": "retrieved",
+      "identity": {
+        "requestedUrl": "https://pymupdf.readthedocs.io/en/latest/recipes-text.html",
+        "url": "https://pymupdf.readthedocs.io/en/latest/recipes-text.html",
+        "title": "Text - PyMuPDF documentation",
+        "retrievedAt": "2026-10-29T21:25:12.731Z",
+        "type": "text/html",
+        "bytes": 119008,
+        "textLength": 27900,
+        "sha256": "d65fc9156765f9ab52975ab2d05f729dacfafdeabf4894435ba9497958bf8f02",
+        "textSha256": "b065fb3e581bad9137c4fe6c275e486e0ba5555468b56d333fc107c4fd93c061",
+        "normalization": "public-text-v1"
+      },
+      "excerpts": 8,
+      "receiptSha256": "70e6a119ee94f8457ced0650594f971661005358d94fcaaf981647041d00b5bb"
+    },
+    {
+      "id": "sqlite-transaction",
+      "status": "retrieved",
+      "identity": {
+        "requestedUrl": "https://www.sqlite.org/lang_transaction.html",
+        "url": "https://www.sqlite.org/lang_transaction.html",
+        "title": "Transaction",
+        "retrievedAt": "2026-10-29T21:25:12.733Z",
+        "type": "text/html",
+        "bytes": 27068,
+        "textLength": 8211,
+        "sha256": "b65dc308fd9e0ce471844c97366a4f5ad3a1f42833a3b19486ad7d6555a8e24e",
+        "textSha256": "16b1e19babe6d369c7f3864e3d6f54adcff149bec6971ae4ec55ccc8001fffea",
+        "normalization": "public-text-v1"
+      },
+      "excerpts": 8,
+      "receiptSha256": "a11da26af45b84a2a456132f3a4707ab34db10fbea82e7033a529ab23584f801"
+    },
+    {
+      "id": "sqlite-wal",
+      "status": "retrieved",
+      "identity": {
+        "requestedUrl": "https://www.sqlite.org/wal.html",
+        "url": "https://www.sqlite.org/wal.html",
+        "title": "Write-Ahead Logging",
+        "retrievedAt": "2026-10-29T21:25:12.706Z",
+        "type": "text/html",
+        "bytes": 42143,
+        "textLength": 31466,
+        "sha256": "f3467b530b883d4a00574fe1a898b3d121ed72764ae28cf66941080ac0badb9e",
+        "textSha256": "7b3755c212c794f525ccbdf9ce4238fe302fb757d7f980cd763a0ad2572acf4a",
+        "normalization": "public-text-v1"
+      },
+      "excerpts": 9,
+      "receiptSha256": "a40489b970df19fee5ee601f3c1895f18935776be91f92b6ac80b08cdd4eec32"
+    }
+  ]
+}

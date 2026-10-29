@@ -1,0 +1,178 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-handoff.test.ts:
+(pass) synthetic brief handoff preserves exact accepted parent, complete answer and remapped reading; child never re-fetches or re-answers [64.14ms]
+(pass) synthetic uncertain submission reconciles exact request identity and refuses changed notes or title [32.75ms]
+(pass) synthetic handoff refuses unfinished/rejected parent work and corrupted citation or persisted reading [24.18ms]
+ 97 |     try{
+ 98 |       const parent=await acceptedParent(context),original=body(db,parent.id),altered=JSON.parse(original) as GoalRecord,answer=altered.tasks.find(task=>task.sourceAnswer)!.execution!.sourceAnswer!;
+ 99 |       if(kind==='selection-text')answer.selections[0].text='Changed accepted selection, despite an unchanged source hash.';
+100 |       else{const outside='Saved background.',offset=content.lastIndexOf(outside);expect(offset).toBeGreaterThan(ledger.reading(parent.id)!.ranges[0].end);answer.citations[0]={...answer.citations[0],quote:outside,offset};}
+101 |       db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(altered),parent.id);
+102 |       expect(()=>queue.createBrief(parent.id,briefInput())).toThrow();
+                                                                  ^
+error: expect(received).toThrow()
+
+Received function did not throw
+Received value: {
+  id: "a10ba90f-08de-41bb-b8e2-23d08cdfbcd0",
+  request: "Which standard does this repository host?",
+  projectId: "fixture-project",
+  research: true,
+  status: "queued",
+  phase: "answer_reused",
+  message: "Title and notes saved with a linked research brief. The full accepted answer and checked source copies are kept; only native writing and document acceptance remain.",
+  tasks: [
+    {
+      id: "source-1",
+      specialist: "research",
+      sourceUrl: "https://example.org/host-flow-fixture.txt",
+      description: "Save public source 1 for this question.",
+      acceptance: "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+      dependsOn: [],
+      status: "verified",
+      attempts: 0,
+      execution: {
+        message: "Reused an independently hash-checked copy of the original public acquisition; no source was fetched.",
+        verified: true,
+        sourceId: "7d202b91-9b60-4552-b9c5-8b58213c8124",
+        evidence: [ "Copied saved source 7d202b91-9b60-4552-b9c5-8b58213c8124 from e04c971e-f85d-4bf5-8698-9736a9713e10",
+          "Response SHA-256 7ed2d78113dee204470533c07aaa45823bc46de30c77a80f08162c8ac6726b25; text SHA-256 7ed2d78113dee204470533c07aaa45823bc46de30c77a80f08162c8ac6726b25"
+        ],
+      },
+      review: {
+        accepted: true,
+        reason: "Host re-read the verified original snapshot and copied its exact response/text under this goal. Ownership, lengths and hashes match; acquisition only.",
+      },
+    },
+    {
+      id: "source-answer",
+      specialist: "analysis",
+      sourceAnswer: true,
+      description: "Reuse the complete accepted parent answer and its checked literal source citations.",
+      acceptance: "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+      dependsOn: [ "source-1" ],
+      status: "verified",
+      attempts: 0,
+      execution: {
+        verified: true,
+        message: "The repository hosts the Fetch Standard. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. END-OF-ACCEPTED-ANSWER\n\nSelected saved-source excerpts:\n[source-1] “This repository hosts the Fetch Standard.”\n\nThe model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+        sourceAnswer: {
+          text: "The repository hosts the Fetch Standard. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. END-OF-ACCEPTED-ANSWER",
+          citations: [
+            {
+              sourceId: "7d202b91-9b60-4552-b9c5-8b58213c8124",
+              label: "source-1",
+              quote: "This repository hosts the Fetch Standard.",
+              offset: 0,
+              textSha256: "7ed2d78113dee204470533c07aaa45823bc46de30c77a80f08162c8ac6726b25",
+              spanId: "span-1",
+            }
+          ],
+          uncertainty: "",
+          limit: "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+          draftAssessment: {
+            answerable: true,
+            reason: "The synthetic source explicitly names the standard.",
+            uncertainty: "",
+            text: "The repository hosts the Fetch Standard. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. This synthetic answer deliberately keeps all of its accepted text during the document handoff. END-OF-ACCEPTED-ANSWER",
+          },
+          supportReview: {
+            supported: true,
+            reason: "Synthetic fixture accepts the chosen literal statement for the complete question.",
+          },
+          citationMethod: "host-spans-v1",
+          readingId: "24569c27-0731-42f1-9dce-cd5cfba99115",
+          answerable: true,
+          answerabilityReason: "Synthetic fixture accepts the chosen literal statement for the complete question.",
+          selections: [
+            {
+              sourceId: "7d202b91-9b60-4552-b9c5-8b58213c8124",
+              label: "source-1",
+              start: 0,
+              end: 800,
+              textSha256: "7ed2d78113dee204470533c07aaa45823bc46de30c77a80f08162c8ac6726b25",
+              rangeSha256: "b6c0d3ee7ca4d78dea967be0c7acca3f7d05efc5f495ed76f677850b6c770445",
+              text: "Changed accepted selection, despite an unchanged source hash.",
+            }
+          ],
+        },
+        evidence: [ "Accepted parent answer 6d66a505-0e6e-432d-9c28-94f621ee0c5e; SHA-256 b2d4b6029b8fb7215b5c1442bb72270ae71e3502a405f502116eb7ceed55eea5",
+          "Copied reading 24569c27-0731-42f1-9dce-cd5cfba99115; every citation re-read from independently checked child source copies. No source fetch or new answer generation."
+        ],
+      },
+      review: {
+        accepted: true,
+        reason: "Host copied the complete accepted parent answer, re-read its saved reading and literal citations, and remapped ownership to this child. This reuses the original native acceptance, not a fresh model answer or independent fact check.",
+      },
+    },
+    {
+      id: "source-brief",
+      specialist: "analysis",
+      sourceBrief: true,
+      description: "Write and save the requested cited research brief as a usable PDF and HTML document.",
+      acceptance: "Keep the exact title and separately labelled user notes; native writing must cover the accepted question with literal source citations. Verify saved PDF/HTML bytes, complete extracted text, pages and source identity; reconcile interruption without duplicate artifacts.",
+      dependsOn: [ "source-answer" ],
+      status: "pending",
+      attempts: 0,
+    }
+  ],
+  created: 1793309359044,
+  updated: 1793309359045,
+  events: [
+    {
+      time: 1793309359044,
+      role: "coordinator",
+      phase: "source_reused",
+      detail: "Copied verified saved source e04c971e-f85d-4bf5-8698-9736a9713e10 to 7d202b91-9b60-4552-b9c5-8b58213c8124; response/text hashes and retrieval time retained. No public request.",
+      taskId: "source-1",
+    }, {
+      time: 1793309359045,
+      role: "coordinator",
+      phase: "queued",
+      detail: "Linked question saved with 1 verified public-source copies and a manual reading plan. The earlier question and answer are unchanged.",
+    },
+    {
+      time: 1793309359045,
+      role: "coordinator",
+      phase: "answer_reused",
+      detail: "Title and notes saved with a linked research brief. The full accepted answer and checked source copies are kept; only native writing and document acceptance remain.",
+      taskId: "source-answer",
+    }
+  ],
+  planningOffset: 41,
+  planningDone: true,
+  planningCalls: 0,
+  coverageOffset: 0,
+  coverageDone: false,
+  notes: [],
+  sourceQuestion: {
+    urls: [ "https://example.org/host-flow-fixture.txt" ],
+    ranges: [
+      {
+        sourceId: "7d202b91-9b60-4552-b9c5-8b58213c8124",
+        start: 0,
+        end: 800,
+        textSha256: "7ed2d78113dee204470533c07aaa45823bc46de30c77a80f08162c8ac6726b25",
+      }
+    ],
+  },
+  parentGoalId: "6d66a505-0e6e-432d-9c28-94f621ee0c5e",
+  brief: {
+    parentGoalId: "6d66a505-0e6e-432d-9c28-94f621ee0c5e",
+    title: "My complete research brief",
+    notes: "My own note <must stay literal> & separate from source claims.",
+    requestKey: "90a0b392-e8f4-4d42-9724-5bf688c3751e",
+  },
+}
+
+      at <anonymous> (/workspace/anascummis/apps/studio/tests/research-brief-handoff.test.ts:102:61)
+(fail) synthetic corrupted handoff refuses changed selection text and a literal citation outside its accepted reading [24.83ms]
+(pass) synthetic late handoff transaction failure rolls back child, copied sources/readings and request identity together [23.47ms]
+(pass) synthetic review approval cannot complete a brief lacking its saved artifact descriptor [26.33ms]
+(pass) synthetic Stop then shutdown/reopen needs explicit Continue and reviews checked execution without redoing accepted work [59.21ms]
+
+ 6 pass
+ 1 fail
+ 81 expect() calls
+Ran 7 tests across 1 file. [294.00ms]

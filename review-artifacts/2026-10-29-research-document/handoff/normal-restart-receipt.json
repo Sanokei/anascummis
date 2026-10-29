@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-10-29T22:03:39Z",
+  "oldOwnedPid": 50046,
+  "newOwnedPid": 62739,
+  "command": "bun core/server.ts",
+  "port": 3211,
+  "gracefulStop": true,
+  "idleBeforeRestart": true,
+  "sameWorkingDirectoryAndEnvironment": true,
+  "originalDataSignatures": {
+    "/api/projects": "13e608f4c535fb6f6841d5a815a3ffcd37e415ed7b9b18f39bee4e6d139e2130",
+    "/api/goals": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "/api/jobs": "97dc79c9e7ea9d0e786a46d812c7253f1c8337f2b0d8f2369f8c49ece2324cf7",
+    "/api/software": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "dataUnchanged": true,
+  "modelPid": 18848,
+  "modelProcessUnchanged": true,
+  "modelReady": true,
+  "source": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+  "sourceKit": {
+    "format": 1,
+    "version": "8dcb78d814048407b93cf155996dea4110e771f7da643b3fd2cf6d02ab478962",
+    "filename": "anascummis-studio-8dcb78d814048407.zip",
+    "sha256": "03e62d1e77d0a6258e9912c485b5590d0499d7c8b12f4954c3546d2b02c9700f",
+    "bytes": 2038144,
+    "files": 258,
+    "source": {
+      "commit": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "note": "No fixture imported, no UI mutation performed; only the existing idle owned Studio was updated. Configuration draft/main/deployment unchanged."
+}

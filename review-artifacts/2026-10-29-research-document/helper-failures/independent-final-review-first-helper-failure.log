@@ -1,0 +1,12 @@
+Original inline independent artifact-comparison helper:
+Traceback (most recent call last):
+  File "<stdin>", line 28, in <module>
+AssertionError
+
+Diagnosis: the HTMLParser helper concatenated text nodes but did not map <br>
+to newline. Its exact personal-note substring check therefore failed even
+though the document retained the complete note. A diagnostic helper with
+handle_starttag('br') -> '\n' verified note length 1719, PDF pages 2, complete
+canonical PDF note and exact HTML note. No PDF, HTML or product source was changed.
+The corrected saved helper is review-native-final.py; its final result is
+independent-final-review/review.json.

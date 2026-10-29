@@ -1,0 +1,49 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-ui.test.ts:
+(pass) brief UI keeps drafts and uncertain submissions without replaying them [4623.45ms]
+
+tests/research-brief-draft.test.ts:
+(pass) local brief draft and uncertain delivery > retains exact title, notes and sent identity across a reload [2.54ms]
+(pass) local brief draft and uncertain delivery > acknowledgement clears only its unchanged submitted snapshot [0.28ms]
+(pass) local brief draft and uncertain delivery > newer edits survive a late acknowledgement with a fresh unsent identity [0.05ms]
+(pass) local brief draft and uncertain delivery > an acknowledgement for another payload cannot discard the pending draft [0.07ms]
+(pass) local brief draft and uncertain delivery > uncertain submission cannot become another save before inspection [0.14ms]
+(pass) local brief draft and uncertain delivery > invalid or over-limit storage is rejected without truncation [0.21ms]
+
+tests/research-brief.test.ts:
+(pass) synthetic lifecycle: saved draft survives a stop before review, then one artifact is reused without another writing decision [55.85ms]
+(pass) synthetic crash after atomic registration reconciles the same artifact without duplicated writes or native calls [18.77ms]
+(pass) synthetic database failure rolls back document, version and artifact together; retry keeps draft and identity [19.75ms]
+(pass) a saved negative native support decision stays inspectable and is never silently replaced on retry [15.63ms]
+(pass) changed submitted notes and damaged saved draft fail without overwriting the original checkpoint [5.87ms]
+(pass) source hash, accepted range, citation ownership and accepted dependency are checked before writing [3.96ms]
+(pass) the complete context budget refuses oversized evidence without omission or model submission [6.13ms]
+(pass) new factual packets exclude host scope while retaining full accepted text, passages and literal citations [7.92ms]
+(pass) host rejects provenance as a cited source claim before native over-acceptance and preserves the raw failed writing [5.94ms]
+(pass) paraphrased host execution and citation-verification claims cannot masquerade as source facts [13.57ms]
+(pass) malformed multiple-paragraph output is saved and stays inspectable without re-inference on retry [4.58ms]
+(pass) introduced URLs and raw Markdown fail the local factual guard and preserve their original drafts [6.90ms]
+(pass) actual native inline-format failure is projected deterministically without rewriting facts, raw output or citation IDs [22.83ms]
+(pass) a nonredundant HTTPS link preserves both its exact label and full target in displayed prose [5.64ms]
+(pass) explicit continuation of a legacy format rejection publishes a consistent readable checkpoint before awaiting support review [6.80ms]
+(pass) inline formatting never launders provenance, invented link targets or unsupported markup [28.19ms]
+(pass) a self-consistently rehashed presentation cannot diverge from its retained raw writing [6.46ms]
+(pass) early HTML/PDF export is read-only and later document edits do not change accepted original downloads [16.24ms]
+(pass) saved artifact damage and a forged review receipt fail without regeneration [6.08ms]
+(pass) synthetic filesystem boundary: a pre-created document-folder symlink is refused [3.36ms]
+(pass) real fixed PDF renderer paginates and preserves every title/note/citation/long URL/hash; HTML is escaped and self-contained [1521.07ms]
+
+tests/research-brief-handoff.test.ts:
+(pass) synthetic brief handoff preserves exact accepted parent, complete answer and remapped reading; child never re-fetches or re-answers [55.34ms]
+(pass) synthetic uncertain submission reconciles exact request identity and refuses changed notes or title [32.77ms]
+(pass) synthetic handoff refuses unfinished/rejected parent work and corrupted citation or persisted reading [26.66ms]
+(pass) synthetic corrupted handoff refuses changed selection text and a literal citation outside its accepted reading [51.21ms]
+(pass) synthetic late handoff transaction failure rolls back child, copied sources/readings and request identity together [29.38ms]
+(pass) synthetic review approval cannot complete a brief lacking its saved artifact descriptor [54.03ms]
+(pass) synthetic Stop then shutdown/reopen needs explicit Continue and reviews checked execution without redoing accepted work [77.91ms]
+
+ 35 pass
+ 0 fail
+ 351 expect() calls
+Ran 35 tests across 4 files. [7.18s]

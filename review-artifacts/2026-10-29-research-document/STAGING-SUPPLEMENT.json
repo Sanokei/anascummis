@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "preparedAt": "2026-10-29T22:03:12.634776+00:00",
+  "scope": "Completed follow-up lanes only; no active or future phone-started run copied and no aggregate desktop-plus-phone acceptance claim. Initial 66 false-citation artifact remains preserved in first-native-failed/.",
+  "lanes": [
+    {
+      "directory": "native-quality-desktop",
+      "lane": "fresh-real-native-research-and-document",
+      "source": "873ba2fc71a48e69503848d4e498159d1ea31db5",
+      "sourceDirty": false,
+      "status": "failed",
+      "summary": {
+        "passed": 0,
+        "blocked": 0,
+        "failed": 1
+      },
+      "recordedAssertions": 1,
+      "qualification": "Historical hydration/helper click timeout; the run did not reach an accepted brief. Original failure remains failed."
+    },
+    {
+      "directory": "native-quality-hydration-desktop",
+      "lane": "fresh-real-native-research-and-document",
+      "source": "5e1b0a0aef674a000a1fdb76c24b24bb2a175760",
+      "sourceDirty": false,
+      "status": "failed",
+      "summary": {
+        "passed": 0,
+        "blocked": 0,
+        "failed": 1
+      },
+      "recordedAssertions": 5,
+      "qualification": "Actual native writing supplied the requested facts using Markdown, then the overly strict host paragraph-format check rejected it. No accepted artifact exists in this lane; original rejected writing and failure are preserved."
+    },
+    {
+      "directory": "native-inline-desktop",
+      "lane": "fresh-real-native-research-and-document",
+      "source": "890609bf5ebe848e54e6754e095666b8115647e8",
+      "sourceDirty": false,
+      "status": "failed",
+      "summary": {
+        "passed": 0,
+        "blocked": 0,
+        "failed": 1
+      },
+      "recordedAssertions": 10,
+      "qualification": "Ten recorded assertions covered actual document/PDF work before managed Chromium refused file:// HTML opening with ERR_BLOCKED_BY_ADMINISTRATOR. The lane remains failed; no transport/policy workaround was used. Separate read-only exact-prose proof is not full-journey completion."
+    },
+    {
+      "directory": "native-preview-desktop",
+      "lane": "fresh-real-native-research-and-document",
+      "source": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+      "sourceDirty": false,
+      "status": "passed",
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "recordedAssertions": 12,
+      "qualification": "Fresh genuine native desktop journey passed its twelve recorded assertions, including supported ordinary Studio HTML opening and saved-work continuation. Its phone-sized/short resized views belong to this desktop journey; no fresh phone-started journey pass is inferred."
+    },
+    {
+      "directory": "checkpoint-preview-first-9ad0fa",
+      "lane": "real-native-checkpoint-read-only",
+      "source": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+      "sourceDirty": false,
+      "status": "passed",
+      "freshInference": false,
+      "mutationRequests": 0,
+      "qualification": "Passed read-only ordinary-UI proof of the stopped 890 native checkpoint served with 9ad code. No fresh inference, POST or other mutation; not a fresh native user journey or phone-started pass."
+    }
+  ],
+  "sharedModelIdentity": "Unchanged existing readiness/local-model-identity.json; this staging process does not perform new readiness/inference work."
+}

@@ -1,0 +1,16 @@
+{
+  "desktopTestSource": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+  "phoneDeliverySource": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+  "desktopStatus": "passed",
+  "productCodeAndBuildIdentical": true,
+  "onlyChangedApplicationFingerprint": [
+    "scripts/e2e/research-document.mjs"
+  ],
+  "sourceFilesChecked": 102,
+  "servedBuildFilesChecked": 88,
+  "gitChangedPaths": [
+    "apps/studio/scripts/e2e/research-document.mjs"
+  ],
+  "cleanCheckout": true,
+  "scope": "Phone adds a longer personal note, tap actions and 300% real multipage checks; desktop application and compiled UI are unchanged."
+}

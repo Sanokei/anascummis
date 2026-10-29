@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-10-29T21:34:14.964Z",
+  "receipts": [
+    {
+      "id": "playwright-downloads",
+      "status": "retrieved",
+      "identity": {
+        "requestedUrl": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/downloads.md",
+        "url": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/downloads.md",
+        "title": "Downloads",
+        "retrievedAt": "2026-10-29T21:34:14.837Z",
+        "type": "text/plain",
+        "bytes": 3390,
+        "textLength": 3390,
+        "sha256": "b6142bc2eedd26a35f13a7c32ca6922d134e4cdf6405a9fef6bef7d2edec8cb1",
+        "textSha256": "b6142bc2eedd26a35f13a7c32ca6922d134e4cdf6405a9fef6bef7d2edec8cb1",
+        "normalization": "public-text-v1",
+        "normalizerTitle": "Start waiting for the download",
+        "titleDerivation": "Exact title field in official Markdown front matter, retained in the first bounded excerpt. The existing plain-text normalizer picked a Python code comment as a Markdown heading; this research-only correction does not change raw bytes/text hashes."
+      },
+      "receiptSha256": "444183662a95cf4250b6d6eac1095a977d111c8f6656a9c0d94133ff046a27e6",
+      "excerpts": 5
+    },
+    {
+      "id": "playwright-class-download",
+      "status": "retrieved",
+      "identity": {
+        "requestedUrl": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/api/class-download.md",
+        "url": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/api/class-download.md",
+        "title": "class: Download",
+        "retrievedAt": "2026-10-29T21:34:14.964Z",
+        "type": "text/plain",
+        "bytes": 4945,
+        "textLength": 4945,
+        "sha256": "fb1803f9f472c47fd7006db085d2f22ae5bf6795c27819750c56e4791de500e2",
+        "textSha256": "fb1803f9f472c47fd7006db085d2f22ae5bf6795c27819750c56e4791de500e2",
+        "normalization": "public-text-v1"
+      },
+      "receiptSha256": "9f94701f4d27c320d4acf1640bd44fd025d46b3363fcc54b63f14e192be2ef5c",
+      "excerpts": 9
+    }
+  ]
+}

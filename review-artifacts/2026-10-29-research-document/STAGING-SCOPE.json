@@ -1,0 +1,25 @@
+{
+  "format": 1,
+  "preparedAt": "2026-10-29T21:41:32.111420+00:00",
+  "state": "Pre-final staging only; root must add fresh native final receipts/images, final source pins and final README after verified tests. No final native pass count is invented.",
+  "preservedBaselineSource": "21f62247ca92311545a553eecdc98c7d39842db2",
+  "firstFailedSource": "66a09023374b9bc8711bb47f7591dd34643fde3c",
+  "firstFailedRunStatus": "failed",
+  "firstFailedRunSummary": {
+    "passed": 0,
+    "blocked": 0,
+    "failed": 1
+  },
+  "firstArtifactPdfSha256": "40163830498866d9a58e395e9edc7738baa713eef3206bf6378c7dac67206e60",
+  "tracePolicy": "Original already-redacted event/network/stacks entries copied byte-identically from source ZIPs. ZIP identities/entry SHA256 recorded in manifest. Cached resources, screencast streams and full trace ZIPs remain local. These entries alone are not a standalone replayable trace.",
+  "excluded": [
+    "private databases/WAL/SHM",
+    "pairing keys",
+    "actual environment files",
+    "raw host logs",
+    "node_modules/dependency caches",
+    "model weights",
+    "full raw trace ZIPs and their cached resources"
+  ],
+  "note": "The first artifact is explicitly whitelisted by exact PDF/HTML path and hash because its question/source/note are the public test fixture; no other private-data file is eligible."
+}

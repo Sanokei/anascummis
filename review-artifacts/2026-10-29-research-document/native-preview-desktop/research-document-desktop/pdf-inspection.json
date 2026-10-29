@@ -1,0 +1,76 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "width": 595,
+      "height": 842,
+      "text": "Fetch test contributor brief\nBrief: The Fetch Standard’s tests are kept in the fetch/ directory of web-platform-tests/wpt and\ncan be seen at https://wpt. fyi/results/ fetch. [1] [2]\nExact source question: Where are the Fetch Standard’s tests kept, and where can I see\nthem running against browser engines? Cite the README statements supporting both.\nYour note — supplied by you, not a source claim: Check the live dashboard before ﬁling a\nbrowser bug. This is my personal next step, not a claim from the source.\nReference [1] · Literal saved-source quote (source-1, text 1914–2055): Tests for the Fetch\nStandard can be found in the `fetch/` directory of [`web-platfo rm-tests/wpt `](https://g\nithub.com/we b-platform-t ests/wpt).\nReference [2] · Literal saved-source quote (source-1, text 2057–2189): A dashboard showing\nthe tests running against browser engines can be seen at [wpt.fyi/res ults/fetch]( https://wpt.\nfyi/results/ fetch).\nSaved source source-1: README.md\nURL: https://raw. githubuserco ntent.com/wh atwg/fetch/m ain/README.m d\nOpen original source\nRetrieved: 2026-10-29T21:58:02.278Z\nSnapshot: a17c0dbc-6f4 9-4370-b7c1- f95037ca0eea\nResponse SHA-256: d484144421db 3f758ef98fe5 bf13c3dbe1e0 7a357033af52\n88298ea0f4f2 ceaa\nText SHA-256: d484144421db 3f758ef98fe5 bf13c3dbe1e0 7a357033af52 88298ea0f4f2\nceaa\nScope and provenance: The model selected citation span IDs; the host copied their exact\nsaved text. This checks text identity, not independent factual answer accuracy.\nWritten by the local model from the accepted answer and selected saved passages. Fixed\nhost code rendered this document. Source claims and general factual accuracy were not\nindependently veriﬁed.\nParent question: ac3780e2-30d d-4e40-a779- 25173bfa4e99\nBrief goal: df6fb28a-033 4-41c6-8e09- 31f7b3dafd2b\n",
+      "links": [
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            68,
+            422.2550964355469,
+            94.90599822998047,
+            433.2550964355469
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            94.90599822998047,
+            422.2550964355469,
+            97.96399688720703,
+            433.2550964355469
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            97.96399688720703,
+            422.2550964355469,
+            133.4169921875,
+            433.2550964355469
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            133.4169921875,
+            422.2550964355469,
+            136.47499084472656,
+            433.2550964355469
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            136.47499084472656,
+            422.2550964355469,
+            169.48599243164062,
+            433.2550964355469
+          ]
+        }
+      ]
+    }
+  ],
+  "pageCount": 1,
+  "metadata": {
+    "format": "PDF 1.7",
+    "title": "Fetch test contributor brief",
+    "author": "",
+    "subject": "",
+    "keywords": "",
+    "creator": "",
+    "producer": "Anascummis fixed research-brief renderer",
+    "creationDate": "",
+    "modDate": "",
+    "trapped": "",
+    "encryption": null
+  }
+}

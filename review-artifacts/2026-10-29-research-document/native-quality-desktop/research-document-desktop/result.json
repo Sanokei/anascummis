@@ -1,0 +1,653 @@
+{
+  "id": "native-research-document",
+  "viewport": "desktop",
+  "artifactDirectory": "research-document-desktop",
+  "goal": "Retrieve real Fetch evidence, create a genuinely native-written cited brief, recover stopped/interrupted work explicitly and reopen actual PDF/HTML downloads without losing notes or repeating accepted research.",
+  "startedAt": "2026-10-29T21:41:39.418Z",
+  "status": "failed",
+  "lane": "fresh-real-native-research-and-document",
+  "assertions": [
+    {
+      "name": "Fresh ordinary source question has genuine local native decisions, both required facts, actual support acceptance and literal hash-checked retrieved citations.",
+      "passed": true,
+      "goalId": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+      "answer": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+    }
+  ],
+  "screenshots": [
+    "01-ordinary-first-use.png",
+    "02-explicit-source-question.png",
+    "03-supported-parent-answer.png",
+    "04-unsaved-exact-title-and-notes.png",
+    "05-failure.png"
+  ],
+  "processes": [
+    {
+      "pid": 59193,
+      "port": 43981,
+      "startedAt": "2026-10-29T21:41:39.421Z",
+      "command": "bun core/server.ts"
+    }
+  ],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T21:41:39.974Z"
+    },
+    {
+      "path": "/api/goals",
+      "time": "2026-10-29T21:41:42.130Z"
+    }
+  ],
+  "requests": [
+    {
+      "path": "/",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.675Z"
+    },
+    {
+      "path": "/_next/static/css/70d5090bbac1dd1a.css",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.720Z"
+    },
+    {
+      "path": "/_next/static/css/86423725007b2d8e.css",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.725Z"
+    },
+    {
+      "path": "/_next/static/chunks/webpack-c72b897f46241ace.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.725Z"
+    },
+    {
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.726Z"
+    },
+    {
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.726Z"
+    },
+    {
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.726Z"
+    },
+    {
+      "path": "/_next/static/chunks/app/page-c66a77e202ba7671.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.726Z"
+    },
+    {
+      "path": "/api/status",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.916Z"
+    },
+    {
+      "path": "/api/projects",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.917Z"
+    },
+    {
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.937Z"
+    },
+    {
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.940Z"
+    },
+    {
+      "path": "/api/jobs",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.961Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:39.964Z"
+    },
+    {
+      "path": "/api/projects",
+      "method": "POST",
+      "time": "2026-10-29T21:41:39.974Z"
+    },
+    {
+      "path": "/api/assets",
+      "method": "GET",
+      "time": "2026-10-29T21:41:40.044Z"
+    },
+    {
+      "path": "/api/software",
+      "method": "GET",
+      "time": "2026-10-29T21:41:40.054Z"
+    },
+    {
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:40.063Z"
+    },
+    {
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:40.081Z"
+    },
+    {
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:40.104Z"
+    },
+    {
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js",
+      "method": "GET",
+      "time": "2026-10-29T21:41:40.162Z"
+    },
+    {
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz",
+      "method": "GET",
+      "time": "2026-10-29T21:41:40.294Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:41.715Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "POST",
+      "time": "2026-10-29T21:41:42.130Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:43.736Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:45.774Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:47.794Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:49.816Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:51.872Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:53.888Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:55.908Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:57.975Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:41:58.844Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:42:00.857Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:42:02.879Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:42:04.898Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:42:06.909Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:42:08.922Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:42:10.931Z"
+    },
+    {
+      "path": "/api/goals",
+      "method": "GET",
+      "time": "2026-10-29T21:42:14.033Z"
+    }
+  ],
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "downloads": [],
+  "pageErrors": [],
+  "progress": [
+    {
+      "time": "2026-10-29T21:41:42.157Z",
+      "goalId": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+      "status": "running",
+      "phase": "fetching_source",
+      "tasks": [
+        {
+          "id": "source-1",
+          "status": "running",
+          "attempts": 1
+        },
+        {
+          "id": "source-answer",
+          "status": "pending",
+          "attempts": 0
+        }
+      ]
+    },
+    {
+      "time": "2026-10-29T21:41:42.485Z",
+      "goalId": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+      "status": "running",
+      "phase": "answering_sources",
+      "tasks": [
+        {
+          "id": "source-1",
+          "status": "verified",
+          "attempts": 1
+        },
+        {
+          "id": "source-answer",
+          "status": "running",
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "time": "2026-10-29T21:41:49.969Z",
+      "goalId": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+      "status": "running",
+      "phase": "reviewing",
+      "tasks": [
+        {
+          "id": "source-1",
+          "status": "verified",
+          "attempts": 1
+        },
+        {
+          "id": "source-answer",
+          "status": "running",
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "time": "2026-10-29T21:41:54.041Z",
+      "goalId": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+      "status": "running",
+      "phase": "reviewing_goal",
+      "tasks": [
+        {
+          "id": "source-1",
+          "status": "verified",
+          "attempts": 1
+        },
+        {
+          "id": "source-answer",
+          "status": "verified",
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "time": "2026-10-29T21:41:56.785Z",
+      "goalId": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+      "status": "completed",
+      "phase": "completed",
+      "tasks": [
+        {
+          "id": "source-1",
+          "status": "verified",
+          "attempts": 1
+        },
+        {
+          "id": "source-answer",
+          "status": "verified",
+          "attempts": 1
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Installed local Qwen is used through the ordinary application, never a scripted model, proxy or mutation API seed.",
+    "Fixed host code renders PDF/HTML from native decisions; this is not arbitrary generated software execution.",
+    "Desktop Chromium/touch emulation and installed PDF dependencies; no physical handset, voice or fresh online installation claim.",
+    "One focused Fetch brief: required facts, literal citation identity and a reproduced provenance-misattribution regression; not general semantic citation or answer-quality proof."
+  ],
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "acceptedParentBefore": {
+    "id": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+    "request": "Where are the Fetch Standard’s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+    "projectId": "477c7012-ebc7-4e77-9d58-4b9dc3b818ab",
+    "research": true,
+    "status": "completed",
+    "phase": "completed",
+    "message": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified.",
+    "tasks": [
+      {
+        "id": "source-1",
+        "specialist": "research",
+        "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "description": "Save public source 1 for this question.",
+        "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+        "dependsOn": [],
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "Public response and full extracted text saved. Acquisition identity only; no answer or factual verification.",
+          "verified": true,
+          "evidence": [
+            "Saved source f9132bbe-beac-48f0-a7a4-6f41d5ea6582: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+            "Retrieved 2026-10-29T21:41:42.440Z; 4815 bytes; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "Text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; 4815 text positions; public-text-v1"
+          ],
+          "sourceId": "f9132bbe-beac-48f0-a7a4-6f41d5ea6582"
+        },
+        "review": {
+          "accepted": true,
+          "reason": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality."
+        }
+      },
+      {
+        "id": "source-answer",
+        "specialist": "analysis",
+        "sourceAnswer": true,
+        "description": "Answer the exact saved question using selected saved-source excerpts.",
+        "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+        "dependsOn": [
+          "source-1"
+        ],
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\nSelected saved-source excerpts:\n[source-1] “Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).”\n[source-1] “A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).”\n\nThe model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+          "verified": true,
+          "evidence": [
+            "Exact supplied-source quote [source-1]: Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+            "Exact supplied-source quote [source-1]: A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+            "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+            "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+            "Saved reading 1c31167e-4c59-41ff-90e1-b67545b99991; question SHA-256 6f22c7ec184e33bc4ad15bcec90d99181c8ee3314f1e641fc8b70f82f7ffbc1f"
+          ],
+          "sourceAnswer": {
+            "text": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+            "citations": [
+              {
+                "sourceId": "f9132bbe-beac-48f0-a7a4-6f41d5ea6582",
+                "label": "source-1",
+                "quote": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+                "offset": 1914,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                "spanId": "span-6"
+              },
+              {
+                "sourceId": "f9132bbe-beac-48f0-a7a4-6f41d5ea6582",
+                "label": "source-1",
+                "quote": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+                "offset": 2057,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                "spanId": "span-7"
+              }
+            ],
+            "uncertainty": "",
+            "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "draftAssessment": {
+              "answerable": false,
+              "reason": "The requested facts are not fully supported by the provided excerpts.",
+              "uncertainty": "The specific location of the tests is not mentioned in the provided excerpts, but the presence of tests is indicated in the excerpts.",
+              "text": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+            },
+            "supportReview": {
+              "supported": true,
+              "reason": "The requested information is supported by the provided citations. The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt`, and a dashboard showing the tests running against browser engines can be accessed ["
+            },
+            "citationMethod": "host-spans-v1",
+            "readingId": "1c31167e-4c59-41ff-90e1-b67545b99991",
+            "answerable": true,
+            "answerabilityReason": "The requested information is supported by the provided citations. The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt`, and a dashboard showing the tests running against browser engines can be accessed [",
+            "selections": [
+              {
+                "sourceId": "f9132bbe-beac-48f0-a7a4-6f41d5ea6582",
+                "label": "source-1",
+                "start": 1400,
+                "end": 2200,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                "rangeSha256": "543515254a61e8c5e320c338e6e52d9fd8f661b080e3b4a9b558bc7ac6a290ea",
+                "text": "even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Buildi"
+              }
+            ]
+          }
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch). The two statements cited support both the location of the tests and the dashboard for running them against browser engines."
+        }
+      }
+    ],
+    "created": 1793310102134,
+    "updated": 1793310116731,
+    "events": [
+      {
+        "time": 1793310102135,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Question and source reading steps saved. Public requests send only the URLs. The answer requires the local model."
+      },
+      {
+        "time": 1793310102137,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Save public source 1 for this question.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793310102140,
+        "role": "executor",
+        "phase": "fetching_source",
+        "detail": "Fetching public source: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793310102441,
+        "role": "executor",
+        "phase": "source_saved",
+        "detail": "Saved 4815 response bytes and full text; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793310102443,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793310102444,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793310102445,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793310102447,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Answer the exact saved question using selected saved-source excerpts.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793310102458,
+        "role": "executor",
+        "phase": "selection_saved",
+        "detail": "Saved auto reading 1c31167e-4c59-41ff-90e1-b67545b99991: source-1 1400–2200 (8 term matches). Exact question and text ranges are hashed before inference.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793310102459,
+        "role": "executor",
+        "phase": "answering_sources",
+        "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793310107325,
+        "role": "executor",
+        "phase": "answering_sources",
+        "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793310109895,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793310114027,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch). The two statements cited support both the location of the tests and the dashboard for running them against browser engines.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793310114029,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793310114031,
+        "role": "reviewer",
+        "phase": "reviewing_goal",
+        "detail": "Checking that verified milestones cover the full saved goal."
+      },
+      {
+        "time": 1793310116730,
+        "role": "reviewer",
+        "phase": "goal_page_verified",
+        "detail": "Reviewed 144 of 144 goal characters. The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+      },
+      {
+        "time": 1793310116731,
+        "role": "coordinator",
+        "phase": "completed",
+        "detail": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified."
+      }
+    ],
+    "planningOffset": 144,
+    "planningDone": true,
+    "planningCalls": 0,
+    "coverageOffset": 144,
+    "coverageDone": true,
+    "notes": [],
+    "sourceQuestion": {
+      "urls": [
+        "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+      ]
+    },
+    "sources": [
+      {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T21:41:42.440Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "f9132bbe-beac-48f0-a7a4-6f41d5ea6582",
+        "goalId": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+        "taskId": "source-1"
+      }
+    ],
+    "reading": {
+      "id": "1c31167e-4c59-41ff-90e1-b67545b99991",
+      "goalId": "3afdde30-36a2-423a-a372-6dd9c4d492e6",
+      "taskId": "source-answer",
+      "version": "source-passages-v1",
+      "mode": "auto",
+      "question": "Where are the Fetch Standard’s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+      "questionSha256": "6f22c7ec184e33bc4ad15bcec90d99181c8ee3314f1e641fc8b70f82f7ffbc1f",
+      "created": 1793310102457,
+      "match": "matched",
+      "ranges": [
+        {
+          "sourceId": "f9132bbe-beac-48f0-a7a4-6f41d5ea6582",
+          "label": "source-1",
+          "start": 1400,
+          "end": 2200,
+          "score": 8,
+          "matchedTerms": [
+            "fetch",
+            "standard",
+            "test",
+            "see",
+            "running",
+            "against",
+            "browser",
+            "engine"
+          ],
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "text": "even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Buildi",
+          "rangeSha256": "543515254a61e8c5e320c338e6e52d9fd8f661b080e3b4a9b558bc7ac6a290ea"
+        }
+      ]
+    }
+  },
+  "reason": "locator.click: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-goal-id=\"3afdde30-36a2-423a-a372-6dd9c4d492e6\"]').getByRole('button', { name: 'Create research brief', exact: true })\u001b[22m\n\n    at runCase (/workspace/anascummis/apps/studio/scripts/e2e/research-document.mjs:190:128)\n    at async runResearchDocumentSuite (/workspace/anascummis/apps/studio/scripts/e2e/research-document.mjs:375:74)\n    at async main (/workspace/anascummis/apps/studio/scripts/e2e/research-document.mjs:393:18)",
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T21:42:14.087Z",
+  "goalAchieved": false
+}

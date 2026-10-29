@@ -1,0 +1,86 @@
+{
+  "reviewedAt": "2026-10-29T22:12:44.308746+00:00",
+  "assessment": "bounded_static_acceptance",
+  "productSource": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+  "evidenceRoot": "/workspace/.cloud-env/anascummis/research-document/native-multipage-phone/research-document-narrow",
+  "ownerRunnerStatus": "passed",
+  "independentlyViewedOriginals": [
+    {
+      "path": "downloaded-pdf-page-1.png",
+      "sha256": "fcbe649c9edf19a57d1133a537519787f81f3c3b3eca55e0ed1623129c1d877e"
+    },
+    {
+      "path": "downloaded-pdf-page-2.png",
+      "sha256": "9aaf5053f31abd588d029a81f664c84d440c1a0ab2794379f80b4bb144411c6c"
+    },
+    {
+      "path": "21-actual-pdf-readable-300pct-360x420.png",
+      "sha256": "e6ee34e8395bfb972e389c0be8a323e681d5b405b0269ac541aea40e0212ed88"
+    },
+    {
+      "path": "26-reopened-pdf-keeps-last-inspected-page.png",
+      "sha256": "a14c65dfad7d5e7ada43c3449bd182e54e4fb52d9c7758d8ef5ee019861ff5e3"
+    },
+    {
+      "path": "downloaded-html-360x800.png",
+      "sha256": "ffd970ad76dac18208b03966526a78a4fc35bfe35a1c768a9f2612b4f5e1ab9a"
+    },
+    {
+      "path": "downloaded-html-360x420.png",
+      "sha256": "ee104289453e3e9a088d52d32bd54545eb186392a217a0154584dcf982449101"
+    }
+  ],
+  "staticArtifactChecks": {
+    "actualPdfPages": 2,
+    "personalNoteCharacters": 1719,
+    "fullPersonalNoteRetainedInPdfIgnoringLayoutWhitespace": true,
+    "fullPersonalNoteRetainedInHtml": true,
+    "pdfSha256": "92e0223b2160ee34c8fa94275f713b6294c658206ccde328c0686e66e0bb5e0f",
+    "htmlSha256": "6c53ee64702d001254c5b4d4f1a4d5cfec1d088e652f72abf7935fe8cebc998c",
+    "pdfSourceLinkTargets": [
+      "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+      "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+      "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+      "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+      "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+    ],
+    "htmlSourceLinkTargets": [
+      "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+    ],
+    "htmlExecutableElements": []
+  },
+  "findings": [
+    "The concise presented brief supplies both requested facts without the earlier repeated fact or falsely source-cited host-method paragraph.",
+    "The actual two-page PDF retains the complete separately labelled 1,719-character personal note, both literal source quotations and source/content identities.",
+    "The 360x420 original shows Page 2 of 2, readable 300% text and fixed page/zoom controls outside the intentional panning area, without overlap.",
+    "The reopened original visibly identifies Page 2 of 2.",
+    "Responsive HTML title, facts, question and separately labelled personal note are readable and contained at 360px.",
+    "PDF visible URLs are wrapped, but original-source link targets are the exact unbroken official URL."
+  ],
+  "materialBarriersObserved": [],
+  "normalServerCapture": {
+    "receipt": "../normal-current-final/receipt.json",
+    "status": "passed",
+    "independentlyViewedOriginals": [
+      "desktop-normal-ai-ready.png",
+      "desktop-current-download-version.png",
+      "narrow-empty-typing-no-send.png",
+      "narrow-current-download-version.png",
+      "short-current-download-version.png",
+      "short-instructions-and-reachable-close.png"
+    ],
+    "observed": "Current kit version/source, reachable Close, typing entry/focus, model-ready indication, explicit voice-unavailable state, licenses and real startup commands are readable on desktop/360x800/360x420. Dialog content scrolls independently of its fixed Close header.",
+    "scope": "Normal readiness and Download only. No native inference, goal, fixture, app launch or installation was attempted."
+  },
+  "helperHistory": [
+    "The first independent text-comparison helper omitted HTML br separators, causing its exact-newline note comparison to fail. Restoring br as newline passes exact HTML note retention. No artifact or product change was made.",
+    "The first normal-capture helper mixed Node Fetch response.ok with Playwright response.ok(). It stopped before browser launch after GET only; its exact helper/log/receipt are retained separately. The corrected helper passed."
+  ],
+  "limits": [
+    "Independent static screenshot/artifact QA; genuine inference, stop/restart, lost delivery, no-replay and HTTP-header assertions remain owner-runner evidence and were not independently replayed.",
+    "Writer and support reviewer are separate roles on the same local model. This bounded result is not general research accuracy.",
+    "PDF fit-width phone text is small; 300% uses deliberate panning. Physical-device gestures and handset keyboards remain unverified.",
+    "Managed file-URL opening remains blocked; supported HTML uses the normal existing Studio loopback route.",
+    "Native OS installation and voice remain unverified. The normal browser capture deliberately blocked external voice/config requests."
+  ]
+}

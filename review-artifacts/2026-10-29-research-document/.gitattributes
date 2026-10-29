@@ -1,0 +1,5 @@
+* -whitespace
+*.log binary
+*.trace -diff
+*.network -diff
+*.stacks -diff

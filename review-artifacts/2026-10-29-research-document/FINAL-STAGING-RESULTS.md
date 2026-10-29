@@ -1,0 +1,12 @@
+# Final completed-lane staging index
+
+This index supplements the earlier preparatory and failure-history notes. It records completed receipts; root still supplies the final review README/source/QA pins, kit and normal current-server handoff.
+
+- **Fresh native desktop: passed, 12 assertions, source 9ad0fadaf12eab78ae360861ca6c56eeb5d411c1.** One-page accepted brief, actual PDF/HTML/export/reopen and interrupted continuation, with desktop/narrow/short resized originals.
+- **Fresh native phone: passed, 12 assertions, source c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d.** A separate narrow-started touch-emulation goal uses a 1,719-character note, two real PDF pages, tap controls, 300% zoom, stop/SIGKILL/explicit continuation and final page-2 recovery after SIGTERM/restart. No physical swipe/handset claim.
+- **Product equivalence:** phone-source-equivalence.json and offline comparison of the two reports show 102 application fingerprints differing only in scripts/e2e/research-document.mjs, and all 88 served-build fingerprints identical. The desktop and phone retain their actual source pins.
+- **Existing export regression: two cases passed, seven recorded assertions each (fourteen total), source c6.** Selected correct-output originals and actual downloaded HTML/ZIP/PDF/PNG files are included with exact hashes. This is export routing/output correctness, not new native inference quality.
+- **Affected gates:** original logs report 35 document/host checks with 351 assertions and one separate PDF-viewer component check with 81 assertions; both type stdout files and production build output are retained. Empty type stdout is not an exit-code proof by itself; root records actual gate exits separately.
+- **Fresh readiness:** readiness/current-local-model-identity.json freshly hashes the installed/live-mapped model, runtime binary and official cached archive, verifies unchanged PID 18848 plus local health/model listing, and records exact official origin/revision/cache paths from the preserved metadata receipt. No weights/secrets/downloads/inference/services changed; readiness remains distinct from quality.
+
+Original failed runs and critiques remain intact. Selected trace entries are byte-identical already-redacted ZIP entries with source ZIP/entry hashes; full cached resources and ZIPs remain local. They are not standalone replayable traces. No private database/key, raw host log, model weight or dependency cache is staged.

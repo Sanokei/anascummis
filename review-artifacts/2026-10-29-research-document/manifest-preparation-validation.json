@@ -1,0 +1,790 @@
+{
+  "checkedAt": "2026-10-29T22:11:41.743563+00:00",
+  "scope": "Offline final completed-lane staging validation only; no rerun of browser/native tests and no source/HEAD/build/service changes.",
+  "payloadFilesInManifest": 236,
+  "actualFilesIncludingManifest": 237,
+  "payloadBytes": 37398301,
+  "manifestSha256": "62f7b1c74c96a7de87ffa82ee028e969431cdb9b2bd73b682edec16b0e139a41",
+  "directByteIdenticalOriginals": 206,
+  "byteIdenticalRedactedEventEntries": 24,
+  "generatedStagingMetadata": 6,
+  "verifiedPngs": [
+    {
+      "path": "before/01-desktop-request.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/02-desktop-answer-no-document-action.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/03-desktop-existing-answer-actions.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/04-narrow-answer-no-document-action.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "before/05-narrow-existing-answer-actions.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "before/06-short-answer-no-document-action.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "before/07-short-existing-answer-actions.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "checkpoint-preview-first-9ad0fa/actual-supported-html-desktop.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "checkpoint-preview-first-9ad0fa/actual-supported-html-narrow.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "checkpoint-preview-first-9ad0fa/actual-supported-html-short.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "checkpoint-preview-first-9ad0fa/returned-correct-goal-narrow.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "existing-export-regression/website-pdf-exports-desktop/03-correct-exports.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "existing-export-regression/website-pdf-exports-desktop/packing-list.png",
+      "width": 1224,
+      "height": 1584
+    },
+    {
+      "path": "existing-export-regression/website-pdf-exports-desktop/rendered-downloaded-website.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "existing-export-regression/website-pdf-exports-narrow/03-correct-exports.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "existing-export-regression/website-pdf-exports-narrow/packing-list.png",
+      "width": 1224,
+      "height": 1584
+    },
+    {
+      "path": "existing-export-regression/website-pdf-exports-narrow/rendered-downloaded-website.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "first-native-failed/critique/page-1.png",
+      "width": 744,
+      "height": 1053
+    },
+    {
+      "path": "first-native-failed/critique/page-2.png",
+      "width": 744,
+      "height": 1053
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/01-ordinary-first-use.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/02-explicit-source-question.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/03-supported-parent-answer.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/04-unsaved-exact-title-and-notes.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/05-unconfirmed-creation-inspect-before-retry.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/06-stopped-child-saved-personal-note.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/07-stopped-child-keeps-notes-and-dependencies.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/08-interrupted-native-draft-explicit-continuation.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "first-native-failed/research-document-desktop/09-failure.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/01-ordinary-first-use.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/02-explicit-source-question.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/03-supported-parent-answer.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/04-unsaved-exact-title-and-notes.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/05-unconfirmed-creation-inspect-before-retry.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/06-stopped-child-saved-personal-note.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/07-stopped-child-keeps-notes-and-dependencies.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/08-interrupted-original-native-writing.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/09-interrupted-presented-brief.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/10-interrupted-saved-native-writing.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/11-interrupted-native-draft-explicit-continuation.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/12-saved-brief-actions-1440x1000.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/13-saved-brief-actions-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/14-saved-brief-actions-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/15-actual-pdf-page-1.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/16-actual-pdf-page-2.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/17-actual-pdf-zoom-pan-1440x1000.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/18-actual-pdf-window-1440x1000.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/19-actual-pdf-zoom-pan-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/20-actual-pdf-window-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/21-actual-pdf-zoom-pan-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/22-actual-pdf-window-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/23-returned-to-correct-brief-work-window.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/24-returned-brief-keeps-personal-note.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/25-returned-brief-source-identity-source-1.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/26-failure.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/downloaded-pdf-page-1.png",
+      "width": 744,
+      "height": 1053
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/downloaded-pdf-page-2.png",
+      "width": 744,
+      "height": 1053
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/01-ordinary-first-use.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/02-explicit-source-question.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/03-supported-parent-answer.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/04-unsaved-exact-title-and-notes.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/05-unconfirmed-creation-inspect-before-retry.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/06-unconfirmed-creation-explicit-notice.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/07-stopped-child-saved-personal-note.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/08-stopped-child-keeps-notes-and-dependencies.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/09-interrupted-original-native-writing.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/10-interrupted-presented-brief.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/11-interrupted-saved-native-writing.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/12-interrupted-native-draft-explicit-continuation.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/13-saved-brief-actions-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/14-saved-brief-actions-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/15-actual-pdf-page-1.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/16-actual-pdf-page-2.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/17-actual-pdf-zoom-pan-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/18-actual-pdf-readable-300pct-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/19-actual-pdf-window-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/20-actual-pdf-zoom-pan-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/21-actual-pdf-readable-300pct-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/22-actual-pdf-window-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/23-returned-to-correct-brief-work-window.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/24-returned-brief-keeps-personal-note.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/25-returned-brief-source-identity-source-1.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/26-reopened-pdf-keeps-last-inspected-page.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/downloaded-html-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/downloaded-html-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/downloaded-pdf-page-1.png",
+      "width": 744,
+      "height": 1053
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/downloaded-pdf-page-2.png",
+      "width": 744,
+      "height": 1053
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/01-ordinary-first-use.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/02-explicit-source-question.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/03-supported-parent-answer.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/04-unsaved-exact-title-and-notes.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/05-unconfirmed-creation-inspect-before-retry.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/06-unconfirmed-creation-explicit-notice.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/07-stopped-child-saved-personal-note.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/08-stopped-child-keeps-notes-and-dependencies.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/09-interrupted-original-native-writing.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/10-interrupted-presented-brief.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/11-interrupted-saved-native-writing.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/12-interrupted-native-draft-explicit-continuation.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/13-saved-brief-actions-1440x1000.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/14-saved-brief-actions-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/15-saved-brief-actions-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/16-actual-pdf-page-1.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/17-actual-pdf-zoom-pan-1440x1000.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/18-actual-pdf-window-1440x1000.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/19-actual-pdf-zoom-pan-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/20-actual-pdf-window-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/21-actual-pdf-zoom-pan-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/22-actual-pdf-window-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/23-returned-to-correct-brief-work-window.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/24-returned-brief-keeps-personal-note.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/25-returned-brief-source-identity-source-1.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/26-reopened-pdf-keeps-last-inspected-page.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/downloaded-html-1440x1000.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/downloaded-html-360x420.png",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/downloaded-html-360x800.png",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/downloaded-pdf-page-1.png",
+      "width": 744,
+      "height": 1053
+    },
+    {
+      "path": "native-quality-desktop/research-document-desktop/01-ordinary-first-use.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-desktop/research-document-desktop/02-explicit-source-question.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-desktop/research-document-desktop/03-supported-parent-answer.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-desktop/research-document-desktop/04-unsaved-exact-title-and-notes.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-desktop/research-document-desktop/05-failure.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-hydration-desktop/research-document-desktop/01-ordinary-first-use.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-hydration-desktop/research-document-desktop/02-explicit-source-question.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-hydration-desktop/research-document-desktop/03-supported-parent-answer.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-hydration-desktop/research-document-desktop/04-unsaved-exact-title-and-notes.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-hydration-desktop/research-document-desktop/05-unconfirmed-creation-inspect-before-retry.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-hydration-desktop/research-document-desktop/06-stopped-child-saved-personal-note.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-hydration-desktop/research-document-desktop/07-stopped-child-keeps-notes-and-dependencies.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-quality-hydration-desktop/research-document-desktop/08-failure.png",
+      "width": 1440,
+      "height": 1000
+    }
+  ],
+  "openedPdfs": [
+    {
+      "path": "existing-export-regression/website-pdf-exports-desktop/packing-list.pdf",
+      "pages": 1,
+      "sha256": "5e17183fe41ff29866aaae0130a910b55c339241a181bbe9a4370b74ebb5b5fe"
+    },
+    {
+      "path": "existing-export-regression/website-pdf-exports-narrow/packing-list.pdf",
+      "pages": 1,
+      "sha256": "5e17183fe41ff29866aaae0130a910b55c339241a181bbe9a4370b74ebb5b5fe"
+    },
+    {
+      "path": "first-native-failed/critique/first-output.pdf",
+      "pages": 2,
+      "sha256": "40163830498866d9a58e395e9edc7738baa713eef3206bf6378c7dac67206e60"
+    },
+    {
+      "path": "native-inline-desktop/research-document-desktop/fetch-test-contributor-brief.pdf",
+      "pages": 2,
+      "sha256": "15923a2a9dda69b6c7b1cd49527598392719eebce7fdc565d1cb2d0e01db328c"
+    },
+    {
+      "path": "native-multipage-phone/research-document-narrow/fetch-test-contributor-brief.pdf",
+      "pages": 2,
+      "sha256": "92e0223b2160ee34c8fa94275f713b6294c658206ccde328c0686e66e0bb5e0f"
+    },
+    {
+      "path": "native-preview-desktop/research-document-desktop/fetch-test-contributor-brief.pdf",
+      "pages": 1,
+      "sha256": "002e971a3a319d32311fc6d8dca1791a0ee4290eb6a9d709860c3a433ac08ea1"
+    },
+    {
+      "path": "synthetic-renderer/pagination-css-anywhere.pdf",
+      "pages": 2,
+      "sha256": "a6ccc8af7c28f9498d089c162987275583b8baf2be6d62f95c0ac47195b82a55"
+    },
+    {
+      "path": "synthetic-renderer/pagination-plain.pdf",
+      "pages": 2,
+      "sha256": "ea1cddb2c36bea7eeb9a6383148f0a93eb76040cce6ff44ea3f7f96ea8b78de6"
+    },
+    {
+      "path": "synthetic-renderer/pagination-spacechunks.pdf",
+      "pages": 2,
+      "sha256": "1062d32f9d14b574b3dec06c390abdf1d3fc1c096c093ecb617d3a066bd013d7"
+    },
+    {
+      "path": "synthetic-renderer/pagination-wbr.pdf",
+      "pages": 2,
+      "sha256": "2844dec9e0f3af2a7c883d079a2f2c4cf80e8ac4c32e6d6b8a4d0e431597ed8a"
+    }
+  ],
+  "crcCheckedOutputZips": [
+    {
+      "path": "existing-export-regression/website-pdf-exports-desktop/website.zip",
+      "entries": [
+        "index.html",
+        "site.json",
+        "scene.json",
+        "wrangler.jsonc",
+        "public/index.html"
+      ],
+      "sha256": "3f73e59456e1abd95932127c0fdb3cd929d1cf504268644eab1b3b8f6088c3e2"
+    },
+    {
+      "path": "existing-export-regression/website-pdf-exports-narrow/website.zip",
+      "entries": [
+        "index.html",
+        "site.json",
+        "scene.json",
+        "wrangler.jsonc",
+        "public/index.html"
+      ],
+      "sha256": "917b276a1a8129bcb486097bdcba5608f2b4ef149adf2f2521a3d39cbc737476"
+    }
+  ],
+  "verifiedReadinessReceiptSha256": "47435f4510ccccf1d4b3c83b625d1b8c557b0e8e572b85bf38cab9c9c82111b0",
+  "completedLaneSummary": {
+    "format": 1,
+    "preparedAt": "2026-10-29T22:11:11.798784+00:00",
+    "scope": "Explicitly completed owner receipts and offline copied-evidence checks. Root still owns final reviewer README, final source/QA pins, kit identity and normal current-server handoff.",
+    "freshNativeDesktop": {
+      "directory": "native-preview-desktop",
+      "source": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+      "status": "passed",
+      "recordedAssertions": 12,
+      "pages": 1
+    },
+    "freshNativePhone": {
+      "directory": "native-multipage-phone",
+      "source": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+      "status": "passed",
+      "recordedAssertions": 12,
+      "pages": 2,
+      "personalNoteCharacters": 1719,
+      "pointerActions": "tap",
+      "zoom": 3
+    },
+    "desktopPhoneProductEquivalence": {
+      "recordedReceipt": "phone-source-equivalence.json",
+      "offlineReportFingerprintDifferences": {
+        "applicationSource": [
+          "scripts/e2e/research-document.mjs"
+        ],
+        "servedBuild": []
+      },
+      "applicationSourceFiles": 102,
+      "servedBuildFiles": 88
+    },
+    "existingExports": {
+      "source": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+      "status": "passed",
+      "cases": 2,
+      "recordedAssertions": 14,
+      "nativeQualityClaim": false
+    },
+    "freshReadinessReceipt": "readiness/current-local-model-identity.json",
+    "preservedFailures": "First 66 invalid cited metadata output and later 873 hydration/5e format/890 file-policy failures retain their failed status and originals.",
+    "omissions": [
+      "full trace ZIPs/resources",
+      "private DB/WAL/SHM/pairing key",
+      "raw host logs",
+      "model weights/dependency caches"
+    ],
+    "limitations": [
+      "Chromium desktop/touch emulation, not a physical handset/native-OS/voice pass.",
+      "Trusted host PDF/HTML rendering; no arbitrary model-written server execution claim.",
+      "Separate desktop/phone test pins must remain labelled; code/build equivalence does not relabel the desktop run as executing c6."
+    ]
+  },
+  "forbiddenPayloadPathsAbsent": true,
+  "fullTraceResourcesAndZipsExcluded": true
+}

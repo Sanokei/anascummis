@@ -1,0 +1,720 @@
+{
+  "status": "passed",
+  "startedAt": "2026-10-29T22:11:30.067Z",
+  "origin": "http://127.0.0.1:3211",
+  "scope": "Already-running ordinary Studio. Read-only readiness, empty typing discovery and current Download handoff only; no fixtures, message, goal, app launch, inference, model setup or service change.",
+  "productCode": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+  "deliverySource": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+  "cases": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshots": [
+        "desktop-normal-ai-ready.png",
+        "desktop-current-download-version.png"
+      ],
+      "closeHits": [
+        {
+          "x": 912.3125,
+          "y": 54.359375,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 912.3125,
+          "y": 45,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 912.3125,
+          "y": 45,
+          "width": 52.6875,
+          "height": 40
+        }
+      ],
+      "typing": {
+        "opened": true,
+        "focused": true,
+        "empty": true,
+        "sent": false,
+        "closed": true
+      },
+      "checksumMatches": true,
+      "licensesAndPrivateFileExclusionsVisible": true,
+      "instructionsVisible": true,
+      "closed": true
+    },
+    {
+      "name": "narrow",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "screenshots": [
+        "narrow-empty-typing-no-send.png",
+        "narrow-current-download-version.png"
+      ],
+      "closeHits": [
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        }
+      ],
+      "typing": {
+        "opened": true,
+        "focused": true,
+        "empty": true,
+        "sent": false,
+        "closed": true
+      },
+      "checksumMatches": true,
+      "licensesAndPrivateFileExclusionsVisible": true,
+      "instructionsVisible": true,
+      "closed": true
+    },
+    {
+      "name": "short",
+      "viewport": {
+        "width": 360,
+        "height": 420
+      },
+      "screenshots": [
+        "short-current-download-version.png",
+        "short-instructions-and-reachable-close.png"
+      ],
+      "closeHits": [
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        },
+        {
+          "x": 267.3125,
+          "y": 41,
+          "width": 52.6875,
+          "height": 40
+        }
+      ],
+      "typing": {
+        "opened": true,
+        "focused": true,
+        "empty": true,
+        "sent": false,
+        "closed": true
+      },
+      "checksumMatches": true,
+      "licensesAndPrivateFileExclusionsVisible": true,
+      "instructionsVisible": true,
+      "closed": true
+    }
+  ],
+  "screenshots": [
+    "desktop-normal-ai-ready.png",
+    "desktop-current-download-version.png",
+    "narrow-empty-typing-no-send.png",
+    "narrow-current-download-version.png",
+    "short-current-download-version.png",
+    "short-instructions-and-reachable-close.png"
+  ],
+  "blockedExternalRequests": [
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json"
+    }
+  ],
+  "mutationAttempts": [],
+  "requests": [
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/86423725007b2d8e.css"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/webpack-c72b897f46241ace.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/app/page-316087fa251a97e7.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/status"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/jobs"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/goals"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects/deff660d-fc36-43c4-86cb-5c85e2591734"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/assets"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/software"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/manifest.json"
+    },
+    {
+      "case": "desktop",
+      "method": "HEAD",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/anascummis-studio-6e8a3764bd5ca06d.zip"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/86423725007b2d8e.css"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/webpack-c72b897f46241ace.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/app/page-316087fa251a97e7.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/status"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/jobs"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/goals"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects/deff660d-fc36-43c4-86cb-5c85e2591734"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/assets"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/software"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/manifest.json"
+    },
+    {
+      "case": "narrow",
+      "method": "HEAD",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/anascummis-studio-6e8a3764bd5ca06d.zip"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/86423725007b2d8e.css"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/webpack-c72b897f46241ace.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/app/page-316087fa251a97e7.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/status"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/jobs"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/goals"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects/deff660d-fc36-43c4-86cb-5c85e2591734"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/assets"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/software"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz"
+    },
+    {
+      "case": "short",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/manifest.json"
+    },
+    {
+      "case": "short",
+      "method": "HEAD",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/anascummis-studio-6e8a3764bd5ca06d.zip"
+    }
+  ],
+  "pageErrors": [],
+  "limitations": [
+    "Chrome desktop/touch emulation; no physical handset or native OS installation proof.",
+    "External browser requests are deliberately blocked, including voice initialization/configuration. Voice remains unverified; its unavailable state here is not a new native voice test.",
+    "Normal data has no Goals or Software builds. Real work windows and native research/document results are separate owned-instance evidence.",
+    "Actual current kit browser bytes are checked; no new extraction, dependency install, setup or native-OS install is performed.",
+    "SQLite shared-memory lock bookkeeping is excluded from durable file hashing. API records, main database and WAL bytes are compared."
+  ],
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "manifest": {
+    "format": 1,
+    "version": "6e8a3764bd5ca06d675e721b910ab9300a56ed0eed5913f097503a8a44b46352",
+    "filename": "anascummis-studio-6e8a3764bd5ca06d.zip",
+    "sha256": "2764e1a746c3133f84cae9a4df12001bd14d8485096107b5e767c59bd082636c",
+    "bytes": 2042573,
+    "files": 258,
+    "source": {
+      "commit": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "sourceInputsBefore": [
+    {
+      "path": "out/index.html",
+      "sha256": "4b38e88846b47d75f19b9ae92639b08083cf4a4df25d34467e489f7903fb0d2e"
+    },
+    {
+      "path": "out/opensource/manifest.json",
+      "sha256": "8599ac318d8fb5890f9d3bf2f808597600a8780071011025f67a05cc67c70b6b"
+    },
+    {
+      "path": "out/opensource/anascummis-studio-6e8a3764bd5ca06d.zip",
+      "sha256": "2764e1a746c3133f84cae9a4df12001bd14d8485096107b5e767c59bd082636c"
+    }
+  ],
+  "browserDownload": {
+    "path": "browser-downloaded-anascummis-studio-6e8a3764bd5ca06d.zip",
+    "filename": "anascummis-studio-6e8a3764bd5ca06d.zip",
+    "bytes": 2042573,
+    "sha256": "2764e1a746c3133f84cae9a4df12001bd14d8485096107b5e767c59bd082636c",
+    "signature": "PK0304",
+    "headContentType": "application/zip",
+    "headLength": null
+  },
+  "sourceInputsUnchanged": true,
+  "apiRecordsUnchanged": true,
+  "apiRecordHashes": {
+    "/api/projects": "13e608f4c535fb6f6841d5a815a3ffcd37e415ed7b9b18f39bee4e6d139e2130",
+    "/api/goals": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "/api/jobs": "97dc79c9e7ea9d0e786a46d812c7253f1c8337f2b0d8f2369f8c49ece2324cf7",
+    "/api/software": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "/api/documents": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "project:deff660d-fc36-43c4-86cb-5c85e2591734": "8f92da3fe06e59d5eec900bc52651a4a203998a69a8efd4d25041f894b25fd70"
+  },
+  "apiRecordSummary": {
+    "projects": 1,
+    "goals": 0,
+    "software": 0,
+    "documents": 0,
+    "activeJobs": 0,
+    "historyJobs": 0
+  },
+  "processesBefore": [
+    {
+      "pid": 62739,
+      "startTimeTicks": "2067608"
+    },
+    {
+      "pid": 18848,
+      "startTimeTicks": "845300"
+    }
+  ],
+  "processesAfter": [
+    {
+      "pid": 62739,
+      "startTimeTicks": "2067608"
+    },
+    {
+      "pid": 18848,
+      "startTimeTicks": "845300"
+    }
+  ],
+  "processesUnchanged": true,
+  "durableFilesBefore": [
+    {
+      "name": "studio.sqlite",
+      "bytes": 4096,
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "name": "studio.sqlite-wal",
+      "bytes": 354352,
+      "sha256": "8037cec10aaea7645ea9ada96cb31947b4c765849e8f030cfd4d7d5a9f31d32c"
+    }
+  ],
+  "durableFilesAfter": [
+    {
+      "name": "studio.sqlite",
+      "bytes": 4096,
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "name": "studio.sqlite-wal",
+      "bytes": 354352,
+      "sha256": "8037cec10aaea7645ea9ada96cb31947b4c765849e8f030cfd4d7d5a9f31d32c"
+    }
+  ],
+  "durableFileHashesUnchanged": true,
+  "finishedAt": "2026-10-29T22:11:36.569Z"
+}

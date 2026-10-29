@@ -1,0 +1,15 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-handoff.test.ts:
+(pass) synthetic brief handoff preserves exact accepted parent, complete answer and remapped reading; child never re-fetches or re-answers [44.63ms]
+(pass) synthetic uncertain submission reconciles exact request identity and refuses changed notes or title [24.51ms]
+(pass) synthetic handoff refuses unfinished/rejected parent work and corrupted citation or persisted reading [22.78ms]
+(pass) synthetic corrupted handoff refuses changed selection text and a literal citation outside its accepted reading [42.78ms]
+(pass) synthetic late handoff transaction failure rolls back child, copied sources/readings and request identity together [23.84ms]
+(pass) synthetic review approval cannot complete a brief lacking its saved artifact descriptor [26.64ms]
+(pass) synthetic Stop then shutdown/reopen needs explicit Continue and reviews checked execution without redoing accepted work [58.49ms]
+
+ 7 pass
+ 0 fail
+ 89 expect() calls
+Ran 7 tests across 1 file. [272.00ms]

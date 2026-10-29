@@ -1,0 +1,1305 @@
+{
+  "startedAt": "2026-10-29T21:25:04.949Z",
+  "sourcePin": "21f62247ca92311545a553eecdc98c7d39842db2",
+  "sourceDirty": false,
+  "status": "baseline-reproduced",
+  "question": "Where are the Fetch Standard’s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+  "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T21:25:05.829Z"
+    },
+    {
+      "path": "/api/goals",
+      "time": "2026-10-29T21:25:07.872Z"
+    }
+  ],
+  "screenshots": [
+    "01-desktop-request.png",
+    "02-desktop-answer-no-document-action.png",
+    "03-desktop-existing-answer-actions.png",
+    "04-narrow-answer-no-document-action.png",
+    "05-narrow-existing-answer-actions.png",
+    "06-short-answer-no-document-action.png",
+    "07-short-existing-answer-actions.png"
+  ],
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "pageErrors": [],
+  "assertions": [
+    {
+      "name": "Real native answer supplies both requested test locations with supported literal saved-source citations",
+      "passed": true
+    },
+    {
+      "name": "Reload retains exact completed answer/source/reading identities and does not submit again",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Genuine local Qwen, actual permitted server-side source retrieval; no scripted inference or mutation API seeding.",
+    "Chromium desktop/touch emulation, no physical handset/voice pass.",
+    "This baseline deliberately reproduces the absent answer→document handoff; no fabricated document completion."
+  ],
+  "applicationSource": [
+    {
+      "path": "core/activity-journal.ts",
+      "bytes": 6959,
+      "sha256": "0a93207e3ec1cd85d30a8763bdf2b3bb8f8124e38b7dca6f2c85d59c1a0394bd"
+    },
+    {
+      "path": "core/analysis-harness.ts",
+      "bytes": 6433,
+      "sha256": "4ad7b9d3f4825d46146f5d8e05083a8a280d328730141f86e1bd5f6971e589cf"
+    },
+    {
+      "path": "core/app-launch-package.ts",
+      "bytes": 16083,
+      "sha256": "622232b0d30e682c169e4e534a8697be6f4995ab3a90161e8b604e4a05bd139e"
+    },
+    {
+      "path": "core/app-launch-process.ts",
+      "bytes": 7436,
+      "sha256": "ff970e6fc1aa3592b3fdb3e4b60ccc8a8b052840026e09a726f7bfe9c6cda1c4"
+    },
+    {
+      "path": "core/character.ts",
+      "bytes": 2764,
+      "sha256": "51087232e8f2689891a281ed40905f8864c3c46e4aa77b4327159a9c363a8b0b"
+    },
+    {
+      "path": "core/cloudflare.ts",
+      "bytes": 2135,
+      "sha256": "5a83b268d22f69f22c10c145b420b652bd73e11ef40c0682802a45d072dd50cd"
+    },
+    {
+      "path": "core/collection-screen.ts",
+      "bytes": 16937,
+      "sha256": "673d96ac62c992f7fccbdc437e012f8fc95415c00b0194497587fe30ba10c841"
+    },
+    {
+      "path": "core/conversation.ts",
+      "bytes": 2585,
+      "sha256": "b5562868505d8255419368867325b7f6545aebfbfd3cfc561358eda0189da10c"
+    },
+    {
+      "path": "core/decision-routing.ts",
+      "bytes": 2688,
+      "sha256": "999a4d1773fee72b684dc957d92f6962185c962c26fcfbfa6accf50c4fbb5fae"
+    },
+    {
+      "path": "core/fetch-without-redirects.ts",
+      "bytes": 689,
+      "sha256": "a19bba29e0e92c80583f11130f40601cd39b0a592b80a284f998304ec4646667"
+    },
+    {
+      "path": "core/goal-evidence.ts",
+      "bytes": 8942,
+      "sha256": "52fbb3f2ba865121a16c65225dffe7884e3da87a8db7003e483fbd0b6320e2d4"
+    },
+    {
+      "path": "core/goal-executor.ts",
+      "bytes": 4147,
+      "sha256": "486b565434984408930a77261931e0ddda59410951a93e43db303f50d696c8ac"
+    },
+    {
+      "path": "core/goal-orchestrator.ts",
+      "bytes": 35545,
+      "sha256": "6c3fd5c59e1051ef0bd6dad4036f506f6882fc9af14b33c12485491df56098d1"
+    },
+    {
+      "path": "core/goal-software.ts",
+      "bytes": 7854,
+      "sha256": "c1834fa5dd97c256df9b1c5e7eac5820ee1491947875c3ab3dfaa4991ff3f45b"
+    },
+    {
+      "path": "core/harness.ts",
+      "bytes": 6672,
+      "sha256": "529ad0785f42d9b0f5bd995a01df5a1bb258f2bc42859b241be0830fcc22d2bd"
+    },
+    {
+      "path": "core/model-scheduler.ts",
+      "bytes": 933,
+      "sha256": "f2482595bdcfc5a6a5292d1cd07b91050a0a371514a5889d3a861684047ce74a"
+    },
+    {
+      "path": "core/model.ts",
+      "bytes": 6509,
+      "sha256": "60509900acd4b3f17146bfbf7e40ed6165671641f0fbfb2031a41d668619f475"
+    },
+    {
+      "path": "core/network.ts",
+      "bytes": 2894,
+      "sha256": "7e207ee29850b6990afdcc13c40e66b7fd9afa424a3ed40c12c440d5af1ca024"
+    },
+    {
+      "path": "core/news-answer.ts",
+      "bytes": 1004,
+      "sha256": "754c6095be99566f1f7ea6a451e51685b31b7b7dbb940b2c554a654febbaa855"
+    },
+    {
+      "path": "core/news.ts",
+      "bytes": 5120,
+      "sha256": "0a846a0cf2c877b9823ca5367fdbfb861ce7750b5e376ff4235e209f72c010f9"
+    },
+    {
+      "path": "core/orchestrator.ts",
+      "bytes": 25981,
+      "sha256": "d0365b92da2d9b950a697a79523d8e6d810c5dc1ffa0a1bf593bbaad046547bc"
+    },
+    {
+      "path": "core/pdf.ts",
+      "bytes": 3792,
+      "sha256": "3329f814f8a6598fc62d35a216ae16d090c346b2015fa1ea23284e5f85f3b0a6"
+    },
+    {
+      "path": "core/peers.ts",
+      "bytes": 4125,
+      "sha256": "bd6fe25737c9742430287743d3aa5115a7aa326ce6576952f651c4593d6fb519"
+    },
+    {
+      "path": "core/public-source.ts",
+      "bytes": 19240,
+      "sha256": "0c9e9c8cf02fdc9af581afa940ed245cc490df71e218340c108082594c297293"
+    },
+    {
+      "path": "core/react-screen.ts",
+      "bytes": 9144,
+      "sha256": "a26ec7d00ca02798eadc67437643586a0554719dfd5e89745745de418a85982c"
+    },
+    {
+      "path": "core/request-intent.ts",
+      "bytes": 600,
+      "sha256": "e922105d1cddbc137cd20311ea96ee6552b28e6db79c0a40f5163964ce52cab8"
+    },
+    {
+      "path": "core/server.ts",
+      "bytes": 29140,
+      "sha256": "4d72629d2a903b69cdad424f36d781e0a2c963f881ffe960a26c42a3bb65f4c8"
+    },
+    {
+      "path": "core/site.ts",
+      "bytes": 6355,
+      "sha256": "86dbb7ec45b3ef44f2311bd218ecb3bcaa7d6af6e8e5ea57b9bd0b465a08cd76"
+    },
+    {
+      "path": "core/software-api.ts",
+      "bytes": 6319,
+      "sha256": "58385ad6892051714fc333aeffc4b48ca03a8f16c4e6204f4d7daa9a9f6c765c"
+    },
+    {
+      "path": "core/software-launch.ts",
+      "bytes": 13230,
+      "sha256": "fb356eef5f2e7f88b8782f3afbee2a4d634cb0ab0c82eca5b2e44e8a49c34714"
+    },
+    {
+      "path": "core/software-loop.ts",
+      "bytes": 6481,
+      "sha256": "6e0e9d2d77dd862b3d0ca8d1c8b0677e2f59474fbc268831f41534f60114b27c"
+    },
+    {
+      "path": "core/software-recipes.ts",
+      "bytes": 3394,
+      "sha256": "7e25d2ad86611ca6dfb8a21c1c5bec54fe084e2b22698464de947e80a4612cdb"
+    },
+    {
+      "path": "core/software-runner.ts",
+      "bytes": 29798,
+      "sha256": "88effe77e2ba50a40a1a48981d79a2e38c1c0440234f668ac20d9f58f87bce0a"
+    },
+    {
+      "path": "core/software-source.ts",
+      "bytes": 1356,
+      "sha256": "75a18122c1893995c9a000eb233804e6993f862cd89eec01a3f07d519115e9c3"
+    },
+    {
+      "path": "core/software-targets.ts",
+      "bytes": 315,
+      "sha256": "442800fd085cff809d08dee16e72d377225f74f22d669d21a9c2f7f9b67260ae"
+    },
+    {
+      "path": "core/software-task.ts",
+      "bytes": 57886,
+      "sha256": "a8e8411e48990d3ed0644c753f1f1afc9d7f265e7a16a81bbb4832348563a192"
+    },
+    {
+      "path": "core/software-tools.ts",
+      "bytes": 1834,
+      "sha256": "3170b368a6bbc229e74f963fa6a2c9b1ab48a89e6f154a95dd3d8ea053c280be"
+    },
+    {
+      "path": "core/source-citation-spans.ts",
+      "bytes": 1761,
+      "sha256": "2c9c54d2f926ca15a5a94a5ea68349a6837f2d20f2217019c69c0796cd533545"
+    },
+    {
+      "path": "core/source-kit-manifest.ts",
+      "bytes": 1349,
+      "sha256": "5961151c356d58aceff27825948bdc63453b321bb27e717ae43d8aa9c6509b98"
+    },
+    {
+      "path": "core/source-passages.ts",
+      "bytes": 3463,
+      "sha256": "0341890e7b84249bb75bfcc76b8eb305d9820821eaf988d9f26fcd32486dd955"
+    },
+    {
+      "path": "core/source-question.ts",
+      "bytes": 11401,
+      "sha256": "30acd22630b6dd177fae58e988454756d88a3a56c7f9372168fa64a9bc66340b"
+    },
+    {
+      "path": "core/speech.ts",
+      "bytes": 3902,
+      "sha256": "5d98639a8406742652714e44add466b088d4acc81ff4a018fa7c4c2871505872"
+    },
+    {
+      "path": "core/storage.ts",
+      "bytes": 3513,
+      "sha256": "be083ddd9ae743c7901886317e704d56214f36ea46092c4b62d766e6b30aab4d"
+    },
+    {
+      "path": "core/tools.ts",
+      "bytes": 7794,
+      "sha256": "fabfe9bf39ef4744693234004c3146e6d6a433bc972fba877bb9e37d3bb00e95"
+    },
+    {
+      "path": "core/vault.ts",
+      "bytes": 2867,
+      "sha256": "2cd19ed95ba766429795bb515d9b4be3da7369eb6c36531afd9cf4766df73e42"
+    },
+    {
+      "path": "core/video-skills.ts",
+      "bytes": 2282,
+      "sha256": "157527861e4906502a970230793ca2abed6221dfb770c5047974d35fb3d43700"
+    },
+    {
+      "path": "core/video.ts",
+      "bytes": 19938,
+      "sha256": "7c1bf840037333a53093feea50964a3ea9ddf33772fdc0eb0b47c4197a2d415c"
+    },
+    {
+      "path": "core/visual-context.ts",
+      "bytes": 3303,
+      "sha256": "6af346498c96fe7578e0876a2deec3d4da2458b5d3767607361d47ad712305d2"
+    },
+    {
+      "path": "core/website-copy.ts",
+      "bytes": 2018,
+      "sha256": "43152053b5e00a7e59ad8fb0605039fb2bfdfc42cd95d80d29c6cb975180a1be"
+    },
+    {
+      "path": "core/window-requests.ts",
+      "bytes": 2387,
+      "sha256": "b080f7012a0f97718561ae344abd23c516368347e46b88420b764e86633a50f1"
+    },
+    {
+      "path": "core/work-journal.ts",
+      "bytes": 6822,
+      "sha256": "20b29db5cac2d18cfade2488048a60db53abeb030c4ecdec223f35808932a557"
+    },
+    {
+      "path": "core/working-memory.ts",
+      "bytes": 2068,
+      "sha256": "b1800720be95e941005f89f7ecb9a961a44f02de1682b10d98af52fb312e17d7"
+    },
+    {
+      "path": "core/workspace-export.ts",
+      "bytes": 1922,
+      "sha256": "5f4a4efb4844fe373bfada0fcd746591bdc73467957e2ed35ffad8efe3bf2525"
+    },
+    {
+      "path": "core/zip.ts",
+      "bytes": 1709,
+      "sha256": "c07d1645619cb14af7281a149a014c7e30e61c2fa4612b491ee2d30a1c216d85"
+    },
+    {
+      "path": "components/ActivityHistory.tsx",
+      "bytes": 8528,
+      "sha256": "5880ee7c6248a34efed2aa5ea2724e8a5e9d6d50a9955149782a6da12694c0de"
+    },
+    {
+      "path": "components/BabylonPreview.tsx",
+      "bytes": 2063,
+      "sha256": "e659881f964f5f62574c20a5bbccf2bf4e378cb9b70a609dfe926db8469bd182"
+    },
+    {
+      "path": "components/DownloadLocal.tsx",
+      "bytes": 7459,
+      "sha256": "754211208635aa40bd5bfcdc364b4896ab23b6845a7960e07824d0ececea2107"
+    },
+    {
+      "path": "components/EtroPreview.tsx",
+      "bytes": 3598,
+      "sha256": "c48a8b46abd1016167f7c26baccd44a6a4234b1be4d9c64638c556a33638fb28"
+    },
+    {
+      "path": "components/FloatingPanels.tsx",
+      "bytes": 6853,
+      "sha256": "2cdf762832a40e2cc2bf961198adf308e5c01f4088eee20760d520491a00f34c"
+    },
+    {
+      "path": "components/GoalPanel.tsx",
+      "bytes": 21109,
+      "sha256": "e724e2bb4e3a28cc0b85edb23504f22c630eba2b644666de7ff7d9f67ab39005"
+    },
+    {
+      "path": "components/GoalSources.tsx",
+      "bytes": 23077,
+      "sha256": "94cc978376c76df210372028b3e147a307bcab02923cf811e402b86724de0f28"
+    },
+    {
+      "path": "components/Orb.tsx",
+      "bytes": 8655,
+      "sha256": "7a02e7636049041fdafa3fcf4cbe8fe6bf8d8b1b369159e8b8e6131ba08e1100"
+    },
+    {
+      "path": "components/PeerPanel.tsx",
+      "bytes": 8184,
+      "sha256": "7b53f720fd6c5934f6c0bceb3ccbff69a7e0ea3ee163ab777a4c20ae6bfac110"
+    },
+    {
+      "path": "components/SoftwareLaunch.tsx",
+      "bytes": 16027,
+      "sha256": "1be3cb92c568cac7b12979031d1a3e6d7e0f327e395f62c707f6c4acf2b35d85"
+    },
+    {
+      "path": "components/SoftwarePanel.tsx",
+      "bytes": 19409,
+      "sha256": "ba58e5462f4aea1fc227fb99e41fc57af1a6f47f375a81abbf438d952939a33c"
+    },
+    {
+      "path": "components/WorkPanel.tsx",
+      "bytes": 6797,
+      "sha256": "2bd605ed4fe5200f6e41dfc3f28d4f631c5d8a1272a15a49b622552e320c02ae"
+    },
+    {
+      "path": "components/browser-model.ts",
+      "bytes": 3369,
+      "sha256": "a4d7fa2100063e2f9468fb3db0515466aff6f467c72bc09bc2e835f7d5cef85b"
+    },
+    {
+      "path": "components/browser-model.worker.ts",
+      "bytes": 3070,
+      "sha256": "a38b892ed01f40cd6bc5321f5066b728517e9dc5ed7d6829ca73d0f59a9fedb7"
+    },
+    {
+      "path": "components/browser-runtime.ts",
+      "bytes": 1108,
+      "sha256": "6814f10d81ce17869c51aeaf4442dec06e2b1c77b41d59d4b4c60ca16f0060e4"
+    },
+    {
+      "path": "components/demo-tools.ts",
+      "bytes": 2158,
+      "sha256": "f1e70d36e70a316ef7ba4052a494464df05501a3aaa2bd551572c93ef55bc5d5"
+    },
+    {
+      "path": "components/hologram.ts",
+      "bytes": 1180,
+      "sha256": "b28fd0fb6b5b3d56db16d6879805a888c55e8b870304f2a3c7206c0dad1b57fe"
+    },
+    {
+      "path": "components/microphone.ts",
+      "bytes": 3843,
+      "sha256": "5fba0f8507a0ce247abc9dda3637dce480c0fe16a56c46cd92da921e4a779439"
+    },
+    {
+      "path": "components/orb-draw.ts",
+      "bytes": 31386,
+      "sha256": "c01fdfdbbc0c7c4f8e5c5719b3053474ed1ab2d7998edeb0119df9922fd3099f"
+    },
+    {
+      "path": "components/scene-runtime.ts",
+      "bytes": 1391,
+      "sha256": "ad3fdf6e14e6a60f98ef0ae4ebc7b1cf52374c908caa5f335e2ceff35daee350"
+    },
+    {
+      "path": "components/software-tools.ts",
+      "bytes": 963,
+      "sha256": "737943559624175c8f05d776c3fe552924e2f4e872f0b47199ec32b1689a7a0f"
+    },
+    {
+      "path": "components/transcribe-recording.ts",
+      "bytes": 1411,
+      "sha256": "1d3ed5254c052f08edf9dba55fdcd3849583e7800d95bf9d4ed10a22b911ede2"
+    },
+    {
+      "path": "components/turn-timing.ts",
+      "bytes": 731,
+      "sha256": "9ea171e6e9390f7216efa2dd45d2c43dcd0e8c1ce007db239a09f47c464089f1"
+    },
+    {
+      "path": "components/voice.ts",
+      "bytes": 1653,
+      "sha256": "376d2703b319fdb410c778491f51b18599cef888f901c8897908b10f38d64bb8"
+    },
+    {
+      "path": "components/voice.worker.ts",
+      "bytes": 1900,
+      "sha256": "105511491baac74227891a0a9488f9166371e50fd62d052ce9462255c04ca91c"
+    },
+    {
+      "path": "app/layout.tsx",
+      "bytes": 939,
+      "sha256": "2d6cbd61fabf0b64f11c62da1a7aa553b7d99925834b404400e33fa4ae2eff1c"
+    },
+    {
+      "path": "app/page.tsx",
+      "bytes": 66200,
+      "sha256": "afd0b5272673043fbac529e7d70b91a3854cda93cdbcb95bb6c7b4d634fc5a22"
+    },
+    {
+      "path": "app/style.css",
+      "bytes": 30423,
+      "sha256": "833eb5340736579aa03c079182677c9b49c3f97e7b309e2a3aa20bcc90d48f12"
+    },
+    {
+      "path": "worker/app-launch.ts",
+      "bytes": 5730,
+      "sha256": "8c4bf43bedf682fd23d07588bb3fa806f3a7f3a1789f0f49222b4d0ffe03173d"
+    },
+    {
+      "path": "worker/demo.ts",
+      "bytes": 2518,
+      "sha256": "6a597500f665efff9277622fca78e9742aae3c59cb4a247bc3f93621df162e5e"
+    },
+    {
+      "path": "worker/enhance_daemon.py",
+      "bytes": 1393,
+      "sha256": "cf1b0a2de655f3bfad219a8e93283eaa68978bf9ff6208d01f18c2bb376b9aac"
+    },
+    {
+      "path": "worker/goal-directory.ts",
+      "bytes": 2167,
+      "sha256": "6d3aaa6879238da787fe6e3b0c15268e013c45b4de0ac44d180a62120fa6c11b"
+    },
+    {
+      "path": "worker/lavasr/lavasr_core.py",
+      "bytes": 19158,
+      "sha256": "f09194539d4b80b203ad95d92416f62f7f1675b03aa415603a727d24227c766f"
+    },
+    {
+      "path": "worker/pdf_worker.py",
+      "bytes": 12315,
+      "sha256": "09ab9c6b321a50ad828bec22fb87db751a5e8141240228d161f4505f5baefde5"
+    },
+    {
+      "path": "worker/peer-room.ts",
+      "bytes": 2097,
+      "sha256": "23b58e4240fd9f9dfdd44cb17c00266d03081986db78261007d44d117f5325ee"
+    },
+    {
+      "path": "worker/pocket_daemon.py",
+      "bytes": 2734,
+      "sha256": "0a135c2693b012e7c7450a05469abef7fe7376b2ec80fc2a3962971a3c6dc2f8"
+    },
+    {
+      "path": "worker/voice_daemon.py",
+      "bytes": 1251,
+      "sha256": "9162b3e0de2e067f8ccb5980e9b2d7cc4eebd5b0f6fca71b74cd6f2e42a04ae2"
+    }
+  ],
+  "servedBuild": [
+    {
+      "path": "out/404/index.html",
+      "bytes": 8688,
+      "sha256": "8d3173e5b82fbcae7328645d4731a7f2df40c1f702912a62a3afee079bff870c"
+    },
+    {
+      "path": "out/404.html",
+      "bytes": 8688,
+      "sha256": "8d3173e5b82fbcae7328645d4731a7f2df40c1f702912a62a3afee079bff870c"
+    },
+    {
+      "path": "out/_next/static/N3xTAIqXR6mmFiq_7JN-O/_buildManifest.js",
+      "bytes": 440,
+      "sha256": "735100de5b4d0775a309ea72b2859f679aa4da5efee09ef54bddcf7e928aaa1c"
+    },
+    {
+      "path": "out/_next/static/N3xTAIqXR6mmFiq_7JN-O/_ssgManifest.js",
+      "bytes": 80,
+      "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00"
+    },
+    {
+      "path": "out/_next/static/chunks/0928c0d2.5a275abdeb508710.js",
+      "bytes": 85765,
+      "sha256": "ac750ec17cd978927b2d2d1a5958d4e75f3c2736b03de4d263a68dcd25ab440d"
+    },
+    {
+      "path": "out/_next/static/chunks/1010.3b422031f1f503cf.js",
+      "bytes": 7096,
+      "sha256": "679cc26075a04caffb9b86031c03e97544304ec653b330c81d58cbe0373712e1"
+    },
+    {
+      "path": "out/_next/static/chunks/105.e2fc4d5163276d70.js",
+      "bytes": 1509,
+      "sha256": "8f5f5265dea385095c573f0d4ec1c23608b9f562b9d96d01a23db2a28d2d676f"
+    },
+    {
+      "path": "out/_next/static/chunks/119.5e66e08ffd5244c7.js",
+      "bytes": 1092,
+      "sha256": "d34410c0366406c8dcbb2e97275c68082835f114e84ed54fc3d16e7a8a75c27c"
+    },
+    {
+      "path": "out/_next/static/chunks/1413.7ebcbe39c3c98cf1.js",
+      "bytes": 3570,
+      "sha256": "870ea69fdebefb42fd7180d4413b39b9e6b0065d58603c041b6209715726f754"
+    },
+    {
+      "path": "out/_next/static/chunks/16.14304b1802b69924.js",
+      "bytes": 4905,
+      "sha256": "e88bc65bf679cf86bbeb9a60b6d5301e1ef66b1201fc470cf07ee09ff561171f"
+    },
+    {
+      "path": "out/_next/static/chunks/2047.09ecac094b4d804e.js",
+      "bytes": 1716,
+      "sha256": "075c907f155d13def359872e98348cdf1be01d49565d64f6b28699cfd28211b6"
+    },
+    {
+      "path": "out/_next/static/chunks/205.ac4e4ba2cec822f5.js",
+      "bytes": 1046,
+      "sha256": "f65c5f86af13615f121b5d0d1f3413651c81489931154592785a712db5f519fd"
+    },
+    {
+      "path": "out/_next/static/chunks/2078.0d4b86900860e447.js",
+      "bytes": 917,
+      "sha256": "07d7af294549837d9aa16f8498c7b9772b37defd2b3107a96672d4242afc83b2"
+    },
+    {
+      "path": "out/_next/static/chunks/2128.90c5faad3c498b34.js",
+      "bytes": 2494,
+      "sha256": "ae84cb19af5d04d4422639925a526f25feed3b0cc8be9e7aac471a3a8fdfcddd"
+    },
+    {
+      "path": "out/_next/static/chunks/2434.5f10cae8dbf71501.js",
+      "bytes": 1486,
+      "sha256": "37afafd5edc8ffea66be04b518e6ffd3106edff9ae236ae353be938a019dc2bb"
+    },
+    {
+      "path": "out/_next/static/chunks/2436.d14295ded52d193c.js",
+      "bytes": 1837,
+      "sha256": "78cec0eeea642e1aefe0082378ae4a13e22b1d24d240351bb5ae250f06161b1c"
+    },
+    {
+      "path": "out/_next/static/chunks/26.b29809e9b9d29f7c.js",
+      "bytes": 1063,
+      "sha256": "abad5d622a55b6d3889c50d049982628ec5ef71052513ebc02bad898bdb94fb1"
+    },
+    {
+      "path": "out/_next/static/chunks/2724.3c1e26529ab2ddba.js",
+      "bytes": 48740,
+      "sha256": "863f70f4dccf6604f63a046ff2c4f51d389892456c37ed11c2c96f767af0e0d2"
+    },
+    {
+      "path": "out/_next/static/chunks/2873.14304b1802b69924.js",
+      "bytes": 4905,
+      "sha256": "e88bc65bf679cf86bbeb9a60b6d5301e1ef66b1201fc470cf07ee09ff561171f"
+    },
+    {
+      "path": "out/_next/static/chunks/292.7c027a444c126f7f.js",
+      "bytes": 6346,
+      "sha256": "1fdd0ce343391e2b75d31a879252b1f161eed709bc2ba70ff115b28a715fc29c"
+    },
+    {
+      "path": "out/_next/static/chunks/3441.c6cb1d5b343c162a.js",
+      "bytes": 8409,
+      "sha256": "710bed775ac3dfc4aa068312c4a1296d0776fe865a859b9e0632de3bd5e33e9e"
+    },
+    {
+      "path": "out/_next/static/chunks/3708.1894802fd737d9a0.js",
+      "bytes": 37140,
+      "sha256": "d79835baeebdfb3735e444a455dc4545903d5584d7a355770ad6863eb26b5c46"
+    },
+    {
+      "path": "out/_next/static/chunks/3774.8f5d9a3e78ed88e5.js",
+      "bytes": 1909,
+      "sha256": "19c0bf65a0113f0464ec8335d0e1a1b74ef628bbf69da96fcd7d1ca26c3c74dd"
+    },
+    {
+      "path": "out/_next/static/chunks/3794-e6b880ea1810fa3e.js",
+      "bytes": 243714,
+      "sha256": "80c30e85c98f93f267462d19efb989ec7b5f29a4b22418ef944a8896c1e85955"
+    },
+    {
+      "path": "out/_next/static/chunks/3910.bbe23c1e4b53389a.js",
+      "bytes": 1374,
+      "sha256": "e84af8e20528507de4946db7863b5f3fc4b621bf8c51b53acaf69589a67a5ef2"
+    },
+    {
+      "path": "out/_next/static/chunks/4067.7e1dd2c666ec8601.js",
+      "bytes": 4457,
+      "sha256": "04918feb2e4d04a47e7d53a1a51825daf5cfcf87cd15ee0df8518224316778b3"
+    },
+    {
+      "path": "out/_next/static/chunks/4071.5b8c74386d0308d7.js",
+      "bytes": 1533,
+      "sha256": "052f6c9747408478efb58fcb42f4483b8fa611ca987d661fa2248d8f5c5a0942"
+    },
+    {
+      "path": "out/_next/static/chunks/4192.5e45804544f1fcf8.js",
+      "bytes": 757,
+      "sha256": "92923dfbf511a93f97f4b02762d81b53c7c82d234eb4c48ddbf4c9e8846fee1c"
+    },
+    {
+      "path": "out/_next/static/chunks/4661.80a4da643d7d0cbb.js",
+      "bytes": 1328,
+      "sha256": "76e541b224229f685bf3a7e9f694a00d1638b2a7039a0cb6c4b6fd4425af4928"
+    },
+    {
+      "path": "out/_next/static/chunks/471.8f9a01f152663757.js",
+      "bytes": 2583,
+      "sha256": "10ed07c4abeccf84a062c8caab9dc74cc0c67e8dd64228c5eef4c28cef43c7a1"
+    },
+    {
+      "path": "out/_next/static/chunks/4721.d579b9099b02d47a.js",
+      "bytes": 2785,
+      "sha256": "640f53e9d244da6a5bcc69469786bf1c47e4651acc623973cb40e5b58f5debed"
+    },
+    {
+      "path": "out/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "bytes": 203727,
+      "sha256": "898c71c4da75489e3cf225ab3cd3d44d6232a491ee816510ba79b6e3ac17885e"
+    },
+    {
+      "path": "out/_next/static/chunks/5124.c9fcdaa522028f8c.js",
+      "bytes": 42665,
+      "sha256": "5dbdaed4873a82a16a7ed9ef25822a9adb4f4f28198539a95e71480bf5e47a45"
+    },
+    {
+      "path": "out/_next/static/chunks/5173.72d9738c3f247596.js",
+      "bytes": 130329,
+      "sha256": "f33febdfe122f8930493916a61d0679bc67301cb788280632f585a51cac7a180"
+    },
+    {
+      "path": "out/_next/static/chunks/5208.40aeaa8f53521f54.js",
+      "bytes": 3199,
+      "sha256": "3f917d80e3cb03c3192c8f98c63e49bbc82361a43a07b8f77f5a29e187ef9c14"
+    },
+    {
+      "path": "out/_next/static/chunks/5254.14304b1802b69924.js",
+      "bytes": 4905,
+      "sha256": "e88bc65bf679cf86bbeb9a60b6d5301e1ef66b1201fc470cf07ee09ff561171f"
+    },
+    {
+      "path": "out/_next/static/chunks/5275.4c28311e2ebaa6e4.js",
+      "bytes": 3365,
+      "sha256": "b43b8685aad9924a26137d24f071d896475652beb9efde3a139fc0fa33c435eb"
+    },
+    {
+      "path": "out/_next/static/chunks/5315.1454ba2c6f8cb341.js",
+      "bytes": 2933,
+      "sha256": "40e067800ac491ad60f030d6f34f38babd3476f021f356f686cb4e59a9a9f8a2"
+    },
+    {
+      "path": "out/_next/static/chunks/5386.f252f57d08ec1dec.js",
+      "bytes": 3657,
+      "sha256": "68af840837706155dc2488d987f5f35a7fd5346dfbc83b0b28d7cb14fd013b53"
+    },
+    {
+      "path": "out/_next/static/chunks/5584.8e210b131c50ecaa.js",
+      "bytes": 2791,
+      "sha256": "27ef5ba696a1789dcedb1487c77cea25e9df75c3f970db0a7ed29c2b727d11e5"
+    },
+    {
+      "path": "out/_next/static/chunks/6025.a31f90d36e0592ce.js",
+      "bytes": 39539,
+      "sha256": "4bb0bba749a27ac9247613db2e5f05ed2a14c1ebc3184d0469c9b54d7387e17d"
+    },
+    {
+      "path": "out/_next/static/chunks/6255.76d1f787935ca7bf.js",
+      "bytes": 5491,
+      "sha256": "54777e011884a9349659848c336a714f79bc993a576d624e8da51a92f6b995bc"
+    },
+    {
+      "path": "out/_next/static/chunks/629.0d897fcd6a8dcdd7.js",
+      "bytes": 1145,
+      "sha256": "3f852fbbfb743589c1bb00e4078a6b908d22f3d88ee3c496d1f93fe383701722"
+    },
+    {
+      "path": "out/_next/static/chunks/6713.1c3c71f40a2b4948.js",
+      "bytes": 9934,
+      "sha256": "e57a94b0f4dfabfe6e14c6f388e59c639c72d440620934e91238b324aae494e0"
+    },
+    {
+      "path": "out/_next/static/chunks/6788.26c991529bf3aaef.js",
+      "bytes": 1616,
+      "sha256": "1a166820676f9b68c232bc6434e40a1ab9a2780ff568c000ebbd543ca11e79f8"
+    },
+    {
+      "path": "out/_next/static/chunks/6817.46cc19724d4ff86c.js",
+      "bytes": 5074,
+      "sha256": "b03ca794e836b579f26b0d3e9a44db25dfeba91c7379f67298825ecd6e7a5929"
+    },
+    {
+      "path": "out/_next/static/chunks/6900.8815fa82713f2190.js",
+      "bytes": 845,
+      "sha256": "5be7bec6744d8188b499b9d0550be4f8451c9e5146fd39b0a9f345d4f8edf48b"
+    },
+    {
+      "path": "out/_next/static/chunks/6997.838506c40a0169b7.js",
+      "bytes": 675,
+      "sha256": "4c496793296442e8cd0531cae90c613bbcfc62a4e6096e01f1f12eafe75d57f9"
+    },
+    {
+      "path": "out/_next/static/chunks/6c6c61ac.c4f2cf1aad7a370c.js",
+      "bytes": 51555,
+      "sha256": "d7f2be7f68f3ccd2f9c83c2c4928ab6415c1a528111ac4866c980d9294e97c56"
+    },
+    {
+      "path": "out/_next/static/chunks/7069.f13d8ba618f89037.js",
+      "bytes": 7628857,
+      "sha256": "75fdec05d14a4a7b278c300544d2d69a62235c2e6fcb69133a82ab8e32bebca4"
+    },
+    {
+      "path": "out/_next/static/chunks/7292.04663a128e0e4741.js",
+      "bytes": 459,
+      "sha256": "a4d10d174b3a78c6ab012bcbd48b4a6b20dea74cdd360f9f36efd47075c23b68"
+    },
+    {
+      "path": "out/_next/static/chunks/7379.598114a901a6f8e1.js",
+      "bytes": 2416,
+      "sha256": "2d452be1120fc3bb6b0f0bee2be2b746c0578f4b85ef99d92733844ec54695e8"
+    },
+    {
+      "path": "out/_next/static/chunks/7387.9d7a1cce63f7a6d0.js",
+      "bytes": 704,
+      "sha256": "8f30802e5be2e937cee9ff40c773991ced5332048b9e4ef9323e00aa922b5a27"
+    },
+    {
+      "path": "out/_next/static/chunks/7632.2625e6e04d5560eb.js",
+      "bytes": 894,
+      "sha256": "be9a59793fc8f4bb19d3f4bdc37e72dcbb11ae7217651c737fe3fdcf42704f2b"
+    },
+    {
+      "path": "out/_next/static/chunks/7f989a4a.d61c062c858654a1.js",
+      "bytes": 62960,
+      "sha256": "06f9f524e7d3bc51fe5f653a628ff33c33a45d463d5eaf53cccce452b0a01e46"
+    },
+    {
+      "path": "out/_next/static/chunks/8118.69d47ec321f15874.js",
+      "bytes": 1954,
+      "sha256": "441c17a3a81e98e4023b4f2c056f1dfab8e99c68d1f2e885fe706cd5ef7e5571"
+    },
+    {
+      "path": "out/_next/static/chunks/8141.d7015931cf820bf3.js",
+      "bytes": 1677,
+      "sha256": "f40cdb0989cc4d43f2fb435a54ffb9fc96d09f44c1cf9f29aa7e03eef5e63bfd"
+    },
+    {
+      "path": "out/_next/static/chunks/8431.416f3d4b31f10418.js",
+      "bytes": 3016,
+      "sha256": "9044b4c129ac24f8f2e951fd07b29923a92c0239a0cfa675b3deed770f54bc64"
+    },
+    {
+      "path": "out/_next/static/chunks/8810.f84d4cceaa359e4e.js",
+      "bytes": 1037,
+      "sha256": "879a200ce57f83838022e30119f93625bfd83522f1e60e3b54099343875e1f78"
+    },
+    {
+      "path": "out/_next/static/chunks/9103.cf943ab6b3358e29.js",
+      "bytes": 531,
+      "sha256": "5b3c6233e23d4228afc4a01709a10b545c3715c9bc0dae2a94d63618d7893a5d"
+    },
+    {
+      "path": "out/_next/static/chunks/9396.6fe5f2ff3e0a27de.js",
+      "bytes": 6115,
+      "sha256": "4b878779329f651d8f9579eff5a6ce058e7f00d8d88712653a90f226af7f6e6e"
+    },
+    {
+      "path": "out/_next/static/chunks/979ca5ab.27ff4797c0cbea83.js",
+      "bytes": 94257,
+      "sha256": "776b78d498c233790fb1b18b096fe054170312cbb4756c0f117fffa90cdeec8d"
+    },
+    {
+      "path": "out/_next/static/chunks/aa60288b.47350d1f67489574.js",
+      "bytes": 193165,
+      "sha256": "e17cf6b1700abfc65c26c755c3f0d47f1d7b7fa1eaf365966d082b4f83d8ea41"
+    },
+    {
+      "path": "out/_next/static/chunks/adda3502.9499f9268d018031.js",
+      "bytes": 412842,
+      "sha256": "866b04d9a3a0de5aa4eb757fc5519074f12b42d2091670bfa7cabd4a75700241"
+    },
+    {
+      "path": "out/_next/static/chunks/app/_global-error/page-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/app/_not-found/page-5d30d0999bd9c153.js",
+      "bytes": 2677,
+      "sha256": "2feed21e66175ed7eb42f9f489a4e0dab18de956932569a837df305a11643637"
+    },
+    {
+      "path": "out/_next/static/chunks/app/layout-407888a1fb28ed1a.js",
+      "bytes": 267,
+      "sha256": "8430fa07c61477caff7234921206383cc73a60c6ec15f440229d5637d30c21be"
+    },
+    {
+      "path": "out/_next/static/chunks/app/page-28ffbf899600e93f.js",
+      "bytes": 193795,
+      "sha256": "50bd5555db83389ad15acec98f83ad92a303860dc609c0f649beb06672ecc7bf"
+    },
+    {
+      "path": "out/_next/static/chunks/d33cb27b.72da600cc895723a.js",
+      "bytes": 1317910,
+      "sha256": "f1e920730be6614a0d06c22df791bda24aecd172abed076f17d59a0a5e1f2bec"
+    },
+    {
+      "path": "out/_next/static/chunks/da32cb34.453f366afa0f0011.js",
+      "bytes": 64582,
+      "sha256": "b36971acd0717a140a901c5034bd5804282f7047ed61e3e5b4c5ed9caf674126"
+    },
+    {
+      "path": "out/_next/static/chunks/dc366605.1be4851c2e738f07.js",
+      "bytes": 77167,
+      "sha256": "f03f46947b0e4492e2fcebb3277fb4efe76d5c30730a7ed7c0f257c106b6dcb9"
+    },
+    {
+      "path": "out/_next/static/chunks/e99baa5a.f5d9e1aad2870b0e.js",
+      "bytes": 60941,
+      "sha256": "fc45c367544434d4b0acfded24630bb4649f5b96183ede8cc013932014b19398"
+    },
+    {
+      "path": "out/_next/static/chunks/framework-dea131d1c6cbc1c0.js",
+      "bytes": 218938,
+      "sha256": "e9078d215dbbfc6917145e1ad94d010131ac1b3141d19ebc85506e59e54bb0af"
+    },
+    {
+      "path": "out/_next/static/chunks/main-6a7869ea003ca134.js",
+      "bytes": 137795,
+      "sha256": "bdc824805430a1ef4f2451d0667599af733375bca8a23dc066fa51b9977ac3ca"
+    },
+    {
+      "path": "out/_next/static/chunks/main-app-0e4f821d9d39c8d0.js",
+      "bytes": 529,
+      "sha256": "f48c65e4fc5945bbd2205ce22809557d625bede6e4b352148585499c7f0641de"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/app-error-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/forbidden-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/global-error-639d2837948ac423.js",
+      "bytes": 186,
+      "sha256": "99c16cf647716b40f5d9746feb0cbb16609d6489d660d08bd7b82e03b1215ee4"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/not-found-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/unauthorized-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "bytes": 112594,
+      "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683"
+    },
+    {
+      "path": "out/_next/static/chunks/webpack-f2eb6af661630aa6.js",
+      "bytes": 4954,
+      "sha256": "8a1dd94648c84e38693567187c8bcecfd3e3e1e81f4e8b69938e62204e5c382f"
+    },
+    {
+      "path": "out/_next/static/css/459f7aa1967f3e21.css",
+      "bytes": 30177,
+      "sha256": "1becf1193b4e5ae065e15505ab2653ef92310f87bb94c0244ae94edb47ce73e5"
+    },
+    {
+      "path": "out/_next/static/css/70d5090bbac1dd1a.css",
+      "bytes": 24037,
+      "sha256": "6494bc5b2f8562059d9910aed28f21e951068580ec8416002d67d8cd61da3dd3"
+    },
+    {
+      "path": "out/_not-found/index.html",
+      "bytes": 8688,
+      "sha256": "8d3173e5b82fbcae7328645d4731a7f2df40c1f702912a62a3afee079bff870c"
+    },
+    {
+      "path": "out/index.html",
+      "bytes": 10449,
+      "sha256": "76d56b2201926c3e3285a8e4e1582e3e859a9c879daadb01f12681dfa05fce69"
+    },
+    {
+      "path": "out/scene.js",
+      "bytes": 7278506,
+      "sha256": "c27cd2d942a6738a584dbbd102de79b74ecc955a11ea37df3c0bf00aac70a39f"
+    },
+    {
+      "path": "out/voice-capture.js",
+      "bytes": 834,
+      "sha256": "592884d8b8e7edf5464ba7dabf746a17abc028bc4936fdb3c5951d659f1eea2e"
+    }
+  ],
+  "host": {
+    "pid": 54758,
+    "port": 44769,
+    "command": "bun core/server.ts",
+    "data": "private-data",
+    "exitCode": 0,
+    "signalCode": null
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "loadedAt": "2026-10-29T21:25:07.028Z",
+  "progress": [
+    {
+      "time": "2026-10-29T21:25:07.898Z",
+      "status": "running",
+      "phase": "fetching_source",
+      "accepted": 0
+    },
+    {
+      "time": "2026-10-29T21:25:08.338Z",
+      "status": "running",
+      "phase": "answering_sources",
+      "accepted": 1
+    },
+    {
+      "time": "2026-10-29T21:25:22.381Z",
+      "status": "running",
+      "phase": "reviewing",
+      "accepted": 1
+    },
+    {
+      "time": "2026-10-29T21:25:28.913Z",
+      "status": "running",
+      "phase": "reviewing_goal",
+      "accepted": 2
+    },
+    {
+      "time": "2026-10-29T21:25:35.218Z",
+      "status": "completed",
+      "phase": "completed",
+      "accepted": 2
+    }
+  ],
+  "goal": {
+    "id": "7aeb5b07-7c16-4c7c-adbb-465a1b84400b",
+    "request": "Where are the Fetch Standard’s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+    "projectId": "7d4ea0aa-8555-4bdc-ab1a-05b894e5a445",
+    "research": true,
+    "status": "completed",
+    "phase": "completed",
+    "message": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified.",
+    "tasks": [
+      {
+        "id": "source-1",
+        "specialist": "research",
+        "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "description": "Save public source 1 for this question.",
+        "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+        "dependsOn": [],
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "Public response and full extracted text saved. Acquisition identity only; no answer or factual verification.",
+          "verified": true,
+          "evidence": [
+            "Saved source 00cb6a33-4258-4327-b776-56d788a5305a: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+            "Retrieved 2026-10-29T21:25:08.239Z; 4815 bytes; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "Text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; 4815 text positions; public-text-v1"
+          ],
+          "sourceId": "00cb6a33-4258-4327-b776-56d788a5305a"
+        },
+        "review": {
+          "accepted": true,
+          "reason": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality."
+        }
+      },
+      {
+        "id": "source-answer",
+        "specialist": "analysis",
+        "sourceAnswer": true,
+        "description": "Answer the exact saved question using selected saved-source excerpts.",
+        "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+        "dependsOn": [
+          "source-1"
+        ],
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\nSelected saved-source excerpts:\n[source-1] “Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).”\n[source-1] “A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).”\n\nThe model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+          "verified": true,
+          "evidence": [
+            "Exact supplied-source quote [source-1]: Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+            "Exact supplied-source quote [source-1]: A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+            "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+            "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+            "Saved reading 9df9228f-f572-4041-a97e-9d5b6833e115; question SHA-256 6f22c7ec184e33bc4ad15bcec90d99181c8ee3314f1e641fc8b70f82f7ffbc1f"
+          ],
+          "sourceAnswer": {
+            "text": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+            "citations": [
+              {
+                "sourceId": "00cb6a33-4258-4327-b776-56d788a5305a",
+                "label": "source-1",
+                "quote": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+                "offset": 1914,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                "spanId": "span-6"
+              },
+              {
+                "sourceId": "00cb6a33-4258-4327-b776-56d788a5305a",
+                "label": "source-1",
+                "quote": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+                "offset": 2057,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                "spanId": "span-7"
+              }
+            ],
+            "uncertainty": "",
+            "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "draftAssessment": {
+              "answerable": false,
+              "reason": "The requested facts are not fully supported by the provided excerpts.",
+              "uncertainty": "The specific location of the tests is not mentioned in the provided excerpts, but the information about where they can be seen is provided in the references.",
+              "text": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+            },
+            "supportReview": {
+              "supported": true,
+              "reason": "The requested information is supported by the provided citations. The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt`, and a dashboard showing the tests running against browser engines can be accessed ["
+            },
+            "citationMethod": "host-spans-v1",
+            "readingId": "9df9228f-f572-4041-a97e-9d5b6833e115",
+            "answerable": true,
+            "answerabilityReason": "The requested information is supported by the provided citations. The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt`, and a dashboard showing the tests running against browser engines can be accessed [",
+            "selections": [
+              {
+                "sourceId": "00cb6a33-4258-4327-b776-56d788a5305a",
+                "label": "source-1",
+                "start": 1400,
+                "end": 2200,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                "rangeSha256": "543515254a61e8c5e320c338e6e52d9fd8f661b080e3b4a9b558bc7ac6a290ea",
+                "text": "even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Buildi"
+              }
+            ]
+          }
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch). The two statements cited support both locations and functionality as requested."
+        }
+      }
+    ],
+    "created": 1793309107875,
+    "updated": 1793309135120,
+    "events": [
+      {
+        "time": 1793309107875,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Question and source reading steps saved. Public requests send only the URLs. The answer requires the local model."
+      },
+      {
+        "time": 1793309107879,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Save public source 1 for this question.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793309107881,
+        "role": "executor",
+        "phase": "fetching_source",
+        "detail": "Fetching public source: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793309108240,
+        "role": "executor",
+        "phase": "source_saved",
+        "detail": "Saved 4815 response bytes and full text; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793309108243,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793309108245,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793309108245,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793309108248,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Answer the exact saved question using selected saved-source excerpts.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793309108260,
+        "role": "executor",
+        "phase": "selection_saved",
+        "detail": "Saved auto reading 9df9228f-f572-4041-a97e-9d5b6833e115: source-1 1400–2200 (8 term matches). Exact question and text ranges are hashed before inference.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793309108261,
+        "role": "executor",
+        "phase": "answering_sources",
+        "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793309117535,
+        "role": "executor",
+        "phase": "answering_sources",
+        "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793309122365,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793309128820,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch). The two statements cited support both locations and functionality as requested.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793309128822,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793309128832,
+        "role": "reviewer",
+        "phase": "reviewing_goal",
+        "detail": "Checking that verified milestones cover the full saved goal."
+      },
+      {
+        "time": 1793309135118,
+        "role": "reviewer",
+        "phase": "goal_page_verified",
+        "detail": "Reviewed 144 of 144 goal characters. The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+      },
+      {
+        "time": 1793309135120,
+        "role": "coordinator",
+        "phase": "completed",
+        "detail": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified."
+      }
+    ],
+    "planningOffset": 144,
+    "planningDone": true,
+    "planningCalls": 0,
+    "coverageOffset": 144,
+    "coverageDone": true,
+    "notes": [],
+    "sourceQuestion": {
+      "urls": [
+        "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+      ]
+    },
+    "sources": [
+      {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T21:25:08.239Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "00cb6a33-4258-4327-b776-56d788a5305a",
+        "goalId": "7aeb5b07-7c16-4c7c-adbb-465a1b84400b",
+        "taskId": "source-1"
+      }
+    ],
+    "reading": {
+      "id": "9df9228f-f572-4041-a97e-9d5b6833e115",
+      "goalId": "7aeb5b07-7c16-4c7c-adbb-465a1b84400b",
+      "taskId": "source-answer",
+      "version": "source-passages-v1",
+      "mode": "auto",
+      "question": "Where are the Fetch Standard’s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+      "questionSha256": "6f22c7ec184e33bc4ad15bcec90d99181c8ee3314f1e641fc8b70f82f7ffbc1f",
+      "created": 1793309108257,
+      "match": "matched",
+      "ranges": [
+        {
+          "sourceId": "00cb6a33-4258-4327-b776-56d788a5305a",
+          "label": "source-1",
+          "start": 1400,
+          "end": 2200,
+          "score": 8,
+          "matchedTerms": [
+            "fetch",
+            "standard",
+            "test",
+            "see",
+            "running",
+            "against",
+            "browser",
+            "engine"
+          ],
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "text": "even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Buildi",
+          "rangeSha256": "543515254a61e8c5e320c338e6e52d9fd8f661b080e3b4a9b558bc7ac6a290ea"
+        }
+      ]
+    }
+  },
+  "buttons": [
+    "Inspect selected passage 1",
+    "Inspect saved text",
+    "Ask another question from saved sources",
+    "Open website",
+    "Stop goal"
+  ],
+  "absentDocumentActions": true,
+  "userGoalAchieved": false,
+  "gap": "Research answer is supported and durable, but existing answer window provides no document create/open/save/export handoff.",
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T21:25:40.520Z"
+}

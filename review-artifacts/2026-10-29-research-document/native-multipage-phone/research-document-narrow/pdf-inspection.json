@@ -1,0 +1,83 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "width": 595,
+      "height": 842,
+      "text": "Fetch test contributor brief\nBrief: The Fetch Standard’s tests are kept in the fetch/ directory of web-platform-tests/wpt and\ncan be seen at https://wpt. fyi/results/ fetch. [1] [2]\nExact source question: Where are the Fetch Standard’s tests kept, and where can I see\nthem running against browser engines? Cite the README statements supporting both.\nYour note — supplied by you, not a source claim: Personal handoﬀ for my next Fetch test\ncontribution. These are my own proposed actions and working notes, not instructions or\nveriﬁed claims from the source.\nBefore changing anything, I will record the browser and version, a minimal public example, the\noutcome I expected and what I actually saw. I will remove cookies, authorization headers,\naccount details and private URLs from anything I share.\n1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with\nthe current README. If the evidence changed, ask a new focused question instead of editing\nthe accepted copy.\n2. Open the browser-results location from the brief. Write down the engine and platform I\ninspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test\npasses.\n3. Search the cited test directory for a related case before proposing another test. Keep the\ncandidate ﬁlename, my reason for choosing it and any unresolved question in my own draft.\n4. Separate reproduction from implementation. First describe a small public ﬁxture and\nexpected behavior; then explain the proposed test and the observation it should distinguish.\n5. Read the project's current contribution and review instructions before submitting anything. I\nhave not checked those instructions yet, and this brief does not establish them.\n6. Keep a handoﬀ log of what I tried, which evidence I saved and what remains uncertain.\nAfter interruption, inspect saved work and continue deliberately rather than repeating\naccepted research.\n7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for\nmissing guidance instead of guessing. My personal checklist is not a source-backed\nconclusion.\nReference [1] · Literal saved-source quote (source-1, text 1914–2055): Tests for the Fetch\nStandard can be found in the `fetch/` directory of [`web-platfo rm-tests/wpt `](https://g\nithub.com/we b-platform-t ests/wpt).\nReference [2] · Literal saved-source quote (source-1, text 2057–2189): A dashboard showing\nthe tests running against browser engines can be seen at [wpt.fyi/res ults/fetch]( https://wpt.\nfyi/results/ fetch).\nSaved source source-1: README.md\n",
+      "links": []
+    },
+    {
+      "number": 2,
+      "width": 595,
+      "height": 842,
+      "text": "URL: https://raw. githubuserco ntent.com/wh atwg/fetch/m ain/README.m d\nOpen original source\nRetrieved: 2026-10-29T22:06:27.711Z\nSnapshot: 52d48f68-3ab 1-467d-bbd4- f5467e4b41ef\nResponse SHA-256: d484144421db 3f758ef98fe5 bf13c3dbe1e0 7a357033af52\n88298ea0f4f2 ceaa\nText SHA-256: d484144421db 3f758ef98fe5 bf13c3dbe1e0 7a357033af52 88298ea0f4f2\nceaa\nScope and provenance: The model selected citation span IDs; the host copied their exact\nsaved text. This checks text identity, not independent factual answer accuracy.\nWritten by the local model from the accepted answer and selected saved passages. Fixed\nhost code rendered this document. Source claims and general factual accuracy were not\nindependently veriﬁed.\nParent question: 7c31d3ef-f1c 3-4094-85b6- 7bab80ca81e7\nBrief goal: a09643e1-9a3 3-4d6d-b6d5- dc5e87d516bd\n",
+      "links": [
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            68,
+            66.42498779296875,
+            94.90599822998047,
+            77.42498779296875
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            94.90599822998047,
+            66.42498779296875,
+            97.96399688720703,
+            77.42498779296875
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            97.96399688720703,
+            66.42498779296875,
+            133.4169921875,
+            77.42498779296875
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            133.4169921875,
+            66.42498779296875,
+            136.47499084472656,
+            77.42498779296875
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "kind": 2,
+          "rect": [
+            136.47499084472656,
+            66.42498779296875,
+            169.48599243164062,
+            77.42498779296875
+          ]
+        }
+      ]
+    }
+  ],
+  "pageCount": 2,
+  "metadata": {
+    "format": "PDF 1.7",
+    "title": "Fetch test contributor brief",
+    "author": "",
+    "subject": "",
+    "keywords": "",
+    "creator": "",
+    "producer": "Anascummis fixed research-brief renderer",
+    "creationDate": "",
+    "modDate": "",
+    "trapped": "",
+    "encryption": null
+  }
+}

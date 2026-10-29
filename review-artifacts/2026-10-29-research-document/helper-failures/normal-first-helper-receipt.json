@@ -1,0 +1,30 @@
+{
+  "status": "failed",
+  "startedAt": "2026-10-29T22:11:12.569Z",
+  "origin": "http://127.0.0.1:3211",
+  "scope": "Already-running ordinary Studio. Read-only readiness, empty typing discovery and current Download handoff only; no fixtures, message, goal, app launch, inference, model setup or service change.",
+  "productCode": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+  "deliverySource": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+  "cases": [],
+  "screenshots": [],
+  "blockedExternalRequests": [],
+  "mutationAttempts": [],
+  "requests": [],
+  "pageErrors": [],
+  "limitations": [
+    "Chrome desktop/touch emulation; no physical handset or native OS installation proof.",
+    "External browser requests are deliberately blocked, including voice initialization/configuration. Voice remains unverified; its unavailable state here is not a new native voice test.",
+    "Normal data has no Goals or Software builds. Real work windows and native research/document results are separate owned-instance evidence.",
+    "Actual current kit browser bytes are checked; no new extraction, dependency install, setup or native-OS install is performed.",
+    "SQLite shared-memory lock bookkeeping is excluded from durable file hashing. API records, main database and WAL bytes are compared."
+  ],
+  "error": {
+    "message": "response.ok is not a function",
+    "stack": "TypeError: response.ok is not a function\n    at apiSnapshot (file:///workspace/.cloud-env/anascummis/research-document/capture-normal-current-final.mjs:13:130)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///workspace/.cloud-env/anascummis/research-document/capture-normal-current-final.mjs:20:16"
+  },
+  "preservationError": {
+    "message": "response.ok is not a function",
+    "stack": "TypeError: response.ok is not a function\n    at apiSnapshot (file:///workspace/.cloud-env/anascummis/research-document/capture-normal-current-final.mjs:13:130)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///workspace/.cloud-env/anascummis/research-document/capture-normal-current-final.mjs:65:25"
+  },
+  "finishedAt": "2026-10-29T22:11:12.589Z"
+}

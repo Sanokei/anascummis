@@ -1,0 +1,102 @@
+{
+  "source": "890609bf5ebe848e54e6754e095666b8115647e8",
+  "sourceRun": "native-inline-desktop",
+  "lane": "Read-only independent full presented-prose proof after the browser file-URL policy refusal; not a completed HTML-open/final-restart journey.",
+  "written": "The Fetch Standard\u2019s tests are kept in the fetch/ directory of web-platform-tests/wpt and can be seen at https://wpt.fyi/results/fetch.",
+  "presentation": {
+    "version": "brief-inline-v1",
+    "draft": {
+      "paragraphs": [
+        {
+          "text": "The Fetch Standard\u2019s tests are kept in the fetch/ directory of web-platform-tests/wpt and can be seen at https://wpt.fyi/results/fetch.",
+          "citations": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "sha256": "68a38029a44502c9ba9aadcb179d8d2c54466f826cc3cbf7e535a84c37ae6aed",
+    "method": "Host presentation only: remove matched single-backtick code delimiters and expand matched HTTPS Markdown links to their unchanged label and exact target; redundant URL labels use the target. Facts, citation IDs and literal source quotes are not rewritten."
+  },
+  "artifact": {
+    "id": "4f8590cc-2a4f-48ec-9d7b-717b2cea5b24",
+    "documentId": "4f8590cc-2a4f-48ec-9d7b-717b2cea5b24",
+    "title": "Fetch test contributor brief",
+    "created": 1793310691104,
+    "pages": 2,
+    "inputSha256": "9c73374553ad0ed9d1b8f1b61f9fa726a19fcc0608d110236eb9243600f71d54",
+    "draftSha256": "e67e669138de250604ba002fdb8cec0a9caf20b0243b47e87c3fd6f392a46e88",
+    "pdfSha256": "15923a2a9dda69b6c7b1cd49527598392719eebce7fdc565d1cb2d0e01db328c",
+    "htmlSha256": "596956a22bc531eae4c9be3006261b86c3b299fc5ca0814f173cdce844b0821d",
+    "presentationVersion": "brief-inline-v1",
+    "presentationSha256": "68a38029a44502c9ba9aadcb179d8d2c54466f826cc3cbf7e535a84c37ae6aed"
+  },
+  "actualBrowserDownloadIdentities": [
+    {
+      "path": "fetch-test-contributor-brief.pdf",
+      "bytes": 70751,
+      "sha256": "15923a2a9dda69b6c7b1cd49527598392719eebce7fdc565d1cb2d0e01db328c",
+      "suggestedFilename": "Fetch_test_contributor_brief.pdf",
+      "mimeEvidence": "Independent exact-URL GET headers; its complete body must equal the actual browser download.",
+      "type": "application/pdf",
+      "headerProbe": {
+        "method": "GET",
+        "path": "/api/goals/bc7c2c32-6d1d-4abb-a11f-1cf727a23cc4/brief/export?format=pdf",
+        "status": 200,
+        "sha256": "15923a2a9dda69b6c7b1cd49527598392719eebce7fdc565d1cb2d0e01db328c",
+        "byteIdentical": true
+      }
+    },
+    {
+      "path": "fetch-test-contributor-brief.html",
+      "bytes": 2860,
+      "sha256": "596956a22bc531eae4c9be3006261b86c3b299fc5ca0814f173cdce844b0821d",
+      "suggestedFilename": "Fetch_test_contributor_brief.html",
+      "mimeEvidence": "Independent exact-URL GET headers; its complete body must equal the actual browser download.",
+      "type": "text/html; charset=utf-8",
+      "headerProbe": {
+        "method": "GET",
+        "path": "/api/goals/bc7c2c32-6d1d-4abb-a11f-1cf727a23cc4/brief/export?format=html",
+        "status": 200,
+        "sha256": "596956a22bc531eae4c9be3006261b86c3b299fc5ca0814f173cdce844b0821d",
+        "byteIdentical": true
+      }
+    }
+  ],
+  "pdfExactPresentedProse": true,
+  "pdfNormalization": "Unicode NFKC plus layout whitespace only",
+  "htmlExactPresentedProse": true,
+  "htmlNormalization": "Whitespace only; HTML entities decoded by standard HTMLParser",
+  "pdfPages": 2,
+  "assertionsBeforePolicyBlock": 10,
+  "screenshots": [
+    "01-ordinary-first-use.png",
+    "02-explicit-source-question.png",
+    "03-supported-parent-answer.png",
+    "04-unsaved-exact-title-and-notes.png",
+    "05-unconfirmed-creation-inspect-before-retry.png",
+    "06-stopped-child-saved-personal-note.png",
+    "07-stopped-child-keeps-notes-and-dependencies.png",
+    "08-interrupted-original-native-writing.png",
+    "09-interrupted-presented-brief.png",
+    "10-interrupted-saved-native-writing.png",
+    "11-interrupted-native-draft-explicit-continuation.png",
+    "12-saved-brief-actions-1440x1000.png",
+    "13-saved-brief-actions-360x800.png",
+    "14-saved-brief-actions-360x420.png",
+    "15-actual-pdf-page-1.png",
+    "16-actual-pdf-page-2.png",
+    "17-actual-pdf-zoom-pan-1440x1000.png",
+    "18-actual-pdf-window-1440x1000.png",
+    "19-actual-pdf-zoom-pan-360x800.png",
+    "20-actual-pdf-window-360x800.png",
+    "21-actual-pdf-zoom-pan-360x420.png",
+    "22-actual-pdf-window-360x420.png",
+    "23-returned-to-correct-brief-work-window.png",
+    "24-returned-brief-keeps-personal-note.png",
+    "25-returned-brief-source-identity-source-1.png",
+    "26-failure.png"
+  ],
+  "status": "passed"
+}

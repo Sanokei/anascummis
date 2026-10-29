@@ -1,0 +1,64 @@
+{
+  "nativeDesktop": {
+    "source": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+    "passed": 1,
+    "blocked": 0,
+    "failed": 0,
+    "recordedOutcomeAssertions": 12,
+    "report": "native-preview-desktop/report.json"
+  },
+  "nativePhone": {
+    "source": "c6da6cd77dbeee24d5b0aa6932ef38a6fedff02d",
+    "passed": 1,
+    "blocked": 0,
+    "failed": 0,
+    "recordedOutcomeAssertions": 12,
+    "personalNoteCharacters": 1719,
+    "pages": 2,
+    "report": "native-multipage-phone/report.json"
+  },
+  "existingExports": {
+    "passed": 2,
+    "blocked": 0,
+    "failed": 0,
+    "recordedOutcomeAssertions": 14,
+    "nativeInferenceClaim": false,
+    "report": "existing-export-regression/report.json"
+  },
+  "focusedDocumentChecks": {
+    "testsPassed": 35,
+    "failed": 0,
+    "expectCalls": 351,
+    "log": "gates/preview-affected-tests.log",
+    "lane": "Injected host-flow/model decisions plus real renderer and synthetic API component browser checks; not native answer-quality proof."
+  },
+  "focusedPdfReader": {
+    "testsPassed": 1,
+    "failed": 0,
+    "expectCalls": 81,
+    "log": "gates/pdf-viewer-tests.log",
+    "lane": "Actual Chromium component with synthetic two-page images/API outcomes, separate from real native outputs."
+  },
+  "typescript": {
+    "frontendExitCode": 0,
+    "coreExitCode": 0
+  },
+  "productionBuild": {
+    "source": "9ad0fadaf12eab78ae360861ca6c56eeb5d411c1",
+    "exitCode": 0,
+    "log": "gates/preview-production-build.log"
+  },
+  "currentZip": {
+    "payloadFiles": 258,
+    "bytes": 2042573,
+    "sha256": "2764e1a746c3133f84cae9a4df12001bd14d8485096107b5e767c59bd082636c",
+    "verifiedPerFileHashes": true,
+    "browserDownloadedIdentical": true,
+    "freshInstallOrExtractionStartClaim": false
+  },
+  "notes": [
+    "Do not add earlier 66/30/31-test intermediate runs to these final distinct check counts.",
+    "Four failed intermediate native journeys remain failed; a partial output or recovery assertion is not a completed goal.",
+    "Actual SIGKILL occurred after saved native writing and before document publication; other crash windows use separately labelled injected tests."
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "checkedAt": "2026-10-29T22:09:55.797826+00:00",
+  "scope": "Fresh read-only identity/file/hash/live-process and local health/model-list verification. No downloads, inference, secrets, remote endpoint, source/build/HEAD changes or service restarts.",
+  "model": {
+    "name": "Qwen3-0.6B",
+    "format": "GGUF",
+    "quantization": "Q4_0",
+    "filename": "Qwen3-0.6B-Q4_0.gguf",
+    "bytes": 428970080,
+    "sha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+    "officialRepository": "ggml-org/Qwen3-0.6B-GGUF",
+    "revision": "13ac06624948e4d8589cb4b6f90100837342fcb8",
+    "originUrl": "https://huggingface.co/ggml-org/Qwen3-0.6B-GGUF/resolve/13ac06624948e4d8589cb4b6f90100837342fcb8/Qwen3-0.6B-Q4_0.gguf",
+    "metadataUrl": "https://huggingface.co/api/models/ggml-org/Qwen3-0.6B-GGUF/revision/13ac06624948e4d8589cb4b6f90100837342fcb8?blobs=true",
+    "metadataBlobId": "a93a9195fadfc2f6e53cc051c106638477abc45b",
+    "officialLfsSha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+    "officialLfsBytes": 428970080,
+    "officialHashAndSizeMatch": true,
+    "installedPath": "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+    "storageKind": "Direct application .runtime file, not an HF SDK cache snapshot",
+    "regularFile": true,
+    "symlink": false,
+    "inode": 786626,
+    "liveProcessMapsSameFile": true,
+    "freshActualSha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+    "freshActualBytes": 428970080
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "version": "0.8.0-dev",
+    "build": "b11960",
+    "commit": "8642541b2",
+    "platform": "Linux x86_64",
+    "executable": "/workspace/.cloud-tools/llama/llama-b11960/llama-server",
+    "executableSha256": "005c789a278eff50500a864ee4736e7f4a7edf657acfba13e7a5cf19992927fa",
+    "originUrl": "https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz",
+    "cachedArchive": "/workspace/.cloud-tools/downloads/llama-b11960-bin-ubuntu-x64.tar.gz",
+    "cachedArchiveSha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a",
+    "installerExpectedArchiveSha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a",
+    "cpuThreads": 4,
+    "contextTokens": 2048,
+    "parallelSlots": 1,
+    "gpuLayers": 0,
+    "reasoning": "off",
+    "freshExecutableSha256": "005c789a278eff50500a864ee4736e7f4a7edf657acfba13e7a5cf19992927fa",
+    "freshCachedArchiveSha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a",
+    "runningExecutablePathMatches": true
+  },
+  "readiness": {
+    "existingProcessPid": 18848,
+    "startTicks": "845300",
+    "sameProcessAcrossCheck": true,
+    "health": {
+      "status": "ok"
+    },
+    "modelListingMatchesInstalledPath": true,
+    "reportedFormat": "Q4_0",
+    "reportedContextTokens": 2048,
+    "readinessIsNotQuality": true,
+    "freshInferencePerformedByThisAudit": false,
+    "qualityScope": "This proves exact weights/runtime identity and reachability only; native research/document/browser outcomes are separate receipts. Voice/native OS/physical handset/general capability is not inferred."
+  },
+  "officialMetadata": {
+    "revalidatedFromNetworkDuringThisCheck": false,
+    "cachedVerifiedMetadataReceipt": "/workspace/.cloud-env/anascummis/research-document/readiness/local-model-identity.json",
+    "cachedReceiptSha256": "dde04836f2c44280652bf671f2bcfd2ff82b28cc1d43eaf643a3c8bd0b329a77",
+    "cachedReceiptCheckedAt": "2026-10-29T21:24:57.611282+00:00",
+    "note": "Official origin/revision/LFS metadata was retrieved in the earlier guarded-scope identity receipt. This fresh audit re-hashes the actual installed model and existing official cached runtime archive against those saved official expected values; it neither downloads weights nor refreshes metadata remotely."
+  }
+}

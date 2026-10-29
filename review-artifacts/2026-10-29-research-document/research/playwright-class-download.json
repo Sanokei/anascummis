@@ -1,0 +1,71 @@
+{
+  "id": "playwright-class-download",
+  "status": "retrieved",
+  "transport": "Existing readPublicSource guard; official raw GitHub URL, credentials omitted, bounded bytes/time and zero redirects, no bypass",
+  "requestedUrl": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/api/class-download.md",
+  "url": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/api/class-download.md",
+  "title": "class: Download",
+  "retrievedAt": "2026-10-29T21:34:14.964Z",
+  "type": "text/plain",
+  "bytes": 4945,
+  "textLength": 4945,
+  "sha256": "fb1803f9f472c47fd7006db085d2f22ae5bf6795c27819750c56e4791de500e2",
+  "textSha256": "fb1803f9f472c47fd7006db085d2f22ae5bf6795c27819750c56e4791de500e2",
+  "normalization": "public-text-v1",
+  "excerpts": [
+    {
+      "term": "download event",
+      "start": 73,
+      "end": 1323,
+      "text": "e via the [`event: Page.download`] event.\n\nAll the downloaded files belonging to the browser context are deleted when the\nbrowser context is closed.\n\nDownload event is emitted once the download starts. Download path becomes available once download completes.\n\n```js\n// Start waiting for download before clicking. Note no await.\nconst downloadPromise = page.waitForEvent('download');\nawait page.getByText('Download file').click();\nconst download = await downloadPromise;\n\n// Wait for the download process to complete and save the downloaded file somewhere.\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\n// Wait for the download to start\nDownload download = page.waitForDownload(() -> {\n    // Perform the action that initiates download\n    page.getByText(\"Download file\").click();\n});\n\n// Wait for the download process to complete and save the downloaded file somewhere\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\n# Start waiting for the download\nasync with page.expect_download() as download_info:\n    # Perform the action that initiates download\n    await page.get_by_text(\"Download file\").click()\ndownload = await download_info.value\n\n# Wait for the "
+    },
+    {
+      "term": "saveAs",
+      "start": 494,
+      "end": 1744,
+      "text": "click();\nconst download = await downloadPromise;\n\n// Wait for the download process to complete and save the downloaded file somewhere.\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\n// Wait for the download to start\nDownload download = page.waitForDownload(() -> {\n    // Perform the action that initiates download\n    page.getByText(\"Download file\").click();\n});\n\n// Wait for the download process to complete and save the downloaded file somewhere\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\n# Start waiting for the download\nasync with page.expect_download() as download_info:\n    # Perform the action that initiates download\n    await page.get_by_text(\"Download file\").click()\ndownload = await download_info.value\n\n# Wait for the download process to complete and save the downloaded file somewhere\nawait download.save_as(\"/path/to/save/at/\" + download.suggested_filename)\n```\n\n```python sync\n# Start waiting for the download\nwith page.expect_download() as download_info:\n    # Perform the action that initiates download\n    page.get_by_text(\"Download file\").click()\ndownload = download_info.value\n\n# Wait for the download process to complete and save "
+    },
+    {
+      "term": "saveAs",
+      "start": 843,
+      "end": 2093,
+      "text": "wnload\n    page.getByText(\"Download file\").click();\n});\n\n// Wait for the download process to complete and save the downloaded file somewhere\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\n# Start waiting for the download\nasync with page.expect_download() as download_info:\n    # Perform the action that initiates download\n    await page.get_by_text(\"Download file\").click()\ndownload = await download_info.value\n\n# Wait for the download process to complete and save the downloaded file somewhere\nawait download.save_as(\"/path/to/save/at/\" + download.suggested_filename)\n```\n\n```python sync\n# Start waiting for the download\nwith page.expect_download() as download_info:\n    # Perform the action that initiates download\n    page.get_by_text(\"Download file\").click()\ndownload = download_info.value\n\n# Wait for the download process to complete and save the downloaded file somewhere\ndownload.save_as(\"/path/to/save/at/\" + download.suggested_filename)\n```\n\n```csharp\n// Start the task of waiting for the download before clicking\nvar waitForDownloadTask = page.WaitForDownloadAsync();\nawait page.GetByText(\"Download file\").ClickAsync();\nvar download = await waitForDownloadTask;\n\n// Wait for the download"
+    },
+    {
+      "term": "failure",
+      "start": 2259,
+      "end": 3509,
+      "text": "ad.cancel\n* since: v1.13\n\nCancels a download. Will not fail if the download is already finished or canceled.\nUpon successful cancellations, `download.failure()` would resolve to `'canceled'`.\n\n## async method: Download.createReadStream\n* since: v1.8\n* langs: java, js, csharp\n- returns: <[Readable]>\n\nReturns a readable stream for a successful download, or throws for a failed/canceled download.\n\n:::note\nIf you don't need a readable stream, it's usually simpler to read the file from disk after the download completed. See [`method: Download.path`].\n:::\n\n## async method: Download.delete\n* since: v1.8\n\nDeletes the downloaded file. Will wait for the download to finish if necessary.\n\n## async method: Download.failure\n* since: v1.8\n- returns: <[null]|[string]>\n\nReturns download error if any. Will wait for the download to finish if necessary.\n\n## method: Download.page\n* since: v1.12\n- returns: <[Page]>\n\nGet the page that the download belongs to.\n\n## async method: Download.path\n* since: v1.8\n- returns: <[path]>\n\nReturns path to the downloaded file for a successful download, or throws for a failed/canceled download. The method will wait for the download to finish if necessary. The method throws when connected remotely.\n\nNote that the download"
+    },
+    {
+      "term": "failure",
+      "start": 2820,
+      "end": 4070,
+      "text": "ync method: Download.delete\n* since: v1.8\n\nDeletes the downloaded file. Will wait for the download to finish if necessary.\n\n## async method: Download.failure\n* since: v1.8\n- returns: <[null]|[string]>\n\nReturns download error if any. Will wait for the download to finish if necessary.\n\n## method: Download.page\n* since: v1.12\n- returns: <[Page]>\n\nGet the page that the download belongs to.\n\n## async method: Download.path\n* since: v1.8\n- returns: <[path]>\n\nReturns path to the downloaded file for a successful download, or throws for a failed/canceled download. The method will wait for the download to finish if necessary. The method throws when connected remotely.\n\nNote that the download's file name is a random GUID, use [`method: Download.suggestedFilename`]\nto get suggested file name.\n\n## async method: Download.saveAs\n* since: v1.8\n\nCopy the download to a user-specified path. It is safe to call this method while the download\nis still in progress. Will wait for the download to finish if necessary.\n\n**Usage**\n\n```js\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\nawait download.save_as(\"/path/to/save"
+    },
+    {
+      "term": "path",
+      "start": 134,
+      "end": 1384,
+      "text": " files belonging to the browser context are deleted when the\nbrowser context is closed.\n\nDownload event is emitted once the download starts. Download path becomes available once download completes.\n\n```js\n// Start waiting for download before clicking. Note no await.\nconst downloadPromise = page.waitForEvent('download');\nawait page.getByText('Download file').click();\nconst download = await downloadPromise;\n\n// Wait for the download process to complete and save the downloaded file somewhere.\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\n// Wait for the download to start\nDownload download = page.waitForDownload(() -> {\n    // Perform the action that initiates download\n    page.getByText(\"Download file\").click();\n});\n\n// Wait for the download process to complete and save the downloaded file somewhere\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\n# Start waiting for the download\nasync with page.expect_download() as download_info:\n    # Perform the action that initiates download\n    await page.get_by_text(\"Download file\").click()\ndownload = await download_info.value\n\n# Wait for the download process to complete and save the downloaded file som"
+    },
+    {
+      "term": "path",
+      "start": 503,
+      "end": 1753,
+      "text": "const download = await downloadPromise;\n\n// Wait for the download process to complete and save the downloaded file somewhere.\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\n// Wait for the download to start\nDownload download = page.waitForDownload(() -> {\n    // Perform the action that initiates download\n    page.getByText(\"Download file\").click();\n});\n\n// Wait for the download process to complete and save the downloaded file somewhere\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\n# Start waiting for the download\nasync with page.expect_download() as download_info:\n    # Perform the action that initiates download\n    await page.get_by_text(\"Download file\").click()\ndownload = await download_info.value\n\n# Wait for the download process to complete and save the downloaded file somewhere\nawait download.save_as(\"/path/to/save/at/\" + download.suggested_filename)\n```\n\n```python sync\n# Start waiting for the download\nwith page.expect_download() as download_info:\n    # Perform the action that initiates download\n    page.get_by_text(\"Download file\").click()\ndownload = download_info.value\n\n# Wait for the download process to complete and save the downl"
+    },
+    {
+      "term": "finished",
+      "start": 2196,
+      "end": 3446,
+      "text": "t/\" + download.SuggestedFilename);\n```\n\n## async method: Download.cancel\n* since: v1.13\n\nCancels a download. Will not fail if the download is already finished or canceled.\nUpon successful cancellations, `download.failure()` would resolve to `'canceled'`.\n\n## async method: Download.createReadStream\n* since: v1.8\n* langs: java, js, csharp\n- returns: <[Readable]>\n\nReturns a readable stream for a successful download, or throws for a failed/canceled download.\n\n:::note\nIf you don't need a readable stream, it's usually simpler to read the file from disk after the download completed. See [`method: Download.path`].\n:::\n\n## async method: Download.delete\n* since: v1.8\n\nDeletes the downloaded file. Will wait for the download to finish if necessary.\n\n## async method: Download.failure\n* since: v1.8\n- returns: <[null]|[string]>\n\nReturns download error if any. Will wait for the download to finish if necessary.\n\n## method: Download.page\n* since: v1.12\n- returns: <[Page]>\n\nGet the page that the download belongs to.\n\n## async method: Download.path\n* since: v1.8\n- returns: <[path]>\n\nReturns path to the downloaded file for a successful download, or throws for a failed/canceled download. The method will wait for the download to finish if necessary. The"
+    },
+    {
+      "term": "response",
+      "start": 4524,
+      "end": 4945,
+      "text": " is typically computed by the browser from the\n[`Content-Disposition`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) response header\nor the `download` attribute. See the spec on [whatwg](https://html.spec.whatwg.org/#downloading-resources). Different\nbrowsers can use different logic for computing it.\n\n## method: Download.url\n* since: v1.8\n- returns: <[string]>\n\nReturns downloaded url.\n"
+    }
+  ]
+}

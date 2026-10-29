@@ -1,0 +1,77 @@
+{
+  "id": "pymupdf-story",
+  "status": "retrieved",
+  "transport": "Existing readPublicSource guard; public HTTPS, existing safeFetch/address validation and limits, no redirects or guard bypass",
+  "requestedUrl": "https://pymupdf.readthedocs.io/en/latest/story-class.html",
+  "url": "https://pymupdf.readthedocs.io/en/latest/story-class.html",
+  "title": "Story - PyMuPDF documentation",
+  "retrievedAt": "2026-10-29T21:25:12.596Z",
+  "type": "text/html",
+  "bytes": 94872,
+  "textLength": 17901,
+  "sha256": "23489e5c29ac0205fc4bbfc0a5d40c29df6ddbb33e97eed743c5fc61bc4a27ec",
+  "textSha256": "d95f7d0cd5be795291183e1085d9b8d05f9b159758127471ac492d24e8cc7d26",
+  "normalization": "public-text-v1",
+  "excerpts": [
+    {
+      "term": "write_with_links",
+      "start": 1582,
+      "end": 2832,
+      "text": "sitions() callback function logging currently processed story content Story.body the story’s underlying body Story.write() places and draws Story to a DocumentWriter Story.write_stabilized() iterative layout of html content to a DocumentWriter Story.write_with_links() like write() but also creates PDF links Story.write_stabilized_with_links() like write_stabilized() but also creates PDF links Story.fit() Finds optimal rect that contains the story self . Story.fit_scale() Story.fit_height() Story.fit_width() Class API class Story ¶ __init__ ( self , html = None , user_css = None , em = 12 , archive = None ) ¶ Create a story , optionally providing HTML and CSS source. The HTML is parsed, and held within the Story as a DOM (Document Object Model). This structure may be modified: content (text, images) may be added, copied, modified or removed by using methods of the Xml class. When finished, the story can be written to any device; in typical usage the device may be provided by a DocumentWriter to make new pages. Here are some general remarks: The Story constructor parses and validates the provided HTML to create the DOM. PyMuPDF provides a number of ways to manipulate the HTML source by providing access to the nodes of the underlying"
+    },
+    {
+      "term": "write_with_links",
+      "start": 11034,
+      "end": 12284,
+      "text": "ev, after) ; called at start ( after=0 ) and end ( after=1 ) of each page. archive add_header_ids – If true, we add unique ids to all header tags that don’t already have an id. This can help automatic generation of tables of contents. Returns: None. write_with_links ( rectfn , positionfn = None , pagefn = None ) ¶ Similar to write() except that we don’t have a writer arg and we return a PDF Document in which links have been created for each internal html link. static write_stabilized_with_links ( contentfn , rectfn , user_css = None , em = 12 , positionfn = None , pagefn = None , archive = None , add_header_ids = True ) ¶ Similar to write_stabilized() except that we don’t have a writer arg and instead return a PDF Document in which links have been created for each internal html link. class FitResult ¶ The result from a Story.fit*() method. Members: big_enough : True if the fit succeeded. filled : From the last call to Story.place() . more : False if the fit succeeded. numcalls : Number of calls made to self.place() . parameter : The successful parameter value, or the largest failing value. Rect : The rect created from parameter . fit ( self , fn , pmin = None , pmax = None , delta = 0.001 , verbose = False ) ¶ Finds optimal rect t"
+    },
+    {
+      "term": "write_stabilized",
+      "start": 1504,
+      "end": 2754,
+      "text": "angle Story.draw() write the computed content to current page Story.element_positions() callback function logging currently processed story content Story.body the story’s underlying body Story.write() places and draws Story to a DocumentWriter Story.write_stabilized() iterative layout of html content to a DocumentWriter Story.write_with_links() like write() but also creates PDF links Story.write_stabilized_with_links() like write_stabilized() but also creates PDF links Story.fit() Finds optimal rect that contains the story self . Story.fit_scale() Story.fit_height() Story.fit_width() Class API class Story ¶ __init__ ( self , html = None , user_css = None , em = 12 , archive = None ) ¶ Create a story , optionally providing HTML and CSS source. The HTML is parsed, and held within the Story as a DOM (Document Object Model). This structure may be modified: content (text, images) may be added, copied, modified or removed by using methods of the Xml class. When finished, the story can be written to any device; in typical usage the device may be provided by a DocumentWriter to make new pages. Here are some general remarks: The Story constructor parses and validates the provided HTML to create the DOM. PyMuPDF provides a number of ways to"
+    },
+    {
+      "term": "write_stabilized",
+      "start": 1647,
+      "end": 2897,
+      "text": "tent Story.body the story’s underlying body Story.write() places and draws Story to a DocumentWriter Story.write_stabilized() iterative layout of html content to a DocumentWriter Story.write_with_links() like write() but also creates PDF links Story.write_stabilized_with_links() like write_stabilized() but also creates PDF links Story.fit() Finds optimal rect that contains the story self . Story.fit_scale() Story.fit_height() Story.fit_width() Class API class Story ¶ __init__ ( self , html = None , user_css = None , em = 12 , archive = None ) ¶ Create a story , optionally providing HTML and CSS source. The HTML is parsed, and held within the Story as a DOM (Document Object Model). This structure may be modified: content (text, images) may be added, copied, modified or removed by using methods of the Xml class. When finished, the story can be written to any device; in typical usage the device may be provided by a DocumentWriter to make new pages. Here are some general remarks: The Story constructor parses and validates the provided HTML to create the DOM. PyMuPDF provides a number of ways to manipulate the HTML source by providing access to the nodes of the underlying DOM. Documents can be completely built from ground up programmat"
+    },
+    {
+      "term": "rectfn",
+      "start": 8706,
+      "end": 9956,
+      "text": "y’s document to the beginning for starting over its output. body ¶ The body part of the story’s DOM. This attribute contains the Xml node of body . All relevant content for PDF production is contained between “<body>” and “</body>”. write ( writer , rectfn , positionfn = None , pagefn = None ) ¶ Places and draws Story to a DocumentWriter . Avoids the need for calling code to implement a loop that calls Story.place() and Story.draw() etc, at the expense of having to provide at least the rectfn() callback. Parameters : writer – a DocumentWriter or None. rectfn – a callable taking (rect_num: int, filled: Rect) and returning (mediabox, rect, ctm) : mediabox: None or rect for new page. rect: The next rect into which content should be placed. ctm: None or a Matrix . positionfn – None, or a callable taking (position: ElementPosition) : position: An ElementPosition with an extra .page_num member. Typically called multiple times as we generate elements that are headings or have an id. pagefn – None, or a callable taking (page_num, mediabox, dev, after) ; called at start ( after=0 ) and end ( after=1 ) of each page. static write_stabilized ( writer , contentfn , rectfn , user_css = None , em = 12 , positionfn = None , pagefn = None , archiv"
+    },
+    {
+      "term": "rectfn",
+      "start": 8947,
+      "end": 10197,
+      "text": "writer , rectfn , positionfn = None , pagefn = None ) ¶ Places and draws Story to a DocumentWriter . Avoids the need for calling code to implement a loop that calls Story.place() and Story.draw() etc, at the expense of having to provide at least the rectfn() callback. Parameters : writer – a DocumentWriter or None. rectfn – a callable taking (rect_num: int, filled: Rect) and returning (mediabox, rect, ctm) : mediabox: None or rect for new page. rect: The next rect into which content should be placed. ctm: None or a Matrix . positionfn – None, or a callable taking (position: ElementPosition) : position: An ElementPosition with an extra .page_num member. Typically called multiple times as we generate elements that are headings or have an id. pagefn – None, or a callable taking (page_num, mediabox, dev, after) ; called at start ( after=0 ) and end ( after=1 ) of each page. static write_stabilized ( writer , contentfn , rectfn , user_css = None , em = 12 , positionfn = None , pagefn = None , archive = None , add_header_ids = True ) ¶ Static method that does iterative layout of html content to a DocumentWriter . For example this allows one to add a table of contents section while ensuring that page numbers are patched up until stable. "
+    },
+    {
+      "term": "resource",
+      "start": 105,
+      "end": 1355,
+      "text": "to light/dark, in dark mode Skip to content PyMuPDF documentation PyMuPDF documentation About Features Comparison Performance License and Copyright PyMuPDF Office PyMuPDF, LLM & RAG PyMuPDF & Grounding User Guide Installation The Basics Tutorial OCR Resources FAQ How to Guide Opening Files Converting Files Compressing Files Text Images Annotations Drawing and Graphics Stories Journalling Multiprocessing Optional Content Support Low-Level Interfaces Common Issues and their Solutions API Reference Classes Annot Archive BatchResult ChunkMetadata Chunk ChunkedDocument Colorspace DisplayList Document DocumentWriter Font Identity IRect Link linkDest Matrix Outline Page Pixmap Point Quad Rect Shape Story TextPage TextWriter Tools Widget Xml Operator Algebra for Geometry Objects Low Level Functions and Classes Functions Device Working together: DisplayList and TextPage Glossary Constants and Enumerations Color Database Other Appendix 1: Details on Text Extraction Appendix 2: Considerations on Embedded Files Appendix 3: Assorted Technical Information Appendix 4: Performance Comparison Methodology Change Log Deprecated Names Back to top View this page pymupdf.io English 日本語 한국어 Find #pymupdf on Discord Try our forum! Story ¶ New in v1.21.0 "
+    },
+    {
+      "term": "resource",
+      "start": 5856,
+      "end": 7106,
+      "text": "ax errors and also accepts HTML fragments like \"<b>Hello, <i>World!</i></b>\" . user_css ( str ) – CSS source code. If provided, must contain valid CSS specifications. em ( float ) – the default text font size. archive – an Archive from which to load resources for rendering. Currently supported resource types are images and text fonts. If omitted, the story will not try to look up any such data and may thus produce incomplete output. Note Instead of an actual archive, valid arguments for creating an Archive can also be provided – in which case an archive will temporarily be constructed. So, instead of story = pymupdf.Story(archive=pymupdf.Archive(\"myfolder\")) , one can also shorter write story = pymupdf.Story(archive=\"myfolder\") . place ( where ) ¶ Calculate that part of the story’s content, that will fit in the provided rectangle. The method maintains a pointer which part of the story’s content has already been written and upon the next invocation resumes from that pointer’s position. Parameters : where ( rect_like ) – layout the current part of the content to fit into this rectangle. This must be a sub-rectangle of the page’s MediaBox . Return type : tuple[bool, rect_like] Returns : a bool (int) more and a rectangle filled . If m"
+    },
+    {
+      "term": "fit",
+      "start": 1234,
+      "end": 2484,
+      "text": "mes Back to top View this page pymupdf.io English 日本語 한국어 Find #pymupdf on Discord Try our forum! Story ¶ New in v1.21.0 Method / Attribute Short Description Story.reset() “rewind” story output to its beginning Story.place() compute story content to fit in provided rectangle Story.draw() write the computed content to current page Story.element_positions() callback function logging currently processed story content Story.body the story’s underlying body Story.write() places and draws Story to a DocumentWriter Story.write_stabilized() iterative layout of html content to a DocumentWriter Story.write_with_links() like write() but also creates PDF links Story.write_stabilized_with_links() like write_stabilized() but also creates PDF links Story.fit() Finds optimal rect that contains the story self . Story.fit_scale() Story.fit_height() Story.fit_width() Class API class Story ¶ __init__ ( self , html = None , user_css = None , em = 12 , archive = None ) ¶ Create a story , optionally providing HTML and CSS source. The HTML is parsed, and held within the Story as a DOM (Document Object Model). This structure may be modified: content (text, images) may be added, copied, modified or removed by using methods of the Xml class. When finished, "
+    },
+    {
+      "term": "fit",
+      "start": 1734,
+      "end": 2984,
+      "text": "ocumentWriter Story.write_stabilized() iterative layout of html content to a DocumentWriter Story.write_with_links() like write() but also creates PDF links Story.write_stabilized_with_links() like write_stabilized() but also creates PDF links Story.fit() Finds optimal rect that contains the story self . Story.fit_scale() Story.fit_height() Story.fit_width() Class API class Story ¶ __init__ ( self , html = None , user_css = None , em = 12 , archive = None ) ¶ Create a story , optionally providing HTML and CSS source. The HTML is parsed, and held within the Story as a DOM (Document Object Model). This structure may be modified: content (text, images) may be added, copied, modified or removed by using methods of the Xml class. When finished, the story can be written to any device; in typical usage the device may be provided by a DocumentWriter to make new pages. Here are some general remarks: The Story constructor parses and validates the provided HTML to create the DOM. PyMuPDF provides a number of ways to manipulate the HTML source by providing access to the nodes of the underlying DOM. Documents can be completely built from ground up programmatically, or the existing DOM can be modified pretty arbitrarily. For details of this int"
+    }
+  ]
+}

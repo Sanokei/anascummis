@@ -1,0 +1,12 @@
+{
+  "frozenKitHashesVerified": {
+    "review-artifacts/2026-10-29-source-kit/anascummis-studio-c5735e970e817eed.zip": "b73cc2f7f7950efb6ade3d2a7ec5f296a9950f30af0afe760efbe5fa80439f47",
+    "review-artifacts/2026-10-29-software-goals/kit/anascummis-studio-3298a9e9adb589b2.zip": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+    "review-artifacts/2026-10-29-app-launch/kit/anascummis-studio-c9c84ba6a1c9844a.zip": "d5ab598227fe7e1674c2751db4704b6589495f7ffab5a0bbd622130f977a7bec"
+  },
+  "priorLaunchReviewManifestUnchanged": "51bbb1894c19c380acc7bb80ff3c5eafa8a310a11a4aae23a7b61dbadbabdcbe",
+  "olderTrackedReviewPathsUnchanged": true,
+  "normalDataPreservation": "handoff/normal-restart-receipt.json and normal-current-final/receipt.json",
+  "modelProcessUnchanged": true,
+  "sourceOfAcceptedArtifacts": "Existing accepted fixture originals were copied only into fresh owned test directories; no fixture was imported into normal Studio."
+}

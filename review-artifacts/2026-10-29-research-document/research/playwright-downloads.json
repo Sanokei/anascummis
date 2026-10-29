@@ -1,0 +1,49 @@
+{
+  "id": "playwright-downloads",
+  "status": "retrieved",
+  "transport": "Existing readPublicSource guard; official raw GitHub URL, credentials omitted, bounded bytes/time and zero redirects, no bypass",
+  "requestedUrl": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/downloads.md",
+  "url": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/downloads.md",
+  "title": "Downloads",
+  "retrievedAt": "2026-10-29T21:34:14.837Z",
+  "type": "text/plain",
+  "bytes": 3390,
+  "textLength": 3390,
+  "sha256": "b6142bc2eedd26a35f13a7c32ca6922d134e4cdf6405a9fef6bef7d2edec8cb1",
+  "textSha256": "b6142bc2eedd26a35f13a7c32ca6922d134e4cdf6405a9fef6bef7d2edec8cb1",
+  "normalization": "public-text-v1",
+  "excerpts": [
+    {
+      "term": "download",
+      "start": 0,
+      "end": 1108,
+      "text": "---\nid: downloads\ntitle: \"Downloads\"\n---\n\n## Introduction\n\nFor every attachment downloaded by the page, [`event: Page.download`] event is emitted. All these attachments are downloaded into a temporary folder. You can obtain the download url, file name and payload stream using the [Download] object from the event.\n\nYou can specify where to persist downloaded files using the [`option: BrowserType.launch.downloadsPath`] option in [`method: BrowserType.launch`].\n\n:::note\nDownloaded files are deleted when the browser context that produced them is closed.\n:::\n\nHere is the simplest way to handle the file download:\n\n```js\n// Start waiting for download before clicking. Note no await.\nconst downloadPromise = page.waitForEvent('download');\nawait page.getByText('Download file').click();\nconst download = await downloadPromise;\n\n// Wait for the download process to complete and save the downloaded file somewhere.\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\n// Wait for the download to start\nDownload download = page.waitForDownload(() -> {\n    // Perform the action"
+    },
+    {
+      "term": "download",
+      "start": 0,
+      "end": 1126,
+      "text": "---\nid: downloads\ntitle: \"Downloads\"\n---\n\n## Introduction\n\nFor every attachment downloaded by the page, [`event: Page.download`] event is emitted. All these attachments are downloaded into a temporary folder. You can obtain the download url, file name and payload stream using the [Download] object from the event.\n\nYou can specify where to persist downloaded files using the [`option: BrowserType.launch.downloadsPath`] option in [`method: BrowserType.launch`].\n\n:::note\nDownloaded files are deleted when the browser context that produced them is closed.\n:::\n\nHere is the simplest way to handle the file download:\n\n```js\n// Start waiting for download before clicking. Note no await.\nconst downloadPromise = page.waitForEvent('download');\nawait page.getByText('Download file').click();\nconst download = await downloadPromise;\n\n// Wait for the download process to complete and save the downloaded file somewhere.\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\n// Wait for the download to start\nDownload download = page.waitForDownload(() -> {\n    // Perform the action that initiates do"
+    },
+    {
+      "term": "waitForEvent",
+      "start": 563,
+      "end": 1813,
+      "text": "re is the simplest way to handle the file download:\n\n```js\n// Start waiting for download before clicking. Note no await.\nconst downloadPromise = page.waitForEvent('download');\nawait page.getByText('Download file').click();\nconst download = await downloadPromise;\n\n// Wait for the download process to complete and save the downloaded file somewhere.\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\n// Wait for the download to start\nDownload download = page.waitForDownload(() -> {\n    // Perform the action that initiates download\n    page.getByText(\"Download file\").click();\n});\n\n// Wait for the download process to complete and save the downloaded file somewhere\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\n# Start waiting for the download\nasync with page.expect_download() as download_info:\n    # Perform the action that initiates download\n    await page.get_by_text(\"Download file\").click()\ndownload = await download_info.value\n\n# Wait for the download process to complete and save the downloaded file somewhere\nawait download.save_as(\"/path/to/save/at/\" + download.suggested_filename)\n```\n\n```python sync\n# Start waiting for the download\nwith page.ex"
+    },
+    {
+      "term": "saveAs",
+      "start": 777,
+      "end": 2027,
+      "text": "click();\nconst download = await downloadPromise;\n\n// Wait for the download process to complete and save the downloaded file somewhere.\nawait download.saveAs('/path/to/save/at/' + download.suggestedFilename());\n```\n\n```java\n// Wait for the download to start\nDownload download = page.waitForDownload(() -> {\n    // Perform the action that initiates download\n    page.getByText(\"Download file\").click();\n});\n\n// Wait for the download process to complete and save the downloaded file somewhere\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\n# Start waiting for the download\nasync with page.expect_download() as download_info:\n    # Perform the action that initiates download\n    await page.get_by_text(\"Download file\").click()\ndownload = await download_info.value\n\n# Wait for the download process to complete and save the downloaded file somewhere\nawait download.save_as(\"/path/to/save/at/\" + download.suggested_filename)\n```\n\n```python sync\n# Start waiting for the download\nwith page.expect_download() as download_info:\n    # Perform the action that initiates download\n    page.get_by_text(\"Download file\").click()\ndownload = download_info.value\n\n# Wait for the download process to complete and save "
+    },
+    {
+      "term": "saveAs",
+      "start": 1126,
+      "end": 2376,
+      "text": "wnload\n    page.getByText(\"Download file\").click();\n});\n\n// Wait for the download process to complete and save the downloaded file somewhere\ndownload.saveAs(Paths.get(\"/path/to/save/at/\", download.suggestedFilename()));\n```\n\n```python async\n# Start waiting for the download\nasync with page.expect_download() as download_info:\n    # Perform the action that initiates download\n    await page.get_by_text(\"Download file\").click()\ndownload = await download_info.value\n\n# Wait for the download process to complete and save the downloaded file somewhere\nawait download.save_as(\"/path/to/save/at/\" + download.suggested_filename)\n```\n\n```python sync\n# Start waiting for the download\nwith page.expect_download() as download_info:\n    # Perform the action that initiates download\n    page.get_by_text(\"Download file\").click()\ndownload = download_info.value\n\n# Wait for the download process to complete and save the downloaded file somewhere\ndownload.save_as(\"/path/to/save/at/\" + download.suggested_filename)\n```\n\n```csharp\n// Start the task of waiting for the download before clicking\nvar waitForDownloadTask = page.WaitForDownloadAsync();\nawait page.GetByText(\"Download file\").ClickAsync();\nvar download = await waitForDownloadTask;\n\n// Wait for the download"
+    }
+  ],
+  "normalizerTitle": "Start waiting for the download",
+  "titleDerivation": "Exact title field in official Markdown front matter, retained in the first bounded excerpt. The existing plain-text normalizer picked a Python code comment as a Markdown heading; this research-only correction does not change raw bytes/text hashes."
+}

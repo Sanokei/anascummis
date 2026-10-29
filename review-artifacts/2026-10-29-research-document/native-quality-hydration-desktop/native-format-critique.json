@@ -1,0 +1,44 @@
+{
+  "sourceRun": "native-quality-hydration-desktop",
+  "lane": "Read-only extraction of actual native rejected writing; no new inference or artifact completion.",
+  "goalId": "7a2e4e37-6c4a-4cd8-b615-3990b4c770b3",
+  "status": "needs_input",
+  "message": "Error: The saved writing failed its host factual-paragraph check: The factual brief must be one plain-prose paragraph, without Markdown headings, lists or formatting marks. The original draft is preserved. Create a new brief; retry does not replace it.",
+  "briefState": {
+    "id": "cc86b8b9-449c-47dc-85bf-43ed621b6995",
+    "goalId": "7a2e4e37-6c4a-4cd8-b615-3990b4c770b3",
+    "inputSha256": "59aa7462399ef82b536a65f270524d250dbf9eb8f8943b87a2aeaaca32ffa56a",
+    "created": 1793310222796,
+    "phase": "rejected",
+    "writingAttempt": {
+      "raw": {
+        "paragraphs": [
+          {
+            "text": "The Fetch Standard\u2019s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+            "citations": [
+              1,
+              2
+            ]
+          }
+        ]
+      },
+      "sha256": "e67e669138de250604ba002fdb8cec0a9caf20b0243b47e87c3fd6f392a46e88"
+    },
+    "draft": {
+      "paragraphs": [
+        {
+          "text": "The Fetch Standard\u2019s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+          "citations": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "draftSha256": "e67e669138de250604ba002fdb8cec0a9caf20b0243b47e87c3fd6f392a46e88",
+    "draftCheck": {
+      "accepted": false,
+      "reason": "The factual brief must be one plain-prose paragraph, without Markdown headings, lists or formatting marks."
+    }
+  }
+}
