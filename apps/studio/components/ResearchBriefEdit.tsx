@@ -1,7 +1,7 @@
 'use client';
 import {useEffect, useRef, useState} from 'react';
 import type {GoalRecord} from '../core/goal-orchestrator';
-import type {DocumentEditRequest, DocumentEditState} from '../core/research-brief-edit-types';
+import type {DocumentEditRequest, DocumentEditState, DocumentSentenceSelection} from '../core/research-brief-edit-types';
 import type {BriefDraft} from '../core/research-brief-types';
 import {
   beginBriefEditSubmission, readBriefEditApproval, readBriefEditDraft, sameBriefEditApproval,
@@ -31,6 +31,24 @@ async function api(path: string, body: unknown | undefined, signal: AbortSignal)
 
 function DraftParagraphs({draft}: {draft: BriefDraft}) {
   return <>{draft.paragraphs.map((paragraph, index) => <p key={index}>{paragraph.text} {paragraph.citations.map(number => '[' + number + ']').join(' ')}</p>)}</>;
+}
+
+function HostCitationSelection({selection, part}: {selection: DocumentSentenceSelection; part: 'first' | 'second'}) {
+  return <details data-sentence-selection={part}>
+    <summary aria-label={'Host citation matching for ' + selection.label}>{selection.outcome === 'matched' ? 'Host selected saved citation [' + selection.selectedNumber + '] for ' + selection.label + '; inspect matching' : 'Host found no matching saved citation for ' + selection.label + '; inspect matching'}</summary>
+    <p>The host ranks saved quotations by matching label terms before the local model writes. Matching can miss relevant evidence; it does not verify the source’s claims.</p>
+    <p>{selection.method}</p>
+    <p>Label terms: {selection.queryTerms.length ? selection.queryTerms.join(', ') : 'No usable matching terms.'}</p>
+    {selection.selectedQuote !== undefined && <><h5>Selected saved quotation</h5><blockquote aria-label={'Selected saved quotation for ' + selection.label}>{selection.selectedQuote}</blockquote><small>Selected quote SHA-256 {selection.selectedQuoteSha256}</small></>}
+    {selection.outcome === 'none' && <p>No quotation had a positive match. The sentence writer cannot continue from this label; preserve this request and create a new edit with a more precise label.</p>}
+    <ol aria-label={'Ranked saved citation candidates for ' + selection.label}>{selection.candidates.map(candidate => <li key={candidate.order}>
+      <p>Saved citation [{candidate.number}] · score {candidate.score} · original order {candidate.order}</p>
+      <p>Matched terms: {candidate.matchedTerms.length ? candidate.matchedTerms.join(', ') : 'None'}</p>
+      <small>Source snapshot {candidate.sourceId} · quote starts at text position {candidate.offset}</small><small>Text SHA-256 {candidate.textSha256}</small><small>Quote SHA-256 {candidate.quoteSha256}</small>
+    </li>)}</ol>
+    <details><summary>Host matching record JSON</summary><pre tabIndex={0} aria-label={'Host citation matching JSON for ' + selection.label}>{JSON.stringify(selection, null, 2)}</pre></details>
+    <small>{selection.version}</small>
+  </details>;
 }
 
 function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
@@ -100,8 +118,10 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
   const artifact = state?.phase === 'saved' ? state.artifact : undefined, base = '/api/goals/' + encodeURIComponent(goal.id) + '/document-edit';
   const original = '/api/goals/' + encodeURIComponent(request.parentGoalId) + '/brief';
   const canApply = state?.phase === 'awaiting_approval' && goal.status === 'needs_input' && !!state.proposalSha256;
-  const sequential = state?.writingMode === 'sequential-labelled-sentences-v2';
+  const grounded = state?.writingMode === 'grounded-labelled-sentences-v3';
+  const sequential = grounded || state?.writingMode === 'sequential-labelled-sentences-v2';
   const savedSentences = Number(!!state?.sentenceAttempts?.first) + Number(!!state?.sentenceAttempts?.second);
+  const hasNativeWriting = !!state?.writingAttempt || savedSentences > 0;
   return <section className="research-brief-edit" aria-label="Research brief edit">
     <h4>Edit the research brief</h4>
     <p>{state ? state.phase === 'preparing' && sequential ? savedSentences === 1 ? 'First native sentence saved; the second is not yet saved' : savedSentences === 2 ? 'Both native sentences saved; preparing the proposal' : 'Preparing two native sentence-writing decisions' : phases[state.phase] : 'The exact edit request is saved. Waiting for the document specialist.'}</p>
@@ -110,8 +130,9 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
     {sequential && <section aria-label="Native sentence progress">
       <p>{savedSentences} of 2 native sentence-writing decisions saved.</p>
       <small>First sentence: {state?.sentenceAttempts?.first ? state.sentenceAttempts.first.error ? 'saved; needs attention.' : 'saved.' : 'not saved.'} Second sentence: {state?.sentenceAttempts?.second ? state.sentenceAttempts.second.error ? 'saved; needs attention.' : 'saved.' : 'not saved.'}</small>
-      <small>Each sentence-writing call reads its target label, exact request, original factual paragraph, full accepted answer and all literal citation quotes. It does not receive the longer selected passages or your personal notes. The original sources and complete notes remain preserved.</small>
+      {grounded ? <><small>Each sentence writer receives only its label and the one literal saved quotation selected by host word matching. It does not receive the full edit intent, original paragraph, accepted answer, other quotations or personal notes.</small><small>The separate support review receives the full edit intent, original paragraph, accepted answer and all literal quotations. The complete notes and provenance remain preserved by the host.</small></> : <small>Each sentence-writing call reads its target label, exact request, original factual paragraph, full accepted answer and all literal citation quotes. It does not receive the longer selected passages or your personal notes. The original sources and complete notes remain preserved.</small>}
     </section>}
+    {grounded && state?.sentenceSelections && <section aria-label="Host sentence evidence selection">{(['first', 'second'] as const).map(part => state.sentenceSelections?.[part] ? <HostCitationSelection key={part} part={part} selection={state.sentenceSelections[part]!}/> : null)}</section>}
     {(pending || unknownApproval) && <div className="research-brief-edit-notice" aria-label="Unconfirmed edit approval">
       <p>Apply needs inspection before another approval. Opening or reloading this window does not replay it.</p>
       <button ref={inspectButton} type="button" disabled={busy || !loaded} onClick={() => void inspect()}>Inspect saved edit</button>
@@ -128,7 +149,7 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
       <p>Compare the wording above. Apply saves one revised version and uses the updated document presentation. The original files remain available below.</p>
       <button type="button" disabled={busy || !loaded} onClick={() => void apply()}>Apply proposed edit</button>
     </div>}
-    {state?.phase === 'rejected' && <p role="status">This proposal has not passed the checks. Its original native response is kept below. Continuing does not silently generate a replacement; start a separate edit from the original brief for a different request.</p>}
+    {state?.phase === 'rejected' && <p role="status">This proposal has not passed the checks. {hasNativeWriting ? 'Its saved native responses are kept below.' : 'No native writing decision has been saved.'} Continuing does not silently generate a replacement; start a separate edit from the original brief for a different request.</p>}
     {state?.phase === 'rendered' && <p role="status">The prepared files are not yet registered as a document version. If work was interrupted, use Continue remaining work. Opening this window does not publish or replay the edit.</p>}
     {artifact && <>
       <p>Version {artifact.revision} · {artifact.pages} {artifact.pages === 1 ? 'page' : 'pages'} · {goal.status === 'completed' ? 'Revised files and goal checks passed.' : 'Version saved; goal acceptance is shown above.'}</p>

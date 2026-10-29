@@ -1,7 +1,7 @@
 export type PassageSource={id:string;label:string;text:string};
 export type SelectedPassage={sourceId:string;label:string;start:number;end:number;score:number;matchedTerms:string[]};
 const stop=new Set('a an the and or but to of in on at for from with by as is are was were be been it its this that these those what which where when why how does do did can could would should will you your we our they their have has had only supplied source sources excerpt excerpts question answer according please http https www com org'.split(' '));
-function terms(text:string){
+export function sourceTerms(text:string){
   const result=new Set<string>();
   for(const token of text.normalize('NFKC').toLowerCase().match(/[\p{L}\p{N}]+/gu)||[]){
     if(stop.has(token))continue;
@@ -19,14 +19,14 @@ function floorBoundary(text:string,at:number){return utf16Boundary(text,at)?at:a
  * hints, never factual verification or an assertion that the whole source was read. */
 export function selectSourcePassages(question:string,sources:PassageSource[]):{ranges:SelectedPassage[];match:'matched'|'none'}{
   if(!sources.length||sources.length>2)throw new Error('Select one or two saved public sources.');
-  const wanted=terms(question),budget=800;
+  const wanted=sourceTerms(question),budget=800;
   const candidates=sources.map(source=>{
     const starts=new Set<number>([0]);
     for(let offset=200;offset<source.text.length;offset+=200){let start=floorBoundary(source.text,offset),previous=source.text.slice(Math.max(0,start-80),start).search(/[^\s]*$/);start=Math.max(0,start-80)+previous;starts.add(floorBoundary(source.text,start));}
     const choices:SelectedPassage[]=[];
     for(const start of [...starts].sort((a,b)=>a-b)){
       const end=floorBoundary(source.text,Math.min(source.text.length,start+budget));if(end<=start)continue;
-      const present=new Set(terms(source.text.slice(start,end))),matchedTerms=wanted.filter(term=>present.has(term));
+      const present=new Set(sourceTerms(source.text.slice(start,end))),matchedTerms=wanted.filter(term=>present.has(term));
       const candidate={sourceId:source.id,label:source.label,start,end,score:matchedTerms.length,matchedTerms};
       choices.push(candidate);
     }

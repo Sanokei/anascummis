@@ -11,6 +11,10 @@ test('document edit UI preserves an uncertain request and approval without repla
     brief: {title: 'Saved research brief', notes: 'Exact <personal> note & café\nKeep the second line.'}, briefState: {artifact: {documentId: '0ea40ce9-ef40-46b8-92ad-7ec22788cb24'}}};
   let child: any, posts = 0, applies = 0, gets = 0;
   const operationId = '5677a109-8625-4353-b292-0791cdaf5ed5', proposalHash = 'b'.repeat(64);
+  const selection = (label: string, selectedNumber: number) => ({version: 'literal-citation-label-terms-v1', method: 'Host word matching ranks exact saved quotations by label terms; ties keep original order.', label,
+    queryTerms: label === 'Tests:' ? ['test'] : ['browser', 'result'], outcome: 'matched', selectedNumber, selectedQuoteSha256: '4'.repeat(64), selectedQuote: 'Literal `source` [label](https://example.com/source)',
+    candidates: [{order: 0, number: selectedNumber, sourceId: 'source', offset: 3, textSha256: 'e'.repeat(64), quoteSha256: '4'.repeat(64), matchedTerms: label === 'Tests:' ? ['test'] : ['result'], score: 1},
+      {order: 1, number: selectedNumber === 1 ? 2 : 1, sourceId: 'other-source', offset: 75, textSha256: '5'.repeat(64), quoteSha256: '6'.repeat(64), matchedTerms: [], score: 0}]});
   const initialChild = (submission: any) => ({id: '00fab2c6-23dd-4db1-a875-e17ae7121cdf', parentGoalId: parent.id, request: submission.intent, status: 'needs_input', tasks: [],
     documentEdit: {...submission, parentGoalId: parent.id, documentId: parent.briefState.artifact.documentId, baseRevision: 0, basePdfSha256: 'c'.repeat(64)},
     documentEditState: {operationId, goalId: '00fab2c6-23dd-4db1-a875-e17ae7121cdf', inputSha256: 'a'.repeat(64), phase: 'awaiting_approval',
@@ -18,9 +22,9 @@ test('document edit UI preserves an uncertain request and approval without repla
       proposal: {paragraphs: [{text: 'Tests: See the saved test location. Browser results: See the saved results location.', citations: [1, 2]}]}, proposalSha256: proposalHash,
       preserved: {title: parent.brief.title, notes: parent.brief.notes, citations: [{number: 1, quote: 'Literal `source` [label](https://example.com/source)', sourceId: 'source', offset: 3, textSha256: 'e'.repeat(64)}]},
       writingAttempt: {sha256: 'd'.repeat(64), raw: {first: {text: '<script>window.editExecuted=true</script>', citations: [1]}, second: {text: 'Native results sentence.', citations: [2]}}},
-      writingMode: 'sequential-labelled-sentences-v2',
+      writingMode: 'grounded-labelled-sentences-v3', sentenceSelections: {first: selection('Tests:', 1), second: selection('Browser results:', 2)},
       sentenceAttempts: {first: {raw: {text: '<script>window.editExecuted=true</script>', citations: [1]}, sha256: '2'.repeat(64)}, second: {raw: {text: 'Native results sentence.', citations: [2]}, sha256: '3'.repeat(64)}},
-      projection: {version: 'brief-labelled-sentences-v2', method: 'The host adds exact labels to two separately saved native sentences; it does not supply facts.', rawSha256: 'd'.repeat(64), proposalSha256: proposalHash, sentenceSha256: {first: '2'.repeat(64), second: '3'.repeat(64)}},
+      projection: {version: 'brief-grounded-labelled-sentences-v3', method: 'The host selects saved quotations by label matching and adds exact labels to two native-written sentences; it does not supply facts.', rawSha256: 'd'.repeat(64), proposalSha256: proposalHash, sentenceSha256: {first: '2'.repeat(64), second: '3'.repeat(64)}},
       draftCheck: {accepted: true, reason: 'The exact proposal passes the bounded host checks.'}, supportReview: {supported: true, reason: 'The retained evidence supports both locations.'}}});
   const entry = join(folder, 'entry.tsx');
   await Bun.write(entry, `import React from 'react';import{createRoot}from'react-dom/client';import{ResearchBriefEdit}from ${JSON.stringify(resolve('components/ResearchBriefEdit.tsx'))};const root=createRoot(document.getElementById('root'));window.showEdit=goal=>root.render(<ResearchBriefEdit goal={goal} onCreated={next=>{window.lastCreated=next;if(location.search)window.showEdit(next);}} onOpenDocument={id=>window.lastOpened=id}/>);if(location.search)fetch('/api/goals/00fab2c6-23dd-4db1-a875-e17ae7121cdf').then(r=>r.json()).then(window.showEdit);else window.showEdit(${JSON.stringify(parent)});`);
@@ -100,6 +104,31 @@ test('document edit UI preserves an uncertain request and approval without repla
     const partial = structuredClone(child);
     partial.status = 'needs_input'; partial.documentEditState.phase = 'preparing';
     for (const field of ['writingAttempt', 'proposal', 'proposalSha256', 'projection', 'draftCheck', 'supportReview']) delete partial.documentEditState[field];
+    delete partial.documentEditState.sentenceSelections.second;
+    partial.documentEditState.sentenceAttempts = {};
+    const unmatched = structuredClone(partial); unmatched.documentEditState.phase = 'rejected';
+    unmatched.documentEditState.draftCheck = {accepted: false, reason: 'No saved quotation matches the label.'};
+    unmatched.documentEditState.sentenceSelections.first.outcome = 'none';
+    for (const field of ['selectedNumber', 'selectedQuote', 'selectedQuoteSha256']) delete unmatched.documentEditState.sentenceSelections.first[field];
+    unmatched.documentEditState.sentenceSelections.first.candidates = unmatched.documentEditState.sentenceSelections.first.candidates.map((candidate: any) => ({...candidate, matchedTerms: [], score: 0}));
+    await page.evaluate(next => (window as any).showEdit(next), unmatched);
+    expect(await page.locator('details[data-sentence-selection="first"]').locator('summary').first().innerText()).toBe('Host found no matching saved citation for Tests:; inspect matching');
+    expect(await page.getByText('No native writing decision has been saved.', {exact: false}).isVisible()).toBe(true);
+    expect(await page.getByRole('button', {name: 'Apply proposed edit', exact: true}).count()).toBe(0);
+    await page.evaluate(next => (window as any).showEdit(next), partial);
+    expect(await page.getByText('0 of 2 native sentence-writing decisions saved.', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('Each sentence writer receives only its label and the one literal saved quotation selected by host word matching.', {exact: false}).isVisible()).toBe(true);
+    const matching = page.locator('details[data-sentence-selection="first"]');
+    expect(await matching.locator('summary').first().innerText()).toBe('Host selected saved citation [1] for Tests:; inspect matching');
+    expect(await page.getByLabel('Selected saved quotation for Tests:', {exact: true}).isVisible()).toBe(false);
+    await page.locator('summary[aria-label="Host citation matching for Tests:"]').click();
+    expect(await page.getByLabel('Selected saved quotation for Tests:', {exact: true}).innerText()).toBe(partial.documentEditState.sentenceSelections.first.selectedQuote);
+    expect(await matching.getByText('Label terms: test', {exact: true}).isVisible()).toBe(true);
+    expect(await matching.getByRole('list', {name: 'Ranked saved citation candidates for Tests:', exact: true}).innerText()).toContain('score 0');
+    await matching.getByText('Host matching record JSON', {exact: true}).click();
+    expect(JSON.parse(await page.getByLabel('Host citation matching JSON for Tests:', {exact: true}).innerText())).toEqual(partial.documentEditState.sentenceSelections.first);
+    expect(await page.getByLabel('First native sentence decision JSON', {exact: true}).count()).toBe(0);
+    partial.documentEditState.sentenceAttempts.first = structuredClone(child.documentEditState.sentenceAttempts.first);
     delete partial.documentEditState.sentenceAttempts.second;
     await page.evaluate(next => (window as any).showEdit(next), partial);
     expect(await page.getByText('1 of 2 native sentence-writing decisions saved.', {exact: true}).isVisible()).toBe(true);
@@ -111,13 +140,19 @@ test('document edit UI preserves an uncertain request and approval without repla
     expect(await page.getByText('Second native sentence decision has not been saved.', {exact: true}).isVisible()).toBe(true);
     expect(await page.getByLabel('Original native edit decision JSON', {exact: true}).count()).toBe(0);
     expect(await page.evaluate(() => (window as any).editExecuted)).toBeUndefined();
+    const legacy = structuredClone(child); legacy.documentEditState.writingMode = 'sequential-labelled-sentences-v2'; delete legacy.documentEditState.sentenceSelections;
+    legacy.documentEditState.projection.version = 'brief-labelled-sentences-v2';
+    legacy.documentEditState.projection.method = 'The host adds labels to two native decisions that read the original paragraph, accepted answer and all literal quotations.';
+    await page.evaluate(next => (window as any).showEdit(next), legacy);
+    expect(await page.getByText('Each sentence-writing call reads its target label, exact request, original factual paragraph, full accepted answer and all literal citation quotes.', {exact: false}).isVisible()).toBe(true);
+    expect(await page.getByRole('region', {name: 'Host sentence evidence selection', exact: true}).count()).toBe(0);
     await page.evaluate(next => (window as any).showEdit(next), child);
     expect(await page.getByRole('region', {name: 'Proposed edit', exact: true}).innerText()).toContain('Tests:');
     expect(await page.getByText('2 of 2 native sentence-writing decisions saved.', {exact: true}).isVisible()).toBe(true);
     expect(await page.getByText('Requested sentence labels: Tests: / Browser results:', {exact: true}).isVisible()).toBe(true);
     await page.getByText('Host sentence formatting', {exact: true}).click();
-    expect(await page.getByText('The host adds exact labels to two separately saved native sentences; it does not supply facts.', {exact: true}).isVisible()).toBe(true);
-    expect(await page.getByText('brief-labelled-sentences-v2', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('The host selects saved quotations by label matching and adds exact labels to two native-written sentences; it does not supply facts.', {exact: true}).isVisible()).toBe(true);
+    expect(await page.getByText('brief-grounded-labelled-sentences-v3', {exact: true}).isVisible()).toBe(true);
     const apply = page.getByRole('button', {name: 'Apply proposed edit', exact: true});
     await apply.scrollIntoViewIfNeeded();
     expect((await apply.boundingBox())!.height).toBeGreaterThanOrEqual(44);

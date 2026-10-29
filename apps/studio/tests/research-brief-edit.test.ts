@@ -3,20 +3,24 @@ import {Database} from 'bun:sqlite';
 import {join,resolve} from 'node:path';
 import {mkdtemp,rm,readFile,writeFile,readdir,symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
+import {execFile} from 'node:child_process';
 import {ResearchBriefStore,BRIEF_WRITER_ROLE} from '../core/research-brief';
 import {ResearchBriefEditStore,DOCUMENT_EDIT_ROLE,DOCUMENT_EDIT_LABELLED_ROLE,DOCUMENT_EDIT_SENTENCE_ROLE,validateDocumentEditLabels} from '../core/research-brief-edit';
 import {PublicSourceLedger,describePublicSource,sourceHash} from '../core/public-source';
+import {GROUNDED_DOCUMENT_SENTENCE_ROLE} from '../core/research-brief-edit-selection';
 import {GoalOrchestrator,type GoalRecord,type GoalTask,type SourceAnswer} from '../core/goal-orchestrator';
 import type {Infer} from '../core/model';
 
 const signal=()=>new AbortController().signal,noop=()=>{};
 const question='Where are the Fetch tests kept and where are browser results displayed?';
-const quote='Fetch tests are in `fetch/` in [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt). Browser results are at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).';
+const quoteTests='Fetch tests are in `fetch/` in [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).';
+const quoteResults='Browser results are at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).';
+const quote=quoteTests+' '+quoteResults;
 const before='Fetch tests are kept in fetch/ in web-platform-tests/wpt. Browser results are displayed at wpt.fyi/results/fetch.';
 const after='Tests: Fetch tests are kept in fetch/ in web-platform-tests/wpt. Browser results: results are displayed at wpt.fyi/results/fetch.';
 const intent='Rewrite the summary as two short sentences beginning Tests: and Browser results:. Keep both exact locations and citations.';
 
-async function fixture(real=false){
+async function fixture(real=false,separateCitations=false){
   const dir=await mkdtemp(join(tmpdir(),'research-brief-edit-')),db=new Database(join(dir,'studio.sqlite'));
   db.exec('CREATE TABLE documents(id TEXT PRIMARY KEY,name TEXT,revision INTEGER,pages INTEGER); CREATE TABLE pdf_versions(doc TEXT,revision INTEGER,label TEXT,PRIMARY KEY(doc,revision)); CREATE TABLE goal_tasks(id TEXT PRIMARY KEY,body TEXT,updated INTEGER);');
   const url='https://example.org/fetch-guide',body='# Fetch guide\n'+quote,ledger=new PublicSourceLedger(db,async requested=>describePublicSource(requested,{bytes:new TextEncoder().encode(body),type:'text/plain',url:requested}));
@@ -24,7 +28,7 @@ async function fixture(real=false){
   let copy:any;db.transaction(()=>{copy=ledger.copySnapshots(ancestor,parentId,[source.id])[0];})();
   const {plan}=ledger.prepareReading(parentId,'source-answer',question),range=plan.ranges[0];
   const answer:SourceAnswer={text:before,uncertainty:'',limit:'These saved source claims have not been independently fact checked.',readingId:plan.id,answerable:true,supportReview:{supported:true,reason:'Both requested locations occur in the saved passage.'},citationMethod:'host-spans-v1',
-    citations:[{sourceId:copy.id,label:'source-1',quote,offset:body.indexOf(quote),textSha256:copy.textSha256,spanId:'source-1:1'}],selections:[{sourceId:copy.id,label:'source-1',start:range.start,end:range.end,textSha256:copy.textSha256,rangeSha256:range.rangeSha256,text:range.text}]};
+    citations:(separateCitations?[quoteTests,quoteResults]:[quote]).map((text,index)=>({sourceId:copy.id,label:'source-1',quote:text,offset:body.indexOf(text),textSha256:copy.textSha256,spanId:'source-1:'+(index+1)})),selections:[{sourceId:copy.id,label:'source-1',start:range.start,end:range.end,textSha256:copy.textSha256,rangeSha256:range.rangeSha256,text:range.text}]};
   const notes=Array.from({length:34},(_,i)=>`Personal handoff ${String(i+1).padStart(2,'0')}: preserve this entire exact note.`).join('\n');
   const briefTask:GoalTask={id:'source-brief',specialist:'analysis',sourceBrief:true,description:'Write brief',acceptance:'Keep complete notes and evidence',dependsOn:['source-answer'],status:'running',attempts:1};
   const parent={id:parentId,parentGoalId:ancestor,request:question,projectId:'test-workspace',research:true,sourceQuestion:{urls:[url]},brief:{parentGoalId:ancestor,requestKey:crypto.randomUUID(),title:'Fetch contributor brief',notes},status:'running',phase:'executing',coverageDone:false,tasks:[
@@ -34,14 +38,23 @@ async function fixture(real=false){
   const engine=async(job:Record<string,any>)=>{
     if(job.op==='research_brief')renders++;if(job.op==='inspect')inspections++;
     if(real){
-      const root=resolve(import.meta.dir,'..'),python=process.env.PYTHON_PATH||join(root,'.venv/bin/python'),proc=Bun.spawn([python,join(root,'worker/pdf_worker.py')],{stdin:'pipe',stdout:'pipe',stderr:'pipe'});
-      proc.stdin.write(JSON.stringify(job));proc.stdin.end();const [out,err,code]=await Promise.all([new Response(proc.stdout).text(),new Response(proc.stderr).text(),proc.exited]);const value=JSON.parse(out);if(code||!value.ok)throw new Error(value.error||err);return value.result;
+      const root=resolve(import.meta.dir,'..'),python=process.env.PYTHON_PATH||join(root,'.venv/bin/python');
+      // Keep the actual PDF worker and assertions. In the mixed browser-test
+      // host Bun.spawn's exited promise twice hung with an already-zombie child;
+      // the stdlib callback also owns exit/error/timeout and drains both streams.
+      return await new Promise<any>((resolve,reject)=>{
+        const child=execFile(python,[join(root,'worker/pdf_worker.py')],{encoding:'utf8',maxBuffer:4_000_000,timeout:10_000,env:{...process.env,PYTHONUTF8:'1',PYTHONIOENCODING:'utf-8'}},(error,out,err)=>{
+          if(error){reject(new Error('Fixture PDF '+String(job.op)+' subprocess failed: '+(err||error.message),{cause:error}));return;}
+          try{const value=JSON.parse(out);if(!value.ok)throw new Error(value.error||err||'Fixture PDF worker failed');resolve(value.result);}catch(error){reject(error);}
+        });
+        child.stdin!.end(JSON.stringify(job));
+      });
     }
     if(job.op==='research_brief')await writeFile(job.output,'%PDF-1.7\nSynthetic render '+renders+'; native quality and real PDF rendering are not established by this fixture.\n');
     if(job.op==='inspect')return {pageCount:2,pages:[{page:1,text:before},{page:2,text:notes}]};
     return {pageCount:2,complete:true,contained:true,links:job.args?.expectedLinks||[],linksContained:true};
   };
-  const briefs=new ResearchBriefStore(db,ledger,dir,engine),briefInfer:Infer=async role=>role===BRIEF_WRITER_ROLE?{paragraphs:[{text:before,citations:[1]}]}:{supported:true,reason:'Injected source support, not native quality.'};
+  const briefs=new ResearchBriefStore(db,ledger,dir,engine),briefInfer:Infer=async role=>role===BRIEF_WRITER_ROLE?{paragraphs:[{text:before,citations:separateCitations?[1,2]:[1]}]}:{supported:true,reason:'Injected source support, not native quality.'};
   const original=await briefs.execute(briefTask,parent,signal(),briefInfer,noop);Object.assign(briefTask,{status:'verified',execution:original,review:{accepted:true,reason:'Host original fixture acceptance'}});Object.assign(parent,{status:'completed',coverageDone:true});
   db.query('INSERT INTO goal_tasks VALUES(?,?,?)').run(parent.id,JSON.stringify(parent),Date.now());
   const store=new ResearchBriefEditStore(db,briefs,dir,engine),request=await store.prepare(parent,{requestKey:crypto.randomUUID(),intent});
@@ -212,26 +225,60 @@ test('Stop while Apply verifies the original wins over its stale needs-input sna
   }finally{release();await f.close();}
 });
 
-async function requestLabels(f:Awaited<ReturnType<typeof fixture>>,editIntent=intent){
-  const request=await f.store.prepare(f.parent,{requestKey:crypto.randomUUID(),intent:editIntent,sentenceLabels:['Tests:','Browser results:']});
+async function requestLabels(f:Awaited<ReturnType<typeof fixture>>,editIntent=intent,sentenceLabels:[string,string]=['Tests:','Browser results:']){
+  const request=await f.store.prepare(f.parent,{requestKey:crypto.randomUUID(),intent:editIntent,sentenceLabels});
   f.goal.documentEdit=request;f.goal.request=editIntent;f.db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(f.goal),f.goal.id);return request;
 }
 
-test('sequential native sentence checkpoints reuse the exact first decision after interruption and disclose their aggregate/projection',async()=>{
-  const f=await fixture();try{
+// Injected model decisions and an injected process boundary: genuine native
+// writing/host SIGKILL acceptance is recorded separately by the browser journey.
+test('grounded sentence checkpoints preserve the exact host selection and first response across interruption before completing one version',async()=>{
+  const f=await fixture(true,true);try{
     await requestLabels(f);
-    const raw={first:{text:'  Tests: Fetch tests are kept in fetch/ in web-platform-tests/wpt.  ',citations:[1]},second:{text:'Browser results: Browser results are displayed at wpt.fyi/results/fetch.',citations:[1]}};const calls:string[]=[],packets:any[]=[];
-    const infer:Infer=async(role,packet)=>{const value=JSON.parse(packet);packets.push(value);if(role===DOCUMENT_EDIT_SENTENCE_ROLE){calls.push(value.sentence);return raw[value.sentence as 'first'|'second'];}calls.push('review');return {supported:true,reason:'Injected support checks both exact native location statements; not genuine model-quality evidence.'};};
+    const raw={first:{text:'  Tests: Fetch tests are kept in fetch/ in web-platform-tests/wpt.  ',citations:[1]},second:{text:'Browser results: Browser results are displayed at wpt.fyi/results/fetch.',citations:[2]}};
+    const calls:string[]=[],writers:{prompt:string;schema:Record<string,any>}[]=[],reviews:any[]=[];
+    const infer:Infer=async(role,packet,schema)=>{
+      if(role===GROUNDED_DOCUMENT_SENTENCE_ROLE){
+        const slot=packet.startsWith('Requested topic: Tests:\n')?'first':'second';calls.push(slot);writers.push({prompt:packet,schema});return raw[slot];
+      }
+      calls.push('review');reviews.push(JSON.parse(packet));return {supported:true,reason:'Injected support accepts both literal source facts and user labels; this is not native model-quality proof.'};
+    };
     await expect(f.store.execute(f.task,f.goal,signal(),infer,phase=>{if(phase==='first_sentence_saved')throw new Error('injected first-sentence stop');})).rejects.toThrow('first-sentence stop');
-    const first=f.store.state(f.goal.id)!;expect(first.phase).toBe('preparing');expect(first.sentenceAttempts?.first?.raw).toEqual(raw.first);expect(first.sentenceAttempts?.first?.sha256).toBe(sourceHash(JSON.stringify(raw.first)));expect(first.sentenceAttempts?.second).toBeUndefined();expect(first.writingAttempt).toBeUndefined();expect(calls).toEqual(['first']);
-    await expect(f.restart().execute(f.task,f.goal,signal(),infer,noop)).rejects.toThrow('proposal is ready');const saved=f.store.state(f.goal.id)!,projected='Tests: Fetch tests are kept in fetch/ in web-platform-tests/wpt. Browser results: Browser results are displayed at wpt.fyi/results/fetch.';
-    expect(calls).toEqual(['first','second','review']);expect(saved.sentenceAttempts?.first).toEqual(first.sentenceAttempts?.first);expect(saved.sentenceAttempts?.second?.raw).toEqual(raw.second);expect(saved.writingAttempt?.raw).toEqual(raw);expect(saved.writingAttempt?.origin).toBe('aggregate-of-two-native-sentence-decisions-v2');expect(saved.writingAttempt?.decisionHashes).toEqual({first:sourceHash(JSON.stringify(raw.first)),second:sourceHash(JSON.stringify(raw.second))});expect(saved.proposal).toEqual({paragraphs:[{text:projected,citations:[1]}]});expect(saved.projection).toMatchObject({version:'brief-labelled-sentences-v2',rawSha256:sourceHash(JSON.stringify(raw)),proposalSha256:sourceHash(JSON.stringify(saved.proposal)),sentenceSha256:saved.writingAttempt?.decisionHashes});expect(saved.projection?.method).toContain('No factual text is authored or rewritten');
-    for(const packet of packets){expect(packet.selectedPassages).toBeUndefined();expect(packet.acceptedAnswer).toBe(before);expect(packet.originalParagraphs).toEqual(saved.before.paragraphs);expect(packet.citations).toEqual([{number:1,quote}]);expect(packet.readingScope).toContain('Longer saved passages and personal notes are not sent');expect(JSON.stringify(packet)).not.toContain(f.notes);}
-    f.goal.status='needs_input';await approve(f);const result=await f.restart().execute(f.task,f.goal,signal(),infer,noop);expect(result.documentEditArtifact?.revision).toBe(1);expect(calls).toEqual(['first','second','review']);
-    const provenance=JSON.parse(new TextDecoder().decode((await f.store.export(f.goal,'provenance-json')).bytes));expect(provenance.evidence.nativeEdit.raw).toEqual(raw);expect(provenance.evidence.sentenceAttempts).toEqual(saved.sentenceAttempts);expect(provenance.evidence.projection).toEqual(saved.projection);expect(provenance.evidence.originalBrief.input.notes).toBe(f.notes);expect(provenance.evidence.request.sentenceLabels).toEqual(['Tests:','Browser results:']);
+    const first=f.store.state(f.goal.id)!;
+    expect(first.phase).toBe('preparing');expect(first.writingMode).toBe('grounded-labelled-sentences-v3');
+    expect(first.sentenceAttempts?.first?.raw).toEqual(raw.first);expect(first.sentenceAttempts?.first?.sha256).toBe(sourceHash(JSON.stringify(raw.first)));
+    expect(first.sentenceAttempts?.second).toBeUndefined();expect(first.writingAttempt).toBeUndefined();expect(calls).toEqual(['first']);
+    const selected=first.sentenceSelections!.first!;
+    expect(selected.selectedNumber).toBe(1);expect(selected.selectedQuote).toBe(quoteTests);expect(selected.selectedQuoteSha256).toBe(sourceHash(quoteTests));
+    expect(selected.candidates.map(candidate=>candidate.number)).toEqual([1,2]);
+    const originalCitations=f.parent.tasks.find(task=>task.sourceAnswer)!.execution!.sourceAnswer!.citations;
+    expect(selected.candidates[0]).toMatchObject({sourceId:originalCitations[0].sourceId,offset:originalCitations[0].offset,textSha256:originalCitations[0].textSha256,quoteSha256:sourceHash(quoteTests)});
+    expect(selected.queryTerms).toEqual(['test']);expect(first.sentenceSelections?.second).toBeUndefined();
+    await expect(f.restart().execute(f.task,f.goal,signal(),infer,noop)).rejects.toThrow('proposal is ready');
+    const saved=f.store.state(f.goal.id)!,projected='Tests: Fetch tests are kept in fetch/ in web-platform-tests/wpt. Browser results: Browser results are displayed at wpt.fyi/results/fetch.';
+    expect(calls).toEqual(['first','second','review']);expect(saved.sentenceAttempts?.first).toEqual(first.sentenceAttempts?.first);expect(saved.sentenceSelections?.first).toEqual(first.sentenceSelections?.first);
+    expect(saved.sentenceSelections?.second).toMatchObject({label:'Browser results:',queryTerms:['browser','result'],selectedNumber:2,selectedQuote:quoteResults,selectedQuoteSha256:sourceHash(quoteResults)});
+    expect(saved.sentenceAttempts?.second?.raw).toEqual(raw.second);expect(saved.writingAttempt?.raw).toEqual(raw);expect(saved.writingAttempt?.origin).toBe('aggregate-of-two-grounded-native-decisions-v3');
+    expect(saved.writingAttempt?.decisionHashes).toEqual({first:sourceHash(JSON.stringify(raw.first)),second:sourceHash(JSON.stringify(raw.second))});
+    expect(saved.proposal).toEqual({paragraphs:[{text:projected,citations:[1,2]}]});expect(saved.projection).toMatchObject({version:'brief-grounded-labelled-sentences-v3',rawSha256:sourceHash(JSON.stringify(raw)),proposalSha256:sourceHash(JSON.stringify(saved.proposal)),sentenceSha256:saved.writingAttempt?.decisionHashes});
+    expect(saved.projection?.method).toContain('not model evidence choice');expect(saved.projection?.method).toContain('No factual text is authored or rewritten');
+    expect(writers.length).toBe(2);
+    for(const [index,writer] of writers.entries()){
+      expect(writer.prompt).toContain(index===0?quoteTests:quoteResults);expect(writer.prompt).not.toContain(index===0?quoteResults:quoteTests);
+      expect(writer.prompt).not.toContain(intent);expect(writer.prompt).not.toContain(before);expect(writer.prompt).not.toContain(f.notes);
+      expect((writer.schema.properties.citations as any).items.enum).toEqual([index+1]);
+    }
+    expect(reviews.length).toBe(1);expect(reviews[0].intent).toBe(intent);expect(reviews[0].acceptedAnswer).toBe(before);expect(reviews[0].originalParagraphs).toEqual(saved.before.paragraphs);
+    expect(reviews[0].citations).toEqual([{number:1,quote:quoteTests},{number:2,quote:quoteResults}]);expect(reviews[0].selectedPassages).toBeUndefined();expect(JSON.stringify(reviews[0])).not.toContain(f.notes);
+    f.goal.status='needs_input';await approve(f);const result=await f.restart().execute(f.task,f.goal,signal(),infer,noop);
+    expect(result.documentEditArtifact?.revision).toBe(1);expect(result.documentEditArtifact?.pages).toBeGreaterThanOrEqual(2);expect(calls).toEqual(['first','second','review']);
+    const actualPdf=await f.store.export(f.goal,'pdf'),actualHtml=new TextDecoder().decode((await f.store.export(f.goal,'html')).bytes);expect(new TextDecoder().decode(actualPdf.bytes.slice(0,5))).toBe('%PDF-');expect(actualHtml).toContain(f.notes.replace(/\n/g,'<br>'));expect(actualHtml).toContain('https://github.com/web-platform-tests/wpt');expect(actualHtml).toContain('https://wpt.fyi/results/fetch');
+    const provenance=JSON.parse(new TextDecoder().decode((await f.store.export(f.goal,'provenance-json')).bytes));
+    expect(provenance.evidence.nativeEdit.raw).toEqual(raw);expect(provenance.evidence.sentenceAttempts).toEqual(saved.sentenceAttempts);expect(provenance.evidence.sentenceSelections).toEqual(saved.sentenceSelections);expect(provenance.evidence.projection).toEqual(saved.projection);
+    expect(provenance.evidence.originalBrief.input.notes).toBe(f.notes);expect(provenance.evidence.request.sentenceLabels).toEqual(['Tests:','Browser results:']);
     expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'brief.html'))).toEqual(f.originalHtml);
   }finally{await f.close();}
-});
+},20000);
 
 test('a historical native-like single-sentence proposal and false positive model review cannot waive exact quoted prefixes on Apply or Continue',async()=>{
   const f=await fixture();try{
@@ -258,7 +305,7 @@ test('sequential formatting rejects empty, repeated-label, multi-sentence and du
     ['second',(raw:typeof good)=>{raw.second.text+=' This is another sentence.';}],
     ['first',(raw:typeof good)=>{raw.first.citations=[1,1];}]
   ] as const){
-    const f=await fixture();try{await requestLabels(f);const raw=structuredClone(good);change(raw);const calls:string[]=[];await expect(f.store.execute(f.task,f.goal,signal(),async(_role,packet)=>{const which=JSON.parse(packet).sentence as 'first'|'second';calls.push(which);return raw[which];},noop)).rejects.toThrow('sentence decision is unusable');const saved=f.store.state(f.goal.id)!;expect(saved.phase).toBe('rejected');expect(saved.sentenceAttempts?.[slot]?.raw).toEqual(raw[slot]);expect(saved.sentenceAttempts?.[slot]?.error).toBeTruthy();expect(saved.proposal).toBeUndefined();expect(saved.writingAttempt).toBeUndefined();expect(saved.supportReview).toBeUndefined();expect(calls).toEqual(slot==='first'?['first']:['first','second']);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});}finally{await f.close();}
+    const f=await fixture();try{await requestLabels(f);const raw=structuredClone(good);change(raw);const calls:string[]=[];await expect(f.store.execute(f.task,f.goal,signal(),async(_role,packet)=>{const which=packet.startsWith('Requested topic: Tests:\n')?'first':'second';calls.push(which);return raw[which];},noop)).rejects.toThrow('sentence decision is unusable');const saved=f.store.state(f.goal.id)!;expect(saved.phase).toBe('rejected');expect(saved.sentenceAttempts?.[slot]?.raw).toEqual(raw[slot]);expect(saved.sentenceAttempts?.[slot]?.error).toBeTruthy();expect(saved.proposal).toBeUndefined();expect(saved.writingAttempt).toBeUndefined();expect(saved.supportReview).toBeUndefined();expect(calls).toEqual(slot==='first'?['first']:['first','second']);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});}finally{await f.close();}
   }
 });
 
@@ -267,7 +314,7 @@ test('the previous two-field native failure remains exact and cannot be regenera
     await requestLabels(f);await expect(f.store.execute(f.task,f.goal,signal(),async()=>({text:' ',citations:[1]}),noop)).rejects.toThrow('sentence decision is unusable');
     const row=f.db.query('SELECT body FROM research_brief_edits WHERE goal=?').get(f.goal.id) as {body:string},state=JSON.parse(row.body);
     const raw={first:{text:'Tests: The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).',citations:[1,2]},second:{text:'Browser results: The names are sorted lexicographically, and tests for the Fetch Standard can be found in the `fetch/` directory of `web-platform-tests/wpt`.',citations:[1,2]}};
-    delete state.writingMode;delete state.sentenceAttempts;state.writingAttempt={raw,sha256:sourceHash(JSON.stringify(raw)),error:'Error: Each native labelled field must contain one nonempty factual sentence ending in punctuation, without a repeated host label or duplicated citations. Its raw response is preserved.'};state.phase='rejected';
+    delete state.writingMode;delete state.sentenceAttempts;delete state.sentenceSelections;state.writingAttempt={raw,sha256:sourceHash(JSON.stringify(raw)),error:'Error: Each native labelled field must contain one nonempty factual sentence ending in punctuation, without a repeated host label or duplicated citations. Its raw response is preserved.'};state.phase='rejected';
     expect(state.writingAttempt.sha256).toBe('4082d2efae63c27b15819b1aeceb76fa65fb2830bbea1ccca6e1ad786559c322');const original=JSON.stringify(state);f.db.query('UPDATE research_brief_edits SET body=? WHERE goal=?').run(original,f.goal.id);
     await expect(f.restart().execute(f.task,f.goal,signal(),async()=>{throw new Error('must never regenerate the historical failed native writing');},noop)).rejects.toThrow('original edit response is unusable');expect(JSON.stringify(f.store.state(f.goal.id))).toBe(original);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});
   }finally{await f.close();}
@@ -292,5 +339,70 @@ test('a crash-window partial raw response stays inspectable and Continue rejects
     const restarted=f.restart(),inspected=restarted.state(f.goal.id)!;expect(inspected.phase).toBe('preparing');expect(inspected.sentenceAttempts?.first?.raw).toEqual(raw);expect(inspected.sentenceAttempts?.first?.error).toBeUndefined();expect(inspected.writingAttempt).toBeUndefined();
     let calls=0;await expect(restarted.execute(f.task,f.goal,signal(),async()=>{calls++;throw new Error('must never replace a saved malformed native decision');},noop)).rejects.toThrow('first sentence decision is unusable');
     const rejected=restarted.state(f.goal.id)!;expect(rejected.phase).toBe('rejected');expect(rejected.sentenceAttempts?.first?.raw).toEqual(raw);expect(rejected.sentenceAttempts?.first?.sha256).toBe(inspected.sentenceAttempts?.first?.sha256);expect(rejected.sentenceAttempts?.first?.error).toBeTruthy();expect(calls).toBe(0);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});
+  }finally{await f.close();}
+});
+
+
+test('no matching label evidence remains a persisted needs-input goal without any native request or document write',async()=>{
+  const f=await fixture(false,true);let queue:GoalOrchestrator|undefined;
+  try{
+    // Use the real durable orchestrator for this host-flow outcome; its model
+    // callback is forbidden, not replaced by a claim of native completion.
+    f.db.query('DELETE FROM goal_tasks WHERE id=?').run(f.goal.id);
+    const request=await f.store.prepare(f.parent,{requestKey:crypto.randomUUID(),intent:'Write two sourced sentences about telephone details and browser results.',sentenceLabels:['Telephone:','Browser results:']});
+    let nativeCalls=0;const forbidden:Infer=async()=>{nativeCalls++;throw new Error('unmatched evidence must not reach native inference');};
+    queue=new GoalOrchestrator(f.db,{infer:forbidden,execute:(task,goal,sig,progress)=>f.store.execute(task,goal,sig,forbidden,progress),reviewDocumentEdit:(task,goal,execution,sig)=>f.store.review(task,goal,execution,sig)});
+    const child=queue.createDocumentEdit(f.parent.id,request);queue.start();
+    let current=queue.get(child.id);for(let i=0;i<300&&current.status!=='needs_input';i++){await new Promise(resolve=>setTimeout(resolve,3));current=queue.get(child.id);}
+    expect(current.status).toBe('needs_input');expect(current.coverageDone).toBe(false);expect(current.message).toContain('No saved literal citation matches');expect(current.message).toContain('more precise label');
+    const state=f.store.state(child.id)!;expect(state.sentenceSelections?.first).toMatchObject({outcome:'none',queryTerms:['telephone']});expect(state.sentenceSelections?.first?.candidates.every(candidate=>candidate.score===0)).toBe(true);
+    expect(state.sentenceSelections?.first?.selectedQuote).toBeUndefined();expect(state.sentenceAttempts).toEqual({});expect(state.proposal).toBeUndefined();expect(state.artifact).toBeUndefined();expect(nativeCalls).toBe(0);
+    expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:1});expect(f.counts().renders).toBe(1);
+    expect(await readFile(join(f.dir,'documents',request.documentId,'0.pdf'))).toEqual(f.originalPdf);expect(await readFile(join(f.dir,'documents',request.documentId,'brief.html'))).toEqual(f.originalHtml);
+  }finally{queue?.shutdown();await new Promise(resolve=>setTimeout(resolve,0));await f.close();}
+});
+
+test('an unmatched second label keeps the saved first native response and never requests or fabricates the missing sentence',async()=>{
+  const f=await fixture(false,true);try{
+    await requestLabels(f,'Write two sourced sentences about tests and telephone details.',['Tests:','Telephone:']);
+    const first={text:'Fetch tests are kept in the fetch/ directory of web-platform-tests/wpt.',citations:[1]};let nativeCalls=0;
+    const infer:Infer=async(role,prompt)=>{nativeCalls++;expect(role).toBe(GROUNDED_DOCUMENT_SENTENCE_ROLE);expect(prompt).toContain(quoteTests);expect(prompt).not.toContain(quoteResults);return first;};
+    await expect(f.store.execute(f.task,f.goal,signal(),infer,noop)).rejects.toThrow('No saved literal citation matches the second');
+    const state=f.store.state(f.goal.id)!;expect(state.sentenceAttempts?.first?.raw).toEqual(first);expect(state.sentenceAttempts?.first?.sha256).toBe(sourceHash(JSON.stringify(first)));
+    expect(state.sentenceSelections?.second).toMatchObject({label:'Telephone:',outcome:'none'});expect(state.sentenceAttempts?.second).toBeUndefined();expect(state.writingAttempt).toBeUndefined();expect(state.supportReview).toBeUndefined();expect(nativeCalls).toBe(1);
+    await expect(f.restart().execute(f.task,f.goal,signal(),infer,noop)).rejects.toThrow('No saved literal citation matches the second');
+    expect(f.store.state(f.goal.id)?.sentenceAttempts?.first).toEqual(state.sentenceAttempts?.first);expect(nativeCalls).toBe(1);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.counts().renders).toBe(1);
+  }finally{await f.close();}
+});
+
+test('changed candidate provenance or a rehashed selected quote cannot retarget an interrupted native sentence',async()=>{
+  for(const damage of ['offset','rank','source-hash','selected-quote'] as const){
+    const f=await fixture(false,true);try{
+      await requestLabels(f);let calls=0;
+      await expect(f.store.execute(f.task,f.goal,signal(),async()=>{calls++;throw new Error('injected process exit before first response');},noop)).rejects.toThrow('process exit');
+      const row=f.db.query('SELECT body FROM research_brief_edits WHERE goal=?').get(f.goal.id) as {body:string},body=JSON.parse(row.body),selection=body.sentenceSelections.first;
+      if(damage==='offset')selection.candidates[0].offset++;
+      else if(damage==='rank')selection.candidates[0].score+=100;
+      else if(damage==='source-hash')selection.candidates[0].textSha256='a'.repeat(64);
+      else{selection.selectedQuote='A different quotation with a self-consistent replacement hash.';selection.selectedQuoteSha256=sourceHash(selection.selectedQuote);selection.candidates[0].quoteSha256=selection.selectedQuoteSha256;}
+      f.db.query('UPDATE research_brief_edits SET body=? WHERE goal=?').run(JSON.stringify(body),f.goal.id);
+      expect(()=>f.store.state(f.goal.id)).toThrow('host sentence-evidence selection changed');
+      await expect(f.restart().execute(f.task,f.goal,signal(),async()=>{calls++;throw new Error('must never infer from changed evidence');},noop)).rejects.toThrow('host sentence-evidence selection changed');
+      expect(calls).toBe(1);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.counts().renders).toBe(1);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);
+    }finally{await f.close();}
+  }
+});
+
+test('an existing v2 sequential checkpoint retains its original broader reading contract instead of silently switching evidence mode',async()=>{
+  const f=await fixture();try{
+    await requestLabels(f);
+    await expect(f.store.execute(f.task,f.goal,signal(),async()=>{throw new Error('must not infer before historical fixture is installed');},phase=>{if(phase==='sentence_evidence_selected')throw new Error('installing historical checkpoint');})).rejects.toThrow('installing historical checkpoint');
+    const row=f.db.query('SELECT body FROM research_brief_edits WHERE goal=?').get(f.goal.id) as {body:string},body=JSON.parse(row.body);
+    body.writingMode='sequential-labelled-sentences-v2';delete body.sentenceSelections;f.db.query('UPDATE research_brief_edits SET body=? WHERE goal=?').run(JSON.stringify(body),f.goal.id);
+    const raw={first:{text:'Fetch tests are kept in fetch/ in web-platform-tests/wpt.',citations:[1]},second:{text:'Browser results are displayed at wpt.fyi/results/fetch.',citations:[1]}},calls:string[]=[];
+    const infer:Infer=async(role,packet)=>{const parsed=JSON.parse(packet);if(role===DOCUMENT_EDIT_SENTENCE_ROLE){calls.push(parsed.sentence);expect(parsed.originalParagraphs).toEqual(body.before.paragraphs);expect(parsed.acceptedAnswer).toBe(before);expect(parsed.citations).toEqual([{number:1,quote}]);return raw[parsed.sentence as 'first'|'second'];}calls.push('review');return {supported:true,reason:'Injected historical-mode support only.'};};
+    await expect(f.restart().execute(f.task,f.goal,signal(),infer,noop)).rejects.toThrow('proposal is ready');const saved=f.store.state(f.goal.id)!;
+    expect(calls).toEqual(['first','second','review']);expect(saved.writingMode).toBe('sequential-labelled-sentences-v2');expect(saved.sentenceSelections).toBeUndefined();expect(saved.writingAttempt?.raw).toEqual(raw);expect(saved.writingAttempt?.origin).toBe('aggregate-of-two-native-sentence-decisions-v2');expect(saved.projection?.version).toBe('brief-labelled-sentences-v2');expect(saved.projection?.method).not.toContain('Host evidence retrieval chose');
+    expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);
   }finally{await f.close();}
 });
