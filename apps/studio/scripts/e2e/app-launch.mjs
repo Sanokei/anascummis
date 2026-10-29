@@ -286,11 +286,13 @@ async function runCase(browser, kind, viewportName, options) {
     assert.equal(launchPosts().length, 1); assertStep('Only a visible Start creates the product-managed trusted runtime, pinned to accepted ZIP/source and a separate origin.', first);
     if (kind === 'counter') {
       await region(ids[0]).getByRole('alert').filter({hasText: 'Start was not confirmed'}).waitFor();
+      assert(await region(ids[0]).getByRole('button',{name:'Reload app view',exact:true}).isDisabled(), 'An unconfirmed Start must not recreate the app iframe.');
       await screenshot('unconfirmed-start-inspect-before-retry', region(ids[0]));
       assert.equal(launchPosts().length, 1); await region(ids[0]).getByRole('button', {name: 'Check app status', exact: true}).click();
       await until(async () => !(await region(ids[0]).innerText()).includes('Start was not confirmed'), 'read-only inspection clears uncertain Start');
       assert.deepEqual(startIdentity(await launch(ids[0])), startIdentity(first)); assert.equal(launchPosts().length, 1);
-      assertStep('A dropped real Start response is inspected through GET; the saved launch is not replayed or duplicated.', {transport: 'The real host accepted Start; only its browser response was deliberately dropped.'});
+      assert(await region(ids[0]).getByRole('button',{name:'Reload app view',exact:true}).isEnabled(), 'A successful current inspection restores deliberate Reload.');
+      assertStep('A dropped real Start response is inspected through GET; the saved launch is not replayed or duplicated and Reload stays disabled until inspection.', {transport: 'The real host accepted Start; only its browser response was deliberately dropped.',reloadDisabledUntilInspection:true});
     }
     const identityDetails = region(ids[0]).locator('details.software-launch-identity'); await identityDetails.locator('summary').click();
     assert((await identityDetails.innerText()).includes(first.zipSha256)); assert((await identityDetails.innerText()).includes(first.runtimeId)); assert((await identityDetails.innerText()).includes(first.origin));
@@ -313,14 +315,16 @@ async function runCase(browser, kind, viewportName, options) {
       await region(options.parent).getByRole('button',{name:'Check app status',exact:true}).click();
       await region(options.parent).getByRole('alert').filter({hasText:'App status could not be checked'}).waitFor();
       assert(await retainedFrame.evaluate(node=>node.isConnected), 'A temporary status failure must retain the existing iframe, not recreate its client state.');
+      assert(await region(options.parent).getByRole('button',{name:'Reload app view',exact:true}).isDisabled(), 'A failed current status check must disable iframe recreation.');
       assert.equal(await (await frame(options.parent)).getByRole('textbox',{name:'New task',exact:true}).inputValue(),'Keep this unsubmitted app draft');
       assert.deepEqual(startIdentity(await launch(options.parent)),startIdentity(unchangedStart)); assert.equal(launchPosts().length,unchangedPosts);
       await screenshot('temporary-status-failure-keeps-app-draft', region(options.parent));
       await region(options.parent).getByRole('button',{name:'Check app status',exact:true}).click();
       await until(async()=>!(await region(options.parent).innerText()).includes('App status could not be checked'),'explicit real GET restores checked status');
       assert(await retainedFrame.evaluate(node=>node.isConnected)); assert.equal(await (await frame(options.parent)).getByRole('textbox',{name:'New task',exact:true}).inputValue(),'Keep this unsubmitted app draft');
+      assert(await region(options.parent).getByRole('button',{name:'Reload app view',exact:true}).isEnabled());
       await (await frame(options.parent)).getByRole('textbox',{name:'New task',exact:true}).fill('');
-      assertStep('A temporary aborted status GET keeps the same iframe and unsubmitted app draft; explicit real status inspection recovers without POST or process recreation.',{transport:'One browser status GET was deliberately aborted while the real host/runtime stayed healthy.'});
+      assertStep('A temporary aborted status GET keeps the same iframe and unsubmitted app draft; Reload is disabled until explicit real status inspection recovers without POST or process recreation.',{transport:'One browser status GET was deliberately aborted while the real host/runtime stayed healthy.',reloadDisabledUntilInspection:true});
       const identity = await launch(options.parent), posts = launchPosts().length;
       const softwareTab = page.getByRole('tab', {name: 'Software work', exact: true}); await softwareTab.locator('[title="Close"]').click();
       await until(async () => !await page.locator('.software-panel').isVisible(), 'Software closes'); await openSoftware();
@@ -345,6 +349,7 @@ async function runCase(browser, kind, viewportName, options) {
         const rejectedResponse = page.waitForResponse(response => response.url() === base + '/api/software/' + options.parent + '/launch' && response.request().method() === 'GET');
         await region(options.parent).getByRole('button',{name:'Check app status',exact:true}).click(); assert.equal((await rejectedResponse).status(),403);
         const reconnect = region(options.parent).getByRole('button',{name:'Reconnect to Studio',exact:true}); await reconnect.waitFor();
+        assert(await region(options.parent).getByRole('button',{name:'Reload app view',exact:true}).isDisabled(), 'An old-session403 must not navigate the saved origin before reconnecting.');
         const beforeReconnectPosts=launchPosts().length,beforeReconnectNavigations=record.mainNavigations.length; assert.equal(beforeReconnectPosts,postCount);
         await screenshot(signal.toLowerCase() + '-session-reconnect-keeps-draft', reconnect); await reconnect.click();
         await until(async () => !(await reconnect.isVisible()), 'explicit GET session reconnect finishes');
@@ -353,7 +358,7 @@ async function runCase(browser, kind, viewportName, options) {
         await screenshot(signal.toLowerCase() + '-explicit-restart', region(options.parent));
         await page.getByRole('button',{name:'Type a message',exact:true}).click(); assert.equal(await page.getByRole('textbox',{name:'Message Anascummis',exact:true}).inputValue(),keptDraft); await page.getByRole('button',{name:'Close text input',exact:true}).click();
         assertStep('After '+signal+', an old-tab status GET is rejected403; explicit reconnect uses only GET, preserves the unsent draft, does not navigate, POST or start an app/model.',{rejectedOldSessionStatus:403});
-        await start(options.parent); await ensureItems(options.parent, ['Keep this task', 'Duplicate task']); assert.equal((await launch(options.parent)).origin, stableOrigin);
+        await start(options.parent); await ensureItems(options.parent, ['Keep this task', 'Duplicate task']); assert.equal((await launch(options.parent)).origin, stableOrigin); assert(await region(options.parent).getByRole('button',{name:'Reload app view',exact:true}).isEnabled());
         assertStep('Studio ' + signal + ' cleans up the owned app; restart stays stopped until explicit Start and preserves its origin/items.');
       }
       await stop(options.parent); await start(options.child); assert.equal((await launch(options.child)).origin, stableOrigin);

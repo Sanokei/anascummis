@@ -120,6 +120,7 @@ export function SoftwareLaunch({taskId,title,local,selected=false,request,onSele
  const appTitle=view?.title||title;
  const canStart=!!view?.supported&&!activeStates.has(view.state)&&!busy&&!unconfirmed&&!readError&&!reconnectSuggested&&!reconnecting;
  const canStop=!!view&&activeStates.has(view.state)&&!busy&&!unconfirmed&&!reconnectSuggested&&!reconnecting;
+ const canReload=showFrame&&!readError&&!unconfirmed&&!reconnectSuggested&&!reconnecting&&!busy;
  return <section ref={launchElement} className="software-launch" aria-label="Open checked app" data-app-launch-task-id={taskId}>
   <h3>Open checked app</h3>
   {!view?<p role="status">{readError?'App availability could not be checked.':'Checking app availability…'}</p>:<>
@@ -137,7 +138,7 @@ export function SoftwareLaunch({taskId,title,local,selected=false,request,onSele
    {view?.supported&&!activeStates.has(view.state)&&<button type="button" ref={controls} disabled={!canStart} onClick={()=>void act('start')}>{busy==='start'?'Starting app…':'Start app'}</button>}
    {view&&activeStates.has(view.state)&&<button type="button" ref={controls} disabled={!canStop} onClick={()=>void act('stop')}>{busy==='stop'?'Stopping app…':view.state==='stopping'?'Retry stop':'Stop running app'}</button>}
    <button type="button" disabled={checking||!!busy||reconnecting} onClick={()=>void checkStatus(true)}>{checking?'Checking app status…':'Check app status'}</button>
-   {showFrame&&<button type="button" onClick={()=>{setFrameError(false);setFrameReload(value=>value+1);}}>Reload app view</button>}
+   {showFrame&&<button type="button" disabled={!canReload} onClick={()=>{if(!canReload)return;setFrameError(false);setFrameReload(value=>value+1);}}>Reload app view</button>}
    {showFrame&&<button type="button" onClick={focusAppView}>Focus app view</button>}
    </div>
   </div>
