@@ -31,7 +31,7 @@ bun run start
 
 Open **http://127.0.0.1:3211** and keep the app terminal running. Stop it with Ctrl+C. The UI can open before models/voice are installed: Type a message, Goals, Work and Software remain discoverable; tasks needing inference honestly fail or request input. Opening the UI does not establish AI readiness.
 
-The build generates scene/browser runtime files from installed dependencies and a versioned kit under `out/opensource`. Download checks this copy's same-origin manifest. `bun run kit:build` regenerates the kit without rebuilding the UI. `bun run demo:build` copies that same build/kit into demo assets; it does not deploy. The source catalog and existing Etro license accompany the kit. Missing/invalid manifests disable the download with a retry; no unknown external version is substituted.
+The build generates scene/browser runtime files from installed dependencies and a versioned kit under `out/opensource`. Download checks this copy's same-origin manifest and archive headers before offering the file; this does not pre-download the ZIP or models. `bun run kit:build` regenerates the kit without rebuilding the UI. `bun run demo:build` copies that same build/kit into demo assets; it does not deploy. The source catalog and existing Etro license accompany the kit. Missing/invalid manifests disable the download with a retry; no unknown external version is substituted.
 
 For frontend development use `bun run dev` instead of `start`; the backend proxies Next on port 3212. Build before expecting a corresponding source download. `bun run typecheck` checks TypeScript; `bun run test` runs included tests and needs the PDF environment for PDF cases.
 
