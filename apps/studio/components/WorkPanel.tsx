@@ -11,9 +11,11 @@ function mergeHistory(current: WorkRecord[], incoming: WorkRecord[], active: Wor
   return [...records.values()].sort((a, b) => b.updated - a.updated || (a.id < b.id ? 1 : a.id > b.id ? -1 : 0));
 }
 
-export function WorkPanel({onOpenProject, onOpenDocument}: {onOpenProject: (id: string) => void; onOpenDocument: (id: string) => void}) {
+export function WorkPanel({onOpenProject, onOpenDocument, onEditRequest, onOpenSetup}: {onOpenProject: (id: string) => void; onOpenDocument: (id: string) => void; onEditRequest?: (record: WorkRecord) => Promise<void>; onOpenSetup?: () => void}) {
   const [active, setActive] = useState<WorkRecord[]>([]), [history, setHistory] = useState<WorkRecord[]>([]);
   const [nextCursor, setNextCursor] = useState<string>(), [message, setMessage] = useState(''), [loading, setLoading] = useState(false);
+  const [edits, setEdits] = useState<Record<string, {pending: boolean; message: string; error?: boolean}>>({});
+  const editing = useRef(new Set<string>());
   const olderLoaded = useRef(false);
   useEffect(() => {
     const control = new AbortController();
@@ -60,16 +62,35 @@ export function WorkPanel({onOpenProject, onOpenDocument}: {onOpenProject: (id: 
     } catch (error) {setMessage(String(error));}
     finally {setLoading(false);}
   }
+  async function editRequest(record: WorkRecord) {
+    if (!onEditRequest || editing.current.has(record.id)) return;
+    editing.current.add(record.id);
+    setEdits(current => ({...current, [record.id]: {pending: true, message: 'Preparing the saved request for review…'}}));
+    try {
+      await onEditRequest(record);
+      setEdits(current => ({...current, [record.id]: {pending: false, message: 'Request prepared for review. Edit it in the message field, then send when ready.'}}));
+    } catch (error) {
+      setEdits(current => ({...current, [record.id]: {pending: false, error: true, message: error instanceof Error ? error.message : String(error)}}));
+    } finally {editing.current.delete(record.id);}
+  }
 
   return <section className="work-journal background-tasks" aria-label="Work history">
     <p>Local tasks keep working when this window or page is closed. Progress is saved as they work.</p>
     <p role="status">{message}</p>
     {!active.length && !history.length && <p>No specialist tasks yet.</p>}
-    {[...active, ...history].map(task => <article key={task.id}>
+    {[...active, ...history].map(task => <article key={task.id} data-work-task-id={task.id}>
       <strong>{task.request}</strong>
       <p>{task.status === 'complete' && task.outcome !== 'finished' ? 'Needs attention' : labels[task.status]}</p>
       {task.status === 'running' && <p>{task.progress.agent} · {task.progress.phase}</p>}
       {(task.error || task.message) && <p>{task.error || task.message}</p>}
+      {(task.status === 'failed' || task.status === 'interrupted' || task.status === 'cancelled' || task.status === 'complete' && task.outcome !== 'finished') && (onEditRequest || onOpenSetup) && <div className="work-recovery">
+        {onEditRequest && <>
+          <p>Review the saved changes before trying again. Editing this request prepares a new attempt for you to send; it does not resume the old task or replay its edits automatically.</p>
+          <button disabled={!!edits[task.id]?.pending} onClick={() => void editRequest(task)}>{edits[task.id]?.pending ? 'Preparing request…' : 'Edit saved request'}</button>
+        </>}
+        {onOpenSetup && <button onClick={onOpenSetup}>Setup instructions</button>}
+        {edits[task.id] && <p role={edits[task.id].error ? 'alert' : 'status'} className="work-recovery-message">{edits[task.id].message}</p>}
+      </div>}
       <small>Updated {new Date(task.updated).toLocaleString()}</small>
       {task.specialists?.map(specialist => <p key={specialist.id}>{specialist.agent} · {specialist.status} · {specialist.message}</p>)}
       <ActivityHistory streamId={'work:'+task.id} title="Progress history" loadPage={async (before, signal) => {

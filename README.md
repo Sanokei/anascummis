@@ -43,11 +43,11 @@ Model and voice setup download files once. With runtimes and dependencies instal
 
 ## Voice interaction
 
-Touch the holographic orb to start listening. After sustained speech, 650 ms of silence ends the turn; touching it again also finishes recording. Touch during thought or speech, or press Escape, to stop. Press Space twice within 450 ms to reveal a message box below the orb; Enter sends the same conversational request. Spaces inside the message box work normally. There is no navigation bar or dashboard. Requested previews appear as result surfaces.
+Touch the holographic orb to start listening. After sustained speech, 650 ms of silence ends the turn; touching it again also finishes recording. Touch during thought or speech, or press Escape, to stop. Choose **Type a message** to open the message field; pressing Space twice within 450 ms remains a keyboard shortcut. Enter adds a new line; use Send or Ctrl/Command+Enter to submit. There is no navigation bar or dashboard. Requested previews appear as result surfaces.
 
 Drop supported images, PDFs, recordings or videos onto the orb. File cards show transfer progress, processing, receipt or failure; successful transfers receive a spoken acknowledgement. The public demo accepts PNG/JPEG images; native PDF/audio/video tools require the local app. The shared metadata includes Open Graph and Twitter large-image cards with a 1200×630 orb-only thumbnail rendered from the same shader.
 
-Speech recognition uses CPU WASM Whisper tiny English in a Web Worker. The local app prefers Piper for replies; a Supertonic WASM voice is available in the browser. These do not call browser speechSynthesis or SpeechRecognition. Speech and Qwen files download on first use and are cached by the browser; offline use requires those downloads to finish and the local application server to be running.
+Speech and model runtimes initialize independently. The local Qwen service needs the setup commands above and a running model server; browser runtime initialization may also download files. **AI model** reports local service reachability, and **Voice** reports initialization for this page. These checks do not establish task accuracy, microphone access or a complete spoken conversation. **Check again** repeats the readiness checks; **Setup instructions** opens the existing installation dialog.
 
 ## Website workspace
 
@@ -76,6 +76,8 @@ One quantized Qwen3 0.6B model performs routing and argument generation across s
 This follows the useful small-decision idea behind NanoJev without assuming a game-trained checkpoint understands websites. There is no claim of perfect understanding. The current tests use a scripted inference adapter to test host behavior; actual Qwen task accuracy and CPU performance still need evaluation.
 
 Local specialist tasks now keep a durable work history with their full goals, progress, specialist summaries and outcomes. Say **show work** to open its floating window and inspect the associated website or PDF. Local tasks continue when the page closes, and history returns after reloading. After a backend restart, unfinished specialist work is marked interrupted for review; software builds retain their separate resumable checkpoints. This does not automatically replay edits that may already have been saved.
+
+Unsuccessful or interrupted Work cards offer **Edit saved request**. It prepares the exact saved text for review in the message field, with its website and PDF context, before you explicitly send a new attempt. Review any saved changes first; this does not resume the old task or submit it automatically. Existing unsent text or unavailable context blocks preparation with a message on that card. **Setup instructions** opens the same installation dialog when runtime setup needs attention.
 
 For goals with several steps, say **show goals** to open the local Goals window, or begin a message with **plan this goal:** followed by the full request. A planner creates dependent milestones, specialist executors work within their existing capabilities, and a separate reviewer checks each milestone against its acceptance condition. The window shows recorded progress, host evidence and review decisions together. It also provides an optional open-PDF attachment and explicit public-research opt-in. Closing the page leaves local work running; Stop keeps the plan, and Continue remaining work preserves accepted milestones while retrying unfinished work with your guidance. Reopened windows restore saved goals and show work that needs attention after an interruption.
 

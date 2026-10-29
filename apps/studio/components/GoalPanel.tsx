@@ -1,5 +1,5 @@
 'use client';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import type {GoalRecord} from '../core/goal-orchestrator';
 import type {ActivityPage} from '../core/activity-journal';
 import {ActivityHistory} from './ActivityHistory';
@@ -36,18 +36,21 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
   const [message, setMessage] = useState(''), [loadError, setLoadError] = useState(''), [busy, setBusy] = useState<string>();
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [newGoalOpen, setNewGoalOpen] = useState(false);
+  const requestDraft = useRef({text: ''}), noteDrafts = useRef<Record<string, {text: string}>>({});
+  const busyRef = useRef<string | undefined>(undefined), mutationEpoch = useRef(0);
 
   useEffect(() => {setIncludeDocument(!!documentId);}, [documentId]);
   useEffect(() => {
     const control = new AbortController();
     let timer: ReturnType<typeof setTimeout> | undefined;
     async function poll() {
+      const epoch = mutationEpoch.current;
       try {
         const next = await goalApi('', undefined, control.signal);
         if (!Array.isArray(next)) throw new Error('Goal history is unavailable.');
-        if (!control.signal.aborted) {setGoals(next as GoalRecord[]); setLoadError('');}
+        if (!control.signal.aborted && epoch === mutationEpoch.current) {setGoals(next as GoalRecord[]); setLoadError('');}
       } catch (error) {
-        if (!control.signal.aborted) setLoadError(String(error));
+        if (!control.signal.aborted && epoch === mutationEpoch.current) setLoadError(String(error));
       } finally {
         if (!control.signal.aborted) timer = setTimeout(poll, 2000);
       }
@@ -59,34 +62,45 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
   function received(goal: GoalRecord) {
     setGoals(current => [goal, ...current.filter(item => item.id !== goal.id)]);
   }
+  function writeRequest(text: string) {
+    requestDraft.current = {text}; setRequest(text);
+    if (text.length) setNewGoalOpen(true);
+  }
+  function writeNote(id: string, text: string) {
+    noteDrafts.current[id] = {text}; setNotes(current => ({...current, [id]: text}));
+  }
   async function start() {
-    if (!projectId || !request.trim() || busy) return;
+    const submitted = requestDraft.current;
+    if (!projectId || !submitted.text.trim() || busyRef.current) return;
+    busyRef.current = 'new'; mutationEpoch.current++;
     setBusy('new');
     try {
       const goal = await goalApi('', {
-        request: request.trim(), project: projectId,
+        request: submitted.text, project: projectId,
         ...(includeDocument && documentId ? {document: documentId} : {}), research
       }) as GoalRecord;
       received(goal);
-      setRequest('');
-      setNewGoalOpen(false);
+      if (requestDraft.current === submitted) {writeRequest(''); setNewGoalOpen(false);}
+      else setNewGoalOpen(true);
       setMessage('The full goal is saved. Planning, specialist work and acceptance reviews will appear here.');
-    } catch (error) {setMessage(String(error));}
-    finally {setBusy(undefined);}
+    } catch (error) {setMessage('Submission was not confirmed. Check saved goals before sending again. ' + String(error));}
+    finally {mutationEpoch.current++; busyRef.current = undefined; setBusy(undefined);}
   }
   async function act(goal: GoalRecord, action: 'stop' | 'resume') {
-    if (busy) return;
+    if (busyRef.current) return;
+    const submitted = noteDrafts.current[goal.id];
+    busyRef.current = goal.id; mutationEpoch.current++;
     setBusy(goal.id);
     try {
-      received(await goalApi('/' + goal.id + '/' + action, action === 'resume' ? {note: notes[goal.id] || ''} : {}) as GoalRecord);
+      received(await goalApi('/' + goal.id + '/' + action, action === 'resume' ? {note: submitted?.text || ''} : {}) as GoalRecord);
       setMessage(action === 'stop' ? 'Goal stopped. Its plan, accepted work and evidence are kept.' : 'Continuing unfinished work with the saved plan and your guidance.');
-      if (action === 'resume') setNotes(current => ({...current, [goal.id]: ''}));
+      if (action === 'resume' && noteDrafts.current[goal.id] === submitted) writeNote(goal.id, '');
     } catch (error) {setMessage(String(error));}
-    finally {setBusy(undefined);}
+    finally {mutationEpoch.current++; busyRef.current = undefined; setBusy(undefined);}
   }
 
   const newGoalForm = <form onSubmit={event => {event.preventDefault(); void start();}}>
-      <label>Goal<textarea aria-label="Goal" value={request} onChange={event => setRequest(event.target.value)} maxLength={8000} placeholder="Describe the result you want and what must be true when it is finished."/></label>
+      <label>Goal<textarea aria-label="Goal" value={request} onChange={event => writeRequest(event.target.value)} maxLength={8000} placeholder="Describe the result you want and what must be true when it is finished."/></label>
       {documentId && <label className="goal-option"><input type="checkbox" checked={includeDocument} onChange={event => setIncludeDocument(event.target.checked)}/>Include the open PDF{documentName ? ': ' + documentName : ''}</label>}
       <label className="goal-option"><input type="checkbox" checked={research} onChange={event => setResearch(event.target.checked)}/>Allow public web research for this goal</label>
       <button type="submit" disabled={!projectId || !request.trim() || !!busy}>{busy === 'new' ? 'Saving goal…' : 'Start coordinated work'}</button>
@@ -95,11 +109,13 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
   return <section className="goal-panel" aria-label="Coordinated goals">
     <p>{goals.length ? 'Progress stays saved when you close this window.' : 'A planner breaks down your goal, specialists do the work, and a separate reviewer checks each milestone. Their progress stays here when this window or page closes.'}</p>
     {goals.length ? <details className="goal-create" open={newGoalOpen} onToggle={event => setNewGoalOpen(event.currentTarget.open)}><summary>New goal</summary>{newGoalForm}</details> : newGoalForm}
-    <p role="status">{loadError || message}</p>
+    {loadError && <p role="status">{loadError}</p>}
+    <p role="status">{message}</p>
     {!goals.length && <p>No saved goals yet.</p>}
     {goals.map(goal => {
       const accepted = goal.tasks.filter(task => task.status === 'verified').length;
       const running = ['queued', 'planning', 'running'].includes(goal.status);
+      const canResume = ['needs_input', 'cancelled'].includes(goal.status);
       const latest = goal.events.at(-1);
       const longRequest = goal.request.length > 180;
       const linkedSoftwareTask = goal.tasks.find(task => ['running', 'needs_input'].includes(task.status) && (task.softwareTaskId || task.execution?.softwareTaskId)) || goal.tasks.find(task => task.softwareTaskId || task.execution?.softwareTaskId);
@@ -115,10 +131,11 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
           <small>Software build for milestone {goal.tasks.indexOf(linkedSoftwareTask!) + 1}</small>
           <button onClick={() => onOpenSoftware(linkedSoftwareId)}>Open software build</button>
         </div>}
-        {['needs_input', 'cancelled'].includes(goal.status) && <form onSubmit={event => {event.preventDefault(); void act(goal, 'resume');}}>
-          <label>Guidance for continuing<textarea aria-label="Guidance for continuing" value={notes[goal.id] || ''} onChange={event => setNotes(current => ({...current, [goal.id]: event.target.value}))} maxLength={2000} placeholder="Clarify missing information or explain what to try next."/></label>
+        {(canResume || !!notes[goal.id]) && <form onSubmit={event => {event.preventDefault(); if (canResume) void act(goal, 'resume');}}>
+          <label>Guidance for continuing<textarea aria-label="Guidance for continuing" value={notes[goal.id] || ''} onChange={event => writeNote(goal.id, event.target.value)} maxLength={2000} placeholder="Clarify missing information or explain what to try next."/></label>
           <small>Accepted milestones are kept. Only unfinished work is retried; review any saved changes before continuing.</small>
-          <button type="submit" disabled={!!busy}>Continue remaining work</button>
+          {!canResume && <small>Your newer guidance draft is kept. You can send it when this goal needs attention or is stopped.</small>}
+          <button type="submit" disabled={!!busy || !canResume}>Continue remaining work</button>
         </form>}
         {longRequest && <details className="goal-full-request"><summary>Full goal</summary><p>{goal.request}</p></details>}
         <ol className="goal-milestones">{goal.tasks.map((task, index) => {
