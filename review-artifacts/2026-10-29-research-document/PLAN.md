@@ -1,0 +1,22 @@
+# Native research → a useful cited document
+
+Base: `21f62247ca92311545a553eecdc98c7d39842db2` (tested product source `ade3e43479654e60415876ba681d965c5a8ff296`). Work continues on child branch `codex/native-research-document-20261029`; main, deployment, draft 13 and frozen source kits stay unchanged.
+
+The human wants useful, goal-driven end-to-end tests, working local AI, persistent visible work and specialist orchestration. The current roadmap explicitly names a native research→written brief→downloaded document with interrupted continuation as missing. A source audit found that `source-question.ts` saves a native cited answer, but `GoalSources` offers no document action. Generic dependency evidence omits the answer, PDF work requires an attached file, and `importPdf` assigns a new identity on each call. Treating a completed answer as a completed document would be false completion.
+
+## One bounded result
+
+Use the ordinary Goals window and explicit public-research permission to ask where WHATWG Fetch tests live and where browser results are displayed, from the real official Fetch README. Require the two supported facts and exact saved citations from genuine installed Qwen inference. Then deliberately create a linked **research brief** with an exact title and a separately labelled personal note. Reuse the accepted answer and independently hash-checked source copies, preserving the parent and avoiding another fetch or answer generation. A native writing decision produces a short cited brief; a separate support decision checks that writing. Fixed host code creates a paginated PDF and self-contained HTML, without executing generated code or allowing document text to fetch resources.
+
+## Acceptance before counting success
+
+1. Preserve a normal-server baseline: real source retrieval, native accepted answer, and the currently missing document handoff. Record source/build identity, actual failures and original desktop/360px/short views.
+2. Save the child title, exact note, accepted-answer/source/reading lineage and dependent milestones before writing. Show writing, review, rendering, saved artifact and needs-input state in existing Goals/PDF windows. Draft notes are explicitly unsaved until submitted; retained local drafts and uncertain delivery must never silently disappear or resubmit themselves.
+3. Persist the native writing decision before rendering. Use one identity-keyed artifact per child and input hash, verified against actual stored PDF/HTML bytes, pages and extracted text. Explicit continuation reconciles saved drafts/artifacts rather than repeating accepted work. Never infer artifact completion from a filename or model approval.
+4. Stop a real native child; close/reopen/reload; interrupt an owned Studio process during a later saved phase; restart and explicitly Continue. Compare accepted parent JSON, source hashes, task attempts and saved writing identity. Lose one actual submission acknowledgement and inspect saved state without automatic replay or duplicate child/artifact creation.
+5. Open and export through visible UI. Check real MIME/signature, SHA-256, complete title/note/facts/citations, source URL/title/retrieval/content identities and page count. Open the downloaded HTML and rendered PDF, critique the actual prose and page layout, and capture original desktop, 360×800 and 360×420 views with reachable actions and intentional scrolling.
+6. Missing model, unsupported evidence, rejected writing, changed input or damaged files must stay unfinished with a practical explicit recovery path. Synthetic crash-window/unit checks are labelled separately from genuine inference and ordinary browser journeys.
+
+Only meaningful affected checks, both TypeScript targets and a production build are required after implementation. No unrelated 192-test cycle, dependency/model downloads, new provider/secret, environment publication or public preview is authorized. Existing private-data/network guards remain. Record verified local model file hash, pinned official origin and installed/cache paths in non-secret readiness metadata; readiness does not establish general quality, voice, physical-device or native-OS behavior.
+
+Primary implementation references and retrieval identities will be saved beside the evidence. The current model has already been freshly checked against official HF metadata; actual document inference and output quality still require this journey.
