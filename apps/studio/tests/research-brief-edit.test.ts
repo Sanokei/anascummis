@@ -172,3 +172,42 @@ test('a symlink at the prospective revision path cannot overwrite its target or 
     await expect(f.store.execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('ordinary owned file');expect(await readFile(target,'utf8')).toBe(sentinel);expect(f.store.state(f.goal.id)!.phase).toBe('rendered');expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions WHERE revision=1').get()).toEqual({n:0});expect(f.calls.length).toBe(2);
   }finally{await f.close();}
 });
+
+test('Stop during asynchronous original verification or page inspection creates no late edit checkpoint or native decision',async()=>{
+  for(const boundary of ['snapshot','inspect'] as const){
+    const f=await fixture();let release!:()=>void,entered!:()=>void;
+    const blocked=new Promise<void>(resolve=>{release=resolve;}),waiting=new Promise<void>(resolve=>{entered=resolve;});
+    try{
+      let intercepted=false;
+      const gated=async(job:Record<string,any>)=>{
+        if(!intercepted&&job.op===(boundary==='snapshot'?'verify_research_brief':'inspect')){intercepted=true;entered();await blocked;}
+        return f.engine(job);
+      };
+      const briefs=new ResearchBriefStore(f.db,f.ledger,f.dir,gated),store=new ResearchBriefEditStore(f.db,briefs,f.dir,gated),control=new AbortController();
+      const running=store.execute(f.task,f.goal,control.signal,f.infer,noop);await waiting;
+      expect(store.state(f.goal.id)).toBeUndefined();f.goal.status='cancelled';f.db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(f.goal),f.goal.id);
+      control.abort(new Error('Stopped during '+boundary));release();
+      await expect(running).rejects.toThrow('Stopped during '+boundary);
+      expect(store.state(f.goal.id)).toBeUndefined();expect(f.db.query('SELECT COUNT(*) n FROM research_brief_edits').get()).toEqual({n:0});expect(f.calls.length).toBe(0);
+      expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:1});expect(f.counts().renders).toBe(1);
+      expect(f.counts().inspections).toBe(boundary==='snapshot'?0:1);expect((JSON.parse((f.db.query('SELECT body FROM goal_tasks WHERE id=?').get(f.goal.id) as {body:string}).body) as GoalRecord).status).toBe('cancelled');
+      expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'brief.html'))).toEqual(f.originalHtml);
+    }finally{release();await f.close();}
+  }
+});
+
+test('Stop while Apply verifies the original wins over its stale needs-input snapshot and cannot save approval',async()=>{
+  const f=await fixture();let release!:()=>void,entered!:()=>void;
+  const blocked=new Promise<void>(resolve=>{release=resolve;}),waiting=new Promise<void>(resolve=>{entered=resolve;});
+  try{
+    const proposed=await propose(f);let intercepted=false;
+    const gated=async(job:Record<string,any>)=>{if(!intercepted&&job.op==='verify_research_brief'){intercepted=true;entered();await blocked;}return f.engine(job);};
+    const briefs=new ResearchBriefStore(f.db,f.ledger,f.dir,gated),store=new ResearchBriefEditStore(f.db,briefs,f.dir,gated),stale=structuredClone(f.goal);
+    const applying=store.approve(stale,{operationId:proposed.operationId,proposalSha256:proposed.proposalSha256!});await waiting;
+    f.goal.status='cancelled';f.db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(f.goal),f.goal.id);release();
+    await expect(applying).rejects.toThrow('This edit is stopped');
+    const saved=store.state(f.goal.id)!;expect(saved.phase).toBe('awaiting_approval');expect(saved.approvedProposalSha256).toBeUndefined();expect(saved.proposalSha256).toBe(proposed.proposalSha256);expect(saved.writingAttempt).toEqual(proposed.writingAttempt);
+    expect((JSON.parse((f.db.query('SELECT body FROM goal_tasks WHERE id=?').get(f.goal.id) as {body:string}).body) as GoalRecord).status).toBe('cancelled');expect(f.calls.length).toBe(2);expect(f.counts().renders).toBe(1);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:1});
+    expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'brief.html'))).toEqual(f.originalHtml);
+  }finally{release();await f.close();}
+});

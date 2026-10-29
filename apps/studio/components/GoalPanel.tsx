@@ -76,6 +76,9 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
   }, []);
 
   function received(goal: GoalRecord) {
+    // A child handoff can confirm a mutation independently of this panel's forms.
+    // Its acknowledgement invalidates any list poll that began before it.
+    mutationEpoch.current++;
     setGoals(current => [goal, ...current.filter(item => item.id !== goal.id)]);
   }
   function writeRequest(text: string) {

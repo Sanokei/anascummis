@@ -64,21 +64,23 @@ export class ResearchBriefEditStore {
     const original=await this.briefs.snapshot(JSON.parse(row.body) as GoalRecord);
     if(JSON.stringify(original)!==JSON.stringify(input.original)||original.state.artifact?.pdfSha256!==input.request.basePdfSha256||original.state.artifact.documentId!==input.request.documentId)fail('The original accepted brief or its complete provenance changed. No edit was applied.');
   }
-  private async checkpoint(task:GoalTask,goal:GoalRecord){
+  private async checkpoint(task:GoalTask,goal:GoalRecord,signal:AbortSignal){
+    signal.throwIfAborted();
     const request=goal.documentEdit;
     if(!request||!task.documentEdit||task.id!=='native-brief-edit'||task.specialist!=='pdf'||goal.parentGoalId!==request.parentGoalId||goal.documentId!==request.documentId||goal.request!==request.intent||request.baseRevision!==0||!sha.test(request.basePdfSha256))fail('Invalid research edit ownership or intent.');
     const row=this.row(goal.id);
-    if(row){const saved=this.stateFrom(row);if(JSON.stringify(saved.input.request)!==JSON.stringify(request))fail('The saved edit request changed; its original proposal is preserved.');await this.verifyOriginal(saved.input);return saved;}
+    if(row){const saved=this.stateFrom(row);if(JSON.stringify(saved.input.request)!==JSON.stringify(request))fail('The saved edit request changed; its original proposal is preserved.');await this.verifyOriginal(saved.input);signal.throwIfAborted();return saved;}
     const parentRow=this.db.query('SELECT body FROM goal_tasks WHERE id=?').get(request.parentGoalId) as {body:string}|null;if(!parentRow)fail('The original accepted brief goal is missing.');
-    const parent=JSON.parse(parentRow.body) as GoalRecord,original=await this.briefs.snapshot(parent),artifact=original.state.artifact!;
+    const parent=JSON.parse(parentRow.body) as GoalRecord,original=await this.briefs.snapshot(parent);signal.throwIfAborted();const artifact=original.state.artifact!;
     if(artifact.documentId!==request.documentId||artifact.pdfSha256!==request.basePdfSha256||this.originalDocument(request.documentId).revision!==0)fail('The original document changed before its edit was inspected.');
     const inspected=await this.pdfEngine({op:'inspect',input:join(this.dataDir,'documents',request.documentId,'0.pdf'),args:{pages:Array.from({length:artifact.pages},(_,i)=>i+1)}});
+    signal.throwIfAborted();
     if(inspected.pageCount!==artifact.pages||!Array.isArray(inspected.pages)||inspected.pages.length!==artifact.pages)fail('The complete original document could not be inspected before proposing an edit.');
     const inspection={pages:inspected.pages,sha256:sourceHash(JSON.stringify(inspected.pages))};
     const input:EditInput={version:'research-brief-edit-v1',request:structuredClone(request),original,inspection},encoded=JSON.stringify(input),inputSha256=sourceHash(encoded);
     const before=original.state.presentation?.draft||original.state.draft!;
     const state:DocumentEditState={operationId:crypto.randomUUID(),goalId:goal.id,inputSha256,created:Date.now(),phase:'preparing',before:structuredClone(before),preserved:this.preserved(original.input),inspectBase:inspection};
-    this.db.query('INSERT INTO research_brief_edits VALUES(?,?,?,?)').run(goal.id,inputSha256,encoded,JSON.stringify(state));return {input,state};
+    signal.throwIfAborted();this.db.query('INSERT INTO research_brief_edits VALUES(?,?,?,?)').run(goal.id,inputSha256,encoded,JSON.stringify(state));return {input,state};
   }
   private packet(input:EditInput,state:DocumentEditState){const original=input.original.input;return {intent:input.request.intent,originalParagraphs:state.before.paragraphs,acceptedAnswer:original.answer.text,selectedPassages:original.answer.selections.map(r=>({label:r.label,text:r.text})),citations:original.answer.citations.map((c,i)=>({number:i+1,quote:c.quote}))};}
   private check(input:EditInput,state:DocumentEditState){
@@ -93,7 +95,7 @@ export class ResearchBriefEditStore {
   }
   async approve(goal:GoalRecord,approval:{operationId:string;proposalSha256:string}){
     const first=this.row(goal.id);if(!first)fail('Inspect the saved edit proposal before applying it.');await this.verifyOriginal(this.stateFrom(first).input);
-    const goalRow=this.db.query('SELECT body FROM goal_tasks WHERE id=?').get(goal.id) as {body:string}|null;if(goalRow)goal=JSON.parse(goalRow.body) as GoalRecord;
+    const goalRow=this.db.query('SELECT body FROM goal_tasks WHERE id=?').get(goal.id) as {body:string}|null;if(!goalRow)fail('The saved edit goal is missing. No approval was applied.');goal=JSON.parse(goalRow.body) as GoalRecord;
     const row=this.row(goal.id);if(!row)fail('Inspect the saved edit proposal before applying it.');const {state}=this.stateFrom(row);
     if(goal.status==='cancelled')fail('This edit is stopped. Explicitly Continue before approving it.');
     if(state.operationId!==approval.operationId||state.proposalSha256!==approval.proposalSha256)fail('Approval does not match this exact saved edit proposal.');
@@ -130,7 +132,7 @@ export class ResearchBriefEditStore {
   private label(state:DocumentEditState){return 'Research edit '+state.operationId;}
   async execute(task:GoalTask,goal:GoalRecord,signal:AbortSignal,infer:Infer,progress:SourceProgress):Promise<GoalExecution>{
     signal.throwIfAborted();if(this.busy.has(goal.id))fail('This edit is still working. Inspect its saved progress.');this.busy.add(goal.id);
-    try{const {input,state}=await this.checkpoint(task,goal);
+    try{const {input,state}=await this.checkpoint(task,goal,signal);
       if(state.phase==='saved'){await this.verify(input,state,true);return this.receipt(state.artifact!);}
       if(this.originalDocument(input.request.documentId).revision!==0)fail('The document changed outside this edit. Its original and proposal are preserved; no revision was overwritten.');
       if(!state.proposal){
@@ -167,7 +169,7 @@ export class ResearchBriefEditStore {
     }finally{this.busy.delete(goal.id);}
   }
   private receipt(artifact:DocumentEditArtifact):GoalExecution{return {verified:true,documentEditArtifact:structuredClone(artifact),message:'The explicitly approved native summary edit is saved as one verified document revision. Complete notes and source evidence are preserved.',evidence:['Operation '+artifact.operationId+'; document '+artifact.documentId+'; revision '+artifact.revision+'; pages '+artifact.pages,'PDF SHA-256 '+artifact.pdfSha256+'; HTML SHA-256 '+artifact.htmlSha256,'Full provenance SHA-256 '+artifact.provenanceSha256,'Host verified complete expected text, unchanged personal notes and exact source-link targets. Native support review is not an independent factual accuracy guarantee.']};}
-  async review(task:GoalTask,goal:GoalRecord,execution:GoalExecution,signal:AbortSignal):Promise<GoalReview>{signal.throwIfAborted();const {input,state}=await this.checkpoint(task,goal);if(!execution.verified||state.phase!=='saved'||JSON.stringify(execution.documentEditArtifact)!==JSON.stringify(state.artifact))fail('The edit acceptance receipt does not match its saved revision.');await this.verify(input,state,true);signal.throwIfAborted();return {accepted:true,reason:'Host re-read the exact revised PDF/HTML, full original notes, citation links, raw provenance and one conditional revision registration. The exact proposal was explicitly approved; native source-support review passed with stated factual limits.'};}
+  async review(task:GoalTask,goal:GoalRecord,execution:GoalExecution,signal:AbortSignal):Promise<GoalReview>{signal.throwIfAborted();const {input,state}=await this.checkpoint(task,goal,signal);if(!execution.verified||state.phase!=='saved'||JSON.stringify(execution.documentEditArtifact)!==JSON.stringify(state.artifact))fail('The edit acceptance receipt does not match its saved revision.');await this.verify(input,state,true);signal.throwIfAborted();return {accepted:true,reason:'Host re-read the exact revised PDF/HTML, full original notes, citation links, raw provenance and one conditional revision registration. The exact proposal was explicitly approved; native source-support review passed with stated factual limits.'};}
   async export(goal:GoalRecord,kind:'pdf'|'html'|'provenance-html'|'provenance-json'){
     const row=this.row(goal.id);if(!row)fail('This edit has no saved artifact.');const {input,state}=this.stateFrom(row);if(state.phase!=='saved')fail('Apply and finish this reviewed edit before opening its revised files.');const paths=await this.verify(input,state,true),path=kind==='pdf'?paths.pdf:kind==='html'?paths.html:kind==='provenance-html'?paths.provenanceHtml:paths.provenanceJson;
     return {bytes:new Uint8Array(await this.ordinary(path)),name:input.original.input.title+'-revision-1'+(kind==='pdf'?'.pdf':kind==='html'?'.html':kind==='provenance-html'?'-provenance.html':'-provenance.json')};
