@@ -4,6 +4,7 @@ import {objectSchema, validate} from './harness';
 import {ActivityJournal, type ActivityInput, type ActivityPage} from './activity-journal';
 import {publicSourceUrl, sourceHash, type SourceSnapshot, type SourceProgress, type SourceReadingPlan, type SourceRangeInput, type PublicSourceLedger} from './public-source';
 import type {BriefRequest, BriefState, BriefArtifact} from './research-brief-types';
+import type {DocumentEditRequest, DocumentEditState, DocumentEditArtifact} from './research-brief-edit-types';
 import {citationSpans} from './source-citation-spans';
 
 export const GOAL_SPECIALISTS = ['analysis', 'website', 'pdf', 'scene', 'commerce', 'research', 'workspace', 'video', 'video_sources', 'software'] as const;
@@ -15,7 +16,7 @@ export type SourceAnswer = {text: string; uncertainty: string; limit: string;
   supportReview?:{supported:boolean;reason:string};supportError?:string;
   selections: {sourceId: string; label: string; start: number; end: number; textSha256: string; rangeSha256?:string; text?:string}[];
   citations: {sourceId: string; label: string; quote: string; offset: number; textSha256: string;spanId?:string}[]};
-export type GoalExecution = {message: string; verified: boolean; evidence: string[]; softwareTaskId?: string; sourceId?: string; sourceAnswer?: SourceAnswer; briefArtifact?: BriefArtifact};
+export type GoalExecution = {message: string; verified: boolean; evidence: string[]; softwareTaskId?: string; sourceId?: string; sourceAnswer?: SourceAnswer; briefArtifact?: BriefArtifact; documentEditArtifact?:DocumentEditArtifact};
 export type GoalReview = {accepted: boolean; reason: string};
 export type GoalTask = {
   id: string;
@@ -28,6 +29,7 @@ export type GoalTask = {
   sourceUrl?: string;
   sourceAnswer?: boolean;
   sourceBrief?: boolean;
+  documentEdit?: boolean;
   softwareTaskId?: string;
   retryReason?: 'acceptance_rejected' | 'execution_unverified' | 'interrupted';
   execution?: GoalExecution;
@@ -43,6 +45,9 @@ export type GoalRecord = {
   sourceQuestion?: {urls: string[]; ranges?:SourceRangeInput[]};
   brief?: BriefRequest;
   briefState?: BriefState;
+  briefEditEligibility?: {canEdit:boolean;reason?:string};
+  documentEdit?: DocumentEditRequest;
+  documentEditState?: DocumentEditState;
   parentGoalId?: string;
   reading?: SourceReadingPlan;
   sources?: SourceSnapshot[];
@@ -66,6 +71,7 @@ export type GoalOrchestratorOptions = {
   execute: (task: GoalTask, goal: GoalRecord, signal: AbortSignal, progress: SourceProgress) => Promise<GoalExecution>;
   reviewSource?: (task: GoalTask, goal: GoalRecord, execution: GoalExecution, signal: AbortSignal) => Promise<GoalReview>;
   reviewBrief?: (task: GoalTask, goal: GoalRecord, execution: GoalExecution, signal: AbortSignal) => Promise<GoalReview>;
+  reviewDocumentEdit?: (task: GoalTask, goal: GoalRecord, execution: GoalExecution, signal: AbortSignal) => Promise<GoalReview>;
   sourceLedger?: PublicSourceLedger;
   allowedSpecialists?: readonly GoalSpecialist[];
 };
@@ -101,7 +107,8 @@ export class GoalOrchestrator {
     if (options.allowedSpecialists?.some(name => !GOAL_SPECIALISTS.includes(name))) throw new Error('Unknown goal specialist');
     db.exec(`CREATE TABLE IF NOT EXISTS goal_tasks(id TEXT PRIMARY KEY,body TEXT NOT NULL,updated INTEGER NOT NULL);
       CREATE INDEX IF NOT EXISTS goal_tasks_updated ON goal_tasks(updated DESC,id DESC);
-      CREATE TABLE IF NOT EXISTS goal_brief_requests(parent_id TEXT NOT NULL,request_key TEXT NOT NULL,goal_id TEXT NOT NULL UNIQUE,PRIMARY KEY(parent_id,request_key))`);
+      CREATE TABLE IF NOT EXISTS goal_brief_requests(parent_id TEXT NOT NULL,request_key TEXT NOT NULL,goal_id TEXT NOT NULL UNIQUE,PRIMARY KEY(parent_id,request_key));
+      CREATE TABLE IF NOT EXISTS goal_document_edit_requests(parent_id TEXT NOT NULL,request_key TEXT NOT NULL,goal_id TEXT NOT NULL UNIQUE,PRIMARY KEY(parent_id,request_key))`);
     this.activityJournal = new ActivityJournal(db);
   }
 
@@ -267,6 +274,32 @@ export class GoalOrchestrator {
     return this.get(child.id);
   }
 
+  /** The server supplies a verified base document identity. Client input cannot
+   * choose files, tool operations or a revision. Duplicate delivery returns the
+   * original child without restarting it. */
+  existingDocumentEdit(parentId:string,requestKey:string,intent:string):GoalRecord|undefined {
+    const row=this.db.query('SELECT goal_id FROM goal_document_edit_requests WHERE parent_id=? AND request_key=?').get(parentId,requestKey) as {goal_id:string}|null;
+    if(!row)return undefined;
+    const saved=this.get(row.goal_id);
+    if(saved.documentEdit?.intent!==intent)throw new Error('This edit identity already saved another intent. Inspect its original proposal before starting another.');
+    return saved;
+  }
+
+  createDocumentEdit(parentId:string,input:DocumentEditRequest):GoalRecord {
+    if(!this.options.reviewDocumentEdit)throw new Error('The native document edit host is unavailable.');
+    const child=this.db.transaction(()=>{
+      const existing=this.existingDocumentEdit(parentId,input.requestKey,input.intent);if(existing)return existing;
+      const parent=this.get(parentId),artifact=parent.tasks.find(task=>task.sourceBrief)?.execution?.briefArtifact;
+      if(!parent.brief||parent.status!=='completed'||!parent.coverageDone||input.parentGoalId!==parent.id||!artifact||input.documentId!==artifact.documentId||input.basePdfSha256!==artifact.pdfSha256||input.baseRevision!==0||!input.intent.trim()||input.intent.length>500||!/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(input.requestKey))throw new Error('Finish and inspect the accepted original research brief before editing.');
+      const created=this.create({request:input.intent,projectId:parent.projectId,documentId:input.documentId},true);
+      created.parentGoalId=parent.id;created.documentEdit=structuredClone(input);created.planningDone=true;created.planningOffset=created.request.length;
+      created.tasks=[{id:'native-brief-edit',specialist:'pdf',documentEdit:true,description:'Inspect the original multi-page research brief, propose the exact requested summary edit and await explicit approval before saving a revision.',acceptance:'Native edit must satisfy the exact intent with source support. Preserve the original PDF/HTML, complete personal notes, title and citations. Apply only the inspected exact proposal, register one durable revision and reconcile interruption without duplicated edits.',dependsOn:[],status:'pending',attempts:0}];
+      this.db.query('INSERT INTO goal_document_edit_requests VALUES(?,?,?)').run(parentId,input.requestKey,created.id);
+      this.event(created,'coordinator','edit_requested','Exact edit intent and unchanged original document identity saved. The local model can propose a summary change; no revision is applied until you explicitly approve the saved proposal.');
+      return created;
+    })();this.kick();return this.get(child.id);
+  }
+
   stop(id: string): GoalRecord {
     const goal = this.get(id);
     if (goal.status === 'completed' || goal.status === 'cancelled') return goal;
@@ -283,6 +316,7 @@ export class GoalOrchestrator {
     if (goal.sourceQuestion && note.length > 500) throw new Error('Source-question guidance must be at most 500 characters; no guidance was omitted.');
     if (goal.status === 'completed') return goal;
     if (goal.brief && note.trim()) throw new Error('This brief keeps its saved title, notes and accepted research unchanged. Continue without new guidance, or create another brief from the original question for changed requirements. Your unsent guidance has not been applied.');
+    if (goal.documentEdit && note.trim()) throw new Error('This edit keeps its exact saved intent and original document unchanged. Continue without guidance, or create a new edit request for changed requirements. Continue never approves a proposal.');
     if (this.controls.has(id)) throw new Error('This goal is still stopping. Continue after the active operation finishes.');
     if (['queued', 'planning', 'running'].includes(goal.status)) {
       if (note.trim()) throw new Error('Stop the active goal before adding continuation guidance');
@@ -427,7 +461,9 @@ export class GoalOrchestrator {
       this.event(goal, 'executor', 'executing', task.description, task.id);
       const execution = await this.options.execute(structuredClone(task), structuredClone(goal), signal, (phase, detail) => {
         signal.throwIfAborted();
-        if (!goal.sourceQuestion || !['fetching_source', 'source_saved', 'source_reused', 'selection_saved', 'selection_reused', 'answering_sources', ...(goal.brief && task.sourceBrief ? ['writing_document', 'draft_saved', 'reviewing_document', 'rendering_document', 'document_saved'] : [])].includes(phase)) throw new Error('Invalid source progress phase');
+        const validSource=goal.sourceQuestion&&['fetching_source', 'source_saved', 'source_reused', 'selection_saved', 'selection_reused', 'answering_sources', ...(goal.brief && task.sourceBrief ? ['writing_document', 'draft_saved', 'reviewing_document', 'rendering_document', 'document_saved'] : [])].includes(phase);
+        const validEdit=goal.documentEdit&&task.documentEdit&&['proposing_document_edit','edit_proposal_saved','reviewing_document_edit','edit_awaiting_approval','rendering_document_edit','edit_rendered','document_edit_saved'].includes(phase);
+        if (!validSource&&!validEdit) throw new Error('Invalid source progress phase');
         this.event(goal, 'executor', phase, detail.slice(0, 2300), task.id);
       });
       signal.throwIfAborted();
@@ -436,8 +472,9 @@ export class GoalOrchestrator {
       if (execution.sourceId && (!goal.sourceQuestion || !task.sourceUrl)) throw new Error('Unexpected source snapshot reference');
       if (execution.sourceAnswer && (!goal.sourceQuestion || !task.sourceAnswer)) throw new Error('Unexpected source answer');
       if (execution.briefArtifact && (!goal.brief || !task.sourceBrief)) throw new Error('Unexpected research document');
+      if (execution.documentEditArtifact && (!goal.documentEdit || !task.documentEdit)) throw new Error('Unexpected document edit receipt');
       task.execution = {message: execution.message, verified: execution.verified, evidence: [...execution.evidence], ...(execution.softwareTaskId ? {softwareTaskId: execution.softwareTaskId} : {}),
-        ...(execution.sourceId ? {sourceId: execution.sourceId} : {}), ...(execution.sourceAnswer ? {sourceAnswer: structuredClone(execution.sourceAnswer)} : {}), ...(execution.briefArtifact ? {briefArtifact: structuredClone(execution.briefArtifact)} : {})};
+        ...(execution.sourceId ? {sourceId: execution.sourceId} : {}), ...(execution.sourceAnswer ? {sourceAnswer: structuredClone(execution.sourceAnswer)} : {}), ...(execution.briefArtifact ? {briefArtifact: structuredClone(execution.briefArtifact)} : {}), ...(execution.documentEditArtifact?{documentEditArtifact:structuredClone(execution.documentEditArtifact)}:{})};
       this.save(goal);
       if (!execution.verified || !execution.evidence.length) {
         task.status = 'needs_input';
@@ -450,7 +487,9 @@ export class GoalOrchestrator {
       {milestone: {description: task.description, acceptance: task.acceptance}, guidance: goal.guidance,execution:task.execution};
     const encoded = JSON.stringify(packet);
     if (encoded.length > 4500) throw new Error('The complete milestone evidence exceeds the small review context. It is saved; provide a smaller verified summary before continuing.');
-    const review = goal.brief && task.sourceBrief
+    const review = goal.documentEdit && task.documentEdit
+      ? await this.options.reviewDocumentEdit!(structuredClone(task),structuredClone(goal),task.execution!,signal)
+      : goal.brief && task.sourceBrief
       ? await this.options.reviewBrief!(structuredClone(task), structuredClone(goal), task.execution!, signal)
       : goal.sourceQuestion && task.sourceUrl
       ? await this.options.reviewSource!(structuredClone(task), structuredClone(goal), task.execution!, signal)
@@ -472,6 +511,13 @@ export class GoalOrchestrator {
   private async coverage(goal: GoalRecord, signal: AbortSignal) {
     goal.status = 'running';
     this.event(goal, 'reviewer', 'reviewing_goal', 'Checking that verified milestones cover the full saved goal.');
+    if (goal.documentEdit) {
+      const task=goal.tasks.find(task=>task.documentEdit);
+      if(!task?.execution?.documentEditArtifact||!task.review?.accepted||!this.options.reviewDocumentEdit||!goal.tasks.every(task=>task.status==='verified'))throw new Error('The document edit has no accepted explicitly approved revision.');
+      const review=await this.options.reviewDocumentEdit(structuredClone(task),structuredClone(goal),task.execution,signal);signal.throwIfAborted();if(!review.accepted)throw new Error('The document edit needs attention: '+review.reason);
+      goal.coverageOffset=goal.request.length;goal.coverageDone=true;goal.status='completed';
+      this.event(goal,'coordinator','completed','The explicitly approved native summary edit is saved as one verified document revision. Original files, full personal notes and citation evidence remain inspectable. Native support review is not an independent factual accuracy guarantee.');return;
+    }
     if (goal.brief) {
       const task = goal.tasks.find(task => task.sourceBrief);
       if (!task?.execution?.briefArtifact || !task.review?.accepted || !this.options.reviewBrief || !goal.tasks.every(task => task.status === 'verified')) throw new Error('The research brief has no accepted saved document.');

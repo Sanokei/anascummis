@@ -1,0 +1,30 @@
+# Readable revised brief: presentation research and acceptance
+
+The accepted two-page phone brief from `def43327504e652282516a2ff6b0a585160f0f73` is the baseline. Its actual first PDF page shows literal Markdown around quoted `fetch/` and source links; its second page is dominated by snapshot IDs and two different SHA-256 fields that happen to have the same value for this plain-text source. Its raw accepted PDF/HTML are history and must remain byte-for-byte unchanged.
+
+## Primary sources consulted
+
+- [PyMuPDF Story API](https://pymupdf.readthedocs.io/en/latest/story-class.html), especially [`write_with_links`](https://pymupdf.readthedocs.io/en/latest/story-class.html#Story.write_with_links) and the `rectfn`/`ElementPosition` contracts. Story consumes HTML/CSS, lays content into host-supplied rectangles and can generate PDF links from anchors. An anchor's visible text and exact `href` are separate values: a readable label can retain a full URI annotation without printing the target URL.
+- [PyMuPDF Stories recipes](https://pymupdf.readthedocs.io/en/latest/recipes-stories.html) describe pagination and the host-provided page-rectangle callback. The recipes do not establish browser-equivalent CSS wrapping. Local renderer measurements therefore check all expected text, every glyph's page bounds and every exact link target after real rendering; a successful call or page count alone is insufficient.
+
+Both official pages were retrieved through ordinary verified HTTPS on October 29, 2026. Exact retrieval times, byte counts and SHA-256 values are retained in the accompanying presentation research receipt. No dependencies or model files were downloaded. Documentation HTML is research input, never executed by the app's PDF renderer.
+
+## Bounded presentation design
+
+Only newly accepted edit revisions use `brief-document-v2`; the original renderer and historical files keep their existing verification path. The document body keeps the exact question, full personal notes, factual text and numbered references. Matched single-backtick code and public HTTPS Markdown links in source quotations become code and labelled anchors. Their claims and labels are not paraphrased. The source record is a readable title link and retrieval time, without printing a long raw URL beside an identical-looking hash.
+
+Every exact raw quotation, full URL, source snapshot, separate response/text hash, reading selection, original model response and operation/version identity remains in explicit provenance detail HTML/JSON. Personal notes are never interpreted as Markdown. The ordinary brief names the available provenance details without putting machine IDs into its reading flow. Inert host markup cannot load a stylesheet, image or script; private and non-HTTPS link destinations do not become active anchors.
+
+The prior arbitrary 12-character token fragmentation is removed from new revisions. Normal URLs fit as normal labelled links. Exceptionally long visible tokens in full notes wrap at path delimiters where possible, falling back to a generous line-length bound; this is PDF layout whitespace only, and exact original strings remain in the HTML and provenance. Complete ordered text is independently checked ignoring PDF layout whitespace and expanding font ligatures.
+
+## Acceptance and critique
+
+1. Re-render the actual prior native brief in an isolated presentation prototype, without inference or mutation of its original files. Verify all 1,719 personal-note characters, exact raw quotes in provenance, complete PDF text, printable bounds and the three exact source/evidence URI targets.
+2. Directly inspect the rendered pages: no literal Markdown links/backticks, no 12-character printed URL fragments, no snapshot/hash/goal-ID block in the ordinary brief. Keep clear numbered references and accessible source labels. The unmodified historical PDF must keep its recorded hash.
+3. Exercise the same renderer through a genuine native edit and ordinary export/reopen UI. Prototype rendering is a layout check, not proof of native edit quality or durable operation recovery.
+
+The initial read-only prototype passed complete-text, bounds and link checks and kept the original PDF SHA-256 `92e0223b2160ee34c8fa94275f713b6294c658206ccde328c0686e66e0bb5e0f`. Direct image inspection confirmed legible code/source links and retained personal notes, but its second page held only scope/provenance explanatory prose. That sparse ending was corrected: the full original scope remains in explicit provenance, while the ordinary footer gives one concise, truthful limit and points to the details. The final prototype uses 11-point text, 1.45 line height and modest paragraph spacing; all original notes, readable quotations and the footer fit on one page. No two-page result is artificially required merely because the unchanged historical input has two pages. Its final SHA-256 is `bc899b021948b980bf9f7de9bd718ab211e0a18fc50778d05951c04304d1bb2c`. The first sparse-ending image remains separate from the final image.
+
+The focused renderer suite also covers genuinely multi-page longer notes, inert HTML/private-link handling and long personal URLs. Its first helper failures (a local variable shadow and an assertion that did not expand a PDF font ligature) are retained; neither was native inference or a missing-content product failure.
+
+Presentation does not establish general factual accuracy. The backend's separately saved genuine native edit/review, explicit user approval, durable identity and interrupted retry acceptance remain necessary. Existing accepted files, all original notes and exact source evidence must survive that path.

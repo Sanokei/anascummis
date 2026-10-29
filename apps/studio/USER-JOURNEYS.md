@@ -17,6 +17,9 @@ bun run test:e2e --journey task-list-application --viewport narrow --require-mod
 # A fresh research → cited document goal, including actual owned-host interruption:
 bun run test:e2e:research-document --viewport all --output .test-data/user-journeys/research-document-NEW
 
+# Edit an explicitly selected stopped, previously native-generated brief:
+bun run test:e2e:research-document-edit --fixture /absolute/path/to/stopped/brief-data --viewport all --output .test-data/user-journeys/research-document-edit-NEW
+
 # List goals and options:
 bun run test:e2e --list
 bun run test:e2e --help
@@ -41,6 +44,8 @@ The supported task-list example and its bounds are in [SOFTWARE.md](SOFTWARE.md#
 The separate `scripts/e2e/app-launch.mjs` suite copies stopped, previously native-generated accepted counter/task-list checkpoints and uses the product's visible **Start app**, iframe, **Stop running app** and status controls. It checks actual use, close/reopen/reload without another launch, host interruption and explicit same-address continuation, compatible child replacement, saved items and immutable accepted artifacts. Its fixed React runtime executes the actual accepted client page, not the packaged Next server. Matching installed dependencies are reused; no new inference, API-seeded tasks or dependency installation is claimed. Use a fresh output folder and retained local fixtures; `--collection-fixture`, `--parent`, `--child`, `--counter-fixture` and `--counter` select them. Fixture databases and local logs stay private.
 
 The separate `test:e2e:research-document` suite begins with fresh private data and a real public-source question. It requires genuine native answer and writing decisions, creates a linked brief through the visible **Create research brief** form, and checks saved notes, source attribution and actual PDF/HTML downloads. The child reuses the complete accepted answer and hash-checked source copies. Its fixed host renderer creates document files; it does not execute model-written code. The suite deliberately stops/restarts only its own Studio processes and requires explicit continuation with the accepted parent and saved writing unchanged. Choose a fresh output folder. A blocked or incorrect native answer/document is an unmet user goal, even when recovery works.
+
+The separate `test:e2e:research-document-edit` suite copies a stopped, previously accepted native two-page brief into fresh owned data. It requires new genuine local edit/support decisions through **Edit brief**, an inspectable before/after proposal, and explicit **Apply proposed edit**. It checks uncertain create/apply acknowledgement recovery, Stop, forced/graceful owned-host restart, a single operation/revision, unchanged original files and all personal notes/citations, actual PDF/HTML bytes and separate raw provenance. The new presentation may reflow the original two-page document into one readable page; this is not fixed-layout editing. The action currently supports the factual summary of an unchanged original structured research brief, not arbitrary imported PDFs or another edit after version 1. It never refetches the prior research or injects replacement model answers. Browser touch and short-window checks do not establish physical-device behavior.
 
 ## Outcomes and evidence
 

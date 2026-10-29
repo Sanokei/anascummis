@@ -80,7 +80,7 @@ test('brief UI keeps drafts and uncertain submissions without replaying them', a
         presentation: {version: 'brief-inline-v1', sha256: 'b'.repeat(64), method: 'Inline formatting changed; factual wording and citation numbers are retained.',
           draft: {paragraphs: [{text: 'One cited fact <script>window.presentationExecuted=true</script>', citations: [1]}]}},
         supportReview: {supported: true, reason: 'Presented wording is supported.'}, artifact: {documentId: 'owned-document', pages: 2}}}), parent);
-    await page.getByRole('button', {name: 'Open brief PDF', exact: true}).click();
+    await page.getByRole('button', {name: 'Open PDF in editor', exact: true}).click();
     expect(await page.evaluate(() => (window as any).lastOpened)).toBe('owned-document');
     const openHtml = page.getByRole('link', {name: 'Open brief HTML', exact: true});
     expect(await openHtml.getAttribute('href')).toBe('/api/goals/f725b77e-e7ce-44a6-aafe-a1dd734f6f5a/brief/preview');

@@ -22,4 +22,4 @@ apps/studio/.test-data/
 apps/studio/public/scene.js
 .deploy-backups/
 apps/studio/.demo-assets/
-apps/studio/tsconfig.tsbuildinfo
+apps/studio/*.tsbuildinfo

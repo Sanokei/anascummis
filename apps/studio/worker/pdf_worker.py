@@ -77,7 +77,7 @@ def inspect(doc, pages=None):
 
 class BriefMarkup(HTMLParser):
     """The research renderer accepts only the host's inert document vocabulary."""
-    tags = {'html', 'head', 'meta', 'title', 'style', 'body', 'main', 'h1', 'h2', 'p', 'br', 'a', 'b'}
+    tags = {'html', 'head', 'meta', 'title', 'style', 'body', 'main', 'h1', 'h2', 'p', 'br', 'a', 'b', 'code'}
     attributes = {'lang', 'charset', 'name', 'content', 'http-equiv'}
 
     def __init__(self):
@@ -85,9 +85,9 @@ class BriefMarkup(HTMLParser):
         self.in_style = False
 
     def handle_starttag(self, tag, attrs):
-        if tag == 'b':
+        if tag in ('b', 'code'):
             if attrs:
-                raise ValueError('Research brief bold prefixes cannot have attributes')
+                raise ValueError('Research brief inline formatting cannot have attributes')
             return
         if tag == 'a':
             if len(attrs) != 1 or attrs[0][0] != 'href' or not safe_brief_link(attrs[0][1]):
@@ -122,7 +122,7 @@ def verify_brief(doc, expected, expected_links):
         raise ValueError('Research brief text expectations are invalid')
     if not 1 <= len(doc) <= 20:
         raise ValueError('Research brief must contain 1 to 20 pages')
-    if not isinstance(expected_links, list) or not 1 <= len(expected_links) <= 2 or any(
+    if not isinstance(expected_links, list) or not 1 <= len(expected_links) <= 16 or any(
             not safe_brief_link(value) for value in expected_links) or len(set(expected_links)) != len(expected_links):
         raise ValueError('Research brief source link expectations are invalid')
     # Expand PDF font ligatures (for example the glyph ﬁ back to fi).

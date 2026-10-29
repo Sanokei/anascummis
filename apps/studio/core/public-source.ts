@@ -13,7 +13,7 @@ export type SourceSnapshot = {
   copiedFrom?: {goalId:string;sourceId:string};
 };
 export type PublicPage = Omit<SourceSnapshot, 'id' | 'goalId' | 'taskId'> & {body: Uint8Array; text: string};
-export type SourceProgress = (phase: 'fetching_source' | 'source_saved' | 'source_reused' | 'selection_saved' | 'selection_reused' | 'answering_sources' | 'writing_document' | 'draft_saved' | 'reviewing_document' | 'rendering_document' | 'document_saved', detail: string) => void;
+export type SourceProgress = (phase: 'fetching_source' | 'source_saved' | 'source_reused' | 'selection_saved' | 'selection_reused' | 'answering_sources' | 'writing_document' | 'draft_saved' | 'reviewing_document' | 'rendering_document' | 'document_saved' | 'proposing_document_edit' | 'edit_proposal_saved' | 'reviewing_document_edit' | 'edit_awaiting_approval' | 'rendering_document_edit' | 'edit_rendered' | 'document_edit_saved', detail: string) => void;
 export type SourceRangeInput={sourceId:string;start:number;end:number;textSha256:string};
 export type SourceReadingResult={id:string;goalId:string;taskId:string;readingId?:string;question:string;attempt:number;created:number;status:GoalTask['status'];execution:GoalExecution;review?:GoalReview};
 export type SourceReadingPlan={id:string;goalId:string;taskId:string;version:'source-passages-v1';mode:'auto'|'manual';question:string;questionSha256:string;created:number;match:'matched'|'none'|'manual';ranges:(SourceRangeInput&{label:string;rangeSha256:string;text:string;score:number;matchedTerms:string[]})[];result?:SourceReadingResult;resultCount?:number};

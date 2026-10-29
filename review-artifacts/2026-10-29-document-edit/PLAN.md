@@ -1,0 +1,24 @@
+# Review and apply a genuine local-AI edit to an existing cited brief
+
+Base: `def43327504e652282516a2ff6b0a585160f0f73`. Independent child branch: `codex/native-document-edit-20261029`. Main, normal user data, deployment, unpublished environment draft 13, previous accepted artifacts and frozen kits remain unchanged.
+
+The human wants useful goal-driven journeys with real local inference, visible work and durable recovery. The accepted research→document milestone supplies an actual two-page PDF, full 1,719-character personal notes, source citations and raw model decisions. It does not demonstrate document editing. The generic `editPdf` path immediately writes a new numbered revision; it has neither an expected-base guard, operation identity nor reviewable native proposal. Reusing it as-is would silently accept edits and risk repeating a mutation after an uncertain response.
+
+## One bounded user result
+
+Open the existing real two-page research brief. Ask the installed Qwen to rewrite its factual summary into two short sentences headed **Tests:** and **Browser results:**, retaining both exact locations and citations. Inspect the proposed before/after text, source-support review and precise intent. Explicitly apply that exact proposal to one new revision of the same document. Keep the original PDF/HTML byte-for-byte, the complete personal notes, original raw source quotations and citation identities. This is editing a verified structured research brief through a fixed renderer; it does not establish general imported-PDF editing or arbitrary model-authored code execution.
+
+The new revision also fixes the independently observed presentation problem: ordinary source quotations display formatted inline code/links, friendly clickable source labels replace fragmented printed URLs, and full machine IDs/raw quotations/hashes move to a separately inspectable provenance detail. Exact evidence is retained there, without silently shortening facts or notes. Historical versions keep their historical bytes and rendering contract.
+
+## Acceptance
+
+1. Inspect the actual old PDF/HTML and all pages, record hashes, parent and source identities, full notes and source/model limitations. Read primary SQLite transaction, llama.cpp constrained-generation and PyMuPDF Story/link documentation. State what their guarantees do and do not establish.
+2. Persist the exact edit intent, expected original revision/hash and one request/operation identity before native work. Genuine installed local Qwen proposes the bounded summary change; raw output and hashes are saved before review. Host checks enforce scope and preserved data; a separate role of the same model checks source support and intent. Model agreement is not independent fact verification.
+3. Show proposed changes in existing Goals/PDF windows and require an explicit **Apply proposed edit**. Stop, Continue or server startup must never approve a proposal. Unconfirmed create/apply delivery leads to GET inspection, with no automatic replay or lost/newer draft. Conflicting document revisions or changed files remain unfinished with evidence.
+4. Lose a delivered acknowledgement, deliberately Stop, close/reload, interrupt an owned ordinary Studio during a saved phase, restart and explicitly continue. Preserve one child, native proposal and one new document revision. Verify model decisions are not repeated once saved and accepted research is not fetched or answered again. Distinguish real host interruption from injected filesystem/SQL crash-window checks.
+5. Through visible UI, open/export the revised PDF and HTML. Check actual downloaded MIME/signature/bytes/hashes, both requested labels/locations, complete notes, exact citation provenance, clickable link targets and page containment. Critique original rendered pages and actual desktop/360×800/360×420 proposal/recovery/reader/HTML states. Controls must be reachable with deliberate scrolling and no text overlap; bounded emulated touch is not a physical-phone claim.
+6. Run meaningful affected checks, both TypeScript targets and production build after the implementation. Publish an additive source-pinned review and versioned kit with exact hashes. No repeated broad lifecycle/regression batch, model/dependency downloads, public preview/tunnel, environment publication or native-OS/voice claim.
+
+## Evidence and limitations
+
+Reuse a stopped copy of the previously genuine native two-page fixture in fresh test-owned data; this is not a new public retrieval/research-quality pass. New edit decisions must come from the installed local Qwen, not scripted inference. Normal Studio/model stay healthy; tests own only their new server processes and data. Managed browser `file://` policy remains enforced; use the already supported exact-byte Studio HTML preview. Primary-source retrieval identities, before/after output critique, exact source pins, failures and acceptance receipts accompany the result.

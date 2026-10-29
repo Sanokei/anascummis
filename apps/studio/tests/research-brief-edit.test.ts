@@ -1,0 +1,174 @@
+import {test,expect} from 'bun:test';
+import {Database} from 'bun:sqlite';
+import {join,resolve} from 'node:path';
+import {mkdtemp,rm,readFile,writeFile,readdir,symlink} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {ResearchBriefStore,BRIEF_WRITER_ROLE} from '../core/research-brief';
+import {ResearchBriefEditStore,DOCUMENT_EDIT_ROLE} from '../core/research-brief-edit';
+import {PublicSourceLedger,describePublicSource,sourceHash} from '../core/public-source';
+import type {GoalRecord,GoalTask,SourceAnswer} from '../core/goal-orchestrator';
+import type {Infer} from '../core/model';
+
+const signal=()=>new AbortController().signal,noop=()=>{};
+const question='Where are the Fetch tests kept and where are browser results displayed?';
+const quote='Fetch tests are in `fetch/` in [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt). Browser results are at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).';
+const before='Fetch tests are kept in fetch/ in web-platform-tests/wpt. Browser results are displayed at wpt.fyi/results/fetch.';
+const after='Tests: Fetch tests are kept in fetch/ in web-platform-tests/wpt. Browser results: results are displayed at wpt.fyi/results/fetch.';
+const intent='Rewrite the summary as two short sentences beginning Tests: and Browser results:. Keep both exact locations and citations.';
+
+async function fixture(real=false){
+  const dir=await mkdtemp(join(tmpdir(),'research-brief-edit-')),db=new Database(join(dir,'studio.sqlite'));
+  db.exec('CREATE TABLE documents(id TEXT PRIMARY KEY,name TEXT,revision INTEGER,pages INTEGER); CREATE TABLE pdf_versions(doc TEXT,revision INTEGER,label TEXT,PRIMARY KEY(doc,revision)); CREATE TABLE goal_tasks(id TEXT PRIMARY KEY,body TEXT,updated INTEGER);');
+  const url='https://example.org/fetch-guide',body='# Fetch guide\n'+quote,ledger=new PublicSourceLedger(db,async requested=>describePublicSource(requested,{bytes:new TextEncoder().encode(body),type:'text/plain',url:requested}));
+  const ancestor=crypto.randomUUID(),parentId=crypto.randomUUID(),source=await ledger.capture(ancestor,'source-1',url,signal(),noop);
+  let copy:any;db.transaction(()=>{copy=ledger.copySnapshots(ancestor,parentId,[source.id])[0];})();
+  const {plan}=ledger.prepareReading(parentId,'source-answer',question),range=plan.ranges[0];
+  const answer:SourceAnswer={text:before,uncertainty:'',limit:'These saved source claims have not been independently fact checked.',readingId:plan.id,answerable:true,supportReview:{supported:true,reason:'Both requested locations occur in the saved passage.'},citationMethod:'host-spans-v1',
+    citations:[{sourceId:copy.id,label:'source-1',quote,offset:body.indexOf(quote),textSha256:copy.textSha256,spanId:'source-1:1'}],selections:[{sourceId:copy.id,label:'source-1',start:range.start,end:range.end,textSha256:copy.textSha256,rangeSha256:range.rangeSha256,text:range.text}]};
+  const notes=Array.from({length:34},(_,i)=>`Personal handoff ${String(i+1).padStart(2,'0')}: preserve this entire exact note.`).join('\n');
+  const briefTask:GoalTask={id:'source-brief',specialist:'analysis',sourceBrief:true,description:'Write brief',acceptance:'Keep complete notes and evidence',dependsOn:['source-answer'],status:'running',attempts:1};
+  const parent={id:parentId,parentGoalId:ancestor,request:question,projectId:'test-workspace',research:true,sourceQuestion:{urls:[url]},brief:{parentGoalId:ancestor,requestKey:crypto.randomUUID(),title:'Fetch contributor brief',notes},status:'running',phase:'executing',coverageDone:false,tasks:[
+    {id:'source-1',specialist:'research',sourceUrl:url,status:'verified',execution:{verified:true,sourceId:copy.id,evidence:['Synthetic identity fixture'],message:'saved'},review:{accepted:true,reason:'Hash-checked fixture'}},
+    {id:'source-answer',specialist:'analysis',sourceAnswer:true,status:'verified',execution:{verified:true,sourceAnswer:answer,evidence:['Synthetic answer fixture'],message:before},review:{accepted:true,reason:'Injected support acceptance'}},briefTask]} as GoalRecord;
+  let renders=0,inspections=0;const calls:{role:string;packet:any}[]=[];
+  const engine=async(job:Record<string,any>)=>{
+    if(job.op==='research_brief')renders++;if(job.op==='inspect')inspections++;
+    if(real){
+      const root=resolve(import.meta.dir,'..'),python=process.env.PYTHON_PATH||join(root,'.venv/bin/python'),proc=Bun.spawn([python,join(root,'worker/pdf_worker.py')],{stdin:'pipe',stdout:'pipe',stderr:'pipe'});
+      proc.stdin.write(JSON.stringify(job));proc.stdin.end();const [out,err,code]=await Promise.all([new Response(proc.stdout).text(),new Response(proc.stderr).text(),proc.exited]);const value=JSON.parse(out);if(code||!value.ok)throw new Error(value.error||err);return value.result;
+    }
+    if(job.op==='research_brief')await writeFile(job.output,'%PDF-1.7\nSynthetic render '+renders+'; native quality and real PDF rendering are not established by this fixture.\n');
+    if(job.op==='inspect')return {pageCount:2,pages:[{page:1,text:before},{page:2,text:notes}]};
+    return {pageCount:2,complete:true,contained:true,links:job.args?.expectedLinks||[],linksContained:true};
+  };
+  const briefs=new ResearchBriefStore(db,ledger,dir,engine),briefInfer:Infer=async role=>role===BRIEF_WRITER_ROLE?{paragraphs:[{text:before,citations:[1]}]}:{supported:true,reason:'Injected source support, not native quality.'};
+  const original=await briefs.execute(briefTask,parent,signal(),briefInfer,noop);Object.assign(briefTask,{status:'verified',execution:original,review:{accepted:true,reason:'Host original fixture acceptance'}});Object.assign(parent,{status:'completed',coverageDone:true});
+  db.query('INSERT INTO goal_tasks VALUES(?,?,?)').run(parent.id,JSON.stringify(parent),Date.now());
+  const store=new ResearchBriefEditStore(db,briefs,dir,engine),request=await store.prepare(parent,{requestKey:crypto.randomUUID(),intent});
+  const task:GoalTask={id:'native-brief-edit',specialist:'pdf',documentEdit:true,description:'Propose summary edit',acceptance:'Keep original notes and citations; apply only after approval',dependsOn:[],status:'running',attempts:1};
+  const goal={id:crypto.randomUUID(),parentGoalId:parent.id,request:intent,projectId:parent.projectId,documentId:request.documentId,documentEdit:request,status:'running',tasks:[task]} as GoalRecord;
+  db.query('INSERT INTO goal_tasks VALUES(?,?,?)').run(goal.id,JSON.stringify(goal),Date.now());
+  const infer:Infer=async(role,raw)=>{calls.push({role,packet:JSON.parse(raw)});return role===DOCUMENT_EDIT_ROLE?{paragraphs:[{text:after,citations:[1]}]}:{supported:true,reason:'Injected review: the two requested labelled sentences retain both exact locations and the literal citation.'};};
+  const originalPdf=await readFile(join(dir,'documents',request.documentId,'0.pdf')),originalHtml=await readFile(join(dir,'documents',request.documentId,'brief.html'));
+  return {dir,db,ledger,parent,goal,task,store,briefs,engine,infer,calls,notes,originalPdf,originalHtml,counts:()=>({renders,inspections}),restart:()=>new ResearchBriefEditStore(db,briefs,dir,engine),close:async()=>{db.close();await rm(dir,{recursive:true,force:true});}};
+}
+
+async function propose(f:Awaited<ReturnType<typeof fixture>>){await expect(f.store.execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('proposal is ready');f.goal.status='needs_input';f.db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(f.goal),f.goal.id);const state=f.store.state(f.goal.id)!;expect(state.phase).toBe('awaiting_approval');return state;}
+async function approve(f:Awaited<ReturnType<typeof fixture>>){f.db.query('UPDATE goal_tasks SET body=? WHERE id=?').run(JSON.stringify(f.goal),f.goal.id);const state=f.store.state(f.goal.id)!;return await f.store.approve(f.goal,{operationId:state.operationId,proposalSha256:state.proposalSha256!});}
+
+test('proposal is durable read-only work; Continue does not approve and exact approval creates one version without another native decision',async()=>{
+  const f=await fixture();try{
+    const state=await propose(f);expect(f.calls.length).toBe(2);expect(state.before.paragraphs[0].text).toBe(before);expect(state.proposal?.paragraphs[0].text).toBe(after);expect(state.preserved.notes).toBe(f.notes);expect(state.inspectBase.pages.length).toBe(2);
+    expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:1});
+    await expect(f.restart().execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('proposal is ready');expect(f.calls.length).toBe(2);expect(f.store.state(f.goal.id)!.operationId).toBe(state.operationId);
+    await approve(f);const result=await f.restart().execute(f.task,f.goal,signal(),f.infer,noop);expect(result.verified).toBe(true);expect(result.documentEditArtifact).toMatchObject({operationId:state.operationId,documentId:f.goal.documentId!,revision:1});
+    expect((await f.store.review(f.task,f.goal,result,signal())).accepted).toBe(true);expect(f.calls.length).toBe(2);expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:2});
+    expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'brief.html'))).toEqual(f.originalHtml);
+    const provenance=JSON.parse(new TextDecoder().decode((await f.store.export(f.goal,'provenance-json')).bytes));expect(provenance.evidence.originalBrief.input.notes).toBe(f.notes);expect(provenance.evidence.originalBrief.input.answer.citations[0].quote).toBe(quote);expect(provenance.evidence.nativeEdit.raw).toEqual(state.writingAttempt!.raw);
+    const count=f.counts().renders;expect(await f.store.execute(f.task,f.goal,signal(),f.infer,noop)).toEqual(result);expect(f.counts().renders).toBe(count);expect(f.calls.length).toBe(2);
+    for(const call of f.calls){expect(call.packet.acceptedAnswer).toBe(before);expect(call.packet.citations[0].quote).toBe(quote);expect(JSON.stringify(call.packet)).not.toContain(f.notes);}
+  }finally{await f.close();}
+});
+
+test('interruption immediately after saving the native proposal reuses it and performs only the missing support decision',async()=>{
+  const f=await fixture();try{
+    await expect(f.store.execute(f.task,f.goal,signal(),f.infer,phase=>{if(phase==='edit_proposal_saved')throw new Error('injected proposal interruption');})).rejects.toThrow('injected proposal interruption');const saved=f.store.state(f.goal.id)!;expect(saved.phase).toBe('proposal_saved');expect(f.calls.length).toBe(1);
+    await expect(f.restart().execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('proposal is ready');expect(f.calls.length).toBe(2);expect(f.store.state(f.goal.id)!.writingAttempt).toEqual(saved.writingAttempt);expect(f.store.state(f.goal.id)!.proposalSha256).toBe(saved.proposalSha256);expect(f.counts().renders).toBe(1);
+  }finally{await f.close();}
+});
+
+test('interrupted rendered-files checkpoint adopts the exact bytes and registers one revision without rerendering or repeat inference',async()=>{
+  const f=await fixture();try{
+    await propose(f);await approve(f);await expect(f.store.execute(f.task,f.goal,signal(),f.infer,phase=>{if(phase==='edit_rendered')throw new Error('injected rendered interruption');})).rejects.toThrow('injected rendered interruption');
+    const state=f.store.state(f.goal.id)!,rendered=await readFile(join(f.dir,'documents',f.goal.documentId!,'edits',state.operationId,'revised.pdf'));expect(state.phase).toBe('rendered');expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});const count=f.counts().renders;
+    const result=await f.restart().execute(f.task,f.goal,signal(),f.infer,noop);expect(result.documentEditArtifact?.pdfSha256).toBe(sourceHash(rendered));expect(f.counts().renders).toBe(count);expect(f.calls.length).toBe(2);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'1.pdf'))).toEqual(rendered);expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions WHERE revision=1').get()).toEqual({n:1});
+  }finally{await f.close();}
+});
+
+test('lost completion and a rolled-back SQL registration retain the same operation and rendered files',async()=>{
+  const f=await fixture();try{
+    await propose(f);await approve(f);f.db.exec("CREATE TRIGGER fail_edit_registration BEFORE INSERT ON pdf_versions WHEN NEW.revision=1 BEGIN SELECT RAISE(ABORT,'injected registration failure'); END;");
+    await expect(f.store.execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('injected registration failure');const state=f.store.state(f.goal.id)!;expect(state.phase).toBe('rendered');expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});const count=f.counts().renders;
+    f.db.exec('DROP TRIGGER fail_edit_registration');await expect(f.restart().execute(f.task,f.goal,signal(),f.infer,phase=>{if(phase==='document_edit_saved')throw new Error('injected lost completion');})).rejects.toThrow('injected lost completion');expect(f.store.state(f.goal.id)!.phase).toBe('saved');
+    const result=await f.restart().execute(f.task,f.goal,signal(),f.infer,noop);expect(result.documentEditArtifact?.operationId).toBe(state.operationId);expect(f.counts().renders).toBe(count);expect(f.calls.length).toBe(2);expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:2});
+  }finally{await f.close();}
+});
+
+test('approval binds the exact operation and proposal; stopped goals and changed intent cannot publish',async()=>{
+  const f=await fixture();try{
+    const state=await propose(f);for(const wrong of [{operationId:crypto.randomUUID(),proposalSha256:state.proposalSha256!},{operationId:state.operationId,proposalSha256:'a'.repeat(64)}])await expect(Promise.resolve().then(()=>f.store.approve(f.goal,wrong))).rejects.toThrow('does not match');
+    f.goal.status='cancelled';await expect(Promise.resolve().then(()=>approve(f))).rejects.toThrow();f.goal.status='needs_input';
+    const changed=structuredClone(f.goal);changed.documentEdit!.intent='A different unsaved intent';changed.request=changed.documentEdit!.intent;await expect(f.store.execute(f.task,changed,signal(),f.infer,noop)).rejects.toThrow('request changed');expect(f.calls.length).toBe(2);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});
+  }finally{await f.close();}
+});
+
+test('source-support rejection stays inspectable and cannot be turned into silent regeneration or approval',async()=>{
+  const f=await fixture();try{
+    const reject:Infer=async(role,packet,schema,sig)=>role===DOCUMENT_EDIT_ROLE?f.infer(role,packet,schema,sig):{supported:false,reason:'The proposed wording does not satisfy the exact requested intent.'};
+    await expect(f.store.execute(f.task,f.goal,signal(),reject,noop)).rejects.toThrow('needs support');const state=f.store.state(f.goal.id)!;expect(state.phase).toBe('rejected');expect(state.proposal?.paragraphs[0].text).toBe(after);expect(state.supportReview?.supported).toBe(false);
+    await expect(f.restart().execute(f.task,f.goal,signal(),async()=>{throw new Error('must not infer again');},noop)).rejects.toThrow('needs support');f.goal.status='needs_input';await expect(Promise.resolve().then(()=>approve(f))).rejects.toThrow();expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.counts().renders).toBe(1);
+  }finally{await f.close();}
+});
+
+test('introduced URLs and changed citation selection fail before native over-acceptance or publication',async()=>{
+  for(const draft of [{paragraphs:[{text:after+' Read https://invented.example/new.',citations:[1]}]},{paragraphs:[{text:after,citations:[2]}]}]){
+    const f=await fixture();try{let calls=0;await expect(f.store.execute(f.task,f.goal,signal(),async()=>{calls++;return draft;},noop)).rejects.toThrow('host check');const state=f.store.state(f.goal.id)!;expect(state.phase).toBe('rejected');expect(state.writingAttempt?.raw).toEqual(draft);expect(state.supportReview).toBeUndefined();expect(calls).toBe(1);expect(f.counts().renders).toBe(1);}finally{await f.close();}
+  }
+});
+
+test('original-file tampering and a conflicting revision are detected after a proposal without overwriting accepted files',async()=>{
+  for(const conflict of ['original','revision'] as const){const f=await fixture();try{
+    await propose(f);if(conflict==='original')await writeFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'),'%PDF-1.7\nmodified outside edit');else{f.db.query('UPDATE documents SET revision=1 WHERE id=?').run(f.goal.documentId!);f.db.query('INSERT INTO pdf_versions VALUES(?,?,?)').run(f.goal.documentId!,1,'Unknown external revision');await writeFile(join(f.dir,'documents',f.goal.documentId!,'1.pdf'),'EXTERNAL REVISION MUST STAY');}
+    await expect(Promise.resolve().then(()=>approve(f))).rejects.toThrow();expect(f.calls.length).toBe(2);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'brief.html'))).toEqual(f.originalHtml);if(conflict==='revision')expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'1.pdf'),'utf8')).toBe('EXTERNAL REVISION MUST STAY');
+  }finally{await f.close();}}
+});
+
+test('damaged native response, proposal or complete-note checkpoint is rejected while its original saved bytes remain inspectable',async()=>{
+  for(const damage of ['native','proposal','notes'] as const){const f=await fixture();try{
+    await propose(f);const row=f.db.query('SELECT body FROM research_brief_edits WHERE goal=?').get(f.goal.id) as {body:string},body=JSON.parse(row.body);if(damage==='native')body.writingAttempt.raw={paragraphs:[{text:'changed',citations:[1]}]};else if(damage==='proposal')body.proposal.paragraphs[0].text='changed';else body.preserved.notes='shortened';
+    f.db.query('UPDATE research_brief_edits SET body=? WHERE goal=?').run(JSON.stringify(body),f.goal.id);expect(()=>f.store.state(f.goal.id)).toThrow();expect(f.calls.length).toBe(2);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);
+  }finally{await f.close();}}
+});
+
+test('real renderer: revised multi-page PDF/HTML retains complete notes and exact raw citations in separate provenance',async()=>{
+  const f=await fixture(true);try{
+    const state=await propose(f);expect(state.inspectBase.pages.length).toBeGreaterThanOrEqual(2);await approve(f);const result=await f.store.execute(f.task,f.goal,signal(),f.infer,noop);expect(result.documentEditArtifact?.pages).toBeGreaterThanOrEqual(2);
+    const pdf=await f.store.export(f.goal,'pdf'),html=new TextDecoder().decode((await f.store.export(f.goal,'html')).bytes),provenance=JSON.parse(new TextDecoder().decode((await f.store.export(f.goal,'provenance-json')).bytes));expect(new TextDecoder().decode(pdf.bytes.slice(0,5))).toBe('%PDF-');expect(html).toContain('Tests:');expect(html).toContain('Browser results:');expect(html).not.toContain('Response SHA-256:');expect(html).not.toContain('Snapshot:');expect(html).not.toContain('](https://');expect(html).toContain('https://github.com/web-platform-tests/wpt');expect(provenance.evidence.originalBrief.input.notes).toBe(f.notes);expect(provenance.evidence.originalBrief.input.answer.citations[0].quote).toBe(quote);expect(provenance.evidence.originalBrief.state.artifact.pdfSha256).toBe(sourceHash(f.originalPdf));
+    expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'brief.html'))).toEqual(f.originalHtml);expect(f.calls.length).toBe(2);const beforeEntries=await readdir(join(f.dir,'documents',f.goal.documentId!,'edits',state.operationId));await f.store.export(f.goal,'pdf');expect(await readdir(join(f.dir,'documents',f.goal.documentId!,'edits',state.operationId))).toEqual(beforeEntries);
+  }finally{await f.close();}
+},30000);
+
+
+test('duplicated citation numbers are rejected before support review, approval or document revision',async()=>{
+  const f=await fixture();try{
+    const duplicated={paragraphs:[{text:after,citations:[1,1]}]};let calls=0;
+    await expect(f.store.execute(f.task,f.goal,signal(),async()=>{calls++;return duplicated;},noop)).rejects.toThrow('without duplicates');
+    const state=f.store.state(f.goal.id)!;expect(state.phase).toBe('rejected');expect(state.writingAttempt?.raw).toEqual(duplicated);expect(state.draftCheck?.accepted).toBe(false);expect(state.supportReview).toBeUndefined();
+    f.goal.status='needs_input';await expect(approve(f)).rejects.toThrow();expect(calls).toBe(1);expect(f.counts().renders).toBe(1);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:1});
+  }finally{await f.close();}
+});
+
+test('an unregistered unknown revision file is preserved and never claimed as this edit after publication collision',async()=>{
+  const f=await fixture();try{
+    const proposed=await propose(f);await approve(f);const path=join(f.dir,'documents',f.goal.documentId!,'1.pdf'),unknown=Buffer.from('%PDF-1.7\nUnknown existing revision, preserve exactly.\n');await writeFile(path,unknown,{flag:'wx'});
+    await expect(f.store.execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('No file was replaced');
+    const state=f.store.state(f.goal.id)!;expect(state.phase).toBe('rendered');expect(state.operationId).toBe(proposed.operationId);expect(state.artifact?.pdfSha256).not.toBe(sourceHash(unknown));expect(await readFile(path)).toEqual(unknown);expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions WHERE revision=1').get()).toEqual({n:0});
+    const renders=f.counts().renders;await expect(f.restart().execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('No file was replaced');expect(f.counts().renders).toBe(renders);expect(f.calls.length).toBe(2);expect(await readFile(path)).toEqual(unknown);await expect(f.store.export(f.goal,'pdf')).rejects.toThrow('finish this reviewed edit');expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);
+  }finally{await f.close();}
+});
+
+test('an impossible saved phase without its artifact cannot become a false completed revision',async()=>{
+  const f=await fixture();try{
+    await propose(f);const row=f.db.query('SELECT body FROM research_brief_edits WHERE goal=?').get(f.goal.id) as {body:string},body=JSON.parse(row.body);body.phase='saved';body.approvedProposalSha256=body.proposalSha256;delete body.artifact;
+    f.db.query('UPDATE research_brief_edits SET body=? WHERE goal=?').run(JSON.stringify(body),f.goal.id);
+    expect(()=>f.store.state(f.goal.id)).toThrow('artifact identity');await expect(f.store.export(f.goal,'pdf')).rejects.toThrow('artifact identity');await expect(f.restart().execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('artifact identity');
+    expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions').get()).toEqual({n:1});expect(f.counts().renders).toBe(1);expect(f.calls.length).toBe(2);expect(await readFile(join(f.dir,'documents',f.goal.documentId!,'0.pdf'))).toEqual(f.originalPdf);
+  }finally{await f.close();}
+});
+
+test('a symlink at the prospective revision path cannot overwrite its target or register an edit',async()=>{
+  const f=await fixture();try{
+    await propose(f);await approve(f);const target=join(f.dir,'unrelated-protected-file.txt'),sentinel='This unrelated file must never be overwritten.';await writeFile(target,sentinel);await symlink(target,join(f.dir,'documents',f.goal.documentId!,'1.pdf'));
+    await expect(f.store.execute(f.task,f.goal,signal(),f.infer,noop)).rejects.toThrow('ordinary owned file');expect(await readFile(target,'utf8')).toBe(sentinel);expect(f.store.state(f.goal.id)!.phase).toBe('rendered');expect(f.db.query('SELECT revision FROM documents').get()).toEqual({revision:0});expect(f.db.query('SELECT COUNT(*) n FROM pdf_versions WHERE revision=1').get()).toEqual({n:0});expect(f.calls.length).toBe(2);
+  }finally{await f.close();}
+});

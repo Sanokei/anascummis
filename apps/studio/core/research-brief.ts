@@ -8,7 +8,7 @@ import {objectSchema,validate} from './harness';
 import type {BriefArtifact,BriefDraft,BriefState} from './research-brief-types';
 
 type PdfEngine=(job:Record<string,unknown>)=>Promise<any>;
-type BriefInput={version:'research-brief-v1';goalId:string;parentGoalId:string;question:string;guidance?:string;title:string;notes:string;requestKey:string;answer:SourceAnswer;sources:SourceSnapshot[]};
+export type BriefInput={version:'research-brief-v1';goalId:string;parentGoalId:string;question:string;guidance?:string;title:string;notes:string;requestKey:string;answer:SourceAnswer;sources:SourceSnapshot[]};
 type Stored={id:string;goal:string;input_hash:string;input:string;body:string};
 const paragraphSchema=objectSchema({text:{type:'string',minLength:1,maxLength:600},citations:{type:'array',minItems:1,maxItems:2,items:{type:'integer',minimum:1,maximum:2}}});
 const draftSchema=objectSchema({paragraphs:{type:'array',minItems:1,maxItems:1,items:paragraphSchema}});
@@ -219,4 +219,6 @@ export class ResearchBriefStore{
   async review(task:GoalTask,goal:GoalRecord,execution:GoalExecution,signal:AbortSignal):Promise<GoalReview>{signal.throwIfAborted();const input=this.input(task,goal),state=this.checkpoint(input);if(!execution.verified||!execution.briefArtifact||JSON.stringify(execution.briefArtifact)!==JSON.stringify(state.artifact))fail('The document acceptance receipt does not match its saved artifact.');await this.verifyArtifact(input,state);signal.throwIfAborted();return {accepted:true,reason:'Host re-read the exact PDF and HTML, verified all text and page bounds, source/citation/draft hashes and one registered document. The saved native support review passed; source claims are not independently verified.'};}
   async exportHtml(goal:GoalRecord):Promise<{bytes:Uint8Array;name:string}>{const task=goal.tasks.find(task=>task.sourceBrief);if(!task)fail('This goal has no research brief.');const input=this.input(task!,goal),state=this.existing(input);await this.verifyArtifact(input,state);return {bytes:new Uint8Array(await readFile(this.paths(state).html)),name:input.title+'.html'};}
   async exportPdf(goal:GoalRecord):Promise<{bytes:Uint8Array;name:string}>{const task=goal.tasks.find(task=>task.sourceBrief);if(!task)fail('This goal has no research brief.');const input=this.input(task!,goal),state=this.existing(input);await this.verifyArtifact(input,state);return {bytes:new Uint8Array(await readFile(this.paths(state).pdf)),name:input.title+'.pdf'};}
+  /** Read-only, fully verified handoff for a separately identified edit goal. */
+  async snapshot(goal:GoalRecord):Promise<{input:BriefInput;state:BriefState}>{const task=goal.tasks.find(task=>task.sourceBrief);if(!task)fail('This goal has no research brief.');const input=this.input(task,goal),state=this.existing(input);await this.verifyArtifact(input,state);return structuredClone({input,state});}
 }

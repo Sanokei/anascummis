@@ -345,10 +345,10 @@ async function runCase(browser, viewportName, options) {
 
     for (const viewport of layoutViewports) {
       await page.setViewportSize(viewport); await openGoals();
-      for (const name of ['Open brief PDF', 'Open brief HTML', 'Download brief PDF', 'Download brief HTML']) await reachable(action(card(child.id), name), name);
-      await screenshot('saved-brief-actions-' + viewport.width + 'x' + viewport.height, action(card(child.id), 'Open brief PDF'));
+      for (const name of ['Open PDF in editor', 'Open brief HTML', 'Download brief PDF', 'Download brief HTML']) await reachable(action(card(child.id), name), name);
+      await screenshot('saved-brief-actions-' + viewport.width + 'x' + viewport.height, action(card(child.id), 'Open PDF in editor'));
     }
-    await action(card(child.id), 'Open brief PDF')[pointer]();
+    await action(card(child.id), 'Open PDF in editor')[pointer]();
     async function decodedPdfPage(number) {
       const image = page.getByRole('img', {name: 'PDF page ' + number, exact: true}); await image.waitFor();
       await until(() => image.evaluate((element, expected) => element.complete && element.naturalWidth > 0 && new URL(element.src).searchParams.get('page') === String(expected), number), 'ordinary PDF window actually decodes saved page ' + number);
@@ -448,7 +448,7 @@ async function runCase(browser, viewportName, options) {
 
     const finished = await snapshotGoal(child.id), completedPosts = mutationCount(); await stopHost(host, 'SIGTERM'); host = undefined; await boot(); await page.reload({waitUntil: 'networkidle'}); await openGoals();
     assert.deepEqual(await snapshotGoal(child.id), finished); assert.deepEqual(await snapshotGoal(parent.id), parent); assert.equal(mutationCount(), completedPosts);
-    await card(child.id).waitFor(); await action(card(child.id), 'Open brief PDF')[pointer](); await decodedPdfPage(lastPageNumber);
+    await card(child.id).waitFor(); await action(card(child.id), 'Open PDF in editor')[pointer](); await decodedPdfPage(lastPageNumber);
     await page.getByText('Page ' + lastPageNumber + ' of ' + artifact.pages, {exact: true}).waitFor();
     await screenshot('reopened-pdf-keeps-last-inspected-page', page.getByRole('button', {name: 'Fit PDF width', exact: true}));
     assert.equal((await get('/api/documents')).length, 1); assert.equal((await get('/api/goals')).filter(goal => goal.brief?.requestKey === submittedKey).length, 1);

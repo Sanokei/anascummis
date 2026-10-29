@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import type {GoalRecord} from '../core/goal-orchestrator';
 import type {BriefArtifact, BriefRequest, BriefState} from '../core/research-brief-types';
 import {beginBriefSubmission, readBriefDraft, sameBriefSubmission, settleBriefSubmission, type BriefFormDraft, type BriefSubmission} from '../core/research-brief-draft';
+import {ResearchBriefEdit} from './ResearchBriefEdit';
 
 type BriefGoal = GoalRecord & {brief?: BriefRequest; briefState?: BriefState};
 type Props = {goal: BriefGoal; onCreated: (child: GoalRecord) => void; onOpenDocument: (id: string) => void};
@@ -22,12 +23,12 @@ function SavedBrief({goal, onOpenDocument}: Pick<Props, 'goal' | 'onOpenDocument
     {artifact && <>
       <p>{artifact.pages} {artifact.pages === 1 ? 'page' : 'pages'} · {goal.status === 'completed' ? 'Document and goal checks passed.' : 'The files are saved; goal acceptance is still shown above.'}</p>
       <div className="goal-actions research-brief-actions">
-        <button type="button" onClick={() => onOpenDocument(artifact.documentId)}>Open brief PDF</button>
+        <button type="button" onClick={() => onOpenDocument(artifact.documentId)}>Open PDF in editor</button>
         <a href={'/api/goals/' + encodeURIComponent(goal.id) + '/brief/preview'} target="_blank" rel="noopener noreferrer">Open brief HTML</a>
         <a href={'/api/goals/' + encodeURIComponent(goal.id) + '/brief/export?format=pdf'} download>Download brief PDF</a>
         <a href={'/api/goals/' + encodeURIComponent(goal.id) + '/brief/export?format=html'} download>Download brief HTML</a>
       </div>
-      <small>The PDF opens in the editor. Brief downloads keep the original checked document.</small>
+      <small>The editor shows the latest document version. These brief downloads and the HTML preview keep the original checked document.</small>
     </>}
     {state?.presentation && <section className="research-brief-presentation" aria-label="Presented brief">
       <h5 style={{fontSize: 13, margin: '10px 0 6px'}}>Presented brief</h5>
@@ -174,7 +175,8 @@ function BriefCreation({goal, onCreated}: Pick<Props, 'goal' | 'onCreated'>) {
 }
 
 export function ResearchBrief({goal, onCreated, onOpenDocument}: Props) {
-  if (goal.brief) return <SavedBrief goal={goal} onOpenDocument={onOpenDocument}/>;
+  if (goal.documentEdit) return <ResearchBriefEdit goal={goal} onCreated={onCreated} onOpenDocument={onOpenDocument}/>;
+  if (goal.brief) return <><SavedBrief goal={goal} onOpenDocument={onOpenDocument}/><ResearchBriefEdit goal={goal} onCreated={onCreated} onOpenDocument={onOpenDocument}/></>;
   const answerTask = goal.tasks.find(task => task.sourceAnswer), answer = answerTask?.execution?.sourceAnswer;
   if (goal.status !== 'completed' || !goal.sourceQuestion || answerTask?.status !== 'verified' || !answerTask.review?.accepted || answer?.answerable !== true || answer.supportReview?.supported !== true) return null;
   return <BriefCreation goal={goal} onCreated={onCreated}/>;

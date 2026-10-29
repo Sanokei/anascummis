@@ -182,32 +182,33 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
       const accepted = goal.tasks.filter(task => task.status === 'verified').length;
       const running = ['queued', 'planning', 'running'].includes(goal.status);
       const canResume = ['needs_input', 'cancelled'].includes(goal.status);
+      const awaitingEditApproval = goal.documentEditState?.phase === 'awaiting_approval' && goal.status === 'needs_input';
       const latest = goal.events.at(-1);
       const longRequest = goal.request.length > 180;
       const linkedSoftwareTask = goal.tasks.find(task => ['running', 'needs_input'].includes(task.status) && (task.softwareTaskId || task.execution?.softwareTaskId)) || goal.tasks.find(task => task.softwareTaskId || task.execution?.softwareTaskId);
       const linkedSoftwareId = linkedSoftwareTask?.softwareTaskId || linkedSoftwareTask?.execution?.softwareTaskId;
       const followups = goals.filter(item => item.parentGoalId === goal.id);
       return <article key={goal.id} ref={node => {if (node) goalNodes.current.set(goal.id, node); else goalNodes.current.delete(goal.id);}} tabIndex={-1} data-goal-id={goal.id} aria-current={goalSelection?.id === goal.id ? 'true' : undefined} className={'goal-record' + (goalSelection?.id === goal.id ? ' is-selected' : '')}>
-        <h3>{goal.brief ? goal.brief.title : longRequest ? goal.request.slice(0, 180).trimEnd() + '…' : goal.request}</h3>
+        <h3>{goal.documentEdit ? 'Edit: ' + (goal.documentEditState?.preserved.title || 'Research brief') : goal.brief ? goal.brief.title : longRequest ? goal.request.slice(0, 180).trimEnd() + '…' : goal.request}</h3>
         <p className="goal-state">{goalLabels[goal.status]} · {goal.phase.replaceAll('_', ' ')}</p>
         <p>{goal.message}</p>
         <small>Updated {new Date(goal.updated).toLocaleString()}</small>
         {goal.tasks.length > 0 && <p>{accepted} of {goal.tasks.length} milestones accepted</p>}
         {latest && <p className="goal-current-role">{roleLabels[latest.role]} · {latest.detail === goal.message ? latest.phase.replaceAll('_', ' ') : latest.detail}</p>}
-        {goal.parentGoalId && <div className="goal-question-link"><small>{goal.brief ? 'Research brief from the parent’s complete accepted answer and checked source copies. The parent is unchanged.' : 'New question from the parent’s saved source copies. Its answer is separate.'}</small><button type="button" onClick={() => void openQuestion(goal.parentGoalId!)}>Open parent question</button></div>}
-        {followups.length > 0 && <details className="goal-question-links"><summary>{followups.length} linked {followups.length === 1 ? 'goal' : 'goals'}</summary>{followups.map(child => <button key={child.id} type="button" onClick={() => void openQuestion(child.id)}>{child.brief ? 'Open research brief: ' + child.brief.title : 'Open follow-up question: ' + (child.request.length > 100 ? child.request.slice(0, 100).trimEnd() + '…' : child.request)}</button>)}</details>}
+        {goal.parentGoalId && <div className="goal-question-link"><small>{goal.documentEdit ? 'A proposed edit of the parent’s saved brief. The original files, notes and research are preserved.' : goal.brief ? 'Research brief from the parent’s complete accepted answer and checked source copies. The parent is unchanged.' : 'New question from the parent’s saved source copies. Its answer is separate.'}</small><button type="button" onClick={() => void openQuestion(goal.parentGoalId!)}>{goal.documentEdit ? 'Open original brief goal' : 'Open parent question'}</button></div>}
+        {followups.length > 0 && <details className="goal-question-links"><summary>{followups.length} linked {followups.length === 1 ? 'goal' : 'goals'}</summary>{followups.map(child => <button key={child.id} type="button" onClick={() => void openQuestion(child.id)}>{child.documentEdit ? 'Open brief edit: ' + (child.request.length > 100 ? child.request.slice(0, 100).trimEnd() + '…' : child.request) : child.brief ? 'Open research brief: ' + child.brief.title : 'Open follow-up question: ' + (child.request.length > 100 ? child.request.slice(0, 100).trimEnd() + '…' : child.request)}</button>)}</details>}
         {linkedSoftwareId && <div className="goal-child-link">
           <small>Software build for milestone {goal.tasks.indexOf(linkedSoftwareTask!) + 1}</small>
           <button onClick={() => onOpenSoftware(linkedSoftwareId)}>Open software build</button>
         </div>}
-        {goal.brief && (running || canResume) && <div className="goal-brief-controls">
+        {(goal.brief || goal.documentEdit) && (running || (canResume && !awaitingEditApproval)) && <div className="goal-brief-controls">
           {running && <button disabled={!!busy} onClick={() => void act(goal, 'stop')}>Stop goal</button>}
           {canResume && <button disabled={!!busy} onClick={() => void act(goal, 'resume')}>Continue remaining work</button>}
-          <small>The title, notes and accepted research are saved. Continue reuses saved writing and document evidence. For changed requirements, create another brief from the original question.</small>
+          <small>{goal.documentEdit ? 'The requested change and any saved proposal are kept. Continue finishes unfinished checks; it never approves or reapplies an edit. Apply requires your explicit review below.' : 'The title, notes and accepted research are saved. Continue reuses saved writing and document evidence. For changed requirements, create another brief from the original question.'}</small>
         </div>}
         <ResearchBrief goal={goal} onOpenDocument={onOpenDocument} onCreated={child => {received(child); setGoalSelection({id: child.id, key: ++selectionSequence.current});}}/>
         <GoalSources goal={goal} onAskAnother={goal.brief ? undefined : stageSourceQuestion} message={sourceMessages[goal.id]}/>
-        {!goal.brief && (canResume || !!notes[goal.id]) && <form onSubmit={event => {event.preventDefault(); if (canResume) void act(goal, 'resume');}}>
+        {!goal.brief && !goal.documentEdit && (canResume || !!notes[goal.id]) && <form onSubmit={event => {event.preventDefault(); if (canResume) void act(goal, 'resume');}}>
           {!goal.brief && <label>Guidance for continuing{goal.sourceQuestion ? ' (up to 500 characters)' : ''}<textarea aria-label="Guidance for continuing" value={notes[goal.id] || ''} onChange={event => writeNote(goal.id, event.target.value)} maxLength={goal.sourceQuestion ? 500 : 2000} placeholder="Clarify missing information or explain what to try next."/></label>}
           <small>{goal.brief ? 'The saved title, notes and accepted research stay unchanged. Continue reuses any saved writing and document; it does not refetch sources or repeat accepted work. Create another brief from the original question for changed requirements.' : goal.sourceQuestion ? 'Verified source acquisitions are kept. Changed guidance on an unfinished question can regenerate its read-only answer. Reading plan history shows saved plans and the latest archived answer for each plan; completed questions stay unchanged.' : 'Accepted milestones are kept. Only unfinished work is retried; review any saved changes before continuing.'}</small>
           {!canResume && <small>Your newer guidance draft is kept. You can send it when this goal needs attention or is stopped.</small>}
@@ -249,7 +250,7 @@ export function GoalPanel({projectId, documentId, documentName, onOpenProject, o
         <div className="goal-actions">
           <button onClick={() => onOpenProject(goal.projectId)}>Open website</button>
           {goal.documentId && <button onClick={() => onOpenDocument(goal.documentId!)}>Open PDF</button>}
-          {running && !goal.brief && <button disabled={!!busy} onClick={() => void act(goal, 'stop')}>Stop goal</button>}
+          {running && !goal.brief && !goal.documentEdit && <button disabled={!!busy} onClick={() => void act(goal, 'stop')}>Stop goal</button>}
         </div>
       </article>;
     })}
