@@ -198,3 +198,38 @@ test('a cleanup rejection without an attached Stop is observed and retains the o
   assert.equal(result.state,'stopped');assert.equal(result.origin,inspected.origin);assert.equal(h.events(task.id).filter(x=>x.phase==='app_stopped').length,1);assert.equal(JSON.stringify([...h.tasks]),before);assert.deepEqual(unhandled,[]);process.off('unhandledRejection',observe);
  `);
 });
+
+test('old active apps stay pinned beyond twenty builds through Stop and restart recovery without automatic execution',async()=>{
+ await scenario(`
+  const {listedSoftwareTasks}=await import(${JSON.stringify(join(studio,'core/software-api.ts'))});
+  const h=harness(),parent=h.fixture(),child=h.fixture('collection',parent),accepted=JSON.stringify([h.tasks.get(parent.id),h.tasks.get(child.id)]);
+  for(let i=0;i<30;i++)h.fixture('counter');const recent=[...h.tasks.values()].slice(-20).reverse();assert.equal(recent.length,20);assert.equal(recent.some(task=>task.id===child.id),false);
+  const preparing=deferred();h.setPrepare(async(task,signal)=>{await preparing.promise;return h.prepared(task);});await h.manager.start(child.id);assert.equal(h.row(parent.id).state,'preparing');
+  const rowsBefore=h.database.query('SELECT * FROM software_launches ORDER BY lineage_id').all(),historyBefore=h.events(child.id),countsBefore={...h.calls};
+  for(let i=0;i<4;i++)assert.deepEqual(h.manager.pinnedTaskIds(),[child.id]);assert.deepEqual(h.database.query('SELECT * FROM software_launches ORDER BY lineage_id').all(),rowsBefore);assert.deepEqual(h.events(child.id),historyBefore);assert.deepEqual(h.calls,countsBefore);
+  const listed=listedSoftwareTasks(recent,h.manager.pinnedTaskIds(),h.deps.task);assert.deepEqual(listed.slice(0,20),recent);assert.equal(listed[20].id,child.id);assert.equal(listed.length,21);
+  const stopping=h.manager.stop(child.id);await until(()=>h.row(parent.id).state==='stopping');assert.deepEqual(h.manager.pinnedTaskIds(),[child.id]);preparing.resolve();await stopping;assert.deepEqual(h.manager.pinnedTaskIds(),[]);
+  h.setPrepare(undefined);await h.manager.start(child.id);await until(()=>h.row(parent.id).state==='running');assert.deepEqual(h.manager.pinnedTaskIds(),[child.id]);
+  let current=h.manager;
+  const reopen=async()=>{const before={...h.calls};await new Promise(resolve=>setTimeout(resolve,2));const next=new SoftwareLaunchManager(h.database,'http://127.0.0.1:3211',h.deps);next.initialize();assert.deepEqual(h.calls,before);current=next;return next;};
+  await reopen();assert.equal(h.row(parent.id).state,'interrupted');assert.deepEqual(current.pinnedTaskIds(),[child.id]);assert.equal(h.processes[0].closed,false);
+  const second=h.fixture('counter');await current.start(second.id);await until(()=>h.row(second.id).state==='running');await reopen();
+  const third=h.fixture('counter');await current.start(third.id);await until(()=>h.row(third.id).state==='running');await reopen();assert.deepEqual(current.pinnedTaskIds(),[third.id,second.id]);assert.equal(current.pinnedTaskIds().includes(child.id),false);
+  const active=h.fixture('counter'),lastGate=deferred();h.setPrepare(async(task,signal)=>{await lastGate.promise;return h.prepared(task);});await current.start(active.id);assert.deepEqual(current.pinnedTaskIds(),[active.id,third.id,second.id]);
+  const lastStop=current.stop(active.id);await until(()=>h.row(active.id).state==='stopping');assert.deepEqual(current.pinnedTaskIds(),[active.id,third.id,second.id]);lastGate.resolve();await lastStop;assert.deepEqual(current.pinnedTaskIds(),[third.id,second.id]);assert.equal(JSON.stringify([h.tasks.get(parent.id),h.tasks.get(child.id)]),accepted);
+  // Reopened fake managers model host loss only; no real persisted PID or OS
+  // process is attached/killed by any pin/reconciliation read in this scenario.
+ `);
+});
+
+test('merging pinned builds preserves recent order and object identity, reads only missing IDs and never mutates inputs',async()=>{
+ await scenario(`
+  const {listedSoftwareTasks}=await import(${JSON.stringify(join(studio,'core/software-api.ts'))});
+  const h=harness(),oldActive=Object.freeze(h.fixture('collection')),oldInterrupted=Object.freeze(h.fixture('counter')),recent=Object.freeze(Array.from({length:20},()=>Object.freeze(h.fixture('counter'))).reverse());
+  const pinned=Object.freeze([recent[7].id,oldActive.id,oldActive.id,recent[0].id,oldInterrupted.id,oldActive.id,oldInterrupted.id]),beforeRecent=JSON.stringify(recent),beforePins=JSON.stringify(pinned),beforeOld=JSON.stringify([oldActive,oldInterrupted]),reads=[];
+  const old=new Map([[oldActive.id,oldActive],[oldInterrupted.id,oldInterrupted]]);const merged=listedSoftwareTasks(recent,pinned,id=>{reads.push(id);assert(old.has(id),'Recent tasks must never be reread');return old.get(id);});
+  assert.notEqual(merged,recent);assert.equal(merged.length,22);for(let i=0;i<recent.length;i++)assert.equal(merged[i],recent[i]);assert.equal(merged[20],oldActive);assert.equal(merged[21],oldInterrupted);assert.deepEqual(reads,[oldActive.id,oldInterrupted.id]);assert.equal(new Set(merged.map(task=>task.id)).size,merged.length);
+  assert.equal(JSON.stringify(recent),beforeRecent);assert.equal(JSON.stringify(pinned),beforePins);assert.equal(JSON.stringify([oldActive,oldInterrupted]),beforeOld);
+  const unchanged=listedSoftwareTasks(recent,[recent[2].id,recent[2].id],()=>{throw new Error('Unexpected reread of a recent task');});assert.notEqual(unchanged,recent);assert.equal(unchanged.length,20);for(let i=0;i<recent.length;i++)assert.equal(unchanged[i],recent[i]);
+ `);
+});

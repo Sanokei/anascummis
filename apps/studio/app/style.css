@@ -83,6 +83,24 @@
 .software-panel .software-launch-identity code{font-size:11px;overflow-wrap:anywhere;word-break:break-word}
 @media(max-width:420px){.software-panel .software-launch{padding:10px}.software-panel .software-launch-actions{gap:8px}.software-panel .software-launch-actions button{flex:1 1 125px}.software-panel .software-launch-frame{height:clamp(280px,58svh,500px)}}
 @media(max-height:480px){.software-panel .software-launch-frame{height:260px}}
+/* Software work owns one scroll area. Running pages need the window's width. */
+.floating-panel-content:has(> .software-panel){box-sizing:border-box;min-width:0;min-height:0;padding:0;overflow:hidden}
+.floating-panel-content>.software-panel{box-sizing:border-box;width:100%;min-width:0;min-height:0;overflow-x:hidden;overflow-y:auto}
+.software-panel:has(.software-launch-frame){padding:0}
+.software-panel:has(.software-launch-frame)>:not(.software-build),.software-panel:has(.software-launch-frame)>.software-build:not(:has(.software-launch-frame)){margin-left:12px;margin-right:12px}
+.software-panel .software-build:has(.software-launch-frame){padding-left:0;padding-right:0;border-left:0;border-right:0;border-radius:0}
+.software-panel .software-build:has(.software-launch-frame)>:not(.software-launch){margin-left:12px;margin-right:12px}
+.software-panel .software-build:has(.software-launch-frame)>strong{display:block}
+.software-panel .software-launch:has(.software-launch-frame){padding-left:0;padding-right:0;border-left:0;border-right:0;border-radius:0}
+.software-panel .software-launch:has(.software-launch-frame)>:not(.software-launch-bar):not(.software-launch-frame){margin-left:12px;margin-right:12px}
+.software-panel .software-launch-bar{min-width:0;background:#fff}
+.software-panel .software-launch:has(.software-launch-frame)>.software-launch-bar{position:sticky;top:0;z-index:2;padding:8px 12px;border-bottom:1px solid #c6dce5;box-shadow:0 3px 6px #254c6012}
+.software-panel .software-launch-bar-title{display:flex;align-items:center;gap:8px;min-width:0;font-size:12px;line-height:1.5;color:#254c60}
+.software-panel .software-launch-bar-title strong{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.software-panel .software-launch-bar-title span{flex:none;font-size:11px;color:#38647b}
+.software-panel .software-launch:has(.software-launch-frame) .software-launch-actions{gap:6px;margin:8px 0 0}
+.software-panel .software-launch-frame{max-width:100%;border-left:0;border-right:0;border-radius:0}
+@media(max-height:480px){.software-panel .software-launch:has(.software-launch-frame)>.software-launch-bar{padding:4px 8px}.software-panel .software-launch-bar-title{font-size:11px;line-height:14px}.software-panel .software-launch-bar-title span{font-size:10px}.software-panel .software-launch:has(.software-launch-frame) .software-launch-actions{gap:4px;margin-top:4px}}
 .activity-history{margin:12px 0;font-size:12px;line-height:1.6;overflow-wrap:anywhere}.activity-history>summary{cursor:pointer;color:#386f89}.activity-history-body{min-width:0;padding:8px 0}.activity-history .activity-history-status{margin:0 0 8px}.activity-history .activity-history-status:empty{margin:0}.activity-history .activity-history-error{color:#8b443d}.activity-history .activity-history-note{margin:6px 0;color:#637888;font-size:11px}
 .activity-history-entries{max-height:min(260px,45dvh);overflow:auto;overscroll-behavior:contain;margin:8px 0;padding:0 4px 0 0}.activity-history-entries:focus-visible{outline:2px solid #0b7fa8;outline-offset:2px}.activity-history .activity-history-entries>ol{margin:0;padding:0;list-style:none}.activity-history .activity-history-count{margin:6px 0;color:#637888;font-size:11px}.activity-history .activity-history-entries li{margin:0;padding:9px 0;border-bottom:1px solid #e3edf2;white-space:normal}.activity-entry-heading{display:grid;gap:2px}.activity-entry-heading time{font-size:11px;color:#80929d}.activity-entry-heading span{font-weight:500;color:#386f89}.activity-history .activity-history-entries small{display:block;margin:4px 0;color:#637888}.activity-history .activity-history-entries p{margin:5px 0;white-space:pre-wrap;overflow-wrap:anywhere}
 .activity-history-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.activity-history .activity-history-actions button{margin:0;padding:6px 9px;border:1px solid #d2e1e9;border-radius:8px;background:#f5fbfc;color:#264b60;font:inherit;cursor:pointer;max-width:100%;white-space:normal}.activity-history .activity-history-actions button:disabled{opacity:.5;cursor:default}

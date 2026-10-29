@@ -37,6 +37,9 @@ export class SoftwareLaunchManager{
  }
  private patch(lineageId:string,launchId:string,fields:Partial<LaunchRow>,phase:string,detail:string){const row=this.row(lineageId);if(!row||row.launchId!==launchId)return;return this.save({...row,...fields},phase,detail);}
  private async eligibility(task:SoftwareTask):Promise<Eligibility>{try{return await this.deps.inspect(task);}catch(error){return {supported:false,reason:error instanceof Error?error.message:String(error)};}}
+ /** Keep live launch controls discoverable when accepted build history grows
+  * beyond its normal recent-page limit. This inspection never starts anything. */
+ pinnedTaskIds(){const rows=(this.database.query('SELECT body FROM software_launches ORDER BY updated DESC').all() as {body:string}[]).map(item=>JSON.parse(item.body) as LaunchRow);return [...new Set([...rows.filter(row=>activeStates.has(row.state)),...rows.filter(row=>row.state==='interrupted').slice(0,2)].map(row=>row.activeTaskId))];}
  async view(id:string):Promise<LaunchView>{const task=this.deps.task(id),root=this.lineage(task),eligible=await this.eligibility(task),row=this.row(root.id);return {taskId:id,lineageId:root.id,supported:eligible.supported,...(eligible.reason?{reason:eligible.reason}:{}),state:'stopped',message:eligible.supported?'Ready to open this checked app. Start is deliberate; reopening this window does not start it.':eligible.reason||'Use the checked ZIP and manual run instructions for this build.',updated:0,...row,...(!row?{kind:eligible.kind,title:eligible.title,storageKey:eligible.storageKey}:{} )};}
  /** Called once on host startup. Restart records interruption without executing
   * apps or attempting to kill/attach to a persisted process identifier. */

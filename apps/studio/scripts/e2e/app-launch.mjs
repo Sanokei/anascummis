@@ -194,6 +194,57 @@ async function runCase(browser, kind, viewportName, options) {
     const exit = await awaitProcessExit(before.processId, 'owned app exits after Stop'); record.processes.push({appPid: before.processId, explicitStopExit: exit});
     return after;
   }
+  async function visibleAppControls(id,label) {
+    const metrics=[];
+    for(const name of ['Stop running app','Check app status','Focus app view']){
+      const control=region(id).getByRole('button',{name,exact:true}),bounds=await control.boundingBox();
+      assert(bounds&&bounds.x>=0&&bounds.y>=0&&bounds.x+bounds.width<=page.viewportSize().width+1&&bounds.y+bounds.height<=page.viewportSize().height+1,name+' remains inside the current viewport.');
+      assert(await control.evaluate(node=>{const box=node.getBoundingClientRect();const hit=document.elementFromPoint(box.x+box.width/2,box.y+box.height/2);return hit===node||node.contains(hit);}),name+' remains pointer-accessible above the real app frame.');
+      metrics.push({name,...bounds});
+    }
+    (record.controlLayouts||=[]).push({label,viewport:page.viewportSize(),metrics});return metrics;
+  }
+  async function returnToControls(id,label){
+    await region(id).getByRole('button',{name:'Back to app controls',exact:true}).click();
+    const stopControl=region(id).getByRole('button',{name:'Stop running app',exact:true});assert(await stopControl.evaluate(node=>document.activeElement===node),'The product Back action returns keyboard focus to Stop.');
+    await visibleAppControls(id,label);await screenshot(label);
+  }
+  async function appLayout(id,heading){
+    await region(id).getByRole('button',{name:'Focus app view',exact:true}).click();
+    let app=await frame(id);await app.getByRole('heading',{name:heading,exact:true}).scrollIntoViewIfNeeded();
+    const initialBox=await card(id).locator('iframe').boundingBox(),initialLogical=await app.evaluate(()=>({width:innerWidth,height:innerHeight}));
+    assert(initialBox&&initialBox.width>=300&&initialLogical.width>=300,'The active app gets a readable300px or wider embedded viewport.');
+    (record.appLayouts||=[]).push({viewport:page.viewportSize(),frame:initialBox,logical:initialLogical});
+    await visibleAppControls(id,'running-'+kind+'-heading');await screenshot('running-'+kind+'-heading-and-controls');
+    if(kind==='collection'){
+      const item=app.getByRole('listitem').filter({hasText:'Keep this task'});await item.scrollIntoViewIfNeeded();const text=item.locator('span'),bounds=await text.boundingBox();
+      assert(bounds&&bounds.width>=80,'The task label has room for words beside Remove, rather than one or two characters per line.');
+      await visibleAppControls(id,'running-collection-items');await screenshot('running-collection-readable-items-and-controls');
+    }
+    await returnToControls(id,'return-to-'+kind+'-controls');
+    if(viewportName!=='narrow')return;
+    const originalFrame=await card(id).locator('iframe').elementHandle(),oldIdentity=startIdentity(await launch(id));let draft;
+    app=await frame(id);
+    if(kind==='collection'){draft='Keep this app input through a shorter viewport';await app.getByRole('textbox',{name:'New task',exact:true}).fill(draft);}
+    else{const increment=app.getByRole('button',{name:'Increment',exact:true});await increment.click();await increment.click();assert.equal(await app.getByLabel('Count',{exact:true}).innerText(),'2');}
+    await page.setViewportSize({width:360,height:420});
+    await until(async()=>{const box=await card(id).locator('iframe').boundingBox();return box&&box.width>=300&&box.height>64;},'short viewport has a measured, contained app frame');
+    assert(await originalFrame.evaluate(node=>node.isConnected),'Viewport changes retain the actual app iframe/client state.');
+    await region(id).getByRole('button',{name:'Focus app view',exact:true}).click();app=await frame(id);await app.getByRole('heading',{name:heading,exact:true}).scrollIntoViewIfNeeded();
+    await visibleAppControls(id,'short-'+kind+'-heading');await screenshot('short-'+kind+'-heading-and-controls');
+    const measured=await card(id).locator('iframe').boundingBox(),logical=await app.evaluate(()=>({width:innerWidth,height:innerHeight}));
+    assert(logical.width>=300,'The embedded app has at least300 logical CSS pixels at a360px viewport.');
+    (record.appLayouts||=[]).push({viewport:{width:360,height:420},frame:measured,logical});
+    if(kind==='collection'){
+      assert.equal(await app.getByRole('textbox',{name:'New task',exact:true}).inputValue(),draft);await app.getByRole('listitem').filter({hasText:'Keep this task'}).scrollIntoViewIfNeeded();
+    }else{assert.equal(await app.getByLabel('Count',{exact:true}).innerText(),'2');await app.getByRole('button',{name:'Reset',exact:true}).scrollIntoViewIfNeeded();}
+    await visibleAppControls(id,'short-'+kind+'-interaction');await screenshot('short-'+kind+'-interaction-and-controls');
+    await returnToControls(id,'short-'+kind+'-return-to-controls');
+    await page.setViewportSize(viewports.narrow);await until(async()=>{const box=await card(id).locator('iframe').boundingBox();return box&&box.width>=300;},'normal narrow layout restores');
+    assert(await originalFrame.evaluate(node=>node.isConnected));assert.deepEqual(startIdentity(await launch(id)),oldIdentity);
+    app=await frame(id);if(kind==='collection'){assert.equal(await app.getByRole('textbox',{name:'New task',exact:true}).inputValue(),draft);await app.getByRole('textbox',{name:'New task',exact:true}).fill('');}else{assert.equal(await app.getByLabel('Count',{exact:true}).innerText(),'2');await app.getByRole('button',{name:'Reset',exact:true}).click();}
+    assertStep('Actual Focus/Back controls keep Stop/Check reachable at360x800 and360x420; measured wide app viewport and existing iframe preserve saved items and client draft/count during resize.');
+  }
   async function ensureItems(id, expected) {const app = await frame(id); for (const text of expected) await app.getByRole('listitem').filter({hasText: text}).waitFor(); return app;}
   async function download(id, label) {
     const task = await get('/api/software/' + id), zip = task.evidence.artifacts.find(x => x.kind === 'zip' && x.smokeTested); assert(zip);
@@ -255,6 +306,7 @@ async function runCase(browser, kind, viewportName, options) {
       const duplicates = app.getByRole('listitem').filter({hasText: 'Duplicate task'}); assert.equal(await duplicates.count(), 2); await duplicates.first().getByRole('button', {name: 'Remove', exact: true}).click(); assert.equal(await duplicates.count(), 1);
       await reloadApp(options.parent, 'My Tasks'); await ensureItems(options.parent, ['Keep this task', 'Duplicate task']);
       await screenshot('running-my-tasks', region(options.parent));
+      await appLayout(options.parent,'My Tasks');
       const retainedFrame = await card(options.parent).locator('iframe').elementHandle(), unchangedStart = await launch(options.parent), unchangedPosts = launchPosts().length;
       app = await frame(options.parent); await app.getByRole('textbox', {name:'New task',exact:true}).fill('Keep this unsubmitted app draft');
       await page.route(base + '/api/software/' + options.parent + '/launch', route => route.abort('connectionfailed'), {times:1});
@@ -316,7 +368,10 @@ async function runCase(browser, kind, viewportName, options) {
       await region(options.parent).getByRole('button', {name: 'Start app', exact: true}).click();
       const collision = await until(async () => {const value = await launch(options.parent); return value.state === 'failed' && value;}, 'occupied stable port rejects launch');
       assert.equal(collision.origin, stableOrigin); assert.equal(await (await fetch(stableOrigin)).text(), 'owned-unrelated-http-200'); assert.equal(await card(options.parent).locator('iframe').count(), 0);
-      await screenshot('occupied-origin-fails-honestly', region(options.parent)); await new Promise(done => blocker.close(done)); blocker = undefined;
+      await until(async () => (await region(options.parent).locator('.software-launch-state').innerText()).startsWith('failed'), 'saved occupied-origin failure appears in the actual work window');
+      await screenshot('occupied-origin-fails-honestly', region(options.parent).locator('.software-launch-state'));
+      await screenshot('occupied-origin-retry-controls', region(options.parent).getByRole('button',{name:'Start app',exact:true}));
+      await new Promise(done => blocker.close(done)); blocker = undefined;
       await start(options.parent); await ensureItems(options.parent, ['Keep this task', 'Duplicate task', 'Continue in My Week']); await stop(options.parent);
       assertStep('An occupied reserved origin/unrelated HTTP200 fails visibly without changing port, attaching to it or killing its owner; explicit retry succeeds after the owned blocker closes.');
     } else {
@@ -325,8 +380,9 @@ async function runCase(browser, kind, viewportName, options) {
       await increment[viewportName === 'narrow' ? 'tap' : 'click'](); assert.equal(await output.innerText(), '1'); await increment[viewportName === 'narrow' ? 'tap' : 'click'](); assert.equal(await output.innerText(), '2'); await reset[viewportName === 'narrow' ? 'tap' : 'click'](); assert.equal(await output.innerText(), '0');
       await reset.press('Shift+Tab'); assert(await increment.evaluate(node => document.activeElement === node && node.matches(':focus-visible'))); await increment.press('Enter'); await increment.press('Space'); assert.equal(await output.innerText(), '2');
       await increment.press('Tab'); await reset.press('Space'); assert.equal(await output.innerText(), '0'); assert(await reset.evaluate(node => document.activeElement === node && node.matches(':focus-visible')));
-      await screenshot('counter-reset-keyboard-feedback', reset); assert.match(await app.getByRole('status').innerText(), /Reset: Count is 0/);
+      await screenshot('counter-reset-keyboard-feedback', reset); assert.match(await app.locator('[role="status"][aria-live="polite"]').innerText(), /Reset: Count is 0/);
       await reloadApp(options.counter, 'Bakery Orders'); assert.equal(await (await frame(options.counter)).getByLabel('Count', {exact: true}).innerText(), '0');
+      await appLayout(options.counter,'Bakery Orders');
       await screenshot('counter-in-software-work', region(options.counter)); await download(options.counter, 'accepted-counter-after-launch');
       const stillRunning = await launch(options.counter), stopsBefore = launchPosts().filter(x => x.path.endsWith('/stop')).length;
       await page.route(base + '/api/software/' + options.counter + '/launch/stop', route => route.abort('connectionfailed'), {times: 1});

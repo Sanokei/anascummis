@@ -32,9 +32,11 @@ export function SoftwareLaunch({taskId,title,local,selected=false,request,onSele
  const [checking,setChecking]=useState(false),[busy,setBusy]=useState<'start'|'stop'>(),[unconfirmed,setUnconfirmed]=useState<'start'|'stop'>();
  const [reconnectSuggested,setReconnectSuggested]=useState(false),[reconnecting,setReconnecting]=useState(false);
  const [frameError,setFrameError]=useState(false),[frameReload,setFrameReload]=useState(0),[hideFrame,setHideFrame]=useState(false);
+ const [frameSize,setFrameSize]=useState({height:280,barHeight:0});
  const current=useRef<SoftwareLaunchView|undefined>(undefined),requestRef=useRef(request),alive=useRef(false),epoch=useRef(0),readSequence=useRef(0);
  const mutation=useRef<'start'|'stop'|undefined>(undefined),controls=useRef<HTMLButtonElement|null>(null),readControls=useRef(new Set<AbortController>()),manualRead=useRef<number|undefined>(undefined);
  const reconnectControl=useRef<AbortController|undefined>(undefined);
+ const launchElement=useRef<HTMLElement|null>(null),barElement=useRef<HTMLDivElement|null>(null),frameElement=useRef<HTMLIFrameElement|null>(null);
  requestRef.current=request;
  const endpoint='/software/'+encodeURIComponent(taskId)+'/launch';
 
@@ -67,6 +69,20 @@ export function SoftwareLaunch({taskId,title,local,selected=false,request,onSele
   return()=>{alive.current=false;epoch.current++;readSequence.current++;if(timer)clearTimeout(timer);for(const control of readControls.current)control.abort();readControls.current.clear();reconnectControl.current?.abort();reconnectControl.current=undefined;window.removeEventListener(changedEvent,refresh);};
  },[local,taskId]);
  useEffect(()=>{if(local&&selected&&!mutation.current)void checkStatus();},[local,selected,taskId]);
+ useEffect(()=>{
+  const panel=launchElement.current?.closest<HTMLElement>('.software-panel'),bar=barElement.current;
+  if(!local||!panel||!bar||!frameElement.current)return;
+  const measure=()=>{const barHeight=Math.ceil(bar.getBoundingClientRect().height),height=Math.max(120,Math.min(480,Math.floor(panel.clientHeight-barHeight-12)));setFrameSize(current=>current.height===height&&current.barHeight===barHeight?current:{height,barHeight});};
+  const observer=new ResizeObserver(measure);observer.observe(panel);observer.observe(bar);window.addEventListener('resize',measure);measure();
+  return()=>{observer.disconnect();window.removeEventListener('resize',measure);};
+ },[local,taskId,view?.state,view?.activeTaskId,view?.origin,view?.launchId,hideFrame,frameReload]);
+
+ function focusAppView(){
+  const frame=frameElement.current,panel=launchElement.current?.closest<HTMLElement>('.software-panel'),bar=barElement.current;
+  if(!frame||!panel||!bar)return;
+  const top=frame.getBoundingClientRect().top-panel.getBoundingClientRect().top-panel.clientTop-bar.getBoundingClientRect().height-8;
+  panel.scrollTop+=top;frame.focus({preventScroll:true});
+ }
 
  async function act(action:'start'|'stop'){
   if(!local||mutation.current||unconfirmed)return;
@@ -104,7 +120,7 @@ export function SoftwareLaunch({taskId,title,local,selected=false,request,onSele
  const appTitle=view?.title||title;
  const canStart=!!view?.supported&&!activeStates.has(view.state)&&!busy&&!unconfirmed&&!readError&&!reconnectSuggested&&!reconnecting;
  const canStop=!!view&&activeStates.has(view.state)&&!busy&&!unconfirmed&&!reconnectSuggested&&!reconnecting;
- return <section className="software-launch" aria-label="Open checked app" data-app-launch-task-id={taskId}>
+ return <section ref={launchElement} className="software-launch" aria-label="Open checked app" data-app-launch-task-id={taskId}>
   <h3>Open checked app</h3>
   {!view?<p role="status">{readError?'App availability could not be checked.':'Checking app availability…'}</p>:<>
    <p className="software-launch-state" role="status"><strong>{readError?'Last checked state: ':''}{view.state.replace('_',' ')}</strong> · {view.message}</p>
@@ -114,18 +130,22 @@ export function SoftwareLaunch({taskId,title,local,selected=false,request,onSele
   {readError&&<p className="software-launch-warning" role="alert">App status could not be checked. {readError}</p>}
   {notice&&<p className={unconfirmed?'software-launch-warning':'software-launch-notice'} role={unconfirmed?'alert':'status'}>{notice}</p>}
   {reconnectSuggested&&<p className="software-launch-lifetime">Studio may have restarted. Reconnect to refresh this tab’s local session and check saved app status. Reconnecting does not start an app.</p>}
-  <div className="software-launch-actions">
+  <div ref={barElement} className="software-launch-bar" role="region" aria-label="App controls">
+   {showFrame&&<div className="software-launch-bar-title"><strong title={appTitle}>{appTitle}</strong><span>{readError?'Last checked: ':''}{view.state}</span></div>}
+   <div className="software-launch-actions">
    {reconnectSuggested&&<button type="button" disabled={reconnecting||!!busy||checking} onClick={()=>void reconnect()}>{reconnecting?'Reconnecting to Studio…':'Reconnect to Studio'}</button>}
    {view?.supported&&!activeStates.has(view.state)&&<button type="button" ref={controls} disabled={!canStart} onClick={()=>void act('start')}>{busy==='start'?'Starting app…':'Start app'}</button>}
    {view&&activeStates.has(view.state)&&<button type="button" ref={controls} disabled={!canStop} onClick={()=>void act('stop')}>{busy==='stop'?'Stopping app…':view.state==='stopping'?'Retry stop':'Stop running app'}</button>}
    <button type="button" disabled={checking||!!busy||reconnecting} onClick={()=>void checkStatus(true)}>{checking?'Checking app status…':'Check app status'}</button>
    {showFrame&&<button type="button" onClick={()=>{setFrameError(false);setFrameReload(value=>value+1);}}>Reload app view</button>}
+   {showFrame&&<button type="button" onClick={focusAppView}>Focus app view</button>}
+   </div>
   </div>
   {view?.supported&&<p className="software-launch-lifetime">Starting is deliberate. Closing Software work keeps its process running. Reopening reloads the view: saved browser data stays, unsaved input is lost, and a counter returns to its initial value.</p>}
   {runningHere&&!origin&&<p className="software-launch-warning" role="alert">The app address could not be verified. Its view stays closed. Check app status or use the source ZIP and run instructions.</p>}
   {showFrame&&<>
    {frameError&&<p className="software-launch-warning" role="alert">The app view could not load. Check its status or reload this view.</p>}
-   <iframe key={(view.launchId||view.runtimeId||taskId)+':'+origin+':'+frameReload} className="software-launch-frame" src={origin+'/'} title={'Running app: '+appTitle} sandbox="allow-scripts allow-same-origin allow-forms" referrerPolicy="no-referrer" onLoad={()=>setFrameError(false)} onError={()=>setFrameError(true)}/>
+   <iframe ref={frameElement} key={(view.launchId||view.runtimeId||taskId)+':'+origin+':'+frameReload} className="software-launch-frame" style={{height:frameSize.height,scrollMarginTop:frameSize.barHeight+8}} src={origin+'/'} title={'Running app: '+appTitle} sandbox="allow-scripts allow-same-origin allow-forms" referrerPolicy="no-referrer" onLoad={()=>setFrameError(false)} onError={()=>setFrameError(true)}/>
    <button type="button" className="software-launch-return" onClick={()=>controls.current?.focus()}>Back to app controls</button>
   </>}
   {view&&(view.origin||view.runtimeId||view.zipSha256||view.launchId)&&<details className="software-launch-identity"><summary>Runtime identity and saved-data address</summary>
