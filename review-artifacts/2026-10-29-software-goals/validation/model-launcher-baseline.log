@@ -1,0 +1,23 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/model-launcher.test.ts:
+(pass) model launcher preserves child exit code 0 [49.88ms]
+29 |       const child=Bun.spawn([process.execPath,'-e',entry],{
+30 |         cwd:folder,env:{...process.env,LLAMA_SERVER:process.execPath},stdout:'pipe',stderr:'pipe'
+31 |       });
+32 |       const [actual,stdout,stderr]=await Promise.all([child.exited,new Response(child.stdout).text(),new Response(child.stderr).text()]);
+33 |       expect(stderr).toBe('');
+34 |       expect(actual).toBe(code);
+                          ^
+error: expect(received).toBe(expected)
+
+Expected: 23
+Received: 0
+
+      at <anonymous> (/workspace/anascummis/apps/studio/tests/model-launcher.test.ts:34:22)
+(fail) model launcher preserves child exit code 23 [41.41ms]
+
+ 1 pass
+ 1 fail
+ 6 expect() calls
+Ran 2 tests across 1 file. [109.00ms]

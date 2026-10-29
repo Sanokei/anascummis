@@ -1,0 +1,7 @@
+{
+  "checkedAt": "2026-10-29T18:48:39.089362+00:00",
+  "command": "bun test tests/model-launcher.test.ts",
+  "exitCode": 0,
+  "scope": "Isolated scripted launcher subprocesses only; no native service call",
+  "healthyNativeModelUntouched": true
+}

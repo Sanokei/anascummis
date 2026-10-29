@@ -1,0 +1,599 @@
+{
+  "startedAt": "2026-10-29T19:24:22.625Z",
+  "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+  "fixtureSource": "345b82bcc8dee4591bf93c98029624667185a0b9",
+  "fixtureSourceDirty": false,
+  "taskId": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+  "originalCompletedData": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data",
+  "originalFailedData": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data",
+  "copiedData": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/capture-EAbOiQ/private-data",
+  "mode": "Normal production Studio server reading another complete copy of the completed recovery fixture.",
+  "limitations": [
+    "Installed Chromium desktop/touch emulation.",
+    "No source, DOM, CSS, or image edits. Native UI opening, scrolling, text selection and read-only inspection only.",
+    "No Resume, Stop, build, installation, or inference request was sent. This captures retained evidence; it is not another execution or recovery claim."
+  ],
+  "originalInputsBefore": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/report.json",
+      "sha256": "c76e065ba660a79d26250f6225072bfc6bb311f4cee7ecfb7c0022d43c945c06"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/result.json",
+      "sha256": "53a7bdeb97220bab3e1b213ec43f4b605132dc0323968e433a52bd837e356d50"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/progress.json",
+      "sha256": "9d7243cbac570c8cc5462293f38bcd0c291f89e3cb9c7fe556a50221cc5daa80"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/studio.sqlite",
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/studio.sqlite-shm",
+      "sha256": "6121c310c2bd3d84fe1547d6a5e9d7d7b76f3f892c690522a64f8a609972c4cf"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/studio.sqlite-wal",
+      "sha256": "111d19848c7b9766446249fa4b7fd7f9e40942edbd07b7f1f2b252876f259140"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/app/page.tsx",
+      "sha256": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/lib/collection.ts",
+      "sha256": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/BUILD-PROVENANCE.json",
+      "sha256": "187594af54ac0cb186d406b2041d238e2ac3db11c2718eb9ec7f4bae34c18876"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/.qa/browser-1.json",
+      "sha256": "b376dfd91501db4bb923221869d9e134ac46d67a934599c9b1ce0819166c90f0"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/studio.sqlite",
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/studio.sqlite-shm",
+      "sha256": "87e7490717e5c0872f9642901545ada1b6b866dacb6850997d7caf35f5e8d56e"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/studio.sqlite-wal",
+      "sha256": "98164d5a8d92cbe4aedcfa2a4d31fcc5a4e55a6663d4bac0451257eddbdf51b0"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/app/page.tsx",
+      "sha256": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/lib/collection.ts",
+      "sha256": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/BUILD-PROVENANCE.json",
+      "sha256": "187594af54ac0cb186d406b2041d238e2ac3db11c2718eb9ec7f4bae34c18876"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/.qa/browser-1.json",
+      "sha256": "789ac255ae7f944199f9283b208b70c12f04b0212c0d7b00abd9b1865dd9c992"
+    }
+  ],
+  "browserRequests": [
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/css/d57a4a926eb3fea2.css",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/app/page-f64ad9c5ed635c6c.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/status",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/projects",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/jobs",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/goals",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/projects/31bd9207-60fd-4d6c-b0ad-ba012bb07fc7",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/assets",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/software",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/software",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/software/74fb284e-c390-428e-8bfe-05ff9767feb2/screenshots/revision-1.png",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/api/software/74fb284e-c390-428e-8bfe-05ff9767feb2/activity",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/css/d57a4a926eb3fea2.css",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/app/page-f64ad9c5ed635c6c.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/status",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/projects",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/jobs",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/goals",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/projects/31bd9207-60fd-4d6c-b0ad-ba012bb07fc7",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/assets",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/software",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/software",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/software/74fb284e-c390-428e-8bfe-05ff9767feb2/screenshots/revision-1.png",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz",
+      "origin": "http://127.0.0.1:32907"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/api/software/74fb284e-c390-428e-8bfe-05ff9767feb2/activity",
+      "origin": "http://127.0.0.1:32907"
+    }
+  ],
+  "blockedRequests": [
+    {
+      "viewport": "desktop",
+      "method": "GET",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "origin": "https://huggingface.co"
+    },
+    {
+      "viewport": "narrow",
+      "method": "GET",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "origin": "https://huggingface.co"
+    }
+  ],
+  "screenshots": [
+    {
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "height": 1000
+      },
+      "header": "validation-retry-desktop-header.png",
+      "error": "validation-retry-desktop-error.png",
+      "sequence": 14,
+      "phase": "validation_retry",
+      "revision": 1,
+      "detailSha256": "588f4cf2d163850748e4d36eb49eaa6c2c69a04af2883145837b0827b679c96a",
+      "exactJsonMatchesAccepted": true,
+      "metadata": {
+        "region": {
+          "x": 1052,
+          "y": 187.265625,
+          "width": 328,
+          "height": 260
+        },
+        "formatTaskRevision": {
+          "top": 261.328125,
+          "bottom": 335.890625
+        },
+        "phase": "Software builder · validation retry"
+      },
+      "errorBounds": {
+        "selected": "The application reported a persistence failure during collection acceptance",
+        "text": {
+          "x": 1052,
+          "y": 226.765625,
+          "width": 285.46875,
+          "height": 55.375,
+          "bottom": 282.140625
+        },
+        "region": {
+          "x": 1052,
+          "y": 187.265625,
+          "width": 328,
+          "height": 260,
+          "bottom": 447.265625
+        },
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        }
+      }
+    },
+    {
+      "viewport": "narrow",
+      "dimensions": {
+        "width": 360,
+        "height": 800
+      },
+      "header": "validation-retry-narrow-header.png",
+      "error": "validation-retry-narrow-error.png",
+      "sequence": 14,
+      "phase": "validation_retry",
+      "revision": 1,
+      "detailSha256": "588f4cf2d163850748e4d36eb49eaa6c2c69a04af2883145837b0827b679c96a",
+      "exactJsonMatchesAccepted": true,
+      "metadata": {
+        "region": {
+          "x": 52,
+          "y": 187.15625,
+          "width": 256,
+          "height": 260
+        },
+        "formatTaskRevision": {
+          "top": 260.59375,
+          "bottom": 373.53125
+        },
+        "phase": "Software builder · validation retry"
+      },
+      "errorBounds": {
+        "selected": "The application reported a persistence failure during collection acceptance",
+        "text": {
+          "x": 52,
+          "y": 227.21875,
+          "width": 217.4375,
+          "height": 55.375,
+          "bottom": 282.59375
+        },
+        "region": {
+          "x": 52,
+          "y": 187.15625,
+          "width": 256,
+          "height": 260,
+          "bottom": 447.15625
+        },
+        "viewport": {
+          "width": 360,
+          "height": 800
+        }
+      }
+    }
+  ],
+  "pageErrors": [],
+  "servedBuildMatchesAcceptedReport": true,
+  "host": {
+    "pid": 32570,
+    "port": 32907,
+    "command": "bun core/server.ts",
+    "owned": true
+  },
+  "taskBefore": {
+    "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+    "status": "completed",
+    "phase": "completed",
+    "revision": 1,
+    "calls": 1,
+    "sourceHash": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b"
+  },
+  "taskAfter": {
+    "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+    "status": "completed",
+    "phase": "completed",
+    "revision": 1,
+    "calls": 1
+  },
+  "apiAccess": "GET only; no Resume/Stop/revise/create/build or fresh inference was requested. Completed task and inference decision count unchanged.",
+  "archivedJsonSha256": "f81a923cd12d1d7f970f7d3664415571de41642748a63f80eedf025b415f4d56",
+  "status": "passed",
+  "ownedServerStopped": true,
+  "originalInputsAfter": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/report.json",
+      "sha256": "c76e065ba660a79d26250f6225072bfc6bb311f4cee7ecfb7c0022d43c945c06"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/result.json",
+      "sha256": "53a7bdeb97220bab3e1b213ec43f4b605132dc0323968e433a52bd837e356d50"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/progress.json",
+      "sha256": "9d7243cbac570c8cc5462293f38bcd0c291f89e3cb9c7fe556a50221cc5daa80"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/studio.sqlite",
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/studio.sqlite-shm",
+      "sha256": "6121c310c2bd3d84fe1547d6a5e9d7d7b76f3f892c690522a64f8a609972c4cf"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/studio.sqlite-wal",
+      "sha256": "111d19848c7b9766446249fa4b7fd7f9e40942edbd07b7f1f2b252876f259140"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/app/page.tsx",
+      "sha256": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/lib/collection.ts",
+      "sha256": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/BUILD-PROVENANCE.json",
+      "sha256": "187594af54ac0cb186d406b2041d238e2ac3db11c2718eb9ec7f4bae34c18876"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/.qa/browser-1.json",
+      "sha256": "b376dfd91501db4bb923221869d9e134ac46d67a934599c9b1ce0819166c90f0"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/studio.sqlite",
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/studio.sqlite-shm",
+      "sha256": "87e7490717e5c0872f9642901545ada1b6b866dacb6850997d7caf35f5e8d56e"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/studio.sqlite-wal",
+      "sha256": "98164d5a8d92cbe4aedcfa2a4d31fcc5a4e55a6663d4bac0451257eddbdf51b0"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/app/page.tsx",
+      "sha256": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/lib/collection.ts",
+      "sha256": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/BUILD-PROVENANCE.json",
+      "sha256": "187594af54ac0cb186d406b2041d238e2ac3db11c2718eb9ec7f4bae34c18876"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/.qa/browser-1.json",
+      "sha256": "789ac255ae7f944199f9283b208b70c12f04b0212c0d7b00abd9b1865dd9c992"
+    }
+  ],
+  "originalInputsUnchanged": true,
+  "finishedAt": "2026-10-29T19:24:28.374Z"
+}

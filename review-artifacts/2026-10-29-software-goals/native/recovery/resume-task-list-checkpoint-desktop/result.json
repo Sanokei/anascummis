@@ -1,0 +1,600 @@
+{
+  "id": "resume-task-list-checkpoint",
+  "viewport": "desktop",
+  "goal": "Explicitly resume the same native-generated task list after correcting host validation, preserving source/call identity and prior failed checks while obtaining real verified output.",
+  "startedAt": "2026-10-29T19:16:38.821Z",
+  "status": "passed",
+  "lane": "real-checkpoint-recovery",
+  "prerequisite": "None",
+  "assertions": [
+    {
+      "name": "The actual saved native-generated failure and browser check remain paused and inspectable until explicit Resume.",
+      "passed": true
+    },
+    {
+      "name": "One explicit Resume reruns actual checks/package on the same generated source without new inference, retains exact failed receipt/history, and leaves the original failed fixture untouched.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-retained-original-failed-check.png",
+    "03-explicit-resume-checkpoint.png",
+    "04-failed-validation-history-kept.png",
+    "recovered-produced-task-list.png"
+  ],
+  "downloads": [
+    {
+      "path": "recovered-source.zip",
+      "bytes": 176559,
+      "sha256": "e5e6a64b506601ccf82971837980a10e7c5dcc0c00316e826fb538b817758947"
+    }
+  ],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/software/74fb284e-c390-428e-8bfe-05ff9767feb2/resume",
+      "time": "2026-10-29T19:16:47.736Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "checkpoint": {
+    "source": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data",
+    "copiedToOwnedData": true,
+    "note": "Copy of a stopped real native-generated fixture; no mutation API seeding or inference substitute."
+  },
+  "host": {
+    "pid": 28194,
+    "port": 37143,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "recoveryBefore": {
+    "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+    "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.",
+    "status": "needs_input",
+    "phase": "needs_input",
+    "revision": 1,
+    "requirements": [
+      {
+        "id": "collection",
+        "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+        "status": "implemented",
+        "files": [
+          "app/page.tsx",
+          "lib/collection.ts"
+        ],
+        "tests": [
+          "tests/app.test.tsx",
+          "tests/collection.test.ts"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "time": 1793300653480,
+        "phase": "starting",
+        "detail": "Resuming the full saved goal and workspace.",
+        "revision": 0
+      },
+      {
+        "time": 1793300653483,
+        "phase": "planning",
+        "detail": "Specifying a bounded persistent text collection; a trusted compiler owns source and independent browser acceptance.",
+        "revision": 0
+      },
+      {
+        "time": 1793300655508,
+        "phase": "install",
+        "detail": "Running install.",
+        "revision": 1
+      },
+      {
+        "time": 1793300656252,
+        "phase": "typecheck",
+        "detail": "Running typecheck.",
+        "revision": 1
+      },
+      {
+        "time": 1793300657595,
+        "phase": "tests",
+        "detail": "Running tests.",
+        "revision": 1
+      },
+      {
+        "time": 1793300657647,
+        "phase": "build",
+        "detail": "Building the actual Next.js program.",
+        "revision": 1
+      },
+      {
+        "time": 1793300684953,
+        "phase": "browser",
+        "detail": "Loading the production app and capturing a real screenshot.",
+        "revision": 1
+      },
+      {
+        "time": 1793300688971,
+        "phase": "retrying",
+        "detail": "Retrying from the saved checkpoint: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persiste",
+        "revision": 1
+      },
+      {
+        "time": 1793300688974,
+        "phase": "starting",
+        "detail": "Resuming the full saved goal and workspace.",
+        "revision": 1
+      },
+      {
+        "time": 1793300688977,
+        "phase": "retrying",
+        "detail": "Retrying from the saved checkpoint: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persiste",
+        "revision": 1
+      },
+      {
+        "time": 1793300688978,
+        "phase": "starting",
+        "detail": "Resuming the full saved goal and workspace.",
+        "revision": 1
+      },
+      {
+        "time": 1793300688981,
+        "phase": "needs_input",
+        "detail": "Could not make verified progress: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+        "revision": 1
+      }
+    ],
+    "created": 1793300653475,
+    "updated": 1793300688981,
+    "calls": 1,
+    "errors": 3,
+    "message": "Could not make verified progress: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+    "milestoneMs": [],
+    "milestoneStarted": 1793300653475,
+    "planOffset": 0,
+    "planningDone": true,
+    "targets": [
+      "zip"
+    ],
+    "collectionContract": {
+      "kind": "collection",
+      "heading": "My Tasks",
+      "inputLabel": "New task",
+      "addButton": "Add",
+      "removeButton": "Remove",
+      "listLabel": "Tasks",
+      "storage": "localStorage",
+      "storageKey": "anascummis.collection.74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "maxItems": 100,
+      "maxTextLength": 200
+    },
+    "lastProgressCall": 1,
+    "evidence": {
+      "revision": 1,
+      "checks": [
+        {
+          "id": "install",
+          "ok": true,
+          "detail": "bun install v1.3.14 (0d9b296a)\nResolving dependencies\nResolved, downloaded and extracted [14]\nSaved lockfile\n\n+ @types/bun@1.3.0\n+ @types/react@19.2.0\n+ @types/react-dom@19.2.0\n+ typescript@5.9.3\n+ next@16.4.3\n+ react@19.2.7\n+ react-dom@19.2.7\n\n33 packages installed [738.00ms]\n",
+          "milliseconds": 742
+        },
+        {
+          "id": "typecheck",
+          "ok": true,
+          "detail": "",
+          "milliseconds": 1340
+        },
+        {
+          "id": "tests",
+          "ok": true,
+          "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [6.70ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.57ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.29ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [45.00ms]\n",
+          "milliseconds": 50
+        },
+        {
+          "id": "build",
+          "ok": true,
+          "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 25ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 4.4s\n  Running TypeScript ...\n\n  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.\n  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:\n\n  \t- allowJs was set to true\n  \t- incremental was set to true\n  \t- include was updated to add '.next/dev/types/**/*.ts'\n\n  The following mandatory changes were made to your tsconfig.json:\n\n  \t- isolatedModules was set to true (requirement for SWC / Babel)\n\n  Finished TypeScript in 1851ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 205ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+          "milliseconds": 27290
+        },
+        {
+          "id": "browser",
+          "ok": false,
+          "detail": "Error: file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+          "milliseconds": 4010
+        }
+      ],
+      "dom": "",
+      "artifacts": [],
+      "screenshot": "revision-1.png"
+    }
+  },
+  "goalProgress": [
+    {
+      "time": "2026-10-29T19:16:47.753Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "starting",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:16:47.868Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "typecheck",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:16:49.496Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "tests",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:16:49.600Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "build",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:17:15.166Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "browser",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:17:18.768Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "typecheck",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:17:20.177Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "tests",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:17:20.289Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "build",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:17:42.601Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "browser",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:17:46.128Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "running",
+      "phase": "source_zip",
+      "revision": 1,
+      "calls": 1
+    },
+    {
+      "time": "2026-10-29T19:18:14.205Z",
+      "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "calls": 1
+    }
+  ],
+  "recoveryAfter": {
+    "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+    "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.",
+    "status": "completed",
+    "phase": "completed",
+    "revision": 1,
+    "requirements": [
+      {
+        "id": "collection",
+        "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+        "status": "verified",
+        "files": [
+          "app/page.tsx",
+          "lib/collection.ts"
+        ],
+        "tests": [
+          "tests/app.test.tsx",
+          "tests/collection.test.ts"
+        ],
+        "reviewRevision": 1,
+        "note": "Bounded collection contract verified by actual production-browser interactions: Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key"
+      }
+    ],
+    "events": [
+      {
+        "time": 1793301407761,
+        "phase": "typecheck",
+        "detail": "Running typecheck.",
+        "revision": 1
+      },
+      {
+        "time": 1793301409437,
+        "phase": "tests",
+        "detail": "Running tests.",
+        "revision": 1
+      },
+      {
+        "time": 1793301409499,
+        "phase": "build",
+        "detail": "Building the actual Next.js program.",
+        "revision": 1
+      },
+      {
+        "time": 1793301435088,
+        "phase": "browser",
+        "detail": "Loading the production app and capturing a real screenshot.",
+        "revision": 1
+      },
+      {
+        "time": 1793301438688,
+        "phase": "install",
+        "detail": "Running install.",
+        "revision": 1
+      },
+      {
+        "time": 1793301438694,
+        "phase": "typecheck",
+        "detail": "Running typecheck.",
+        "revision": 1
+      },
+      {
+        "time": 1793301440153,
+        "phase": "tests",
+        "detail": "Running tests.",
+        "revision": 1
+      },
+      {
+        "time": 1793301440203,
+        "phase": "build",
+        "detail": "Building the actual Next.js program.",
+        "revision": 1
+      },
+      {
+        "time": 1793301462542,
+        "phase": "browser",
+        "detail": "Loading the production app and capturing a real screenshot.",
+        "revision": 1
+      },
+      {
+        "time": 1793301466032,
+        "phase": "source_zip",
+        "detail": "Running source_zip.",
+        "revision": 1
+      },
+      {
+        "time": 1793301494173,
+        "phase": "packaging",
+        "detail": "Packaging checked source ZIP.",
+        "revision": 1
+      },
+      {
+        "time": 1793301494202,
+        "phase": "completed",
+        "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+        "revision": 1
+      }
+    ],
+    "created": 1793300653475,
+    "updated": 1793301494202,
+    "calls": 1,
+    "errors": 0,
+    "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+    "milestoneMs": [],
+    "milestoneStarted": 1793300653475,
+    "planOffset": 0,
+    "planningDone": true,
+    "targets": [
+      "zip"
+    ],
+    "collectionContract": {
+      "kind": "collection",
+      "heading": "My Tasks",
+      "inputLabel": "New task",
+      "addButton": "Add",
+      "removeButton": "Remove",
+      "listLabel": "Tasks",
+      "storage": "localStorage",
+      "storageKey": "anascummis.collection.74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "maxItems": 100,
+      "maxTextLength": 200
+    },
+    "lastProgressCall": 1,
+    "evidence": {
+      "revision": 1,
+      "checks": [
+        {
+          "id": "install",
+          "ok": true,
+          "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [2.00ms]\n",
+          "milliseconds": 4
+        },
+        {
+          "id": "typecheck",
+          "ok": true,
+          "detail": "",
+          "milliseconds": 1458
+        },
+        {
+          "id": "tests",
+          "ok": true,
+          "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [7.16ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.47ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.27ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [43.00ms]\n",
+          "milliseconds": 48
+        },
+        {
+          "id": "build",
+          "ok": true,
+          "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 26ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1452ms\n  Running TypeScript ...\n  Finished TypeScript in 1348ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 207ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+          "milliseconds": 22332
+        },
+        {
+          "id": "browser",
+          "ok": true,
+          "detail": "Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key",
+          "milliseconds": 3491
+        },
+        {
+          "id": "source_zip",
+          "ok": true,
+          "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+          "milliseconds": 28138
+        }
+      ],
+      "dom": "My Tasks\n\nSaved in this browser. Up to 100 tasks, 200 characters each.\n\nNew task\nAdd\nKeep this task\nRemove\nAdded after reload\nRemove",
+      "artifacts": [
+        {
+          "kind": "zip",
+          "name": "source.zip",
+          "sha256": "e5e6a64b506601ccf82971837980a10e7c5dcc0c00316e826fb538b817758947",
+          "bytes": 176559,
+          "smokeTested": true
+        }
+      ],
+      "headings": [
+        "My Tasks"
+      ],
+      "screenshot": "revision-1.png",
+      "browserContract": {
+        "kind": "collection",
+        "heading": "My Tasks",
+        "inputLabel": "New task",
+        "addButton": "Add",
+        "removeButton": "Remove",
+        "listLabel": "Tasks",
+        "storage": "localStorage",
+        "storageKey": "anascummis.collection.74fb284e-c390-428e-8bfe-05ff9767feb2",
+        "maxItems": 100,
+        "maxTextLength": 200
+      }
+    }
+  },
+  "archivedFailedValidation": {
+    "format": "anascummis.failed-validation.v1",
+    "taskId": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+    "sourceRevision": 1,
+    "retention": "Text-only historical validation receipt. Screenshots and artifact file bytes were not archived and may be replaced by later validation; the prior screenshot reference is omitted. Artifact checksums below record the original receipt metadata.",
+    "receipt": {
+      "revision": 1,
+      "checks": [
+        {
+          "id": "install",
+          "ok": true,
+          "detail": "bun install v1.3.14 (0d9b296a)\nResolving dependencies\nResolved, downloaded and extracted [14]\nSaved lockfile\n\n+ @types/bun@1.3.0\n+ @types/react@19.2.0\n+ @types/react-dom@19.2.0\n+ typescript@5.9.3\n+ next@16.4.3\n+ react@19.2.7\n+ react-dom@19.2.7\n\n33 packages installed [738.00ms]\n",
+          "milliseconds": 742
+        },
+        {
+          "id": "typecheck",
+          "ok": true,
+          "detail": "",
+          "milliseconds": 1340
+        },
+        {
+          "id": "tests",
+          "ok": true,
+          "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [6.70ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.57ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.29ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [45.00ms]\n",
+          "milliseconds": 50
+        },
+        {
+          "id": "build",
+          "ok": true,
+          "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 25ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 4.4s\n  Running TypeScript ...\n\n  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.\n  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:\n\n  \t- allowJs was set to true\n  \t- incremental was set to true\n  \t- include was updated to add '.next/dev/types/**/*.ts'\n\n  The following mandatory changes were made to your tsconfig.json:\n\n  \t- isolatedModules was set to true (requirement for SWC / Babel)\n\n  Finished TypeScript in 1851ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 205ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+          "milliseconds": 27290
+        },
+        {
+          "id": "browser",
+          "ok": false,
+          "detail": "Error: file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+          "milliseconds": 4010
+        }
+      ],
+      "dom": "",
+      "artifacts": []
+    }
+  },
+  "softwareInspections": [
+    {
+      "taskId": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+      "name": "recovered-produced-task-list",
+      "mode": "produced-standalone",
+      "phases": [],
+      "limit": "Actual produced standalone bundle; downloaded-source installation is a separate inspection.",
+      "pid": 29020,
+      "port": 39419,
+      "startCommand": "node server.js",
+      "passed": true,
+      "trace": "recovered-produced-task-list-trace.zip"
+    }
+  ],
+  "recoveryIdentity": {
+    "sourceHashes": {
+      "app/page.tsx": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b",
+      "lib/collection.ts": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d",
+      "BUILD-PROVENANCE.json": "187594af54ac0cb186d406b2041d238e2ac3db11c2718eb9ec7f4bae34c18876"
+    },
+    "originalFixtureHashes": {
+      "app/page.tsx": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b",
+      "lib/collection.ts": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d",
+      "BUILD-PROVENANCE.json": "187594af54ac0cb186d406b2041d238e2ac3db11c2718eb9ec7f4bae34c18876",
+      "studio.sqlite": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70",
+      "studio.sqlite-wal": "111d19848c7b9766446249fa4b7fd7f9e40942edbd07b7f1f2b252876f259140",
+      "studio.sqlite-shm": "6121c310c2bd3d84fe1547d6a5e9d7d7b76f3f892c690522a64f8a609972c4cf"
+    },
+    "inferenceCallsBefore": 1,
+    "inferenceCallsAfter": 1,
+    "sourceRevision": 1
+  },
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T19:18:25.569Z",
+  "recoveryChecksPassed": 2
+}

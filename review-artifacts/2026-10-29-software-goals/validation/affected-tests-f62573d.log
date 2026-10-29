@@ -1,0 +1,84 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-software.test.ts:
+(pass) actual software creation rolls task and parent link back together before a successful retry [69.26ms]
+(pass) a failed atomic link leaves no queued build and retries reuse the committed whole-app build [2.82ms]
+(pass) concurrent duplicate creation commits only one child and both monitors use that child [2.84ms]
+(pass) completed linked output is not presented as a newly repaired build after rejected acceptance [1.08ms]
+(pass) guided repair atomically links a distinct completed child while preserving its accepted parent [0.99ms]
+(pass) cancelled revision staging rolls its child and link back and never changes the accepted parent [0.78ms]
+(pass) a completed build requires explicit repair guidance before a child can be created [0.32ms]
+(pass) startup reconciliation stops unfinished children of paused/cancelled parents and preserves completed children [0.90ms]
+(pass) shutdown leaves a recoverable checkpoint that startup reconciliation pauses until explicit continuation [2.84ms]
+(pass) explicit cancellation stops a live child and missing artifact checks cannot certify completion [2.98ms]
+
+tests/software-revisions.test.ts:
+(pass) revision creation clones editable input while leaving the accepted parent and release bytes unchanged [83.01ms]
+(pass) a failed synchronous parent-link callback rolls back the child and cleans only its owned workspace [82.71ms]
+(pass) revision acceptance replaces the old heading, keeps unaffected counter criteria, and discards old review stamps [74.88ms]
+(pass) invalid guidance, changed accepted artifacts, and unsupported browser contracts create no child [82.26ms]
+(pass) queued revision cancellation and continuation preserve the same child and copied source checkpoint [73.83ms]
+(pass) late revision-planning responses cannot change a cancelled child or its accepted parent [107.63ms]
+(pass) a restarted revision resumes its saved acceptance checkpoint without fresh-app seeding [140.01ms]
+(pass) counter revision decisions retain inspected edit tools while fresh numeric tasks keep their typed recipe [95.21ms]
+(pass) continuation guidance B to C to B uses the current plan rather than suppressing the original note [79.13ms]
+(pass) host-derived counter amendments ground numeric steps and starts while preserving unrelated contracts [61.77ms]
+(pass) numeric and removal QA amendments are persisted only in their child and never delete the host contract [116.85ms]
+(pass) retiring a changed heading cannot complete a revision from only kept counter proof [134.47ms]
+(pass) coverage pagination resumes from persisted offset without replaying accepted writes and stale review revisions reset [153.42ms]
+(pass) public binary runtime assets and extensionless scripts survive a revision clone byte for byte [207.27ms]
+(pass) an unsupported eligible input fails the clone cleanly instead of silently losing application files [326.16ms]
+
+tests/software.test.ts:
+(pass) software repairs are read first, retested, and gated by host evidence [2.22ms]
+(pass) blocked QA, missing executable and stale evidence cannot produce completion [0.55ms]
+(pass) software source capability excludes credentials and path traversal [285.41ms]
+(pass) software edits require inspected unique source and cancellation blocks verification completion [0.91ms]
+(pass) an app request cannot be completed by editing a website [16.47ms]
+(pass) long software requests stay paginated outside the small model packet [1.68ms]
+(pass) harness rejects completion before executing any work [0.44ms]
+(pass) typed React screen rejects invalid state and keeps hostile labels as data [3.98ms]
+(pass) counter skill scope accepts phrasing changes but never absorbs additional features [7.14ms]
+
+tests/collection-screen.test.ts:
+(pass) the full task-list request grounds literal fields while refusing unsupported additional behavior [1.75ms]
+(pass) the generic compiler renders literal data and a server-safe labelled loading state [130.90ms]
+(pass) the actual generated storage module preserves separate duplicate identities and rejects invalid saved data [57.87ms]
+(pass) complete known compiler bytes and provenance are required even if a changed file declares its own hash [8.41ms]
+(pass) only a full literal heading amendment preserves the complete collection contract [3.16ms]
+
+tests/window-requests.test.ts:
+(pass) whole build goals containing progress, remaining tasks and collaboration remain build requests [0.85ms]
+(pass) actual whole status questions stay read-only without consuming appended work [0.17ms]
+(pass) collaboration shortcuts target the existing panel without matching app descriptions [0.17ms]
+(pass) existing app requests need visible revision/run controls rather than status or fabricated completion [0.09ms]
+
+tests/software-counter-contracts.test.ts:
+(pass) Reset and literal-heading host contracts validate and evolve in a child without changing their parent [239.92ms]
+
+tests/software-collection-contracts.test.ts:
+(pass) collection browser contracts normalize complete behavior and a literal heading amendment retains its storage identity [237.65ms]
+(pass) a bounded child changes only known compiler fields, keeps full collection acceptance and leaves its accepted parent byte-identical [248.10ms]
+(pass) custom source, tampered provenance or additional accepted criteria cannot be replaced by the heading recipe [372.05ms]
+(pass) late cancellation does not save a compiler checkpoint or overwrite copied child source [337.89ms]
+(pass) a persisted compiler checkpoint finishes partial own writes after process reopen without another model call [202.05ms]
+(pass) unsupported extra revision guidance keeps the guarded worker path and never receives a typed collection shortcut [194.00ms]
+
+tests/software-targets.test.ts:
+(pass) default builds do not require a Windows executable on Linux or macOS [0.12ms]
+
+tests/react-screen.test.ts:
+(pass) the complete bounded heading/Increment/Reset/browser/ZIP request has a grounded host contract [0.70ms]
+(pass) Reset compiles as an initial-value state update while older numeric screens remain compatible [0.83ms]
+(pass) literal headings remain data and an unsupported suffix never becomes covered counter work [8.91ms]
+(pass) old Increment-only or wrong-heading proof cannot certify the new full request [0.33ms]
+(pass) optional Reset labels must be nonempty and distinct from Increment [0.21ms]
+
+tests/model-launcher.test.ts:
+(pass) model launcher preserves child exit code 0 [157.16ms]
+(pass) model launcher preserves child exit code 23 [167.52ms]
+
+ 58 pass
+ 0 fail
+ 344 expect() calls
+Ran 58 tests across 10 files. [4.84s]

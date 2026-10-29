@@ -1,0 +1,55 @@
+{
+  "id": "task-list-application",
+  "viewport": "desktop",
+  "goal": "Build a usable persistent task list, download and run its actual source, then revise its heading while preserving the accepted parent and add/remove/reload behavior.",
+  "startedAt": "2026-10-29T18:41:32.431Z",
+  "status": "failed",
+  "lane": "real-local-runtime",
+  "prerequisite": "Real local model and existing software build dependencies; no scripted inference.",
+  "assertions": [],
+  "screenshots": [
+    "01-first-use.png",
+    "outcome.png"
+  ],
+  "downloads": [],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T18:41:33.050Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 19382,
+    "port": 45959,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "goalAchieved": false,
+  "reason": "locator.waitFor: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.software-panel') to be visible\u001b[22m\n",
+  "stack": "locator.waitFor: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.software-panel') to be visible\u001b[22m\n\n    at Object.run (/workspace/anascummis/apps/studio/scripts/e2e/task-list.mjs:90:107)\n    at async runJourney (/workspace/anascummis/apps/studio/scripts/e2e/runner.mjs:126:5)\n    at async runSuite (/workspace/anascummis/apps/studio/scripts/e2e/runner.mjs:185:123)\n    at async file:///workspace/anascummis/apps/studio/scripts/test-user-journeys.mjs:18:18",
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T18:41:48.099Z",
+  "recoveryChecksPassed": 0
+}

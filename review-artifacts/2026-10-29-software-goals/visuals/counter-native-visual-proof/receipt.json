@@ -1,0 +1,1003 @@
+{
+  "startedAt": "2026-10-29T19:31:30.372Z",
+  "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+  "sourceDirty": false,
+  "terminalNativeMatrixFinishedAt": "2026-10-29T19:30:59.809Z",
+  "mode": "Runtime visual inspection of copied completed actual native-decision/trusted-compiler counter bundles. No new decision, build or source-ZIP rebuild.",
+  "limits": [
+    "Installed Chromium desktop/touch emulation, not a physical phone or screen-reader audit.",
+    "The exact frozen helper performs native pointer/keyboard actions, transient focus preparation and observation only; no rendered content, style or screenshot was edited.",
+    "The downloaded source ZIP identities below come from the same completed native cases; their independent clean source builds were performed by the original matrix, not repeated here."
+  ],
+  "helper": {
+    "path": "/workspace/anascummis/apps/studio/scripts/e2e/counter-ux.mjs",
+    "sha256": "01e2d0832e64d853e8018a15f69d6cfb3d6e87aeaebfc9e5ecd2131b42bfc048"
+  },
+  "originalInputsBefore": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/report.json",
+      "sha256": "6918b153c7b51cf489d0a587cf3afa9ae7da12b186e4947cb2cbfe4bd8fbd6fb"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/scripts/e2e/counter-ux.mjs",
+      "sha256": "01e2d0832e64d853e8018a15f69d6cfb3d6e87aeaebfc9e5ecd2131b42bfc048"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/result.json",
+      "sha256": "7d7f9dfe4907d01d6c1de1c04a82fdf6a3b0aaed622c79ad444da732524eafcb"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/progress.json",
+      "sha256": "b1daf96ebbce0020c174e6f774571043068ed6df23528837dee8ee31e6d348fd"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/counter-source.zip",
+      "sha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/app/page.tsx",
+      "sha256": "0895e47453fdde1693b8046ad5854d05c997ca1a69ab285d12b3ecc68d4a5484"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/studio.sqlite",
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/studio.sqlite-shm",
+      "sha256": "e13df2d2af04a42a893c8a1a41ad7943bc23114ee7de923b883bfb005b65083a"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/studio.sqlite-wal",
+      "sha256": "77bcb2408c6a80bad6530ef8b0787dba01bb1ff5798afb42675208ab6fc583fe"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/.next/standalone/server.js",
+      "sha256": "03792a8d1c93eb2be540b2c5f690ac9275315ca8d7028933e8db3291897a3d5d"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/.next/standalone/.next/BUILD_ID",
+      "sha256": "34076dea727e532b263b09cc4cc3175e3896ea05c9aac5a8474dbd13c3ba329c"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/.next/standalone/.next/server/app/page.js",
+      "sha256": "e0c316550ef108c4d97ce31b91711a32c4445fd71e95fb4865d11165b532cade"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/result.json",
+      "sha256": "66e69e5281865f6ae005c4d11cd03d38230481c81d06e7eee905e37c886e8c81"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/progress.json",
+      "sha256": "56b32774a67447451ec4f92ed44ea0843390978cb7f9a19515567f614bc3cd7a"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/counter-source.zip",
+      "sha256": "e3a84cb69e8c978e77a876f1a09a773a8b8edabca1e1478f477fd88948d40845"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/software/554c2f10-ce13-412e-899e-dcf844f17994/app/page.tsx",
+      "sha256": "0895e47453fdde1693b8046ad5854d05c997ca1a69ab285d12b3ecc68d4a5484"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/studio.sqlite",
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/studio.sqlite-shm",
+      "sha256": "b852a95c3afaf99077f9986dd48888915aa68808b880a52c435fd52f78f9a289"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/studio.sqlite-wal",
+      "sha256": "9836a135ac69822e2a45fc5ab1066a17b5692bb63886fec8e1d1cd8e35d1cd40"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/software/554c2f10-ce13-412e-899e-dcf844f17994/.next/standalone/server.js",
+      "sha256": "ba2457b4d51fc2846083ba6dd79af6a27e37d6b9e07fc446922615c899ed40c5"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/software/554c2f10-ce13-412e-899e-dcf844f17994/.next/standalone/.next/BUILD_ID",
+      "sha256": "3369981c1263f4420bde1c1a9660fdb5403edb028f7ffa73c83e3c9cd3045535"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/software/554c2f10-ce13-412e-899e-dcf844f17994/.next/standalone/.next/server/app/page.js",
+      "sha256": "1ef5e4f4ca3b3dfdb400aaf6ece7a867646c595d0159f464a8d22b6b399c9289"
+    }
+  ],
+  "cases": [
+    {
+      "name": "desktop",
+      "taskId": "3df01946-1359-4e9f-8036-ec02ed037b09",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "originalResult": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/result.json",
+      "completedRevision": 1,
+      "originalInferenceDecisions": 1,
+      "sourceZip": {
+        "sha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+        "bytes": 170945
+      },
+      "sourcePageSha256": "0895e47453fdde1693b8046ad5854d05c997ca1a69ab285d12b3ecc68d4a5484",
+      "copiedIdentity": [
+        {
+          "path": "server.js",
+          "sha256": "03792a8d1c93eb2be540b2c5f690ac9275315ca8d7028933e8db3291897a3d5d"
+        },
+        {
+          "path": ".next/BUILD_ID",
+          "sha256": "34076dea727e532b263b09cc4cc3175e3896ea05c9aac5a8474dbd13c3ba329c"
+        },
+        {
+          "path": ".next/server/app/page.js",
+          "sha256": "e0c316550ef108c4d97ce31b91711a32c4445fd71e95fb4865d11165b532cade"
+        }
+      ],
+      "screenshots": [
+        {
+          "phase": "initial",
+          "screenshot": "desktop-initial.png",
+          "bounds": {
+            "h1": "Bakery Orders",
+            "output": {
+              "text": "0",
+              "bounds": {
+                "x": 502,
+                "y": 432.203125,
+                "width": 436,
+                "height": 101.1875,
+                "right": 938,
+                "bottom": 533.390625
+              }
+            },
+            "feedback": {
+              "text": "Ready when you are.",
+              "bounds": {
+                "x": 481,
+                "y": 656.390625,
+                "width": 478,
+                "height": 22.5,
+                "right": 959,
+                "bottom": 678.890625
+              }
+            },
+            "focus": {
+              "tag": "BODY",
+              "text": "\nbody{margin:0;background:#f4f6f3}\n.numeric-screen,.numeric-screen *{box-sizing:border-box}\n.numeric-screen{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:48px 24px;color:#17392b;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;color-scheme:light}\n.numeric-screen .counter-card{width:min(100%,560px);min-width:0;padding:40px;background:#fff;border:1px solid #d8e1d9;border-radius:24px;box-shadow:0 12px 40px #1d402b0a}\n.numeric-screen h1{margin:0;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;line-height:1.15;letter-spacing:-.035em;overflow-wrap:anywhere}\n.numeric-screen .counter-intro{margin:12px 0 0;color:#53665a;font-size:1rem;line-height:1.6;overflow-wrap:anywhere}\n.numeric-screen .counter-reading{margin:32px 0 24px;padding:28px 20px;background:#edf4ef;border:1px solid #d4e2d9;border-radius:16px;text-align:center}\n.numeric-screen .counter-reading label{display:block;font-size:1.125rem;font-weight:650;line-height:1.4;overflow-wrap:anywhere}\n.numeric-screen output{display:block;margin-top:8px;font-size:clamp(2.5rem,12vw,5.75rem);font-weight:650;font-variant-numeric:tabular-nums;line-height:1.1;letter-spacing:-.04em;overflow-wrap:anywhere}\n.numeric-screen .counter-actions{display:flex;flex-wrap:wrap;gap:12px}\n.numeric-screen button{flex:1 1 120px;min-width:44px;min-height:52px;max-width:100%;padding:13px 20px;border:1px solid #174d3b;border-radius:12px;background:#174d3b;color:#fff;font:inherit;font-weight:650;line-height:1.4;overflow-wrap:anywhere;cursor:pointer;touch-action:manipulation}\n.numeric-screen button:hover{background:#103e2e}\n.numeric-screen button+button{border-color:#b8c8bd;background:#fff;color:#244a37}\n.numeric-screen button+button:hover{background:#f1f5f1}\n.numeric-screen button:focus-visible{outline:3px solid #81551a;outline-offset:4px}\n.numeric-screen .counter-feedback{min-height:1.5em;margin:18px 0 0;color:#274a3a;font-size:.9375rem;line-height:1.5;overflow-wrap:anywhere}\n.numeric-screen .counter-note{margin:24px 0 0;padding-top:20px;border-top:1px solid #e1e6e1;color:#59665c;font-size:.875rem;line-height:1.55;overflow-wrap:anywhere}\n@media(max-width:480px){.numeric-screen{place-items:start center;padding:24px 16px}.numeric-screen .counter-card{padding:24px;border-radius:20px}.numeric-screen .counter-reading{margin-top:24px;padding:24px 16px}}\n@media(max-width:380px){.numeric-screen .counter-actions{flex-direction:column}.numeric-screen button{flex-basis:auto}}\n@media(forced-colors:active){.numeric-screen button:focus-visible{outline-color:Highlight}}\nBakery OrdersIncrement adds 1 each time.Count0IncrementResetReady when you are.Reloading starts again at 0.(self.__next_f=self.__next_f||[]).push([0])self.__next_f.push([1,\"1:\\\"$Sreact.fragment\\\"\\n2:I[7121,[],\\\"\\\"]\\n3:I[4581,[],\\\"\\\"]\\n5:I[1304,[],\\\"ClientPageRoot\\\"]\\n6:\\\"static/chunks/app/page-71cf6f0c0187a7d1.js\\\"\\n7:I[6919,[\\\"974\\\",\\\"$6\\\"],\\\"default\\\"]\\na:I[484,[],\\\"OutletBoundary\\\"]\\nb:\\\"$Sreact.suspense\\\"\\nd:\\\"ViewportBoundary\\\"\\ne:I[484,[],\\\"$d\\\"]\\n10:\\\"MetadataBoundary\\\"\\n11:I[484,[],\\\"$10\\\"]\\n13:I[7123,[],\\\"default\\\",1]\\n4:[[\\\"children\\\",{\\\"s\\\":\\\"__PAGE__\\\",\\\"h\\\":512,\\\"d\\\":{\\\"r\\\":[\\\"$\\\",\\\"$1\\\",\\\"c\\\",{\\\"children\\\":[[\\\"$\\\",\\\"$L5\\\",null,{\\\"Component\\\":\\\"$7\\\",\\\"serverProvidedParams\\\":{\\\"searchParams\\\":{},\\\"params\\\":{},\\\"promises\\\":[\\\"$@8\\\",\\\"$@9\\\"]}}],null,[\\\"$\\\",\\\"$La\\\",null,{\\\"children\\\":[\\\"$\\\",\\\"$b\\\",null,{\\\"name\\\":\\\"Next.MetadataOutlet\\\",\\\"children\\\":\\\"$@c\\\"}]}]]}],\\\"p\\\":false,\\\"v\\\":null}}]]\\n0:{\\\"P\\\":null,\\\"c\\\":[\\\"\\\",\\\"\\\"],\\\"q\\\":\\\"\\\",\\\"i\\\":false,\\\"t\\\":{\\\"t\\\":{\\\"s\\\":\\\"\\\",\\\"h\\\":528,\\\"d\\\":{\\\"r\\\":[\\\"$\\\",\\\"$1\\\",\\\"c\\\",{\\\"children\\\":[null,[\\\"$\\\",\\\"html\\\",null,{\\\"lang\\\":\\\"en\\\",\\\"children\\\":[\\\"$\\\",\\\"body\\\",null,{\\\"children\\\":[\\\"$\\\",\\\"$L2\\\",null,{\\\"parallelRouterKey\\\":\\\"children\\\",\\\"error\\\":\\\"$undefined\\\",\\\"errorStyles\\\":\\\"$undefined\\\",\\\"errorScripts\\\":\\\"$undefined\\\",\\\"template\\\":[\\\"$\\\",\\\"$L3\\\",null,{}],\\\"templateStyles\\\":\\\"$undefined\\\",\\\"templateScripts\\\":\\\"$undefined\\\",\\\"notFound\\\":[[[\\\"$\\\",\\\"title\\\",null,{\\\"children\\\":\\\"404: This page could not be found.\\\"}],[\\\"$\\\",\\\"div\\\",null,{\\\"style\\\":{\\\"fontFamily\\\":\\\"system-ui,\\\\\\\"Segoe UI\\\\\\\",Roboto,Helvetica,Arial,sans-serif,\\\\\\\"Apple Color Emoji\\\\\\\",\\\\\\\"Segoe UI Emoji\\\\\\\"\\\",\\\"height\\\":\\\"100vh\\\",\\\"textAlign\\\":\\\"center\\\",\\\"display\\\":\\\"flex\\\",\\\"flexDirection\\\":\\\"column\\\",\\\"alignItems\\\":\\\"center\\\",\\\"justifyContent\\\":\\\"center\\\"},\\\"children\\\":[\\\"$\\\",\\\"div\\\",null,{\\\"children\\\":[[\\\"$\\\",\\\"style\\\",null,{\\\"dangerouslySetInnerHTML\\\":{\\\"__html\\\":\\\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\\\"}}],[\\\"$\\\",\\\"h1\\\",null,{\\\"className\\\":\\\"next-error-h1\\\",\\\"style\\\":{\\\"display\\\":\\\"inline-block\\\",\\\"margin\\\":\\\"0 20px 0 0\\\",\\\"padding\\\":\\\"0 23px 0 0\\\",\\\"fontSize\\\":24,\\\"fontWeight\\\":500,\\\"verticalAlign\\\":\\\"top\\\",\\\"lineHeight\\\":\\\"49px\\\"},\\\"children\\\":404}],[\\\"$\\\",\\\"div\\\",null,{\\\"style\\\":{\\\"display\\\":\\\"inline-block\\\"},\\\"children\\\":[\\\"$\\\",\\\"h2\\\",null,{\\\"style\\\":{\\\"fontSize\\\":14,\\\"fontWeight\\\":400,\\\"lineHeight\\\":\\\"49px\\\",\\\"margin\\\":0},\\\"children\\\":\\\"This page could not be found.\\\"}]}]]}]}]],[]],\\\"forbidden\\\":\\\"$undefined\\\",\\\"unauthorized\\\":\\\"$undefined\\\"}]}]}]]}],\\\"p\\\":false,\\\"v\\\":null},\\\"c\\\":\\\"$Q4\\\"},\\\"h\\\":{\\\"r\\\":[\\\"$\\\",\\\"$1\\\",\\\"h\\\",{\\\"children\\\":[null,[\\\"$\\\",\\\"$Le\\\",null,{\\\"children\\\":\\\"$Lf\\\"}],[\\\"$\\\",\\\"$L11\\\",null,{\\\"children\\\":[[\\\"$\\\",\\\"div\\\",null,{\\\"hidden\\\":true,\\\"children\\\":[\\\"$\\\",\\\"$b\\\",null,{\\\"name\\\":\\\"Next.Metadata\\\",\\\"children\\\":\\\"$L12\\\"}]}],null]}],null]}],\\\"p\\\":false,\\\"v\\\":null}},\\\"m\\\":\\\"$undefined\\\",\\\"G\\\":[\\\"$13\\\",[]],\\\"S\\\":true,\\\"r\\\":\\\"$undefined\\\",\\\"s\\\":\\\"$undefined\\\",\\\"a\\\":\\\"$undefined\\\",\\\"l\\\":\\\"$undefined\\\",\\\"p\\\":\\\"$undefined\\\",\\\"d\\\":\\\"$undefined\\\",\\\"b\\\":\\\"i2UOB9HV-OCVAPTBWSM6W\\\"}\\n8:{}\\n9:\\\"$4:0:1:d:r:props:children:0:props:serverProvidedParams:params\\\"\\nf:[[\\\"$\\\",\\\"meta\\\",\\\"0\\\",{\\\"charSet\\\":\\\"utf-8\\\"}],[\\\"$\\\",\\\"meta\\\",\\\"1\\\",{\\\"name\\\":\\\"viewport\\\",\\\"content\\\":\\\"width=device-width, initial-scale=1\\\"}]]\\nc:null\\n12:[]\\n\"])",
+              "focusVisible": false,
+              "outlineStyle": "none",
+              "outlineWidth": "3px",
+              "outlineColor": "rgb(0, 0, 0)",
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 1440,
+                "height": 1000,
+                "right": 1440,
+                "bottom": 1000
+              }
+            },
+            "buttons": [
+              {
+                "text": "Increment",
+                "bounds": {
+                  "x": 481,
+                  "y": 586.390625,
+                  "width": 233,
+                  "height": 52,
+                  "right": 714,
+                  "bottom": 638.390625
+                }
+              },
+              {
+                "text": "Reset",
+                "bounds": {
+                  "x": 726,
+                  "y": 586.390625,
+                  "width": 233,
+                  "height": 52,
+                  "right": 959,
+                  "bottom": 638.390625
+                }
+              }
+            ],
+            "horizontalOverflow": false
+          }
+        },
+        {
+          "phase": "keyboard-increment",
+          "screenshot": "desktop-keyboard-increment.png",
+          "bounds": {
+            "h1": "Bakery Orders",
+            "output": {
+              "text": "2",
+              "bounds": {
+                "x": 502,
+                "y": 432.203125,
+                "width": 436,
+                "height": 101.1875,
+                "right": 938,
+                "bottom": 533.390625
+              }
+            },
+            "feedback": {
+              "text": "Increment: Count is 2.",
+              "bounds": {
+                "x": 481,
+                "y": 656.390625,
+                "width": 478,
+                "height": 22.5,
+                "right": 959,
+                "bottom": 678.890625
+              }
+            },
+            "focus": {
+              "tag": "BUTTON",
+              "text": "Increment",
+              "focusVisible": true,
+              "outlineStyle": "solid",
+              "outlineWidth": "3px",
+              "outlineColor": "rgb(129, 85, 26)",
+              "bounds": {
+                "x": 481,
+                "y": 586.390625,
+                "width": 233,
+                "height": 52,
+                "right": 714,
+                "bottom": 638.390625
+              }
+            },
+            "buttons": [
+              {
+                "text": "Increment",
+                "bounds": {
+                  "x": 481,
+                  "y": 586.390625,
+                  "width": 233,
+                  "height": 52,
+                  "right": 714,
+                  "bottom": 638.390625
+                }
+              },
+              {
+                "text": "Reset",
+                "bounds": {
+                  "x": 726,
+                  "y": 586.390625,
+                  "width": 233,
+                  "height": 52,
+                  "right": 959,
+                  "bottom": 638.390625
+                }
+              }
+            ],
+            "horizontalOverflow": false
+          }
+        },
+        {
+          "phase": "keyboard-reset",
+          "screenshot": "desktop-keyboard-reset.png",
+          "bounds": {
+            "h1": "Bakery Orders",
+            "output": {
+              "text": "0",
+              "bounds": {
+                "x": 502,
+                "y": 432.203125,
+                "width": 436,
+                "height": 101.1875,
+                "right": 938,
+                "bottom": 533.390625
+              }
+            },
+            "feedback": {
+              "text": "Reset: Count is 0.",
+              "bounds": {
+                "x": 481,
+                "y": 656.390625,
+                "width": 478,
+                "height": 22.5,
+                "right": 959,
+                "bottom": 678.890625
+              }
+            },
+            "focus": {
+              "tag": "BUTTON",
+              "text": "Reset",
+              "focusVisible": true,
+              "outlineStyle": "solid",
+              "outlineWidth": "3px",
+              "outlineColor": "rgb(129, 85, 26)",
+              "bounds": {
+                "x": 726,
+                "y": 586.390625,
+                "width": 233,
+                "height": 52,
+                "right": 959,
+                "bottom": 638.390625
+              }
+            },
+            "buttons": [
+              {
+                "text": "Increment",
+                "bounds": {
+                  "x": 481,
+                  "y": 586.390625,
+                  "width": 233,
+                  "height": 52,
+                  "right": 714,
+                  "bottom": 638.390625
+                }
+              },
+              {
+                "text": "Reset",
+                "bounds": {
+                  "x": 726,
+                  "y": 586.390625,
+                  "width": 233,
+                  "height": 52,
+                  "right": 959,
+                  "bottom": 638.390625
+                }
+              }
+            ],
+            "horizontalOverflow": false
+          }
+        }
+      ],
+      "behavior": {
+        "heading": "Bakery Orders",
+        "label": "Count",
+        "initial": 0,
+        "delta": 1,
+        "resetButton": "Reset",
+        "touch": false,
+        "bounds": [
+          {
+            "label": "Increment",
+            "x": 481,
+            "y": 586.390625,
+            "width": 233,
+            "height": 52
+          },
+          {
+            "label": "Reset",
+            "x": 726,
+            "y": 586.390625,
+            "width": 233,
+            "height": 52
+          }
+        ],
+        "pointerValues": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "keyboardEnterAndSpace": true,
+        "visibleFocus": true,
+        "repeatedResetStatusMutation": true,
+        "reloadValue": 0,
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "horizontalOverflow": false
+      },
+      "noPersistentCounterStorage": true
+    },
+    {
+      "name": "narrow",
+      "taskId": "554c2f10-ce13-412e-899e-dcf844f17994",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "originalResult": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/result.json",
+      "completedRevision": 1,
+      "originalInferenceDecisions": 1,
+      "sourceZip": {
+        "sha256": "e3a84cb69e8c978e77a876f1a09a773a8b8edabca1e1478f477fd88948d40845",
+        "bytes": 170945
+      },
+      "sourcePageSha256": "0895e47453fdde1693b8046ad5854d05c997ca1a69ab285d12b3ecc68d4a5484",
+      "copiedIdentity": [
+        {
+          "path": "server.js",
+          "sha256": "ba2457b4d51fc2846083ba6dd79af6a27e37d6b9e07fc446922615c899ed40c5"
+        },
+        {
+          "path": ".next/BUILD_ID",
+          "sha256": "3369981c1263f4420bde1c1a9660fdb5403edb028f7ffa73c83e3c9cd3045535"
+        },
+        {
+          "path": ".next/server/app/page.js",
+          "sha256": "1ef5e4f4ca3b3dfdb400aaf6ece7a867646c595d0159f464a8d22b6b399c9289"
+        }
+      ],
+      "screenshots": [
+        {
+          "phase": "initial",
+          "screenshot": "narrow-initial.png",
+          "bounds": {
+            "h1": "Bakery Orders",
+            "output": {
+              "text": "0",
+              "bounds": {
+                "x": 58,
+                "y": 200.96875,
+                "width": 244,
+                "height": 47.515625,
+                "right": 302,
+                "bottom": 248.484375
+              }
+            },
+            "feedback": {
+              "text": "Ready when you are.",
+              "bounds": {
+                "x": 41,
+                "y": 431.484375,
+                "width": 278,
+                "height": 22.5,
+                "right": 319,
+                "bottom": 453.984375
+              }
+            },
+            "focus": {
+              "tag": "BODY",
+              "text": "\nbody{margin:0;background:#f4f6f3}\n.numeric-screen,.numeric-screen *{box-sizing:border-box}\n.numeric-screen{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:48px 24px;color:#17392b;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;color-scheme:light}\n.numeric-screen .counter-card{width:min(100%,560px);min-width:0;padding:40px;background:#fff;border:1px solid #d8e1d9;border-radius:24px;box-shadow:0 12px 40px #1d402b0a}\n.numeric-screen h1{margin:0;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;line-height:1.15;letter-spacing:-.035em;overflow-wrap:anywhere}\n.numeric-screen .counter-intro{margin:12px 0 0;color:#53665a;font-size:1rem;line-height:1.6;overflow-wrap:anywhere}\n.numeric-screen .counter-reading{margin:32px 0 24px;padding:28px 20px;background:#edf4ef;border:1px solid #d4e2d9;border-radius:16px;text-align:center}\n.numeric-screen .counter-reading label{display:block;font-size:1.125rem;font-weight:650;line-height:1.4;overflow-wrap:anywhere}\n.numeric-screen output{display:block;margin-top:8px;font-size:clamp(2.5rem,12vw,5.75rem);font-weight:650;font-variant-numeric:tabular-nums;line-height:1.1;letter-spacing:-.04em;overflow-wrap:anywhere}\n.numeric-screen .counter-actions{display:flex;flex-wrap:wrap;gap:12px}\n.numeric-screen button{flex:1 1 120px;min-width:44px;min-height:52px;max-width:100%;padding:13px 20px;border:1px solid #174d3b;border-radius:12px;background:#174d3b;color:#fff;font:inherit;font-weight:650;line-height:1.4;overflow-wrap:anywhere;cursor:pointer;touch-action:manipulation}\n.numeric-screen button:hover{background:#103e2e}\n.numeric-screen button+button{border-color:#b8c8bd;background:#fff;color:#244a37}\n.numeric-screen button+button:hover{background:#f1f5f1}\n.numeric-screen button:focus-visible{outline:3px solid #81551a;outline-offset:4px}\n.numeric-screen .counter-feedback{min-height:1.5em;margin:18px 0 0;color:#274a3a;font-size:.9375rem;line-height:1.5;overflow-wrap:anywhere}\n.numeric-screen .counter-note{margin:24px 0 0;padding-top:20px;border-top:1px solid #e1e6e1;color:#59665c;font-size:.875rem;line-height:1.55;overflow-wrap:anywhere}\n@media(max-width:480px){.numeric-screen{place-items:start center;padding:24px 16px}.numeric-screen .counter-card{padding:24px;border-radius:20px}.numeric-screen .counter-reading{margin-top:24px;padding:24px 16px}}\n@media(max-width:380px){.numeric-screen .counter-actions{flex-direction:column}.numeric-screen button{flex-basis:auto}}\n@media(forced-colors:active){.numeric-screen button:focus-visible{outline-color:Highlight}}\nBakery OrdersIncrement adds 1 each time.Count0IncrementResetReady when you are.Reloading starts again at 0.(self.__next_f=self.__next_f||[]).push([0])self.__next_f.push([1,\"1:\\\"$Sreact.fragment\\\"\\n2:I[7121,[],\\\"\\\"]\\n3:I[4581,[],\\\"\\\"]\\n5:I[1304,[],\\\"ClientPageRoot\\\"]\\n6:\\\"static/chunks/app/page-83d6345a5aa31fee.js\\\"\\n7:I[6919,[\\\"974\\\",\\\"$6\\\"],\\\"default\\\"]\\na:I[484,[],\\\"OutletBoundary\\\"]\\nb:\\\"$Sreact.suspense\\\"\\nd:\\\"ViewportBoundary\\\"\\ne:I[484,[],\\\"$d\\\"]\\n10:\\\"MetadataBoundary\\\"\\n11:I[484,[],\\\"$10\\\"]\\n13:I[7123,[],\\\"default\\\",1]\\n4:[[\\\"children\\\",{\\\"s\\\":\\\"__PAGE__\\\",\\\"h\\\":512,\\\"d\\\":{\\\"r\\\":[\\\"$\\\",\\\"$1\\\",\\\"c\\\",{\\\"children\\\":[[\\\"$\\\",\\\"$L5\\\",null,{\\\"Component\\\":\\\"$7\\\",\\\"serverProvidedParams\\\":{\\\"searchParams\\\":{},\\\"params\\\":{},\\\"promises\\\":[\\\"$@8\\\",\\\"$@9\\\"]}}],null,[\\\"$\\\",\\\"$La\\\",null,{\\\"children\\\":[\\\"$\\\",\\\"$b\\\",null,{\\\"name\\\":\\\"Next.MetadataOutlet\\\",\\\"children\\\":\\\"$@c\\\"}]}]]}],\\\"p\\\":false,\\\"v\\\":null}}]]\\n0:{\\\"P\\\":null,\\\"c\\\":[\\\"\\\",\\\"\\\"],\\\"q\\\":\\\"\\\",\\\"i\\\":false,\\\"t\\\":{\\\"t\\\":{\\\"s\\\":\\\"\\\",\\\"h\\\":528,\\\"d\\\":{\\\"r\\\":[\\\"$\\\",\\\"$1\\\",\\\"c\\\",{\\\"children\\\":[null,[\\\"$\\\",\\\"html\\\",null,{\\\"lang\\\":\\\"en\\\",\\\"children\\\":[\\\"$\\\",\\\"body\\\",null,{\\\"children\\\":[\\\"$\\\",\\\"$L2\\\",null,{\\\"parallelRouterKey\\\":\\\"children\\\",\\\"error\\\":\\\"$undefined\\\",\\\"errorStyles\\\":\\\"$undefined\\\",\\\"errorScripts\\\":\\\"$undefined\\\",\\\"template\\\":[\\\"$\\\",\\\"$L3\\\",null,{}],\\\"templateStyles\\\":\\\"$undefined\\\",\\\"templateScripts\\\":\\\"$undefined\\\",\\\"notFound\\\":[[[\\\"$\\\",\\\"title\\\",null,{\\\"children\\\":\\\"404: This page could not be found.\\\"}],[\\\"$\\\",\\\"div\\\",null,{\\\"style\\\":{\\\"fontFamily\\\":\\\"system-ui,\\\\\\\"Segoe UI\\\\\\\",Roboto,Helvetica,Arial,sans-serif,\\\\\\\"Apple Color Emoji\\\\\\\",\\\\\\\"Segoe UI Emoji\\\\\\\"\\\",\\\"height\\\":\\\"100vh\\\",\\\"textAlign\\\":\\\"center\\\",\\\"display\\\":\\\"flex\\\",\\\"flexDirection\\\":\\\"column\\\",\\\"alignItems\\\":\\\"center\\\",\\\"justifyContent\\\":\\\"center\\\"},\\\"children\\\":[\\\"$\\\",\\\"div\\\",null,{\\\"children\\\":[[\\\"$\\\",\\\"style\\\",null,{\\\"dangerouslySetInnerHTML\\\":{\\\"__html\\\":\\\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\\\"}}],[\\\"$\\\",\\\"h1\\\",null,{\\\"className\\\":\\\"next-error-h1\\\",\\\"style\\\":{\\\"display\\\":\\\"inline-block\\\",\\\"margin\\\":\\\"0 20px 0 0\\\",\\\"padding\\\":\\\"0 23px 0 0\\\",\\\"fontSize\\\":24,\\\"fontWeight\\\":500,\\\"verticalAlign\\\":\\\"top\\\",\\\"lineHeight\\\":\\\"49px\\\"},\\\"children\\\":404}],[\\\"$\\\",\\\"div\\\",null,{\\\"style\\\":{\\\"display\\\":\\\"inline-block\\\"},\\\"children\\\":[\\\"$\\\",\\\"h2\\\",null,{\\\"style\\\":{\\\"fontSize\\\":14,\\\"fontWeight\\\":400,\\\"lineHeight\\\":\\\"49px\\\",\\\"margin\\\":0},\\\"children\\\":\\\"This page could not be found.\\\"}]}]]}]}]],[]],\\\"forbidden\\\":\\\"$undefined\\\",\\\"unauthorized\\\":\\\"$undefined\\\"}]}]}]]}],\\\"p\\\":false,\\\"v\\\":null},\\\"c\\\":\\\"$Q4\\\"},\\\"h\\\":{\\\"r\\\":[\\\"$\\\",\\\"$1\\\",\\\"h\\\",{\\\"children\\\":[null,[\\\"$\\\",\\\"$Le\\\",null,{\\\"children\\\":\\\"$Lf\\\"}],[\\\"$\\\",\\\"$L11\\\",null,{\\\"children\\\":[[\\\"$\\\",\\\"div\\\",null,{\\\"hidden\\\":true,\\\"children\\\":[\\\"$\\\",\\\"$b\\\",null,{\\\"name\\\":\\\"Next.Metadata\\\",\\\"children\\\":\\\"$L12\\\"}]}],null]}],null]}],\\\"p\\\":false,\\\"v\\\":null}},\\\"m\\\":\\\"$undefined\\\",\\\"G\\\":[\\\"$13\\\",[]],\\\"S\\\":true,\\\"r\\\":\\\"$undefined\\\",\\\"s\\\":\\\"$undefined\\\",\\\"a\\\":\\\"$undefined\\\",\\\"l\\\":\\\"$undefined\\\",\\\"p\\\":\\\"$undefined\\\",\\\"d\\\":\\\"$undefined\\\",\\\"b\\\":\\\"D6flodsWWAs4phJA1k2qQ\\\"}\\n8:{}\\n9:\\\"$4:0:1:d:r:props:children:0:props:serverProvidedParams:params\\\"\\nf:[[\\\"$\\\",\\\"meta\\\",\\\"0\\\",{\\\"charSet\\\":\\\"utf-8\\\"}],[\\\"$\\\",\\\"meta\\\",\\\"1\\\",{\\\"name\\\":\\\"viewport\\\",\\\"content\\\":\\\"width=device-width, initial-scale=1\\\"}]]\\nc:null\\n12:[]\\n\"])",
+              "focusVisible": false,
+              "outlineStyle": "none",
+              "outlineWidth": "3px",
+              "outlineColor": "rgb(0, 0, 0)",
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 360,
+                "height": 800,
+                "right": 360,
+                "bottom": 800
+              }
+            },
+            "buttons": [
+              {
+                "text": "Increment",
+                "bounds": {
+                  "x": 41,
+                  "y": 297.484375,
+                  "width": 278,
+                  "height": 52,
+                  "right": 319,
+                  "bottom": 349.484375
+                }
+              },
+              {
+                "text": "Reset",
+                "bounds": {
+                  "x": 41,
+                  "y": 361.484375,
+                  "width": 278,
+                  "height": 52,
+                  "right": 319,
+                  "bottom": 413.484375
+                }
+              }
+            ],
+            "horizontalOverflow": false
+          }
+        },
+        {
+          "phase": "keyboard-increment",
+          "screenshot": "narrow-keyboard-increment.png",
+          "bounds": {
+            "h1": "Bakery Orders",
+            "output": {
+              "text": "2",
+              "bounds": {
+                "x": 58,
+                "y": 200.96875,
+                "width": 244,
+                "height": 47.515625,
+                "right": 302,
+                "bottom": 248.484375
+              }
+            },
+            "feedback": {
+              "text": "Increment: Count is 2.",
+              "bounds": {
+                "x": 41,
+                "y": 431.484375,
+                "width": 278,
+                "height": 22.5,
+                "right": 319,
+                "bottom": 453.984375
+              }
+            },
+            "focus": {
+              "tag": "BUTTON",
+              "text": "Increment",
+              "focusVisible": true,
+              "outlineStyle": "solid",
+              "outlineWidth": "3px",
+              "outlineColor": "rgb(129, 85, 26)",
+              "bounds": {
+                "x": 41,
+                "y": 297.484375,
+                "width": 278,
+                "height": 52,
+                "right": 319,
+                "bottom": 349.484375
+              }
+            },
+            "buttons": [
+              {
+                "text": "Increment",
+                "bounds": {
+                  "x": 41,
+                  "y": 297.484375,
+                  "width": 278,
+                  "height": 52,
+                  "right": 319,
+                  "bottom": 349.484375
+                }
+              },
+              {
+                "text": "Reset",
+                "bounds": {
+                  "x": 41,
+                  "y": 361.484375,
+                  "width": 278,
+                  "height": 52,
+                  "right": 319,
+                  "bottom": 413.484375
+                }
+              }
+            ],
+            "horizontalOverflow": false
+          }
+        },
+        {
+          "phase": "keyboard-reset",
+          "screenshot": "narrow-keyboard-reset.png",
+          "bounds": {
+            "h1": "Bakery Orders",
+            "output": {
+              "text": "0",
+              "bounds": {
+                "x": 58,
+                "y": 200.96875,
+                "width": 244,
+                "height": 47.515625,
+                "right": 302,
+                "bottom": 248.484375
+              }
+            },
+            "feedback": {
+              "text": "Reset: Count is 0.",
+              "bounds": {
+                "x": 41,
+                "y": 431.484375,
+                "width": 278,
+                "height": 22.5,
+                "right": 319,
+                "bottom": 453.984375
+              }
+            },
+            "focus": {
+              "tag": "BUTTON",
+              "text": "Reset",
+              "focusVisible": true,
+              "outlineStyle": "solid",
+              "outlineWidth": "3px",
+              "outlineColor": "rgb(129, 85, 26)",
+              "bounds": {
+                "x": 41,
+                "y": 361.484375,
+                "width": 278,
+                "height": 52,
+                "right": 319,
+                "bottom": 413.484375
+              }
+            },
+            "buttons": [
+              {
+                "text": "Increment",
+                "bounds": {
+                  "x": 41,
+                  "y": 297.484375,
+                  "width": 278,
+                  "height": 52,
+                  "right": 319,
+                  "bottom": 349.484375
+                }
+              },
+              {
+                "text": "Reset",
+                "bounds": {
+                  "x": 41,
+                  "y": 361.484375,
+                  "width": 278,
+                  "height": 52,
+                  "right": 319,
+                  "bottom": 413.484375
+                }
+              }
+            ],
+            "horizontalOverflow": false
+          }
+        }
+      ],
+      "behavior": {
+        "heading": "Bakery Orders",
+        "label": "Count",
+        "initial": 0,
+        "delta": 1,
+        "resetButton": "Reset",
+        "touch": true,
+        "bounds": [
+          {
+            "label": "Increment",
+            "x": 41,
+            "y": 297.484375,
+            "width": 278,
+            "height": 52
+          },
+          {
+            "label": "Reset",
+            "x": 41,
+            "y": 361.484375,
+            "width": 278,
+            "height": 52
+          }
+        ],
+        "pointerValues": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "keyboardEnterAndSpace": true,
+        "visibleFocus": true,
+        "repeatedResetStatusMutation": true,
+        "reloadValue": 0,
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "horizontalOverflow": false
+      },
+      "noPersistentCounterStorage": true
+    }
+  ],
+  "browserRequests": [
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/webpack-70c336f9a46f13b1.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/4bd1b696-c7408084347438ae.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/794-216401842b802bd7.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/main-app-d4833acabb9231ba.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/app/page-71cf6f0c0187a7d1.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/webpack-70c336f9a46f13b1.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/4bd1b696-c7408084347438ae.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/794-216401842b802bd7.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/main-app-d4833acabb9231ba.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/app/page-71cf6f0c0187a7d1.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/webpack-70c336f9a46f13b1.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/4bd1b696-c7408084347438ae.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/794-216401842b802bd7.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/main-app-d4833acabb9231ba.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:45759",
+      "path": "/_next/static/chunks/app/page-71cf6f0c0187a7d1.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/webpack-70c336f9a46f13b1.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/4bd1b696-c7408084347438ae.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/794-216401842b802bd7.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/main-app-e0f9f5bddf07324f.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/app/page-83d6345a5aa31fee.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/webpack-70c336f9a46f13b1.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/4bd1b696-c7408084347438ae.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/794-216401842b802bd7.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/main-app-e0f9f5bddf07324f.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/app/page-83d6345a5aa31fee.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/webpack-70c336f9a46f13b1.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/4bd1b696-c7408084347438ae.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/794-216401842b802bd7.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/main-app-e0f9f5bddf07324f.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:35055",
+      "path": "/_next/static/chunks/app/page-83d6345a5aa31fee.js"
+    }
+  ],
+  "blockedRequests": [],
+  "pageErrors": [],
+  "hosts": [
+    {
+      "name": "desktop",
+      "pid": 36814,
+      "port": 45759,
+      "command": "node server.js",
+      "copied": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/desktop-EHktq6/standalone",
+      "stopped": true
+    },
+    {
+      "name": "narrow",
+      "pid": 36866,
+      "port": 35055,
+      "command": "node server.js",
+      "copied": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-hspOnI/standalone",
+      "stopped": true
+    }
+  ],
+  "status": "passed",
+  "originalInputsAfter": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/report.json",
+      "sha256": "6918b153c7b51cf489d0a587cf3afa9ae7da12b186e4947cb2cbfe4bd8fbd6fb"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/scripts/e2e/counter-ux.mjs",
+      "sha256": "01e2d0832e64d853e8018a15f69d6cfb3d6e87aeaebfc9e5ecd2131b42bfc048"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/result.json",
+      "sha256": "7d7f9dfe4907d01d6c1de1c04a82fdf6a3b0aaed622c79ad444da732524eafcb"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/progress.json",
+      "sha256": "b1daf96ebbce0020c174e6f774571043068ed6df23528837dee8ee31e6d348fd"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/counter-source.zip",
+      "sha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/app/page.tsx",
+      "sha256": "0895e47453fdde1693b8046ad5854d05c997ca1a69ab285d12b3ecc68d4a5484"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/studio.sqlite",
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/studio.sqlite-shm",
+      "sha256": "e13df2d2af04a42a893c8a1a41ad7943bc23114ee7de923b883bfb005b65083a"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/studio.sqlite-wal",
+      "sha256": "77bcb2408c6a80bad6530ef8b0787dba01bb1ff5798afb42675208ab6fc583fe"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/.next/standalone/server.js",
+      "sha256": "03792a8d1c93eb2be540b2c5f690ac9275315ca8d7028933e8db3291897a3d5d"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/.next/standalone/.next/BUILD_ID",
+      "sha256": "34076dea727e532b263b09cc4cc3175e3896ea05c9aac5a8474dbd13c3ba329c"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/private-data/software/3df01946-1359-4e9f-8036-ec02ed037b09/.next/standalone/.next/server/app/page.js",
+      "sha256": "e0c316550ef108c4d97ce31b91711a32c4445fd71e95fb4865d11165b532cade"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/result.json",
+      "sha256": "66e69e5281865f6ae005c4d11cd03d38230481c81d06e7eee905e37c886e8c81"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/progress.json",
+      "sha256": "56b32774a67447451ec4f92ed44ea0843390978cb7f9a19515567f614bc3cd7a"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/counter-source.zip",
+      "sha256": "e3a84cb69e8c978e77a876f1a09a773a8b8edabca1e1478f477fd88948d40845"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/software/554c2f10-ce13-412e-899e-dcf844f17994/app/page.tsx",
+      "sha256": "0895e47453fdde1693b8046ad5854d05c997ca1a69ab285d12b3ecc68d4a5484"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/studio.sqlite",
+      "sha256": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/studio.sqlite-shm",
+      "sha256": "b852a95c3afaf99077f9986dd48888915aa68808b880a52c435fd52f78f9a289"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/studio.sqlite-wal",
+      "sha256": "9836a135ac69822e2a45fc5ab1066a17b5692bb63886fec8e1d1cd8e35d1cd40"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/software/554c2f10-ce13-412e-899e-dcf844f17994/.next/standalone/server.js",
+      "sha256": "ba2457b4d51fc2846083ba6dd79af6a27e37d6b9e07fc446922615c899ed40c5"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/software/554c2f10-ce13-412e-899e-dcf844f17994/.next/standalone/.next/BUILD_ID",
+      "sha256": "3369981c1263f4420bde1c1a9660fdb5403edb028f7ffa73c83e3c9cd3045535"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/private-data/software/554c2f10-ce13-412e-899e-dcf844f17994/.next/standalone/.next/server/app/page.js",
+      "sha256": "1ef5e4f4ca3b3dfdb400aaf6ece7a867646c595d0159f464a8d22b6b399c9289"
+    }
+  ],
+  "originalInputsUnchanged": true,
+  "finishedAt": "2026-10-29T19:31:37.086Z"
+}

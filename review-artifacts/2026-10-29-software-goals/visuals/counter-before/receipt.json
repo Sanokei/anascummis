@@ -1,0 +1,100 @@
+{
+  "capturedAt": "2026-10-29T18:45:09.754Z",
+  "source": "Unmodified copy of the actual previously accepted standalone counter bundle.",
+  "originalTaskId": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+  "originalHashes": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/native-final-gated/counter-application-desktop/counter-source.zip",
+      "sha256": "3a4279f848983f2b39bdf627f447811a22855215c42c55cf154c7cba44fdc34d"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/native-final-gated/counter-application-desktop/private-data/software/4e210710-16fe-43fd-82a4-f91dab2f5d41/app/page.tsx",
+      "sha256": "865ba844f6cd0615d27899d60d9ff7dbc12bccad4b4d1f382fa8d29829baa6e8"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/native-final-gated/counter-application-desktop/private-data/software/4e210710-16fe-43fd-82a4-f91dab2f5d41/.next/standalone/server.js",
+      "sha256": "2af1e83683d121bfee6679a3dd4bdcd202453fe35c3442fb5b456a3e7856c6a6"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/native-final-gated/counter-application-desktop/private-data/software/4e210710-16fe-43fd-82a4-f91dab2f5d41/.next/standalone/.next/BUILD_ID",
+      "sha256": "2ac8398175e051fdf5ecb394718b02a3dd5acc6defea45bc03bfb758a9359918"
+    }
+  ],
+  "limit": "Installed Chromium desktop/touch emulation. No application build, model inference, installation, parent artifact modification, or native voice claim.",
+  "viewports": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot": "before-desktop.png",
+      "metrics": {
+        "visibleText": "Bakery Orders\n0IncrementReset",
+        "visibleCountLabel": false,
+        "horizontalOverflow": false,
+        "buttons": [
+          {
+            "label": "Increment",
+            "width": 75.265625,
+            "height": 21
+          },
+          {
+            "label": "Reset",
+            "width": 50.828125,
+            "height": 21
+          }
+        ],
+        "output": {
+          "label": "Count",
+          "role": null,
+          "live": null
+        },
+        "statusMessages": []
+      },
+      "numericalBehavior": "0 → 1 → 2 → Reset0; reload0"
+    },
+    {
+      "name": "narrow",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "screenshot": "before-narrow.png",
+      "metrics": {
+        "visibleText": "Bakery Orders\n0IncrementReset",
+        "visibleCountLabel": false,
+        "horizontalOverflow": false,
+        "buttons": [
+          {
+            "label": "Increment",
+            "width": 75.265625,
+            "height": 21
+          },
+          {
+            "label": "Reset",
+            "width": 50.828125,
+            "height": 21
+          }
+        ],
+        "output": {
+          "label": "Count",
+          "role": null,
+          "live": null
+        },
+        "statusMessages": []
+      },
+      "numericalBehavior": "0 → 1 → 2 → Reset0; reload0"
+    }
+  ],
+  "externalRequests": [],
+  "pageErrors": [],
+  "host": {
+    "pid": 20599,
+    "port": 45683,
+    "command": "node server.js",
+    "copiedBundle": "/workspace/.cloud-env/anascummis/task-list/counter-before/accepted-bundle-copy"
+  },
+  "originalArtifactsUnchanged": true,
+  "status": "passed"
+}

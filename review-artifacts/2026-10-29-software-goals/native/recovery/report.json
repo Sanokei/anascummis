@@ -1,0 +1,1229 @@
+{
+  "startedAt": "2026-10-29T19:16:38.522Z",
+  "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+  "lane": "real-local-runtime",
+  "results": [
+    {
+      "id": "resume-task-list-checkpoint",
+      "viewport": "desktop",
+      "goal": "Explicitly resume the same native-generated task list after correcting host validation, preserving source/call identity and prior failed checks while obtaining real verified output.",
+      "startedAt": "2026-10-29T19:16:38.821Z",
+      "status": "passed",
+      "lane": "real-checkpoint-recovery",
+      "prerequisite": "None",
+      "assertions": [
+        {
+          "name": "The actual saved native-generated failure and browser check remain paused and inspectable until explicit Resume.",
+          "passed": true
+        },
+        {
+          "name": "One explicit Resume reruns actual checks/package on the same generated source without new inference, retains exact failed receipt/history, and leaves the original failed fixture untouched.",
+          "passed": true
+        }
+      ],
+      "screenshots": [
+        "01-first-use.png",
+        "02-retained-original-failed-check.png",
+        "03-explicit-resume-checkpoint.png",
+        "04-failed-validation-history-kept.png",
+        "recovered-produced-task-list.png"
+      ],
+      "downloads": [
+        {
+          "path": "recovered-source.zip",
+          "bytes": 176559,
+          "sha256": "e5e6a64b506601ccf82971837980a10e7c5dcc0c00316e826fb538b817758947"
+        }
+      ],
+      "pageErrors": [],
+      "apiMutations": [
+        {
+          "path": "/api/software/74fb284e-c390-428e-8bfe-05ff9767feb2/resume",
+          "time": "2026-10-29T19:16:47.736Z"
+        }
+      ],
+      "limitations": [
+        "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+        "No test-supplied inference, API seeding, model download or external provisioning."
+      ],
+      "checkpoint": {
+        "source": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data",
+        "copiedToOwnedData": true,
+        "note": "Copy of a stopped real native-generated fixture; no mutation API seeding or inference substitute."
+      },
+      "host": {
+        "pid": 28194,
+        "port": 37143,
+        "command": "bun core/server.ts",
+        "isolatedData": "private-data"
+      },
+      "runtime": {
+        "runtime": "local",
+        "model": {
+          "ready": true,
+          "name": "qwen3-0.6b"
+        },
+        "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+        "network": "Opt-in actions only"
+      },
+      "externalBrowserRequests": [
+        {
+          "origin": "https://huggingface.co",
+          "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+          "blocked": true
+        },
+        {
+          "origin": "https://huggingface.co",
+          "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+          "blocked": true
+        },
+        {
+          "origin": "https://huggingface.co",
+          "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+          "blocked": true
+        }
+      ],
+      "recoveryBefore": {
+        "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+        "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.",
+        "status": "needs_input",
+        "phase": "needs_input",
+        "revision": 1,
+        "requirements": [
+          {
+            "id": "collection",
+            "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+            "status": "implemented",
+            "files": [
+              "app/page.tsx",
+              "lib/collection.ts"
+            ],
+            "tests": [
+              "tests/app.test.tsx",
+              "tests/collection.test.ts"
+            ]
+          }
+        ],
+        "events": [
+          {
+            "time": 1793300653480,
+            "phase": "starting",
+            "detail": "Resuming the full saved goal and workspace.",
+            "revision": 0
+          },
+          {
+            "time": 1793300653483,
+            "phase": "planning",
+            "detail": "Specifying a bounded persistent text collection; a trusted compiler owns source and independent browser acceptance.",
+            "revision": 0
+          },
+          {
+            "time": 1793300655508,
+            "phase": "install",
+            "detail": "Running install.",
+            "revision": 1
+          },
+          {
+            "time": 1793300656252,
+            "phase": "typecheck",
+            "detail": "Running typecheck.",
+            "revision": 1
+          },
+          {
+            "time": 1793300657595,
+            "phase": "tests",
+            "detail": "Running tests.",
+            "revision": 1
+          },
+          {
+            "time": 1793300657647,
+            "phase": "build",
+            "detail": "Building the actual Next.js program.",
+            "revision": 1
+          },
+          {
+            "time": 1793300684953,
+            "phase": "browser",
+            "detail": "Loading the production app and capturing a real screenshot.",
+            "revision": 1
+          },
+          {
+            "time": 1793300688971,
+            "phase": "retrying",
+            "detail": "Retrying from the saved checkpoint: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persiste",
+            "revision": 1
+          },
+          {
+            "time": 1793300688974,
+            "phase": "starting",
+            "detail": "Resuming the full saved goal and workspace.",
+            "revision": 1
+          },
+          {
+            "time": 1793300688977,
+            "phase": "retrying",
+            "detail": "Retrying from the saved checkpoint: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persiste",
+            "revision": 1
+          },
+          {
+            "time": 1793300688978,
+            "phase": "starting",
+            "detail": "Resuming the full saved goal and workspace.",
+            "revision": 1
+          },
+          {
+            "time": 1793300688981,
+            "phase": "needs_input",
+            "detail": "Could not make verified progress: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+            "revision": 1
+          }
+        ],
+        "created": 1793300653475,
+        "updated": 1793300688981,
+        "calls": 1,
+        "errors": 3,
+        "message": "Could not make verified progress: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+        "milestoneMs": [],
+        "milestoneStarted": 1793300653475,
+        "planOffset": 0,
+        "planningDone": true,
+        "targets": [
+          "zip"
+        ],
+        "collectionContract": {
+          "kind": "collection",
+          "heading": "My Tasks",
+          "inputLabel": "New task",
+          "addButton": "Add",
+          "removeButton": "Remove",
+          "listLabel": "Tasks",
+          "storage": "localStorage",
+          "storageKey": "anascummis.collection.74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "maxItems": 100,
+          "maxTextLength": 200
+        },
+        "lastProgressCall": 1,
+        "evidence": {
+          "revision": 1,
+          "checks": [
+            {
+              "id": "install",
+              "ok": true,
+              "detail": "bun install v1.3.14 (0d9b296a)\nResolving dependencies\nResolved, downloaded and extracted [14]\nSaved lockfile\n\n+ @types/bun@1.3.0\n+ @types/react@19.2.0\n+ @types/react-dom@19.2.0\n+ typescript@5.9.3\n+ next@16.4.3\n+ react@19.2.7\n+ react-dom@19.2.7\n\n33 packages installed [738.00ms]\n",
+              "milliseconds": 742
+            },
+            {
+              "id": "typecheck",
+              "ok": true,
+              "detail": "",
+              "milliseconds": 1340
+            },
+            {
+              "id": "tests",
+              "ok": true,
+              "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [6.70ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.57ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.29ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [45.00ms]\n",
+              "milliseconds": 50
+            },
+            {
+              "id": "build",
+              "ok": true,
+              "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 25ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 4.4s\n  Running TypeScript ...\n\n  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.\n  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:\n\n  \t- allowJs was set to true\n  \t- incremental was set to true\n  \t- include was updated to add '.next/dev/types/**/*.ts'\n\n  The following mandatory changes were made to your tsconfig.json:\n\n  \t- isolatedModules was set to true (requirement for SWC / Babel)\n\n  Finished TypeScript in 1851ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 205ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+              "milliseconds": 27290
+            },
+            {
+              "id": "browser",
+              "ok": false,
+              "detail": "Error: file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+              "milliseconds": 4010
+            }
+          ],
+          "dom": "",
+          "artifacts": [],
+          "screenshot": "revision-1.png"
+        }
+      },
+      "goalProgress": [
+        {
+          "time": "2026-10-29T19:16:47.753Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "starting",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:16:47.868Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "typecheck",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:16:49.496Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "tests",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:16:49.600Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "build",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:17:15.166Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "browser",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:17:18.768Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "typecheck",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:17:20.177Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "tests",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:17:20.289Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "build",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:17:42.601Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "browser",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:17:46.128Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "running",
+          "phase": "source_zip",
+          "revision": 1,
+          "calls": 1
+        },
+        {
+          "time": "2026-10-29T19:18:14.205Z",
+          "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "status": "completed",
+          "phase": "completed",
+          "revision": 1,
+          "calls": 1
+        }
+      ],
+      "recoveryAfter": {
+        "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+        "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.",
+        "status": "completed",
+        "phase": "completed",
+        "revision": 1,
+        "requirements": [
+          {
+            "id": "collection",
+            "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+            "status": "verified",
+            "files": [
+              "app/page.tsx",
+              "lib/collection.ts"
+            ],
+            "tests": [
+              "tests/app.test.tsx",
+              "tests/collection.test.ts"
+            ],
+            "reviewRevision": 1,
+            "note": "Bounded collection contract verified by actual production-browser interactions: Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key"
+          }
+        ],
+        "events": [
+          {
+            "time": 1793301407761,
+            "phase": "typecheck",
+            "detail": "Running typecheck.",
+            "revision": 1
+          },
+          {
+            "time": 1793301409437,
+            "phase": "tests",
+            "detail": "Running tests.",
+            "revision": 1
+          },
+          {
+            "time": 1793301409499,
+            "phase": "build",
+            "detail": "Building the actual Next.js program.",
+            "revision": 1
+          },
+          {
+            "time": 1793301435088,
+            "phase": "browser",
+            "detail": "Loading the production app and capturing a real screenshot.",
+            "revision": 1
+          },
+          {
+            "time": 1793301438688,
+            "phase": "install",
+            "detail": "Running install.",
+            "revision": 1
+          },
+          {
+            "time": 1793301438694,
+            "phase": "typecheck",
+            "detail": "Running typecheck.",
+            "revision": 1
+          },
+          {
+            "time": 1793301440153,
+            "phase": "tests",
+            "detail": "Running tests.",
+            "revision": 1
+          },
+          {
+            "time": 1793301440203,
+            "phase": "build",
+            "detail": "Building the actual Next.js program.",
+            "revision": 1
+          },
+          {
+            "time": 1793301462542,
+            "phase": "browser",
+            "detail": "Loading the production app and capturing a real screenshot.",
+            "revision": 1
+          },
+          {
+            "time": 1793301466032,
+            "phase": "source_zip",
+            "detail": "Running source_zip.",
+            "revision": 1
+          },
+          {
+            "time": 1793301494173,
+            "phase": "packaging",
+            "detail": "Packaging checked source ZIP.",
+            "revision": 1
+          },
+          {
+            "time": 1793301494202,
+            "phase": "completed",
+            "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+            "revision": 1
+          }
+        ],
+        "created": 1793300653475,
+        "updated": 1793301494202,
+        "calls": 1,
+        "errors": 0,
+        "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+        "milestoneMs": [],
+        "milestoneStarted": 1793300653475,
+        "planOffset": 0,
+        "planningDone": true,
+        "targets": [
+          "zip"
+        ],
+        "collectionContract": {
+          "kind": "collection",
+          "heading": "My Tasks",
+          "inputLabel": "New task",
+          "addButton": "Add",
+          "removeButton": "Remove",
+          "listLabel": "Tasks",
+          "storage": "localStorage",
+          "storageKey": "anascummis.collection.74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "maxItems": 100,
+          "maxTextLength": 200
+        },
+        "lastProgressCall": 1,
+        "evidence": {
+          "revision": 1,
+          "checks": [
+            {
+              "id": "install",
+              "ok": true,
+              "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [2.00ms]\n",
+              "milliseconds": 4
+            },
+            {
+              "id": "typecheck",
+              "ok": true,
+              "detail": "",
+              "milliseconds": 1458
+            },
+            {
+              "id": "tests",
+              "ok": true,
+              "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [7.16ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.47ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.27ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [43.00ms]\n",
+              "milliseconds": 48
+            },
+            {
+              "id": "build",
+              "ok": true,
+              "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 26ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1452ms\n  Running TypeScript ...\n  Finished TypeScript in 1348ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 207ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+              "milliseconds": 22332
+            },
+            {
+              "id": "browser",
+              "ok": true,
+              "detail": "Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key",
+              "milliseconds": 3491
+            },
+            {
+              "id": "source_zip",
+              "ok": true,
+              "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+              "milliseconds": 28138
+            }
+          ],
+          "dom": "My Tasks\n\nSaved in this browser. Up to 100 tasks, 200 characters each.\n\nNew task\nAdd\nKeep this task\nRemove\nAdded after reload\nRemove",
+          "artifacts": [
+            {
+              "kind": "zip",
+              "name": "source.zip",
+              "sha256": "e5e6a64b506601ccf82971837980a10e7c5dcc0c00316e826fb538b817758947",
+              "bytes": 176559,
+              "smokeTested": true
+            }
+          ],
+          "headings": [
+            "My Tasks"
+          ],
+          "screenshot": "revision-1.png",
+          "browserContract": {
+            "kind": "collection",
+            "heading": "My Tasks",
+            "inputLabel": "New task",
+            "addButton": "Add",
+            "removeButton": "Remove",
+            "listLabel": "Tasks",
+            "storage": "localStorage",
+            "storageKey": "anascummis.collection.74fb284e-c390-428e-8bfe-05ff9767feb2",
+            "maxItems": 100,
+            "maxTextLength": 200
+          }
+        }
+      },
+      "archivedFailedValidation": {
+        "format": "anascummis.failed-validation.v1",
+        "taskId": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+        "sourceRevision": 1,
+        "retention": "Text-only historical validation receipt. Screenshots and artifact file bytes were not archived and may be replaced by later validation; the prior screenshot reference is omitted. Artifact checksums below record the original receipt metadata.",
+        "receipt": {
+          "revision": 1,
+          "checks": [
+            {
+              "id": "install",
+              "ok": true,
+              "detail": "bun install v1.3.14 (0d9b296a)\nResolving dependencies\nResolved, downloaded and extracted [14]\nSaved lockfile\n\n+ @types/bun@1.3.0\n+ @types/react@19.2.0\n+ @types/react-dom@19.2.0\n+ typescript@5.9.3\n+ next@16.4.3\n+ react@19.2.7\n+ react-dom@19.2.7\n\n33 packages installed [738.00ms]\n",
+              "milliseconds": 742
+            },
+            {
+              "id": "typecheck",
+              "ok": true,
+              "detail": "",
+              "milliseconds": 1340
+            },
+            {
+              "id": "tests",
+              "ok": true,
+              "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [6.70ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.57ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.29ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [45.00ms]\n",
+              "milliseconds": 50
+            },
+            {
+              "id": "build",
+              "ok": true,
+              "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 25ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 4.4s\n  Running TypeScript ...\n\n  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.\n  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:\n\n  \t- allowJs was set to true\n  \t- incremental was set to true\n  \t- include was updated to add '.next/dev/types/**/*.ts'\n\n  The following mandatory changes were made to your tsconfig.json:\n\n  \t- isolatedModules was set to true (requirement for SWC / Babel)\n\n  Finished TypeScript in 1851ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 205ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+              "milliseconds": 27290
+            },
+            {
+              "id": "browser",
+              "ok": false,
+              "detail": "Error: file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+              "milliseconds": 4010
+            }
+          ],
+          "dom": "",
+          "artifacts": []
+        }
+      },
+      "softwareInspections": [
+        {
+          "taskId": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+          "name": "recovered-produced-task-list",
+          "mode": "produced-standalone",
+          "phases": [],
+          "limit": "Actual produced standalone bundle; downloaded-source installation is a separate inspection.",
+          "pid": 29020,
+          "port": 39419,
+          "startCommand": "node server.js",
+          "passed": true,
+          "trace": "recovered-produced-task-list-trace.zip"
+        }
+      ],
+      "recoveryIdentity": {
+        "sourceHashes": {
+          "app/page.tsx": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b",
+          "lib/collection.ts": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d",
+          "BUILD-PROVENANCE.json": "187594af54ac0cb186d406b2041d238e2ac3db11c2718eb9ec7f4bae34c18876"
+        },
+        "originalFixtureHashes": {
+          "app/page.tsx": "a5f9a8cf48ca478b53fdb77353f2e9c65cfb9864392c998fd308e1572e0a202b",
+          "lib/collection.ts": "d41ec125e554e6d9ddf0dc1d728ca3a089e7add033d93e4f0f82f9da6f20215d",
+          "BUILD-PROVENANCE.json": "187594af54ac0cb186d406b2041d238e2ac3db11c2718eb9ec7f4bae34c18876",
+          "studio.sqlite": "40cf07c52bfaa52b334ef341456f970787f6dc701ffe18ad3c572cb5056dbd70",
+          "studio.sqlite-wal": "111d19848c7b9766446249fa4b7fd7f9e40942edbd07b7f1f2b252876f259140",
+          "studio.sqlite-shm": "6121c310c2bd3d84fe1547d6a5e9d7d7b76f3f892c690522a64f8a609972c4cf"
+        },
+        "inferenceCallsBefore": 1,
+        "inferenceCallsAfter": 1,
+        "sourceRevision": 1
+      },
+      "goalAchieved": true,
+      "trace": "trace.zip",
+      "traceSessionHeadersRedacted": true,
+      "finishedAt": "2026-10-29T19:18:25.569Z",
+      "recoveryChecksPassed": 2,
+      "artifactDirectory": "resume-task-list-checkpoint-desktop"
+    }
+  ],
+  "output": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery",
+  "notes": [
+    "Blocked user goals never count as completed goals, even when recovery assertions pass.",
+    "private-data and host.log are local diagnostics, not shareable fixture inputs. Traces remove ephemeral session headers."
+  ],
+  "sourceDirty": false,
+  "runnerSource": [
+    {
+      "path": "scripts/test-user-journeys.mjs",
+      "sha256": "c87a5a920526bf7b12c8ce1daaaea30f6c6174ffbc4bd02e654697bf2c1c4859"
+    },
+    {
+      "path": "scripts/e2e/runner.mjs",
+      "sha256": "b0edb88a5d41da47440b811b92d885cd7b75ba4d8a9046e51af6dfd46601488b"
+    },
+    {
+      "path": "scripts/e2e/journeys.mjs",
+      "sha256": "9b1a3e8acbdc06c71ca7616f52686e8e57fbfa09a9497f6837bc90f4e12d81c2"
+    },
+    {
+      "path": "scripts/e2e/artifacts.mjs",
+      "sha256": "ff1d3193e978763206d343b91a16f066fa463416baba6348e855be804d4a9351"
+    },
+    {
+      "path": "scripts/e2e/source-reading.mjs",
+      "sha256": "f716cdd9ba541ce421f678dfd655010d83683034305078603ab7e469c58c621f"
+    },
+    {
+      "path": "scripts/e2e/task-list.mjs",
+      "sha256": "0b0830b710e316b6182b194d641b3c090691afe289febd60d49ee95e14a80e9e"
+    },
+    {
+      "path": "scripts/e2e/software-artifact.mjs",
+      "sha256": "ccf430c6a1ed9f04b773df33a58234bfce4d16b028b4a0a2faf41ad9a19edab7"
+    },
+    {
+      "path": "scripts/e2e/counter-ux.mjs",
+      "sha256": "01e2d0832e64d853e8018a15f69d6cfb3d6e87aeaebfc9e5ecd2131b42bfc048"
+    },
+    {
+      "path": "scripts/e2e/window-routing.mjs",
+      "sha256": "e46829e556dcdf0c337b874fdb016e2c3692163615da4e09985b20e08482dd2b"
+    },
+    {
+      "path": "scripts/e2e/recover-software.mjs",
+      "sha256": "f26838da2297b1f04116c274be75cd9e4a7c045f07d3e8d8c9f1bc1067d38b91"
+    }
+  ],
+  "servedBuild": [
+    {
+      "path": "out/404/index.html",
+      "bytes": 8688,
+      "sha256": "2821acc40de2973ead5c0afe4ffb78eb8123ffdc99a5b4db4137445a51414bb3"
+    },
+    {
+      "path": "out/404.html",
+      "bytes": 8688,
+      "sha256": "2821acc40de2973ead5c0afe4ffb78eb8123ffdc99a5b4db4137445a51414bb3"
+    },
+    {
+      "path": "out/_next/static/chunks/0928c0d2.5a275abdeb508710.js",
+      "bytes": 85765,
+      "sha256": "ac750ec17cd978927b2d2d1a5958d4e75f3c2736b03de4d263a68dcd25ab440d"
+    },
+    {
+      "path": "out/_next/static/chunks/1010.3b422031f1f503cf.js",
+      "bytes": 7096,
+      "sha256": "679cc26075a04caffb9b86031c03e97544304ec653b330c81d58cbe0373712e1"
+    },
+    {
+      "path": "out/_next/static/chunks/105.e2fc4d5163276d70.js",
+      "bytes": 1509,
+      "sha256": "8f5f5265dea385095c573f0d4ec1c23608b9f562b9d96d01a23db2a28d2d676f"
+    },
+    {
+      "path": "out/_next/static/chunks/119.5e66e08ffd5244c7.js",
+      "bytes": 1092,
+      "sha256": "d34410c0366406c8dcbb2e97275c68082835f114e84ed54fc3d16e7a8a75c27c"
+    },
+    {
+      "path": "out/_next/static/chunks/1413.7ebcbe39c3c98cf1.js",
+      "bytes": 3570,
+      "sha256": "870ea69fdebefb42fd7180d4413b39b9e6b0065d58603c041b6209715726f754"
+    },
+    {
+      "path": "out/_next/static/chunks/16.14304b1802b69924.js",
+      "bytes": 4905,
+      "sha256": "e88bc65bf679cf86bbeb9a60b6d5301e1ef66b1201fc470cf07ee09ff561171f"
+    },
+    {
+      "path": "out/_next/static/chunks/2047.09ecac094b4d804e.js",
+      "bytes": 1716,
+      "sha256": "075c907f155d13def359872e98348cdf1be01d49565d64f6b28699cfd28211b6"
+    },
+    {
+      "path": "out/_next/static/chunks/205.ac4e4ba2cec822f5.js",
+      "bytes": 1046,
+      "sha256": "f65c5f86af13615f121b5d0d1f3413651c81489931154592785a712db5f519fd"
+    },
+    {
+      "path": "out/_next/static/chunks/2078.0d4b86900860e447.js",
+      "bytes": 917,
+      "sha256": "07d7af294549837d9aa16f8498c7b9772b37defd2b3107a96672d4242afc83b2"
+    },
+    {
+      "path": "out/_next/static/chunks/2128.90c5faad3c498b34.js",
+      "bytes": 2494,
+      "sha256": "ae84cb19af5d04d4422639925a526f25feed3b0cc8be9e7aac471a3a8fdfcddd"
+    },
+    {
+      "path": "out/_next/static/chunks/2434.5f10cae8dbf71501.js",
+      "bytes": 1486,
+      "sha256": "37afafd5edc8ffea66be04b518e6ffd3106edff9ae236ae353be938a019dc2bb"
+    },
+    {
+      "path": "out/_next/static/chunks/2436.d14295ded52d193c.js",
+      "bytes": 1837,
+      "sha256": "78cec0eeea642e1aefe0082378ae4a13e22b1d24d240351bb5ae250f06161b1c"
+    },
+    {
+      "path": "out/_next/static/chunks/26.b29809e9b9d29f7c.js",
+      "bytes": 1063,
+      "sha256": "abad5d622a55b6d3889c50d049982628ec5ef71052513ebc02bad898bdb94fb1"
+    },
+    {
+      "path": "out/_next/static/chunks/2724.3c1e26529ab2ddba.js",
+      "bytes": 48740,
+      "sha256": "863f70f4dccf6604f63a046ff2c4f51d389892456c37ed11c2c96f767af0e0d2"
+    },
+    {
+      "path": "out/_next/static/chunks/2873.14304b1802b69924.js",
+      "bytes": 4905,
+      "sha256": "e88bc65bf679cf86bbeb9a60b6d5301e1ef66b1201fc470cf07ee09ff561171f"
+    },
+    {
+      "path": "out/_next/static/chunks/292.7c027a444c126f7f.js",
+      "bytes": 6346,
+      "sha256": "1fdd0ce343391e2b75d31a879252b1f161eed709bc2ba70ff115b28a715fc29c"
+    },
+    {
+      "path": "out/_next/static/chunks/3441.c6cb1d5b343c162a.js",
+      "bytes": 8409,
+      "sha256": "710bed775ac3dfc4aa068312c4a1296d0776fe865a859b9e0632de3bd5e33e9e"
+    },
+    {
+      "path": "out/_next/static/chunks/3708.1894802fd737d9a0.js",
+      "bytes": 37140,
+      "sha256": "d79835baeebdfb3735e444a455dc4545903d5584d7a355770ad6863eb26b5c46"
+    },
+    {
+      "path": "out/_next/static/chunks/3774.8f5d9a3e78ed88e5.js",
+      "bytes": 1909,
+      "sha256": "19c0bf65a0113f0464ec8335d0e1a1b74ef628bbf69da96fcd7d1ca26c3c74dd"
+    },
+    {
+      "path": "out/_next/static/chunks/3794-e6b880ea1810fa3e.js",
+      "bytes": 243714,
+      "sha256": "80c30e85c98f93f267462d19efb989ec7b5f29a4b22418ef944a8896c1e85955"
+    },
+    {
+      "path": "out/_next/static/chunks/3910.bbe23c1e4b53389a.js",
+      "bytes": 1374,
+      "sha256": "e84af8e20528507de4946db7863b5f3fc4b621bf8c51b53acaf69589a67a5ef2"
+    },
+    {
+      "path": "out/_next/static/chunks/4067.7e1dd2c666ec8601.js",
+      "bytes": 4457,
+      "sha256": "04918feb2e4d04a47e7d53a1a51825daf5cfcf87cd15ee0df8518224316778b3"
+    },
+    {
+      "path": "out/_next/static/chunks/4071.5b8c74386d0308d7.js",
+      "bytes": 1533,
+      "sha256": "052f6c9747408478efb58fcb42f4483b8fa611ca987d661fa2248d8f5c5a0942"
+    },
+    {
+      "path": "out/_next/static/chunks/4192.5e45804544f1fcf8.js",
+      "bytes": 757,
+      "sha256": "92923dfbf511a93f97f4b02762d81b53c7c82d234eb4c48ddbf4c9e8846fee1c"
+    },
+    {
+      "path": "out/_next/static/chunks/4661.80a4da643d7d0cbb.js",
+      "bytes": 1328,
+      "sha256": "76e541b224229f685bf3a7e9f694a00d1638b2a7039a0cb6c4b6fd4425af4928"
+    },
+    {
+      "path": "out/_next/static/chunks/471.8f9a01f152663757.js",
+      "bytes": 2583,
+      "sha256": "10ed07c4abeccf84a062c8caab9dc74cc0c67e8dd64228c5eef4c28cef43c7a1"
+    },
+    {
+      "path": "out/_next/static/chunks/4721.d579b9099b02d47a.js",
+      "bytes": 2785,
+      "sha256": "640f53e9d244da6a5bcc69469786bf1c47e4651acc623973cb40e5b58f5debed"
+    },
+    {
+      "path": "out/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "bytes": 203727,
+      "sha256": "898c71c4da75489e3cf225ab3cd3d44d6232a491ee816510ba79b6e3ac17885e"
+    },
+    {
+      "path": "out/_next/static/chunks/5124.c9fcdaa522028f8c.js",
+      "bytes": 42665,
+      "sha256": "5dbdaed4873a82a16a7ed9ef25822a9adb4f4f28198539a95e71480bf5e47a45"
+    },
+    {
+      "path": "out/_next/static/chunks/5173.72d9738c3f247596.js",
+      "bytes": 130329,
+      "sha256": "f33febdfe122f8930493916a61d0679bc67301cb788280632f585a51cac7a180"
+    },
+    {
+      "path": "out/_next/static/chunks/5208.40aeaa8f53521f54.js",
+      "bytes": 3199,
+      "sha256": "3f917d80e3cb03c3192c8f98c63e49bbc82361a43a07b8f77f5a29e187ef9c14"
+    },
+    {
+      "path": "out/_next/static/chunks/5254.14304b1802b69924.js",
+      "bytes": 4905,
+      "sha256": "e88bc65bf679cf86bbeb9a60b6d5301e1ef66b1201fc470cf07ee09ff561171f"
+    },
+    {
+      "path": "out/_next/static/chunks/5275.4c28311e2ebaa6e4.js",
+      "bytes": 3365,
+      "sha256": "b43b8685aad9924a26137d24f071d896475652beb9efde3a139fc0fa33c435eb"
+    },
+    {
+      "path": "out/_next/static/chunks/5315.1454ba2c6f8cb341.js",
+      "bytes": 2933,
+      "sha256": "40e067800ac491ad60f030d6f34f38babd3476f021f356f686cb4e59a9a9f8a2"
+    },
+    {
+      "path": "out/_next/static/chunks/5386.f252f57d08ec1dec.js",
+      "bytes": 3657,
+      "sha256": "68af840837706155dc2488d987f5f35a7fd5346dfbc83b0b28d7cb14fd013b53"
+    },
+    {
+      "path": "out/_next/static/chunks/5584.8e210b131c50ecaa.js",
+      "bytes": 2791,
+      "sha256": "27ef5ba696a1789dcedb1487c77cea25e9df75c3f970db0a7ed29c2b727d11e5"
+    },
+    {
+      "path": "out/_next/static/chunks/6025.a31f90d36e0592ce.js",
+      "bytes": 39539,
+      "sha256": "4bb0bba749a27ac9247613db2e5f05ed2a14c1ebc3184d0469c9b54d7387e17d"
+    },
+    {
+      "path": "out/_next/static/chunks/6255.76d1f787935ca7bf.js",
+      "bytes": 5491,
+      "sha256": "54777e011884a9349659848c336a714f79bc993a576d624e8da51a92f6b995bc"
+    },
+    {
+      "path": "out/_next/static/chunks/629.0d897fcd6a8dcdd7.js",
+      "bytes": 1145,
+      "sha256": "3f852fbbfb743589c1bb00e4078a6b908d22f3d88ee3c496d1f93fe383701722"
+    },
+    {
+      "path": "out/_next/static/chunks/6713.1c3c71f40a2b4948.js",
+      "bytes": 9934,
+      "sha256": "e57a94b0f4dfabfe6e14c6f388e59c639c72d440620934e91238b324aae494e0"
+    },
+    {
+      "path": "out/_next/static/chunks/6788.26c991529bf3aaef.js",
+      "bytes": 1616,
+      "sha256": "1a166820676f9b68c232bc6434e40a1ab9a2780ff568c000ebbd543ca11e79f8"
+    },
+    {
+      "path": "out/_next/static/chunks/6817.46cc19724d4ff86c.js",
+      "bytes": 5074,
+      "sha256": "b03ca794e836b579f26b0d3e9a44db25dfeba91c7379f67298825ecd6e7a5929"
+    },
+    {
+      "path": "out/_next/static/chunks/6900.8815fa82713f2190.js",
+      "bytes": 845,
+      "sha256": "5be7bec6744d8188b499b9d0550be4f8451c9e5146fd39b0a9f345d4f8edf48b"
+    },
+    {
+      "path": "out/_next/static/chunks/6997.838506c40a0169b7.js",
+      "bytes": 675,
+      "sha256": "4c496793296442e8cd0531cae90c613bbcfc62a4e6096e01f1f12eafe75d57f9"
+    },
+    {
+      "path": "out/_next/static/chunks/6c6c61ac.c4f2cf1aad7a370c.js",
+      "bytes": 51555,
+      "sha256": "d7f2be7f68f3ccd2f9c83c2c4928ab6415c1a528111ac4866c980d9294e97c56"
+    },
+    {
+      "path": "out/_next/static/chunks/7069.f13d8ba618f89037.js",
+      "bytes": 7628857,
+      "sha256": "75fdec05d14a4a7b278c300544d2d69a62235c2e6fcb69133a82ab8e32bebca4"
+    },
+    {
+      "path": "out/_next/static/chunks/7292.04663a128e0e4741.js",
+      "bytes": 459,
+      "sha256": "a4d10d174b3a78c6ab012bcbd48b4a6b20dea74cdd360f9f36efd47075c23b68"
+    },
+    {
+      "path": "out/_next/static/chunks/7379.598114a901a6f8e1.js",
+      "bytes": 2416,
+      "sha256": "2d452be1120fc3bb6b0f0bee2be2b746c0578f4b85ef99d92733844ec54695e8"
+    },
+    {
+      "path": "out/_next/static/chunks/7387.9d7a1cce63f7a6d0.js",
+      "bytes": 704,
+      "sha256": "8f30802e5be2e937cee9ff40c773991ced5332048b9e4ef9323e00aa922b5a27"
+    },
+    {
+      "path": "out/_next/static/chunks/7632.2625e6e04d5560eb.js",
+      "bytes": 894,
+      "sha256": "be9a59793fc8f4bb19d3f4bdc37e72dcbb11ae7217651c737fe3fdcf42704f2b"
+    },
+    {
+      "path": "out/_next/static/chunks/7f989a4a.d61c062c858654a1.js",
+      "bytes": 62960,
+      "sha256": "06f9f524e7d3bc51fe5f653a628ff33c33a45d463d5eaf53cccce452b0a01e46"
+    },
+    {
+      "path": "out/_next/static/chunks/8118.69d47ec321f15874.js",
+      "bytes": 1954,
+      "sha256": "441c17a3a81e98e4023b4f2c056f1dfab8e99c68d1f2e885fe706cd5ef7e5571"
+    },
+    {
+      "path": "out/_next/static/chunks/8141.d7015931cf820bf3.js",
+      "bytes": 1677,
+      "sha256": "f40cdb0989cc4d43f2fb435a54ffb9fc96d09f44c1cf9f29aa7e03eef5e63bfd"
+    },
+    {
+      "path": "out/_next/static/chunks/8431.416f3d4b31f10418.js",
+      "bytes": 3016,
+      "sha256": "9044b4c129ac24f8f2e951fd07b29923a92c0239a0cfa675b3deed770f54bc64"
+    },
+    {
+      "path": "out/_next/static/chunks/8810.f84d4cceaa359e4e.js",
+      "bytes": 1037,
+      "sha256": "879a200ce57f83838022e30119f93625bfd83522f1e60e3b54099343875e1f78"
+    },
+    {
+      "path": "out/_next/static/chunks/9103.cf943ab6b3358e29.js",
+      "bytes": 531,
+      "sha256": "5b3c6233e23d4228afc4a01709a10b545c3715c9bc0dae2a94d63618d7893a5d"
+    },
+    {
+      "path": "out/_next/static/chunks/9396.6fe5f2ff3e0a27de.js",
+      "bytes": 6115,
+      "sha256": "4b878779329f651d8f9579eff5a6ce058e7f00d8d88712653a90f226af7f6e6e"
+    },
+    {
+      "path": "out/_next/static/chunks/979ca5ab.27ff4797c0cbea83.js",
+      "bytes": 94257,
+      "sha256": "776b78d498c233790fb1b18b096fe054170312cbb4756c0f117fffa90cdeec8d"
+    },
+    {
+      "path": "out/_next/static/chunks/aa60288b.47350d1f67489574.js",
+      "bytes": 193165,
+      "sha256": "e17cf6b1700abfc65c26c755c3f0d47f1d7b7fa1eaf365966d082b4f83d8ea41"
+    },
+    {
+      "path": "out/_next/static/chunks/adda3502.9499f9268d018031.js",
+      "bytes": 412842,
+      "sha256": "866b04d9a3a0de5aa4eb757fc5519074f12b42d2091670bfa7cabd4a75700241"
+    },
+    {
+      "path": "out/_next/static/chunks/app/_global-error/page-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/app/_not-found/page-5d30d0999bd9c153.js",
+      "bytes": 2677,
+      "sha256": "2feed21e66175ed7eb42f9f489a4e0dab18de956932569a837df305a11643637"
+    },
+    {
+      "path": "out/_next/static/chunks/app/layout-407888a1fb28ed1a.js",
+      "bytes": 267,
+      "sha256": "8430fa07c61477caff7234921206383cc73a60c6ec15f440229d5637d30c21be"
+    },
+    {
+      "path": "out/_next/static/chunks/app/page-f64ad9c5ed635c6c.js",
+      "bytes": 181701,
+      "sha256": "40f151d3ea17c54439d7450440ebe785a85cc662ca53c9a75c1afbe76095b277"
+    },
+    {
+      "path": "out/_next/static/chunks/d33cb27b.72da600cc895723a.js",
+      "bytes": 1317910,
+      "sha256": "f1e920730be6614a0d06c22df791bda24aecd172abed076f17d59a0a5e1f2bec"
+    },
+    {
+      "path": "out/_next/static/chunks/da32cb34.453f366afa0f0011.js",
+      "bytes": 64582,
+      "sha256": "b36971acd0717a140a901c5034bd5804282f7047ed61e3e5b4c5ed9caf674126"
+    },
+    {
+      "path": "out/_next/static/chunks/dc366605.1be4851c2e738f07.js",
+      "bytes": 77167,
+      "sha256": "f03f46947b0e4492e2fcebb3277fb4efe76d5c30730a7ed7c0f257c106b6dcb9"
+    },
+    {
+      "path": "out/_next/static/chunks/e99baa5a.f5d9e1aad2870b0e.js",
+      "bytes": 60941,
+      "sha256": "fc45c367544434d4b0acfded24630bb4649f5b96183ede8cc013932014b19398"
+    },
+    {
+      "path": "out/_next/static/chunks/framework-dea131d1c6cbc1c0.js",
+      "bytes": 218938,
+      "sha256": "e9078d215dbbfc6917145e1ad94d010131ac1b3141d19ebc85506e59e54bb0af"
+    },
+    {
+      "path": "out/_next/static/chunks/main-6a7869ea003ca134.js",
+      "bytes": 137795,
+      "sha256": "bdc824805430a1ef4f2451d0667599af733375bca8a23dc066fa51b9977ac3ca"
+    },
+    {
+      "path": "out/_next/static/chunks/main-app-0e4f821d9d39c8d0.js",
+      "bytes": 529,
+      "sha256": "f48c65e4fc5945bbd2205ce22809557d625bede6e4b352148585499c7f0641de"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/app-error-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/forbidden-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/global-error-639d2837948ac423.js",
+      "bytes": 186,
+      "sha256": "99c16cf647716b40f5d9746feb0cbb16609d6489d660d08bd7b82e03b1215ee4"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/not-found-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/next/dist/client/components/builtin/unauthorized-26287a6e4941226d.js",
+      "bytes": 157,
+      "sha256": "3cdde7969b274b52d2abc7cd09b7737ae7a4a4c1217389be38732be88c580e48"
+    },
+    {
+      "path": "out/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "bytes": 112594,
+      "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683"
+    },
+    {
+      "path": "out/_next/static/chunks/webpack-f2eb6af661630aa6.js",
+      "bytes": 4954,
+      "sha256": "8a1dd94648c84e38693567187c8bcecfd3e3e1e81f4e8b69938e62204e5c382f"
+    },
+    {
+      "path": "out/_next/static/css/70d5090bbac1dd1a.css",
+      "bytes": 24037,
+      "sha256": "6494bc5b2f8562059d9910aed28f21e951068580ec8416002d67d8cd61da3dd3"
+    },
+    {
+      "path": "out/_next/static/css/d57a4a926eb3fea2.css",
+      "bytes": 25171,
+      "sha256": "8765bbb33899885cd67d86962a98ab364bcd607a524737ea470e645ab891a2ec"
+    },
+    {
+      "path": "out/_next/static/j-l5D1jF9LAoUoP0fl1pZ/_buildManifest.js",
+      "bytes": 440,
+      "sha256": "735100de5b4d0775a309ea72b2859f679aa4da5efee09ef54bddcf7e928aaa1c"
+    },
+    {
+      "path": "out/_next/static/j-l5D1jF9LAoUoP0fl1pZ/_ssgManifest.js",
+      "bytes": 80,
+      "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00"
+    },
+    {
+      "path": "out/_not-found/index.html",
+      "bytes": 8688,
+      "sha256": "2821acc40de2973ead5c0afe4ffb78eb8123ffdc99a5b4db4137445a51414bb3"
+    },
+    {
+      "path": "out/index.html",
+      "bytes": 10449,
+      "sha256": "cc48bdfac508c38ccdb6eb6f285483d988d31d6ab99a53e56ce7f01b20466d31"
+    },
+    {
+      "path": "out/scene.js",
+      "bytes": 7278506,
+      "sha256": "c27cd2d942a6738a584dbbd102de79b74ecc955a11ea37df3c0bf00aac70a39f"
+    },
+    {
+      "path": "out/voice-capture.js",
+      "bytes": 834,
+      "sha256": "592884d8b8e7edf5464ba7dabf746a17abc028bc4936fdb3c5951d659f1eea2e"
+    }
+  ],
+  "applicationSource": [
+    {
+      "path": "app/page.tsx",
+      "sha256": "ad64aa55a698f7c662538a942c50d4e49a715aa46d67d8f27a606cbc6f0b142a"
+    },
+    {
+      "path": "app/style.css",
+      "sha256": "f2fb351fdd9980c39c1177d60c8a929fdfb628410665e3dfd5d6e4b1f54917c4"
+    },
+    {
+      "path": "components/GoalPanel.tsx",
+      "sha256": "e724e2bb4e3a28cc0b85edb23504f22c630eba2b644666de7ff7d9f67ab39005"
+    },
+    {
+      "path": "components/GoalSources.tsx",
+      "sha256": "94cc978376c76df210372028b3e147a307bcab02923cf811e402b86724de0f28"
+    },
+    {
+      "path": "components/SoftwarePanel.tsx",
+      "sha256": "cd34b0faa01056e7a430e1117e3d3702d0d0aa4559c1d29ca04850704be943ff"
+    },
+    {
+      "path": "core/window-requests.ts",
+      "sha256": "b080f7012a0f97718561ae344abd23c516368347e46b88420b764e86633a50f1"
+    },
+    {
+      "path": "scripts/model.ts",
+      "sha256": "8aeea9b5fcc469fa78eccd68f98308a5210535177d7cdf6f9db8538f7c5a4517"
+    },
+    {
+      "path": "core/server.ts",
+      "sha256": "6fd229d58ba0d4c17e670ec03e85e996dd88b2567ade4d75a1f511f124e145d5"
+    },
+    {
+      "path": "core/workspace-export.ts",
+      "sha256": "5f4a4efb4844fe373bfada0fcd746591bdc73467957e2ed35ffad8efe3bf2525"
+    },
+    {
+      "path": "core/orchestrator.ts",
+      "sha256": "d0365b92da2d9b950a697a79523d8e6d810c5dc1ffa0a1bf593bbaad046547bc"
+    },
+    {
+      "path": "core/harness.ts",
+      "sha256": "529ad0785f42d9b0f5bd995a01df5a1bb258f2bc42859b241be0830fcc22d2bd"
+    },
+    {
+      "path": "core/model.ts",
+      "sha256": "60509900acd4b3f17146bfbf7e40ed6165671641f0fbfb2031a41d668619f475"
+    },
+    {
+      "path": "core/model-scheduler.ts",
+      "sha256": "f2482595bdcfc5a6a5292d1cd07b91050a0a371514a5889d3a861684047ce74a"
+    },
+    {
+      "path": "core/decision-routing.ts",
+      "sha256": "999a4d1773fee72b684dc957d92f6962185c962c26fcfbfa6accf50c4fbb5fae"
+    },
+    {
+      "path": "core/working-memory.ts",
+      "sha256": "b1800720be95e941005f89f7ecb9a961a44f02de1682b10d98af52fb312e17d7"
+    },
+    {
+      "path": "core/tools.ts",
+      "sha256": "fabfe9bf39ef4744693234004c3146e6d6a433bc972fba877bb9e37d3bb00e95"
+    },
+    {
+      "path": "core/analysis-harness.ts",
+      "sha256": "4ad7b9d3f4825d46146f5d8e05083a8a280d328730141f86e1bd5f6971e589cf"
+    },
+    {
+      "path": "core/source-question.ts",
+      "sha256": "30acd22630b6dd177fae58e988454756d88a3a56c7f9372168fa64a9bc66340b"
+    },
+    {
+      "path": "core/source-passages.ts",
+      "sha256": "0341890e7b84249bb75bfcc76b8eb305d9820821eaf988d9f26fcd32486dd955"
+    },
+    {
+      "path": "core/source-citation-spans.ts",
+      "sha256": "2c9c54d2f926ca15a5a94a5ea68349a6837f2d20f2217019c69c0796cd533545"
+    },
+    {
+      "path": "core/public-source.ts",
+      "sha256": "0c9e9c8cf02fdc9af581afa940ed245cc490df71e218340c108082594c297293"
+    },
+    {
+      "path": "core/goal-executor.ts",
+      "sha256": "486b565434984408930a77261931e0ddda59410951a93e43db303f50d696c8ac"
+    },
+    {
+      "path": "core/goal-orchestrator.ts",
+      "sha256": "6c3fd5c59e1051ef0bd6dad4036f506f6882fc9af14b33c12485491df56098d1"
+    },
+    {
+      "path": "core/software-api.ts",
+      "sha256": "be10e2926dd8db6cc770c7282c99dd5696a5934637829c37afc4a20baeb48222"
+    },
+    {
+      "path": "core/software-task.ts",
+      "sha256": "a8e8411e48990d3ed0644c753f1f1afc9d7f265e7a16a81bbb4832348563a192"
+    },
+    {
+      "path": "core/software-runner.ts",
+      "sha256": "88effe77e2ba50a40a1a48981d79a2e38c1c0440234f668ac20d9f58f87bce0a"
+    },
+    {
+      "path": "core/software-recipes.ts",
+      "sha256": "7e25d2ad86611ca6dfb8a21c1c5bec54fe084e2b22698464de947e80a4612cdb"
+    },
+    {
+      "path": "core/collection-screen.ts",
+      "sha256": "673d96ac62c992f7fccbdc437e012f8fc95415c00b0194497587fe30ba10c841"
+    },
+    {
+      "path": "core/react-screen.ts",
+      "sha256": "a26ec7d00ca02798eadc67437643586a0554719dfd5e89745745de418a85982c"
+    },
+    {
+      "path": "worker/software-browser.mjs",
+      "sha256": "a9bf3033c3825c9e4c75de96a5d56e31b0594225f5e9ed837a98b459604a3de5"
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "blocked": 0,
+    "failed": 0
+  },
+  "goalAchieved": true,
+  "status": "passed",
+  "finishedAt": "2026-10-29T19:18:25.646Z",
+  "exitCode": 0
+}

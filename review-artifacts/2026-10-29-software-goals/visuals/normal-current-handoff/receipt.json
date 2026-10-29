@@ -1,0 +1,563 @@
+{
+  "startedAt": "2026-10-29T19:40:13.984Z",
+  "origin": "http://127.0.0.1:3211",
+  "source": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+  "manifest": {
+    "format": 1,
+    "version": "3298a9e9adb589b2d84f2111af36120eee539e6d044ccda1045d3af69edd28b9",
+    "filename": "anascummis-studio-3298a9e9adb589b2.zip",
+    "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+    "bytes": 1648533,
+    "files": 237,
+    "source": {
+      "commit": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "processesBefore": [
+    {
+      "pid": 37402,
+      "startTimeTicks": "1190976",
+      "command": [
+        "/workspace/.cloud-tools/node_modules/bun/bin/bun.exe",
+        "core/server.ts"
+      ]
+    },
+    {
+      "pid": 18848,
+      "startTimeTicks": "845300",
+      "command": [
+        "/workspace/.cloud-tools/llama/llama-b11960/llama-server",
+        "-m",
+        "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8081",
+        "-ngl",
+        "0",
+        "-c",
+        "2048",
+        "-t",
+        "4",
+        "--parallel",
+        "1",
+        "--jinja",
+        "--reasoning",
+        "off",
+        "--cors-origins",
+        "localhost"
+      ]
+    }
+  ],
+  "localInputsBefore": [
+    {
+      "path": "out/opensource/manifest.json",
+      "sha256": "b12b262a76f02e40e2296c4a17363554d4d5a6d92c3d512d4d1b263176be15f5"
+    },
+    {
+      "path": "out/opensource/anascummis-studio-3298a9e9adb589b2.zip",
+      "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16"
+    }
+  ],
+  "mode": "Normal already-running Studio first-use and source-download handoff only.",
+  "limitations": [
+    "Installed Chromium desktop/touch emulation, not physical phone or voice quality verification.",
+    "External browser requests are blocked; unavailable voice initialization is shown honestly.",
+    "No real request text, Resume, model inference, build, installation, setup, service, source, or rendered content/style/image mutation. Full source-kit acceptance was previously performed and is not repeated here."
+  ],
+  "requests": [
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/d57a4a926eb3fea2.css"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/app/page-f64ad9c5ed635c6c.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/status"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/jobs"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/goals"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects/deff660d-fc36-43c4-86cb-5c85e2591734"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/assets"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/software"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz"
+    },
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/manifest.json"
+    },
+    {
+      "case": "desktop",
+      "method": "HEAD",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/anascummis-studio-3298a9e9adb589b2.zip"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/70d5090bbac1dd1a.css"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/css/d57a4a926eb3fea2.css"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/webpack-f2eb6af661630aa6.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3794-e6b880ea1810fa3e.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/main-app-0e4f821d9d39c8d0.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/app/page-f64ad9c5ed635c6c.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/status"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/aa60288b.47350d1f67489574.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5386.f252f57d08ec1dec.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/jobs"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/goals"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/projects/deff660d-fc36-43c4-86cb-5c85e2591734"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/assets"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/api/software"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/3708.1894802fd737d9a0.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/adda3502.9499f9268d018031.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/d33cb27b.72da600cc895723a.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/_next/static/chunks/5173.72d9738c3f247596.js"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/runtime/ort-wasm-simd-threaded.asyncify.wasm.gz"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/manifest.json"
+    },
+    {
+      "case": "narrow",
+      "method": "HEAD",
+      "origin": "http://127.0.0.1:3211",
+      "path": "/opensource/anascummis-studio-3298a9e9adb589b2.zip"
+    }
+  ],
+  "blockedRequests": [
+    {
+      "case": "desktop",
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json"
+    },
+    {
+      "case": "narrow",
+      "method": "GET",
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json"
+    }
+  ],
+  "cases": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshots": [
+        "desktop-initial-readiness.png",
+        "desktop-download-current-kit.png",
+        "desktop-download-checksum.png",
+        "desktop-download-instructions.png"
+      ],
+      "initialReadiness": {
+        "model": "ready",
+        "voice": "unavailable",
+        "text": "AI model: Local service reachable.Voice: Initialization unavailable.Check againSetup instructions"
+      },
+      "typeBounds": {
+        "x": 954,
+        "y": 779.40625,
+        "width": 444,
+        "height": 84
+      },
+      "typeEntry": "Opened empty native textarea and closed with visible control; no request entered or POST attempted.",
+      "dialogBounds": {
+        "x": 450,
+        "y": 33.359375,
+        "width": 540,
+        "height": 933.265625
+      },
+      "closeAtKit": {
+        "x": 912.3125,
+        "y": 54.359375,
+        "width": 52.6875,
+        "height": 40
+      },
+      "closeAtChecksum": {
+        "x": 912.3125,
+        "y": 45,
+        "width": 52.6875,
+        "height": 40
+      },
+      "download": {
+        "suggestedFilename": "anascummis-studio-3298a9e9adb589b2.zip",
+        "bytes": 1648533,
+        "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+        "zipSignatureHex": "504b0304",
+        "browserDownloadConfirmed": true,
+        "sameUrlHeadStatus": 200,
+        "contentType": "application/zip",
+        "sourceCommit": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+        "sourceKitVersion": "3298a9e9adb589b2d84f2111af36120eee539e6d044ccda1045d3af69edd28b9"
+      },
+      "closeAtInstructions": {
+        "x": 912.3125,
+        "y": 45,
+        "width": 52.6875,
+        "height": 40
+      },
+      "dialogClosedWithVisibleControl": true,
+      "noDocumentHorizontalOverflow": true
+    },
+    {
+      "name": "narrow",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "screenshots": [
+        "narrow-initial-readiness.png",
+        "narrow-download-current-kit.png",
+        "narrow-download-checksum.png",
+        "narrow-download-instructions.png"
+      ],
+      "initialReadiness": {
+        "model": "ready",
+        "voice": "unavailable",
+        "text": "AI model: Local service reachable.Voice: Initialization unavailable.Check againSetup instructions"
+      },
+      "typeBounds": {
+        "x": 34,
+        "y": 591.40625,
+        "width": 292,
+        "height": 84
+      },
+      "typeEntry": "Opened empty native textarea and closed with visible control; no request entered or POST attempted.",
+      "dialogBounds": {
+        "x": 19,
+        "y": 24,
+        "width": 322,
+        "height": 752
+      },
+      "closeAtKit": {
+        "x": 267.3125,
+        "y": 41,
+        "width": 52.6875,
+        "height": 40
+      },
+      "closeAtChecksum": {
+        "x": 267.3125,
+        "y": 41,
+        "width": 52.6875,
+        "height": 40
+      },
+      "download": {
+        "suggestedFilename": "anascummis-studio-3298a9e9adb589b2.zip",
+        "bytes": 1648533,
+        "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+        "zipSignatureHex": "504b0304",
+        "browserDownloadConfirmed": true,
+        "sameUrlHeadStatus": 200,
+        "contentType": "application/zip",
+        "sourceCommit": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+        "sourceKitVersion": "3298a9e9adb589b2d84f2111af36120eee539e6d044ccda1045d3af69edd28b9"
+      },
+      "closeAtInstructions": {
+        "x": 267.3125,
+        "y": 41,
+        "width": 52.6875,
+        "height": 40
+      },
+      "dialogClosedWithVisibleControl": true,
+      "noDocumentHorizontalOverflow": true
+    }
+  ],
+  "pageErrors": [],
+  "status": "passed",
+  "processesAfter": [
+    {
+      "pid": 37402,
+      "startTimeTicks": "1190976",
+      "command": [
+        "/workspace/.cloud-tools/node_modules/bun/bin/bun.exe",
+        "core/server.ts"
+      ]
+    },
+    {
+      "pid": 18848,
+      "startTimeTicks": "845300",
+      "command": [
+        "/workspace/.cloud-tools/llama/llama-b11960/llama-server",
+        "-m",
+        "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8081",
+        "-ngl",
+        "0",
+        "-c",
+        "2048",
+        "-t",
+        "4",
+        "--parallel",
+        "1",
+        "--jinja",
+        "--reasoning",
+        "off",
+        "--cors-origins",
+        "localhost"
+      ]
+    }
+  ],
+  "processesUnmodified": true,
+  "localInputsAfter": [
+    {
+      "path": "out/opensource/manifest.json",
+      "sha256": "b12b262a76f02e40e2296c4a17363554d4d5a6d92c3d512d4d1b263176be15f5"
+    },
+    {
+      "path": "out/opensource/anascummis-studio-3298a9e9adb589b2.zip",
+      "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16"
+    }
+  ],
+  "localInputsUnchanged": true,
+  "finishedAt": "2026-10-29T19:40:19.087Z"
+}

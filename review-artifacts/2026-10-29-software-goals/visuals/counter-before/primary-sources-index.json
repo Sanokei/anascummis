@@ -1,0 +1,42 @@
+{
+  "indexedAt": "2026-10-29T19:42:11.660096+00:00",
+  "retrievalDate": "2026-10-29, as recorded in counter-before/design-and-sources.md; no precise HTTP timestamp was retained",
+  "claim": "Hashes identify the already-reviewed local archive, not a new fetch or conformance certification. Full third-party documents remain outside the repository.",
+  "sources": [
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html",
+      "title": "Understanding Target Size (Enhanced)",
+      "archivePath": "/workspace/.cloud-env/anascummis/task-list/counter-before/research/target-size.html",
+      "bytes": 49173,
+      "sha256": "2063081312fbf62658cafe6bbc1cb6c1eb4eef34cd3906da0af093c92acf872d"
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html",
+      "title": "Understanding Focus Visible",
+      "archivePath": "/workspace/.cloud-env/anascummis/task-list/counter-before/research/focus-visible.html",
+      "bytes": 38728,
+      "sha256": "754e2c52ec85b3a29d0b6a69f04fbdbbcec7cb9bba849ae2a340c3c92bb83209"
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
+      "title": "Understanding Status Messages",
+      "archivePath": "/workspace/.cloud-env/anascummis/task-list/counter-before/research/status-messages.html",
+      "bytes": 60299,
+      "sha256": "d5a085f7be8814e4f01520db08d41d09b62491f40dc0fb6fb4941ec762cf3746"
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+      "title": "Understanding Reflow",
+      "archivePath": "/workspace/.cloud-env/anascummis/task-list/counter-before/research/reflow.html",
+      "bytes": 85770,
+      "sha256": "bc0b7f0afa54f9f3817026aa3e070251174ccf6db1244c927a1e83e9819a6183"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/form-elements.html#the-output-element",
+      "title": "HTML output element",
+      "archivePath": "/workspace/.cloud-env/anascummis/task-list/counter-before/research/output.html",
+      "bytes": 427360,
+      "sha256": "8e2e9998a3072ff6dd6c9f278db03e59cedc5bd5a2829e631bed0b9fbfdd0f71"
+    }
+  ]
+}

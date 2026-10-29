@@ -1,0 +1,186 @@
+{
+  "format": "anascummis.independent-final-review.v1",
+  "reviewedAt": "2026-10-29T19:37:59.747Z",
+  "reviewer": "/root/journey_audit",
+  "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+  "status": "accepted-within-tested-scope",
+  "blockingFindings": [],
+  "method": "Independent read-only static source/receipt inspection and direct viewing of original PNGs with view_image. No new browser execution, inference, build, download, repository edit or service mutation. This review receipt is the only written artifact.",
+  "reports": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/report.json",
+      "sha256": "7b9b8d3820d75632e8aa2aceef73b436b325ea7c94c073e0872e563888b4a1df",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "status": "passed",
+      "finishedAt": "2026-10-29T19:22:49.049Z"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/report.json",
+      "sha256": "60b7276b92ed5becaaa937e80279f9c95d897818ea6938599fd6689f7e29f642",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "status": "passed",
+      "finishedAt": "2026-10-29T19:27:01.097Z"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/report.json",
+      "sha256": "6918b153c7b51cf489d0a587cf3afa9ae7da12b186e4947cb2cbfe4bd8fbd6fb",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "status": "passed",
+      "finishedAt": "2026-10-29T19:30:59.809Z"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/report.json",
+      "sha256": "c76e065ba660a79d26250f6225072bfc6bb311f4cee7ecfb7c0022d43c945c06",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "status": "passed",
+      "finishedAt": "2026-10-29T19:18:25.646Z"
+    }
+  ],
+  "visuallyInspectedOriginals": [
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-downloaded.png",
+      "sha256": "4b91ca5f0b8827c5bc2b203e1f1546130ddc7d6540383f30f9986aa14216984c"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-downloaded.png",
+      "sha256": "ac0fd636e179e0fb875c5fef466ef377a4be2551c8c02fffbb799ed0cd8a355f"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-same-origin-replacement.png",
+      "sha256": "ee5f1f107bd3cc66ad3e492d29fe91e71cebd3dc3e1af3c302ecc750f71557c1"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/05-checked-source-run-instructions.png",
+      "sha256": "74fab8d50023026f21b3378ef504895148a503737a3257ccf0181a4a1044e78f"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/06-task-list-revision-full-request.png",
+      "sha256": "0212a28b8cbebd49a2074ca15d2f73a1183194c35f8e38325f65ba0358b2829e"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/downloaded-counter.png",
+      "sha256": "df2e98f99f1fa830484905bfe3d7fc75026c2e74bc6224370fa6444400eb639b"
+    },
+    {
+      "path": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/downloaded-counter.png",
+      "sha256": "3f7827728554670e1a9d3ab6957d0d3cae8a014d5d31ba47ff06d98ba272132f"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/desktop-keyboard-increment.png",
+      "sha256": "71ff947cba75dd3243f44a7d070c2763a9045a5f08c3cb4226efa7b004a93466"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-initial.png",
+      "sha256": "3f7827728554670e1a9d3ab6957d0d3cae8a014d5d31ba47ff06d98ba272132f"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-keyboard-increment.png",
+      "sha256": "7c63646348c4ec81439ea50548be043a2263af91e96acfa728738abab6679a68"
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-keyboard-reset.png",
+      "sha256": "85f0777b1b7b61ede950d8f6f266559b4a5a70db553b7ecece215fae110628ee"
+    }
+  ],
+  "findings": {
+    "taskListNarrow": "My Tasks and My Week, New task entry, Add and individual Remove controls are readable and contained at 360×800. Run instructions and existing Software parent-child tracking remain inside scrolling panels. Same-origin replacement visibly retains Review delivery and accepts Plan next week.",
+    "counter": "Readable exact heading, visible Count label, clear numeric value, primary Increment and secondary Reset; contained controls are 52 px high. Original native-copy captures show persistent visible keyboard focus and correct Increment: Count is 2 / Reset: Count is 0 feedback on desktop and 360 px.",
+    "recovery": "Prior independent review confirmed original failed-validation archive identity and actual old error text visibly inside desktop/narrow history scroll regions; same revision/call/source identity accepted separately."
+  },
+  "independentReceiptChecks": {
+    "terminalReportsMatchCleanSource": true,
+    "allRecordedDownloadBytesAndSha256Match": true,
+    "downloadsChecked": [
+      {
+        "result": "task-list-application",
+        "viewport": "desktop",
+        "path": "task-list-parent-source.zip",
+        "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97"
+      },
+      {
+        "result": "task-list-application",
+        "viewport": "desktop",
+        "path": "task-list-revision-source.zip",
+        "sha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546"
+      },
+      {
+        "result": "task-list-application",
+        "viewport": "desktop",
+        "path": "task-list-parent-after-revision-source.zip",
+        "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97"
+      },
+      {
+        "result": "task-list-application",
+        "viewport": "narrow",
+        "path": "task-list-parent-source.zip",
+        "sha256": "6d2a8aaaea9f9c5c694912a4e7766bf2714e82b3294ec07e0a19c3d024fc656d"
+      },
+      {
+        "result": "task-list-application",
+        "viewport": "narrow",
+        "path": "task-list-revision-source.zip",
+        "sha256": "74fb91867d0d4d733e478f4e00d9ec1244d4dcbfc44ff3a31c056db02662f995"
+      },
+      {
+        "result": "task-list-application",
+        "viewport": "narrow",
+        "path": "task-list-parent-after-revision-source.zip",
+        "sha256": "6d2a8aaaea9f9c5c694912a4e7766bf2714e82b3294ec07e0a19c3d024fc656d"
+      },
+      {
+        "result": "counter-application",
+        "viewport": "desktop",
+        "path": "counter-source.zip",
+        "sha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7"
+      },
+      {
+        "result": "counter-application",
+        "viewport": "narrow",
+        "path": "counter-source.zip",
+        "sha256": "e3a84cb69e8c978e77a876f1a09a773a8b8edabca1e1478f477fd88948d40845"
+      },
+      {
+        "result": "resume-task-list-checkpoint",
+        "viewport": "desktop",
+        "path": "recovered-source.zip",
+        "sha256": "e5e6a64b506601ccf82971837980a10e7c5dcc0c00316e826fb538b817758947"
+      }
+    ],
+    "taskListParentRedownloadsByteIdentical": true,
+    "taskListParentChildStorageKeysEqual": true,
+    "sameOriginReplacementStorageBytesEqual": true,
+    "counterVisualProof": {
+      "path": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/receipt.json",
+      "sha256": "f1c93f054cf3a99c67c54e6d2c312a41d0c02994ec1f38fb5e42b7f3427dc691",
+      "originalInputsUnchanged": true,
+      "allOwnedHostsStopped": true
+    }
+  },
+  "evidenceScope": [
+    "Real existing native Qwen decisions with trusted bounded compilers; this is not general or arbitrary model-authored software acceptance.",
+    "Actual produced bundles and downloaded source projects were exercised by owner journeys; downloaded projects reused matching installed dependency trees and used their actual package start script. This independent review did not rerun them.",
+    "Task-list revision preserves existing same-origin browser storage and accepted parent artifact bytes. Different origins do not share storage.",
+    "Desktop Chromium and 360 px touch/keyboard emulation; physical handset keyboards, native voice, screen-reader audit, fresh online installation and Windows/macOS delivery are not established.",
+    "Software card offers manual verified source download/start instructions, not an in-product launch action."
+  ]
+}

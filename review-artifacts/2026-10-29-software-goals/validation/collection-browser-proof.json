@@ -1,0 +1,91 @@
+{
+  "kind": "actual Chromium on isolated compiled React fixtures; no native inference or Next production build claimed",
+  "folder": "/workspace/anascummis/apps/studio/.test-data/collection-browser-50db93d2-8df3-4f67-8ef9-7c7ee4b19df8",
+  "results": [
+    {
+      "name": "correct",
+      "expected": "pass",
+      "exitCode": 0,
+      "behavior": "collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key",
+      "errors": [],
+      "stdout": "Actual browser loaded production app; DOM and screenshot captured.",
+      "stderr": ""
+    },
+    {
+      "name": "missing-remove",
+      "expected": "reject",
+      "exitCode": 1,
+      "behavior": "",
+      "errors": [
+        "Keyboard submission did not add the exact text; actual list [\"First task\"]"
+      ],
+      "stdout": "",
+      "stderr": "file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: Keyboard submission did not add the exact text; actual list [\"First task\"]\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n"
+    },
+    {
+      "name": "remove-all-duplicates",
+      "expected": "reject",
+      "exitCode": 1,
+      "behavior": "",
+      "errors": [
+        "Remove did not delete only its selected item; actual list [\"Keep this taskRemove\"]"
+      ],
+      "stdout": "",
+      "stderr": "file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: Remove did not delete only its selected item; actual list [\"Keep this taskRemove\"]\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n"
+    },
+    {
+      "name": "non-persistent",
+      "expected": "reject",
+      "exitCode": 1,
+      "behavior": "",
+      "errors": [
+        "Remaining items did not persist after reload; actual list []"
+      ],
+      "stdout": "",
+      "stderr": "file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: Remaining items did not persist after reload; actual list []\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n"
+    },
+    {
+      "name": "wrong-heading",
+      "expected": "reject",
+      "exitCode": 1,
+      "behavior": "",
+      "errors": [
+        "The actual application heading does not match the requested literal; observed \"Wrong heading\""
+      ],
+      "stdout": "",
+      "stderr": "file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The actual application heading does not match the requested literal; observed \"Wrong heading\"\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n"
+    },
+    {
+      "name": "write-failure",
+      "verified": true,
+      "draftKept": true,
+      "priorListKept": true,
+      "priorStorageKept": true,
+      "explicitRetryVerified": true,
+      "pageErrors": []
+    },
+    {
+      "name": "invalid-read",
+      "verified": true,
+      "rawStorageKept": true,
+      "editsDisabled": true,
+      "pageErrors": []
+    },
+    {
+      "name": "read-denied",
+      "verified": true,
+      "visibleError": true,
+      "editsDisabled": true,
+      "pageErrors": []
+    },
+    {
+      "name": "same-origin-heading-child",
+      "verified": true,
+      "origin": "http://127.0.0.1:41133",
+      "existingItemsKept": true,
+      "addRemoveReloadVerified": true,
+      "parentSourceHash": "353db0871d86e653aab4d94f760224fd943d0d74664a909ce537fc86edb44c94",
+      "pageErrors": []
+    }
+  ]
+}

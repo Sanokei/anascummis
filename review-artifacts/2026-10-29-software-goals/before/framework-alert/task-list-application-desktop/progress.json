@@ -1,0 +1,10 @@
+{
+  "time": "2026-10-29T19:04:49.065Z",
+  "label": "task-list-parent",
+  "id": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+  "status": "needs_input",
+  "phase": "needs_input",
+  "revision": 1,
+  "modelCalls": 1,
+  "message": "Could not make verified progress: Error: The bounded collection could not pass its recorded build/browser contract. Its source, draft and evidence are retained for inspection: ware-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n"
+}

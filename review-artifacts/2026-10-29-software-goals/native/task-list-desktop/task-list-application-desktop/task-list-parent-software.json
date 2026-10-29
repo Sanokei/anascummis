@@ -1,0 +1,190 @@
+{
+  "id": "e261cd74-7630-4210-960e-6602b417e178",
+  "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.",
+  "status": "completed",
+  "phase": "completed",
+  "revision": 1,
+  "requirements": [
+    {
+      "id": "collection",
+      "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+      "status": "verified",
+      "files": [
+        "app/page.tsx",
+        "lib/collection.ts"
+      ],
+      "tests": [
+        "tests/app.test.tsx",
+        "tests/collection.test.ts"
+      ],
+      "reviewRevision": 1,
+      "note": "Bounded collection contract verified by actual production-browser interactions: Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key"
+    }
+  ],
+  "events": [
+    {
+      "time": 1793301518811,
+      "phase": "typecheck",
+      "detail": "Running typecheck.",
+      "revision": 1
+    },
+    {
+      "time": 1793301520055,
+      "phase": "tests",
+      "detail": "Running tests.",
+      "revision": 1
+    },
+    {
+      "time": 1793301520113,
+      "phase": "build",
+      "detail": "Building the actual Next.js program.",
+      "revision": 1
+    },
+    {
+      "time": 1793301545580,
+      "phase": "browser",
+      "detail": "Loading the production app and capturing a real screenshot.",
+      "revision": 1
+    },
+    {
+      "time": 1793301549089,
+      "phase": "install",
+      "detail": "Running install.",
+      "revision": 1
+    },
+    {
+      "time": 1793301549097,
+      "phase": "typecheck",
+      "detail": "Running typecheck.",
+      "revision": 1
+    },
+    {
+      "time": 1793301550715,
+      "phase": "tests",
+      "detail": "Running tests.",
+      "revision": 1
+    },
+    {
+      "time": 1793301550764,
+      "phase": "build",
+      "detail": "Building the actual Next.js program.",
+      "revision": 1
+    },
+    {
+      "time": 1793301573149,
+      "phase": "browser",
+      "detail": "Loading the production app and capturing a real screenshot.",
+      "revision": 1
+    },
+    {
+      "time": 1793301576588,
+      "phase": "source_zip",
+      "detail": "Running source_zip.",
+      "revision": 1
+    },
+    {
+      "time": 1793301605379,
+      "phase": "packaging",
+      "detail": "Packaging checked source ZIP.",
+      "revision": 1
+    },
+    {
+      "time": 1793301605415,
+      "phase": "completed",
+      "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+      "revision": 1
+    }
+  ],
+  "created": 1793301516223,
+  "updated": 1793301605415,
+  "calls": 1,
+  "errors": 0,
+  "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+  "milestoneMs": [],
+  "milestoneStarted": 1793301516223,
+  "planOffset": 0,
+  "planningDone": true,
+  "targets": [
+    "zip"
+  ],
+  "collectionContract": {
+    "kind": "collection",
+    "heading": "My Tasks",
+    "inputLabel": "New task",
+    "addButton": "Add",
+    "removeButton": "Remove",
+    "listLabel": "Tasks",
+    "storage": "localStorage",
+    "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+    "maxItems": 100,
+    "maxTextLength": 200
+  },
+  "lastProgressCall": 1,
+  "evidence": {
+    "revision": 1,
+    "checks": [
+      {
+        "id": "install",
+        "ok": true,
+        "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [4.00ms]\n",
+        "milliseconds": 7
+      },
+      {
+        "id": "typecheck",
+        "ok": true,
+        "detail": "",
+        "milliseconds": 1616
+      },
+      {
+        "id": "tests",
+        "ok": true,
+        "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [7.83ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.41ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.22ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [41.00ms]\n",
+        "milliseconds": 47
+      },
+      {
+        "id": "build",
+        "ok": true,
+        "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 25ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1471ms\n  Running TypeScript ...\n  Finished TypeScript in 1295ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 175ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+        "milliseconds": 22367
+      },
+      {
+        "id": "browser",
+        "ok": true,
+        "detail": "Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key",
+        "milliseconds": 3438
+      },
+      {
+        "id": "source_zip",
+        "ok": true,
+        "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+        "milliseconds": 28789
+      }
+    ],
+    "dom": "My Tasks\n\nSaved in this browser. Up to 100 tasks, 200 characters each.\n\nNew task\nAdd\nKeep this task\nRemove\nAdded after reload\nRemove",
+    "artifacts": [
+      {
+        "kind": "zip",
+        "name": "source.zip",
+        "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+        "bytes": 176377,
+        "smokeTested": true
+      }
+    ],
+    "headings": [
+      "My Tasks"
+    ],
+    "screenshot": "revision-1.png",
+    "browserContract": {
+      "kind": "collection",
+      "heading": "My Tasks",
+      "inputLabel": "New task",
+      "addButton": "Add",
+      "removeButton": "Remove",
+      "listLabel": "Tasks",
+      "storage": "localStorage",
+      "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+      "maxItems": 100,
+      "maxTextLength": 200
+    }
+  }
+}

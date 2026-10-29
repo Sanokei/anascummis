@@ -1,0 +1,34 @@
+{
+  "source": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+  "checks": [
+    {
+      "target": "frontend",
+      "command": [
+        "bun",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--incremental",
+        "false"
+      ],
+      "cwd": "/workspace/anascummis/apps/studio",
+      "startedAt": "2026-10-29T19:38:10.765669+00:00",
+      "exitCode": 0,
+      "log": "frontend-final-typecheck.log"
+    },
+    {
+      "target": "core",
+      "command": [
+        "bun",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--incremental",
+        "false"
+      ],
+      "cwd": "/workspace/anascummis",
+      "startedAt": "2026-10-29T19:38:17.880902+00:00",
+      "exitCode": 0,
+      "log": "core-final-typecheck.log"
+    }
+  ],
+  "success": true
+}

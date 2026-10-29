@@ -1,0 +1,55 @@
+[
+  {
+    "file": "react-useState.md",
+    "url": "https://raw.githubusercontent.com/reactjs/react.dev/main/src/content/reference/react/useState.md",
+    "retrievedAt": "2026-10-29T18:41:27.384215+00:00",
+    "status": 200,
+    "bytes": 39104,
+    "sha256": "4669baf4a2ded8406cc9b13738c395ea6a71766c552424f0a83285acb928f4e7",
+    "contentType": "text/plain; charset=utf-8"
+  },
+  {
+    "file": "react-useEffect.md",
+    "url": "https://raw.githubusercontent.com/reactjs/react.dev/main/src/content/reference/react/useEffect.md",
+    "retrievedAt": "2026-10-29T18:41:27.384807+00:00",
+    "status": 200,
+    "bytes": 65342,
+    "sha256": "d4fd102c75df4194f5fa4eae8387f3a0aa7b4ba773c3a5ba29e41bf997a61cdb",
+    "contentType": "text/plain; charset=utf-8"
+  },
+  {
+    "file": "html-webstorage.html",
+    "url": "https://html.spec.whatwg.org/multipage/webstorage.html",
+    "retrievedAt": "2026-10-29T18:41:27.385290+00:00",
+    "status": 200,
+    "bytes": 70485,
+    "sha256": "0ea170654503697f3ec3bcda6fa93da476e6ddfc0e8b8d243a4ab12409a63272",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "file": "next-output.mdx",
+    "url": "https://raw.githubusercontent.com/vercel/next.js/canary/docs/01-app/03-api-reference/05-config/01-next-config-js/output.mdx",
+    "retrievedAt": "2026-10-29T18:41:27.385718+00:00",
+    "status": 200,
+    "bytes": 8298,
+    "sha256": "03806058f1390e719a8e007ce02e66eee6837765c669a869c675e2ca22e6780d",
+    "contentType": "text/plain; charset=utf-8"
+  },
+  {
+    "file": "bun-writing-tests.mdx",
+    "url": "https://raw.githubusercontent.com/oven-sh/bun/main/docs/test/writing-tests.mdx",
+    "retrievedAt": "2026-10-29T18:41:27.386179+00:00",
+    "status": 200,
+    "bytes": 18253,
+    "sha256": "e8ff3a3729ca4a2110f2549dfbc3520543d232c108ccce42645e8a0221da4869",
+    "contentType": "text/plain; charset=utf-8"
+  },
+  {
+    "file": "playwright-locators.md",
+    "url": "https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/locators.md",
+    "retrievedAt": "2026-10-29T18:41:41.066895+00:00",
+    "status": 200,
+    "bytes": 47224,
+    "sha256": "ca8a0035dc87cf97385ff372b920da11c93abaffc3558f341a36ddb4f27dbae7"
+  }
+]

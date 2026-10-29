@@ -1,0 +1,499 @@
+{
+  "startedAt": "2026-10-29T18:49:21.867Z",
+  "limit": "Actual compileNumericScreen output rendered with installed React and Chromium; test-supplied bounded specs, no native model or Next build. Actual fresh produced app/downloaded ZIP are separately tested by E2E owner.",
+  "results": [
+    {
+      "name": "desktop",
+      "variant": "counter",
+      "heading": "Bakery Orders",
+      "label": "Count",
+      "initial": 0,
+      "delta": 1,
+      "resetButton": "Reset",
+      "touch": false,
+      "bounds": [
+        {
+          "label": "Increment",
+          "x": 481,
+          "y": 586.390625,
+          "width": 233,
+          "height": 52
+        },
+        {
+          "label": "Reset",
+          "x": 726,
+          "y": 586.390625,
+          "width": 233,
+          "height": 52
+        }
+      ],
+      "pointerValues": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "keyboardEnterAndSpace": true,
+      "visibleFocus": true,
+      "repeatedResetStatusMutation": true,
+      "reloadValue": 0,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "horizontalOverflow": false
+    },
+    {
+      "name": "narrow",
+      "variant": "counter",
+      "heading": "Bakery Orders",
+      "label": "Count",
+      "initial": 0,
+      "delta": 1,
+      "resetButton": "Reset",
+      "touch": true,
+      "bounds": [
+        {
+          "label": "Increment",
+          "x": 41,
+          "y": 297.484375,
+          "width": 278,
+          "height": 52
+        },
+        {
+          "label": "Reset",
+          "x": 41,
+          "y": 361.484375,
+          "width": 278,
+          "height": 52
+        }
+      ],
+      "pointerValues": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "keyboardEnterAndSpace": true,
+      "visibleFocus": true,
+      "repeatedResetStatusMutation": true,
+      "reloadValue": 0,
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "horizontalOverflow": false
+    },
+    {
+      "name": "small",
+      "variant": "counter",
+      "heading": "Bakery Orders",
+      "label": "Count",
+      "initial": 0,
+      "delta": 1,
+      "resetButton": "Reset",
+      "touch": true,
+      "bounds": [
+        {
+          "label": "Increment",
+          "x": 41,
+          "y": 293.96875,
+          "width": 238,
+          "height": 52
+        },
+        {
+          "label": "Reset",
+          "x": 41,
+          "y": 357.96875,
+          "width": 238,
+          "height": 52
+        }
+      ],
+      "pointerValues": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "keyboardEnterAndSpace": true,
+      "visibleFocus": true,
+      "repeatedResetStatusMutation": true,
+      "reloadValue": 0,
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "horizontalOverflow": false
+    },
+    {
+      "name": "decimal",
+      "variant": "decimal",
+      "heading": "Stock adjustment",
+      "label": "Stock",
+      "initial": -3.5,
+      "delta": 0.25,
+      "resetButton": "Start again",
+      "touch": true,
+      "bounds": [
+        {
+          "label": "Adjust",
+          "x": 41,
+          "y": 297.484375,
+          "width": 278,
+          "height": 52
+        },
+        {
+          "label": "Start again",
+          "x": 41,
+          "y": 361.484375,
+          "width": 278,
+          "height": 52
+        }
+      ],
+      "pointerValues": [
+        -3.5,
+        -3.25,
+        -3,
+        -3.5
+      ],
+      "keyboardEnterAndSpace": true,
+      "visibleFocus": true,
+      "repeatedResetStatusMutation": true,
+      "reloadValue": -3.5,
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "horizontalOverflow": false
+    },
+    {
+      "name": "optional-reset-absent",
+      "variant": "noReset",
+      "heading": "Simple count",
+      "label": "Count",
+      "initial": 7,
+      "delta": -2,
+      "touch": true,
+      "bounds": [
+        {
+          "label": "Increment",
+          "x": 41,
+          "y": 297.484375,
+          "width": 278,
+          "height": 52
+        }
+      ],
+      "pointerValues": [
+        7,
+        5,
+        3
+      ],
+      "keyboardEnterAndSpace": true,
+      "visibleFocus": true,
+      "repeatedResetStatusMutation": false,
+      "reloadValue": 7,
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "horizontalOverflow": false
+    },
+    {
+      "name": "long",
+      "variant": "long",
+      "heading": "A long requested heading remains readable without hiding the count or controls",
+      "label": "CountCountCountCountCountCountCountCountCountCountCountCount",
+      "initial": -1000000,
+      "delta": -0.5,
+      "resetButton": "ResetResetResetResetResetResetResetResetResetResetResetReset",
+      "touch": true,
+      "bounds": [
+        {
+          "label": "IncrementIncrementIncrementIncrementIncrementIncrement",
+          "x": 41,
+          "y": 549.46875,
+          "width": 238,
+          "height": 95.171875
+        },
+        {
+          "label": "ResetResetResetResetResetResetResetResetResetResetResetReset",
+          "x": 41,
+          "y": 656.640625,
+          "width": 238,
+          "height": 95.171875
+        }
+      ],
+      "pointerValues": [
+        -1000000,
+        -1000000.5,
+        -1000001,
+        -1000000
+      ],
+      "keyboardEnterAndSpace": true,
+      "visibleFocus": true,
+      "repeatedResetStatusMutation": true,
+      "reloadValue": -1000000,
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "horizontalOverflow": false
+    },
+    {
+      "name": "literal",
+      "variant": "literal",
+      "heading": "<img src=x onerror=\"window.counterXss=true\">",
+      "label": "Count",
+      "initial": 0,
+      "delta": 0,
+      "resetButton": "Reset",
+      "touch": true,
+      "bounds": [
+        {
+          "label": "Increment",
+          "x": 41,
+          "y": 361.859375,
+          "width": 278,
+          "height": 52
+        },
+        {
+          "label": "Reset",
+          "x": 41,
+          "y": 425.859375,
+          "width": 278,
+          "height": 52
+        }
+      ],
+      "pointerValues": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "keyboardEnterAndSpace": true,
+      "visibleFocus": true,
+      "repeatedResetStatusMutation": true,
+      "reloadValue": 0,
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "horizontalOverflow": false
+    }
+  ],
+  "pageErrors": [],
+  "externalRequests": [],
+  "requests": [
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/counter/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/decimal",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/decimal/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/decimal",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/decimal/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/decimal",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/decimal/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/noReset",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/noReset/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/noReset",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/noReset/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/noReset",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/noReset/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/long",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/long/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/long",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/long/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/long",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/long/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/literal",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/literal/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/literal",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/literal/entry.js",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/literal",
+      "method": "GET"
+    },
+    {
+      "origin": "http://127.0.0.1:43517",
+      "path": "/literal/entry.js",
+      "method": "GET"
+    }
+  ],
+  "status": "passed"
+}

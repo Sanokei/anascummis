@@ -1,0 +1,43 @@
+{
+  "format": "anascummis.failed-validation.v1",
+  "taskId": "74fb284e-c390-428e-8bfe-05ff9767feb2",
+  "sourceRevision": 1,
+  "retention": "Text-only historical validation receipt. Screenshots and artifact file bytes were not archived and may be replaced by later validation; the prior screenshot reference is omitted. Artifact checksums below record the original receipt metadata.",
+  "receipt": {
+    "revision": 1,
+    "checks": [
+      {
+        "id": "install",
+        "ok": true,
+        "detail": "bun install v1.3.14 (0d9b296a)\nResolving dependencies\nResolved, downloaded and extracted [14]\nSaved lockfile\n\n+ @types/bun@1.3.0\n+ @types/react@19.2.0\n+ @types/react-dom@19.2.0\n+ typescript@5.9.3\n+ next@16.4.3\n+ react@19.2.7\n+ react-dom@19.2.7\n\n33 packages installed [738.00ms]\n",
+        "milliseconds": 742
+      },
+      {
+        "id": "typecheck",
+        "ok": true,
+        "detail": "",
+        "milliseconds": 1340
+      },
+      {
+        "id": "tests",
+        "ok": true,
+        "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [6.70ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.57ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.29ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [45.00ms]\n",
+        "milliseconds": 50
+      },
+      {
+        "id": "build",
+        "ok": true,
+        "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 25ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 4.4s\n  Running TypeScript ...\n\n  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.\n  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:\n\n  \t- allowJs was set to true\n  \t- incremental was set to true\n  \t- include was updated to add '.next/dev/types/**/*.ts'\n\n  The following mandatory changes were made to your tsconfig.json:\n\n  \t- isolatedModules was set to true (requirement for SWC / Babel)\n\n  Finished TypeScript in 1851ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 205ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+        "milliseconds": 27290
+      },
+      {
+        "id": "browser",
+        "ok": false,
+        "detail": "Error: file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111\n  if (errors.length || !dom.trim()) throw new Error(errors.join('\\n') || 'No application content');\n                                          ^\n\nError: The application reported a persistence failure during collection acceptance\n    at file:///workspace/anascummis/apps/studio/worker/software-browser.mjs:111:43\n\nNode.js v24.19.0\n",
+        "milliseconds": 4010
+      }
+    ],
+    "dom": "",
+    "artifacts": []
+  }
+}

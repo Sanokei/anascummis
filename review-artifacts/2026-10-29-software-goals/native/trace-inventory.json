@@ -1,0 +1,257 @@
+{
+  "format": "anascummis.trace-inventory.v1",
+  "archivesIncluded": false,
+  "count": 25,
+  "traces": [
+    {
+      "report": "native/routing/report.json",
+      "case": "software-window-routing-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 13049302,
+      "sha256": "19f14b4b08ef3fa188619de75c3f924b13243ff5c3f953a119f4139469224a33",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/routing/report.json",
+      "case": "software-window-routing-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 13082624,
+      "sha256": "bc0fa83f712e469ae1954081ee1add9f085a6b046e0e2d86dc0dcc93aa1e89ee",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/recovery/report.json",
+      "case": "resume-task-list-checkpoint-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 60771244,
+      "sha256": "32a960414d9056f2d9869dc1df27b7f0662a51b8c3aca3dccfcf41253315ec77",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/recovery/report.json",
+      "case": "resume-task-list-checkpoint-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/recovered-produced-task-list-trace.zip",
+      "filename": "recovered-produced-task-list-trace.zip",
+      "bytes": 214199,
+      "sha256": "db1ff0587eea6e6bf157601abd59443cc2dae4b60abf43e5b4184f8b7ec8f5f8",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-desktop/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 130712107,
+      "sha256": "d3dc393e6284209921fa7ae2f56cd692bc336b42befc6d9457739278f207a47f",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-desktop/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-produced-trace.zip",
+      "filename": "task-list-parent-produced-trace.zip",
+      "bytes": 597516,
+      "sha256": "8515bec386211efaa1867fd9aebe92e6e8cfbfc0d176bb857b9a29834234ab46",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-desktop/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-downloaded-trace.zip",
+      "filename": "task-list-parent-downloaded-trace.zip",
+      "bytes": 630213,
+      "sha256": "b8b8a4e10bbe5f6efbf52c7f47dfdb6a6770f0fbca76684e751091e0ab6ff523",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-desktop/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-produced-trace.zip",
+      "filename": "task-list-revision-produced-trace.zip",
+      "bytes": 615657,
+      "sha256": "6ed7f2adc35bde78f10ced609d3b6e8c90a7ba351b21c6fe7f272114b7b65c1e",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-desktop/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-downloaded-trace.zip",
+      "filename": "task-list-revision-downloaded-trace.zip",
+      "bytes": 617203,
+      "sha256": "8058964c252fad8b0485a15f3d93b74447d681b831979c2f350471c1e410264c",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-desktop/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-same-origin-replacement-trace.zip",
+      "filename": "task-list-same-origin-replacement-trace.zip",
+      "bytes": 871508,
+      "sha256": "2d70d4d5a54b770347bf93e6ebcb829bed004a83a5f070e9261b098e2547899c",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-narrow/report.json",
+      "case": "task-list-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 159283204,
+      "sha256": "d2e060b469dfac35395efb018781e136ba92a63df8643d4369ec665b62ceebd2",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-narrow/report.json",
+      "case": "task-list-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-produced-trace.zip",
+      "filename": "task-list-parent-produced-trace.zip",
+      "bytes": 717013,
+      "sha256": "1b9c3a9fc967e7288be30ce31b91673b3b1a66e2214879e4aa5f0bc6d4576427",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-narrow/report.json",
+      "case": "task-list-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-downloaded-trace.zip",
+      "filename": "task-list-parent-downloaded-trace.zip",
+      "bytes": 807844,
+      "sha256": "a382477a914ed3b3fdc575728b07288ec9d759a44defa83be77b9b846f8e5ea3",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-narrow/report.json",
+      "case": "task-list-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-produced-trace.zip",
+      "filename": "task-list-revision-produced-trace.zip",
+      "bytes": 787090,
+      "sha256": "27d31b987a3b886055e02673d1ea141d206878e3cfe4952c06c52b21b6fa95bd",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-narrow/report.json",
+      "case": "task-list-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-downloaded-trace.zip",
+      "filename": "task-list-revision-downloaded-trace.zip",
+      "bytes": 788685,
+      "sha256": "47f0a51359118387ed20c6a337a7f15cc9841ba71913a3bf17cc67ec4dd6d252",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/task-list-narrow/report.json",
+      "case": "task-list-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-same-origin-replacement-trace.zip",
+      "filename": "task-list-same-origin-replacement-trace.zip",
+      "bytes": 1153659,
+      "sha256": "1912a0734ccaaf98722c686ffd5d79a7f245d10cfe8dd224e5476823908e700c",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/counter/report.json",
+      "case": "counter-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 65118987,
+      "sha256": "1d66a7fbe87b945e11a71c8e4ee45c176d7a0e8f25758fe046e7c106b6501e57",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/counter/report.json",
+      "case": "counter-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/produced-app-trace.zip",
+      "filename": "produced-app-trace.zip",
+      "bytes": 426472,
+      "sha256": "34e2bc577e687c8083e70c9c38fe0d1fab7de1b4edb4726afd305cfbd1553fe6",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/counter/report.json",
+      "case": "counter-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/downloaded-counter-trace.zip",
+      "filename": "downloaded-counter-trace.zip",
+      "bytes": 421156,
+      "sha256": "506a12e22ab4c5d5d165e1734649eafe14beea80f1d33c41a5804382f9f49dba",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/counter/report.json",
+      "case": "counter-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 76343649,
+      "sha256": "a9b75e93b4698b99bef45acfaae00a1c250a85db0ebf62c9d27b0c797a904a0d",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/counter/report.json",
+      "case": "counter-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/produced-app-trace.zip",
+      "filename": "produced-app-trace.zip",
+      "bytes": 599306,
+      "sha256": "2a6a03f9511a16b5fdc3aeb25d9c21465ce3af2f91430ac054ee553bf24b23bc",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "native/counter/report.json",
+      "case": "counter-application-narrow",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/downloaded-counter-trace.zip",
+      "filename": "downloaded-counter-trace.zip",
+      "bytes": 582557,
+      "sha256": "e0501099709be099edda1f05a47e3fd7c1d7ed74d708435e6ea124b4b591ef6e",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "before/entry-status/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/task-list-application-desktop/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 12298796,
+      "sha256": "9897f106812dc31205a1546c5d53308ae71f18dbdb2c1cba6b99ccbb894b5e22",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "before/generic-worker/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 22098962,
+      "sha256": "138b32e4ca8e19479e3b91dbc5cf3f6132a0d5027e78c8e47d5d907ec1869c8f",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    },
+    {
+      "report": "before/framework-alert/report.json",
+      "case": "task-list-application-desktop",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/trace.zip",
+      "filename": "trace.zip",
+      "bytes": 32328741,
+      "sha256": "feb2aea0c89f1dae775c7065df221d1544c70420d9baa55723eadfc31ed81cd5",
+      "included": false,
+      "scope": "Original large redacted trace retained locally; final22 archives independently checked by post-validation receipt. Failed-run traces inventory only."
+    }
+  ]
+}

@@ -1,0 +1,1470 @@
+{
+  "format": "anascummis.software-goals-review.v1",
+  "createdAt": "2026-10-29T19:44:04.587870+00:00",
+  "pins": {
+    "base": "c599f8182b3e9b94c719110e9248158194e42a73",
+    "firstImplementation": "f62573da5e935e6c19b3e62a7113f439d3e7edd9",
+    "testedRuntime": "345b82bcc8dee4591bf93c98029624667185a0b9",
+    "deliveryHead": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411"
+  },
+  "trees": {
+    "base": "1a371996634cad19b7ea32e018d53c3a9a612774",
+    "firstImplementation": "4119f6abcf334b08109d682539e4412b408ab619",
+    "testedRuntime": "a076d950abb2c9160c9b76e7c3cd761f051919ef",
+    "deliveryHead": "84f9fa8d4d53c4f6d3f1254259f39970bd9b28af"
+  },
+  "docsOnlyDeliveryPaths": [
+    "PROJECT-ROADMAP.md",
+    "README.md",
+    "apps/studio/SOFTWARE.md",
+    "apps/studio/USER-JOURNEYS.md"
+  ],
+  "evidenceSummary": {
+    "passed": 7,
+    "blocked": 0,
+    "failed": 0,
+    "assertions": 36,
+    "traces": 22,
+    "traceEntries": 13421,
+    "downloads": 9
+  },
+  "scope": "Seven scoped final cases (four fresh native software journeys, one zero-additional-inference checkpoint recovery, two earlier read-only routing cases), plus three preserved failed journeys, static/visual/isolated negative controls and current source-kit/ordinary-server handoff.",
+  "sourceKit": {
+    "format": 1,
+    "version": "3298a9e9adb589b2d84f2111af36120eee539e6d044ccda1045d3af69edd28b9",
+    "filename": "anascummis-studio-3298a9e9adb589b2.zip",
+    "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+    "bytes": 1648533,
+    "files": 237,
+    "source": {
+      "commit": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "fullTraceArchivesIncluded": false,
+  "traceInventory": "native/trace-inventory.json",
+  "privateRuntimeArtifactsIncluded": false,
+  "templateException": "Source kit intentionally retains committed studio/.env.example with only a loopback URL/commented optional placeholders; actual environment files/secrets are excluded.",
+  "filesExcludingThisManifest": 178,
+  "bytesExcludingThisManifest": 19823470,
+  "hashScope": "All QA files except this manifest itself. Original copies independently equal retained source bytes.",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "copy": "generated review index",
+      "bytes": 13,
+      "sha256": "b4b62d881a4e1535ca0cf2267f5778d2f5742259ba1eb72bb4e4998f1578a4e8"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 7703,
+      "sha256": "9375847f1eff312b4c22726eaf65e8f40f3ec84ab3097286ee154df73a0b9e83",
+      "copy": "existing tracked PLAN"
+    },
+    {
+      "path": "README.md",
+      "bytes": 15679,
+      "sha256": "98121b53b83ba1e44095211f2dd3049163dd02575127a84a99f2563460e1c130",
+      "copy": "generated review index"
+    },
+    {
+      "path": "before/entry-status/report.html",
+      "bytes": 1158,
+      "sha256": "27cd959abc10081eee4f5b73e1ec8c0ae5ad060c7ce2a6588d2584362166c81a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/report.html",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/entry-status/report.json",
+      "bytes": 23884,
+      "sha256": "5a7b521fb29d88bcfa269f98ce895a4c1049e53dd87bbc178e7308b89428c828",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/report.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/entry-status/task-list-application-desktop/01-first-use.png",
+      "bytes": 341228,
+      "sha256": "557fcbdca2dfc9bb82baf9e58cffa70a29578e352d74eae06919046af0c9cdba",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/task-list-application-desktop/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/entry-status/task-list-application-desktop/outcome.png",
+      "bytes": 338237,
+      "sha256": "310b54f9bb04e5cd364511ebd5d60b4ba67f17d3fb35f43538c0d89a7e6ce080",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/task-list-application-desktop/outcome.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/entry-status/task-list-application-desktop/result.json",
+      "bytes": 2230,
+      "sha256": "05df7977d54c3785f6935dec7a10faad39ca5ff022a180d2466fad0eae415f23",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/task-list-application-desktop/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/framework-alert/observed-browser.json",
+      "bytes": 552,
+      "sha256": "b376dfd91501db4bb923221869d9e134ac46d67a934599c9b1ce0819166c90f0",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/.qa/browser-1.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/framework-alert/observed-browser.png",
+      "bytes": 28660,
+      "sha256": "4984f6765f848a480fb3f5a3c9251fcfb9b04140e1a134f7926512ad2d1f6dac",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/.qa/revision-1.png",
+      "copy": "byte-identical original",
+      "width": 1280,
+      "height": 816
+    },
+    {
+      "path": "before/framework-alert/report.html",
+      "bytes": 2095,
+      "sha256": "4c8e5d95579a749ea4b4019bc5635285b7ad08e94b2f36cceb02923a4d324dd4",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/report.html",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/framework-alert/report.json",
+      "bytes": 38505,
+      "sha256": "9cf1ae0f519dc93ecd9d2bdd9b214624decbb3d206918ebffe02c65b31405197",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/report.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/01-first-use.png",
+      "bytes": 341228,
+      "sha256": "557fcbdca2dfc9bb82baf9e58cffa70a29578e352d74eae06919046af0c9cdba",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/02-task-list-parent-full-request.png",
+      "bytes": 381985,
+      "sha256": "1e5b304e9ebfa2b2ca79c8aa23148c652eb963c2f5c021b26f9389c71c6fac1c",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/02-task-list-parent-full-request.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/03-task-list-parent-saved-progress.png",
+      "bytes": 360315,
+      "sha256": "aad7c359776ec06e0c543322dc37ac4e0a92449849f29025b71dc4f9e0ab6e31",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/03-task-list-parent-saved-progress.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/04-task-list-parent-outcome.png",
+      "bytes": 379036,
+      "sha256": "b2f071586d91e85cf559e61eda9290f9baa8f9cbfa33b978187f5cfcc899a37a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/04-task-list-parent-outcome.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/05-task-list-unfinished-recovery.png",
+      "bytes": 357326,
+      "sha256": "d19c830bc77aaf4de730e6bde8aa57ae19f562b104ac90748b5d3c8efbedcc24",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/05-task-list-unfinished-recovery.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/outcome.png",
+      "bytes": 357326,
+      "sha256": "d19c830bc77aaf4de730e6bde8aa57ae19f562b104ac90748b5d3c8efbedcc24",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/outcome.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/progress.json",
+      "bytes": 761,
+      "sha256": "481419aa7ee2d741993ac9c1aecf1922d077f834ec4dc2a156f11c7dd2933641",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/progress.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/result.json",
+      "bytes": 14927,
+      "sha256": "48f1a34755bb0cffcbde82634dc299dfee39ff5fa1c390e532f557f402084187",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/framework-alert/task-list-application-desktop/task-list-parent-software.json",
+      "bytes": 8052,
+      "sha256": "1d253b678499c9807f82b9fd952e0cf79f277bce29775ed02e79ae8b84dc1349",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/task-list-parent-software.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/generic-worker/report.html",
+      "bytes": 1392,
+      "sha256": "333d98a42a6641c612f648530285cb8ef2b8e53416453933da1f4dadcbafd215",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/report.html",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/generic-worker/report.json",
+      "bytes": 31306,
+      "sha256": "9dc7c413183f14dbdcb43c22a824581aab5cb0fb19b59f108f0fe7e9cd6efd1e",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/report.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/generic-worker/task-list-application-desktop/01-first-use.png",
+      "bytes": 341228,
+      "sha256": "557fcbdca2dfc9bb82baf9e58cffa70a29578e352d74eae06919046af0c9cdba",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/generic-worker/task-list-application-desktop/02-task-list-parent-outcome.png",
+      "bytes": 400436,
+      "sha256": "62cfd9b4a87f1f6ab7db62827b4f0aa7dba7ba193c1d44b055a1d85110662516",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/02-task-list-parent-outcome.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/generic-worker/task-list-application-desktop/03-task-list-unfinished-recovery.png",
+      "bytes": 386160,
+      "sha256": "09b6ff85253e4d3c508f67014577e1056a648d88603fca9c75ec3767feb4130d",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/03-task-list-unfinished-recovery.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/generic-worker/task-list-application-desktop/outcome.png",
+      "bytes": 386160,
+      "sha256": "09b6ff85253e4d3c508f67014577e1056a648d88603fca9c75ec3767feb4130d",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/outcome.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "before/generic-worker/task-list-application-desktop/progress.json",
+      "bytes": 301,
+      "sha256": "0db50a6cb23837531e80e55c234a8f4ef0a04bdc48366971b30487b431d6c6ac",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/progress.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/generic-worker/task-list-application-desktop/result.json",
+      "bytes": 8939,
+      "sha256": "49efbaa26107d6095790604f6fafb89db6dc93495491c9ae152d2d776125a98f",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "before/generic-worker/task-list-application-desktop/task-list-parent-software.json",
+      "bytes": 3605,
+      "sha256": "4af6af300f86edbe8a300c782fa1ca9e33c2c9590943b807aaa6141dc505ad90",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/task-list-parent-software.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "copy-origins.json",
+      "bytes": 44142,
+      "sha256": "b4e6b4a87d6590e8677234112217fb2d4419e71c7d87ba63775c3e1096d366dd",
+      "copy": "generated review index"
+    },
+    {
+      "path": "kit/anascummis-studio-3298a9e9adb589b2.zip",
+      "bytes": 1648533,
+      "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+      "original": "/workspace/anascummis/apps/studio/out/opensource/anascummis-studio-3298a9e9adb589b2.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "kit/manifest.json",
+      "bytes": 435,
+      "sha256": "b12b262a76f02e40e2296c4a17363554d4d5a6d92c3d512d4d1b263176be15f5",
+      "original": "/workspace/anascummis/apps/studio/out/opensource/manifest.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/counter/counter-application-desktop/01-first-use.png",
+      "bytes": 341228,
+      "sha256": "557fcbdca2dfc9bb82baf9e58cffa70a29578e352d74eae06919046af0c9cdba",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/counter/counter-application-desktop/02-counter-application-outcome.png",
+      "bytes": 378209,
+      "sha256": "c8a331ddfd30a290da3a9ff574d966f86fdfeef8505480d0812d26de7a86822b",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/02-counter-application-outcome.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/counter/counter-application-desktop/counter-source.zip",
+      "bytes": 170945,
+      "sha256": "458427cd39e75a34e447494d536e21b91fe11651f1bfbfe9dd32ad6934d185d7",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/counter-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/counter/counter-application-desktop/downloaded-counter.png",
+      "bytes": 31812,
+      "sha256": "df2e98f99f1fa830484905bfe3d7fc75026c2e74bc6224370fa6444400eb639b",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/downloaded-counter.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/counter/counter-application-desktop/produced-counter.png",
+      "bytes": 31812,
+      "sha256": "df2e98f99f1fa830484905bfe3d7fc75026c2e74bc6224370fa6444400eb639b",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/produced-counter.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/counter/counter-application-desktop/progress.json",
+      "bytes": 174,
+      "sha256": "b1daf96ebbce0020c174e6f774571043068ed6df23528837dee8ee31e6d348fd",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/progress.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/counter/counter-application-desktop/result.json",
+      "bytes": 14176,
+      "sha256": "7d7f9dfe4907d01d6c1de1c04a82fdf6a3b0aaed622c79ad444da732524eafcb",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/counter/counter-application-narrow/01-first-use.png",
+      "bytes": 133140,
+      "sha256": "5c3568341644b4d846bfa1c48cb233d1dcb5b75fe89c3e51eb3998f0db367fd7",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/counter/counter-application-narrow/02-counter-application-outcome.png",
+      "bytes": 71367,
+      "sha256": "f7497a70a45fc0cde439597c22dfdd51c985ca8f0e5b232023cb25791e862a50",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/02-counter-application-outcome.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/counter/counter-application-narrow/counter-source.zip",
+      "bytes": 170945,
+      "sha256": "e3a84cb69e8c978e77a876f1a09a773a8b8edabca1e1478f477fd88948d40845",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/counter-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/counter/counter-application-narrow/downloaded-counter.png",
+      "bytes": 23021,
+      "sha256": "3f7827728554670e1a9d3ab6957d0d3cae8a014d5d31ba47ff06d98ba272132f",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/downloaded-counter.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/counter/counter-application-narrow/produced-counter.png",
+      "bytes": 23021,
+      "sha256": "3f7827728554670e1a9d3ab6957d0d3cae8a014d5d31ba47ff06d98ba272132f",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/produced-counter.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/counter/counter-application-narrow/progress.json",
+      "bytes": 174,
+      "sha256": "56b32774a67447451ec4f92ed44ea0843390978cb7f9a19515567f614bc3cd7a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/progress.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/counter/counter-application-narrow/result.json",
+      "bytes": 14165,
+      "sha256": "66e69e5281865f6ae005c4d11cd03d38230481c81d06e7eee905e37c886e8c81",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/counter/report.html",
+      "bytes": 2023,
+      "sha256": "2b9cbf72f0bf68d73ce90ff60cd37f99d1aba999829d3f203c8eb9d410b9bb7f",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/report.html",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/counter/report.json",
+      "bytes": 54733,
+      "sha256": "6918b153c7b51cf489d0a587cf3afa9ae7da12b186e4947cb2cbfe4bd8fbd6fb",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/report.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/post-validation.json",
+      "bytes": 10362,
+      "sha256": "e4992bc869db3632dc1629ca50107dc1233d0cf0765e8814988fd46471344590",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-acceptance-post-validation.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/recovery/report.html",
+      "bytes": 1514,
+      "sha256": "e1124210a1b7a6cd594c98fa63bcb9ec59aae18055c652c033c39c7735a361d8",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/report.html",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/recovery/report.json",
+      "bytes": 50634,
+      "sha256": "c76e065ba660a79d26250f6225072bfc6bb311f4cee7ecfb7c0022d43c945c06",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/report.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/recovery/resume-task-list-checkpoint-desktop/01-first-use.png",
+      "bytes": 373146,
+      "sha256": "c9eaf05a71c0af66e37bfe0551e89cd39065e5243382e4dfb0428679d42bef70",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/recovery/resume-task-list-checkpoint-desktop/02-retained-original-failed-check.png",
+      "bytes": 373977,
+      "sha256": "bc3e7a48952ce321f2a585314882cd441e212530d6d3f68a28bf1d0931b9c213",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/02-retained-original-failed-check.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/recovery/resume-task-list-checkpoint-desktop/03-explicit-resume-checkpoint.png",
+      "bytes": 349438,
+      "sha256": "57b3056178680d7ffc087c2ede33515b26c7e2a24d37e015d10d610bb01827bd",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/03-explicit-resume-checkpoint.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/recovery/resume-task-list-checkpoint-desktop/04-failed-validation-history-kept.png",
+      "bytes": 343374,
+      "sha256": "f805b8a2fccc9410c967951fda1ee19c4d38c64e2971bdc562201a58e58b852a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/04-failed-validation-history-kept.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/recovery/resume-task-list-checkpoint-desktop/progress.json",
+      "bytes": 169,
+      "sha256": "9d7243cbac570c8cc5462293f38bcd0c291f89e3cb9c7fe556a50221cc5daa80",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/progress.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/recovery/resume-task-list-checkpoint-desktop/recovered-produced-task-list.png",
+      "bytes": 27337,
+      "sha256": "2e9bddde7de6c67efb2ade165b103c60f4f0bdc99a7415dd377741b95305d994",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/recovered-produced-task-list.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/recovery/resume-task-list-checkpoint-desktop/recovered-source.zip",
+      "bytes": 176559,
+      "sha256": "e5e6a64b506601ccf82971837980a10e7c5dcc0c00316e826fb538b817758947",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/recovered-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/recovery/resume-task-list-checkpoint-desktop/result.json",
+      "bytes": 25678,
+      "sha256": "53a7bdeb97220bab3e1b213ec43f4b605132dc0323968e433a52bd837e356d50",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/routing/report.html",
+      "bytes": 2372,
+      "sha256": "683c86f8e664c8cdec857b60eb87de474e9a562660f3e7764c207b3d43d128c6",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/report.html",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/routing/report.json",
+      "bytes": 27358,
+      "sha256": "7690ab80d8a9976c703e432c22c06ff67567849e4957b73f0891ee1ab3293b30",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/report.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/routing/software-window-routing-desktop/01-first-use.png",
+      "bytes": 341228,
+      "sha256": "557fcbdca2dfc9bb82baf9e58cffa70a29578e352d74eae06919046af0c9cdba",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/routing/software-window-routing-desktop/02-software-progress-routing.png",
+      "bytes": 332710,
+      "sha256": "bfbe59fbe39c4d2890aac40e3405ee16bd9f1615d080c9c20e149f4d74e69d17",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/02-software-progress-routing.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/routing/software-window-routing-desktop/03-revision-request-kept.png",
+      "bytes": 360334,
+      "sha256": "fe9300bafbe6a7eda172cb15bd3792e25599b94d3d34097df301cfbc5a08fa8c",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/03-revision-request-kept.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/routing/software-window-routing-desktop/04-honest-open-app-handoff.png",
+      "bytes": 348299,
+      "sha256": "6a8bc38ac0fd27d5950d83e058717978ac8f587ae5b454bf85f0ad93ba0b75e7",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/04-honest-open-app-handoff.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/routing/software-window-routing-desktop/05-show-tasks-work-history.png",
+      "bytes": 314894,
+      "sha256": "8753d1d295a918fb51d1c9f7bff02403da325c7744f676a89f455ec16b19a5f1",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/05-show-tasks-work-history.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/routing/software-window-routing-desktop/result.json",
+      "bytes": 2157,
+      "sha256": "daf4f5734372ef4f977c0421b3c3cf28569bee0b4a4de6fdb07aebd7e9c60a3a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/routing/software-window-routing-narrow/01-first-use.png",
+      "bytes": 133140,
+      "sha256": "5c3568341644b4d846bfa1c48cb233d1dcb5b75fe89c3e51eb3998f0db367fd7",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/routing/software-window-routing-narrow/02-software-progress-routing.png",
+      "bytes": 53355,
+      "sha256": "968332bbf88d7f2145f16e4968400b8d288c1827554d9cccc358e5514790bd53",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/02-software-progress-routing.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/routing/software-window-routing-narrow/03-revision-request-kept.png",
+      "bytes": 38709,
+      "sha256": "1fe3c8cc456cad976d7d301012d9c80e06fe55c2879f36853e37d0e127178d9c",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/03-revision-request-kept.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/routing/software-window-routing-narrow/04-honest-open-app-handoff.png",
+      "bytes": 55540,
+      "sha256": "0d17a5a345da42353c8bbcf82ffc96cf3c36ec0fd39661f39ab7be866bf10563",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/04-honest-open-app-handoff.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/routing/software-window-routing-narrow/05-show-tasks-work-history.png",
+      "bytes": 54035,
+      "sha256": "00607bfcdbb373ae2cc08bbf44a385415c806747032b54fb4020dfe7500ee673",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/05-show-tasks-work-history.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/routing/software-window-routing-narrow/result.json",
+      "bytes": 2156,
+      "sha256": "ba5b7b0644080de23d9787db81363a37c6b08cec7205f457e39592a512386a12",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/report.html",
+      "bytes": 2690,
+      "sha256": "0c847f4f3d5bcbc91ee07050e2c00aef4b83c0104c8b4d14032ae139103cc622",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/report.html",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/report.json",
+      "bytes": 64425,
+      "sha256": "7b9b8d3820d75632e8aa2aceef73b436b325ea7c94c073e0872e563888b4a1df",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/report.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/01-first-use.png",
+      "bytes": 341228,
+      "sha256": "557fcbdca2dfc9bb82baf9e58cffa70a29578e352d74eae06919046af0c9cdba",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/02-task-list-parent-full-request.png",
+      "bytes": 369489,
+      "sha256": "f7aa81df8c9bf5295ae60e2fa4c80649135e63d41c86ba597c26e31ca9ee047a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/02-task-list-parent-full-request.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/03-task-list-parent-saved-progress.png",
+      "bytes": 353256,
+      "sha256": "0ff8fa0097a033724d93fae04f552229dea023f02b9fe5c1eb07bf4d25b3e773",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/03-task-list-parent-saved-progress.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/04-task-list-parent-outcome.png",
+      "bytes": 361152,
+      "sha256": "f7a364a1a5a4d5912bd06068962860b688bb9f699e7b95e7c08d3baef150c967",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/04-task-list-parent-outcome.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/05-checked-source-run-instructions.png",
+      "bytes": 355090,
+      "sha256": "0095471484a35ffbcd926dce676805f2506b1f69d45ebefe181812766d09640b",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/05-checked-source-run-instructions.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/06-task-list-revision-full-request.png",
+      "bytes": 366333,
+      "sha256": "6377d143c95263babf5c56fcbd5390b2bd3e21ea5a884b43ddaf22d6a85dc019",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/06-task-list-revision-full-request.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/07-task-list-revision-saved-progress.png",
+      "bytes": 362957,
+      "sha256": "5acd7a8963127c7167d120a715bf4764577bea17393b8715b299253bab90bf6d",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/07-task-list-revision-saved-progress.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/08-task-list-revision-outcome.png",
+      "bytes": 362540,
+      "sha256": "041f9189387ad10536522e750c348fdcfdaec4230bff9ad5aef5d71a9aa5cb53",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/08-task-list-revision-outcome.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/09-task-list-parent-kept.png",
+      "bytes": 368284,
+      "sha256": "967ff5ba4ea2be3e0fcbba686770349b24adddad7462989507c058fd8e5a9278",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/09-task-list-parent-kept.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/progress.json",
+      "bytes": 317,
+      "sha256": "7798def197a26a2a5b22ffc12859781f5b690286356856cb812da16ee97716a4",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/progress.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/result.json",
+      "bytes": 37670,
+      "sha256": "828c240985e313de867a24b6519e876f8f166a3a1b2fe955f4fecb32e3e5f910",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-parent-after-revision-source.zip",
+      "bytes": 176377,
+      "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-after-revision-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-parent-downloaded.png",
+      "bytes": 30704,
+      "sha256": "3cc78952563109610c1e56f6e4a587b4f8b93a9b890ac2d7fb394c45f8c2653a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-downloaded.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-parent-produced.png",
+      "bytes": 30704,
+      "sha256": "3cc78952563109610c1e56f6e4a587b4f8b93a9b890ac2d7fb394c45f8c2653a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-produced.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-parent-software.json",
+      "bytes": 6884,
+      "sha256": "6d37a84e7363fafb31a38568ebbc5312986cf3990e8d82dcf21369ec2e6a4e57",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-software.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-parent-source.zip",
+      "bytes": 176377,
+      "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-revision-downloaded.png",
+      "bytes": 30916,
+      "sha256": "742232740b2d6f49552596fc564b564f072808ba540950fb89a4d25b41549c34",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-downloaded.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-revision-produced.png",
+      "bytes": 30916,
+      "sha256": "742232740b2d6f49552596fc564b564f072808ba540950fb89a4d25b41549c34",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-produced.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-revision-software.json",
+      "bytes": 9581,
+      "sha256": "6ba675efea95bd0c6990c567c4f6cf1fc704bdeab0992042106f4729273f1451",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-software.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-revision-source.zip",
+      "bytes": 177189,
+      "sha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-same-origin-replacement-before-replacement.png",
+      "bytes": 30704,
+      "sha256": "3cc78952563109610c1e56f6e4a587b4f8b93a9b890ac2d7fb394c45f8c2653a",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-same-origin-replacement-before-replacement.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-desktop/task-list-application-desktop/task-list-same-origin-replacement.png",
+      "bytes": 30829,
+      "sha256": "0b288414272b51b78076d9f4840103f74efc5509d0dc368461f550dbf16d6505",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-same-origin-replacement.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native/task-list-narrow/report.html",
+      "bytes": 2672,
+      "sha256": "41a5e7f8149bbaffca3b0f48e3fa5b4a6d5d2e1d571d8a16c3a35e7145d58f2f",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/report.html",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/report.json",
+      "bytes": 64106,
+      "sha256": "60b7276b92ed5becaaa937e80279f9c95d897818ea6938599fd6689f7e29f642",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/report.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/01-first-use.png",
+      "bytes": 133140,
+      "sha256": "5c3568341644b4d846bfa1c48cb233d1dcb5b75fe89c3e51eb3998f0db367fd7",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/01-first-use.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/02-task-list-parent-full-request.png",
+      "bytes": 69132,
+      "sha256": "cbe440738da07d676b4915b1baa41b6472064e64aea7c695188727d81a2731fe",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/02-task-list-parent-full-request.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/03-task-list-parent-saved-progress.png",
+      "bytes": 67086,
+      "sha256": "74a24d5864021fd7e41b2b3df480c11e8f98cec783e2994950f859fb4d6f3e33",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/03-task-list-parent-saved-progress.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/04-task-list-parent-outcome.png",
+      "bytes": 67622,
+      "sha256": "7a1e6fc8c1726877afd4cb43002547d2f16a44cd92ac6fa572439669b0557594",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/04-task-list-parent-outcome.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/05-checked-source-run-instructions.png",
+      "bytes": 64101,
+      "sha256": "74fab8d50023026f21b3378ef504895148a503737a3257ccf0181a4a1044e78f",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/05-checked-source-run-instructions.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/06-task-list-revision-full-request.png",
+      "bytes": 71091,
+      "sha256": "0212a28b8cbebd49a2074ca15d2f73a1183194c35f8e38325f65ba0358b2829e",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/06-task-list-revision-full-request.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/07-task-list-revision-saved-progress.png",
+      "bytes": 71056,
+      "sha256": "69b00446903ab0c834160bfa3bbe4314be8db29738d32c1d7d2a41fe861c1331",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/07-task-list-revision-saved-progress.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/08-task-list-revision-outcome.png",
+      "bytes": 70980,
+      "sha256": "eb68607acdf52921518c6a5c2f5a96eea3ed93a12c46bb872f62ebf846ef69f5",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/08-task-list-revision-outcome.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/09-task-list-parent-kept.png",
+      "bytes": 72239,
+      "sha256": "3fca36861cf1cbcc1fafd94d2a09d4ef585590a9e64d22b9d64464d3c958ed38",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/09-task-list-parent-kept.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/progress.json",
+      "bytes": 317,
+      "sha256": "c236a18a7ada9c6faceacda4612a5aaece5ab56cfdffcf8b529969c7ed09685c",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/progress.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/result.json",
+      "bytes": 37393,
+      "sha256": "a9bb42f6d82f5f3bbef729c8a3c9af23f427a9aee5745eae9e6802c6986eaa35",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/result.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-parent-after-revision-source.zip",
+      "bytes": 176377,
+      "sha256": "6d2a8aaaea9f9c5c694912a4e7766bf2714e82b3294ec07e0a19c3d024fc656d",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-after-revision-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-parent-downloaded.png",
+      "bytes": 23723,
+      "sha256": "4b91ca5f0b8827c5bc2b203e1f1546130ddc7d6540383f30f9986aa14216984c",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-downloaded.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-parent-produced.png",
+      "bytes": 23723,
+      "sha256": "4b91ca5f0b8827c5bc2b203e1f1546130ddc7d6540383f30f9986aa14216984c",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-produced.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-parent-software.json",
+      "bytes": 6884,
+      "sha256": "f046d1bd79e5ebf4b29d37b4523a9f9c56101203ef4aba670c4050c48136acc9",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-software.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-parent-source.zip",
+      "bytes": 176377,
+      "sha256": "6d2a8aaaea9f9c5c694912a4e7766bf2714e82b3294ec07e0a19c3d024fc656d",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-revision-downloaded.png",
+      "bytes": 23912,
+      "sha256": "ac0fd636e179e0fb875c5fef466ef377a4be2551c8c02fffbb799ed0cd8a355f",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-downloaded.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-revision-produced.png",
+      "bytes": 23912,
+      "sha256": "ac0fd636e179e0fb875c5fef466ef377a4be2551c8c02fffbb799ed0cd8a355f",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-produced.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-revision-software.json",
+      "bytes": 9580,
+      "sha256": "81b13e570badde293894c7a7579ed0fa7147b2b7c4df850e5b28c99ea3f903e5",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-software.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-revision-source.zip",
+      "bytes": 177188,
+      "sha256": "74fb91867d0d4d733e478f4e00d9ec1244d4dcbfc44ff3a31c056db02662f995",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-source.zip",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-same-origin-replacement-before-replacement.png",
+      "bytes": 23723,
+      "sha256": "4b91ca5f0b8827c5bc2b203e1f1546130ddc7d6540383f30f9986aa14216984c",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-same-origin-replacement-before-replacement.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/task-list-narrow/task-list-application-narrow/task-list-same-origin-replacement.png",
+      "bytes": 23845,
+      "sha256": "ee5f1f107bd3cc66ad3e492d29fe91e71cebd3dc3e1af3c302ecc750f71557c1",
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-same-origin-replacement.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "native/trace-inventory.json",
+      "bytes": 15598,
+      "sha256": "9652445d757898bdfeb1a4f29853816e59a1cc5f977e7a0333688d01aac2559f",
+      "copy": "generated review index"
+    },
+    {
+      "path": "research/findings-and-plan.md",
+      "bytes": 8573,
+      "sha256": "ea29349654fe91acb4f5ea898326b2594b970b785106848adf872d09a528cfc5",
+      "original": "/workspace/.cloud-env/anascummis/task-list/research/findings-and-plan.md",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "research/sources.json",
+      "bytes": 2172,
+      "sha256": "a47adf995fff32e87ecc6ff7d0b79898f22c8f836173d5289409a68730ff86f6",
+      "original": "/workspace/.cloud-env/anascummis/task-list/research/sources.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "source.json",
+      "bytes": 3900,
+      "sha256": "4f2cd389b2d010ec944abf9e3d89ea44d01d994dc9bc00d2b4c7cd421216159f",
+      "copy": "generated review index"
+    },
+    {
+      "path": "validation/affected-tests-f62573d.log",
+      "bytes": 6661,
+      "sha256": "6810c7e50b456d5a7e600a3f6facef41f5f8ddb5b6a8bfb2bb80024a9ca5f688",
+      "original": "/workspace/.cloud-env/anascummis/task-list/affected-tests-f62573d.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/collection-browser-proof.json",
+      "bytes": 4287,
+      "sha256": "3c3faeb8707018fbda2414962f94fe615f2f6b4f7dbee9b8976abd048db5ce44",
+      "original": "/workspace/.cloud-env/anascummis/task-list/collection-browser-proof.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/core-final-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/workspace/.cloud-env/anascummis/task-list/core-final-typecheck.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/core-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/workspace/.cloud-env/anascummis/task-list/core-typecheck.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/current-kit-build.log",
+      "bytes": 256,
+      "sha256": "ee51a7fc3de14f1677a09f9c580fc3df1218e5f0dea040d28621e73da631f9cd",
+      "original": "/workspace/.cloud-env/anascummis/task-list/current-kit-build.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/current-kit-receipt.json",
+      "bytes": 1060,
+      "sha256": "a34d8ecc3ee54903ee982edd881e4da9e84e2075f5222b5f997f89351ebaefa7",
+      "original": "/workspace/.cloud-env/anascummis/task-list/current-kit-receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/final-affected-tests.log",
+      "bytes": 7343,
+      "sha256": "ad387b218dac985c4ccb4eb2038342d0f739372f30cf231157934a14a22e55ca",
+      "original": "/workspace/.cloud-env/anascummis/task-list/final-affected-tests.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/final-build.log",
+      "bytes": 516,
+      "sha256": "02182c660bb7f2ef385725981fa7ee839d2ef104a731a33ae3441241c5303593",
+      "original": "/workspace/.cloud-env/anascummis/task-list/final-build.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/final-typechecks-receipt.json",
+      "bytes": 792,
+      "sha256": "4932390ec950ddc29a5b84498e2c2f05c1c5aa177fbbafaefbe89797e2573387",
+      "original": "/workspace/.cloud-env/anascummis/task-list/final-typechecks-receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/frontend-final-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/workspace/.cloud-env/anascummis/task-list/frontend-final-typecheck.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/frontend-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/workspace/.cloud-env/anascummis/task-list/frontend-typecheck.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/independent-final-review.json",
+      "bytes": 9264,
+      "sha256": "14c5c9474d931bb57c4227851b2757dfe2301fce738b45861b3e70f22e49cec4",
+      "original": "/workspace/.cloud-env/anascummis/task-list/independent-final-review.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/isolated-counter-fixture.json",
+      "bytes": 11007,
+      "sha256": "a8d80ccf3da074dc4a9adc49efd58580b8c9871a7d7499de845a3046db8e8222",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-after-fixture/receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/model-launcher-baseline.json",
+      "bytes": 208,
+      "sha256": "e39a2ba3fbf761e4257a7c6b47adb9b4e44fc23bbb11d4af7ebc89a3f07fabaa",
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-launcher-baseline.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/model-launcher-baseline.log",
+      "bytes": 839,
+      "sha256": "08d9abd18ce1f1420ff1b9be8090557dfa3b70bd690fd6afbc2728bc732b070e",
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-launcher-baseline.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/model-launcher-fixed.json",
+      "bytes": 247,
+      "sha256": "5a08f4b67f12b9923ebcafcea493210c9362313c03182fb8da0f1ac61891cc36",
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-launcher-fixed.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/model-launcher-fixed.log",
+      "bytes": 253,
+      "sha256": "3d2838be2b4d0c8f0a76b9ed8f04651e6628a05bf3ed879d1f946881c36b4600",
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-launcher-fixed.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/model-start.json",
+      "bytes": 213,
+      "sha256": "77f79516c0633510362937a4ea51e05e32e2fd9257f4b6cca668d86c547560a2",
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-start.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/native-local-ai-check.json",
+      "bytes": 1204,
+      "sha256": "fcb9c093f39a144b4d112de2ebb0bc9970a22d83380ae4572eb350d374c11291",
+      "original": "/workspace/.cloud-env/anascummis/task-list/native-local-ai-check.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/native-local-ai-check.log",
+      "bytes": 803,
+      "sha256": "96bb11339669ca231a9c4aa886c649ce0732e12bec4f8c75e4ceea73678c14b4",
+      "original": "/workspace/.cloud-env/anascummis/task-list/native-local-ai-check.log",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/normal-server-activation.json",
+      "bytes": 1170,
+      "sha256": "2de31d7739b5cd7b4e3a5223f20f7e409800d20aae5a217f48342fc84b6208f5",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-server-activation.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/preservation-final-receipt.json",
+      "bytes": 1096,
+      "sha256": "f9434ecd52826f3479739a201954f8c6a26c60f48059eb0d0fbd7a22111f1789",
+      "original": "/workspace/.cloud-env/anascummis/task-list/preservation-final-receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/startup-config-final-receipt.json",
+      "bytes": 404,
+      "sha256": "77bd6a45253e15976384596404fd7da3c328727827d57b505513f26b33d26a74",
+      "original": "/workspace/.cloud-env/anascummis/task-list/startup-config-final-receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "validation/startup-config-receipt.json",
+      "bytes": 377,
+      "sha256": "71e2bee05291a368d24bf5695ca5314eb5205a71a1dbea8d31f87f78db805907",
+      "original": "/workspace/.cloud-env/anascummis/task-list/startup-config-receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/counter-before/before-desktop.png",
+      "bytes": 12882,
+      "sha256": "45660ec5e1bfbb7eedf66e6b93c1e66c27a79298d71f153949128a0b01d09115",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/before-desktop.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/counter-before/before-narrow.png",
+      "bytes": 8056,
+      "sha256": "656f5c2b535a48aa5923a138478659bd1aee37c11834647426804c5af8717a60",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/before-narrow.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/counter-before/compiler-contract-prefix.json",
+      "bytes": 151,
+      "sha256": "2f9bb69b31c2975d242e648150158c20b0b4d432c1c2c53f02d2c5c018d742e4",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/compiler-contract-prefix.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/counter-before/design-and-sources.md",
+      "bytes": 3416,
+      "sha256": "2e82ac2bea5ed749f2e4558d801b52efe1afc1bcb27256a6a32e2bda0b284377",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/design-and-sources.md",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/counter-before/primary-sources-index.json",
+      "bytes": 2133,
+      "sha256": "7e8d14aeff59373b85e0acd0024f4b49ccd9974f15f9e8e54d6c3f8dbbb2610e",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/primary-sources-index.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/counter-before/receipt.json",
+      "bytes": 3384,
+      "sha256": "10e36fb13a091ac30e1aa0ce0c8791e240812a46b3327acb07d030e9b910ceee",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/counter-native-visual-proof/desktop-initial.png",
+      "bytes": 31812,
+      "sha256": "df2e98f99f1fa830484905bfe3d7fc75026c2e74bc6224370fa6444400eb639b",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/desktop-initial.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/counter-native-visual-proof/desktop-keyboard-increment.png",
+      "bytes": 32606,
+      "sha256": "71ff947cba75dd3243f44a7d070c2763a9045a5f08c3cb4226efa7b004a93466",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/desktop-keyboard-increment.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/counter-native-visual-proof/desktop-keyboard-reset.png",
+      "bytes": 32922,
+      "sha256": "cda25308aff64be098794659b7c46b0d1a6c75322333e6a0ca5dc306a4ca6b62",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/desktop-keyboard-reset.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/counter-native-visual-proof/narrow-initial.png",
+      "bytes": 23021,
+      "sha256": "3f7827728554670e1a9d3ab6957d0d3cae8a014d5d31ba47ff06d98ba272132f",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-initial.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/counter-native-visual-proof/narrow-keyboard-increment.png",
+      "bytes": 24074,
+      "sha256": "7c63646348c4ec81439ea50548be043a2263af91e96acfa728738abab6679a68",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-keyboard-increment.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/counter-native-visual-proof/narrow-keyboard-reset.png",
+      "bytes": 24009,
+      "sha256": "85f0777b1b7b61ede950d8f6f266559b4a5a70db553b7ecece215fae110628ee",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-keyboard-reset.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/counter-native-visual-proof/receipt.json",
+      "bytes": 49167,
+      "sha256": "f1c93f054cf3a99c67c54e6d2c312a41d0c02994ec1f38fb5e42b7f3427dc691",
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/normal-current-handoff/desktop-download-checksum.png",
+      "bytes": 260774,
+      "sha256": "1c50aa7199092104c224ba0caa5967cdcc9f9571c2974383a9a4827511a4d7ce",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/desktop-download-checksum.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/normal-current-handoff/desktop-download-current-kit.png",
+      "bytes": 262245,
+      "sha256": "b9d41dee08a7ddded8c63c0b927a32f7319c7702f5d69d5e3f1fbb6eba4c805e",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/desktop-download-current-kit.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/normal-current-handoff/desktop-download-instructions.png",
+      "bytes": 260774,
+      "sha256": "1c50aa7199092104c224ba0caa5967cdcc9f9571c2974383a9a4827511a4d7ce",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/desktop-download-instructions.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/normal-current-handoff/desktop-initial-readiness.png",
+      "bytes": 341228,
+      "sha256": "557fcbdca2dfc9bb82baf9e58cffa70a29578e352d74eae06919046af0c9cdba",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/desktop-initial-readiness.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/normal-current-handoff/narrow-download-checksum.png",
+      "bytes": 62743,
+      "sha256": "7f0dcee00d3970d4b973819671b4f6cd62dce00c77ecd4af78d76d7d3c86317a",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/narrow-download-checksum.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/normal-current-handoff/narrow-download-current-kit.png",
+      "bytes": 57172,
+      "sha256": "80e4a9577f337bf20f6eb680f921970a60d20c16439ea8dfa627a7e5ac667d50",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/narrow-download-current-kit.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/normal-current-handoff/narrow-download-instructions.png",
+      "bytes": 71305,
+      "sha256": "6b5828f8dc3271c05509af324cc8d85216f7bff17a4705f4fc5f412b916ebf06",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/narrow-download-instructions.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/normal-current-handoff/narrow-initial-readiness.png",
+      "bytes": 133121,
+      "sha256": "0370e3d4b1b25aa825c7cf9b14be150e68807242b52fb4c0364c3c4a7431b804",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/narrow-initial-readiness.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/normal-current-handoff/receipt.json",
+      "bytes": 15214,
+      "sha256": "83cf6fe027a7c416972cc56289a2ac50bbba66ce160b5b04c14537fb665569b2",
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/recovery-visual-proof/archived-failed-validation.json",
+      "bytes": 3306,
+      "sha256": "af9092e2109d39666444e10e563fa2212969416783466981bfcc49f797177eee",
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/archived-failed-validation.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/recovery-visual-proof/receipt.json",
+      "bytes": 22632,
+      "sha256": "70a118dff76683f6164340df68d7f2a067ce02e4cdb8f1ac7dbe3ac3e900c998",
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/receipt.json",
+      "copy": "byte-identical original"
+    },
+    {
+      "path": "visuals/recovery-visual-proof/validation-retry-desktop-error.png",
+      "bytes": 391692,
+      "sha256": "947f17c8fd080236123be97d9e579ed0a126abaaba271462f26c2f56fe304943",
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/validation-retry-desktop-error.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/recovery-visual-proof/validation-retry-desktop-header.png",
+      "bytes": 398113,
+      "sha256": "40659d09d1c90a83b9a6fc44d4b38062714f18fd815cb8dc9262ade1fb730c9c",
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/validation-retry-desktop-header.png",
+      "copy": "byte-identical original",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuals/recovery-visual-proof/validation-retry-narrow-error.png",
+      "bytes": 72551,
+      "sha256": "fe0376d12800cb00183c2acf56cc5ce778ad7afbade14c3bbdebd09ca111e4e9",
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/validation-retry-narrow-error.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "path": "visuals/recovery-visual-proof/validation-retry-narrow-header.png",
+      "bytes": 74976,
+      "sha256": "0191174db996a205a3ae8aba11a0edf7fb9d3839d5060b129c76e0b728ca97a7",
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/validation-retry-narrow-header.png",
+      "copy": "byte-identical original",
+      "width": 360,
+      "height": 800
+    }
+  ],
+  "ownerReviewedAt": "2026-10-29T19:45:25.403742+00:00"
+}

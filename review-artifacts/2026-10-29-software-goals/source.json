@@ -1,0 +1,136 @@
+{
+  "pins": {
+    "base": "c599f8182b3e9b94c719110e9248158194e42a73",
+    "firstImplementation": "f62573da5e935e6c19b3e62a7113f439d3e7edd9",
+    "testedRuntime": "345b82bcc8dee4591bf93c98029624667185a0b9",
+    "deliveryHead": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411"
+  },
+  "trees": {
+    "base": "1a371996634cad19b7ea32e018d53c3a9a612774",
+    "firstImplementation": "4119f6abcf334b08109d682539e4412b408ab619",
+    "testedRuntime": "a076d950abb2c9160c9b76e7c3cd761f051919ef",
+    "deliveryHead": "84f9fa8d4d53c4f6d3f1254259f39970bd9b28af"
+  },
+  "docsOnlyDifference": [
+    "PROJECT-ROADMAP.md",
+    "README.md",
+    "apps/studio/SOFTWARE.md",
+    "apps/studio/USER-JOURNEYS.md"
+  ],
+  "productionFrontend": "Built at f62573da; unchanged served-build hashes through runtime345/delivery20b. Worker-only validation/retry corrections require no UI rebuild.",
+  "branch": "codex/task-list-e2e-20261029",
+  "reports": [
+    {
+      "path": "native/routing/report.json",
+      "source": "f62573da5e935e6c19b3e62a7113f439d3e7edd9",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "originalRun": "software-routing-final"
+    },
+    {
+      "path": "native/recovery/report.json",
+      "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "originalRun": "task-list-checkpoint-recovery"
+    },
+    {
+      "path": "native/task-list-desktop/report.json",
+      "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "originalRun": "task-list-native-fixed-desktop"
+    },
+    {
+      "path": "native/task-list-narrow/report.json",
+      "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "originalRun": "task-list-native-fixed-narrow"
+    },
+    {
+      "path": "native/counter/report.json",
+      "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "originalRun": "counter-ux-native-final"
+    },
+    {
+      "path": "before/entry-status/report.json",
+      "source": "c599f8182b3e9b94c719110e9248158194e42a73",
+      "sourceDirty": true,
+      "summary": {
+        "passed": 0,
+        "blocked": 0,
+        "failed": 1
+      },
+      "exitCode": 1,
+      "originalRun": "task-list-native-baseline"
+    },
+    {
+      "path": "before/generic-worker/report.json",
+      "source": "c599f8182b3e9b94c719110e9248158194e42a73",
+      "sourceDirty": true,
+      "summary": {
+        "passed": 0,
+        "blocked": 0,
+        "failed": 1
+      },
+      "exitCode": 1,
+      "originalRun": "task-list-native-form-baseline"
+    },
+    {
+      "path": "before/framework-alert/report.json",
+      "source": "f62573da5e935e6c19b3e62a7113f439d3e7edd9",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 0,
+        "blocked": 0,
+        "failed": 1
+      },
+      "exitCode": 1,
+      "originalRun": "task-list-native-first"
+    }
+  ],
+  "sourceKit": {
+    "format": 1,
+    "version": "3298a9e9adb589b2d84f2111af36120eee539e6d044ccda1045d3af69edd28b9",
+    "filename": "anascummis-studio-3298a9e9adb589b2.zip",
+    "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+    "bytes": 1648533,
+    "files": 237,
+    "source": {
+      "commit": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  }
+}

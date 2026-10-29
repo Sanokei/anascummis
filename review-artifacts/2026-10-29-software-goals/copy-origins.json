@@ -1,0 +1,693 @@
+{
+  "scope": "Only original synthetic QA receipts/screenshots and checked source ZIPs copied byte-for-byte. No private-data directory, SQLite, keys, actual environment files, model weights, caches, installed dependency trees or trace archive included. Committed .env.example contains only local URL/placeholder comments.",
+  "files": {
+    "native/routing/report.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/report.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/report.html": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/report.html",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-desktop/05-show-tasks-work-history.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/05-show-tasks-work-history.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-desktop/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-desktop/03-revision-request-kept.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/03-revision-request-kept.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-desktop/02-software-progress-routing.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/02-software-progress-routing.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-desktop/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-desktop/04-honest-open-app-handoff.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-desktop/04-honest-open-app-handoff.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-narrow/05-show-tasks-work-history.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/05-show-tasks-work-history.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-narrow/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-narrow/03-revision-request-kept.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/03-revision-request-kept.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-narrow/02-software-progress-routing.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/02-software-progress-routing.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-narrow/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/routing/software-window-routing-narrow/04-honest-open-app-handoff.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/software-routing-final/software-window-routing-narrow/04-honest-open-app-handoff.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/report.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/report.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/report.html": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/report.html",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/resume-task-list-checkpoint-desktop/recovered-produced-task-list.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/recovered-produced-task-list.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/resume-task-list-checkpoint-desktop/recovered-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/recovered-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/resume-task-list-checkpoint-desktop/02-retained-original-failed-check.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/02-retained-original-failed-check.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/resume-task-list-checkpoint-desktop/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/resume-task-list-checkpoint-desktop/progress.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/progress.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/resume-task-list-checkpoint-desktop/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/resume-task-list-checkpoint-desktop/03-explicit-resume-checkpoint.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/03-explicit-resume-checkpoint.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/recovery/resume-task-list-checkpoint-desktop/04-failed-validation-history-kept.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-checkpoint-recovery/resume-task-list-checkpoint-desktop/04-failed-validation-history-kept.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/report.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/report.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/report.html": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/report.html",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-revision-software.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-software.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/05-checked-source-run-instructions.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/05-checked-source-run-instructions.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/04-task-list-parent-outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/04-task-list-parent-outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-same-origin-replacement-before-replacement.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-same-origin-replacement-before-replacement.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-same-origin-replacement.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-same-origin-replacement.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/02-task-list-parent-full-request.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/02-task-list-parent-full-request.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-parent-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/progress.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/progress.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/07-task-list-revision-saved-progress.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/07-task-list-revision-saved-progress.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-revision-produced.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-produced.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-revision-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-parent-software.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-software.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-parent-after-revision-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-after-revision-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/03-task-list-parent-saved-progress.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/03-task-list-parent-saved-progress.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-parent-produced.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-produced.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-parent-downloaded.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-parent-downloaded.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/09-task-list-parent-kept.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/09-task-list-parent-kept.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/06-task-list-revision-full-request.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/06-task-list-revision-full-request.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/task-list-revision-downloaded.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/task-list-revision-downloaded.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-desktop/task-list-application-desktop/08-task-list-revision-outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-desktop/task-list-application-desktop/08-task-list-revision-outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/report.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/report.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/report.html": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/report.html",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-revision-software.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-software.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/05-checked-source-run-instructions.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/05-checked-source-run-instructions.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/04-task-list-parent-outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/04-task-list-parent-outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-same-origin-replacement-before-replacement.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-same-origin-replacement-before-replacement.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-same-origin-replacement.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-same-origin-replacement.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/02-task-list-parent-full-request.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/02-task-list-parent-full-request.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-parent-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/progress.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/progress.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/07-task-list-revision-saved-progress.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/07-task-list-revision-saved-progress.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-revision-produced.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-produced.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-revision-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-parent-software.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-software.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-parent-after-revision-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-after-revision-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/03-task-list-parent-saved-progress.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/03-task-list-parent-saved-progress.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-parent-produced.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-produced.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-parent-downloaded.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-parent-downloaded.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/09-task-list-parent-kept.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/09-task-list-parent-kept.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/06-task-list-revision-full-request.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/06-task-list-revision-full-request.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/task-list-revision-downloaded.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/task-list-revision-downloaded.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/task-list-narrow/task-list-application-narrow/08-task-list-revision-outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-fixed-narrow/task-list-application-narrow/08-task-list-revision-outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/report.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/report.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/report.html": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/report.html",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-desktop/counter-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/counter-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-desktop/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-desktop/02-counter-application-outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/02-counter-application-outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-desktop/progress.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/progress.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-desktop/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-desktop/downloaded-counter.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/downloaded-counter.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-desktop/produced-counter.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-desktop/produced-counter.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-narrow/counter-source.zip": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/counter-source.zip",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-narrow/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-narrow/02-counter-application-outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/02-counter-application-outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-narrow/progress.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/progress.json",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-narrow/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-narrow/downloaded-counter.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/downloaded-counter.png",
+      "copiedBytesUnchanged": true
+    },
+    "native/counter/counter-application-narrow/produced-counter.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/counter-ux-native-final/counter-application-narrow/produced-counter.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/entry-status/report.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/report.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/entry-status/report.html": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/report.html",
+      "copiedBytesUnchanged": true
+    },
+    "before/entry-status/task-list-application-desktop/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/task-list-application-desktop/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/entry-status/task-list-application-desktop/outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/task-list-application-desktop/outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/entry-status/task-list-application-desktop/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-baseline/task-list-application-desktop/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/report.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/report.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/report.html": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/report.html",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/task-list-application-desktop/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/task-list-application-desktop/03-task-list-unfinished-recovery.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/03-task-list-unfinished-recovery.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/task-list-application-desktop/progress.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/progress.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/task-list-application-desktop/outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/task-list-application-desktop/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/task-list-application-desktop/task-list-parent-software.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/task-list-parent-software.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/generic-worker/task-list-application-desktop/02-task-list-parent-outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-form-baseline/task-list-application-desktop/02-task-list-parent-outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/report.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/report.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/report.html": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/report.html",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/result.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/result.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/04-task-list-parent-outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/04-task-list-parent-outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/05-task-list-unfinished-recovery.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/05-task-list-unfinished-recovery.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/02-task-list-parent-full-request.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/02-task-list-parent-full-request.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/progress.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/progress.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/outcome.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/outcome.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/01-first-use.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/01-first-use.png",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/task-list-parent-software.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/task-list-parent-software.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/task-list-application-desktop/03-task-list-parent-saved-progress.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/03-task-list-parent-saved-progress.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-before/before-narrow.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/before-narrow.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-before/design-and-sources.md": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/design-and-sources.md",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-before/compiler-contract-prefix.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/compiler-contract-prefix.json",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-before/before-desktop.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/before-desktop.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-before/receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-native-visual-proof/narrow-keyboard-reset.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-keyboard-reset.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-native-visual-proof/desktop-initial.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/desktop-initial.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-native-visual-proof/desktop-keyboard-increment.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/desktop-keyboard-increment.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-native-visual-proof/desktop-keyboard-reset.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/desktop-keyboard-reset.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-native-visual-proof/narrow-initial.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-initial.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-native-visual-proof/narrow-keyboard-increment.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/narrow-keyboard-increment.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-native-visual-proof/receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-native-visual-proof/receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/desktop-download-instructions.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/desktop-download-instructions.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/desktop-download-checksum.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/desktop-download-checksum.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/narrow-download-current-kit.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/narrow-download-current-kit.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/narrow-initial-readiness.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/narrow-initial-readiness.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/narrow-download-instructions.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/narrow-download-instructions.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/desktop-initial-readiness.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/desktop-initial-readiness.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/narrow-download-checksum.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/narrow-download-checksum.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/desktop-download-current-kit.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/desktop-download-current-kit.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/normal-current-handoff/receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-current-handoff/receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/recovery-visual-proof/validation-retry-narrow-header.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/validation-retry-narrow-header.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/recovery-visual-proof/validation-retry-desktop-header.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/validation-retry-desktop-header.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/recovery-visual-proof/validation-retry-narrow-error.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/validation-retry-narrow-error.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/recovery-visual-proof/archived-failed-validation.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/archived-failed-validation.json",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/recovery-visual-proof/validation-retry-desktop-error.png": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/validation-retry-desktop-error.png",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/recovery-visual-proof/receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/recovery-visual-proof/receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/startup-config-final-receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/startup-config-final-receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/native-local-ai-check.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/native-local-ai-check.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/final-affected-tests.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/final-affected-tests.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/frontend-final-typecheck.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/frontend-final-typecheck.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/native-local-ai-check.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/native-local-ai-check.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/collection-browser-proof.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/collection-browser-proof.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/model-launcher-baseline.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-launcher-baseline.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/model-launcher-baseline.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-launcher-baseline.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/model-start.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-start.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/independent-final-review.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/independent-final-review.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/startup-config-receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/startup-config-receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/current-kit-build.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/current-kit-build.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/core-typecheck.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/core-typecheck.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/frontend-typecheck.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/frontend-typecheck.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/model-launcher-fixed.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-launcher-fixed.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/core-final-typecheck.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/core-final-typecheck.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/isolated-counter-fixture.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-after-fixture/receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/normal-server-activation.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/normal-server-activation.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/final-build.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/final-build.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/current-kit-receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/current-kit-receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/final-typechecks-receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/final-typechecks-receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "validation/affected-tests-f62573d.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/affected-tests-f62573d.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/model-launcher-fixed.log": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/model-launcher-fixed.log",
+      "copiedBytesUnchanged": true
+    },
+    "validation/preservation-final-receipt.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/preservation-final-receipt.json",
+      "copiedBytesUnchanged": true
+    },
+    "research/sources.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/research/sources.json",
+      "copiedBytesUnchanged": true
+    },
+    "research/findings-and-plan.md": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/research/findings-and-plan.md",
+      "copiedBytesUnchanged": true
+    },
+    "native/post-validation.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-acceptance-post-validation.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/observed-browser.json": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/.qa/browser-1.json",
+      "copiedBytesUnchanged": true
+    },
+    "before/framework-alert/observed-browser.png": {
+      "original": "/workspace/anascummis/apps/studio/.test-data/user-journeys/task-list-native-first/task-list-application-desktop/private-data/software/74fb284e-c390-428e-8bfe-05ff9767feb2/.qa/revision-1.png",
+      "copiedBytesUnchanged": true
+    },
+    "kit/anascummis-studio-3298a9e9adb589b2.zip": {
+      "original": "/workspace/anascummis/apps/studio/out/opensource/anascummis-studio-3298a9e9adb589b2.zip",
+      "copiedBytesUnchanged": true
+    },
+    "kit/manifest.json": {
+      "original": "/workspace/anascummis/apps/studio/out/opensource/manifest.json",
+      "copiedBytesUnchanged": true
+    },
+    "visuals/counter-before/primary-sources-index.json": {
+      "original": "/workspace/.cloud-env/anascummis/task-list/counter-before/primary-sources-index.json",
+      "copiedBytesUnchanged": true
+    }
+  }
+}

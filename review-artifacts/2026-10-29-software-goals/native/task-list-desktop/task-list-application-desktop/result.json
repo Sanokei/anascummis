@@ -1,0 +1,1051 @@
+{
+  "id": "task-list-application",
+  "viewport": "desktop",
+  "goal": "Build a usable persistent task list, download and run its actual source, then revise its heading while preserving the accepted parent and add/remove/reload behavior.",
+  "startedAt": "2026-10-29T19:18:34.045Z",
+  "status": "passed",
+  "lane": "real-local-runtime",
+  "prerequisite": "Real local model and existing software build dependencies; no scripted inference.",
+  "assertions": [
+    {
+      "name": "task-list-parent exact request, state and actual persisted activity are inspectable in Software work.",
+      "passed": true
+    },
+    {
+      "name": "Checked source ZIP has visible prerequisites and real build/start commands; instructions do not claim to launch an app.",
+      "passed": true
+    },
+    {
+      "name": "task-list-parent downloaded source matches the verified artifact bytes and SHA-256.",
+      "passed": true
+    },
+    {
+      "name": "Actual produced bundle and independently extracted/downloaded source build both add, remove individual tasks and preserve the remaining list after reload.",
+      "passed": true
+    },
+    {
+      "name": "task-list-revision exact request, state and actual persisted activity are inspectable in Software work.",
+      "passed": true
+    },
+    {
+      "name": "task-list-revision downloaded source matches the verified artifact bytes and SHA-256.",
+      "passed": true
+    },
+    {
+      "name": "Same owned origin and retained browser context: parent list survives actual server replacement with My Week; add/remove/reload still work without cross-port data transfer.",
+      "passed": true
+    },
+    {
+      "name": "task-list-parent-after-revision downloaded source matches the verified artifact bytes and SHA-256.",
+      "passed": true
+    },
+    {
+      "name": "Explicit linked revision has My Week with original behavior; parent record and downloaded artifact remain identical across revision and reload without replay.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-task-list-parent-full-request.png",
+    "03-task-list-parent-saved-progress.png",
+    "04-task-list-parent-outcome.png",
+    "05-checked-source-run-instructions.png",
+    "task-list-parent-produced.png",
+    "task-list-parent-downloaded.png",
+    "06-task-list-revision-full-request.png",
+    "07-task-list-revision-saved-progress.png",
+    "08-task-list-revision-outcome.png",
+    "task-list-revision-produced.png",
+    "task-list-revision-downloaded.png",
+    "task-list-same-origin-replacement-before-replacement.png",
+    "task-list-same-origin-replacement.png",
+    "09-task-list-parent-kept.png"
+  ],
+  "downloads": [
+    {
+      "path": "task-list-parent-source.zip",
+      "suggestedFilename": "source.zip",
+      "bytes": 176377,
+      "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97"
+    },
+    {
+      "path": "task-list-revision-source.zip",
+      "suggestedFilename": "source.zip",
+      "bytes": 177189,
+      "sha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546"
+    },
+    {
+      "path": "task-list-parent-after-revision-source.zip",
+      "suggestedFilename": "source.zip",
+      "bytes": 176377,
+      "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97"
+    }
+  ],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T19:18:34.671Z"
+    },
+    {
+      "path": "/api/software",
+      "time": "2026-10-29T19:18:36.219Z"
+    },
+    {
+      "path": "/api/software/e261cd74-7630-4210-960e-6602b417e178/revise",
+      "time": "2026-10-29T19:20:30.027Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 29181,
+    "port": 33421,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "goalProgress": [
+    {
+      "time": "2026-10-29T19:18:36.637Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "planning",
+      "revision": 0,
+      "modelCalls": 1,
+      "message": "Specifying a bounded persistent text collection; a trusted compiler owns source and independent browser acceptance."
+    },
+    {
+      "time": "2026-10-29T19:18:38.209Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "install",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running install."
+    },
+    {
+      "time": "2026-10-29T19:18:38.830Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "typecheck",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running typecheck."
+    },
+    {
+      "time": "2026-10-29T19:18:40.119Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "build",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Building the actual Next.js program."
+    },
+    {
+      "time": "2026-10-29T19:19:05.648Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "browser",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Loading the production app and capturing a real screenshot."
+    },
+    {
+      "time": "2026-10-29T19:19:09.111Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "typecheck",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running typecheck."
+    },
+    {
+      "time": "2026-10-29T19:19:10.722Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "tests",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running tests."
+    },
+    {
+      "time": "2026-10-29T19:19:10.831Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "build",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Building the actual Next.js program."
+    },
+    {
+      "time": "2026-10-29T19:19:33.205Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "browser",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Loading the production app and capturing a real screenshot."
+    },
+    {
+      "time": "2026-10-29T19:19:36.675Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "running",
+      "phase": "source_zip",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running source_zip."
+    },
+    {
+      "time": "2026-10-29T19:20:05.419Z",
+      "label": "task-list-parent",
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed."
+    },
+    {
+      "time": "2026-10-29T19:20:30.152Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "revision_planning",
+      "revision": 0,
+      "modelCalls": 1,
+      "message": "Checking a literal heading-only collection revision; add, individual removal and persistence stay required."
+    },
+    {
+      "time": "2026-10-29T19:20:31.441Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "install",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running install."
+    },
+    {
+      "time": "2026-10-29T19:20:31.652Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "typecheck",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running typecheck."
+    },
+    {
+      "time": "2026-10-29T19:20:33.383Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "tests",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running tests."
+    },
+    {
+      "time": "2026-10-29T19:20:33.486Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "build",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Building the actual Next.js program."
+    },
+    {
+      "time": "2026-10-29T19:20:59.160Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "browser",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Loading the production app and capturing a real screenshot."
+    },
+    {
+      "time": "2026-10-29T19:21:03.055Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "typecheck",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running typecheck."
+    },
+    {
+      "time": "2026-10-29T19:21:04.907Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "tests",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running tests."
+    },
+    {
+      "time": "2026-10-29T19:21:05.018Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "build",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Building the actual Next.js program."
+    },
+    {
+      "time": "2026-10-29T19:21:27.410Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "browser",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Loading the production app and capturing a real screenshot."
+    },
+    {
+      "time": "2026-10-29T19:21:30.913Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "source_zip",
+      "revision": 1,
+      "modelCalls": 1,
+      "message": "Running source_zip."
+    },
+    {
+      "time": "2026-10-29T19:21:59.577Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "running",
+      "phase": "revision_coverage",
+      "revision": 1,
+      "modelCalls": 2,
+      "message": "Checking full revision guidance against current output, QA and acceptance changes."
+    },
+    {
+      "time": "2026-10-29T19:22:07.287Z",
+      "label": "task-list-revision",
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "modelCalls": 2,
+      "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed."
+    }
+  ],
+  "persistedSoftwareTasks": [
+    {
+      "id": "e261cd74-7630-4210-960e-6602b417e178",
+      "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "requirements": [
+        {
+          "id": "collection",
+          "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+          "status": "verified",
+          "files": [
+            "app/page.tsx",
+            "lib/collection.ts"
+          ],
+          "tests": [
+            "tests/app.test.tsx",
+            "tests/collection.test.ts"
+          ],
+          "reviewRevision": 1,
+          "note": "Bounded collection contract verified by actual production-browser interactions: Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key"
+        }
+      ],
+      "events": [
+        {
+          "time": 1793301518811,
+          "phase": "typecheck",
+          "detail": "Running typecheck.",
+          "revision": 1
+        },
+        {
+          "time": 1793301520055,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793301520113,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793301545580,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793301549089,
+          "phase": "install",
+          "detail": "Running install.",
+          "revision": 1
+        },
+        {
+          "time": 1793301549097,
+          "phase": "typecheck",
+          "detail": "Running typecheck.",
+          "revision": 1
+        },
+        {
+          "time": 1793301550715,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793301550764,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793301573149,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793301576588,
+          "phase": "source_zip",
+          "detail": "Running source_zip.",
+          "revision": 1
+        },
+        {
+          "time": 1793301605379,
+          "phase": "packaging",
+          "detail": "Packaging checked source ZIP.",
+          "revision": 1
+        },
+        {
+          "time": 1793301605415,
+          "phase": "completed",
+          "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+          "revision": 1
+        }
+      ],
+      "created": 1793301516223,
+      "updated": 1793301605415,
+      "calls": 1,
+      "errors": 0,
+      "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+      "milestoneMs": [],
+      "milestoneStarted": 1793301516223,
+      "planOffset": 0,
+      "planningDone": true,
+      "targets": [
+        "zip"
+      ],
+      "collectionContract": {
+        "kind": "collection",
+        "heading": "My Tasks",
+        "inputLabel": "New task",
+        "addButton": "Add",
+        "removeButton": "Remove",
+        "listLabel": "Tasks",
+        "storage": "localStorage",
+        "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+        "maxItems": 100,
+        "maxTextLength": 200
+      },
+      "lastProgressCall": 1,
+      "evidence": {
+        "revision": 1,
+        "checks": [
+          {
+            "id": "install",
+            "ok": true,
+            "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [4.00ms]\n",
+            "milliseconds": 7
+          },
+          {
+            "id": "typecheck",
+            "ok": true,
+            "detail": "",
+            "milliseconds": 1616
+          },
+          {
+            "id": "tests",
+            "ok": true,
+            "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [7.83ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.41ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.22ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [41.00ms]\n",
+            "milliseconds": 47
+          },
+          {
+            "id": "build",
+            "ok": true,
+            "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 25ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1471ms\n  Running TypeScript ...\n  Finished TypeScript in 1295ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 175ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+            "milliseconds": 22367
+          },
+          {
+            "id": "browser",
+            "ok": true,
+            "detail": "Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Tasks\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key",
+            "milliseconds": 3438
+          },
+          {
+            "id": "source_zip",
+            "ok": true,
+            "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+            "milliseconds": 28789
+          }
+        ],
+        "dom": "My Tasks\n\nSaved in this browser. Up to 100 tasks, 200 characters each.\n\nNew task\nAdd\nKeep this task\nRemove\nAdded after reload\nRemove",
+        "artifacts": [
+          {
+            "kind": "zip",
+            "name": "source.zip",
+            "sha256": "71b0c52699fb3ea807f8a5380932933d012acd5dfaba0e663f88c730af0c3f97",
+            "bytes": 176377,
+            "smokeTested": true
+          }
+        ],
+        "headings": [
+          "My Tasks"
+        ],
+        "screenshot": "revision-1.png",
+        "browserContract": {
+          "kind": "collection",
+          "heading": "My Tasks",
+          "inputLabel": "New task",
+          "addButton": "Add",
+          "removeButton": "Remove",
+          "listLabel": "Tasks",
+          "storage": "localStorage",
+          "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+          "maxItems": 100,
+          "maxTextLength": 200
+        }
+      }
+    },
+    {
+      "id": "3913421e-e224-4968-9045-622f161a2d0c",
+      "goal": "Build a task-list application with heading My Tasks, a text input labelled New task, an Add button, and a Remove button for each task. Add task text to the list, remove individual tasks, and persist remaining tasks after a page reload. Include browser checks and give me the source ZIP.\n\nRevision requested (replaces conflicting earlier criteria; preserve other behavior):\nChange heading to My Week; keep existing add/remove/persistence behavior",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "requirements": [
+        {
+          "id": "collection",
+          "description": "Show exactly \"My Week\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+          "status": "verified",
+          "files": [
+            "app/page.tsx",
+            "lib/collection.ts"
+          ],
+          "tests": [
+            "tests/app.test.tsx",
+            "tests/collection.test.ts"
+          ],
+          "reviewRevision": 1,
+          "note": "Bounded collection contract verified by actual production-browser interactions: Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Week\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key"
+        }
+      ],
+      "events": [
+        {
+          "time": 1793301633349,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793301633398,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793301659122,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793301662972,
+          "phase": "install",
+          "detail": "Running install.",
+          "revision": 1
+        },
+        {
+          "time": 1793301662983,
+          "phase": "typecheck",
+          "detail": "Running typecheck.",
+          "revision": 1
+        },
+        {
+          "time": 1793301664890,
+          "phase": "tests",
+          "detail": "Running tests.",
+          "revision": 1
+        },
+        {
+          "time": 1793301664943,
+          "phase": "build",
+          "detail": "Building the actual Next.js program.",
+          "revision": 1
+        },
+        {
+          "time": 1793301687312,
+          "phase": "browser",
+          "detail": "Loading the production app and capturing a real screenshot.",
+          "revision": 1
+        },
+        {
+          "time": 1793301690892,
+          "phase": "source_zip",
+          "detail": "Running source_zip.",
+          "revision": 1
+        },
+        {
+          "time": 1793301719522,
+          "phase": "packaging",
+          "detail": "Packaging checked source ZIP.",
+          "revision": 1
+        },
+        {
+          "time": 1793301719557,
+          "phase": "revision_coverage",
+          "detail": "Checking full revision guidance against current output, QA and acceptance changes.",
+          "revision": 1
+        },
+        {
+          "time": 1793301727228,
+          "phase": "completed",
+          "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+          "revision": 1
+        }
+      ],
+      "created": 1793301630058,
+      "updated": 1793301727228,
+      "calls": 2,
+      "errors": 0,
+      "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+      "milestoneMs": [],
+      "milestoneStarted": 1793301630058,
+      "planOffset": 72,
+      "planningDone": true,
+      "targets": [
+        "zip"
+      ],
+      "parentTaskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "parentRevision": 1,
+      "revisionNote": "Change heading to My Week; keep existing add/remove/persistence behavior",
+      "revisionPlan": {
+        "criteria": [
+          {
+            "id": "collection",
+            "description": "Show exactly \"My Tasks\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+            "files": [
+              "app/page.tsx",
+              "lib/collection.ts"
+            ],
+            "tests": [
+              "tests/app.test.tsx",
+              "tests/collection.test.ts"
+            ]
+          }
+        ],
+        "criterionOffset": 1,
+        "guidance": "Change heading to My Week; keep existing add/remove/persistence behavior",
+        "guidanceOffset": 72,
+        "stage": "ready",
+        "decisions": [
+          {
+            "id": "collection",
+            "action": "replace",
+            "description": "Show exactly \"My Week\" with labelled input \"New task\", \"Add\" and per-item \"Remove\". Add nonblank text, remove only its selected item (including duplicates), and persist the remaining collection after reload.",
+            "reason": "Only the explicitly requested literal heading changes; stable storage key, Add, individual Remove and reload persistence remain in the host browser contract."
+          }
+        ],
+        "parentSourceHash": "729173fd50fea8e71f246f5482b49d2e679e5dfd885acd25c98cec18535018e5",
+        "browserContract": {
+          "kind": "collection",
+          "heading": "My Week",
+          "inputLabel": "New task",
+          "addButton": "Add",
+          "removeButton": "Remove",
+          "listLabel": "Tasks",
+          "storage": "localStorage",
+          "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+          "maxItems": 100,
+          "maxTextLength": 200
+        },
+        "collectionRecipe": {
+          "before": {
+            "title": "My Tasks",
+            "inputLabel": "New task",
+            "addButtonLabel": "Add",
+            "removeButtonLabel": "Remove",
+            "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178"
+          },
+          "after": {
+            "title": "My Week",
+            "inputLabel": "New task",
+            "addButtonLabel": "Add",
+            "removeButtonLabel": "Remove",
+            "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178"
+          },
+          "revision": 1
+        },
+        "coverageOffset": 72,
+        "coverageRejected": false,
+        "coverageRevision": 1
+      },
+      "collectionContract": {
+        "kind": "collection",
+        "heading": "My Week",
+        "inputLabel": "New task",
+        "addButton": "Add",
+        "removeButton": "Remove",
+        "listLabel": "Tasks",
+        "storage": "localStorage",
+        "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+        "maxItems": 100,
+        "maxTextLength": 200
+      },
+      "lastProgressCall": 1,
+      "evidence": {
+        "revision": 1,
+        "checks": [
+          {
+            "id": "install",
+            "ok": true,
+            "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [3.00ms]\n",
+            "milliseconds": 10
+          },
+          {
+            "id": "typecheck",
+            "ok": true,
+            "detail": "",
+            "milliseconds": 1903
+          },
+          {
+            "id": "tests",
+            "ok": true,
+            "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested collection has an exact heading and labelled accessible controls before hydration [8.85ms]\n\ntests/collection.test.ts:\n(pass) stable identity preserves duplicate task text and removes only a selected item [0.53ms]\n(pass) invalid storage is rejected without writing and write failures propagate before publishing success [0.30ms]\n\n 3 pass\n 0 fail\n 9 expect() calls\nRan 3 tests across 2 files. [49.00ms]\n",
+            "milliseconds": 51
+          },
+          {
+            "id": "build",
+            "ok": true,
+            "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 29ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1531ms\n  Running TypeScript ...\n  Finished TypeScript in 1407ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 173ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+            "milliseconds": 22354
+          },
+          {
+            "id": "browser",
+            "ok": true,
+            "detail": "Production app loaded; real browser screenshot and DOM captured. collection acceptance passed: exact heading \"My Week\"; labelled input, keyboard/click Add, nonblank text, individual duplicate-safe Remove, reload persistence and subsequent Add/Remove/reload; stable application storage key",
+            "milliseconds": 3580
+          },
+          {
+            "id": "source_zip",
+            "ok": true,
+            "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+            "milliseconds": 28627
+          }
+        ],
+        "dom": "My Week\n\nSaved in this browser. Up to 100 tasks, 200 characters each.\n\nNew task\nAdd\nKeep this task\nRemove\nAdded after reload\nRemove",
+        "artifacts": [
+          {
+            "kind": "zip",
+            "name": "source.zip",
+            "sha256": "de37ed6d6b0f32018e79afd7174e3144d5a6913f720f9a260d5151d58b2c6546",
+            "bytes": 177189,
+            "smokeTested": true
+          }
+        ],
+        "headings": [
+          "My Week"
+        ],
+        "screenshot": "revision-1.png",
+        "browserContract": {
+          "kind": "collection",
+          "heading": "My Week",
+          "inputLabel": "New task",
+          "addButton": "Add",
+          "removeButton": "Remove",
+          "listLabel": "Tasks",
+          "storage": "localStorage",
+          "storageKey": "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+          "maxItems": 100,
+          "maxTextLength": 200
+        }
+      }
+    }
+  ],
+  "softwareInspections": [
+    {
+      "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "name": "task-list-parent-produced",
+      "mode": "produced-standalone",
+      "phases": [],
+      "limit": "Actual produced standalone bundle; downloaded-source installation is a separate inspection.",
+      "pid": 30187,
+      "port": 45531,
+      "startCommand": "node server.js",
+      "behavior": {
+        "heading": "My Tasks",
+        "input": "New task",
+        "add": "Add",
+        "keyboardAdd": true,
+        "individualRemove": true,
+        "duplicateRemoval": true,
+        "retainedAfterReload": [
+          "Review delivery",
+          "Check stock"
+        ],
+        "removedAfterReload": [
+          "Buy flour",
+          "Call the bakery"
+        ]
+      },
+      "passed": true,
+      "trace": "task-list-parent-produced-trace.zip"
+    },
+    {
+      "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "name": "task-list-parent-downloaded",
+      "mode": "downloaded-source-rebuild",
+      "phases": [
+        {
+          "phase": "typecheck",
+          "started": "2026-10-29T19:20:12.498Z",
+          "pid": 30251,
+          "log": "task-list-parent-downloaded-typecheck.log",
+          "exitCode": 0,
+          "finished": "2026-10-29T19:20:14.290Z"
+        },
+        {
+          "phase": "tests",
+          "started": "2026-10-29T19:20:14.294Z",
+          "pid": 30259,
+          "log": "task-list-parent-downloaded-tests.log",
+          "exitCode": 0,
+          "finished": "2026-10-29T19:20:14.344Z"
+        },
+        {
+          "phase": "build",
+          "started": "2026-10-29T19:20:14.347Z",
+          "pid": 30272,
+          "log": "task-list-parent-downloaded-build.log",
+          "exitCode": 0,
+          "finished": "2026-10-29T19:20:24.446Z"
+        }
+      ],
+      "files": 14,
+      "limit": "Actual downloaded source, clean extraction/build; reuses matching installed dependency tree. No fresh registry installation or Windows executable claim.",
+      "packageStartScript": "next start -H 127.0.0.1",
+      "pid": 30387,
+      "port": 39361,
+      "startCommand": "bun run start --port 39361",
+      "behavior": {
+        "heading": "My Tasks",
+        "input": "New task",
+        "add": "Add",
+        "keyboardAdd": true,
+        "individualRemove": true,
+        "duplicateRemoval": true,
+        "retainedAfterReload": [
+          "Review delivery",
+          "Check stock"
+        ],
+        "removedAfterReload": [
+          "Buy flour",
+          "Call the bakery"
+        ]
+      },
+      "passed": true,
+      "trace": "task-list-parent-downloaded-trace.zip"
+    },
+    {
+      "taskId": "3913421e-e224-4968-9045-622f161a2d0c",
+      "name": "task-list-revision-produced",
+      "mode": "produced-standalone",
+      "phases": [],
+      "limit": "Actual produced standalone bundle; downloaded-source installation is a separate inspection.",
+      "pid": 31267,
+      "port": 40435,
+      "startCommand": "node server.js",
+      "behavior": {
+        "heading": "My Week",
+        "input": "New task",
+        "add": "Add",
+        "keyboardAdd": true,
+        "individualRemove": true,
+        "duplicateRemoval": true,
+        "retainedAfterReload": [
+          "Review delivery",
+          "Check stock"
+        ],
+        "removedAfterReload": [
+          "Buy flour",
+          "Call the bakery"
+        ]
+      },
+      "passed": true,
+      "trace": "task-list-revision-produced-trace.zip"
+    },
+    {
+      "taskId": "3913421e-e224-4968-9045-622f161a2d0c",
+      "name": "task-list-revision-downloaded",
+      "mode": "downloaded-source-rebuild",
+      "phases": [
+        {
+          "phase": "typecheck",
+          "started": "2026-10-29T19:22:15.270Z",
+          "pid": 31314,
+          "log": "task-list-revision-downloaded-typecheck.log",
+          "exitCode": 0,
+          "finished": "2026-10-29T19:22:16.946Z"
+        },
+        {
+          "phase": "tests",
+          "started": "2026-10-29T19:22:16.949Z",
+          "pid": 31321,
+          "log": "task-list-revision-downloaded-tests.log",
+          "exitCode": 0,
+          "finished": "2026-10-29T19:22:17.005Z"
+        },
+        {
+          "phase": "build",
+          "started": "2026-10-29T19:22:17.008Z",
+          "pid": 31334,
+          "log": "task-list-revision-downloaded-build.log",
+          "exitCode": 0,
+          "finished": "2026-10-29T19:22:27.472Z"
+        }
+      ],
+      "files": 14,
+      "limit": "Actual downloaded source, clean extraction/build; reuses matching installed dependency tree. No fresh registry installation or Windows executable claim.",
+      "packageStartScript": "next start -H 127.0.0.1",
+      "pid": 31461,
+      "port": 42175,
+      "startCommand": "bun run start --port 42175",
+      "behavior": {
+        "heading": "My Week",
+        "input": "New task",
+        "add": "Add",
+        "keyboardAdd": true,
+        "individualRemove": true,
+        "duplicateRemoval": true,
+        "retainedAfterReload": [
+          "Review delivery",
+          "Check stock"
+        ],
+        "removedAfterReload": [
+          "Buy flour",
+          "Call the bakery"
+        ]
+      },
+      "passed": true,
+      "trace": "task-list-revision-downloaded-trace.zip"
+    },
+    {
+      "taskId": "e261cd74-7630-4210-960e-6602b417e178",
+      "name": "task-list-same-origin-replacement",
+      "mode": "produced-standalone",
+      "phases": [],
+      "limit": "Actual produced standalone bundle; downloaded-source installation is a separate inspection.",
+      "pid": 31522,
+      "port": 44653,
+      "startCommand": "node server.js",
+      "behavior": {
+        "heading": "My Tasks",
+        "input": "New task",
+        "add": "Add",
+        "keyboardAdd": true,
+        "individualRemove": true,
+        "duplicateRemoval": true,
+        "retainedAfterReload": [
+          "Review delivery",
+          "Check stock"
+        ],
+        "removedAfterReload": [
+          "Buy flour",
+          "Call the bakery"
+        ]
+      },
+      "replacement": {
+        "taskId": "3913421e-e224-4968-9045-622f161a2d0c",
+        "parentPid": 31522,
+        "pid": 31569,
+        "origin": "http://127.0.0.1:44653",
+        "port": 44653,
+        "storageBefore": [
+          [
+            "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+            "{\"version\":1,\"items\":[{\"id\":\"16911075-ebe0-4bdb-bf9a-b0d9e652a87b\",\"text\":\"Review delivery\"},{\"id\":\"c54233c8-57b8-4cc0-a6d2-d32b1e7b144e\",\"text\":\"Check stock\"}]}"
+          ]
+        ],
+        "storageAfter": [
+          [
+            "anascummis.collection.e261cd74-7630-4210-960e-6602b417e178",
+            "{\"version\":1,\"items\":[{\"id\":\"16911075-ebe0-4bdb-bf9a-b0d9e652a87b\",\"text\":\"Review delivery\"},{\"id\":\"c54233c8-57b8-4cc0-a6d2-d32b1e7b144e\",\"text\":\"Check stock\"}]}"
+          ]
+        ],
+        "retainedContext": true,
+        "behaviorAfterUpgrade": {
+          "heading": "My Week",
+          "kept": "Review delivery",
+          "added": "Plan next week",
+          "removed": "Check stock"
+        },
+        "passed": true
+      },
+      "passed": true,
+      "trace": "task-list-same-origin-replacement-trace.zip"
+    }
+  ],
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T19:22:48.972Z",
+  "recoveryChecksPassed": 9
+}

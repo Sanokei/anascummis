@@ -1,0 +1,10 @@
+{
+  "launcherPid": 18839,
+  "startedAt": "2026-10-29T18:39:56Z",
+  "command": "bun run model:start",
+  "existingWeightsReused": true,
+  "launch": "separate process session",
+  "health": {
+    "status": "ok"
+  }
+}

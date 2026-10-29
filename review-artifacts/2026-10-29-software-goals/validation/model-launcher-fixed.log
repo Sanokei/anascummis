@@ -1,0 +1,10 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/model-launcher.test.ts:
+(pass) model launcher preserves child exit code 0 [54.62ms]
+(pass) model launcher preserves child exit code 23 [47.92ms]
+
+ 2 pass
+ 0 fail
+ 8 expect() calls
+Ran 2 tests across 1 file. [122.00ms]

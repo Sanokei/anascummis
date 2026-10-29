@@ -1,0 +1,31 @@
+{
+  "manifest": {
+    "format": 1,
+    "version": "3298a9e9adb589b2d84f2111af36120eee539e6d044ccda1045d3af69edd28b9",
+    "filename": "anascummis-studio-3298a9e9adb589b2.zip",
+    "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+    "bytes": 1648533,
+    "files": 237,
+    "source": {
+      "commit": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "zipSignature": "PK0304",
+  "payloadPaths": 238,
+  "newModulesAndGuidesPresent": true,
+  "privateRuntimePathsExcluded": true,
+  "scope": "Supported current source-kit build and archive/HTTP handoff only; no fresh online install or repeated extraction/start matrix.",
+  "allPayloadHashesVerified": 237,
+  "manifestContentVersionVerified": true,
+  "currentSourceFilesMatch": 196,
+  "intentionalTransforms": [
+    "studio/tsconfig.json maps extracted shared/types.ts",
+    "studio/shared/types.ts copies repository src/shared/types.ts"
+  ],
+  "archivePathsUniqueAndSafe": true
+}

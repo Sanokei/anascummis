@@ -1,0 +1,10 @@
+{
+  "time": "2026-10-29T18:42:41.634Z",
+  "label": "task-list-parent",
+  "id": "93a06b8d-fc82-4ec4-b846-0f57a57e7ccb",
+  "status": "needs_input",
+  "phase": "needs_input",
+  "revision": 0,
+  "modelCalls": 4,
+  "message": "Could not make verified progress: Error: Inspect a target source file first"
+}

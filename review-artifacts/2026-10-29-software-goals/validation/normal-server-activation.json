@@ -1,0 +1,38 @@
+{
+  "activatedAt": "2026-10-29T19:37:32.948366+00:00",
+  "source": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+  "oldStudioPid": 17855,
+  "newStudioPid": 37402,
+  "command": "bun core/server.ts",
+  "sameRuntimeEnvironmentPreserved": true,
+  "idleBeforeRestart": true,
+  "apiRecordsUnchanged": {
+    "/api/goals": true,
+    "/api/jobs": true,
+    "/api/software": true,
+    "/api/projects": true
+  },
+  "modelPidUnchanged": 18848,
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "servedHtmlSha256": "cc48bdfac508c38ccdb6eb6f285483d988d31d6ab99a53e56ce7f01b20466d31",
+  "httpSourceKit": {
+    "manifestMatches": true,
+    "archiveMatches": true,
+    "sha256": "926fc41c9cce47e30ba659e05dbdee1f847ec513f8073bd30607b9a608a2ff16",
+    "bytes": 1648533,
+    "contentType": "application/zip",
+    "source": {
+      "commit": "20b7f5c423c4e1fb7e63c8e016605f7ad0ba8411",
+      "dirty": false
+    }
+  },
+  "scope": "Ordinary local server activation and own-origin handoff; no deployment or new inference."
+}

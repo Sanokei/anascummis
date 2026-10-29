@@ -1,0 +1,392 @@
+{
+  "testedSource": "345b82bcc8dee4591bf93c98029624667185a0b9",
+  "reports": [
+    {
+      "directory": "software-routing-final",
+      "source": "f62573da5e935e6c19b3e62a7113f439d3e7edd9",
+      "reportSha256": "7690ab80d8a9976c703e432c22c06ff67567849e4957b73f0891ee1ab3293b30",
+      "summary": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "assertions": 8,
+      "traces": [
+        {
+          "path": "software-window-routing-desktop/trace.zip",
+          "sha256": "19f14b4b08ef3fa188619de75c3f924b13243ff5c3f953a119f4139469224a33",
+          "entries": 187
+        },
+        {
+          "path": "software-window-routing-narrow/trace.zip",
+          "sha256": "bc0fa83f712e469ae1954081ee1add9f085a6b046e0e2d86dc0dcc93aa1e89ee",
+          "entries": 159
+        }
+      ],
+      "fingerprints": "Historical f625 routing proof; served UI unchanged, no worker execution."
+    },
+    {
+      "directory": "task-list-checkpoint-recovery",
+      "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+      "reportSha256": "c76e065ba660a79d26250f6225072bfc6bb311f4cee7ecfb7c0022d43c945c06",
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "assertions": 2,
+      "traces": [
+        {
+          "path": "resume-task-list-checkpoint-desktop/trace.zip",
+          "sha256": "32a960414d9056f2d9869dc1df27b7f0662a51b8c3aca3dccfcf41253315ec77",
+          "entries": 1627
+        },
+        {
+          "path": "resume-task-list-checkpoint-desktop/recovered-produced-task-list-trace.zip",
+          "sha256": "db1ff0587eea6e6bf157601abd59443cc2dae4b60abf43e5b4184f8b7ec8f5f8",
+          "entries": 15
+        }
+      ],
+      "fingerprints": {
+        "runnerSource": 10,
+        "servedBuild": 88,
+        "applicationSource": 30
+      }
+    },
+    {
+      "directory": "task-list-native-fixed-desktop",
+      "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+      "reportSha256": "7b9b8d3820d75632e8aa2aceef73b436b325ea7c94c073e0872e563888b4a1df",
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "assertions": 9,
+      "traces": [
+        {
+          "path": "task-list-application-desktop/trace.zip",
+          "sha256": "d3dc393e6284209921fa7ae2f56cd692bc336b42befc6d9457739278f207a47f",
+          "entries": 3935
+        },
+        {
+          "path": "task-list-application-desktop/task-list-parent-produced-trace.zip",
+          "sha256": "8515bec386211efaa1867fd9aebe92e6e8cfbfc0d176bb857b9a29834234ab46",
+          "entries": 31
+        },
+        {
+          "path": "task-list-application-desktop/task-list-parent-downloaded-trace.zip",
+          "sha256": "b8b8a4e10bbe5f6efbf52c7f47dfdb6a6770f0fbca76684e751091e0ab6ff523",
+          "entries": 34
+        },
+        {
+          "path": "task-list-application-desktop/task-list-revision-produced-trace.zip",
+          "sha256": "6ed7f2adc35bde78f10ced609d3b6e8c90a7ba351b21c6fe7f272114b7b65c1e",
+          "entries": 33
+        },
+        {
+          "path": "task-list-application-desktop/task-list-revision-downloaded-trace.zip",
+          "sha256": "8058964c252fad8b0485a15f3d93b74447d681b831979c2f350471c1e410264c",
+          "entries": 33
+        },
+        {
+          "path": "task-list-application-desktop/task-list-same-origin-replacement-trace.zip",
+          "sha256": "2d70d4d5a54b770347bf93e6ebcb829bed004a83a5f070e9261b098e2547899c",
+          "entries": 45
+        }
+      ],
+      "fingerprints": {
+        "runnerSource": 10,
+        "servedBuild": 88,
+        "applicationSource": 30
+      }
+    },
+    {
+      "directory": "task-list-native-fixed-narrow",
+      "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+      "reportSha256": "60b7276b92ed5becaaa937e80279f9c95d897818ea6938599fd6689f7e29f642",
+      "summary": {
+        "passed": 1,
+        "blocked": 0,
+        "failed": 0
+      },
+      "assertions": 9,
+      "traces": [
+        {
+          "path": "task-list-application-narrow/trace.zip",
+          "sha256": "d2e060b469dfac35395efb018781e136ba92a63df8643d4369ec665b62ceebd2",
+          "entries": 3664
+        },
+        {
+          "path": "task-list-application-narrow/task-list-parent-produced-trace.zip",
+          "sha256": "1b9c3a9fc967e7288be30ce31b91673b3b1a66e2214879e4aa5f0bc6d4576427",
+          "entries": 31
+        },
+        {
+          "path": "task-list-application-narrow/task-list-parent-downloaded-trace.zip",
+          "sha256": "a382477a914ed3b3fdc575728b07288ec9d759a44defa83be77b9b846f8e5ea3",
+          "entries": 35
+        },
+        {
+          "path": "task-list-application-narrow/task-list-revision-produced-trace.zip",
+          "sha256": "27d31b987a3b886055e02673d1ea141d206878e3cfe4952c06c52b21b6fa95bd",
+          "entries": 34
+        },
+        {
+          "path": "task-list-application-narrow/task-list-revision-downloaded-trace.zip",
+          "sha256": "47f0a51359118387ed20c6a337a7f15cc9841ba71913a3bf17cc67ec4dd6d252",
+          "entries": 34
+        },
+        {
+          "path": "task-list-application-narrow/task-list-same-origin-replacement-trace.zip",
+          "sha256": "1912a0734ccaaf98722c686ffd5d79a7f245d10cfe8dd224e5476823908e700c",
+          "entries": 48
+        }
+      ],
+      "fingerprints": {
+        "runnerSource": 10,
+        "servedBuild": 88,
+        "applicationSource": 30
+      }
+    },
+    {
+      "directory": "counter-ux-native-final",
+      "source": "345b82bcc8dee4591bf93c98029624667185a0b9",
+      "reportSha256": "6918b153c7b51cf489d0a587cf3afa9ae7da12b186e4947cb2cbfe4bd8fbd6fb",
+      "summary": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "assertions": 8,
+      "traces": [
+        {
+          "path": "counter-application-desktop/trace.zip",
+          "sha256": "1d66a7fbe87b945e11a71c8e4ee45c176d7a0e8f25758fe046e7c106b6501e57",
+          "entries": 1757
+        },
+        {
+          "path": "counter-application-desktop/produced-app-trace.zip",
+          "sha256": "34e2bc577e687c8083e70c9c38fe0d1fab7de1b4edb4726afd305cfbd1553fe6",
+          "entries": 19
+        },
+        {
+          "path": "counter-application-desktop/downloaded-counter-trace.zip",
+          "sha256": "506a12e22ab4c5d5d165e1734649eafe14beea80f1d33c41a5804382f9f49dba",
+          "entries": 19
+        },
+        {
+          "path": "counter-application-narrow/trace.zip",
+          "sha256": "a9b75e93b4698b99bef45acfaae00a1c250a85db0ebf62c9d27b0c797a904a0d",
+          "entries": 1638
+        },
+        {
+          "path": "counter-application-narrow/produced-app-trace.zip",
+          "sha256": "2a6a03f9511a16b5fdc3aeb25d9c21465ce3af2f91430ac054ee553bf24b23bc",
+          "entries": 22
+        },
+        {
+          "path": "counter-application-narrow/downloaded-counter-trace.zip",
+          "sha256": "e0501099709be099edda1f05a47e3fd7c1d7ed74d708435e6ea124b4b591ef6e",
+          "entries": 21
+        }
+      ],
+      "fingerprints": {
+        "runnerSource": 10,
+        "servedBuild": 88,
+        "applicationSource": 30
+      }
+    }
+  ],
+  "totals": {
+    "passed": 7,
+    "blocked": 0,
+    "failed": 0,
+    "assertions": 36,
+    "traces": 22,
+    "traceEntries": 13421,
+    "downloads": 9
+  },
+  "ownedPids": [
+    {
+      "pid": 25393,
+      "stopped": true
+    },
+    {
+      "pid": 25449,
+      "stopped": true
+    },
+    {
+      "pid": 28194,
+      "stopped": true
+    },
+    {
+      "pid": 29020,
+      "stopped": true
+    },
+    {
+      "pid": 29181,
+      "stopped": true
+    },
+    {
+      "pid": 30187,
+      "stopped": true
+    },
+    {
+      "pid": 30387,
+      "stopped": true
+    },
+    {
+      "pid": 30251,
+      "stopped": true
+    },
+    {
+      "pid": 30259,
+      "stopped": true
+    },
+    {
+      "pid": 30272,
+      "stopped": true
+    },
+    {
+      "pid": 31267,
+      "stopped": true
+    },
+    {
+      "pid": 31461,
+      "stopped": true
+    },
+    {
+      "pid": 31314,
+      "stopped": true
+    },
+    {
+      "pid": 31321,
+      "stopped": true
+    },
+    {
+      "pid": 31334,
+      "stopped": true
+    },
+    {
+      "pid": 31522,
+      "stopped": true
+    },
+    {
+      "pid": 31569,
+      "stopped": true
+    },
+    {
+      "pid": 31727,
+      "stopped": true
+    },
+    {
+      "pid": 32756,
+      "stopped": true
+    },
+    {
+      "pid": 32957,
+      "stopped": true
+    },
+    {
+      "pid": 32810,
+      "stopped": true
+    },
+    {
+      "pid": 32817,
+      "stopped": true
+    },
+    {
+      "pid": 32830,
+      "stopped": true
+    },
+    {
+      "pid": 33967,
+      "stopped": true
+    },
+    {
+      "pid": 34154,
+      "stopped": true
+    },
+    {
+      "pid": 34013,
+      "stopped": true
+    },
+    {
+      "pid": 34020,
+      "stopped": true
+    },
+    {
+      "pid": 34033,
+      "stopped": true
+    },
+    {
+      "pid": 34208,
+      "stopped": true
+    },
+    {
+      "pid": 34254,
+      "stopped": true
+    },
+    {
+      "pid": 34384,
+      "stopped": true
+    },
+    {
+      "pid": 35208,
+      "stopped": true
+    },
+    {
+      "pid": 35395,
+      "stopped": true
+    },
+    {
+      "pid": 35255,
+      "stopped": true
+    },
+    {
+      "pid": 35262,
+      "stopped": true
+    },
+    {
+      "pid": 35274,
+      "stopped": true
+    },
+    {
+      "pid": 35449,
+      "stopped": true
+    },
+    {
+      "pid": 36447,
+      "stopped": true
+    },
+    {
+      "pid": 36637,
+      "stopped": true
+    },
+    {
+      "pid": 36495,
+      "stopped": true
+    },
+    {
+      "pid": 36502,
+      "stopped": true
+    },
+    {
+      "pid": 36515,
+      "stopped": true
+    }
+  ],
+  "limits": [
+    "Real Qwen proposes bounded typed specifications; trusted host compilers generate these supported task-list/counter apps. This does not prove arbitrary model-written software.",
+    "Downloaded ZIPs are actually extracted, typechecked, tested, built and started through their package scripts using matching existing installed dependencies; no fresh online dependency installation claim.",
+    "Recovery revalidates the original native-generated checkpoint with zero additional model calls; it is not a new generation.",
+    "Chromium desktop and touch-emulated 360px; physical handset keyboard and native voice remain unverified."
+  ],
+  "sharedProcesses": {
+    "studio": 17855,
+    "nativeModel": 18848,
+    "preserved": true
+  },
+  "finishedAt": "2026-10-29T19:32:20.979Z"
+}
