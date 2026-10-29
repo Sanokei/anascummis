@@ -1,0 +1,14 @@
+{
+  "health": {
+    "status": "ok"
+  },
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  }
+}

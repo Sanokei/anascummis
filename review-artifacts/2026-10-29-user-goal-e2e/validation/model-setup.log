@@ -1,0 +1,4 @@
+$ bun scripts/model.ts setup
+Downloading https://huggingface.co/ggml-org/Qwen3-0.6B-GGUF/resolve/13ac06624948e4d8589cb4b6f90100837342fcb8/Qwen3-0.6B-Q4_0.gguf
+Install llama.cpp for your OS and set LLAMA_SERVER to its llama-server path.
+Model setup complete. Start with bun run model:start.

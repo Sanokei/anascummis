@@ -1,0 +1,53 @@
+{
+  "goal": "Build a small counter application with heading Bakery Orders, a count starting at zero, an Increment button that adds one, and a Reset button that returns to zero. Include browser checks and give me the source ZIP.",
+  "fixture": "compiled real React screen and actual Chromium; no model inference",
+  "root": "/workspace/anascummis/apps/studio/.test-data/counter-reset-browser-941bdce1-b2b9-4269-b265-859b1a1da5ee",
+  "results": [
+    {
+      "name": "requested-reset-and-heading",
+      "expectedSuccess": true,
+      "exit": 0,
+      "behavior": "counter acceptance passed: 0 → 1 → 2, Reset → 0, Increment → 1, reload → 0; exact heading \"Bakery Orders\"",
+      "headings": [
+        "Bakery Orders"
+      ],
+      "errors": []
+    },
+    {
+      "name": "missing-reset",
+      "expectedSuccess": false,
+      "exit": 1,
+      "behavior": "",
+      "headings": [
+        "Bakery Orders"
+      ],
+      "errors": [
+        "locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Reset', exact: true })\u001b[22m\n"
+      ]
+    },
+    {
+      "name": "wrong-reset",
+      "expectedSuccess": false,
+      "exit": 1,
+      "behavior": "",
+      "headings": [
+        "Bakery Orders"
+      ],
+      "errors": [
+        "Reset did not return the counter to its required initial value; observed \"1\""
+      ]
+    },
+    {
+      "name": "wrong-heading",
+      "expectedSuccess": false,
+      "exit": 1,
+      "behavior": "",
+      "headings": [
+        "Bakery Orders Counter"
+      ],
+      "errors": [
+        "The actual application heading does not match the requested literal; observed \"Bakery Orders Counter\""
+      ]
+    }
+  ]
+}

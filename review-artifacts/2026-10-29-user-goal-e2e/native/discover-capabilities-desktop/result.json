@@ -1,0 +1,71 @@
+{
+  "id": "discover-capabilities",
+  "viewport": "desktop",
+  "goal": "Find what this assistant can help me do, then open the work windows without knowing hidden command phrases.",
+  "startedAt": "2026-10-29T16:49:56.430Z",
+  "status": "passed",
+  "lane": "real-local-runtime",
+  "prerequisite": "None",
+  "assertions": [
+    {
+      "name": "Capabilities provide visible, labelled next actions.",
+      "passed": true
+    },
+    {
+      "name": "Open Goals opens the existing window.",
+      "passed": true
+    },
+    {
+      "name": "Open Work history opens the existing window.",
+      "passed": true
+    },
+    {
+      "name": "Open Software work opens the existing window.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-capabilities.png",
+    "03-work-windows.png"
+  ],
+  "downloads": [],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T16:49:56.952Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 5898,
+    "port": 41401,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T16:50:02.002Z",
+  "recoveryChecksPassed": 4
+}

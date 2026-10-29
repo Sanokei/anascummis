@@ -1,0 +1,95 @@
+{
+  "message": "Some delegated work remains unfinished. software: I stopped after two failed actions. Review the recorded errors before continuing.",
+  "trace": [
+    {
+      "step": 1,
+      "tool": "read_software_source",
+      "ok": false,
+      "result": "Error: Source is not in the public source catalog",
+      "args": {
+        "path": "Set my website title to \"Baker's Table\" and subtitle to \"Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm",
+        "offset": 0
+      },
+      "agent": "software",
+      "taskId": "task-1"
+    },
+    {
+      "step": 2,
+      "tool": "read_software_source",
+      "ok": false,
+      "result": "Error: Source is not in the public source catalog",
+      "args": {
+        "path": "read_software_source",
+        "offset": 0
+      },
+      "agent": "software",
+      "taskId": "task-1"
+    },
+    {
+      "step": 3,
+      "tool": "delegate",
+      "ok": true,
+      "result": {
+        "taskId": "task-1",
+        "agent": "software",
+        "status": "limited",
+        "message": "I stopped after two failed actions. Review the recorded errors before continuing.",
+        "verified": false,
+        "evidence": "task-1"
+      },
+      "args": {
+        "agent": "software",
+        "task": "Set my website title to \"Baker's Table\" and subtitle to \"Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.\". Preserve the other content.",
+        "inputs": []
+      },
+      "agent": "coordinator",
+      "taskId": "root"
+    }
+  ],
+  "orchestration": {
+    "tasks": [
+      {
+        "id": "task-1",
+        "agent": "software",
+        "task": "Set my website title to \"Baker's Table\" and subtitle to \"Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.\". Preserve the other content.",
+        "inputs": [],
+        "status": "limited",
+        "message": "I stopped after two failed actions. Review the recorded errors before continuing.",
+        "trace": [
+          {
+            "step": 1,
+            "tool": "read_software_source",
+            "ok": false,
+            "result": "Error: Source is not in the public source catalog",
+            "args": {
+              "path": "Set my website title to \"Baker's Table\" and subtitle to \"Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm",
+              "offset": 0
+            }
+          },
+          {
+            "step": 2,
+            "tool": "read_software_source",
+            "ok": false,
+            "result": "Error: Source is not in the public source catalog",
+            "args": {
+              "path": "read_software_source",
+              "offset": 0
+            }
+          }
+        ]
+      }
+    ],
+    "creativeReviews": [],
+    "used": {
+      "calls": 7,
+      "actions": 2,
+      "delegations": 1
+    },
+    "limits": {
+      "calls": 48,
+      "actions": 18,
+      "delegations": 6
+    },
+    "stopReason": "incomplete"
+  }
+}

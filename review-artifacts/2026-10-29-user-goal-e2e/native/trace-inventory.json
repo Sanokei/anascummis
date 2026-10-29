@@ -1,0 +1,86 @@
+[
+  {
+    "path": "discover-capabilities-desktop/trace.zip",
+    "bytes": 15129938,
+    "sha256": "bc87460fdd804638458f7442dfb39c8e613eeffc4d8a93e3bde927e1a1adbabe",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "discover-capabilities-narrow/trace.zip",
+    "bytes": 14643803,
+    "sha256": "e9c1355535a17a7fa97d8ab9146bfc87dc2dc26e97cfce76e46b0abb706aabd8",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "bakery-website-desktop/trace.zip",
+    "bytes": 24591430,
+    "sha256": "718aa1b23db6ede4cfb4ba3d42b9e019e7e92c934e0c52267696e58bfcefc035",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "bakery-website-narrow/trace.zip",
+    "bytes": 26066317,
+    "sha256": "0ff2508f47e543f8f6cbbf6df01bcb1a1417b1ab810deb5bd51c86210b83089f",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "website-pdf-exports-desktop/trace.zip",
+    "bytes": 14944443,
+    "sha256": "f7b051082bddf2c2fbe2106967a479e0489196132e4ed68722f495eb0e2d5bbb",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "website-pdf-exports-narrow/trace.zip",
+    "bytes": 15467953,
+    "sha256": "96a141c166b0720a6302e6ec365f441d53648566f65395d85e34f462d6101759",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "public-source-answer-desktop/trace.zip",
+    "bytes": 25055361,
+    "sha256": "a30425399197590e19a09f4428c0faf783c879185fbb5536d301ce40d2e62c37",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "public-source-answer-narrow/trace.zip",
+    "bytes": 23758340,
+    "sha256": "08eb39945c2188b9b46c20e8dda5eddab43cc25f7e52ee3a21d95f942d2cc3f6",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "counter-application-desktop/produced-app-trace.zip",
+    "bytes": 94093,
+    "sha256": "e0cfbef53c529dc34fb09e2b48da3c06f53ae23d05910204dd9ca4453f72d3ea",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "counter-application-desktop/trace.zip",
+    "bytes": 57268584,
+    "sha256": "46f628bff1fed4e1bbdd6285e834bfacdb173f3b86b4e1a48a715152f0112c3e",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "counter-application-narrow/produced-app-trace.zip",
+    "bytes": 106912,
+    "sha256": "7d6d4279f90d062c45a44ea5fd54d22e4a31fb88cfb7665427cae936097e12ea",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  },
+  {
+    "path": "counter-application-narrow/trace.zip",
+    "bytes": 65740977,
+    "sha256": "e9bfdd190460df01b1e2aea79a08e8bbb07ccd3b5fc97a9266ab146fcb223970",
+    "retainedLocally": true,
+    "reasonNotPublished": "Large runtime-resource traces; redacted and validated, retained in the local ignored run directory."
+  }
+]

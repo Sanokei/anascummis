@@ -1,0 +1,143 @@
+{
+  "id": "bakery-website",
+  "viewport": "narrow",
+  "goal": "Personalize my bakery website, inspect the result, reload it, and download a copy with the exact requested title and subtitle.",
+  "startedAt": "2026-10-29T16:50:19.706Z",
+  "status": "passed",
+  "lane": "real-local-runtime",
+  "prerequisite": "A real configured local inference runtime for the requested website edits.",
+  "assertions": [
+    {
+      "name": "The exact user request is visible in saved Work history.",
+      "passed": true
+    },
+    {
+      "name": "Requested copy survives reload, preview, and the actual downloaded website.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-personalized-website.png",
+    "03-downloaded-website.png"
+  ],
+  "downloads": [
+    {
+      "path": "bakery-website.zip",
+      "suggestedFilename": "My business.zip",
+      "bytes": 2897,
+      "sha256": "f6164c7ecfec0ba3205ba4fb90f3052ca82a6c408b1547b7fd3268652ab9f8dd"
+    }
+  ],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T16:50:20.263Z"
+    },
+    {
+      "path": "/api/chat",
+      "time": "2026-10-29T16:50:21.690Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 6489,
+    "port": 38753,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "persistedWork": {
+    "id": "eb1dc2dc-3c84-4987-bb13-2bc7ed6cde36",
+    "projectId": "a2031576-e046-42bc-865d-493fcc730067",
+    "request": "Set my website title to \"Baker's Table\" and subtitle to \"Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.\". Preserve the other content.",
+    "status": "complete",
+    "created": 1793292621695,
+    "updated": 1793292626378,
+    "progress": {
+      "phase": "finished",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793292621695
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793292621704
+      },
+      {
+        "phase": "delegating",
+        "agent": "website",
+        "taskId": "task-1",
+        "time": 1793292624796
+      },
+      {
+        "phase": "verifying",
+        "agent": "website",
+        "taskId": "task-1",
+        "time": 1793292626366
+      },
+      {
+        "phase": "completed",
+        "agent": "website",
+        "taskId": "task-1",
+        "time": 1793292626370
+      },
+      {
+        "phase": "finished",
+        "agent": "coordinator",
+        "time": 1793292626377
+      },
+      {
+        "phase": "complete",
+        "agent": "coordinator",
+        "time": 1793292626378,
+        "detail": "Your website title and subtitle are now set to the exact supplied text."
+      }
+    ],
+    "outcome": "finished",
+    "message": "Your website title and subtitle are now set to the exact supplied text.",
+    "specialists": [
+      {
+        "id": "task-1",
+        "agent": "website",
+        "task": "Set the website title to \"Baker's Table\" and subtitle to \"Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.\". Preserve the other content.",
+        "status": "completed",
+        "message": "Your website title and subtitle are now set to the exact supplied text."
+      }
+    ]
+  },
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T16:50:30.993Z",
+  "recoveryChecksPassed": 2
+}

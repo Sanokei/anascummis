@@ -1,0 +1,17 @@
+{
+  "officialRepository": "ggml-org/Qwen3-0.6B-GGUF",
+  "revision": "13ac06624948e4d8589cb4b6f90100837342fcb8",
+  "file": "Qwen3-0.6B-Q4_0.gguf",
+  "bytes": 428970080,
+  "sha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+  "setupExitCode": 0,
+  "cachedSetupRepeatExitCode": 0,
+  "nativeCheckExitCode": 0,
+  "enginePid": 700,
+  "cpuThreads": 4,
+  "contextTokens": 2048,
+  "slots": 1,
+  "host": "127.0.0.1",
+  "port": 8081,
+  "weightsPublished": false
+}

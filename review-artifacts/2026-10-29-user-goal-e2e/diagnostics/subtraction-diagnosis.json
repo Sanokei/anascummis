@@ -1,0 +1,144 @@
+{
+  "scope": "Three bounded real native inference probes; no flags/process/test expectations changed",
+  "results": [
+    {
+      "id": "negative-literal",
+      "request": "Return the integer negative five.",
+      "property": {
+        "type": "integer",
+        "minimum": -1000,
+        "maximum": 1000
+      },
+      "elapsedMs": 255,
+      "status": 200,
+      "raw": {
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"value\": -5}"
+            }
+          }
+        ],
+        "created": 1793291016,
+        "model": "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+        "system_fingerprint": "b11960-8642541b2",
+        "object": "chat.completion",
+        "usage": {
+          "completion_tokens": 11,
+          "prompt_tokens": 55,
+          "total_tokens": 66,
+          "prompt_tokens_details": {
+            "cached_tokens": 37
+          }
+        },
+        "id": "chatcmpl-IemMuVLVbGBe2jyTqZxEraPcJF32Zlfn",
+        "timings": {
+          "cache_n": 37,
+          "prompt_n": 18,
+          "prompt_ms": 78.45,
+          "prompt_per_token_ms": 4.358333333333333,
+          "prompt_per_second": 229.4455066921606,
+          "predicted_n": 11,
+          "predicted_ms": 143.19,
+          "predicted_per_token_ms": 14.318999999999999,
+          "predicted_per_second": 69.83727913960472
+        }
+      }
+    },
+    {
+      "id": "operator-subtraction",
+      "request": "Compute 9 - 14.",
+      "property": {
+        "type": "integer",
+        "minimum": -1000,
+        "maximum": 1000
+      },
+      "elapsedMs": 309,
+      "status": 200,
+      "raw": {
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"value\": 9}"
+            }
+          }
+        ],
+        "created": 1793291017,
+        "model": "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+        "system_fingerprint": "b11960-8642541b2",
+        "object": "chat.completion",
+        "usage": {
+          "completion_tokens": 11,
+          "prompt_tokens": 57,
+          "total_tokens": 68,
+          "prompt_tokens_details": {
+            "cached_tokens": 37
+          }
+        },
+        "id": "chatcmpl-AFebcVHuzPZxgQUr0SsFjFjzM9ZEiKdT",
+        "timings": {
+          "cache_n": 37,
+          "prompt_n": 20,
+          "prompt_ms": 85.549,
+          "prompt_per_token_ms": 4.27745,
+          "prompt_per_second": 233.78414709698532,
+          "predicted_n": 11,
+          "predicted_ms": 219.16,
+          "predicted_per_token_ms": 21.916,
+          "predicted_per_second": 45.628764373060775
+        }
+      }
+    },
+    {
+      "id": "unbounded-subtraction",
+      "request": "Compute 9 minus 14.",
+      "property": {
+        "type": "integer"
+      },
+      "elapsedMs": 520,
+      "status": 200,
+      "raw": {
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"value\": 9}"
+            }
+          }
+        ],
+        "created": 1793291017,
+        "model": "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+        "system_fingerprint": "b11960-8642541b2",
+        "object": "chat.completion",
+        "usage": {
+          "completion_tokens": 11,
+          "prompt_tokens": 57,
+          "total_tokens": 68,
+          "prompt_tokens_details": {
+            "cached_tokens": 40
+          }
+        },
+        "id": "chatcmpl-x9LFeNQOvsrlQphP4oOwkzE5SJ84VBo4",
+        "timings": {
+          "cache_n": 40,
+          "prompt_n": 17,
+          "prompt_ms": 75.293,
+          "prompt_per_token_ms": 4.429,
+          "prompt_per_second": 225.78460149017835,
+          "predicted_n": 11,
+          "predicted_ms": 442.181,
+          "predicted_per_token_ms": 44.2181,
+          "predicted_per_second": 22.615173424457407
+        }
+      }
+    }
+  ]
+}

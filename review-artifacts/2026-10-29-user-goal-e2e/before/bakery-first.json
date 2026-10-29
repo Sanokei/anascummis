@@ -1,0 +1,137 @@
+{
+  "id": "bakery-website",
+  "viewport": "desktop",
+  "goal": "Personalize my bakery website, inspect the result, reload it, and download a copy with the exact requested title and subtitle.",
+  "startedAt": "2026-10-29T16:22:48.922Z",
+  "status": "failed",
+  "lane": "real-local-runtime",
+  "prerequisite": "A real configured local inference runtime for the requested website edits.",
+  "assertions": [
+    {
+      "name": "The exact user request is visible in saved Work history.",
+      "passed": true
+    },
+    {
+      "name": "Failed request can be edited without retyping.",
+      "passed": true
+    },
+    {
+      "name": "Reload preserves the failed goal without replay and setup gives a concrete runtime step.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-website-goal-blocked.png",
+    "03-setup-next-step.png",
+    "outcome.png"
+  ],
+  "downloads": [],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T16:22:49.629Z"
+    },
+    {
+      "path": "/api/chat",
+      "time": "2026-10-29T16:22:51.188Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 849,
+    "port": 44027,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "persistedWork": {
+    "id": "73e9e325-49a5-4b2c-932c-bde2dac338d0",
+    "projectId": "30396448-2c2c-4485-833d-811923075d29",
+    "request": "Set my website title to \"Baker's Table\" and subtitle to \"Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.\". Preserve the other content.",
+    "status": "complete",
+    "created": 1793290971196,
+    "updated": 1793290998477,
+    "progress": {
+      "phase": "finished",
+      "agent": "coordinator"
+    },
+    "events": [
+      {
+        "phase": "queued",
+        "agent": "coordinator",
+        "time": 1793290971196
+      },
+      {
+        "phase": "routing",
+        "agent": "coordinator",
+        "time": 1793290971202
+      },
+      {
+        "phase": "delegating",
+        "agent": "software",
+        "taskId": "task-1",
+        "time": 1793290977632
+      },
+      {
+        "phase": "limited",
+        "agent": "software",
+        "taskId": "task-1",
+        "time": 1793290987702
+      },
+      {
+        "phase": "finished",
+        "agent": "coordinator",
+        "time": 1793290998475
+      },
+      {
+        "phase": "needs_input",
+        "agent": "coordinator",
+        "time": 1793290998477,
+        "detail": "Some delegated work remains unfinished. software: I stopped after two failed actions. Review the recorded errors before continuing."
+      }
+    ],
+    "outcome": "incomplete",
+    "message": "Some delegated work remains unfinished. software: I stopped after two failed actions. Review the recorded errors before continuing.",
+    "specialists": [
+      {
+        "id": "task-1",
+        "agent": "software",
+        "task": "Set my website title to \"Baker's Table\" and subtitle to \"Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.\". Preserve the other content.",
+        "status": "limited",
+        "message": "I stopped after two failed actions. Review the recorded errors before continuing."
+      }
+    ]
+  },
+  "goalAchieved": false,
+  "reason": "Website goal did not achieve the requested output: Some delegated work remains unfinished. software: I stopped after two failed actions. Review the recorded errors before continuing.",
+  "stack": "Error: Website goal did not achieve the requested output: Some delegated work remains unfinished. software: I stopped after two failed actions. Review the recorded errors before continuing.\n    at Object.run (file:///workspace/anascummis/apps/studio/scripts/e2e/journeys.mjs:68:15)\n    at async runJourney (file:///workspace/anascummis/apps/studio/scripts/e2e/runner.mjs:124:5)\n    at async runSuite (file:///workspace/anascummis/apps/studio/scripts/e2e/runner.mjs:179:123)\n    at async file:///workspace/anascummis/apps/studio/scripts/test-user-journeys.mjs:18:18",
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T16:23:26.324Z",
+  "recoveryChecksPassed": 3
+}

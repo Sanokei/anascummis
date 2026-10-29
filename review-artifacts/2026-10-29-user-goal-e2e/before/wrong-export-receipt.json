@@ -1,0 +1,95 @@
+{
+  "goal": "I have a PDF document and a website workspace; preview and export each correctly, without an AI model.",
+  "fixture": "Ordinary production backend with fresh SQLite, real PyMuPDF PDF upload/render/export and actual browser downloads. No API/model/voice responses mocked. External browser requests aborted solely to prevent model/voice weight downloads.",
+  "pid": 67796,
+  "port": 3296,
+  "data": "/workspace/.cloud-env/anascummis/user-journeys-before/pdf-zw8yb7",
+  "startedAt": "2026-10-29T14:52:15.102Z",
+  "blockedExternal": [
+    "https://huggingface.co/Xenova/whisper-tiny.en/resolve/main/config.json"
+  ],
+  "exports": [
+    {
+      "request": "export website as zip",
+      "name": "user-document.pdf",
+      "path": "/workspace/.cloud-env/anascummis/user-journeys-before/pdf-zw8yb7/export-website-as-zip-user-document.pdf",
+      "bytes": 850,
+      "signatureHex": "255044462d312e370a25c2b5c2b60a25",
+      "isPdf": true,
+      "isZip": false,
+      "isPng": false,
+      "status": "Your export is ready to download.",
+      "detectedMime": "application/pdf",
+      "independentPdfInspection": {
+        "pages": 1,
+        "text": "User goal invoice 2026-10-29\n"
+      }
+    },
+    {
+      "request": "export website as html",
+      "name": "user-document.pdf",
+      "path": "/workspace/.cloud-env/anascummis/user-journeys-before/pdf-zw8yb7/export-website-as-html-user-document.pdf",
+      "bytes": 850,
+      "signatureHex": "255044462d312e370a25c2b5c2b60a25",
+      "isPdf": true,
+      "isZip": false,
+      "isPng": false,
+      "status": "Your export is ready to download.",
+      "detectedMime": "application/pdf",
+      "independentPdfInspection": {
+        "pages": 1,
+        "text": "User goal invoice 2026-10-29\n"
+      }
+    },
+    {
+      "request": "export pdf as png",
+      "name": "page-1.png",
+      "path": "/workspace/.cloud-env/anascummis/user-journeys-before/pdf-zw8yb7/export-pdf-as-png-page-1.png",
+      "bytes": 14764,
+      "signatureHex": "89504e470d0a1a0a0000000d49484452",
+      "isPdf": false,
+      "isZip": false,
+      "isPng": true,
+      "status": "Your export is ready to download.",
+      "detectedMime": "image/png"
+    },
+    {
+      "request": "export pdf",
+      "name": "user-document.pdf",
+      "path": "/workspace/.cloud-env/anascummis/user-journeys-before/pdf-zw8yb7/export-pdf-user-document.pdf",
+      "bytes": 850,
+      "signatureHex": "255044462d312e370a25c2b5c2b60a25",
+      "isPdf": true,
+      "isZip": false,
+      "isPng": false,
+      "status": "Your export is ready to download.",
+      "detectedMime": "application/pdf",
+      "independentPdfInspection": {
+        "pages": 1,
+        "text": "User goal invoice 2026-10-29\n"
+      }
+    }
+  ],
+  "screenshots": [
+    "real-pdf-attached.png",
+    "wrong-website-export-with-pdf-selected.png",
+    "wrong-export-narrow.png"
+  ],
+  "errors": [],
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "attachment": {
+    "transfer": "\u2713\nuser-document.pdf\nReceived \u00b7 ready",
+    "status": "Preparing voice\u2026",
+    "previewNaturalWidth": 1190
+  },
+  "websitePreview": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>My business</title><style>*{box-sizing:border-box}body{margin:0;background:#17211e;color:#ffffff;font:18px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:40px 6vw}header{padding:10vh 0}small,a{color:#b7ee70}h1{font-size:clamp(40px,7vw,88px);line-height:1.05;max-width:900px}h2{font-size:32px}section{padding:44px 0;border-top:1px solid #ffffff30}p{max-width:720px;white-space:pre-wrap}img{max-width:100%;max-height:560px;object-fit:contain;border-radius:16px}footer{padding:40px 0;font-size:14px}</style></head><body><main><small>My business</small><header><h1>Good work starts here.</h1><p>Tell your story, with your own words and images.</p></header><section id=\"about\"><h2>About us</h2><p>Introduce your business.</p></section><footer>My business</footer></main></body></html>",
+  "outcome": "reproduced"
+}

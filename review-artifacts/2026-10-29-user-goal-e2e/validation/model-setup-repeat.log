@@ -1,0 +1,3 @@
+$ bun scripts/model.ts setup
+Install llama.cpp for your OS and set LLAMA_SERVER to its llama-server path.
+Model setup complete. Start with bun run model:start.

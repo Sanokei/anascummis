@@ -1,0 +1,123 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/analysis-harness.test.ts:
+(pass) analysis produces a useful no-source answer with an explicit factual-verification boundary [1.50ms]
+(pass) source-backed analysis validates actual source IDs and exact excerpts without claiming truth verification [0.51ms]
+(pass) invented source IDs, invented quotes and missing citations fail closed [0.34ms]
+(pass) source-less answers cannot attach invented citations, URLs or browsing claims [11.91ms]
+(pass) malformed or empty structured answers never produce a verified result [0.70ms]
+(pass) oversized questions or evidence fail before inference instead of silently dropping content [2.28ms]
+(pass) the supplied evidence snapshot cannot change while inference is pending [0.22ms]
+(pass) a supported request reaches the model in full, including its final instruction [1.35ms]
+(pass) abort stops inference before a call and discards a late generated answer [0.57ms]
+(pass) duplicate source identifiers cannot provide ambiguous evidence [0.12ms]
+(pass) a quoted source cannot simultaneously be reported missing, while an absent fact can be stated [0.28ms]
+
+tests/local.test.ts:
+(pass) token budget handles both flat and batched tokenizer results and fails closed [0.15ms]
+(pass) small decision packets preserve paginated evidence and resist inherited paths [0.54ms]
+(pass) decision evidence exposes complete typed values and lists escaped paths for large records [0.30ms]
+(pass) silence ends a spoken turn without ending idle recording or a short pause [0.09ms]
+(pass) speech starts with a short sentence and chunks preserve every word [0.26ms]
+(pass) background goal locks wait for current edits and can be cancelled while waiting [103.76ms]
+(pass) coordinated goal API preserves full requests and protects stop and continuation controls [13.42ms]
+(pass) software detail returns the complete saved goal while list summaries stay bounded [5.96ms]
+(pass) host, origin and local session gates protect mutations [0.99ms]
+(pass) resource activity APIs paginate real records with strict input and existing pairing protections [15.97ms]
+(pass) websites escape source, reject credential leakage and require uploaded assets [0.81ms]
+(pass) standalone website HTML preserves uploaded images and explicit unsupported exports fail [8.83ms]
+(pass) manual edits use revision fences and restore preserves history [2.89ms]
+(pass) typed harness rejects malformed arguments before execution [1.14ms]
+(pass) harness executes bounded decisions and stops repeated mutations [0.31ms]
+(pass) real PDF edits preserve original and render verified PNG output [2190.27ms]
+(pass) exported ZIP is readable by an independent archive implementation [34.62ms]
+(pass) private details are encrypted and cannot be combined with research tools [106.25ms]
+(pass) real FFmpeg combines image and trimmed silent video with narration, captions and checked MP4 [1358.30ms]
+(pass) video source tools are opt-in, reject private URLs and cancel native work [78.80ms]
+(pass) persistent software goals keep checkpoints, cancellation and conservative time estimates [10.39ms]
+(pass) online build pairing is required and unfinished artifacts cannot be downloaded [11.32ms]
+
+tests/orchestrator.test.ts:
+(pass) creative review revises an inspected design and verifies the resulting content [6.09ms]
+(pass) public video source handoffs reach the video harness with host verification and no private context [1.71ms]
+(pass) coordinator sequences independent specialist harnesses and verifies real website and 3D edits [1.92ms]
+(pass) a specialist cannot acquire another specialist tools through its task description [0.93ms]
+(pass) shared model-call budget stops delegation before an unexecuted edit [1.81ms]
+(pass) duplicate mutations across separately delegated agents execute only once [0.88ms]
+(pass) network specialist receives no private context and cannot accept private specialist handoffs [1.12ms]
+(pass) PDF specialist must inspect target pages and verification runs after a successful edit [1.01ms]
+(pass) cancellation between argument generation and execution blocks the write [0.58ms]
+(pass) a completed research task can hand scoped evidence to a website specialist [1.26ms]
+(pass) host-registered extensions require a verifier before executing unknown write tools [0.34ms]
+(pass) literal operations finish on inspected values and reject invented copy before execution [0.86ms]
+(pass) delegation rejects fabricated handoff IDs before creating a subagent [0.30ms]
+(pass) delegation arguments receive explicit complete agent contracts instead of a partial memory preview [0.74ms]
+(pass) compound exact copy writes separate grounded values and verifies both while preserving other content [1.00ms]
+(pass) one successful copy field cannot complete a compound request whose second field failed [0.70ms]
+(pass) literal copy acceptance rejects collateral changes and stale final inspection [1.36ms]
+
+tests/software-command.test.ts:
+(pass) generated source commands receive browser/cache settings without proxy or credential bindings [13.62ms]
+
+tests/software-revisions.test.ts:
+(pass) revision creation clones editable input while leaving the accepted parent and release bytes unchanged [244.36ms]
+(pass) a failed synchronous parent-link callback rolls back the child and cleans only its owned workspace [129.38ms]
+(pass) revision acceptance replaces the old heading, keeps unaffected counter criteria, and discards old review stamps [142.78ms]
+(pass) invalid guidance, changed accepted artifacts, and unsupported browser contracts create no child [82.73ms]
+(pass) queued revision cancellation and continuation preserve the same child and copied source checkpoint [145.94ms]
+(pass) late revision-planning responses cannot change a cancelled child or its accepted parent [179.63ms]
+(pass) a restarted revision resumes its saved acceptance checkpoint without fresh-app seeding [269.44ms]
+(pass) counter revision decisions retain inspected edit tools while fresh numeric tasks keep their typed recipe [150.82ms]
+(pass) continuation guidance B to C to B uses the current plan rather than suppressing the original note [137.07ms]
+(pass) host-derived counter amendments ground numeric steps and starts while preserving unrelated contracts [95.64ms]
+(pass) numeric and removal QA amendments are persisted only in their child and never delete the host contract [163.39ms]
+(pass) retiring a changed heading cannot complete a revision from only kept counter proof [107.58ms]
+(pass) coverage pagination resumes from persisted offset without replaying accepted writes and stale review revisions reset [191.76ms]
+(pass) public binary runtime assets and extensionless scripts survive a revision clone byte for byte [107.99ms]
+(pass) an unsupported eligible input fails the clone cleanly instead of silently losing application files [90.27ms]
+
+tests/software.test.ts:
+(pass) software repairs are read first, retested, and gated by host evidence [2.03ms]
+(pass) blocked QA, missing executable and stale evidence cannot produce completion [0.21ms]
+(pass) software source capability excludes credentials and path traversal [21.24ms]
+(pass) software edits require inspected unique source and cancellation blocks verification completion [0.54ms]
+(pass) an app request cannot be completed by editing a website [0.50ms]
+(pass) long software requests stay paginated outside the small model packet [0.39ms]
+(pass) harness rejects completion before executing any work [0.24ms]
+(pass) typed React screen rejects invalid state and keeps hostile labels as data [1.05ms]
+(pass) counter skill scope accepts phrasing changes but never absorbs additional features [1.17ms]
+
+tests/source-question.test.ts:
+(pass) source acquisition persists full plaintext and immutable identities across database reopen; view/retry never refetch [2.71ms]
+(pass) host-seeded source reading succeeds before missing inference and explicit continuation preserves accepted acquisition [17.86ms]
+(pass) scripted inference host-flow completes with exact citation offsets/hash and separate answer/coverage review [13.82ms]
+(pass) a fabricated quote blocks the answer while accepted source evidence stays intact [7.91ms]
+(pass) stop during a pending acquisition discards a late response and cannot complete or auto-replay [11.29ms]
+(pass) restart between saved acquisition and execution return requires explicit Continue and reuses snapshot [12.96ms]
+(pass) source mode rejects missing research permission, private/credential URLs, duplicate URLs, PDF and oversized exact questions [3.67ms]
+(pass) fixed publisher fetch sends only a public URL and bounded headers, refuses redirects/types/oversize, preserves plain code [4.11ms]
+(pass) plain source title uses its top-level heading or filename, not an unrelated subsection [0.16ms]
+
+tests/workspace-export.test.ts:
+(pass) website export target/format survives an attached PDF and selected PDF preview [0.32ms]
+(pass) missing or mismatched targets refuse export rather than return a different document [0.09ms]
+(pass) implicit export uses requested format then active preview; prose is not consumed as an export [0.04ms]
+
+tests/website-copy.test.ts:
+(pass) quoted compound copy preserves apostrophes, punctuation, and each field boundary [0.31ms]
+(pass) mixed actions, duplicate fields and ambiguous unquoted conjunctions never become literal-only completion contracts [0.07ms]
+
+tests/software-targets.test.ts:
+(pass) default builds do not require a Windows executable on Linux or macOS [0.13ms]
+
+tests/react-screen.test.ts:
+(pass) the complete bounded heading/Increment/Reset/browser/ZIP request has a grounded host contract [0.49ms]
+(pass) Reset compiles as an initial-value state update while older numeric screens remain compatible [0.63ms]
+(pass) literal headings remain data and an unsupported suffix never becomes covered counter work [1.05ms]
+(pass) old Increment-only or wrong-heading proof cannot certify the new full request [0.58ms]
+(pass) optional Reset labels must be nonempty and distinct from Increment [0.24ms]
+
+ 95 pass
+ 0 fail
+ 515 expect() calls
+Ran 95 tests across 11 files. [6.46s]

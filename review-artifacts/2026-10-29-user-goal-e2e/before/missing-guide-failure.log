@@ -1,0 +1,9 @@
+AssertionError [ERR_ASSERTION]: studio/USER-JOURNEYS.md
+    at file:///workspace/.cloud-env/anascummis/local-ai-readiness/check-current-kit.mjs:14:252 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

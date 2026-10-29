@@ -1,0 +1,14 @@
+{
+  "originalParentRecordUnchanged": true,
+  "originalParentFiles": {
+    "app/page.tsx": true,
+    "tests/app.test.tsx": true,
+    "package.json": true,
+    "bun.lock": true,
+    "artifacts/source.zip": true
+  },
+  "priorReviewUnchanged": true,
+  "patchedParentSourceUnchanged": true,
+  "patchedParentZipUnchanged": true,
+  "oldFrozenKitUnchanged": true
+}

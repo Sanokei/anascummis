@@ -1,0 +1,7 @@
+# Bounded counter Reset and exact-heading repair
+
+Evidence: the real native counter journey generated a heading with an unwanted suffix and no Reset button because the typed numeric-screen compiler did not expose Reset. Its incomplete requirements correctly prevented completion.
+
+Primary React useState documentation was read before implementation; state can be replaced with the explicit initial value from a button handler and updated from the previous state for increment. The existing primary Playwright assertion research applies to awaited accessible controls, exact visible text and actual browser interaction.
+
+Acceptance: retain the old no-Reset compiler contract; a conservatively parsed user request may add a Reset button which sets state to the supplied initial value. Explicit literal heading text is copied as data, never generated as code. The full supported goal must be covered before deterministic counter acceptance may certify it. Extend actual host browser contracts to check the exact requested H1, initial value, two increments, explicit Reset, then a further increment and reload reset. Missing/wrong Reset or heading fails QA. Additional unsupported requirements stay in the general worker and cannot be absorbed by this bounded counter recipe. Existing accepted parent source/artifacts stay unchanged. Validate focused parser/compiler/contract tests and real Chromium fixtures, then the E2E owner runs a new native-model software task with the original full user request. No model processes/configuration, test answer injection or fake completion.

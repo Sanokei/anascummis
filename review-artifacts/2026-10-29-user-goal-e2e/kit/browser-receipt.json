@@ -1,0 +1,33 @@
+{
+  "fixture": "Ordinary isolated production backend, real Download UI and actual ZIP; browser external HTTP requests blocked, no API/model response mocks.",
+  "data": "/workspace/.cloud-env/anascummis/local-ai-readiness/current-kit-DiSGne",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "manifest": {
+    "format": 1,
+    "version": "e3e76d87cf900de935c8eeaf2bc096e10918abd29271df54cf7b9f99813b9c99",
+    "filename": "anascummis-studio-e3e76d87cf900de9.zip",
+    "sha256": "274c19938daa74708b91b9dfedf49886880be17a513ffb14d0bbc72fc9d183e2",
+    "bytes": 1393277,
+    "files": 218,
+    "source": {
+      "commit": "bd1f47213f0eff8ce1685a041782910ebd9e73a1",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "archiveEntries": 219,
+  "requiredSourceLicensesLockPresent": true,
+  "privateFilesModelsCachesAbsent": true,
+  "outcome": "passed"
+}

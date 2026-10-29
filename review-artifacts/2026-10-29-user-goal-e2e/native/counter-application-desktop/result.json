@@ -1,0 +1,350 @@
+{
+  "id": "counter-application",
+  "viewport": "desktop",
+  "goal": "Build a counter application and obtain its verified source ZIP, with persistent progress and a usable resume path if work cannot finish.",
+  "startedAt": "2026-10-29T16:51:15.369Z",
+  "status": "passed",
+  "lane": "real-local-runtime",
+  "prerequisite": "Real local model plus existing software build dependencies/runner.",
+  "assertions": [
+    {
+      "name": "The exact build request and its own progress survive reload.",
+      "passed": true
+    },
+    {
+      "name": "Downloaded app source matches its checked artifact identity.",
+      "passed": true
+    },
+    {
+      "name": "Independently launched produced bundle: Bakery Orders; Increment 0→1→2; Reset→0; reload→0.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-counter-application-outcome.png",
+    "produced-counter.png"
+  ],
+  "downloads": [
+    {
+      "path": "counter-source.zip",
+      "bytes": 166148,
+      "sha256": "3a4279f848983f2b39bdf627f447811a22855215c42c55cf154c7cba44fdc34d"
+    }
+  ],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T16:51:15.889Z"
+    },
+    {
+      "path": "/api/software",
+      "time": "2026-10-29T16:51:17.516Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 6986,
+    "port": 32909,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "goalProgress": [
+    {
+      "time": "2026-10-29T16:51:17.813Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "planning",
+      "revision": 0,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:51:19.552Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "install",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:51:20.180Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "typecheck",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:51:21.379Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "tests",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:51:21.490Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "build",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:51:47.798Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "browser",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:51:50.589Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "typecheck",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:51:52.084Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "build",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:52:15.788Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "browser",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:52:18.959Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "running",
+      "phase": "source_zip",
+      "revision": 1,
+      "modelCalls": 1
+    },
+    {
+      "time": "2026-10-29T16:52:47.902Z",
+      "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+      "status": "completed",
+      "phase": "completed",
+      "revision": 1,
+      "modelCalls": 1
+    }
+  ],
+  "persistedSoftware": {
+    "id": "4e210710-16fe-43fd-82a4-f91dab2f5d41",
+    "goal": "Build a small counter application with heading Bakery Orders, a count starting at zero, an Increment button that adds one, and a Reset button that returns to zero. Include browser checks and give me the source ZIP.",
+    "status": "completed",
+    "phase": "completed",
+    "revision": 1,
+    "requirements": [
+      {
+        "id": "counter",
+        "description": "Render zero, increment to one then two, return to zero with the Reset button and increment again, and reset to zero after reload. Show the exact heading \"Bakery Orders\".",
+        "status": "verified",
+        "files": [
+          "app/page.tsx"
+        ],
+        "tests": [
+          "tests/app.test.tsx"
+        ],
+        "reviewRevision": 1,
+        "note": "Bounded counter skill acceptance: Production app loaded; real browser screenshot and DOM captured. counter acceptance passed: 0 → 1 → 2, Reset → 0, Increment → 1, reload → 0; exact heading \"Bakery Orders\""
+      }
+    ],
+    "events": [
+      {
+        "time": 1793292680171,
+        "phase": "typecheck",
+        "detail": "Running typecheck.",
+        "revision": 1
+      },
+      {
+        "time": 1793292681333,
+        "phase": "tests",
+        "detail": "Running tests.",
+        "revision": 1
+      },
+      {
+        "time": 1793292681379,
+        "phase": "build",
+        "detail": "Building the actual Next.js program.",
+        "revision": 1
+      },
+      {
+        "time": 1793292707703,
+        "phase": "browser",
+        "detail": "Loading the production app and capturing a real screenshot.",
+        "revision": 1
+      },
+      {
+        "time": 1793292710564,
+        "phase": "install",
+        "detail": "Running install.",
+        "revision": 1
+      },
+      {
+        "time": 1793292710570,
+        "phase": "typecheck",
+        "detail": "Running typecheck.",
+        "revision": 1
+      },
+      {
+        "time": 1793292711987,
+        "phase": "tests",
+        "detail": "Running tests.",
+        "revision": 1
+      },
+      {
+        "time": 1793292712031,
+        "phase": "build",
+        "detail": "Building the actual Next.js program.",
+        "revision": 1
+      },
+      {
+        "time": 1793292735707,
+        "phase": "browser",
+        "detail": "Loading the production app and capturing a real screenshot.",
+        "revision": 1
+      },
+      {
+        "time": 1793292738924,
+        "phase": "source_zip",
+        "detail": "Running source_zip.",
+        "revision": 1
+      },
+      {
+        "time": 1793292767802,
+        "phase": "packaging",
+        "detail": "Packaging tested source and Windows executable.",
+        "revision": 1
+      },
+      {
+        "time": 1793292767826,
+        "phase": "completed",
+        "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+        "revision": 1
+      }
+    ],
+    "created": 1793292677519,
+    "updated": 1793292767826,
+    "calls": 1,
+    "errors": 0,
+    "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+    "milestoneMs": [],
+    "milestoneStarted": 1793292677519,
+    "planOffset": 0,
+    "planningDone": true,
+    "targets": [
+      "zip"
+    ],
+    "counterContract": true,
+    "lastProgressCall": 1,
+    "evidence": {
+      "revision": 1,
+      "checks": [
+        {
+          "id": "install",
+          "ok": true,
+          "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [2.00ms]\n",
+          "milliseconds": 4
+        },
+        {
+          "id": "typecheck",
+          "ok": true,
+          "detail": "",
+          "milliseconds": 1413
+        },
+        {
+          "id": "tests",
+          "ok": true,
+          "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) requested numeric screen renders its exact heading and accessible controls [6.61ms]\n\n 1 pass\n 0 fail\n 4 expect() calls\nRan 1 test across 1 file. [37.00ms]\n",
+          "milliseconds": 41
+        },
+        {
+          "id": "build",
+          "ok": true,
+          "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 26ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1393ms\n  Running TypeScript ...\n  Finished TypeScript in 1350ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 270ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+          "milliseconds": 23666
+        },
+        {
+          "id": "browser",
+          "ok": true,
+          "detail": "Production app loaded; real browser screenshot and DOM captured. counter acceptance passed: 0 → 1 → 2, Reset → 0, Increment → 1, reload → 0; exact heading \"Bakery Orders\"",
+          "milliseconds": 3217
+        },
+        {
+          "id": "source_zip",
+          "ok": true,
+          "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+          "milliseconds": 28871
+        }
+      ],
+      "dom": "Bakery Orders\n0IncrementReset",
+      "artifacts": [
+        {
+          "kind": "zip",
+          "name": "source.zip",
+          "sha256": "3a4279f848983f2b39bdf627f447811a22855215c42c55cf154c7cba44fdc34d",
+          "bytes": 166148,
+          "smokeTested": true
+        }
+      ],
+      "headings": [
+        "Bakery Orders"
+      ],
+      "screenshot": "revision-1.png",
+      "browserContract": {
+        "kind": "counter",
+        "label": "Count",
+        "button": "Increment",
+        "heading": "Bakery Orders",
+        "resetButton": "Reset"
+      }
+    }
+  },
+  "deliveredApp": {
+    "pid": 7768,
+    "port": 38965,
+    "source": "Produced task standalone bundle; not a clean installation of the downloaded source ZIP.",
+    "trace": "produced-app-trace.zip"
+  },
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T16:52:55.679Z",
+  "recoveryChecksPassed": 3
+}

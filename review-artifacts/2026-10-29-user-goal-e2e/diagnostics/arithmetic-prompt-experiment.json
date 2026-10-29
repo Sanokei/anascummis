@@ -1,0 +1,48 @@
+{
+  "scope": "Single bounded general-instruction experiment using actual application infer and permissive integer schema. No answer examples, expected values, retries, forced enum, process/config/source changes or new models.",
+  "system": "Calculate the arithmetic RESULT of the requested operation. The JSON value must be the result, not an echoed operand. Respect operation order and preserve the sign; subtraction can produce a negative result. Return only a JSON object with value.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "value": {
+        "type": "integer",
+        "minimum": -1000,
+        "maximum": 1000
+      }
+    },
+    "required": [
+      "value"
+    ],
+    "additionalProperties": false
+  },
+  "results": [
+    {
+      "request": "Compute 23 plus 19.",
+      "actual": {
+        "value": 42
+      },
+      "elapsedMs": 512
+    },
+    {
+      "request": "Compute 9 minus 14.",
+      "actual": {
+        "value": -5
+      },
+      "elapsedMs": 254
+    },
+    {
+      "request": "Compute 22 minus 30.",
+      "actual": {
+        "value": -8
+      },
+      "elapsedMs": 266
+    },
+    {
+      "request": "Compute 7 minus 12.",
+      "actual": {
+        "value": -5
+      },
+      "elapsedMs": 273
+    }
+  ]
+}

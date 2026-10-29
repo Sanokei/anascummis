@@ -1,0 +1,32 @@
+{
+  "validatedAt": "2026-10-29T16:57:54.244120+00:00",
+  "reportSha256": "3dd21b4a15d9ac822e316f31f6be1edaf9d2d03f8d45b4c414a9d5a5d3c290fa",
+  "result": {
+    "passed": 10,
+    "blocked": 0,
+    "failed": 0
+  },
+  "actualExitCode": 0,
+  "independentAssertions": 38,
+  "fingerprints": {
+    "runnerSource": {
+      "files": 4,
+      "allHashesMatch": true
+    },
+    "servedBuild": {
+      "files": 88,
+      "allHashesMatch": true
+    },
+    "applicationSource": {
+      "files": 21,
+      "allHashesMatch": true
+    }
+  },
+  "downloadArtifactsVerified": 12,
+  "traceArchivesVerified": 12,
+  "traceZipEntriesVerified": 5550,
+  "ephemeralSessionCookieValuesFound": 0,
+  "retainedSharedNativeEngine": "700 Thu Oct 29 16:21:36 2026 /workspace/.cloud-tools/llama/llama-b11960/llama-server -m /workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf --host 127.0.0.1 --port 8081 -ngl 0 -c 2048 -t 4 --parallel 1 --jinja --reasoning off --cors-origins localhost",
+  "runnerOwnedHostsAndApplicationsCleaned": true,
+  "counterLimit": "Native planning plus trusted typed counter compilation. Independent interaction exercised produced bundle; not a clean installation of downloaded ZIP."
+}
