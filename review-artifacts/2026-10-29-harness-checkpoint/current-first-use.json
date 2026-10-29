@@ -1,0 +1,44 @@
+{
+  "fixture": "Unmodified normal local server; no model, voice or API mocking.",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": false,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "responses": [
+    {
+      "path": "/api/projects",
+      "status": 200
+    },
+    {
+      "path": "/api/jobs",
+      "status": 200
+    },
+    {
+      "path": "/api/goals",
+      "status": 200
+    },
+    {
+      "path": "/api/projects/deff660d-fc36-43c4-86cb-5c85e2591734",
+      "status": 200
+    },
+    {
+      "path": "/api/assets",
+      "status": 200
+    },
+    {
+      "path": "/api/software",
+      "status": 200
+    }
+  ],
+  "pageErrors": [],
+  "viewportWidths": [
+    1440,
+    360
+  ],
+  "timezone": "Etc/UTC"
+}

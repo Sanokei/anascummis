@@ -1,0 +1,292 @@
+{
+  "fixture": "Scripted inference over the real model HTTP client; real website edits, persistence, browser and acceptance flow. Speech stream simulated.",
+  "goal": {
+    "id": "260959d6-aec9-448e-9445-2ec7704f340f",
+    "request": "Set website title to Coordinated Oak, then explain the saved change.",
+    "projectId": "2c75d4d2-80a5-4dd3-b3f4-43606ea57d80",
+    "research": false,
+    "status": "completed",
+    "phase": "completed",
+    "message": "All milestones have host evidence, independent acceptance reviews and full-goal coverage reviews.",
+    "tasks": [
+      {
+        "specialist": "website",
+        "description": "Set website title to Coordinated Oak",
+        "acceptance": "The inspected website title equals Coordinated Oak",
+        "dependsOn": [],
+        "id": "step-1",
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "Done.",
+          "verified": true,
+          "evidence": [
+            "{\"kind\":\"host_tool_result\",\"specialist\":\"website\",\"tool\":\"set_copy\",\"step\":2,\"arguments\":{\"field\":\"title\",\"value\":\"Coordinated Oak\"},\"result\":{\"revision\":1,\"checks\":{\"ok\":true,\"errors\":[],\"checks\":{\"items\":[\"Typed content and bounded scene\",\"Uploaded images only\",\"No private Stripe credentials\"],\"offset\":0,\"availableItems\":4,\"complete\":false},\"payment\":\"No payment integration\"},\"omittedSnapshots\":[\"site\"],\"projection\":\"Write revision/check receipt; full snapshots are omitted here. Inspect receipts identify any selected output state.\"},\"availableResultCharacters\":484}",
+            "{\"kind\":\"host_tool_result\",\"specialist\":\"website\",\"tool\":\"inspect_site\",\"step\":3,\"result\":{\"project\":{\"id\":\"2c75d4d2-80a5-4dd3-b3f4-43606ea57d80\",\"name\":\"My business\",\"revision\":1,\"site\":{\"name\":\"My business\",\"title\":\"Coordinated Oak\",\"subtitle\":\"Tell your story, with your own words and images.\",\"accent\":\"#b7ee70\",\"background\":\"#17211e\",\"font\":\"sans\",\"sections\":[{\"id\":\"about\",\"heading\":\"About us\",\"text\":\"Introduce your business.\"}],\"scene\":[]}},\"assets\":[],\"checks\":{\"ok\":true,\"errors\":[],\"checks\":{\"items\":[\"Typed content and bounded scene\",\"Uploaded images only\",\"No private Stripe credentials\"],\"offset\":0,\"availableItems\":4,\"complete\":false},\"payment\":\"No payment integration\"}},\"availableResultCharacters\":573,\"inspectionSelection\":{\"mode\":\"latest successful inspection for this target\",\"matchingResults\":2}}"
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The recorded checks and source-linked answer cover the stated requirements."
+        }
+      },
+      {
+        "specialist": "analysis",
+        "description": "Explain the saved website title change",
+        "acceptance": "Explain the title change using the recorded source and state its verification limit",
+        "dependsOn": [
+          "step-1"
+        ],
+        "id": "step-2",
+        "status": "verified",
+        "attempts": 2,
+        "execution": {
+          "message": "The website title is now Coordinated Oak.\n\nSupplied source excerpts:\n[step-1] “Coordinated Oak”\n\nThis answer is limited to the supplied execution record or model knowledge; other facts were not checked. Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+          "verified": true,
+          "evidence": [
+            "Exact supplied-source quote [step-1]: Coordinated Oak",
+            "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified."
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The recorded checks and source-linked answer cover the stated requirements."
+        }
+      }
+    ],
+    "created": 1793266905027,
+    "updated": 1793266908331,
+    "events": [
+      {
+        "time": 1793266905027,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "The full goal is saved and queued for planning."
+      },
+      {
+        "time": 1793266905029,
+        "role": "planner",
+        "phase": "planning",
+        "detail": "Reading the saved goal and assigning bounded, checkable milestones."
+      },
+      {
+        "time": 1793266905039,
+        "role": "planner",
+        "phase": "planned",
+        "detail": "Set website title to Coordinated Oak",
+        "taskId": "step-1"
+      },
+      {
+        "time": 1793266905046,
+        "role": "planner",
+        "phase": "planned",
+        "detail": "Explain the saved website title change",
+        "taskId": "step-2"
+      },
+      {
+        "time": 1793266905047,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793266905059,
+        "role": "planner",
+        "phase": "planning",
+        "detail": "Reading the saved goal and assigning bounded, checkable milestones."
+      },
+      {
+        "time": 1793266905070,
+        "role": "planner",
+        "phase": "read_goal",
+        "detail": "Read 68 of 68 goal characters."
+      },
+      {
+        "time": 1793266905071,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793266905074,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Set website title to Coordinated Oak",
+        "taskId": "step-1"
+      },
+      {
+        "time": 1793266905095,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "step-1"
+      },
+      {
+        "time": 1793266905097,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "The recorded checks and source-linked answer cover the stated requirements.",
+        "taskId": "step-1"
+      },
+      {
+        "time": 1793266905098,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793266905099,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Explain the saved website title change",
+        "taskId": "step-2"
+      },
+      {
+        "time": 1793266906330,
+        "role": "coordinator",
+        "phase": "interrupted",
+        "detail": "The backend restarted during a milestone. Review its saved changes before continuing; edits were not replayed."
+      },
+      {
+        "time": 1793266908306,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Continuing remaining milestones. Verified work will not be repeated."
+      },
+      {
+        "time": 1793266908310,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Explain the saved website title change",
+        "taskId": "step-2"
+      },
+      {
+        "time": 1793266908322,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "step-2"
+      },
+      {
+        "time": 1793266908325,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "The recorded checks and source-linked answer cover the stated requirements.",
+        "taskId": "step-2"
+      },
+      {
+        "time": 1793266908326,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793266908328,
+        "role": "reviewer",
+        "phase": "reviewing_goal",
+        "detail": "Checking that verified milestones cover the full saved goal."
+      },
+      {
+        "time": 1793266908330,
+        "role": "reviewer",
+        "phase": "goal_page_verified",
+        "detail": "Reviewed 68 of 68 goal characters. The recorded checks and source-linked answer cover the stated requirements."
+      },
+      {
+        "time": 1793266908331,
+        "role": "coordinator",
+        "phase": "completed",
+        "detail": "All milestones have host evidence, independent acceptance reviews and full-goal coverage reviews."
+      }
+    ],
+    "planningOffset": 68,
+    "planningDone": true,
+    "planningCalls": 0,
+    "coverageOffset": 68,
+    "coverageDone": true,
+    "notes": [
+      "Continue the explanation using the saved record. Preserve the verified title edit."
+    ],
+    "guidance": "Continue the explanation using the saved record. Preserve the verified title edit."
+  },
+  "cancelledGoal": {
+    "id": "e29fbf2c-2c7c-4493-811a-3fc7b9fca1e7",
+    "request": "Explain cancellation behavior",
+    "projectId": "2c75d4d2-80a5-4dd3-b3f4-43606ea57d80",
+    "research": false,
+    "status": "cancelled",
+    "phase": "cancelled",
+    "message": "Stopped by you. The goal, verified milestones and evidence are kept.",
+    "tasks": [
+      {
+        "specialist": "analysis",
+        "description": "Explain cancellation behavior",
+        "acceptance": "Provide an answer with an explicit verification limit",
+        "dependsOn": [],
+        "id": "step-1",
+        "status": "needs_input",
+        "attempts": 1
+      }
+    ],
+    "created": 1793266909118,
+    "updated": 1793266911069,
+    "events": [
+      {
+        "time": 1793266909118,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "The full goal is saved and queued for planning."
+      },
+      {
+        "time": 1793266909119,
+        "role": "planner",
+        "phase": "planning",
+        "detail": "Reading the saved goal and assigning bounded, checkable milestones."
+      },
+      {
+        "time": 1793266909122,
+        "role": "planner",
+        "phase": "planned",
+        "detail": "Explain cancellation behavior",
+        "taskId": "step-1"
+      },
+      {
+        "time": 1793266909126,
+        "role": "planner",
+        "phase": "read_goal",
+        "detail": "Read 29 of 29 goal characters."
+      },
+      {
+        "time": 1793266909127,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793266909129,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Explain cancellation behavior",
+        "taskId": "step-1"
+      },
+      {
+        "time": 1793266911068,
+        "role": "coordinator",
+        "phase": "cancelled",
+        "detail": "Stopped by you. The goal, verified milestones and evidence are kept."
+      }
+    ],
+    "planningOffset": 29,
+    "planningDone": true,
+    "planningCalls": 2,
+    "coverageOffset": 0,
+    "coverageDone": false,
+    "notes": []
+  },
+  "projectRevision": 1,
+  "verifiedMilestoneAttempts": [
+    1,
+    2
+  ],
+  "abruptRestart": "SIGKILL own backend after the accepted website write, during analysis. Continued through the Goals window without repeating the accepted write."
+}

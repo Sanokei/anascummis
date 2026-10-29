@@ -1,0 +1,142 @@
+{
+  "repository": "Sanokei/anascummis",
+  "branch": "codex/long-horizon-checkpoint-20261029",
+  "sourceBase": "df70f5ccdb9c3474f04d3f83ad7f60a8f7ecf917",
+  "sourceHead": "3a9d642c1e6d8ffc52b4226f040346e27ebce5e0",
+  "sourceTree": "215b00fc56a6ef5741c11e26f39ba2660bbd5a25",
+  "validation": {
+    "testsPassed": 183,
+    "testsFailed": 0,
+    "assertions": 1079,
+    "testFiles": 17,
+    "studioTypecheck": "passed",
+    "rootTypecheck": "passed",
+    "productionBuild": "passed without security retry"
+  },
+  "history": {
+    "goal": 184,
+    "work": 182,
+    "software": 184
+  },
+  "model": "Native Qwen/voice unavailable. Execution inference scripted; compiler/browser/persistence/ZIP checks real. Normal first-use screenshots are unmocked.",
+  "publicPreviewUrl": null,
+  "preservation": {
+    "originalParentId": "a45515b9-b3aa-40e9-803d-67309bcbc70a",
+    "originalParentRecordAndFilesUnchanged": true,
+    "originalReviewManifestUnchanged": true,
+    "previousReviewManifestSha": "75187826677d7747c009ee0cce84a0153e4fb236c0d65934644c4a785f516918"
+  },
+  "environmentDraftUnchanged": {
+    "draftId": "922520ff-61cf-4891-9ad6-189e8f1150c0~cecfgdraft_6ae2defac18481969b19e3fbbc85855d",
+    "installScriptUnchangedFromPriorMilestone": true,
+    "startInstructionsUnchangedFromPriorMilestone": true,
+    "customEgressHosts": [
+      "api.github.com",
+      "huggingface.co"
+    ],
+    "continuationSavedOrPublishedDraft": false,
+    "verification": "Read back through the environment configuration tool after repository validation and compared both script strings with the previously saved values."
+  },
+  "files": [
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/current-first-use.json",
+      "bytes": 824,
+      "sha256": "f116f1fdca5741917ba5953cccfe7c0416174fcf120f954845eebde1ae941f9c"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/environment-draft-verification.json",
+      "bytes": 484,
+      "sha256": "5c21f7040e776ffaa17b003259d3aa3cac97f33d2dfda4419c1e659720cfa53f"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/goal-execution.json",
+      "bytes": 11148,
+      "sha256": "5ad29ffe646a9991cb891929e7a398629734aee52802e770778ab0d4835a5795"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/history-lifecycle.json",
+      "bytes": 121457,
+      "sha256": "3b3329ed9f3a723ac4e2d47622b0d1710345d98835c8e56c4a00add241d5adab"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/model-egress.json",
+      "bytes": 84,
+      "sha256": "d4a4493b9741019f5c441864464c5c1cccd6f4d994f3b3ad960abc03327ebe14"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/production-build.txt",
+      "bytes": 516,
+      "sha256": "47e54c52301f7054ce1f10de53594c72886722b629e5481e407ec04b97a8ae9d"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/qa/activity-fixture-host.ts",
+      "bytes": 4717,
+      "sha256": "7290136065aa7cb6d3d36091312399ce72263683c503016afd1eae8640b5a626"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/qa/activity-history.mjs",
+      "bytes": 12550,
+      "sha256": "249205b963447680d3b71fb40da8f04bda72f608b7cebfd6b56052eb8347efb7"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/qa/goals-lifecycle.mjs",
+      "bytes": 11947,
+      "sha256": "132c2c4601f6f236b3fd0b9ac6e8007aa96660c23eabfc2b120c7b0c052d2d6e"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/qa/repair-fixture-server.ts",
+      "bytes": 4014,
+      "sha256": "555b0a4c17b8327afc520093c76cd2d867201f4ebbb03f6f55caf51c0566a602"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/qa/repair-lifecycle.mjs",
+      "bytes": 7960,
+      "sha256": "4879595951213715f62f13d8828a25695803380f846ae6b4fc7fc272cf2da9fb"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/qa/repair-preflight.ts",
+      "bytes": 3432,
+      "sha256": "c7dff901a76095ce00ed4cb31133b01a517a1ef3f2972f20447d378908def3f6"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/revision-lifecycle.json",
+      "bytes": 11889,
+      "sha256": "978f667fe4cb00372236ce48ef68d54add21ea912da4be919c30857f2e5e4b2b"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/screenshots/activity-desktop.png",
+      "bytes": 342613,
+      "sha256": "918086adc0761fa45ea8e57ec4cbe27418091478106bcd5eab5ee1077e17cc74"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/screenshots/activity-narrow.png",
+      "bytes": 63101,
+      "sha256": "572a620ef8ce0b21e89977ed21e630658d5b50c2bc7695215e04404d4e3dbb13"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/screenshots/current-first-use-desktop.png",
+      "bytes": 323642,
+      "sha256": "a6b5987d51ad9f0b2ffd53b9081bcb06d7d9a617e6761886b5c08d0d57b1c775"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/screenshots/current-first-use-narrow.png",
+      "bytes": 119049,
+      "sha256": "f19b87926f4d711d9cf9c2b6986223fcff56368cffbc8e0c3c104101edcceade"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/screenshots/revision-desktop.png",
+      "bytes": 344567,
+      "sha256": "7083d8ccd45bcc734d16f3e3fcfb1347cb6669239d501550ed9f11a9ed8baf33"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/screenshots/revision-narrow.png",
+      "bytes": 61815,
+      "sha256": "8c3f4df38cd4dee8c8f7931b686f504322463be956c97962c050ef3d8b93a58b"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-harness-checkpoint/test-output.txt",
+      "bytes": 18334,
+      "sha256": "a14cc3bb66325570f3b3794bee467cbe8a0059a56ed22149e3d539e41c726b2c"
+    }
+  ]
+}

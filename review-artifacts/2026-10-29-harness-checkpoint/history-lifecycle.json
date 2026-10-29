@@ -1,0 +1,4014 @@
+{
+  "fixture": "Actual host API state controls and journal persistence; workers deliberately not started, no model/execution claim.",
+  "ids": {
+    "run": "394309e2-5643-4166-972d-0662b7323fea",
+    "projectId": "b2e2ed6d-50e0-4685-9714-33cff60c14c7",
+    "goalId": "e925bf12-1f9a-4813-8236-e7f7968c0185",
+    "workId": "0a1e4671-d85c-4025-b966-5888d939100e",
+    "softwareId": "2513e3f6-86a0-4c68-8dd9-cc8218ec2bd4",
+    "parentId": "1b49605d-1e2c-4a0e-b2d4-605746429921",
+    "fixture": "Actual host API state controls and journal persistence; workers deliberately not started, no model/execution claim."
+  },
+  "sourceProjectionCounts": {
+    "goal": 160,
+    "work": 160,
+    "software": 12
+  },
+  "retainedCounts": {
+    "goal": 184,
+    "work": 182,
+    "software": 184
+  },
+  "activity": {
+    "goal": {
+      "events": [
+        {
+          "time": 1793267131148,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 548
+        },
+        {
+          "time": 1793267131146,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 547
+        },
+        {
+          "time": 1793267127646,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 182
+        },
+        {
+          "time": 1793267127645,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 181
+        },
+        {
+          "time": 1793267127643,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 180
+        },
+        {
+          "time": 1793267127643,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 179
+        },
+        {
+          "time": 1793267127642,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 178
+        },
+        {
+          "time": 1793267127641,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 177
+        },
+        {
+          "time": 1793267127639,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 176
+        },
+        {
+          "time": 1793267127639,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 175
+        },
+        {
+          "time": 1793267127638,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 174
+        },
+        {
+          "time": 1793267127637,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 173
+        },
+        {
+          "time": 1793267127636,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 172
+        },
+        {
+          "time": 1793267127635,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 171
+        },
+        {
+          "time": 1793267127634,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 170
+        },
+        {
+          "time": 1793267127633,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 169
+        },
+        {
+          "time": 1793267127632,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 168
+        },
+        {
+          "time": 1793267127629,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 167
+        },
+        {
+          "time": 1793267127628,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 166
+        },
+        {
+          "time": 1793267127627,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 165
+        },
+        {
+          "time": 1793267127626,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 164
+        },
+        {
+          "time": 1793267127625,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 163
+        },
+        {
+          "time": 1793267127624,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 162
+        },
+        {
+          "time": 1793267127620,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 161
+        },
+        {
+          "time": 1793267127619,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 160
+        },
+        {
+          "time": 1793267127617,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 159
+        },
+        {
+          "time": 1793267127616,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 158
+        },
+        {
+          "time": 1793267127615,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 157
+        },
+        {
+          "time": 1793267127614,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 156
+        },
+        {
+          "time": 1793267127613,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 155
+        },
+        {
+          "time": 1793267127612,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 154
+        },
+        {
+          "time": 1793267127611,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 153
+        },
+        {
+          "time": 1793267127610,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 152
+        },
+        {
+          "time": 1793267127609,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 151
+        },
+        {
+          "time": 1793267127608,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 150
+        },
+        {
+          "time": 1793267127607,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 149
+        },
+        {
+          "time": 1793267127606,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 148
+        },
+        {
+          "time": 1793267127605,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 147
+        },
+        {
+          "time": 1793267127604,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 146
+        },
+        {
+          "time": 1793267127602,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 145
+        },
+        {
+          "time": 1793267127600,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 144
+        },
+        {
+          "time": 1793267127599,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 143
+        },
+        {
+          "time": 1793267127598,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 142
+        },
+        {
+          "time": 1793267127597,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 141
+        },
+        {
+          "time": 1793267127596,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 140
+        },
+        {
+          "time": 1793267127596,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 139
+        },
+        {
+          "time": 1793267127595,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 138
+        },
+        {
+          "time": 1793267127594,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 137
+        },
+        {
+          "time": 1793267127593,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 136
+        },
+        {
+          "time": 1793267127591,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 135
+        },
+        {
+          "time": 1793267127590,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 134
+        },
+        {
+          "time": 1793267127589,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 133
+        },
+        {
+          "time": 1793267127588,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 132
+        },
+        {
+          "time": 1793267127588,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 131
+        },
+        {
+          "time": 1793267127587,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 130
+        },
+        {
+          "time": 1793267127586,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 129
+        },
+        {
+          "time": 1793267127585,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 128
+        },
+        {
+          "time": 1793267127584,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 127
+        },
+        {
+          "time": 1793267127583,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 126
+        },
+        {
+          "time": 1793267127583,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 125
+        },
+        {
+          "time": 1793267127582,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 124
+        },
+        {
+          "time": 1793267127581,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 123
+        },
+        {
+          "time": 1793267127580,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 122
+        },
+        {
+          "time": 1793267127579,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 121
+        },
+        {
+          "time": 1793267127578,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 120
+        },
+        {
+          "time": 1793267127576,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 119
+        },
+        {
+          "time": 1793267127575,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 118
+        },
+        {
+          "time": 1793267127574,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 117
+        },
+        {
+          "time": 1793267127573,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 116
+        },
+        {
+          "time": 1793267127572,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 115
+        },
+        {
+          "time": 1793267127572,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 114
+        },
+        {
+          "time": 1793267127571,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 113
+        },
+        {
+          "time": 1793267127569,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 112
+        },
+        {
+          "time": 1793267127568,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 111
+        },
+        {
+          "time": 1793267127567,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 110
+        },
+        {
+          "time": 1793267127566,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 109
+        },
+        {
+          "time": 1793267127565,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 108
+        },
+        {
+          "time": 1793267127564,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 107
+        },
+        {
+          "time": 1793267127563,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 106
+        },
+        {
+          "time": 1793267127563,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 105
+        },
+        {
+          "time": 1793267127562,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 104
+        },
+        {
+          "time": 1793267127561,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 103
+        },
+        {
+          "time": 1793267127559,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 102
+        },
+        {
+          "time": 1793267127558,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 101
+        },
+        {
+          "time": 1793267127557,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 100
+        },
+        {
+          "time": 1793267127556,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 99
+        },
+        {
+          "time": 1793267127554,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 98
+        },
+        {
+          "time": 1793267127553,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 97
+        },
+        {
+          "time": 1793267127552,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 96
+        },
+        {
+          "time": 1793267127550,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 95
+        },
+        {
+          "time": 1793267127547,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 94
+        },
+        {
+          "time": 1793267127546,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 93
+        },
+        {
+          "time": 1793267127545,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 92
+        },
+        {
+          "time": 1793267127544,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 91
+        },
+        {
+          "time": 1793267127543,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 90
+        },
+        {
+          "time": 1793267127542,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 89
+        },
+        {
+          "time": 1793267127540,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 88
+        },
+        {
+          "time": 1793267127539,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 87
+        },
+        {
+          "time": 1793267127538,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 86
+        },
+        {
+          "time": 1793267127536,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 85
+        },
+        {
+          "time": 1793267127535,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 84
+        },
+        {
+          "time": 1793267127534,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 83
+        },
+        {
+          "time": 1793267127533,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 82
+        },
+        {
+          "time": 1793267127531,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 81
+        },
+        {
+          "time": 1793267127524,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 80
+        },
+        {
+          "time": 1793267127523,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 79
+        },
+        {
+          "time": 1793267127521,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 78
+        },
+        {
+          "time": 1793267127520,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 77
+        },
+        {
+          "time": 1793267127519,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 76
+        },
+        {
+          "time": 1793267127516,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 75
+        },
+        {
+          "time": 1793267127515,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 74
+        },
+        {
+          "time": 1793267127514,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 73
+        },
+        {
+          "time": 1793267127511,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 72
+        },
+        {
+          "time": 1793267127510,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 71
+        },
+        {
+          "time": 1793267127509,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 70
+        },
+        {
+          "time": 1793267127507,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 69
+        },
+        {
+          "time": 1793267127505,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 68
+        },
+        {
+          "time": 1793267127504,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 67
+        },
+        {
+          "time": 1793267127503,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 66
+        },
+        {
+          "time": 1793267127501,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 65
+        },
+        {
+          "time": 1793267127500,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 64
+        },
+        {
+          "time": 1793267127499,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 63
+        },
+        {
+          "time": 1793267127498,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 62
+        },
+        {
+          "time": 1793267127497,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 61
+        },
+        {
+          "time": 1793267127497,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 60
+        },
+        {
+          "time": 1793267127496,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 59
+        },
+        {
+          "time": 1793267127495,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 58
+        },
+        {
+          "time": 1793267127494,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 57
+        },
+        {
+          "time": 1793267127494,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 56
+        },
+        {
+          "time": 1793267127493,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 55
+        },
+        {
+          "time": 1793267127492,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 54
+        },
+        {
+          "time": 1793267127491,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 53
+        },
+        {
+          "time": 1793267127491,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 52
+        },
+        {
+          "time": 1793267127490,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 51
+        },
+        {
+          "time": 1793267127488,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 50
+        },
+        {
+          "time": 1793267127488,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 49
+        },
+        {
+          "time": 1793267127487,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 48
+        },
+        {
+          "time": 1793267127486,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 47
+        },
+        {
+          "time": 1793267127486,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 46
+        },
+        {
+          "time": 1793267127485,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 45
+        },
+        {
+          "time": 1793267127484,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 44
+        },
+        {
+          "time": 1793267127483,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 43
+        },
+        {
+          "time": 1793267127482,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 42
+        },
+        {
+          "time": 1793267127481,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 41
+        },
+        {
+          "time": 1793267127481,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 40
+        },
+        {
+          "time": 1793267127480,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 39
+        },
+        {
+          "time": 1793267127479,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 38
+        },
+        {
+          "time": 1793267127477,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 37
+        },
+        {
+          "time": 1793267127475,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 36
+        },
+        {
+          "time": 1793267127474,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 35
+        },
+        {
+          "time": 1793267127472,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 34
+        },
+        {
+          "time": 1793267127471,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 33
+        },
+        {
+          "time": 1793267127470,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 32
+        },
+        {
+          "time": 1793267127468,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 31
+        },
+        {
+          "time": 1793267127467,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 30
+        },
+        {
+          "time": 1793267127465,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 29
+        },
+        {
+          "time": 1793267127464,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 28
+        },
+        {
+          "time": 1793267127462,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 27
+        },
+        {
+          "time": 1793267127460,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 26
+        },
+        {
+          "time": 1793267127458,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 25
+        },
+        {
+          "time": 1793267127456,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 24
+        },
+        {
+          "time": 1793267127455,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 23
+        },
+        {
+          "time": 1793267127455,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 22
+        },
+        {
+          "time": 1793267127452,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 21
+        },
+        {
+          "time": 1793267127451,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 20
+        },
+        {
+          "time": 1793267127450,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 19
+        },
+        {
+          "time": 1793267127449,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 18
+        },
+        {
+          "time": 1793267127448,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 17
+        },
+        {
+          "time": 1793267127445,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 16
+        },
+        {
+          "time": 1793267127438,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 15
+        },
+        {
+          "time": 1793267127437,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 14
+        },
+        {
+          "time": 1793267127436,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 13
+        },
+        {
+          "time": 1793267127433,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 12
+        },
+        {
+          "time": 1793267127432,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 11
+        },
+        {
+          "time": 1793267127431,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 10
+        },
+        {
+          "time": 1793267127431,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 9
+        },
+        {
+          "time": 1793267127430,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 8
+        },
+        {
+          "time": 1793267127430,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 7
+        },
+        {
+          "time": 1793267127429,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 6
+        },
+        {
+          "time": 1793267127428,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 5
+        },
+        {
+          "time": 1793267127428,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 4
+        },
+        {
+          "time": 1793267127427,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated.",
+          "sequence": 3
+        },
+        {
+          "time": 1793267127423,
+          "role": "coordinator",
+          "phase": "cancelled",
+          "detail": "Stopped by you. The goal, verified milestones and evidence are kept.",
+          "sequence": 2
+        },
+        {
+          "time": 1793267127419,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "The full goal is saved and queued for planning.",
+          "sequence": 1
+        }
+      ],
+      "importedHistory": false,
+      "earlierHistoryMayBeMissing": false
+    },
+    "work": {
+      "events": [
+        {
+          "time": 1793267127740,
+          "role": "coordinator",
+          "phase": "interrupted",
+          "detail": "Fixture sampling ended. No specialist edits were performed.",
+          "sequence": 364
+        },
+        {
+          "time": 1793267127739,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-179",
+          "sequence": 363
+        },
+        {
+          "time": 1793267127739,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-178",
+          "sequence": 362
+        },
+        {
+          "time": 1793267127738,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-177",
+          "sequence": 361
+        },
+        {
+          "time": 1793267127738,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-176",
+          "sequence": 360
+        },
+        {
+          "time": 1793267127737,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-175",
+          "sequence": 359
+        },
+        {
+          "time": 1793267127737,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-174",
+          "sequence": 358
+        },
+        {
+          "time": 1793267127736,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-173",
+          "sequence": 357
+        },
+        {
+          "time": 1793267127736,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-172",
+          "sequence": 356
+        },
+        {
+          "time": 1793267127735,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-171",
+          "sequence": 355
+        },
+        {
+          "time": 1793267127735,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-170",
+          "sequence": 354
+        },
+        {
+          "time": 1793267127735,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-169",
+          "sequence": 353
+        },
+        {
+          "time": 1793267127734,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-168",
+          "sequence": 352
+        },
+        {
+          "time": 1793267127734,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-167",
+          "sequence": 351
+        },
+        {
+          "time": 1793267127733,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-166",
+          "sequence": 350
+        },
+        {
+          "time": 1793267127732,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-165",
+          "sequence": 349
+        },
+        {
+          "time": 1793267127732,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-164",
+          "sequence": 348
+        },
+        {
+          "time": 1793267127731,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-163",
+          "sequence": 347
+        },
+        {
+          "time": 1793267127731,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-162",
+          "sequence": 346
+        },
+        {
+          "time": 1793267127730,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-161",
+          "sequence": 345
+        },
+        {
+          "time": 1793267127730,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-160",
+          "sequence": 344
+        },
+        {
+          "time": 1793267127729,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-159",
+          "sequence": 343
+        },
+        {
+          "time": 1793267127729,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-158",
+          "sequence": 342
+        },
+        {
+          "time": 1793267127728,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-157",
+          "sequence": 341
+        },
+        {
+          "time": 1793267127728,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-156",
+          "sequence": 340
+        },
+        {
+          "time": 1793267127727,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-155",
+          "sequence": 339
+        },
+        {
+          "time": 1793267127727,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-154",
+          "sequence": 338
+        },
+        {
+          "time": 1793267127726,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-153",
+          "sequence": 337
+        },
+        {
+          "time": 1793267127726,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-152",
+          "sequence": 336
+        },
+        {
+          "time": 1793267127725,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-151",
+          "sequence": 335
+        },
+        {
+          "time": 1793267127724,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-150",
+          "sequence": 334
+        },
+        {
+          "time": 1793267127724,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-149",
+          "sequence": 333
+        },
+        {
+          "time": 1793267127723,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-148",
+          "sequence": 332
+        },
+        {
+          "time": 1793267127723,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-147",
+          "sequence": 331
+        },
+        {
+          "time": 1793267127722,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-146",
+          "sequence": 330
+        },
+        {
+          "time": 1793267127720,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-145",
+          "sequence": 329
+        },
+        {
+          "time": 1793267127719,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-144",
+          "sequence": 328
+        },
+        {
+          "time": 1793267127718,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-143",
+          "sequence": 327
+        },
+        {
+          "time": 1793267127717,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-142",
+          "sequence": 326
+        },
+        {
+          "time": 1793267127717,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-141",
+          "sequence": 325
+        },
+        {
+          "time": 1793267127716,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-140",
+          "sequence": 324
+        },
+        {
+          "time": 1793267127716,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-139",
+          "sequence": 323
+        },
+        {
+          "time": 1793267127715,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-138",
+          "sequence": 322
+        },
+        {
+          "time": 1793267127714,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-137",
+          "sequence": 321
+        },
+        {
+          "time": 1793267127714,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-136",
+          "sequence": 320
+        },
+        {
+          "time": 1793267127713,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-135",
+          "sequence": 319
+        },
+        {
+          "time": 1793267127712,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-134",
+          "sequence": 318
+        },
+        {
+          "time": 1793267127712,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-133",
+          "sequence": 317
+        },
+        {
+          "time": 1793267127711,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-132",
+          "sequence": 316
+        },
+        {
+          "time": 1793267127710,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-131",
+          "sequence": 315
+        },
+        {
+          "time": 1793267127710,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-130",
+          "sequence": 314
+        },
+        {
+          "time": 1793267127709,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-129",
+          "sequence": 313
+        },
+        {
+          "time": 1793267127708,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-128",
+          "sequence": 312
+        },
+        {
+          "time": 1793267127706,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-127",
+          "sequence": 311
+        },
+        {
+          "time": 1793267127706,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-126",
+          "sequence": 310
+        },
+        {
+          "time": 1793267127705,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-125",
+          "sequence": 309
+        },
+        {
+          "time": 1793267127705,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-124",
+          "sequence": 308
+        },
+        {
+          "time": 1793267127703,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-123",
+          "sequence": 307
+        },
+        {
+          "time": 1793267127703,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-122",
+          "sequence": 306
+        },
+        {
+          "time": 1793267127703,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-121",
+          "sequence": 305
+        },
+        {
+          "time": 1793267127702,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-120",
+          "sequence": 304
+        },
+        {
+          "time": 1793267127701,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-119",
+          "sequence": 303
+        },
+        {
+          "time": 1793267127701,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-118",
+          "sequence": 302
+        },
+        {
+          "time": 1793267127700,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-117",
+          "sequence": 301
+        },
+        {
+          "time": 1793267127700,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-116",
+          "sequence": 300
+        },
+        {
+          "time": 1793267127700,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-115",
+          "sequence": 299
+        },
+        {
+          "time": 1793267127699,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-114",
+          "sequence": 298
+        },
+        {
+          "time": 1793267127699,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-113",
+          "sequence": 297
+        },
+        {
+          "time": 1793267127698,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-112",
+          "sequence": 296
+        },
+        {
+          "time": 1793267127698,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-111",
+          "sequence": 295
+        },
+        {
+          "time": 1793267127696,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-110",
+          "sequence": 294
+        },
+        {
+          "time": 1793267127695,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-109",
+          "sequence": 293
+        },
+        {
+          "time": 1793267127695,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-108",
+          "sequence": 292
+        },
+        {
+          "time": 1793267127695,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-107",
+          "sequence": 291
+        },
+        {
+          "time": 1793267127694,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-106",
+          "sequence": 290
+        },
+        {
+          "time": 1793267127694,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-105",
+          "sequence": 289
+        },
+        {
+          "time": 1793267127693,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-104",
+          "sequence": 288
+        },
+        {
+          "time": 1793267127693,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-103",
+          "sequence": 287
+        },
+        {
+          "time": 1793267127693,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-102",
+          "sequence": 286
+        },
+        {
+          "time": 1793267127692,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-101",
+          "sequence": 285
+        },
+        {
+          "time": 1793267127691,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-100",
+          "sequence": 284
+        },
+        {
+          "time": 1793267127691,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-099",
+          "sequence": 283
+        },
+        {
+          "time": 1793267127690,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-098",
+          "sequence": 282
+        },
+        {
+          "time": 1793267127690,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-097",
+          "sequence": 281
+        },
+        {
+          "time": 1793267127689,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-096",
+          "sequence": 280
+        },
+        {
+          "time": 1793267127689,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-095",
+          "sequence": 279
+        },
+        {
+          "time": 1793267127688,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-094",
+          "sequence": 278
+        },
+        {
+          "time": 1793267127687,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-093",
+          "sequence": 277
+        },
+        {
+          "time": 1793267127687,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-092",
+          "sequence": 276
+        },
+        {
+          "time": 1793267127687,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-091",
+          "sequence": 275
+        },
+        {
+          "time": 1793267127686,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-090",
+          "sequence": 274
+        },
+        {
+          "time": 1793267127686,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-089",
+          "sequence": 273
+        },
+        {
+          "time": 1793267127685,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-088",
+          "sequence": 272
+        },
+        {
+          "time": 1793267127685,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-087",
+          "sequence": 271
+        },
+        {
+          "time": 1793267127684,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-086",
+          "sequence": 270
+        },
+        {
+          "time": 1793267127684,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-085",
+          "sequence": 269
+        },
+        {
+          "time": 1793267127683,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-084",
+          "sequence": 268
+        },
+        {
+          "time": 1793267127683,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-083",
+          "sequence": 267
+        },
+        {
+          "time": 1793267127682,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-082",
+          "sequence": 266
+        },
+        {
+          "time": 1793267127682,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-081",
+          "sequence": 265
+        },
+        {
+          "time": 1793267127682,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-080",
+          "sequence": 264
+        },
+        {
+          "time": 1793267127681,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-079",
+          "sequence": 263
+        },
+        {
+          "time": 1793267127681,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-078",
+          "sequence": 262
+        },
+        {
+          "time": 1793267127680,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-077",
+          "sequence": 261
+        },
+        {
+          "time": 1793267127680,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-076",
+          "sequence": 260
+        },
+        {
+          "time": 1793267127680,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-075",
+          "sequence": 259
+        },
+        {
+          "time": 1793267127679,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-074",
+          "sequence": 258
+        },
+        {
+          "time": 1793267127679,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-073",
+          "sequence": 257
+        },
+        {
+          "time": 1793267127679,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-072",
+          "sequence": 256
+        },
+        {
+          "time": 1793267127678,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-071",
+          "sequence": 255
+        },
+        {
+          "time": 1793267127678,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-070",
+          "sequence": 254
+        },
+        {
+          "time": 1793267127677,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-069",
+          "sequence": 253
+        },
+        {
+          "time": 1793267127677,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-068",
+          "sequence": 252
+        },
+        {
+          "time": 1793267127676,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-067",
+          "sequence": 251
+        },
+        {
+          "time": 1793267127676,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-066",
+          "sequence": 250
+        },
+        {
+          "time": 1793267127675,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-065",
+          "sequence": 249
+        },
+        {
+          "time": 1793267127675,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-064",
+          "sequence": 248
+        },
+        {
+          "time": 1793267127675,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-063",
+          "sequence": 247
+        },
+        {
+          "time": 1793267127674,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-062",
+          "sequence": 246
+        },
+        {
+          "time": 1793267127674,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-061",
+          "sequence": 245
+        },
+        {
+          "time": 1793267127673,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-060",
+          "sequence": 244
+        },
+        {
+          "time": 1793267127673,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-059",
+          "sequence": 243
+        },
+        {
+          "time": 1793267127673,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-058",
+          "sequence": 242
+        },
+        {
+          "time": 1793267127672,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-057",
+          "sequence": 241
+        },
+        {
+          "time": 1793267127672,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-056",
+          "sequence": 240
+        },
+        {
+          "time": 1793267127671,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-055",
+          "sequence": 239
+        },
+        {
+          "time": 1793267127670,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-054",
+          "sequence": 238
+        },
+        {
+          "time": 1793267127670,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-053",
+          "sequence": 237
+        },
+        {
+          "time": 1793267127670,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-052",
+          "sequence": 236
+        },
+        {
+          "time": 1793267127669,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-051",
+          "sequence": 235
+        },
+        {
+          "time": 1793267127669,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-050",
+          "sequence": 234
+        },
+        {
+          "time": 1793267127668,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-049",
+          "sequence": 233
+        },
+        {
+          "time": 1793267127668,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-048",
+          "sequence": 232
+        },
+        {
+          "time": 1793267127667,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-047",
+          "sequence": 231
+        },
+        {
+          "time": 1793267127667,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-046",
+          "sequence": 230
+        },
+        {
+          "time": 1793267127667,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-045",
+          "sequence": 229
+        },
+        {
+          "time": 1793267127666,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-044",
+          "sequence": 228
+        },
+        {
+          "time": 1793267127666,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-043",
+          "sequence": 227
+        },
+        {
+          "time": 1793267127666,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-042",
+          "sequence": 226
+        },
+        {
+          "time": 1793267127665,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-041",
+          "sequence": 225
+        },
+        {
+          "time": 1793267127665,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-040",
+          "sequence": 224
+        },
+        {
+          "time": 1793267127664,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-039",
+          "sequence": 223
+        },
+        {
+          "time": 1793267127664,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-038",
+          "sequence": 222
+        },
+        {
+          "time": 1793267127664,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-037",
+          "sequence": 221
+        },
+        {
+          "time": 1793267127664,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-036",
+          "sequence": 220
+        },
+        {
+          "time": 1793267127663,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-035",
+          "sequence": 219
+        },
+        {
+          "time": 1793267127663,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-034",
+          "sequence": 218
+        },
+        {
+          "time": 1793267127662,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-033",
+          "sequence": 217
+        },
+        {
+          "time": 1793267127662,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-032",
+          "sequence": 216
+        },
+        {
+          "time": 1793267127662,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-031",
+          "sequence": 215
+        },
+        {
+          "time": 1793267127661,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-030",
+          "sequence": 214
+        },
+        {
+          "time": 1793267127661,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-029",
+          "sequence": 213
+        },
+        {
+          "time": 1793267127661,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-028",
+          "sequence": 212
+        },
+        {
+          "time": 1793267127660,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-027",
+          "sequence": 211
+        },
+        {
+          "time": 1793267127660,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-026",
+          "sequence": 210
+        },
+        {
+          "time": 1793267127660,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-025",
+          "sequence": 209
+        },
+        {
+          "time": 1793267127659,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-024",
+          "sequence": 208
+        },
+        {
+          "time": 1793267127659,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-023",
+          "sequence": 207
+        },
+        {
+          "time": 1793267127659,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-022",
+          "sequence": 206
+        },
+        {
+          "time": 1793267127658,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-021",
+          "sequence": 205
+        },
+        {
+          "time": 1793267127657,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-020",
+          "sequence": 204
+        },
+        {
+          "time": 1793267127657,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-019",
+          "sequence": 203
+        },
+        {
+          "time": 1793267127657,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-018",
+          "sequence": 202
+        },
+        {
+          "time": 1793267127656,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-017",
+          "sequence": 201
+        },
+        {
+          "time": 1793267127655,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-016",
+          "sequence": 200
+        },
+        {
+          "time": 1793267127654,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-015",
+          "sequence": 199
+        },
+        {
+          "time": 1793267127654,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-014",
+          "sequence": 198
+        },
+        {
+          "time": 1793267127653,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-013",
+          "sequence": 197
+        },
+        {
+          "time": 1793267127653,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-012",
+          "sequence": 196
+        },
+        {
+          "time": 1793267127653,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-011",
+          "sequence": 195
+        },
+        {
+          "time": 1793267127652,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-010",
+          "sequence": 194
+        },
+        {
+          "time": 1793267127652,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-009",
+          "sequence": 193
+        },
+        {
+          "time": 1793267127652,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-008",
+          "sequence": 192
+        },
+        {
+          "time": 1793267127651,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-007",
+          "sequence": 191
+        },
+        {
+          "time": 1793267127651,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-006",
+          "sequence": 190
+        },
+        {
+          "time": 1793267127650,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-005",
+          "sequence": 189
+        },
+        {
+          "time": 1793267127650,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-004",
+          "sequence": 188
+        },
+        {
+          "time": 1793267127650,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-003",
+          "sequence": 187
+        },
+        {
+          "time": 1793267127649,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-002",
+          "sequence": 186
+        },
+        {
+          "time": 1793267127649,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-001",
+          "sequence": 185
+        },
+        {
+          "time": 1793267127648,
+          "role": "fixture-recorder",
+          "phase": "fixture-sample-000",
+          "sequence": 184
+        },
+        {
+          "time": 1793267127647,
+          "role": "coordinator",
+          "phase": "queued",
+          "sequence": 183
+        }
+      ],
+      "importedHistory": false,
+      "earlierHistoryMayBeMissing": false
+    },
+    "software": {
+      "events": [
+        {
+          "time": 1793267131149,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 550
+        },
+        {
+          "time": 1793267131148,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 549
+        },
+        {
+          "time": 1793267127887,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 546
+        },
+        {
+          "time": 1793267127886,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 545
+        },
+        {
+          "time": 1793267127885,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 544
+        },
+        {
+          "time": 1793267127884,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 543
+        },
+        {
+          "time": 1793267127884,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 542
+        },
+        {
+          "time": 1793267127883,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 541
+        },
+        {
+          "time": 1793267127882,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 540
+        },
+        {
+          "time": 1793267127882,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 539
+        },
+        {
+          "time": 1793267127881,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 538
+        },
+        {
+          "time": 1793267127880,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 537
+        },
+        {
+          "time": 1793267127879,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 536
+        },
+        {
+          "time": 1793267127879,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 535
+        },
+        {
+          "time": 1793267127878,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 534
+        },
+        {
+          "time": 1793267127877,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 533
+        },
+        {
+          "time": 1793267127876,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 532
+        },
+        {
+          "time": 1793267127876,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 531
+        },
+        {
+          "time": 1793267127875,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 530
+        },
+        {
+          "time": 1793267127874,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 529
+        },
+        {
+          "time": 1793267127872,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 528
+        },
+        {
+          "time": 1793267127871,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 527
+        },
+        {
+          "time": 1793267127871,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 526
+        },
+        {
+          "time": 1793267127870,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 525
+        },
+        {
+          "time": 1793267127870,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 524
+        },
+        {
+          "time": 1793267127869,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 523
+        },
+        {
+          "time": 1793267127868,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 522
+        },
+        {
+          "time": 1793267127867,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 521
+        },
+        {
+          "time": 1793267127867,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 520
+        },
+        {
+          "time": 1793267127866,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 519
+        },
+        {
+          "time": 1793267127865,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 518
+        },
+        {
+          "time": 1793267127864,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 517
+        },
+        {
+          "time": 1793267127863,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 516
+        },
+        {
+          "time": 1793267127862,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 515
+        },
+        {
+          "time": 1793267127861,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 514
+        },
+        {
+          "time": 1793267127860,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 513
+        },
+        {
+          "time": 1793267127860,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 512
+        },
+        {
+          "time": 1793267127859,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 511
+        },
+        {
+          "time": 1793267127858,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 510
+        },
+        {
+          "time": 1793267127857,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 509
+        },
+        {
+          "time": 1793267127857,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 508
+        },
+        {
+          "time": 1793267127856,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 507
+        },
+        {
+          "time": 1793267127855,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 506
+        },
+        {
+          "time": 1793267127855,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 505
+        },
+        {
+          "time": 1793267127852,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 504
+        },
+        {
+          "time": 1793267127851,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 503
+        },
+        {
+          "time": 1793267127851,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 502
+        },
+        {
+          "time": 1793267127850,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 501
+        },
+        {
+          "time": 1793267127849,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 500
+        },
+        {
+          "time": 1793267127848,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 499
+        },
+        {
+          "time": 1793267127848,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 498
+        },
+        {
+          "time": 1793267127847,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 497
+        },
+        {
+          "time": 1793267127847,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 496
+        },
+        {
+          "time": 1793267127846,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 495
+        },
+        {
+          "time": 1793267127846,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 494
+        },
+        {
+          "time": 1793267127845,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 493
+        },
+        {
+          "time": 1793267127844,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 492
+        },
+        {
+          "time": 1793267127843,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 491
+        },
+        {
+          "time": 1793267127843,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 490
+        },
+        {
+          "time": 1793267127842,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 489
+        },
+        {
+          "time": 1793267127841,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 488
+        },
+        {
+          "time": 1793267127841,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 487
+        },
+        {
+          "time": 1793267127840,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 486
+        },
+        {
+          "time": 1793267127839,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 485
+        },
+        {
+          "time": 1793267127839,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 484
+        },
+        {
+          "time": 1793267127838,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 483
+        },
+        {
+          "time": 1793267127838,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 482
+        },
+        {
+          "time": 1793267127837,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 481
+        },
+        {
+          "time": 1793267127836,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 480
+        },
+        {
+          "time": 1793267127835,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 479
+        },
+        {
+          "time": 1793267127834,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 478
+        },
+        {
+          "time": 1793267127833,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 477
+        },
+        {
+          "time": 1793267127833,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 476
+        },
+        {
+          "time": 1793267127832,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 475
+        },
+        {
+          "time": 1793267127832,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 474
+        },
+        {
+          "time": 1793267127831,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 473
+        },
+        {
+          "time": 1793267127831,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 472
+        },
+        {
+          "time": 1793267127830,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 471
+        },
+        {
+          "time": 1793267127830,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 470
+        },
+        {
+          "time": 1793267127829,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 469
+        },
+        {
+          "time": 1793267127829,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 468
+        },
+        {
+          "time": 1793267127828,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 467
+        },
+        {
+          "time": 1793267127827,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 466
+        },
+        {
+          "time": 1793267127827,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 465
+        },
+        {
+          "time": 1793267127826,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 464
+        },
+        {
+          "time": 1793267127826,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 463
+        },
+        {
+          "time": 1793267127825,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 462
+        },
+        {
+          "time": 1793267127824,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 461
+        },
+        {
+          "time": 1793267127824,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 460
+        },
+        {
+          "time": 1793267127823,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 459
+        },
+        {
+          "time": 1793267127822,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 458
+        },
+        {
+          "time": 1793267127822,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 457
+        },
+        {
+          "time": 1793267127820,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 456
+        },
+        {
+          "time": 1793267127819,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 455
+        },
+        {
+          "time": 1793267127818,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 454
+        },
+        {
+          "time": 1793267127818,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 453
+        },
+        {
+          "time": 1793267127817,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 452
+        },
+        {
+          "time": 1793267127817,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 451
+        },
+        {
+          "time": 1793267127816,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 450
+        },
+        {
+          "time": 1793267127816,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 449
+        },
+        {
+          "time": 1793267127815,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 448
+        },
+        {
+          "time": 1793267127815,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 447
+        },
+        {
+          "time": 1793267127814,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 446
+        },
+        {
+          "time": 1793267127813,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 445
+        },
+        {
+          "time": 1793267127813,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 444
+        },
+        {
+          "time": 1793267127812,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 443
+        },
+        {
+          "time": 1793267127811,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 442
+        },
+        {
+          "time": 1793267127811,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 441
+        },
+        {
+          "time": 1793267127811,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 440
+        },
+        {
+          "time": 1793267127810,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 439
+        },
+        {
+          "time": 1793267127810,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 438
+        },
+        {
+          "time": 1793267127809,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 437
+        },
+        {
+          "time": 1793267127808,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 436
+        },
+        {
+          "time": 1793267127807,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 435
+        },
+        {
+          "time": 1793267127807,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 434
+        },
+        {
+          "time": 1793267127806,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 433
+        },
+        {
+          "time": 1793267127805,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 432
+        },
+        {
+          "time": 1793267127804,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 431
+        },
+        {
+          "time": 1793267127803,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 430
+        },
+        {
+          "time": 1793267127802,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 429
+        },
+        {
+          "time": 1793267127801,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 428
+        },
+        {
+          "time": 1793267127798,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 427
+        },
+        {
+          "time": 1793267127796,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 426
+        },
+        {
+          "time": 1793267127796,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 425
+        },
+        {
+          "time": 1793267127795,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 424
+        },
+        {
+          "time": 1793267127795,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 423
+        },
+        {
+          "time": 1793267127794,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 422
+        },
+        {
+          "time": 1793267127793,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 421
+        },
+        {
+          "time": 1793267127792,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 420
+        },
+        {
+          "time": 1793267127791,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 419
+        },
+        {
+          "time": 1793267127790,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 418
+        },
+        {
+          "time": 1793267127788,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 417
+        },
+        {
+          "time": 1793267127788,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 416
+        },
+        {
+          "time": 1793267127787,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 415
+        },
+        {
+          "time": 1793267127784,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 414
+        },
+        {
+          "time": 1793267127784,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 413
+        },
+        {
+          "time": 1793267127783,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 412
+        },
+        {
+          "time": 1793267127783,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 411
+        },
+        {
+          "time": 1793267127783,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 410
+        },
+        {
+          "time": 1793267127782,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 409
+        },
+        {
+          "time": 1793267127781,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 408
+        },
+        {
+          "time": 1793267127780,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 407
+        },
+        {
+          "time": 1793267127780,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 406
+        },
+        {
+          "time": 1793267127779,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 405
+        },
+        {
+          "time": 1793267127779,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 404
+        },
+        {
+          "time": 1793267127778,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 403
+        },
+        {
+          "time": 1793267127778,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 402
+        },
+        {
+          "time": 1793267127777,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 401
+        },
+        {
+          "time": 1793267127775,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 400
+        },
+        {
+          "time": 1793267127774,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 399
+        },
+        {
+          "time": 1793267127773,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 398
+        },
+        {
+          "time": 1793267127772,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 397
+        },
+        {
+          "time": 1793267127771,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 396
+        },
+        {
+          "time": 1793267127771,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 395
+        },
+        {
+          "time": 1793267127770,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 394
+        },
+        {
+          "time": 1793267127770,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 393
+        },
+        {
+          "time": 1793267127769,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 392
+        },
+        {
+          "time": 1793267127768,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 391
+        },
+        {
+          "time": 1793267127768,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 390
+        },
+        {
+          "time": 1793267127767,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 389
+        },
+        {
+          "time": 1793267127766,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 388
+        },
+        {
+          "time": 1793267127765,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 387
+        },
+        {
+          "time": 1793267127764,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 386
+        },
+        {
+          "time": 1793267127764,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 385
+        },
+        {
+          "time": 1793267127763,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 384
+        },
+        {
+          "time": 1793267127763,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 383
+        },
+        {
+          "time": 1793267127763,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 382
+        },
+        {
+          "time": 1793267127762,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 381
+        },
+        {
+          "time": 1793267127762,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 380
+        },
+        {
+          "time": 1793267127761,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 379
+        },
+        {
+          "time": 1793267127761,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 378
+        },
+        {
+          "time": 1793267127760,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 377
+        },
+        {
+          "time": 1793267127760,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 376
+        },
+        {
+          "time": 1793267127759,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 375
+        },
+        {
+          "time": 1793267127759,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 374
+        },
+        {
+          "time": 1793267127758,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 373
+        },
+        {
+          "time": 1793267127757,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 372
+        },
+        {
+          "time": 1793267127757,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 371
+        },
+        {
+          "time": 1793267127756,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 370
+        },
+        {
+          "time": 1793267127756,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 369
+        },
+        {
+          "time": 1793267127755,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 368
+        },
+        {
+          "time": 1793267127755,
+          "role": "software",
+          "phase": "queued",
+          "detail": "Resuming saved workspace and acceptance requirements.",
+          "revision": 0,
+          "sequence": 367
+        },
+        {
+          "time": 1793267127754,
+          "role": "software",
+          "phase": "cancelled",
+          "detail": "Stopped by you. Checkpoints and source are preserved.",
+          "revision": 0,
+          "sequence": 366
+        },
+        {
+          "time": 1793267127753,
+          "role": "software",
+          "phase": "revision_queued",
+          "detail": "A separate revision workspace is ready. The accepted parent is unchanged.",
+          "revision": 0,
+          "sequence": 365
+        }
+      ],
+      "importedHistory": false,
+      "earlierHistoryMayBeMissing": false
+    }
+  },
+  "apiChecks": [
+    {
+      "path": "/api/goals/e925bf12-1f9a-4813-8236-e7f7968c0185/activity?limit=101",
+      "status": 400
+    },
+    {
+      "path": "/api/goals/e925bf12-1f9a-4813-8236-e7f7968c0185/activity?limit=0",
+      "status": 400
+    },
+    {
+      "path": "/api/goals/e925bf12-1f9a-4813-8236-e7f7968c0185/activity?before=0",
+      "status": 400
+    },
+    {
+      "path": "/api/goals/e925bf12-1f9a-4813-8236-e7f7968c0185/activity?before=1.5",
+      "status": 400
+    },
+    {
+      "path": "/api/goals/e925bf12-1f9a-4813-8236-e7f7968c0185/activity?before=9007199254740992",
+      "status": 400
+    },
+    {
+      "path": "/api/goals/e925bf12-1f9a-4813-8236-e7f7968c0185/activity?before=",
+      "status": 400
+    },
+    {
+      "path": "/api/goals/e925bf12-1f9a-4813-8236-e7f7968c0185/activity",
+      "method": "POST",
+      "status": 405
+    },
+    {
+      "path": "/api/jobs/0a1e4671-d85c-4025-b966-5888d939100e/activity?limit=101",
+      "status": 400
+    },
+    {
+      "path": "/api/jobs/0a1e4671-d85c-4025-b966-5888d939100e/activity?limit=0",
+      "status": 400
+    },
+    {
+      "path": "/api/jobs/0a1e4671-d85c-4025-b966-5888d939100e/activity?before=0",
+      "status": 400
+    },
+    {
+      "path": "/api/jobs/0a1e4671-d85c-4025-b966-5888d939100e/activity?before=1.5",
+      "status": 400
+    },
+    {
+      "path": "/api/jobs/0a1e4671-d85c-4025-b966-5888d939100e/activity?before=9007199254740992",
+      "status": 400
+    },
+    {
+      "path": "/api/jobs/0a1e4671-d85c-4025-b966-5888d939100e/activity?before=",
+      "status": 400
+    },
+    {
+      "path": "/api/jobs/0a1e4671-d85c-4025-b966-5888d939100e/activity",
+      "method": "POST",
+      "status": 405
+    },
+    {
+      "path": "/api/software/2513e3f6-86a0-4c68-8dd9-cc8218ec2bd4/activity?limit=101",
+      "status": 400
+    },
+    {
+      "path": "/api/software/2513e3f6-86a0-4c68-8dd9-cc8218ec2bd4/activity?limit=0",
+      "status": 400
+    },
+    {
+      "path": "/api/software/2513e3f6-86a0-4c68-8dd9-cc8218ec2bd4/activity?before=0",
+      "status": 400
+    },
+    {
+      "path": "/api/software/2513e3f6-86a0-4c68-8dd9-cc8218ec2bd4/activity?before=1.5",
+      "status": 400
+    },
+    {
+      "path": "/api/software/2513e3f6-86a0-4c68-8dd9-cc8218ec2bd4/activity?before=9007199254740992",
+      "status": 400
+    },
+    {
+      "path": "/api/software/2513e3f6-86a0-4c68-8dd9-cc8218ec2bd4/activity?before=",
+      "status": 400
+    },
+    {
+      "path": "/api/software/2513e3f6-86a0-4c68-8dd9-cc8218ec2bd4/activity",
+      "method": "POST",
+      "status": 405
+    },
+    {
+      "path": "/api/goals/60379d67-49f0-44df-85b1-bfb7b1936668/activity",
+      "status": 404
+    },
+    {
+      "path": "/api/jobs/2103e684-c44e-4eb7-a075-7d7bf5d38853/activity",
+      "status": 404
+    },
+    {
+      "path": "/api/software/5301e4de-405a-4c31-b611-4a0d38ad3141/activity",
+      "status": 404
+    }
+  ],
+  "softwarePairing": {
+    "unpaired": 403,
+    "paired": 200,
+    "unrelatedOrigin": 403
+  },
+  "ui": {
+    "exactApiSequencesVisible": true,
+    "oldestBeyond160Visible": true,
+    "unsentGuidancePreservedDuringPollPaginationRefreshAndHostRestart": true,
+    "explicitRefreshIncludesNewAppends": true,
+    "desktopAndNarrowWindowBounds": true,
+    "pageErrors": []
+  },
+  "restart": "SIGKILL of the owned host; exact journal sequence/payload persisted and UI reload retrieved full history.",
+  "model": {
+    "ready": false,
+    "name": "qwen3-0.6b"
+  }
+}

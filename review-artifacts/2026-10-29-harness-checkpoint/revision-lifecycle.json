@@ -1,0 +1,358 @@
+{
+  "fixture": "Scripted inference, real compiler/browser/ZIP checks",
+  "parentId": "1b49605d-1e2c-4a0e-b2d4-605746429921",
+  "childId": "808e7c49-d528-4985-a205-5475b16078ba",
+  "childCheckpoint": {
+    "id": "808e7c49-d528-4985-a205-5475b16078ba",
+    "goal": "Create a Bun Nextjs React app with heading Repair Baseline and a counter that starts at zero, increments by one, and resets on reload.\n\nRevision requested (replaces conflicting earlier criteria; preserve other behavior):\nChange the heading to Repair Verified and keep the counter working.",
+    "status": "running",
+    "phase": "revision_planning",
+    "revision": 0,
+    "requirements": [
+      {
+        "id": "heading",
+        "description": "The main heading is Repair Verified.",
+        "status": "pending",
+        "files": [
+          "app/page.tsx"
+        ],
+        "tests": [
+          "tests/app.test.tsx"
+        ],
+        "note": "The new guidance explicitly replaces the old heading."
+      }
+    ],
+    "events": [
+      {
+        "time": 1793266913548,
+        "phase": "revision_queued",
+        "detail": "A separate revision workspace is ready. The accepted parent is unchanged.",
+        "revision": 0
+      },
+      {
+        "time": 1793266913550,
+        "phase": "starting",
+        "detail": "Resuming the full saved goal and workspace.",
+        "revision": 0
+      },
+      {
+        "time": 1793266913553,
+        "phase": "revision_planning",
+        "detail": "Reviewing prior acceptance heading against the revision request.",
+        "revision": 0
+      },
+      {
+        "time": 1793266913556,
+        "phase": "revision_planning",
+        "detail": "Reviewing prior acceptance counter against the revision request.",
+        "revision": 0
+      }
+    ],
+    "created": 1793266913547,
+    "updated": 1793266913557,
+    "calls": 2,
+    "errors": 0,
+    "message": "Reviewing prior acceptance counter against the revision request.",
+    "milestoneMs": [],
+    "milestoneStarted": 1793266913547,
+    "planOffset": 0,
+    "planningDone": false,
+    "targets": [
+      "zip"
+    ],
+    "parentTaskId": "1b49605d-1e2c-4a0e-b2d4-605746429921",
+    "parentRevision": 1,
+    "revisionNote": "Change the heading to Repair Verified and keep the counter working.",
+    "revisionPlan": {
+      "criteria": [
+        {
+          "id": "heading",
+          "description": "The main heading is Repair Baseline.",
+          "files": [
+            "app/page.tsx"
+          ],
+          "tests": [
+            "tests/app.test.tsx"
+          ]
+        },
+        {
+          "id": "counter",
+          "description": "Count starts at zero, Increment produces one then two, and reload resets it to zero.",
+          "files": [
+            "app/page.tsx"
+          ],
+          "tests": [
+            "tests/app.test.tsx"
+          ]
+        }
+      ],
+      "criterionOffset": 1,
+      "guidance": "Change the heading to Repair Verified and keep the counter working.",
+      "guidanceOffset": 0,
+      "stage": "reconcile",
+      "decisions": [
+        {
+          "id": "heading",
+          "action": "replace",
+          "description": "The main heading is Repair Verified.",
+          "reason": "The new guidance explicitly replaces the old heading."
+        }
+      ],
+      "parentSourceHash": "cdea1113fa27eef3288000feb3e3dedf1216efb88af5cd9b8ee8b6c3c249d8b2",
+      "browserContract": {
+        "kind": "counter",
+        "label": "Count",
+        "button": "Increment"
+      },
+      "coverageOffset": 0,
+      "coverageRejected": false
+    }
+  },
+  "child": {
+    "id": "808e7c49-d528-4985-a205-5475b16078ba",
+    "goal": "Create a Bun Nextjs React app with heading Repair Baseline and a counter that starts at zero, increments by one, and resets on reload.\n\nRevision requested (replaces conflicting earlier criteria; preserve other behavior):\nChange the heading to Repair Verified and keep the counter working.",
+    "status": "completed",
+    "phase": "completed",
+    "revision": 2,
+    "requirements": [
+      {
+        "id": "heading",
+        "description": "The main heading is Repair Verified.",
+        "status": "verified",
+        "files": [
+          "app/page.tsx"
+        ],
+        "tests": [
+          "tests/app.test.tsx"
+        ],
+        "note": "The actual source/tests and production browser evidence support this criterion.",
+        "started": 1793266942998,
+        "workMs": 25466,
+        "reviewRevision": 2
+      },
+      {
+        "id": "counter",
+        "description": "Count starts at zero, Increment produces one then two, and reload resets it to zero.",
+        "status": "verified",
+        "files": [
+          "app/page.tsx"
+        ],
+        "tests": [
+          "tests/app.test.tsx"
+        ],
+        "note": "The actual source/tests and production browser evidence support this criterion.",
+        "reviewRevision": 2
+      }
+    ],
+    "events": [
+      {
+        "time": 1793266968462,
+        "phase": "developing",
+        "detail": "Working on heading: The main heading is Repair Verified.",
+        "revision": 2
+      },
+      {
+        "time": 1793266968466,
+        "phase": "reviewing",
+        "detail": "Checking heading against real source, tests and production DOM.",
+        "revision": 2
+      },
+      {
+        "time": 1793266968468,
+        "phase": "reviewing",
+        "detail": "Checking counter against real source, tests and production DOM.",
+        "revision": 2
+      },
+      {
+        "time": 1793266968470,
+        "phase": "install",
+        "detail": "Running install.",
+        "revision": 2
+      },
+      {
+        "time": 1793266968477,
+        "phase": "typecheck",
+        "detail": "Running typecheck.",
+        "revision": 2
+      },
+      {
+        "time": 1793266969439,
+        "phase": "tests",
+        "detail": "Running tests.",
+        "revision": 2
+      },
+      {
+        "time": 1793266969476,
+        "phase": "build",
+        "detail": "Building the actual Next.js program.",
+        "revision": 2
+      },
+      {
+        "time": 1793266989096,
+        "phase": "browser",
+        "detail": "Loading the production app and capturing a real screenshot.",
+        "revision": 2
+      },
+      {
+        "time": 1793266991472,
+        "phase": "source_zip",
+        "detail": "Running source_zip.",
+        "revision": 2
+      },
+      {
+        "time": 1793267015961,
+        "phase": "packaging",
+        "detail": "Packaging tested source and Windows executable.",
+        "revision": 2
+      },
+      {
+        "time": 1793267015980,
+        "phase": "revision_coverage",
+        "detail": "Checking full revision guidance against current output, QA and acceptance changes.",
+        "revision": 2
+      },
+      {
+        "time": 1793267015982,
+        "phase": "completed",
+        "detail": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+        "revision": 2
+      }
+    ],
+    "created": 1793266913547,
+    "updated": 1793267015982,
+    "calls": 17,
+    "errors": 0,
+    "message": "All recorded acceptance reviews, real build checks and requested artifact smoke tests passed.",
+    "milestoneMs": [
+      25466
+    ],
+    "milestoneStarted": 1793266968469,
+    "planOffset": 67,
+    "planningDone": true,
+    "targets": [
+      "zip"
+    ],
+    "parentTaskId": "1b49605d-1e2c-4a0e-b2d4-605746429921",
+    "parentRevision": 1,
+    "revisionNote": "Change the heading to Repair Verified and keep the counter working.",
+    "revisionPlan": {
+      "criteria": [
+        {
+          "id": "heading",
+          "description": "The main heading is Repair Baseline.",
+          "files": [
+            "app/page.tsx"
+          ],
+          "tests": [
+            "tests/app.test.tsx"
+          ]
+        },
+        {
+          "id": "counter",
+          "description": "Count starts at zero, Increment produces one then two, and reload resets it to zero.",
+          "files": [
+            "app/page.tsx"
+          ],
+          "tests": [
+            "tests/app.test.tsx"
+          ]
+        }
+      ],
+      "criterionOffset": 2,
+      "guidance": "Change the heading to Repair Verified and keep the counter working.",
+      "guidanceOffset": 67,
+      "stage": "ready",
+      "decisions": [
+        {
+          "id": "heading",
+          "action": "replace",
+          "description": "The main heading is Repair Verified.",
+          "reason": "The new guidance explicitly replaces the old heading."
+        },
+        {
+          "id": "counter",
+          "action": "keep",
+          "description": "Count starts at zero, Increment produces one then two, and reload resets it to zero.",
+          "reason": "The counter behavior must stay unchanged."
+        }
+      ],
+      "parentSourceHash": "cdea1113fa27eef3288000feb3e3dedf1216efb88af5cd9b8ee8b6c3c249d8b2",
+      "browserContract": {
+        "kind": "counter",
+        "label": "Count",
+        "button": "Increment"
+      },
+      "coverageOffset": 67,
+      "coverageRejected": false,
+      "coverageRevision": 2
+    },
+    "evidence": {
+      "revision": 2,
+      "checks": [
+        {
+          "id": "install",
+          "ok": true,
+          "detail": "bun install v1.3.14 (0d9b296a)\n\nChecked 33 installs across 63 packages (no changes) [2.00ms]\n",
+          "milliseconds": 6
+        },
+        {
+          "id": "typecheck",
+          "ok": true,
+          "detail": "",
+          "milliseconds": 960
+        },
+        {
+          "id": "tests",
+          "ok": true,
+          "detail": "bun test v1.3.14 (0d9b296a)\n\ntests/app.test.tsx:\n(pass) baseline heading and counter controls render [7.48ms]\n\n 1 pass\n 0 fail\n 3 expect() calls\nRan 1 test across 1 file. [33.00ms]\n",
+          "milliseconds": 35
+        },
+        {
+          "id": "build",
+          "ok": true,
+          "detail": "▲ Next.js 16.4.3 (webpack)\n✓ Running next.config.ts took 22ms\n- Experiments (use with caution):\n  · cpus: 1\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1144ms\n  Running TypeScript ...\n  Finished TypeScript in 1080ms ...\n  Collecting page data using 1 worker ...\n  Generating static pages using 1 worker (0/3) ...\n✓ Generating static pages using 1 worker (3/3) in 185ms\n  Finalizing page optimization ...\n  Collecting build traces ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n",
+          "milliseconds": 19614
+        },
+        {
+          "id": "browser",
+          "ok": true,
+          "detail": "Production app loaded; real browser screenshot and DOM captured. counter acceptance passed: 0 → 1 → 2, reload → 0",
+          "milliseconds": 2376
+        },
+        {
+          "id": "source_zip",
+          "ok": true,
+          "detail": "Source snapshot independently installed, typechecked, tested and built in a clean workspace.",
+          "milliseconds": 24487
+        }
+      ],
+      "dom": "Repair Verified\n0Increment",
+      "artifacts": [
+        {
+          "kind": "zip",
+          "name": "source.zip",
+          "sha256": "ca6c615dbd5eb05f1e0578db217b6c5272312302da3d426e589e7fa3e770b6d1",
+          "bytes": 165918,
+          "smokeTested": true
+        }
+      ],
+      "headings": [
+        "Repair Verified"
+      ],
+      "screenshot": "revision-2.png"
+    },
+    "reads": [
+      "0:app/page.tsx:0",
+      "1:tests/app.test.tsx:0"
+    ],
+    "editHistory": [
+      "6cd4ea6198fd8810a658a751f4d4a1173faae1e730d5912f89ed57c1e45f0005",
+      "0239af15fef536863e4eb7bb6eacdadc841a37945eac17cf98adb8dba216637c"
+    ],
+    "lastProgressCall": 16
+  },
+  "parentSourceSha": "e968c101351f5154f7816e3ccdd1807fb2d9c6a832d8c98538672c6281c8e076",
+  "parentZipSha": "e96cd00d5e8a108e56bfef4428fbee117935acfd5f52402f6e98e19432d16ede",
+  "childZipSha": "ca6c615dbd5eb05f1e0578db217b6c5272312302da3d426e589e7fa3e770b6d1",
+  "parentUnchanged": true
+}
