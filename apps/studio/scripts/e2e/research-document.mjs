@@ -85,6 +85,7 @@ const goalDiagnostic = goal => [goal.message, goal.briefState?.draftCheck?.reaso
 
 async function runCase(browser, viewportName, options) {
   const notes = viewportName === 'narrow' ? phoneNotes : shortNotes, pointer = viewportName === 'narrow' ? 'tap' : 'click';
+  const layoutViewports = [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}].filter((viewport, index, values) => values.findIndex(value => value.width === viewport.width && value.height === viewport.height) === index);
   if (viewportName === 'narrow') assert(notes.length >= 1500 && notes.length <= 1800, 'The phone goal uses a meaningful bounded personal handoff, not repeated padding.');
   const folder = join(options.output, 'research-document-' + viewportName); await mkdir(folder);
   const data = join(folder, 'private-data'); await mkdir(data);
@@ -342,7 +343,7 @@ async function runCase(browser, viewportName, options) {
     record.renderedPages = Array.from({length: pdfInspection.pageCount}, (_, index) => 'downloaded-pdf-page-' + (index + 1) + '.png');
     assertStep('Actual browser PDF download signature/hash and independent exact-URL matching-body MIME pass; PyMuPDF rendering/extracted text preserves every requested fact/note/source identity/literal citation.', {pages: pdfInspection.pageCount, pdfSha256: pdf.receipt.sha256});
 
-    for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {
+    for (const viewport of layoutViewports) {
       await page.setViewportSize(viewport); await openGoals();
       for (const name of ['Open brief PDF', 'Open brief HTML', 'Download brief PDF', 'Download brief HTML']) await reachable(action(card(child.id), name), name);
       await screenshot('saved-brief-actions-' + viewport.width + 'x' + viewport.height, action(card(child.id), 'Open brief PDF'));
@@ -367,7 +368,7 @@ async function runCase(browser, viewportName, options) {
       const previous = page.getByRole('button', {name: 'Previous PDF page', exact: true}); await reachable(previous, 'Previous PDF page'); if (viewportName === 'narrow') await previous.tap(); else await previous.press('Enter'); await decodedPdfPage(lastPageNumber - 1);
       await page.getByRole('button', {name: 'Next PDF page', exact: true})[pointer](); await decodedPdfPage(lastPageNumber);
     } else assert(await page.getByRole('button', {name: 'Previous PDF page', exact: true}).isDisabled());
-    for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {
+    for (const viewport of layoutViewports) {
       await page.setViewportSize(viewport); const image = await decodedPdfPage(lastPageNumber);
       const fit = page.getByRole('button', {name: 'Fit PDF width', exact: true}), zoomIn = page.getByRole('button', {name: 'Zoom in PDF', exact: true}), zoomOut = page.getByRole('button', {name: 'Zoom out PDF', exact: true});
       if (await fit.isEnabled()) await fit[pointer]();
@@ -439,7 +440,7 @@ async function runCase(browser, viewportName, options) {
     for (const source of child.sources) assert(htmlLinks.includes(source.url), 'Actual HTML anchors must preserve each complete original source URL.');
     record.sourceLinkChecks = {pdfUris: pdfLinks.map(link => link.uri).filter(Boolean), htmlHrefs: htmlLinks, containedPdfLinkRectangles: true, referenceLabelsWithQuoteOpenings: true};
     assert.equal(await exported.locator('script,iframe,form,object,embed').count(), 0, 'The document must not execute generated code or embed remote content.');
-    for (const viewport of [viewports[viewportName], {width: 360, height: 800}, {width: 360, height: 420}]) {
+    for (const viewport of layoutViewports) {
       await exported.setViewportSize(viewport); assert(await exported.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Downloaded HTML must fit the viewport.');
       const file = 'downloaded-html-' + viewport.width + 'x' + viewport.height + '.png'; await exported.screenshot({path: join(folder, file)}); if (!record.screenshots.includes(file)) record.screenshots.push(file);
     }
