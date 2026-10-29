@@ -93,3 +93,9 @@ test('abort stops inference before a call and discards a late generated answer',
 test('duplicate source identifiers cannot provide ambiguous evidence', async () => {
   await expect(runAnalysis('When does it open?', {evidence: [source, {...source, text: 'Conflicting evidence.'}]}, signal(), async () => grounded)).rejects.toThrow('unique');
 });
+
+test('a quoted source cannot simultaneously be reported missing, while an absent fact can be stated', async () => {
+  await expect(runAnalysis('When does it open?', {evidence: [source]}, signal(), async () => ({...grounded, uncertainty: 'The exact source statement is not provided.'}))).rejects.toThrow('supplied source was missing');
+  const result = await runAnalysis('What year did it open?', {evidence: [source]}, signal(), async () => ({...grounded, response: 'The opening year is unknown from this excerpt.', uncertainty: 'The opening year is not provided.'}));
+  expect(result.message).toContain('opening year is not provided');
+});

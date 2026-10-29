@@ -12,6 +12,8 @@ node scripts/test-user-journeys.mjs --journey bakery-website --require-model
 
 The journeys use visible text entry, actual windows/buttons and a native file chooser. Independent GETs verify saved requests, output state and artifact identity. Actual downloaded HTML, ZIP, PDF and PNG bytes are inspected. Every AI goal is submitted through the interface and reaches a persisted outcome before its real runtime blocker is classified.
 
+The counter application has a bounded ten-minute goal deadline because genuine generation, dependency installation, production build and clean-source QA can exceed a short browser action timeout. Its acceptance criteria are unchanged. Phase/model-call changes are recorded in `progress.json` and the console while work runs, rather than weakening completion checks when it takes longer.
+
 | Journey | User outcome |
 | --- | --- |
 | `discover-capabilities` | Ask what is possible, then find/open Goals, Work and Software through visible actions. |

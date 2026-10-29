@@ -12,7 +12,7 @@ const url = 'https://raw.githubusercontent.com/whatwg/fetch/main/README.md';
 const question = 'Which standard does this repository host?\nUse the supplied evidence.';
 const content = 'This repository hosts the Fetch Standard.\n' + 'More saved text. '.repeat(160);
 const page = () => describePublicSource(url, {url, type: 'text/plain', bytes: new TextEncoder().encode(content)});
-const accept: Infer = async (system) => system.startsWith('Analysis specialist')
+const accept: Infer = async (_system, _packet, schema) => (schema.properties as Record<string, unknown>)?.citations !== undefined
   ? {response: 'The repository hosts the Fetch Standard.', citations: [{id: 'source-1', quote: 'This repository hosts the Fetch Standard.'}], uncertainty: 'Only the selected excerpt supports this answer.'}
   : {accepted: true, reason: 'The recorded source quotes and saved question satisfy the bounded acceptance criterion.'};
 const noModel: Infer = async () => {throw new Error('Local AI is unavailable (test fixture).');};

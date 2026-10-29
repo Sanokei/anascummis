@@ -102,3 +102,31 @@ test('literal operations finish on inspected values and reject invented copy bef
 test('delegation rejects fabricated handoff IDs before creating a subagent',async()=>{
   let site=initialSite();const result=await orchestrate('Change title',{site},demoTools(()=>site,s=>{site=s;},[]),signal(),scripted([route('delegate'),assign('website','Change title',['invented']),route('delegate'),assign('website','Change title',['invented'])]));expect(result.orchestration.tasks).toHaveLength(0);expect(site.title).toBe(initialSite().title);expect(result.orchestration.stopReason).toBe('failure_limit');
 });
+
+test('delegation arguments receive explicit complete agent contracts instead of a partial memory preview',async()=>{
+  let site=initialSite();const prompts:string[]=[],tools=[...demoTools(()=>site,s=>{site=s;},[]),{name:'read_software_source',description:'Read public source',schema:objectSchema({path:{type:'string'}}),run:async()=>({text:'source'})}];
+  await orchestrate('Inspect the existing website before deciding what to improve.',{site},tools,signal(),scripted([route('delegate'),assign('website','Inspect website'),route('inspect_site'),{},finish,finish],prompts));
+  const handoff=prompts.find(packet=>packet.startsWith('Coordinator delegation.'))!;
+  expect(handoff).toContain('"id":"website","description":"Website copy, layout, uploaded images and theme."');expect(handoff).toContain('"id":"software"');expect(handoff).toContain('Inspect the existing website before deciding what to improve.');expect(handoff).not.toContain('"preview"');expect(handoff).not.toContain('"partial"');
+});
+
+test('compound exact copy writes separate grounded values and verifies both while preserving other content',async()=>{
+  let site=initialSite();const original=structuredClone(site),writes:{field:unknown;value:unknown}[]=[],tools=demoTools(()=>site,s=>{site=s;},[]).map(tool=>tool.name==='set_copy'?{...tool,run:async(args:unknown)=>{writes.push(args as any);return tool.run(args);}}:tool);
+  const request='Set my website title to "Cedar\'s Kitchen" and subtitle to "Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.". Preserve the other content.';
+  const result=await orchestrate(request,{site},tools,signal(),scripted([route('delegate'),assign('website',request),{field:'title',value:"Cedar's Kitchen"},{field:'subtitle',value:'Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.'}]));
+  expect(writes).toEqual([{field:'title',value:"Cedar's Kitchen"},{field:'subtitle',value:'Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.'}]);expect(site).toEqual({...original,title:"Cedar's Kitchen",subtitle:'Fresh bread every morning. Open Tuesday to Sunday, 7 am to 2 pm.'});expect(result.orchestration.stopReason).toBe('finished');expect(result.orchestration.used.calls).toBe(4);expect(result.trace.at(-1)).toMatchObject({taskId:'copy-acceptance'});
+});
+
+test('one successful copy field cannot complete a compound request whose second field failed',async()=>{
+  let site=initialSite();const before=site.subtitle,request='Set website title to "Field Notes" and subtitle to "A daily journal."';
+  const result=await orchestrate(request,{site},demoTools(()=>site,s=>{site=s;},[]),signal(),scripted([route('delegate'),assign('website','Set title to "Field Notes"'),{field:'title',value:'Field Notes'},{field:'subtitle',value:'Invented'},{field:'subtitle',value:'Invented'},finish]));
+  expect(site.title).toBe('Field Notes');expect(site.subtitle).toBe(before);expect(result.orchestration.stopReason).toBe('incomplete');expect(result.orchestration.tasks[0].status).toBe('failed');
+});
+
+test('literal copy acceptance rejects collateral changes and stale final inspection',async()=>{
+  for(const collateral of [true,false]){
+    let site=initialSite(),reads=0;const tools=demoTools(()=>site,s=>{site=s;},[]).map(tool=>tool.name==='set_copy'&&collateral?{...tool,run:async(args:unknown)=>{const result=await tool.run(args);site.accent='#123456';return result;}}:tool.name==='inspect_site'?{...tool,run:async(args:unknown)=>{reads++;if(!collateral&&reads===3)site.title='Changed after the specialist review';return tool.run(args);}}:tool);
+    const result=await orchestrate('Set website title to "Field Notes"',{site},tools,signal(),scripted([route('delegate'),assign('website','Set title to "Field Notes"'),{field:'title',value:'Field Notes'},finish]));
+    expect(result.orchestration.stopReason).toBe('incomplete');expect(result.message).toContain(collateral?'unfinished':'current host state');
+  }
+});

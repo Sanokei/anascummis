@@ -124,7 +124,8 @@ export const journeys = [
     id: 'public-source-answer', prerequisite: 'Permitted public-source access and a real local model for the final answer.',
     goal: 'Answer which standard a public repository hosts, cite saved source evidence, and retain the answer or unfinished question after reload.',
     async run(ctx) {
-      await ctx.send('show goals'); await ctx.closeComposer();
+      await ctx.send('What can you do?'); await ctx.closeComposer();
+      await ctx.page.getByRole('region', {name: 'Getting started', exact: true}).getByRole('button', {name: 'Open Goals', exact: true}).click();
       await ctx.page.getByRole('checkbox', {name: 'Question from public sources', exact: true}).check();
       const question = 'Which standard does this repository host? Cite the exact supplied source statement.';
       await ctx.page.getByRole('textbox', {name: 'Exact question', exact: true}).fill(question);
@@ -148,9 +149,14 @@ export const journeys = [
       }
       const answer = goal.tasks.find(task => task.sourceAnswer)?.execution?.sourceAnswer;
       assert(answer?.citations?.length); assert.match(answer.text, /\bFetch Standard\b/i);
+      ctx.record.answerQuality = {text: answer.text, uncertainty: answer.uncertainty};
+      assert.doesNotMatch(answer.uncertainty, /(?:exact\s+)?(?:cited\s+|quoted\s+|supplied\s+|selected\s+)?(?:source\s+)?(?:statement|excerpt)\s+(?:is|was|are|were)\s+not\s+(?:provided|supplied|available)/i,
+        'The answer cannot quote the supplied host statement and then claim that statement/excerpt was not provided.');
       assert(answer.citations.some(citation => /repository hosts[^\n]{0,100}Fetch Standard/i.test(citation.quote)), 'At least one citation must support which standard the repository hosts.');
       for (const citation of answer.citations) {const saved = await ctx.readApi('/api/goals/' + goal.id + '/sources/' + citation.sourceId + '?offset=0'); assert.equal(saved.text.slice(citation.offset, citation.offset + citation.quote.length), citation.quote); assert.equal(citation.textSha256, saved.source.textSha256);}
       const shown = ctx.page.getByRole('region', {name: 'Source-grounded answer', exact: true}); await shown.waitFor(); assert((await shown.innerText()).includes(answer.text));
+      await ctx.screenshot('source-grounded-answer-after-reload', shown.locator('h4'));
+      await ctx.screenshot('source-answer-uncertainty-and-limit', shown.locator('> p').last());
       ctx.assert('Real model answer names Fetch and literal citations match the real saved source.');
     }
   },
@@ -160,8 +166,22 @@ export const journeys = [
     async run(ctx) {
       const request = 'Build a small counter application with heading Bakery Orders, a count starting at zero, an Increment button that adds one, and a Reset button that returns to zero. Include browser checks and give me the source ZIP.';
       await ctx.send(request); await ctx.closeComposer(); await ctx.page.locator('.software-panel').waitFor();
-      let task;
-      await ctx.until(async () => {task = (await ctx.readApi('/api/software'))[0]; return task && ['completed', 'needs_input', 'cancelled'].includes(task.status);}, 'counter app reaches a recorded outcome', 180_000);
+      let task, previousProgress = '';
+      await ctx.until(async () => {
+        task = (await ctx.readApi('/api/software'))[0];
+        if (task) {
+          const state = {id: task.id, status: task.status, phase: task.phase, revision: task.revision, modelCalls: task.calls};
+          const progress = JSON.stringify(state);
+          if (progress !== previousProgress) {
+            previousProgress = progress;
+            const entry = {time: new Date().toISOString(), ...state};
+            (ctx.record.goalProgress ||= []).push(entry);
+            await writeFile(join(ctx.folder, 'progress.json'), JSON.stringify(entry, null, 2) + '\n');
+            console.log('ACTIVE counter-application [' + ctx.record.viewport + '] ' + task.status + ' · ' + task.phase + ' · model calls ' + task.calls);
+          }
+        }
+        return task && ['completed', 'needs_input', 'cancelled'].includes(task.status);
+      }, 'counter app reaches a recorded outcome (10 minute bound for genuine generation/install/build/QA)', 600_000);
       ctx.record.persistedSoftware = task;
       await ctx.screenshot('counter-application-outcome', ctx.page.locator('[data-software-task-id="' + task.id + '"]'));
       assert.equal(task.goal, request); const savedId = task.id;
