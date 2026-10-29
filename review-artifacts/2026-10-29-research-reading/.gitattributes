@@ -1,0 +1,2 @@
+# Preserve original command output byte-for-byte, including blank lines.
+*.log binary

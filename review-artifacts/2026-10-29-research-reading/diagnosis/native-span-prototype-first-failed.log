@@ -1,0 +1,8 @@
+1 | import{infer}from"./core/model";import{objectSchema,validate}from"./core/harness";import{citationSpans}from"./core/source-citation-spans";import{SOURCE_SPAN_ROLE}from"./core/source-question";import{writeFile}from"node:fs/promises";import{createHash}from"node:crypto";const root="/workspace/.cloud-env/anascummis/research-reading",input=await Bun.file(root+"/native-literal-input.json").json(),sources=input.plan.ranges.map((r:any)=>({id:r.label,text:r.text})),spans=citationSpans(sources);const packet={sources:sources.map((s:any)=>({id:s.id,spans:spans.filter(x=>x.sourceId===s.id).map(x=>({id:x.id,text:x.text}))})),request:input.question};const schema=objectSchema({response:{type:"string",maxLength:600},citations:{type:"array",minItems:1,maxItems:2,items:{type:"string",enum:spans.map(s=>s.id)}},uncertainty:{type:"string",maxLength:160},answerable:{type:"boolean"},answerabilityReason:{type:"string",maxLength:160}});const result:any={scope:"ONE real native prototype, all literal uniformly chunked spans from saved800
+
+TypeError: The "data" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received an instance of ArrayBuffer
+ code: "ERR_INVALID_ARG_TYPE"
+
+      at /workspace/anascummis/apps/studio/[eval]:1:1237
+
+Bun v1.3.14 (Linux x64)

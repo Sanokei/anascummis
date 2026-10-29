@@ -1,0 +1,483 @@
+{
+  "goal": "Where are the Fetch Standard\u2019s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+  "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+  "fixture": "Fresh ordinary production host, actual permitted public fetch, persisted full source, existing genuine native Qwen3-0.6B inference. No API seeding or inference/voice responses mocked. External browser network blocked solely to prevent model/voice weight downloads.",
+  "pid": 10655,
+  "port": 39027,
+  "data": "/workspace/.cloud-env/anascummis/later-source-before/native-Zo9600",
+  "startedAt": "2026-10-29T17:23:16.152Z",
+  "sourceHead": "678264ac5fd075921ef7e780f333c00432857423",
+  "sourceDirty": false,
+  "browserErrors": [],
+  "blockedExternal": [
+    "https://huggingface.co/Xenova/whisper-tiny.en/resolve/main/config.json"
+  ],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T17:23:17.027Z"
+    },
+    {
+      "path": "/api/goals",
+      "time": "2026-10-29T17:23:18.719Z"
+    }
+  ],
+  "screenshots": [
+    "native-later-question-outcome-desktop.png",
+    "native-later-source-evidence-narrow.png",
+    "native-incorrect-answer-accepted-desktop.png",
+    "native-incorrect-answer-accepted-narrow.png",
+    "native-retained-test-dashboard-outside-selected-range.png"
+  ],
+  "runtimeBefore": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "acquired": {
+    "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+    "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+    "title": "README.md",
+    "retrievedAt": "2026-10-29T17:23:19.076Z",
+    "type": "text/plain",
+    "bytes": 4815,
+    "textLength": 4815,
+    "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+    "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+    "normalization": "public-text-v1",
+    "id": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+    "goalId": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+    "taskId": "source-1"
+  },
+  "sourceIdentity": {
+    "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+    "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+    "title": "README.md",
+    "retrievedAt": "2026-10-29T17:23:19.076Z",
+    "type": "text/plain",
+    "bytes": 4815,
+    "textLength": 4815,
+    "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+    "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+    "normalization": "public-text-v1",
+    "id": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+    "goalId": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+    "taskId": "source-1"
+  },
+  "savedPages": [
+    {
+      "source": {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T17:23:19.076Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+        "goalId": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+        "taskId": "source-1"
+      },
+      "offset": 0,
+      "end": 1000,
+      "text": "This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/) developed by the [WHATWG community](https://whatwg.org/).\n\n## Code of conduct\n\nWe are committed to providing a friendly, safe, and welcoming environment for all. Please read and respect the [Code of Conduct](https://whatwg.org/code-of-conduct).\n\n## Contribution opportunities\n\nFolks notice minor and larger issues with the Fetch Standard all the time and we'd love your help fixing those. Pull requests for typographical and grammar errors are also most welcome.\n\nIssues labeled [\"good first issue\"](https://github.com/whatwg/fetch/labels/good%20first%20issue) are a good place to get a taste for editing the Fetch Standard. Note that we don't assign issues and there's no reason to ask for availability either, just provide a pull request.\n\nIf you are thinking of suggesting a new feature, read through the [FAQ](https://whatwg.org/faq) and [Working Mode](https:/"
+    },
+    {
+      "source": {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T17:23:19.076Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+        "goalId": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+        "taskId": "source-1"
+      },
+      "offset": 1000,
+      "end": 2000,
+      "text": "/whatwg.org/working-mode) documents to get yourself familiarized with the process.\n\nWe'd be happy to help you with all of this [on Chat](https://whatwg.org/chat).\n\n## Pull requests\n\nIn short, change `fetch.bs` and submit your patch, with a [good commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md).\n\nPlease add your name to the Acknowledgments section in your first pull request, even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-"
+    },
+    {
+      "source": {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T17:23:19.076Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+        "goalId": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+        "taskId": "source-1"
+      },
+      "offset": 2000,
+      "end": 3000,
+      "text": "tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything. See more in the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md#building).\n\n## Formatting\n\nUse a column width of 100 characters.\n\nDo not use newlines inside \"inline\" elements, even if that means exceeding the column width requirement.\n```html\n<p>The\n<dfn method for=DOMTokenList lt=remove(tokens)|remove()><code>remove(<var>tokens</var>&hellip;)</code></dfn>\nmethod, when invoked, must run these steps:\n```\nis okay and\n  ```html\n<p>The <dfn method for=DOMTokenList\nlt=remove(tokens)|remove()><code>remove(<var>tokens</var>&hellip;)</code></dfn> method, when\ninvoked, must run these steps:\n```\nis not.\n\nUsing newlines b"
+    },
+    {
+      "source": {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T17:23:19.076Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+        "goalId": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+        "taskId": "source-1"
+      },
+      "offset": 3000,
+      "end": 4000,
+      "text": "etween \"inline\" element tag names and their content is also forbidden. (This actually alters the content, by adding spaces.) That is\n```html\n<a>token</a>\n```\nis fine and\n```html\n<a>token\n</a>\n```\nis not.\n\nAn `<li>` element always has a `<p>` element inside it, unless it's a child of `<ul class=brief>`.\n\nIf a \"block\" element contains a single \"block\" element, do not put it on a newline.\n\nDo not indent for anything except a new \"block\" element. For instance\n```html\n <li><p>For each <var>token</var> in <var>tokens</var>, in given order, that is not in\n <a>tokens</a>, append <var>token</var> to <a>tokens</a>.\n```\nis not indented, but\n```html\n<ol>\n <li>\n  <p>For each <var>token</var> in <var>tokens</var>, run these substeps:\n\n  <ol>\n   <li><p>If <var>token</var> is the empty string, <a>throw</a> a {{SyntaxError}} exception.\n```\nis.\n\nEnd tags may be included (if done consistently) and attributes may be quoted (using double quotes), though the prevalent theme is to omit end tags and not quote"
+    },
+    {
+      "source": {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T17:23:19.076Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+        "goalId": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+        "taskId": "source-1"
+      },
+      "offset": 4000,
+      "end": 4815,
+      "text": " attributes (unless they contain a space).\n\nPlace one newline between paragraphs (including list elements). Place three newlines before `<h2>`, and two newlines before other headings. This does not apply when a nested heading follows the parent heading.\n```html\n<ul>\n <li><p>Do not place a newline above.\n\n <li><p>Place a newline above.\n</ul>\n\n<p>Place a newline above.\n\n\n<h3>Place two newlines above.</h3>\n\n<h4>Placing one newline is OK here.</h4>\n\n\n<h4>Place two newlines above.</h4>\n```\nUse camel-case for variable names and \"spaced\" names for definitions, algorithms, etc.\n```html\n<p>A <a for=/>request</a> has an associated\n<dfn export for=request id=concept-request-redirect-mode>redirect mode</dfn>,...\n```\n```html\n<p>Let <var>redirectMode</var> be <var>request</var>'s <a for=request>redirect mode</a>.\n```\n"
+    }
+  ],
+  "fullTextSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+  "first800": "This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/) developed by the [WHATWG community](https://whatwg.org/).\n\n## Code of conduct\n\nWe are committed to providing a friendly, safe, and welcoming environment for all. Please read and respect the [Code of Conduct](https://whatwg.org/code-of-conduct).\n\n## Contribution opportunities\n\nFolks notice minor and larger issues with the Fetch Standard all the time and we'd love your help fixing those. Pull requests for typographical and grammar errors are also most welcome.\n\nIssues labeled [\"good first issue\"](https://github.com/whatwg/fetch/labels/good%20first%20issue) are a good place to get a taste for editing the Fetch Standard. Note that we don't assign issues and th",
+  "evidencePositions": [
+    {
+      "needle": "## Tests",
+      "start": 1768,
+      "end": 1776,
+      "inSelectedFirst800": false
+    },
+    {
+      "needle": "web-platform-tests/wpt",
+      "start": 1987,
+      "end": 2009,
+      "inSelectedFirst800": false
+    },
+    {
+      "needle": "wpt.fyi/results/fetch",
+      "start": 2135,
+      "end": 2156,
+      "inSelectedFirst800": false
+    }
+  ],
+  "goalOutcome": {
+    "id": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+    "request": "Where are the Fetch Standard\u2019s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+    "projectId": "17c2ca2d-22ef-4301-8af8-8d2ee2fda386",
+    "research": true,
+    "status": "completed",
+    "phase": "completed",
+    "message": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified.",
+    "tasks": [
+      {
+        "id": "source-1",
+        "specialist": "research",
+        "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "description": "Save public source 1 for this question.",
+        "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+        "dependsOn": [],
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "Public response and full extracted text saved. Acquisition identity only; no answer or factual verification.",
+          "verified": true,
+          "evidence": [
+            "Saved source c59e7205-a0f7-4391-995d-b527b32c0a80: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+            "Retrieved 2026-10-29T17:23:19.076Z; 4815 bytes; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "Text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; 4815 text positions; public-text-v1"
+          ],
+          "sourceId": "c59e7205-a0f7-4391-995d-b527b32c0a80"
+        },
+        "review": {
+          "accepted": true,
+          "reason": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality."
+        }
+      },
+      {
+        "id": "source-answer",
+        "specialist": "analysis",
+        "sourceAnswer": true,
+        "description": "Answer the exact saved question using selected saved-source excerpts.",
+        "acceptance": "A bounded answer cites exact quotes tied to saved source identities and selected ranges, states uncertainty and its factual verification limit.",
+        "dependsOn": [
+          "source-1"
+        ],
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "The Fetch Standard\u2019s tests are kept in the repository, and you can see them running against browser engines by visiting the repository's documentation or the relevant sections of the README statements provided in the source excerpts.\n\nSupplied source excerpts:\n[source-1] \u201cThis repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/)\u201d\n[source-1] \u201cWe are committed to providing a friendly, safe, and welcoming environment for all.\u201d\n\nThe specific location of the tests and the exact details of where they can be seen are not explicitly stated in the excerpts provided. Quoted excerpts match the supplied sources. The answer\u2019s factual accuracy has not been independently verified.",
+          "verified": true,
+          "evidence": [
+            "Exact supplied-source quote [source-1]: This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/)",
+            "Exact supplied-source quote [source-1]: We are committed to providing a friendly, safe, and welcoming environment for all.",
+            "Quoted excerpts match the supplied sources. The answer\u2019s factual accuracy has not been independently verified."
+          ],
+          "sourceAnswer": {
+            "text": "The Fetch Standard\u2019s tests are kept in the repository, and you can see them running against browser engines by visiting the repository's documentation or the relevant sections of the README statements provided in the source excerpts.",
+            "citations": [
+              {
+                "sourceId": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+                "label": "source-1",
+                "quote": "This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/)",
+                "offset": 0,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+              },
+              {
+                "sourceId": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+                "label": "source-1",
+                "quote": "We are committed to providing a friendly, safe, and welcoming environment for all.",
+                "offset": 215,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+              }
+            ],
+            "uncertainty": "The specific location of the tests and the exact details of where they can be seen are not explicitly stated in the excerpts provided.",
+            "limit": "Quoted excerpts match the supplied sources. The answer\u2019s factual accuracy has not been independently verified.",
+            "selections": [
+              {
+                "sourceId": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+                "label": "source-1",
+                "start": 0,
+                "end": 800,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+              }
+            ]
+          }
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The milestone acceptance criterion is satisfied by citing the provided excerpts, which state that the tests are kept in the repository and can be accessed by visiting the repository's documentation or the relevant sections of the README statements. The uncertainty regarding specific locations and exact details is acknowledged, and the evidence meets the stated criterion."
+        }
+      }
+    ],
+    "created": 1793294598723,
+    "updated": 1793294612412,
+    "events": [
+      {
+        "time": 1793294598723,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Question and source reading steps saved. Public requests send only the URLs. The answer requires the local model."
+      },
+      {
+        "time": 1793294598730,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Save public source 1 for this question.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793294598732,
+        "role": "executor",
+        "phase": "fetching_source",
+        "detail": "Fetching public source: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793294599078,
+        "role": "executor",
+        "phase": "source_saved",
+        "detail": "Saved 4815 response bytes and full text; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793294599082,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793294599086,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793294599087,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793294599093,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Answer the exact saved question using selected saved-source excerpts.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793294599097,
+        "role": "executor",
+        "phase": "answering_sources",
+        "detail": "Answering the exact question from the first 800 text positions of each saved source. The full saved text remains inspectable. Requires local inference.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793294603997,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793294609028,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "The milestone acceptance criterion is satisfied by citing the provided excerpts, which state that the tests are kept in the repository and can be accessed by visiting the repository's documentation or the relevant sections of the README statements. The uncertainty regarding specific locations and exact details is acknowledged, and the evidence meets the stated criterion.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793294609030,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793294609033,
+        "role": "reviewer",
+        "phase": "reviewing_goal",
+        "detail": "Checking that verified milestones cover the full saved goal."
+      },
+      {
+        "time": 1793294612405,
+        "role": "reviewer",
+        "phase": "goal_page_verified",
+        "detail": "Reviewed 144 of 144 goal characters. The goalPage's question is addressed by verified milestones. The milestone 'source-1' ensures that the tests are kept in the repository and can be accessed by visiting the repository's documentation or the relevant sections of the README statements. The milestone 'source-answer' confirms that the exact question is answered using selected source excerpts, citing uncertainty and factual verification limits."
+      },
+      {
+        "time": 1793294612412,
+        "role": "coordinator",
+        "phase": "completed",
+        "detail": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified."
+      }
+    ],
+    "planningOffset": 144,
+    "planningDone": true,
+    "planningCalls": 0,
+    "coverageOffset": 144,
+    "coverageDone": true,
+    "notes": [],
+    "sourceQuestion": {
+      "urls": [
+        "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+      ]
+    },
+    "sources": [
+      {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T17:23:19.076Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+        "goalId": "0fcd35d8-efe6-4600-9e29-9549f8ed2469",
+        "taskId": "source-1"
+      }
+    ]
+  },
+  "runtimeAfter": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "nativeOutcome": {
+    "status": "completed",
+    "phase": "completed",
+    "message": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified.",
+    "sourceReadingAttempt": 1,
+    "answerExecution": {
+      "message": "The Fetch Standard\u2019s tests are kept in the repository, and you can see them running against browser engines by visiting the repository's documentation or the relevant sections of the README statements provided in the source excerpts.\n\nSupplied source excerpts:\n[source-1] \u201cThis repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/)\u201d\n[source-1] \u201cWe are committed to providing a friendly, safe, and welcoming environment for all.\u201d\n\nThe specific location of the tests and the exact details of where they can be seen are not explicitly stated in the excerpts provided. Quoted excerpts match the supplied sources. The answer\u2019s factual accuracy has not been independently verified.",
+      "verified": true,
+      "evidence": [
+        "Exact supplied-source quote [source-1]: This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/)",
+        "Exact supplied-source quote [source-1]: We are committed to providing a friendly, safe, and welcoming environment for all.",
+        "Quoted excerpts match the supplied sources. The answer\u2019s factual accuracy has not been independently verified."
+      ],
+      "sourceAnswer": {
+        "text": "The Fetch Standard\u2019s tests are kept in the repository, and you can see them running against browser engines by visiting the repository's documentation or the relevant sections of the README statements provided in the source excerpts.",
+        "citations": [
+          {
+            "sourceId": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+            "label": "source-1",
+            "quote": "This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/)",
+            "offset": 0,
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+          },
+          {
+            "sourceId": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+            "label": "source-1",
+            "quote": "We are committed to providing a friendly, safe, and welcoming environment for all.",
+            "offset": 215,
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+          }
+        ],
+        "uncertainty": "The specific location of the tests and the exact details of where they can be seen are not explicitly stated in the excerpts provided.",
+        "limit": "Quoted excerpts match the supplied sources. The answer\u2019s factual accuracy has not been independently verified.",
+        "selections": [
+          {
+            "sourceId": "c59e7205-a0f7-4391-995d-b527b32c0a80",
+            "label": "source-1",
+            "start": 0,
+            "end": 800,
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+          }
+        ]
+      }
+    },
+    "answerReview": {
+      "accepted": true,
+      "reason": "The milestone acceptance criterion is satisfied by citing the provided excerpts, which state that the tests are kept in the repository and can be accessed by visiting the repository's documentation or the relevant sections of the README statements. The uncertainty regarding specific locations and exact details is acknowledged, and the evidence meets the stated criterion."
+    }
+  },
+  "productGoalAchieved": false,
+  "conclusion": "User goal not achieved: supporting README statements exist in the full retained source after the fixed selected first800 positions; no citation-backed answer using them was produced.",
+  "outcome": "recorded",
+  "readOnlyReopen": {
+    "pid": 10839,
+    "port": 38157,
+    "mode": "Fresh ordinary owned host reopening persisted native result only; no API mutations or inference rerun."
+  },
+  "existingNativeModelProcess": "PID                  STARTED COMMAND\n    700 Thu Oct 29 16:21:36 2026 /workspace/.cloud-tools/llama/llama-b11960/llama-server -m /workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf --host 127.0.0.1 --port 8081 -ngl 0 -c 2048 -t 4 --parallel 1 --jinja --reasoning off --cors-origins localhost"
+}

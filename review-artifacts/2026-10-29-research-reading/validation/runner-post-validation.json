@@ -1,0 +1,43 @@
+{
+  "verifiedAt": "2026-10-29T18:27:59.067022+00:00",
+  "reports": [
+    {
+      "report": "later-source-native-final/report.json",
+      "sha256": "8f7dfcf1d49f5c83873baf58b852454f26de9dcee2eb90343c5059daaa759177",
+      "source": "ae14b819d142bf047e9c1ae32f0ee131d4ba6074",
+      "outcomes": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "actualExitCode": 0,
+      "assertions": 18,
+      "currentFingerprintsVerified": {
+        "runnerSource": 5,
+        "servedBuild": 88,
+        "applicationSource": 25
+      }
+    },
+    {
+      "report": "source-span-regression/report.json",
+      "sha256": "65a77c29075b25627bbf3247ba4c6f5d92bed9b3b301734e53a3e473a5724acf",
+      "source": "ae14b819d142bf047e9c1ae32f0ee131d4ba6074",
+      "outcomes": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "actualExitCode": 0,
+      "assertions": 6,
+      "currentFingerprintsVerified": {
+        "runnerSource": 5,
+        "servedBuild": 88,
+        "applicationSource": 25
+      }
+    }
+  ],
+  "unknownPostalAddressAnswered": false,
+  "realRefusalRetries": 2,
+  "historyScope": "Two actual native refused attempts per viewport on one unchanged reading; prior exact draft/support decision archived and reinspected after close/reload. No invented archived-guidance history.",
+  "citationMethod": "Real model selects span IDs; host resolves literal text, offsets and hashes. Actual later answer checked against exact requested facts."
+}

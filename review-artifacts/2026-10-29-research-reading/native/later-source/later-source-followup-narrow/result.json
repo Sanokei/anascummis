@@ -1,0 +1,1764 @@
+{
+  "id": "later-source-followup",
+  "viewport": "narrow",
+  "goal": "Answer both later README test-location facts, ask a separate build question from retained sources without refetching, and keep an unanswerable control unfinished.",
+  "startedAt": "2026-10-29T18:22:05.106Z",
+  "status": "passed",
+  "lane": "real-local-runtime",
+  "prerequisite": "Permitted real public-source fetch and an actual local inference runtime.",
+  "assertions": [
+    {
+      "name": "Closed reading history is lazy; explicit current-plan inspect verifies the full saved ranges and closes without submission.",
+      "passed": true
+    },
+    {
+      "name": "Hashed question passages were saved before the answering phase; absolute later citations and visible inspected text match.",
+      "passed": true,
+      "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "readingId": "957e8156-15a2-4196-9015-bcc22ec140e6",
+      "citations": [
+        {
+          "offset": 1914,
+          "quote": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt)."
+        },
+        {
+          "offset": 2057,
+          "quote": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+        }
+      ]
+    },
+    {
+      "name": "Closing/reopening/reloading preserves the question, reading, answer, source identity and the single original acquisition without replay.",
+      "passed": true
+    },
+    {
+      "name": "A new explicit linked question reuses distinct hash-checked source copies, keeps the original retrieval time, and does not fetch or mutate its parent.",
+      "passed": true,
+      "parentGoalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "childGoalId": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9"
+    },
+    {
+      "name": "Closed reading history is lazy; explicit current-plan inspect verifies the full saved ranges and closes without submission.",
+      "passed": true
+    },
+    {
+      "name": "Hashed question passages were saved before the answering phase; absolute later citations and visible inspected text match.",
+      "passed": true,
+      "goalId": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9",
+      "readingId": "e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f",
+      "citations": [
+        {
+          "offset": 2191,
+          "quote": "## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything."
+        },
+        {
+          "offset": 2348,
+          "quote": "See more"
+        }
+      ]
+    },
+    {
+      "name": "Visible parent and follow-up links return to the correct retained questions.",
+      "passed": true
+    },
+    {
+      "name": "A new explicit linked question reuses distinct hash-checked source copies, keeps the original retrieval time, and does not fetch or mutate its parent.",
+      "passed": true,
+      "parentGoalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "childGoalId": "af78f8aa-d449-47d1-8a18-8a9f08470491"
+    },
+    {
+      "name": "The insufficient-evidence control remains needs_input through one explicit native retry, keeps exact source/reading identity, and preserves its prior draft/support decision across close/reload. The unknown address is not counted as answered.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-saved-reading-plan-edc99af5.png",
+    "03-selected-later-passage-edc99af5.png",
+    "04-later-answer-edc99af5.png",
+    "05-explicit-linked-question-1.png",
+    "06-saved-reading-plan-d2fa3dbb.png",
+    "07-selected-later-passage-d2fa3dbb.png",
+    "08-later-answer-d2fa3dbb.png",
+    "09-explicit-linked-question-2.png",
+    "10-insufficient-source-needs-input.png",
+    "11-insufficient-focusable-continue.png",
+    "12-archived-native-refusal-af78f8aa.png",
+    "13-archived-native-draft-and-check-af78f8aa.png",
+    "14-archived-native-refusal-af78f8aa.png",
+    "15-archived-native-draft-and-check-af78f8aa.png"
+  ],
+  "downloads": [],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T18:22:05.675Z"
+    },
+    {
+      "path": "/api/goals",
+      "time": "2026-10-29T18:22:07.374Z"
+    },
+    {
+      "path": "/api/goals",
+      "time": "2026-10-29T18:22:23.257Z"
+    },
+    {
+      "path": "/api/goals",
+      "time": "2026-10-29T18:22:35.656Z"
+    },
+    {
+      "path": "/api/goals/af78f8aa-d449-47d1-8a18-8a9f08470491/resume",
+      "time": "2026-10-29T18:22:46.726Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 17237,
+    "port": 43849,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "readingHistoryRequests": [
+    {
+      "path": "/api/goals/edc99af5-0003-4108-abc1-33a3f10ba3cf/readings",
+      "time": "2026-10-29T18:22:20.554Z"
+    },
+    {
+      "path": "/api/goals/edc99af5-0003-4108-abc1-33a3f10ba3cf/readings/957e8156-15a2-4196-9015-bcc22ec140e6",
+      "time": "2026-10-29T18:22:20.623Z"
+    },
+    {
+      "path": "/api/goals/d2fa3dbb-620a-4c9b-9f5d-79f242817fb9/readings",
+      "time": "2026-10-29T18:22:33.985Z"
+    },
+    {
+      "path": "/api/goals/d2fa3dbb-620a-4c9b-9f5d-79f242817fb9/readings/e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f",
+      "time": "2026-10-29T18:22:34.064Z"
+    },
+    {
+      "path": "/api/goals/af78f8aa-d449-47d1-8a18-8a9f08470491/readings",
+      "time": "2026-10-29T18:22:53.223Z"
+    },
+    {
+      "path": "/api/goals/af78f8aa-d449-47d1-8a18-8a9f08470491/readings/eafcf662-bf52-4963-97d6-2dcda2fc7469",
+      "time": "2026-10-29T18:22:53.294Z"
+    },
+    {
+      "path": "/api/goals/af78f8aa-d449-47d1-8a18-8a9f08470491/readings",
+      "time": "2026-10-29T18:22:55.439Z"
+    },
+    {
+      "path": "/api/goals/af78f8aa-d449-47d1-8a18-8a9f08470491/readings/eafcf662-bf52-4963-97d6-2dcda2fc7469",
+      "time": "2026-10-29T18:22:55.517Z"
+    }
+  ],
+  "readingObservedBeforeAnswer": {
+    "edc99af5-0003-4108-abc1-33a3f10ba3cf": {
+      "observedAt": "2026-10-29T18:22:07.600Z",
+      "phase": "answering_sources",
+      "readingId": "957e8156-15a2-4196-9015-bcc22ec140e6",
+      "created": 1793298127581,
+      "answerPresent": false
+    },
+    "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9": {
+      "observedAt": "2026-10-29T18:22:23.274Z",
+      "phase": "answering_sources",
+      "readingId": "e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f",
+      "created": 1793298143266,
+      "answerPresent": false
+    },
+    "af78f8aa-d449-47d1-8a18-8a9f08470491": {
+      "observedAt": "2026-10-29T18:22:35.672Z",
+      "phase": "answering_sources",
+      "readingId": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+      "created": 1793298155663,
+      "answerPresent": false
+    }
+  },
+  "laterSource": {
+    "parent": {
+      "id": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "request": "Where are the Fetch Standard’s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+      "projectId": "daaa227f-5adf-43bd-ba96-ab7e75a1960e",
+      "research": true,
+      "status": "completed",
+      "phase": "completed",
+      "message": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified.",
+      "tasks": [
+        {
+          "id": "source-1",
+          "specialist": "research",
+          "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "description": "Save public source 1 for this question.",
+          "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+          "dependsOn": [],
+          "status": "verified",
+          "attempts": 1,
+          "execution": {
+            "message": "Public response and full extracted text saved. Acquisition identity only; no answer or factual verification.",
+            "verified": true,
+            "evidence": [
+              "Saved source 067ef17c-8ed3-4959-b09f-e5d362e774a7: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+              "Retrieved 2026-10-29T18:22:07.567Z; 4815 bytes; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+              "Text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; 4815 text positions; public-text-v1"
+            ],
+            "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7"
+          },
+          "review": {
+            "accepted": true,
+            "reason": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality."
+          }
+        },
+        {
+          "id": "source-answer",
+          "specialist": "analysis",
+          "sourceAnswer": true,
+          "description": "Answer the exact saved question using selected saved-source excerpts.",
+          "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+          "dependsOn": [
+            "source-1"
+          ],
+          "status": "verified",
+          "attempts": 1,
+          "execution": {
+            "message": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\nSelected saved-source excerpts:\n[source-1] “Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).”\n[source-1] “A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).”\n\nThe model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "verified": true,
+            "evidence": [
+              "Exact supplied-source quote [source-1]: Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+              "Exact supplied-source quote [source-1]: A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+              "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+              "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+              "Saved reading 957e8156-15a2-4196-9015-bcc22ec140e6; question SHA-256 6f22c7ec184e33bc4ad15bcec90d99181c8ee3314f1e641fc8b70f82f7ffbc1f"
+            ],
+            "sourceAnswer": {
+              "text": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+              "citations": [
+                {
+                  "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7",
+                  "label": "source-1",
+                  "quote": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+                  "offset": 1914,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-6"
+                },
+                {
+                  "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7",
+                  "label": "source-1",
+                  "quote": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+                  "offset": 2057,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-7"
+                }
+              ],
+              "uncertainty": "",
+              "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+              "draftAssessment": {
+                "answerable": false,
+                "reason": "The requested facts are not fully supported by the provided excerpts.",
+                "uncertainty": "The specific location of the tests is mentioned in the README statements, but the exact details are not provided in the provided excerpts.",
+                "text": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+              },
+              "supportReview": {
+                "supported": true,
+                "reason": "The requested value is absent, a generic direction to look elsewhere, or an unsubstantiated value is not a supported complete answer. The answer correctly identifies that the Fetch Standard’s tests are kept in the `fetch/` directory of `web"
+              },
+              "citationMethod": "host-spans-v1",
+              "readingId": "957e8156-15a2-4196-9015-bcc22ec140e6",
+              "answerable": true,
+              "answerabilityReason": "The requested value is absent, a generic direction to look elsewhere, or an unsubstantiated value is not a supported complete answer. The answer correctly identifies that the Fetch Standard’s tests are kept in the `fetch/` directory of `web",
+              "selections": [
+                {
+                  "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7",
+                  "label": "source-1",
+                  "start": 1400,
+                  "end": 2200,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "rangeSha256": "543515254a61e8c5e320c338e6e52d9fd8f661b080e3b4a9b558bc7ac6a290ea",
+                  "text": "even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Buildi"
+                }
+              ]
+            }
+          },
+          "review": {
+            "accepted": true,
+            "reason": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+          }
+        }
+      ],
+      "created": 1793298127378,
+      "updated": 1793298140289,
+      "events": [
+        {
+          "time": 1793298127378,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Question and source reading steps saved. Public requests send only the URLs. The answer requires the local model."
+        },
+        {
+          "time": 1793298127382,
+          "role": "executor",
+          "phase": "executing",
+          "detail": "Save public source 1 for this question.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298127385,
+          "role": "executor",
+          "phase": "fetching_source",
+          "detail": "Fetching public source: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298127568,
+          "role": "executor",
+          "phase": "source_saved",
+          "detail": "Saved 4815 response bytes and full text; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298127570,
+          "role": "reviewer",
+          "phase": "reviewing",
+          "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298127571,
+          "role": "reviewer",
+          "phase": "verified",
+          "detail": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298127572,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Checkpoint saved; continuing the next orchestration slice."
+        },
+        {
+          "time": 1793298127574,
+          "role": "executor",
+          "phase": "executing",
+          "detail": "Answer the exact saved question using selected saved-source excerpts.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298127582,
+          "role": "executor",
+          "phase": "selection_saved",
+          "detail": "Saved auto reading 957e8156-15a2-4196-9015-bcc22ec140e6: source-1 1400–2200 (8 term matches). Exact question and text ranges are hashed before inference.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298127583,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298132623,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298135998,
+          "role": "reviewer",
+          "phase": "reviewing",
+          "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298138281,
+          "role": "reviewer",
+          "phase": "verified",
+          "detail": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298138282,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Checkpoint saved; continuing the next orchestration slice."
+        },
+        {
+          "time": 1793298138284,
+          "role": "reviewer",
+          "phase": "reviewing_goal",
+          "detail": "Checking that verified milestones cover the full saved goal."
+        },
+        {
+          "time": 1793298140285,
+          "role": "reviewer",
+          "phase": "goal_page_verified",
+          "detail": "Reviewed 144 of 144 goal characters. The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+        },
+        {
+          "time": 1793298140289,
+          "role": "coordinator",
+          "phase": "completed",
+          "detail": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified."
+        }
+      ],
+      "planningOffset": 144,
+      "planningDone": true,
+      "planningCalls": 0,
+      "coverageOffset": 144,
+      "coverageDone": true,
+      "notes": [],
+      "sourceQuestion": {
+        "urls": [
+          "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+        ]
+      },
+      "sources": [
+        {
+          "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "title": "README.md",
+          "retrievedAt": "2026-10-29T18:22:07.567Z",
+          "type": "text/plain",
+          "bytes": 4815,
+          "textLength": 4815,
+          "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "normalization": "public-text-v1",
+          "id": "067ef17c-8ed3-4959-b09f-e5d362e774a7",
+          "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+          "taskId": "source-1"
+        }
+      ],
+      "reading": {
+        "id": "957e8156-15a2-4196-9015-bcc22ec140e6",
+        "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+        "taskId": "source-answer",
+        "version": "source-passages-v1",
+        "mode": "auto",
+        "question": "Where are the Fetch Standard’s tests kept, and where can I see them running against browser engines? Cite the README statements supporting both.",
+        "questionSha256": "6f22c7ec184e33bc4ad15bcec90d99181c8ee3314f1e641fc8b70f82f7ffbc1f",
+        "created": 1793298127581,
+        "match": "matched",
+        "ranges": [
+          {
+            "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7",
+            "label": "source-1",
+            "start": 1400,
+            "end": 2200,
+            "score": 8,
+            "matchedTerms": [
+              "fetch",
+              "standard",
+              "test",
+              "see",
+              "running",
+              "against",
+              "browser",
+              "engine"
+            ],
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "text": "even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Buildi",
+            "rangeSha256": "543515254a61e8c5e320c338e6e52d9fd8f661b080e3b4a9b558bc7ac6a290ea"
+          }
+        ]
+      }
+    },
+    "child": {
+      "id": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9",
+      "request": "For quick local iteration, what command should I run, and what does it use to build the standard? Cite the README statement.",
+      "projectId": "daaa227f-5adf-43bd-ba96-ab7e75a1960e",
+      "research": true,
+      "status": "completed",
+      "phase": "completed",
+      "message": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified.",
+      "tasks": [
+        {
+          "id": "source-1",
+          "specialist": "research",
+          "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "description": "Save public source 1 for this question.",
+          "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+          "dependsOn": [],
+          "status": "verified",
+          "attempts": 0,
+          "execution": {
+            "message": "Reused an independently hash-checked copy of the original public acquisition; no source was fetched.",
+            "verified": true,
+            "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+            "evidence": [
+              "Copied saved source fe52c8c3-5d95-4755-89ae-13dd1f2ef62f from 067ef17c-8ed3-4959-b09f-e5d362e774a7",
+              "Response SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+            ]
+          },
+          "review": {
+            "accepted": true,
+            "reason": "Host re-read the verified original snapshot and copied its exact response/text under this goal. Ownership, lengths and hashes match; acquisition only."
+          }
+        },
+        {
+          "id": "source-answer",
+          "specialist": "analysis",
+          "sourceAnswer": true,
+          "description": "Answer the exact saved question using selected saved-source excerpts.",
+          "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+          "dependsOn": [
+            "source-1"
+          ],
+          "status": "verified",
+          "attempts": 1,
+          "execution": {
+            "message": "For quick local iteration, run `make` to build the standard, which uses a web service to ensure you don't need to install anything.\n\nSelected saved-source excerpts:\n[source-1] “## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything.”\n[source-1] “See more”\n\nThe model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "verified": true,
+            "evidence": [
+              "Exact supplied-source quote [source-1]: ## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything.",
+              "Exact supplied-source quote [source-1]: See more",
+              "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+              "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+              "Saved reading e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f; question SHA-256 19795f5b4747d4cdc63f14526827e6fbf3db97f4720b189b65d719b5de20e99e"
+            ],
+            "sourceAnswer": {
+              "text": "For quick local iteration, run `make` to build the standard, which uses a web service to ensure you don't need to install anything.",
+              "citations": [
+                {
+                  "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+                  "label": "source-1",
+                  "quote": "## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything.",
+                  "offset": 2191,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-6"
+                },
+                {
+                  "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+                  "label": "source-1",
+                  "quote": "See more",
+                  "offset": 2348,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-7"
+                }
+              ],
+              "uncertainty": "",
+              "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+              "draftAssessment": {
+                "answerable": true,
+                "reason": "Every requested fact is supported.",
+                "uncertainty": "The requested facts are supported.",
+                "text": "For quick local iteration, run `make` to build the standard, which uses a web service to ensure you don't need to install anything."
+              },
+              "supportReview": {
+                "supported": true,
+                "reason": "The answer correctly identifies that the requested command is `make` and that it uses a web service to build the standard, which is supported by the cited statements. The citations support the facts mentioned in the answer."
+              },
+              "citationMethod": "host-spans-v1",
+              "readingId": "e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f",
+              "answerable": true,
+              "answerabilityReason": "The answer correctly identifies that the requested command is `make` and that it uses a web service to build the standard, which is supported by the cited statements. The citations support the facts mentioned in the answer.",
+              "selections": [
+                {
+                  "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+                  "label": "source-1",
+                  "start": 1557,
+                  "end": 2357,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "rangeSha256": "146652feee9261267d2fc4d83995ab7573dec5604a185ebcce1c14ff3cce3e42",
+                  "text": "Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything. See more "
+                }
+              ]
+            }
+          },
+          "review": {
+            "accepted": true,
+            "reason": "The exact question asks for a command to build the standard and a statement about building locally. The selected passages confirm that the command is `make` and that it uses a web service to build the standard locally. The citations provided support these points."
+          }
+        }
+      ],
+      "created": 1793298143260,
+      "updated": 1793298153716,
+      "events": [
+        {
+          "time": 1793298143260,
+          "role": "coordinator",
+          "phase": "source_reused",
+          "detail": "Copied verified saved source 067ef17c-8ed3-4959-b09f-e5d362e774a7 to fe52c8c3-5d95-4755-89ae-13dd1f2ef62f; response/text hashes and retrieval time retained. No public request.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298143266,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Linked question saved with 1 verified public-source copies and a auto reading plan. The earlier question and answer are unchanged."
+        },
+        {
+          "time": 1793298143267,
+          "role": "executor",
+          "phase": "executing",
+          "detail": "Answer the exact saved question using selected saved-source excerpts.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298143270,
+          "role": "executor",
+          "phase": "selection_reused",
+          "detail": "Reusing auto reading e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f: source-1 1557–2357 (7 term matches). Exact question and text ranges are hashed before inference.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298143271,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298147187,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298149812,
+          "role": "reviewer",
+          "phase": "reviewing",
+          "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298151827,
+          "role": "reviewer",
+          "phase": "verified",
+          "detail": "The exact question asks for a command to build the standard and a statement about building locally. The selected passages confirm that the command is `make` and that it uses a web service to build the standard locally. The citations provided support these points.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298151836,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Checkpoint saved; continuing the next orchestration slice."
+        },
+        {
+          "time": 1793298151838,
+          "role": "reviewer",
+          "phase": "reviewing_goal",
+          "detail": "Checking that verified milestones cover the full saved goal."
+        },
+        {
+          "time": 1793298153711,
+          "role": "reviewer",
+          "phase": "goal_page_verified",
+          "detail": "Reviewed 124 of 124 goal characters. The command `make` is used for quick local iteration, and it builds the standard using a web service, ensuring no installation is required."
+        },
+        {
+          "time": 1793298153716,
+          "role": "coordinator",
+          "phase": "completed",
+          "detail": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified."
+        }
+      ],
+      "planningOffset": 124,
+      "planningDone": true,
+      "planningCalls": 0,
+      "coverageOffset": 124,
+      "coverageDone": true,
+      "notes": [],
+      "sourceQuestion": {
+        "urls": [
+          "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+        ]
+      },
+      "parentGoalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "sources": [
+        {
+          "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "title": "README.md",
+          "retrievedAt": "2026-10-29T18:22:07.567Z",
+          "type": "text/plain",
+          "bytes": 4815,
+          "textLength": 4815,
+          "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "normalization": "public-text-v1",
+          "id": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+          "goalId": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9",
+          "taskId": "source-1",
+          "copiedFrom": {
+            "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+            "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7"
+          }
+        }
+      ],
+      "reading": {
+        "id": "e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f",
+        "goalId": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9",
+        "taskId": "source-answer",
+        "version": "source-passages-v1",
+        "mode": "auto",
+        "question": "For quick local iteration, what command should I run, and what does it use to build the standard? Cite the README statement.",
+        "questionSha256": "19795f5b4747d4cdc63f14526827e6fbf3db97f4720b189b65d719b5de20e99e",
+        "created": 1793298143266,
+        "match": "matched",
+        "ranges": [
+          {
+            "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+            "label": "source-1",
+            "start": 1557,
+            "end": 2357,
+            "score": 7,
+            "matchedTerms": [
+              "quick",
+              "local",
+              "iteration",
+              "run",
+              "use",
+              "build",
+              "standard"
+            ],
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "text": "Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything. See more ",
+            "rangeSha256": "146652feee9261267d2fc4d83995ab7573dec5604a185ebcce1c14ff3cce3e42"
+          }
+        ]
+      }
+    },
+    "insufficient": {
+      "id": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+      "request": "What is the maintainer’s postal mailing address? Cite the README statement supplying that address.",
+      "projectId": "daaa227f-5adf-43bd-ba96-ab7e75a1960e",
+      "research": true,
+      "status": "needs_input",
+      "phase": "needs_input",
+      "message": "Error: The specialist did not produce host-verified evidence. No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+      "tasks": [
+        {
+          "id": "source-1",
+          "specialist": "research",
+          "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "description": "Save public source 1 for this question.",
+          "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+          "dependsOn": [],
+          "status": "verified",
+          "attempts": 0,
+          "execution": {
+            "message": "Reused an independently hash-checked copy of the original public acquisition; no source was fetched.",
+            "verified": true,
+            "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+            "evidence": [
+              "Copied saved source 9a745ba2-ec2d-49a0-b382-58b7265ae858 from 067ef17c-8ed3-4959-b09f-e5d362e774a7",
+              "Response SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+            ]
+          },
+          "review": {
+            "accepted": true,
+            "reason": "Host re-read the verified original snapshot and copied its exact response/text under this goal. Ownership, lengths and hashes match; acquisition only."
+          }
+        },
+        {
+          "id": "source-answer",
+          "specialist": "analysis",
+          "sourceAnswer": true,
+          "description": "Answer the exact saved question using selected saved-source excerpts.",
+          "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+          "dependsOn": [
+            "source-1"
+          ],
+          "status": "needs_input",
+          "attempts": 1,
+          "execution": {
+            "message": "No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "verified": false,
+            "evidence": [
+              "Exact supplied-source quote [source-1]: Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md).",
+              "Exact supplied-source quote [source-1]: Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).",
+              "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+              "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+              "Saved reading eafcf662-bf52-4963-97d6-2dcda2fc7469; question SHA-256 42f05ebeea9d6a8443cc56e6f8f327e3ed97005bfb1850a606907a0176066539"
+            ],
+            "sourceAnswer": {
+              "text": "No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection.",
+              "citations": [
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "quote": "Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md).",
+                  "offset": 1557,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-7"
+                },
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "quote": "Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).",
+                  "offset": 1628,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-8"
+                }
+              ],
+              "uncertainty": "",
+              "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+              "draftAssessment": {
+                "answerable": false,
+                "reason": "The requested fact is not supported by the provided information.",
+                "uncertainty": "The requested fact is not supported by the provided information.",
+                "text": "The maintainer’s postal mailing address is not mentioned in the provided excerpts. However, the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. While the address is not explicitly stated in the excerpts, the guidelines mention it in the Maintainer Guidelines section. Therefore, the requested fact is not supported by the provided information."
+              },
+              "supportReview": {
+                "supported": false,
+                "reason": "The requested fact is not supported by the provided information. The address is not mentioned in the excerpts, but the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. As"
+              },
+              "citationMethod": "host-spans-v1",
+              "readingId": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+              "answerable": false,
+              "answerabilityReason": "The requested fact is not supported by the provided information. The address is not mentioned in the excerpts, but the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. As",
+              "selections": [
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "start": 987,
+                  "end": 1787,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "rangeSha256": "f33b43f94c8a9522bd9301873c9b63eb1c8619005d20a3aa0693913ed2eace54",
+                  "text": "Mode](https://whatwg.org/working-mode) documents to get yourself familiarized with the process.\n\nWe'd be happy to help you with all of this [on Chat](https://whatwg.org/chat).\n\n## Pull requests\n\nIn short, change `fetch.bs` and submit your patch, with a [good commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md).\n\nPlease add your name to the Acknowledgments section in your first pull request, even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "created": 1793298155660,
+      "updated": 1793298165011,
+      "events": [
+        {
+          "time": 1793298155661,
+          "role": "coordinator",
+          "phase": "source_reused",
+          "detail": "Copied verified saved source 067ef17c-8ed3-4959-b09f-e5d362e774a7 to 9a745ba2-ec2d-49a0-b382-58b7265ae858; response/text hashes and retrieval time retained. No public request.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298155663,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Linked question saved with 1 verified public-source copies and a auto reading plan. The earlier question and answer are unchanged."
+        },
+        {
+          "time": 1793298155665,
+          "role": "executor",
+          "phase": "executing",
+          "detail": "Answer the exact saved question using selected saved-source excerpts.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298155667,
+          "role": "executor",
+          "phase": "selection_reused",
+          "detail": "Reusing auto reading eafcf662-bf52-4963-97d6-2dcda2fc7469: source-1 987–1787 (1 term matches). Exact question and text ranges are hashed before inference.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298155668,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298161921,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298165011,
+          "role": "coordinator",
+          "phase": "needs_input",
+          "detail": "Error: The specialist did not produce host-verified evidence. No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy."
+        }
+      ],
+      "planningOffset": 98,
+      "planningDone": true,
+      "planningCalls": 0,
+      "coverageOffset": 0,
+      "coverageDone": false,
+      "notes": [],
+      "sourceQuestion": {
+        "urls": [
+          "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+        ]
+      },
+      "parentGoalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "sources": [
+        {
+          "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "title": "README.md",
+          "retrievedAt": "2026-10-29T18:22:07.567Z",
+          "type": "text/plain",
+          "bytes": 4815,
+          "textLength": 4815,
+          "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "normalization": "public-text-v1",
+          "id": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+          "goalId": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+          "taskId": "source-1",
+          "copiedFrom": {
+            "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+            "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7"
+          }
+        }
+      ],
+      "reading": {
+        "id": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+        "goalId": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+        "taskId": "source-answer",
+        "version": "source-passages-v1",
+        "mode": "auto",
+        "question": "What is the maintainer’s postal mailing address? Cite the README statement supplying that address.",
+        "questionSha256": "42f05ebeea9d6a8443cc56e6f8f327e3ed97005bfb1850a606907a0176066539",
+        "created": 1793298155663,
+        "match": "matched",
+        "ranges": [
+          {
+            "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+            "label": "source-1",
+            "start": 987,
+            "end": 1787,
+            "score": 1,
+            "matchedTerms": [
+              "maintainer"
+            ],
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "text": "Mode](https://whatwg.org/working-mode) documents to get yourself familiarized with the process.\n\nWe'd be happy to help you with all of this [on Chat](https://whatwg.org/chat).\n\n## Pull requests\n\nIn short, change `fetch.bs` and submit your patch, with a [good commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md).\n\nPlease add your name to the Acknowledgments section in your first pull request, even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are",
+            "rangeSha256": "f33b43f94c8a9522bd9301873c9b63eb1c8619005d20a3aa0693913ed2eace54"
+          }
+        ]
+      }
+    },
+    "insufficientRetry": {
+      "id": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+      "request": "What is the maintainer’s postal mailing address? Cite the README statement supplying that address.",
+      "projectId": "daaa227f-5adf-43bd-ba96-ab7e75a1960e",
+      "research": true,
+      "status": "needs_input",
+      "phase": "needs_input",
+      "message": "Error: The specialist did not produce host-verified evidence. No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+      "tasks": [
+        {
+          "id": "source-1",
+          "specialist": "research",
+          "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "description": "Save public source 1 for this question.",
+          "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+          "dependsOn": [],
+          "status": "verified",
+          "attempts": 0,
+          "execution": {
+            "message": "Reused an independently hash-checked copy of the original public acquisition; no source was fetched.",
+            "verified": true,
+            "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+            "evidence": [
+              "Copied saved source 9a745ba2-ec2d-49a0-b382-58b7265ae858 from 067ef17c-8ed3-4959-b09f-e5d362e774a7",
+              "Response SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+            ]
+          },
+          "review": {
+            "accepted": true,
+            "reason": "Host re-read the verified original snapshot and copied its exact response/text under this goal. Ownership, lengths and hashes match; acquisition only."
+          }
+        },
+        {
+          "id": "source-answer",
+          "specialist": "analysis",
+          "sourceAnswer": true,
+          "description": "Answer the exact saved question using selected saved-source excerpts.",
+          "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+          "dependsOn": [
+            "source-1"
+          ],
+          "status": "needs_input",
+          "attempts": 2,
+          "retryReason": "execution_unverified",
+          "execution": {
+            "message": "No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "verified": false,
+            "evidence": [
+              "Exact supplied-source quote [source-1]: Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md).",
+              "Exact supplied-source quote [source-1]: Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).",
+              "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+              "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+              "Saved reading eafcf662-bf52-4963-97d6-2dcda2fc7469; question SHA-256 42f05ebeea9d6a8443cc56e6f8f327e3ed97005bfb1850a606907a0176066539"
+            ],
+            "sourceAnswer": {
+              "text": "No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection.",
+              "citations": [
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "quote": "Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md).",
+                  "offset": 1557,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-7"
+                },
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "quote": "Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).",
+                  "offset": 1628,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-8"
+                }
+              ],
+              "uncertainty": "",
+              "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+              "draftAssessment": {
+                "answerable": false,
+                "reason": "The requested fact is not supported by the provided information.",
+                "uncertainty": "The requested fact is not supported by the provided information.",
+                "text": "The maintainer’s postal mailing address is not mentioned in the provided excerpts. However, the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. While the address is not explicitly stated in the excerpts, the guidelines mention it in the Maintainer Guidelines section. Therefore, the requested fact is not supported by the provided information."
+              },
+              "supportReview": {
+                "supported": false,
+                "reason": "The requested fact is not supported by the provided information. The address is not mentioned in the excerpts, but the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. As"
+              },
+              "citationMethod": "host-spans-v1",
+              "readingId": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+              "answerable": false,
+              "answerabilityReason": "The requested fact is not supported by the provided information. The address is not mentioned in the excerpts, but the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. As",
+              "selections": [
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "start": 987,
+                  "end": 1787,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "rangeSha256": "f33b43f94c8a9522bd9301873c9b63eb1c8619005d20a3aa0693913ed2eace54",
+                  "text": "Mode](https://whatwg.org/working-mode) documents to get yourself familiarized with the process.\n\nWe'd be happy to help you with all of this [on Chat](https://whatwg.org/chat).\n\n## Pull requests\n\nIn short, change `fetch.bs` and submit your patch, with a [good commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md).\n\nPlease add your name to the Acknowledgments section in your first pull request, even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "created": 1793298155660,
+      "updated": 1793298173098,
+      "events": [
+        {
+          "time": 1793298155661,
+          "role": "coordinator",
+          "phase": "source_reused",
+          "detail": "Copied verified saved source 067ef17c-8ed3-4959-b09f-e5d362e774a7 to 9a745ba2-ec2d-49a0-b382-58b7265ae858; response/text hashes and retrieval time retained. No public request.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298155663,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Linked question saved with 1 verified public-source copies and a auto reading plan. The earlier question and answer are unchanged."
+        },
+        {
+          "time": 1793298155665,
+          "role": "executor",
+          "phase": "executing",
+          "detail": "Answer the exact saved question using selected saved-source excerpts.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298155667,
+          "role": "executor",
+          "phase": "selection_reused",
+          "detail": "Reusing auto reading eafcf662-bf52-4963-97d6-2dcda2fc7469: source-1 987–1787 (1 term matches). Exact question and text ranges are hashed before inference.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298155668,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298161921,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298165011,
+          "role": "coordinator",
+          "phase": "needs_input",
+          "detail": "Error: The specialist did not produce host-verified evidence. No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy."
+        },
+        {
+          "time": 1793298166731,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Continuing remaining milestones. Verified work will not be repeated."
+        },
+        {
+          "time": 1793298166732,
+          "role": "executor",
+          "phase": "executing",
+          "detail": "Answer the exact saved question using selected saved-source excerpts.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298166734,
+          "role": "executor",
+          "phase": "selection_reused",
+          "detail": "Reusing auto reading eafcf662-bf52-4963-97d6-2dcda2fc7469: source-1 987–1787 (1 term matches). Exact question and text ranges are hashed before inference.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298166735,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298170913,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298173098,
+          "role": "coordinator",
+          "phase": "needs_input",
+          "detail": "Error: The specialist did not produce host-verified evidence. No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy."
+        }
+      ],
+      "planningOffset": 98,
+      "planningDone": true,
+      "planningCalls": 0,
+      "coverageOffset": 0,
+      "coverageDone": false,
+      "notes": [],
+      "sourceQuestion": {
+        "urls": [
+          "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+        ]
+      },
+      "parentGoalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "sources": [
+        {
+          "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "title": "README.md",
+          "retrievedAt": "2026-10-29T18:22:07.567Z",
+          "type": "text/plain",
+          "bytes": 4815,
+          "textLength": 4815,
+          "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "normalization": "public-text-v1",
+          "id": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+          "goalId": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+          "taskId": "source-1",
+          "copiedFrom": {
+            "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+            "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7"
+          }
+        }
+      ],
+      "reading": {
+        "id": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+        "goalId": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+        "taskId": "source-answer",
+        "version": "source-passages-v1",
+        "mode": "auto",
+        "question": "What is the maintainer’s postal mailing address? Cite the README statement supplying that address.",
+        "questionSha256": "42f05ebeea9d6a8443cc56e6f8f327e3ed97005bfb1850a606907a0176066539",
+        "created": 1793298155663,
+        "match": "matched",
+        "ranges": [
+          {
+            "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+            "label": "source-1",
+            "start": 987,
+            "end": 1787,
+            "score": 1,
+            "matchedTerms": [
+              "maintainer"
+            ],
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "text": "Mode](https://whatwg.org/working-mode) documents to get yourself familiarized with the process.\n\nWe'd be happy to help you with all of this [on Chat](https://whatwg.org/chat).\n\n## Pull requests\n\nIn short, change `fetch.bs` and submit your patch, with a [good commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md).\n\nPlease add your name to the Acknowledgments section in your first pull request, even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are",
+            "rangeSha256": "f33b43f94c8a9522bd9301873c9b63eb1c8619005d20a3aa0693913ed2eace54"
+          }
+        ]
+      }
+    }
+  },
+  "currentReadingHistoryChecks": [
+    {
+      "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "readingId": "957e8156-15a2-4196-9015-bcc22ec140e6",
+      "historyEntries": 1,
+      "inspectedCurrent": true,
+      "archivedNativePlanExercised": false
+    },
+    {
+      "goalId": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9",
+      "readingId": "e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f",
+      "historyEntries": 1,
+      "inspectedCurrent": true,
+      "archivedNativePlanExercised": false
+    }
+  ],
+  "linkedQuestionOutcomes": [
+    {
+      "id": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9",
+      "request": "For quick local iteration, what command should I run, and what does it use to build the standard? Cite the README statement.",
+      "projectId": "daaa227f-5adf-43bd-ba96-ab7e75a1960e",
+      "research": true,
+      "status": "completed",
+      "phase": "completed",
+      "message": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified.",
+      "tasks": [
+        {
+          "id": "source-1",
+          "specialist": "research",
+          "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "description": "Save public source 1 for this question.",
+          "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+          "dependsOn": [],
+          "status": "verified",
+          "attempts": 0,
+          "execution": {
+            "message": "Reused an independently hash-checked copy of the original public acquisition; no source was fetched.",
+            "verified": true,
+            "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+            "evidence": [
+              "Copied saved source fe52c8c3-5d95-4755-89ae-13dd1f2ef62f from 067ef17c-8ed3-4959-b09f-e5d362e774a7",
+              "Response SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+            ]
+          },
+          "review": {
+            "accepted": true,
+            "reason": "Host re-read the verified original snapshot and copied its exact response/text under this goal. Ownership, lengths and hashes match; acquisition only."
+          }
+        },
+        {
+          "id": "source-answer",
+          "specialist": "analysis",
+          "sourceAnswer": true,
+          "description": "Answer the exact saved question using selected saved-source excerpts.",
+          "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+          "dependsOn": [
+            "source-1"
+          ],
+          "status": "verified",
+          "attempts": 1,
+          "execution": {
+            "message": "For quick local iteration, run `make` to build the standard, which uses a web service to ensure you don't need to install anything.\n\nSelected saved-source excerpts:\n[source-1] “## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything.”\n[source-1] “See more”\n\nThe model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "verified": true,
+            "evidence": [
+              "Exact supplied-source quote [source-1]: ## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything.",
+              "Exact supplied-source quote [source-1]: See more",
+              "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+              "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+              "Saved reading e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f; question SHA-256 19795f5b4747d4cdc63f14526827e6fbf3db97f4720b189b65d719b5de20e99e"
+            ],
+            "sourceAnswer": {
+              "text": "For quick local iteration, run `make` to build the standard, which uses a web service to ensure you don't need to install anything.",
+              "citations": [
+                {
+                  "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+                  "label": "source-1",
+                  "quote": "## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything.",
+                  "offset": 2191,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-6"
+                },
+                {
+                  "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+                  "label": "source-1",
+                  "quote": "See more",
+                  "offset": 2348,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-7"
+                }
+              ],
+              "uncertainty": "",
+              "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+              "draftAssessment": {
+                "answerable": true,
+                "reason": "Every requested fact is supported.",
+                "uncertainty": "The requested facts are supported.",
+                "text": "For quick local iteration, run `make` to build the standard, which uses a web service to ensure you don't need to install anything."
+              },
+              "supportReview": {
+                "supported": true,
+                "reason": "The answer correctly identifies that the requested command is `make` and that it uses a web service to build the standard, which is supported by the cited statements. The citations support the facts mentioned in the answer."
+              },
+              "citationMethod": "host-spans-v1",
+              "readingId": "e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f",
+              "answerable": true,
+              "answerabilityReason": "The answer correctly identifies that the requested command is `make` and that it uses a web service to build the standard, which is supported by the cited statements. The citations support the facts mentioned in the answer.",
+              "selections": [
+                {
+                  "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+                  "label": "source-1",
+                  "start": 1557,
+                  "end": 2357,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "rangeSha256": "146652feee9261267d2fc4d83995ab7573dec5604a185ebcce1c14ff3cce3e42",
+                  "text": "Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything. See more "
+                }
+              ]
+            }
+          },
+          "review": {
+            "accepted": true,
+            "reason": "The exact question asks for a command to build the standard and a statement about building locally. The selected passages confirm that the command is `make` and that it uses a web service to build the standard locally. The citations provided support these points."
+          }
+        }
+      ],
+      "created": 1793298143260,
+      "updated": 1793298153716,
+      "events": [
+        {
+          "time": 1793298143260,
+          "role": "coordinator",
+          "phase": "source_reused",
+          "detail": "Copied verified saved source 067ef17c-8ed3-4959-b09f-e5d362e774a7 to fe52c8c3-5d95-4755-89ae-13dd1f2ef62f; response/text hashes and retrieval time retained. No public request.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298143266,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Linked question saved with 1 verified public-source copies and a auto reading plan. The earlier question and answer are unchanged."
+        },
+        {
+          "time": 1793298143267,
+          "role": "executor",
+          "phase": "executing",
+          "detail": "Answer the exact saved question using selected saved-source excerpts.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298143270,
+          "role": "executor",
+          "phase": "selection_reused",
+          "detail": "Reusing auto reading e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f: source-1 1557–2357 (7 term matches). Exact question and text ranges are hashed before inference.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298143271,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298147187,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298149812,
+          "role": "reviewer",
+          "phase": "reviewing",
+          "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298151827,
+          "role": "reviewer",
+          "phase": "verified",
+          "detail": "The exact question asks for a command to build the standard and a statement about building locally. The selected passages confirm that the command is `make` and that it uses a web service to build the standard locally. The citations provided support these points.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298151836,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Checkpoint saved; continuing the next orchestration slice."
+        },
+        {
+          "time": 1793298151838,
+          "role": "reviewer",
+          "phase": "reviewing_goal",
+          "detail": "Checking that verified milestones cover the full saved goal."
+        },
+        {
+          "time": 1793298153711,
+          "role": "reviewer",
+          "phase": "goal_page_verified",
+          "detail": "Reviewed 124 of 124 goal characters. The command `make` is used for quick local iteration, and it builds the standard using a web service, ensuring no installation is required."
+        },
+        {
+          "time": 1793298153716,
+          "role": "coordinator",
+          "phase": "completed",
+          "detail": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified."
+        }
+      ],
+      "planningOffset": 124,
+      "planningDone": true,
+      "planningCalls": 0,
+      "coverageOffset": 124,
+      "coverageDone": true,
+      "notes": [],
+      "sourceQuestion": {
+        "urls": [
+          "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+        ]
+      },
+      "parentGoalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "sources": [
+        {
+          "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "title": "README.md",
+          "retrievedAt": "2026-10-29T18:22:07.567Z",
+          "type": "text/plain",
+          "bytes": 4815,
+          "textLength": 4815,
+          "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "normalization": "public-text-v1",
+          "id": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+          "goalId": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9",
+          "taskId": "source-1",
+          "copiedFrom": {
+            "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+            "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7"
+          }
+        }
+      ],
+      "reading": {
+        "id": "e359d7de-0d53-4d8a-a1c4-73cd8c39ce9f",
+        "goalId": "d2fa3dbb-620a-4c9b-9f5d-79f242817fb9",
+        "taskId": "source-answer",
+        "version": "source-passages-v1",
+        "mode": "auto",
+        "question": "For quick local iteration, what command should I run, and what does it use to build the standard? Cite the README statement.",
+        "questionSha256": "19795f5b4747d4cdc63f14526827e6fbf3db97f4720b189b65d719b5de20e99e",
+        "created": 1793298143266,
+        "match": "matched",
+        "ranges": [
+          {
+            "sourceId": "fe52c8c3-5d95-4755-89ae-13dd1f2ef62f",
+            "label": "source-1",
+            "start": 1557,
+            "end": 2357,
+            "score": 7,
+            "matchedTerms": [
+              "quick",
+              "local",
+              "iteration",
+              "run",
+              "use",
+              "build",
+              "standard"
+            ],
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "text": "Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are an essential part of the standardization process and will need to be created or adjusted as changes to the standard are made. Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).\n\nA dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).\n\n## Building \"locally\"\n\nFor quick local iteration, run `make`; this will use a web service to build the standard, so that you don't have to install anything. See more ",
+            "rangeSha256": "146652feee9261267d2fc4d83995ab7573dec5604a185ebcce1c14ff3cce3e42"
+          }
+        ]
+      }
+    },
+    {
+      "id": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+      "request": "What is the maintainer’s postal mailing address? Cite the README statement supplying that address.",
+      "projectId": "daaa227f-5adf-43bd-ba96-ab7e75a1960e",
+      "research": true,
+      "status": "needs_input",
+      "phase": "needs_input",
+      "message": "Error: The specialist did not produce host-verified evidence. No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+      "tasks": [
+        {
+          "id": "source-1",
+          "specialist": "research",
+          "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "description": "Save public source 1 for this question.",
+          "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+          "dependsOn": [],
+          "status": "verified",
+          "attempts": 0,
+          "execution": {
+            "message": "Reused an independently hash-checked copy of the original public acquisition; no source was fetched.",
+            "verified": true,
+            "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+            "evidence": [
+              "Copied saved source 9a745ba2-ec2d-49a0-b382-58b7265ae858 from 067ef17c-8ed3-4959-b09f-e5d362e774a7",
+              "Response SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+            ]
+          },
+          "review": {
+            "accepted": true,
+            "reason": "Host re-read the verified original snapshot and copied its exact response/text under this goal. Ownership, lengths and hashes match; acquisition only."
+          }
+        },
+        {
+          "id": "source-answer",
+          "specialist": "analysis",
+          "sourceAnswer": true,
+          "description": "Answer the exact saved question using selected saved-source excerpts.",
+          "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+          "dependsOn": [
+            "source-1"
+          ],
+          "status": "needs_input",
+          "attempts": 1,
+          "execution": {
+            "message": "No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "verified": false,
+            "evidence": [
+              "Exact supplied-source quote [source-1]: Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md).",
+              "Exact supplied-source quote [source-1]: Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).",
+              "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+              "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+              "Saved reading eafcf662-bf52-4963-97d6-2dcda2fc7469; question SHA-256 42f05ebeea9d6a8443cc56e6f8f327e3ed97005bfb1850a606907a0176066539"
+            ],
+            "sourceAnswer": {
+              "text": "No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection.",
+              "citations": [
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "quote": "Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md).",
+                  "offset": 1557,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-7"
+                },
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "quote": "Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).",
+                  "offset": 1628,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "spanId": "span-8"
+                }
+              ],
+              "uncertainty": "",
+              "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+              "draftAssessment": {
+                "answerable": false,
+                "reason": "The requested fact is not supported by the provided information.",
+                "uncertainty": "The requested fact is not supported by the provided information.",
+                "text": "The maintainer’s postal mailing address is not mentioned in the provided excerpts. However, the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. While the address is not explicitly stated in the excerpts, the guidelines mention it in the Maintainer Guidelines section. Therefore, the requested fact is not supported by the provided information."
+              },
+              "supportReview": {
+                "supported": false,
+                "reason": "The requested fact is not supported by the provided information. The address is not mentioned in the excerpts, but the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. As"
+              },
+              "citationMethod": "host-spans-v1",
+              "readingId": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+              "answerable": false,
+              "answerabilityReason": "The requested fact is not supported by the provided information. The address is not mentioned in the excerpts, but the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. As",
+              "selections": [
+                {
+                  "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+                  "label": "source-1",
+                  "start": 987,
+                  "end": 1787,
+                  "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                  "rangeSha256": "f33b43f94c8a9522bd9301873c9b63eb1c8619005d20a3aa0693913ed2eace54",
+                  "text": "Mode](https://whatwg.org/working-mode) documents to get yourself familiarized with the process.\n\nWe'd be happy to help you with all of this [on Chat](https://whatwg.org/chat).\n\n## Pull requests\n\nIn short, change `fetch.bs` and submit your patch, with a [good commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md).\n\nPlease add your name to the Acknowledgments section in your first pull request, even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "created": 1793298155660,
+      "updated": 1793298165011,
+      "events": [
+        {
+          "time": 1793298155661,
+          "role": "coordinator",
+          "phase": "source_reused",
+          "detail": "Copied verified saved source 067ef17c-8ed3-4959-b09f-e5d362e774a7 to 9a745ba2-ec2d-49a0-b382-58b7265ae858; response/text hashes and retrieval time retained. No public request.",
+          "taskId": "source-1"
+        },
+        {
+          "time": 1793298155663,
+          "role": "coordinator",
+          "phase": "queued",
+          "detail": "Linked question saved with 1 verified public-source copies and a auto reading plan. The earlier question and answer are unchanged."
+        },
+        {
+          "time": 1793298155665,
+          "role": "executor",
+          "phase": "executing",
+          "detail": "Answer the exact saved question using selected saved-source excerpts.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298155667,
+          "role": "executor",
+          "phase": "selection_reused",
+          "detail": "Reusing auto reading eafcf662-bf52-4963-97d6-2dcda2fc7469: source-1 987–1787 (1 term matches). Exact question and text ranges are hashed before inference.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298155668,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298161921,
+          "role": "executor",
+          "phase": "answering_sources",
+          "detail": "Source draft generated; checking the actual answer against 2 chosen literal citation spans. The original draft assessment is kept separately.",
+          "taskId": "source-answer"
+        },
+        {
+          "time": 1793298165011,
+          "role": "coordinator",
+          "phase": "needs_input",
+          "detail": "Error: The specialist did not produce host-verified evidence. No complete answer supported by the chosen saved-source citations was produced. The rejected draft and review are kept for inspection. The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy."
+        }
+      ],
+      "planningOffset": 98,
+      "planningDone": true,
+      "planningCalls": 0,
+      "coverageOffset": 0,
+      "coverageDone": false,
+      "notes": [],
+      "sourceQuestion": {
+        "urls": [
+          "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+        ]
+      },
+      "parentGoalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+      "sources": [
+        {
+          "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "title": "README.md",
+          "retrievedAt": "2026-10-29T18:22:07.567Z",
+          "type": "text/plain",
+          "bytes": 4815,
+          "textLength": 4815,
+          "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "normalization": "public-text-v1",
+          "id": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+          "goalId": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+          "taskId": "source-1",
+          "copiedFrom": {
+            "goalId": "edc99af5-0003-4108-abc1-33a3f10ba3cf",
+            "sourceId": "067ef17c-8ed3-4959-b09f-e5d362e774a7"
+          }
+        }
+      ],
+      "reading": {
+        "id": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+        "goalId": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+        "taskId": "source-answer",
+        "version": "source-passages-v1",
+        "mode": "auto",
+        "question": "What is the maintainer’s postal mailing address? Cite the README statement supplying that address.",
+        "questionSha256": "42f05ebeea9d6a8443cc56e6f8f327e3ed97005bfb1850a606907a0176066539",
+        "created": 1793298155663,
+        "match": "matched",
+        "ranges": [
+          {
+            "sourceId": "9a745ba2-ec2d-49a0-b382-58b7265ae858",
+            "label": "source-1",
+            "start": 987,
+            "end": 1787,
+            "score": 1,
+            "matchedTerms": [
+              "maintainer"
+            ],
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "text": "Mode](https://whatwg.org/working-mode) documents to get yourself familiarized with the process.\n\nWe'd be happy to help you with all of this [on Chat](https://whatwg.org/chat).\n\n## Pull requests\n\nIn short, change `fetch.bs` and submit your patch, with a [good commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md).\n\nPlease add your name to the Acknowledgments section in your first pull request, even for trivial fixes. The names are sorted lexicographically.\n\nTo ensure your patch meets all the necessary requirements, please also see the [Contributor Guidelines](https://github.com/whatwg/meta/blob/main/CONTRIBUTING.md). Editors of the Fetch Standard are expected to follow the [Maintainer Guidelines](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md).\n\n## Tests\n\nTests are",
+            "rangeSha256": "f33b43f94c8a9522bd9301873c9b63eb1c8619005d20a3aa0693913ed2eace54"
+          }
+        ]
+      }
+    }
+  ],
+  "refusalContinueFocus": {
+    "x": 49,
+    "y": 295.65625,
+    "right": 214.4375,
+    "bottom": 330.84375,
+    "width": 360,
+    "height": 800,
+    "focused": true,
+    "hit": true
+  },
+  "archivedNativeReadingChecks": [
+    {
+      "goalId": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+      "readingId": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+      "resultId": "e8c168a6-6d91-42e6-a355-c71598b9b4e7",
+      "attemptsSaved": 1,
+      "originalDraftMatched": true,
+      "actualSupportReviewMatched": true
+    },
+    {
+      "goalId": "af78f8aa-d449-47d1-8a18-8a9f08470491",
+      "readingId": "eafcf662-bf52-4963-97d6-2dcda2fc7469",
+      "resultId": "e8c168a6-6d91-42e6-a355-c71598b9b4e7",
+      "attemptsSaved": 1,
+      "originalDraftMatched": true,
+      "actualSupportReviewMatched": true
+    }
+  ],
+  "insufficientEvidenceControl": {
+    "request": "What is the maintainer’s postal mailing address? Cite the README statement supplying that address.",
+    "status": "needs_input",
+    "goalAchieved": false,
+    "answered": false,
+    "answerable": false,
+    "supportReview": {
+      "supported": false,
+      "reason": "The requested fact is not supported by the provided information. The address is not mentioned in the excerpts, but the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. As"
+    },
+    "reason": "The requested fact is not supported by the provided information. The address is not mentioned in the excerpts, but the mention of the Maintainer Guidelines in the Contributing.md file indicates that the address is part of the guidelines. As",
+    "explicitRetries": 1,
+    "archivedReadingResultId": "e8c168a6-6d91-42e6-a355-c71598b9b4e7"
+  },
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T18:23:01.842Z",
+  "recoveryChecksPassed": 9
+}

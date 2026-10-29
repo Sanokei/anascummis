@@ -1,0 +1,37 @@
+{
+  "raw": {
+    "response": "The Fetch Standard’s tests are kept in the `fetch/` directory of `web-platform-tests/wpt` and can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+    "citations": [
+      "span-6",
+      "span-7"
+    ],
+    "uncertainty": "The specific location of the tests is mentioned in the README statements, but the exact details are not provided in the provided excerpts.",
+    "answerable": false,
+    "answerabilityReason": "The requested facts are not fully supported by the provided excerpts."
+  },
+  "resolved": [
+    {
+      "id": "span-6",
+      "sourceId": "source-1",
+      "start": 514,
+      "end": 655,
+      "text": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt)."
+    },
+    {
+      "id": "span-7",
+      "sourceId": "source-1",
+      "start": 657,
+      "end": 789,
+      "text": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch)."
+    }
+  ],
+  "checks": {
+    "allResolved": true,
+    "allLiteral": true,
+    "differentIds": true,
+    "citationsContainTestsDirectory": true,
+    "citationsContainDashboard": true,
+    "responseExplicitlyContainsBothLocations": true
+  },
+  "elapsedMs": 4239
+}

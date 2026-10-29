@@ -1,0 +1,92 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/analysis-harness.test.ts:
+(pass) analysis produces a useful no-source answer with an explicit factual-verification boundary [2.02ms]
+(pass) source-backed analysis validates actual source IDs and exact excerpts without claiming truth verification [0.72ms]
+(pass) invented source IDs, invented quotes and missing citations fail closed [0.46ms]
+(pass) source-less answers cannot attach invented citations, URLs or browsing claims [1.64ms]
+(pass) malformed or empty structured answers never produce a verified result [0.41ms]
+(pass) oversized questions or evidence fail before inference instead of silently dropping content [0.20ms]
+(pass) the supplied evidence snapshot cannot change while inference is pending [0.18ms]
+(pass) a supported request reaches the model in full, including its final instruction [0.20ms]
+(pass) abort stops inference before a call and discards a late generated answer [0.24ms]
+(pass) duplicate source identifiers cannot provide ambiguous evidence [0.06ms]
+(pass) a quoted source cannot simultaneously be reported missing, while an absent fact can be stated [0.35ms]
+
+tests/goal-orchestrator.test.ts:
+(pass) distinct planner, specialist execution and independent reviewer complete dependency-ordered work [18.89ms]
+(pass) the complete long goal is read and coverage-reviewed in persisted pages without truncating it [17.67ms]
+(pass) a specialist completion claim without host evidence cannot reach acceptance or completion [5.43ms]
+(pass) acceptance rejection is retained and only unverified milestones execute again after explicit guidance [13.18ms]
+(pass) final goal-coverage review rejects an incomplete plan even when every planned milestone passed [8.24ms]
+(pass) capability and dependency restrictions stop unsupported work before execution [21.29ms]
+(pass) cancellation stays authoritative when a non-cooperative executor returns a late success [11.25ms]
+(pass) reopening the database preserves verified work and pauses an uncertain write instead of replaying it [9.80ms]
+(pass) a restored milestone with saved host evidence is reviewed without executing its write twice [9.20ms]
+(pass) one software milestone owns the whole app instead of creating separate apps for dependent edits [6.11ms]
+(pass) a rejected software acceptance reason survives repeated guided retries [14.89ms]
+(pass) a restored multi-software plan is rejected before separate application workspaces can run [5.77ms]
+(pass) only a validated host software child reference is retained in milestone execution evidence [7.47ms]
+(pass) malformed or non-software child references cannot become trusted task links [12.46ms]
+
+tests/local.test.ts:
+(pass) token budget handles both flat and batched tokenizer results and fails closed [0.12ms]
+(pass) small decision packets preserve paginated evidence and resist inherited paths [0.42ms]
+(pass) decision evidence exposes complete typed values and lists escaped paths for large records [0.26ms]
+(pass) silence ends a spoken turn without ending idle recording or a short pause [0.09ms]
+(pass) speech starts with a short sentence and chunks preserve every word [0.17ms]
+(pass) background goal locks wait for current edits and can be cancelled while waiting [101.87ms]
+(pass) coordinated goal API preserves full requests and protects stop and continuation controls [14.04ms]
+(pass) software detail returns the complete saved goal while list summaries stay bounded [6.92ms]
+(pass) host, origin and local session gates protect mutations [1.08ms]
+(pass) resource activity APIs paginate real records with strict input and existing pairing protections [18.46ms]
+(pass) websites escape source, reject credential leakage and require uploaded assets [0.67ms]
+(pass) standalone website HTML preserves uploaded images and explicit unsupported exports fail [8.60ms]
+(pass) manual edits use revision fences and restore preserves history [4.82ms]
+(pass) typed harness rejects malformed arguments before execution [1.40ms]
+(pass) harness executes bounded decisions and stops repeated mutations [0.29ms]
+(pass) real PDF edits preserve original and render verified PNG output [1865.30ms]
+(pass) exported ZIP is readable by an independent archive implementation [31.93ms]
+(pass) private details are encrypted and cannot be combined with research tools [111.25ms]
+(pass) real FFmpeg combines image and trimmed silent video with narration, captions and checked MP4 [1030.86ms]
+(pass) video source tools are opt-in, reject private URLs and cancel native work [83.93ms]
+(pass) persistent software goals keep checkpoints, cancellation and conservative time estimates [6.04ms]
+(pass) online build pairing is required and unfinished artifacts cannot be downloaded [3.24ms]
+
+tests/source-question.test.ts:
+(pass) source acquisition persists full plaintext and immutable identities across database reopen; view/retry never refetch [5.44ms]
+(pass) host-seeded source reading succeeds before missing inference and explicit continuation preserves accepted acquisition [24.98ms]
+(pass) scripted inference host-flow completes with exact citation offsets/hash and separate answer/coverage review [14.16ms]
+(pass) a fabricated span reference blocks the answer while accepted source evidence stays intact [8.69ms]
+(pass) stop during a pending acquisition discards a late response and cannot complete or auto-replay [12.56ms]
+(pass) restart between saved acquisition and execution return requires explicit Continue and reuses snapshot [11.81ms]
+(pass) source mode rejects missing research permission, private/credential URLs, duplicate URLs, PDF and oversized exact questions [1.94ms]
+(pass) fixed publisher fetch sends only a public URL and bounded headers, refuses redirects/types/oversize, preserves plain code [5.50ms]
+(pass) plain source title uses its top-level heading or filename, not an unrelated subsection [0.13ms]
+
+tests/source-reading.test.ts:
+(pass) selected passages are durable before inference and both acceptance and coverage see the actual question, snippets and answer [19.75ms]
+(pass) a false support check blocks a confident draft before any later reviewer can blindly accept it [10.55ms]
+(pass) independent source review rejects an unanswered question while a supported negative factual answer remains valid [21.15ms]
+(pass) unfinished Continue creates immutable per-guidance readings and B to C to B reuses the exact prior plan [35.35ms]
+(pass) linked questions copy immutable verified sources and persist manual ranges atomically without fetching or changing the accepted parent [28.00ms]
+(pass) source/reading copies roll back with rejected child source save and invalid reuse never reaches inference [19.19ms]
+(pass) range identity checks reject overlap, split characters and corrupted reading text; reopen preserves earlier plans and migrates their unique key [14.07ms]
+(pass) stop discards late answer output and restart requires explicit continuation with the exact cached reading [32.39ms]
+(pass) no term match saves an inspectable plan and pauses without making an inference call [9.73ms]
+(pass) new guidance after accepted answer but rejected coverage archives and regenerates only the read-only answer atomically [23.22ms]
+(pass) unfinished verified legacy answer can explicitly Continue without a receipt loop while preserving the old answer evidence [22.77ms]
+(pass) reading history is bounded metadata, while explicit owned reading inspection verifies sources [5.11ms]
+(pass) a chosen repeated literal span retains its own occurrence offset rather than the first matching quote [11.36ms]
+(pass) only a real positive support decision can supersede a contradictory draft assessment, and sees only the chosen quotes [12.84ms]
+(pass) support-check errors retain the draft and cached reading without fabricating a support decision or completion [16.91ms]
+
+tests/source-citation-spans.test.ts:
+(pass) every selected non-whitespace character remains in an exact bounded span, including distractors [0.51ms]
+(pass) a natural support sentence longer than the old120-character limit remains literal and complete [0.04ms]
+(pass) repeated span text has separate identities and stable original offsets [0.04ms]
+
+ 74 pass
+ 0 fail
+ 571 expect() calls
+Ran 74 tests across 6 files. [3.92s]

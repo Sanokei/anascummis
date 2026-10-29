@@ -1,0 +1,33 @@
+{
+  "source": "ae14b819d142bf047e9c1ae32f0ee131d4ba6074",
+  "oldPid": 8979,
+  "before": {
+    "goals": 0,
+    "activeGoals": 0,
+    "activeWork": 0,
+    "software": 0,
+    "activeSoftware": 0
+  },
+  "newPid": 17855,
+  "startedAt": "2026-10-29T18:26:31Z",
+  "command": "bun core/server.ts",
+  "mode": "STUDIO_DEV=0",
+  "modelProcessPreserved": true,
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "htmlStatus": 200,
+  "htmlSha256": "45f21cacf281f7957f88c41246accb7536b8169d6930502230bf7aa07d518861",
+  "htmlMatchesBuiltIndex": true,
+  "after": {
+    "goals": 0,
+    "activeWork": 0,
+    "software": 0
+  }
+}

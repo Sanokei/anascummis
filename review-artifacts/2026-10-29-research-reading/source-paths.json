@@ -1,0 +1,38 @@
+{
+  "base": "678264ac5fd075921ef7e780f333c00432857423",
+  "source": "ae14b819d142bf047e9c1ae32f0ee131d4ba6074",
+  "sourceTree": "5aa8142bd9d9112ab0d3f5f900da9ebad6120f1f",
+  "intermediate": [
+    {
+      "source": "49bbefe66d48bf9b5d57804bbd01c12f4e93fb62",
+      "result": "Both real UI cases failed literal citation validation; preserved."
+    },
+    {
+      "source": "2d93c11c52d5d17dd412902e79fab1a2af969201",
+      "result": "Native span selection became literal; prototype self-assessment still contradicted correct evidence."
+    }
+  ],
+  "paths": [
+    "PROJECT-ROADMAP.md",
+    "README.md",
+    "apps/studio/USER-JOURNEYS.md",
+    "apps/studio/app/style.css",
+    "apps/studio/components/GoalPanel.tsx",
+    "apps/studio/components/GoalSources.tsx",
+    "apps/studio/core/goal-orchestrator.ts",
+    "apps/studio/core/public-source.ts",
+    "apps/studio/core/server.ts",
+    "apps/studio/core/source-citation-spans.ts",
+    "apps/studio/core/source-passages.ts",
+    "apps/studio/core/source-question.ts",
+    "apps/studio/scripts/e2e/README.md",
+    "apps/studio/scripts/e2e/journeys.mjs",
+    "apps/studio/scripts/e2e/runner.mjs",
+    "apps/studio/scripts/e2e/source-reading.mjs",
+    "apps/studio/tests/source-citation-spans.test.ts",
+    "apps/studio/tests/source-passages.test.ts",
+    "apps/studio/tests/source-question.test.ts",
+    "apps/studio/tests/source-reading.test.ts",
+    "review-artifacts/2026-10-29-research-reading/PLAN.md"
+  ]
+}

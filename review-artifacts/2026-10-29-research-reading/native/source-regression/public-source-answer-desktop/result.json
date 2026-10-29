@@ -1,0 +1,355 @@
+{
+  "id": "public-source-answer",
+  "viewport": "desktop",
+  "goal": "Answer which standard a public repository hosts, cite saved source evidence, and retain the answer or unfinished question after reload.",
+  "startedAt": "2026-10-29T18:24:50.415Z",
+  "status": "passed",
+  "lane": "real-local-runtime",
+  "prerequisite": "Permitted public-source access and a real local model for the final answer.",
+  "assertions": [
+    {
+      "name": "A real source is retained with content identity and inspectable text.",
+      "passed": true
+    },
+    {
+      "name": "Reload preserves exact source identities without a new acquisition.",
+      "passed": true
+    },
+    {
+      "name": "Real model answer names Fetch and literal citations match the real saved source.",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-first-use.png",
+    "02-source-question-outcome.png",
+    "03-source-grounded-answer-after-reload.png",
+    "04-source-answer-uncertainty-and-limit.png"
+  ],
+  "downloads": [],
+  "pageErrors": [],
+  "apiMutations": [
+    {
+      "path": "/api/projects",
+      "time": "2026-10-29T18:24:51.041Z"
+    },
+    {
+      "path": "/api/goals",
+      "time": "2026-10-29T18:24:53.079Z"
+    }
+  ],
+  "limitations": [
+    "Installed Chrome with desktop/touch emulation; no physical handset or native voice quality claim.",
+    "No test-supplied inference, API seeding, model download or external provisioning."
+  ],
+  "host": {
+    "pid": 17674,
+    "port": 37121,
+    "command": "bun core/server.ts",
+    "isolatedData": "private-data"
+  },
+  "runtime": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "externalBrowserRequests": [
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    },
+    {
+      "origin": "https://huggingface.co",
+      "path": "/Xenova/whisper-tiny.en/resolve/main/config.json",
+      "blocked": true
+    }
+  ],
+  "persistedGoal": {
+    "id": "3950d739-c414-4557-b528-7d38417479d8",
+    "request": "Which standard does this repository host? Cite the exact supplied source statement.",
+    "projectId": "1ec5ae91-1e1d-455f-8235-d7a351693bb6",
+    "research": true,
+    "status": "completed",
+    "phase": "completed",
+    "message": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified.",
+    "tasks": [
+      {
+        "id": "source-1",
+        "specialist": "research",
+        "sourceUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "description": "Save public source 1 for this question.",
+        "acceptance": "Persist the bounded response and full extracted text with URL, title, retrieval time and matching byte/text SHA-256. Acquisition only; no factual claim.",
+        "dependsOn": [],
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "Public response and full extracted text saved. Acquisition identity only; no answer or factual verification.",
+          "verified": true,
+          "evidence": [
+            "Saved source 21764880-4c78-41ac-999e-ac1e9a15cf75: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+            "Retrieved 2026-10-29T18:24:53.289Z; 4815 bytes; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+            "Text SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa; 4815 text positions; public-text-v1"
+          ],
+          "sourceId": "21764880-4c78-41ac-999e-ac1e9a15cf75"
+        },
+        "review": {
+          "accepted": true,
+          "reason": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality."
+        }
+      },
+      {
+        "id": "source-answer",
+        "specialist": "analysis",
+        "sourceAnswer": true,
+        "description": "Answer the exact saved question using selected saved-source excerpts.",
+        "acceptance": "Answer every part of the exact saved question using the selected passages, with supporting literal citations and a factual verification limit. Missing requested information requires needs_input, not completion.",
+        "dependsOn": [
+          "source-1"
+        ],
+        "status": "verified",
+        "attempts": 1,
+        "execution": {
+          "message": "The standard is the [Fetch Standard](https://fetch.spec.whatwg.org/).\n\nSelected saved-source excerpts:\n[source-1] “This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/).”\n\nThe model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+          "verified": true,
+          "evidence": [
+            "Exact supplied-source quote [source-1]: This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/).",
+            "Quoted excerpts match the supplied sources. The answer’s factual accuracy has not been independently verified.",
+            "Citation method host-spans-v1: model-selected IDs, host-resolved literal spans.",
+            "Saved reading f7b0eebe-7246-4aa0-9c43-45ba1cb6fdf7; question SHA-256 7a9763e6099a81dc4c71a2bf8d9e8b9a9f6f1cfe06eddbed1e1714895f6592d1"
+          ],
+          "sourceAnswer": {
+            "text": "The standard is the [Fetch Standard](https://fetch.spec.whatwg.org/).",
+            "citations": [
+              {
+                "sourceId": "21764880-4c78-41ac-999e-ac1e9a15cf75",
+                "label": "source-1",
+                "quote": "This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/).",
+                "offset": 0,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                "spanId": "span-1"
+              }
+            ],
+            "uncertainty": "",
+            "limit": "The model selected citation span IDs; the host copied their exact saved text. This checks text identity, not independent factual answer accuracy.",
+            "draftAssessment": {
+              "answerable": true,
+              "reason": "Every requested fact is supported.",
+              "uncertainty": "The standard is the [Fetch Standard](https://fetch.spec.whatwg.org/).",
+              "text": "The standard is the [Fetch Standard](https://fetch.spec.whatwg.org/)."
+            },
+            "supportReview": {
+              "supported": true,
+              "reason": "The answer correctly identifies the standard as the [Fetch Standard](https://fetch.spec.whatwg.org/), which is cited in the provided source statement. The citation supports the claim, and the answer provides a specific reference to the Git-"
+            },
+            "citationMethod": "host-spans-v1",
+            "readingId": "f7b0eebe-7246-4aa0-9c43-45ba1cb6fdf7",
+            "answerable": true,
+            "answerabilityReason": "The answer correctly identifies the standard as the [Fetch Standard](https://fetch.spec.whatwg.org/), which is cited in the provided source statement. The citation supports the claim, and the answer provides a specific reference to the Git-",
+            "selections": [
+              {
+                "sourceId": "21764880-4c78-41ac-999e-ac1e9a15cf75",
+                "label": "source-1",
+                "start": 0,
+                "end": 800,
+                "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+                "rangeSha256": "573d7e1aa83d8084abd3a0c71246d7644b07d41733e06f547ce9c230920f8ea2",
+                "text": "This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/) developed by the [WHATWG community](https://whatwg.org/).\n\n## Code of conduct\n\nWe are committed to providing a friendly, safe, and welcoming environment for all. Please read and respect the [Code of Conduct](https://whatwg.org/code-of-conduct).\n\n## Contribution opportunities\n\nFolks notice minor and larger issues with the Fetch Standard all the time and we'd love your help fixing those. Pull requests for typographical and grammar errors are also most welcome.\n\nIssues labeled [\"good first issue\"](https://github.com/whatwg/fetch/labels/good%20first%20issue) are a good place to get a taste for editing the Fetch Standard. Note that we don't assign issues and th"
+              }
+            ]
+          }
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/)."
+        }
+      }
+    ],
+    "created": 1793298293089,
+    "updated": 1793298311124,
+    "events": [
+      {
+        "time": 1793298293091,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Question and source reading steps saved. Public requests send only the URLs. The answer requires the local model."
+      },
+      {
+        "time": 1793298293095,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Save public source 1 for this question.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793298293099,
+        "role": "executor",
+        "phase": "fetching_source",
+        "detail": "Fetching public source: https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793298293290,
+        "role": "executor",
+        "phase": "source_saved",
+        "detail": "Saved 4815 response bytes and full text; SHA-256 d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793298293291,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793298293292,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "Host re-read the persisted response and text: ownership, lengths and both SHA-256 hashes match. This accepts acquisition only, not source claims or answer quality.",
+        "taskId": "source-1"
+      },
+      {
+        "time": 1793298293293,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793298293295,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Answer the exact saved question using selected saved-source excerpts.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793298293305,
+        "role": "executor",
+        "phase": "selection_saved",
+        "detail": "Saved auto reading f7b0eebe-7246-4aa0-9c43-45ba1cb6fdf7: source-1 0–800 (3 term matches). Exact question and text ranges are hashed before inference.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793298293306,
+        "role": "executor",
+        "phase": "answering_sources",
+        "detail": "Answering the exact saved question using 800 selected text positions across 1 saved sources. Other text remains outside this model decision.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793298300250,
+        "role": "executor",
+        "phase": "answering_sources",
+        "detail": "Source draft generated; checking the actual answer against 1 chosen literal citation spans. The original draft assessment is kept separately.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793298303768,
+        "role": "reviewer",
+        "phase": "reviewing",
+        "detail": "Checking the milestone acceptance criterion against recorded host evidence.",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793298307611,
+        "role": "reviewer",
+        "phase": "verified",
+        "detail": "The repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/).",
+        "taskId": "source-answer"
+      },
+      {
+        "time": 1793298307612,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Checkpoint saved; continuing the next orchestration slice."
+      },
+      {
+        "time": 1793298307615,
+        "role": "reviewer",
+        "phase": "reviewing_goal",
+        "detail": "Checking that verified milestones cover the full saved goal."
+      },
+      {
+        "time": 1793298311123,
+        "role": "reviewer",
+        "phase": "goal_page_verified",
+        "detail": "Reviewed 83 of 83 goal characters. The repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/)."
+      },
+      {
+        "time": 1793298311124,
+        "role": "coordinator",
+        "phase": "completed",
+        "detail": "Saved-source identity checks, answer acceptance and full-question coverage passed. Literal citations are checked; factual answer quality is not independently verified."
+      }
+    ],
+    "planningOffset": 83,
+    "planningDone": true,
+    "planningCalls": 0,
+    "coverageOffset": 83,
+    "coverageDone": true,
+    "notes": [],
+    "sourceQuestion": {
+      "urls": [
+        "https://raw.githubusercontent.com/whatwg/fetch/main/README.md"
+      ]
+    },
+    "sources": [
+      {
+        "requestedUrl": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "url": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+        "title": "README.md",
+        "retrievedAt": "2026-10-29T18:24:53.289Z",
+        "type": "text/plain",
+        "bytes": 4815,
+        "textLength": 4815,
+        "sha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+        "normalization": "public-text-v1",
+        "id": "21764880-4c78-41ac-999e-ac1e9a15cf75",
+        "goalId": "3950d739-c414-4557-b528-7d38417479d8",
+        "taskId": "source-1"
+      }
+    ],
+    "reading": {
+      "id": "f7b0eebe-7246-4aa0-9c43-45ba1cb6fdf7",
+      "goalId": "3950d739-c414-4557-b528-7d38417479d8",
+      "taskId": "source-answer",
+      "version": "source-passages-v1",
+      "mode": "auto",
+      "question": "Which standard does this repository host? Cite the exact supplied source statement.",
+      "questionSha256": "7a9763e6099a81dc4c71a2bf8d9e8b9a9f6f1cfe06eddbed1e1714895f6592d1",
+      "created": 1793298293304,
+      "match": "matched",
+      "ranges": [
+        {
+          "sourceId": "21764880-4c78-41ac-999e-ac1e9a15cf75",
+          "label": "source-1",
+          "start": 0,
+          "end": 800,
+          "score": 3,
+          "matchedTerms": [
+            "standard",
+            "repository",
+            "host"
+          ],
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa",
+          "text": "This repository hosts the [Fetch Standard](https://fetch.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/) developed by the [WHATWG community](https://whatwg.org/).\n\n## Code of conduct\n\nWe are committed to providing a friendly, safe, and welcoming environment for all. Please read and respect the [Code of Conduct](https://whatwg.org/code-of-conduct).\n\n## Contribution opportunities\n\nFolks notice minor and larger issues with the Fetch Standard all the time and we'd love your help fixing those. Pull requests for typographical and grammar errors are also most welcome.\n\nIssues labeled [\"good first issue\"](https://github.com/whatwg/fetch/labels/good%20first%20issue) are a good place to get a taste for editing the Fetch Standard. Note that we don't assign issues and th",
+          "rangeSha256": "573d7e1aa83d8084abd3a0c71246d7644b07d41733e06f547ce9c230920f8ea2"
+        }
+      ]
+    }
+  },
+  "answerQuality": {
+    "text": "The standard is the [Fetch Standard](https://fetch.spec.whatwg.org/).",
+    "uncertainty": ""
+  },
+  "goalAchieved": true,
+  "trace": "trace.zip",
+  "traceSessionHeadersRedacted": true,
+  "finishedAt": "2026-10-29T18:25:15.710Z",
+  "recoveryChecksPassed": 3
+}

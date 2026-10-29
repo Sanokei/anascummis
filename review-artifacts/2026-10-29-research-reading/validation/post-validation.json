@@ -1,0 +1,102 @@
+{
+  "validatedAt": "2026-10-29T18:28:22Z",
+  "source": "ae14b819d142bf047e9c1ae32f0ee131d4ba6074",
+  "sourceTree": "5aa8142bd9d9112ab0d3f5f900da9ebad6120f1f",
+  "reports": {
+    "later-source-native-final": {
+      "source": "ae14b819d142bf047e9c1ae32f0ee131d4ba6074",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "fingerprints": {
+        "runnerSource": {
+          "checked": 5,
+          "allMatch": true
+        },
+        "applicationSource": {
+          "checked": 25,
+          "allMatch": true
+        },
+        "servedBuild": {
+          "checked": 88,
+          "allMatch": true
+        }
+      },
+      "assertions": 18
+    },
+    "source-span-regression": {
+      "source": "ae14b819d142bf047e9c1ae32f0ee131d4ba6074",
+      "sourceDirty": false,
+      "summary": {
+        "passed": 2,
+        "blocked": 0,
+        "failed": 0
+      },
+      "exitCode": 0,
+      "fingerprints": {
+        "runnerSource": {
+          "checked": 5,
+          "allMatch": true
+        },
+        "applicationSource": {
+          "checked": 25,
+          "allMatch": true
+        },
+        "servedBuild": {
+          "checked": 88,
+          "allMatch": true
+        }
+      },
+      "assertions": 6
+    }
+  },
+  "preservation": {
+    "originalParentRecordUnchanged": true,
+    "originalParentFiles": {
+      "app/page.tsx": true,
+      "tests/app.test.tsx": true,
+      "package.json": true,
+      "bun.lock": true,
+      "artifacts/source.zip": true
+    },
+    "priorReviewUnchanged": true,
+    "oldFrozenKitUnchanged": true
+  },
+  "preservedServedKit": {
+    "format": 1,
+    "version": "e3e76d87cf900de935c8eeaf2bc096e10918abd29271df54cf7b9f99813b9c99",
+    "filename": "anascummis-studio-e3e76d87cf900de9.zip",
+    "sha256": "274c19938daa74708b91b9dfedf49886880be17a513ffb14d0bbc72fc9d183e2",
+    "bytes": 1393277,
+    "files": 218,
+    "source": {
+      "commit": "bd1f47213f0eff8ce1685a041782910ebd9e73a1",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "noNewKitBuilt": true,
+  "native": {
+    "lane": "genuine local Qwen through ordinary UI and real permitted public-source fetch",
+    "modelProcessPid": 700,
+    "scriptedInference": false,
+    "nativeVoiceVerified": false,
+    "physicalHandsetVerified": false
+  },
+  "notRetested": [
+    "unrelated full192-test lifecycle suite",
+    "counter/export journeys already pinned at678264a",
+    "fresh online install",
+    "new source-kit extraction",
+    "physical handset keyboard",
+    "native voice",
+    "native abrupt-process-interruption recovery"
+  ]
+}

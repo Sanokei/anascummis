@@ -1,0 +1,56 @@
+[
+  {
+    "run": "later-source-native-final",
+    "case": "later-source-followup-desktop",
+    "localPath": "/workspace/anascummis/apps/studio/.test-data/user-journeys/later-source-native-final/later-source-followup-desktop/trace.zip",
+    "bytes": 73948942,
+    "sha256": "87c9299fbd07e8043313ce76d913db1e529c0af1ab79a3adc52db17653c8d2a1",
+    "published": false,
+    "reason": "Large redacted browser trace retained locally; no private database/keys/logs shared."
+  },
+  {
+    "run": "later-source-native-final",
+    "case": "later-source-followup-narrow",
+    "localPath": "/workspace/anascummis/apps/studio/.test-data/user-journeys/later-source-native-final/later-source-followup-narrow/trace.zip",
+    "bytes": 73529925,
+    "sha256": "8b6995cced4f02f30cbbeee1931c411c7d2eb3770ebdca86cfa6429aa2614f03",
+    "published": false,
+    "reason": "Large redacted browser trace retained locally; no private database/keys/logs shared."
+  },
+  {
+    "run": "source-span-regression",
+    "case": "public-source-answer-desktop",
+    "localPath": "/workspace/anascummis/apps/studio/.test-data/user-journeys/source-span-regression/public-source-answer-desktop/trace.zip",
+    "bytes": 29279574,
+    "sha256": "c525b11d66ab2a102dc40560125005d8a067aa92ce3a7faa0aaa190ba1827c0d",
+    "published": false,
+    "reason": "Large redacted browser trace retained locally; no private database/keys/logs shared."
+  },
+  {
+    "run": "source-span-regression",
+    "case": "public-source-answer-narrow",
+    "localPath": "/workspace/anascummis/apps/studio/.test-data/user-journeys/source-span-regression/public-source-answer-narrow/trace.zip",
+    "bytes": 23155026,
+    "sha256": "437889bf0faab11b6caaffbad329f7201319379995db81f8146ced0d22529e16",
+    "published": false,
+    "reason": "Large redacted browser trace retained locally; no private database/keys/logs shared."
+  },
+  {
+    "run": "later-source-native-first",
+    "case": "later-source-followup-desktop",
+    "localPath": "/workspace/anascummis/apps/studio/.test-data/user-journeys/later-source-native-first/later-source-followup-desktop/trace.zip",
+    "bytes": 22767960,
+    "sha256": "b4923fe68480e47324e4d106b0e31c09d00a62a62d2334c50de52403432ed048",
+    "published": false,
+    "reason": "Large redacted browser trace retained locally; no private database/keys/logs shared."
+  },
+  {
+    "run": "later-source-native-first",
+    "case": "later-source-followup-narrow",
+    "localPath": "/workspace/anascummis/apps/studio/.test-data/user-journeys/later-source-native-first/later-source-followup-narrow/trace.zip",
+    "bytes": 19694919,
+    "sha256": "b1ae58de62ab35a2af79a8ba589c7b3254e9bc338c34ea4ddc00ba247fbda197",
+    "published": false,
+    "reason": "Large redacted browser trace retained locally; no private database/keys/logs shared."
+  }
+]

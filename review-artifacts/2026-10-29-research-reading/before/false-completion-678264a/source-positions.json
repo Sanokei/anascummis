@@ -1,0 +1,20 @@
+[
+  {
+    "needle": "## Tests",
+    "start": 1768,
+    "end": 1776,
+    "inSelectedFirst800": false
+  },
+  {
+    "needle": "web-platform-tests/wpt",
+    "start": 1987,
+    "end": 2009,
+    "inSelectedFirst800": false
+  },
+  {
+    "needle": "wpt.fyi/results/fetch",
+    "start": 2135,
+    "end": 2156,
+    "inSelectedFirst800": false
+  }
+]

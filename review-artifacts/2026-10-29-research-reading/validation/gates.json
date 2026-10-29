@@ -1,0 +1,45 @@
+{
+  "source": "ae14b819d142bf047e9c1ae32f0ee131d4ba6074",
+  "cwd": "apps/studio",
+  "scope": "Affected checks only; native user-goal evidence is separate from scripted host tests.",
+  "checks": [
+    {
+      "command": "bun test tests/source-citation-spans.test.ts tests/source-reading.test.ts tests/source-question.test.ts tests/analysis-harness.test.ts tests/goal-orchestrator.test.ts tests/local.test.ts",
+      "exitCode": 0,
+      "tests": 74,
+      "assertions": 571,
+      "log": "final-affected-tests.log"
+    },
+    {
+      "command": "bun node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "exitCode": 0,
+      "log": "final-frontend-typecheck.log"
+    },
+    {
+      "command": "bun node_modules/typescript/bin/tsc --noEmit --project tsconfig.core.json --incremental false",
+      "exitCode": 0,
+      "log": "final-core-typecheck.log"
+    },
+    {
+      "command": "bun node_modules/next/dist/bin/next build --webpack",
+      "exitCode": 0,
+      "log": "final-build.log"
+    },
+    {
+      "command": "node scripts/test-user-journeys.mjs --journey later-source-followup --viewport all --require-model --output .test-data/user-journeys/later-source-native-final",
+      "exitCode": 0,
+      "passed": 2,
+      "blocked": 0,
+      "failed": 0,
+      "report": "../native/later-source/report.json"
+    },
+    {
+      "command": "node scripts/test-user-journeys.mjs --journey public-source-answer --viewport all --require-model --output .test-data/user-journeys/source-span-regression",
+      "exitCode": 0,
+      "passed": 2,
+      "blocked": 0,
+      "failed": 0,
+      "report": "../native/source-regression/report.json"
+    }
+  ]
+}
