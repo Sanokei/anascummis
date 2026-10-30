@@ -1,0 +1,430 @@
+{
+  "files": [
+    {
+      "path": "desktop/report.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/report.json",
+      "bytes": 426226,
+      "sha256": "5137d71913c8b24b175db7eeb19760c0f5a081ff710a155d6dc1e28ec6796f34",
+      "byteIdentical": true
+    },
+    {
+      "path": "desktop/version-2-revised.pdf",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/version-2-revised.pdf",
+      "bytes": 111182,
+      "sha256": "eba34910da8f7a41b616b63e1f331253dedb01f95bd4a49a899656ec01ab6a18",
+      "byteIdentical": true
+    },
+    {
+      "path": "desktop/version-2-revised.html",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/version-2-revised.html",
+      "bytes": 3881,
+      "sha256": "7e1674f81e45891be1b53195705dedee11b6c7e33a07c555292c085e96f83aac",
+      "byteIdentical": true
+    },
+    {
+      "path": "desktop/version-2-provenance.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/version-2-provenance.json",
+      "bytes": 42235,
+      "sha256": "e19ec9d292395fcc6d0879acf814d19b99c548200fc34509359f024ac3648ab5",
+      "byteIdentical": true
+    },
+    {
+      "path": "desktop/version-2-pdf-inspection.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/version-2-pdf-inspection.json",
+      "bytes": 5716,
+      "sha256": "e37b6aba14567cb2282c72fdb959fc07e648f8026cadf621678c5e742e02dd2b",
+      "byteIdentical": true
+    },
+    {
+      "path": "desktop/01-expanded-full-comparison-and-apply-1440.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/01-expanded-full-comparison-and-apply-1440.png",
+      "bytes": 231883,
+      "sha256": "50c88fe0ba1949c35ffdf0853c4e4fc51e57e3e9f63022f75f76b1d5ba97bca7",
+      "byteIdentical": true
+    },
+    {
+      "path": "desktop/02-actual-version-2-pdf-reader-1440.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/02-actual-version-2-pdf-reader-1440.png",
+      "bytes": 395350,
+      "sha256": "ffc45aed246777734a162e7099747681afb493a80cb4e44c098860204f0db827",
+      "byteIdentical": true
+    },
+    {
+      "path": "desktop/version-2-pdf-page-1.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/version-2-pdf-page-1.png",
+      "bytes": 139476,
+      "sha256": "a6749f78a5aa0f654b367c3b9ed3959324305a481de515817404924e71c0fff5",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/report.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/report.json",
+      "bytes": 426061,
+      "sha256": "7877936cc0e237686b1d7fabf7ba807cb0f16e2be77da1dc9970a44ac2faad25",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/version-2-revised.pdf",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/version-2-revised.pdf",
+      "bytes": 111182,
+      "sha256": "d6daef60110ef632b193ad5c24f1a19533d20a6ab9e22556eb0350cb5eb473d9",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/version-2-revised.html",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/version-2-revised.html",
+      "bytes": 3881,
+      "sha256": "7e1674f81e45891be1b53195705dedee11b6c7e33a07c555292c085e96f83aac",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/version-2-provenance.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/version-2-provenance.json",
+      "bytes": 42235,
+      "sha256": "77ffc321cf5a6112fac68a5bfed6e2c1ba574ae0d7366a6ed9b7ff2f57af26d4",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/version-2-pdf-inspection.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/version-2-pdf-inspection.json",
+      "bytes": 5716,
+      "sha256": "e37b6aba14567cb2282c72fdb959fc07e648f8026cadf621678c5e742e02dd2b",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/01-stacked-before-comparison-360x420.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/01-stacked-before-comparison-360x420.png",
+      "bytes": 47348,
+      "sha256": "5818649731c47b468b5d6f636df8fc2ac767b5af523704b651c6b1bfdef2b11c",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/02-stacked-proposed-and-apply-360x420.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/02-stacked-proposed-and-apply-360x420.png",
+      "bytes": 42557,
+      "sha256": "7333c867fbcc03a7144971f09bc8c708a6a0aa48715bf2aa2dbc0a428af57641",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/03-unconfirmed-apply-inspect-360x420.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/03-unconfirmed-apply-inspect-360x420.png",
+      "bytes": 44211,
+      "sha256": "f30a92c119cee09a127f5da8eee0cc6d0f71150a138ad1cd2bfd2379e60f17bd",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/version-2-html-360x420.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/version-2-html-360x420.png",
+      "bytes": 33503,
+      "sha256": "03f617f0e2a70b8d27b72c5cd561c25e54a89fb14eb0f8ed1230742beba05ece",
+      "byteIdentical": true
+    },
+    {
+      "path": "narrow/04-saved-version-2-actions-360x420.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/04-saved-version-2-actions-360x420.png",
+      "bytes": 36094,
+      "sha256": "348d350965fe9788cab91b2a4679d85f866c14e2c5225c53e278cf27c609d917",
+      "byteIdentical": true
+    },
+    {
+      "path": "failures/desktop-runner-promise-wait/report.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-298557ee/report.json",
+      "bytes": 462681,
+      "sha256": "b722697894e041b1a17f9ce70debb3c211c00e93bd294b4bab8cab8e6a13e2d9",
+      "byteIdentical": true
+    },
+    {
+      "path": "failures/desktop-runner-promise-wait/02-failure.png",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-298557ee/research-document-second-edit-desktop/02-failure.png",
+      "bytes": 364775,
+      "sha256": "73ce96cf75bd60a22ff220aff444e06b6742761496d87fdab597a1b599208f1e",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/report.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/report.json",
+      "bytes": 11002,
+      "sha256": "b1c139e5e921d6f2c56fba3620ae479597b29e7110ba6fbe20e41a403ab70109",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/pattern-report.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/pattern-report.json",
+      "bytes": 9518,
+      "sha256": "c36fcb9e8418ee70904d01ce9546ae9da4c30be99a5f2dfda079cf574c968577",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/provider-controls-report.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/provider-controls-report.json",
+      "bytes": 21887,
+      "sha256": "e12ff189d23166cc42adca0c8f65cffbf7a25830ec49b69cfaeb2ee4e8377da4",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/document-profile-report.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/document-profile-report.json",
+      "bytes": 21371,
+      "sha256": "77fe7ad4c66e63a8dc61b067b04a5d2b0bfb011e4277e37cddc45948a446c424",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/runtime-server-source.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/runtime-server-source.json",
+      "bytes": 3078,
+      "sha256": "a6d9c66d64f835b475686d869b636fe537b8f5145e6093a3a8a9fadf6d1cf5ea",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/stdout.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/stdout.log",
+      "bytes": 2113,
+      "sha256": "a89e320aee8aa245f9c56ff4c82c87adbc20006757b07de44e5391dce5f3d825",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/pattern-stdout.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/pattern-stdout.log",
+      "bytes": 934,
+      "sha256": "930ef46fb720919059c2d417fe49e7153d4d8cd4b6399b0297c0933764a6cfe6",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/provider-controls-stdout.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/provider-controls-stdout.log",
+      "bytes": 307,
+      "sha256": "6e412fdaa60debfe3517f3fb7a26c29b67432f9284028439f66f627163f9ee96",
+      "byteIdentical": true
+    },
+    {
+      "path": "diagnostics/document-profile-stdout.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/diagnostic/document-profile-stdout.log",
+      "bytes": 647,
+      "sha256": "59ade1522d0f0499f5a232390c1c94f1c00758c3d24f5a8cf80bc7dd95bdbb46",
+      "byteIdentical": true
+    },
+    {
+      "path": "research/AUDIT.md",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/AUDIT.md",
+      "bytes": 16696,
+      "sha256": "beef6c4048aa7ce0d93fd9f34ef5748962994568d979bdad38d88f6beccae1d0",
+      "byteIdentical": true
+    },
+    {
+      "path": "research/AUDIT-initial-before-provider-controls.md",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/AUDIT-initial-before-provider-controls.md",
+      "bytes": 5264,
+      "sha256": "e1f1bc2f48f3136db3bf3f7fb9807bb63812f5748f4cbf5b1477f58ce975f1e5",
+      "byteIdentical": true
+    },
+    {
+      "path": "research/primary-sources.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/primary-sources.json",
+      "bytes": 1933,
+      "sha256": "048480c8c8f4577dc5753c9c6257d20ab2e338a0d0a2fa69a59bc098dccc5a49",
+      "byteIdentical": true
+    },
+    {
+      "path": "research/dialog-sources.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/ui-research/sources.json",
+      "bytes": 725,
+      "sha256": "d1455f3eb96eb6de6a674016532d37ae5472c806f60ec570f651b17ed3d2e047",
+      "byteIdentical": true
+    },
+    {
+      "path": "independent-review/independent-source-review.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/independent-source-review.json",
+      "bytes": 8489,
+      "sha256": "156a0fa1950b88c2ac01a4ba18dee14c3aa62c6cc5808fb07f3b136680e6465f",
+      "byteIdentical": true
+    },
+    {
+      "path": "independent-review/independent-historical-plan-check.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/independent-historical-plan-check.json",
+      "bytes": 639,
+      "sha256": "e9d69905d915f1cbe71d9f0f499172e03a35ce2ea79b4399d1a1553d0b9e65f1",
+      "byteIdentical": true
+    },
+    {
+      "path": "independent-review/independent-visual-review.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/independent-visual-review.json",
+      "bytes": 12925,
+      "sha256": "fa867bfb0639eba22baf5efb2fc2ae1c58930c7c88b2afa437d8427d09e48da5",
+      "byteIdentical": true
+    },
+    {
+      "path": "readiness/local-model-identity.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/local-model-identity.json",
+      "bytes": 4068,
+      "sha256": "96221ba73b42ccf743158743124cd41ac0e68e72f2f0af5801793cd58927eb53",
+      "byteIdentical": true
+    },
+    {
+      "path": "normal-runtime/preservation-summary.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/preservation-summary.json",
+      "bytes": 948,
+      "sha256": "0be41d320d54f811170d6f050e73c2614154a899b6042b03a020a7b3b6da1122",
+      "byteIdentical": true
+    },
+    {
+      "path": "normal-runtime/refresh-receipt.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/normal-refresh/receipt.json",
+      "bytes": 15680,
+      "sha256": "cf5483bf8ef599b2851f172b844ab9b479e1ccdb04bc275b3bc2111f754f399a",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/affected-tests-final.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/affected-tests-final.log",
+      "bytes": 42,
+      "sha256": "74301b433bbcc36411586b7f5c34f5382e0f9ddeac58412d27fc6adfb509dced",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/affected-tests-final-rerun.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/affected-tests-final-rerun.log",
+      "bytes": 8989,
+      "sha256": "3e357d3ec198d82c26e5b54692cd8ac99012bd18f17813399d4879202e25c563",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/lock-cancellation-after-wakeup-fix.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/lock-cancellation-after-wakeup-fix.log",
+      "bytes": 237,
+      "sha256": "a148deae47eda32b2d880460f13d0a1f35b5c050e8f056fa72f1a0b53638013c",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/types-core-final.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/types-core-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/types-app-final.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/types-app-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/build-final.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/build-final.log",
+      "bytes": 846,
+      "sha256": "723c83bad1aa6a179a52e0333392b1e6feab232092ac2c059ca7f70094651c79",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/build-asset-equivalence.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/build-asset-equivalence.json",
+      "bytes": 507,
+      "sha256": "1774b3c3b89fd3497f1d0cc2d7a4644ea8c4763989c874bd9421501c24815921",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/build-driver-only-equivalence.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/build-driver-only-equivalence.json",
+      "bytes": 3898,
+      "sha256": "4df53fd98fccdd05935adfce162c0672feaddd594949ef9ffde6effce3bd2cde",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/profile-transport-tests.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/profile-transport-tests.log",
+      "bytes": 530,
+      "sha256": "b79c565e4ae556a899621c3dc2dc73ef2e7b31352b031fc8dd2230cdfaf65da7",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/backend-legacy-current-tests.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/backend-legacy-current-tests.log",
+      "bytes": 4634,
+      "sha256": "4da83630d2e2e4a45df2f6a5689822648c447682ae86688870525485f5db4aa8",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/revision2-backend-tests-stop-boundary.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/revision2-backend-tests-stop-boundary.log",
+      "bytes": 1359,
+      "sha256": "64c8c5ef1d9073ee3efc41e4262af23d6e9c69787a592fca753f7f0e7da3c55a",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/revision2-backend-tests-stop-boundary-fixed.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/revision2-backend-tests-stop-boundary-fixed.log",
+      "bytes": 1391,
+      "sha256": "0a76f4585df0f669413917f3adef3f54a6c9b35ff2dbbd292c90107b7b7a7069",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/ui-affected-first-failed.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/ui-affected-first-failed.log",
+      "bytes": 3186,
+      "sha256": "ab410b7baf9d88a2e52b3cdc0cab961850eebad1e98678e616eec36b0cd7b076",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/ui-affected-second-failed.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/ui-affected-second-failed.log",
+      "bytes": 2784,
+      "sha256": "5175b17dfc19e64e20fbb7e00890c2dee078f1c0b0a8b9386f3a2f7c422861cb",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/ui-affected-tests.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/ui-affected-tests.log",
+      "bytes": 888,
+      "sha256": "c7387d09f3e1348b721a9ebc67709840d0e6846da6ecaf5228d8fd02018ea4af",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/ui-final-copy-check.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/ui-final-copy-check.log",
+      "bytes": 395,
+      "sha256": "6f5c16edffc95afffbf27b5050ee8838408c5dbcaff3e0b5e44c9f2eed0c8bf2",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/kit-after-driver-fix.log",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/kit-after-driver-fix.log",
+      "bytes": 256,
+      "sha256": "3358c96aa8e190540befcd41f292455464b2a109c8b04ae204d152e4a94aae13",
+      "byteIdentical": true
+    },
+    {
+      "path": "gates/kit-da0f6c1d7c0bcf4b-verification.json",
+      "original": "/workspace/.cloud-env/anascummis/document-second-edit/kit-da0f6c1d7c0bcf4b-verification.json",
+      "bytes": 3096,
+      "sha256": "a7ad1d836639c8dfb41ad15f6b72aa835c40e0aa9f0e4a0a71ff44142fac0a8c",
+      "byteIdentical": true
+    },
+    {
+      "path": "kit/manifest.json",
+      "original": "/workspace/anascummis/apps/studio/out/opensource/manifest.json",
+      "bytes": 435,
+      "sha256": "0770c84d5bcda9236d5c9152833901823e2a15f3aeb785c6f884e3be2976cd32",
+      "byteIdentical": true
+    },
+    {
+      "path": "kit/anascummis-studio-da0f6c1d7c0bcf4b.zip",
+      "original": "/workspace/anascummis/apps/studio/out/opensource/anascummis-studio-da0f6c1d7c0bcf4b.zip",
+      "bytes": 2470718,
+      "sha256": "7ca73a9145f4b299e3b8a56ad75db8d0ef5a6ce09f8c29d81fc54301bee55e05",
+      "byteIdentical": true
+    },
+    {
+      "path": "kit/anascummis-studio-da0f6c1d7c0bcf4b.zip.sha256",
+      "original": "/workspace/anascummis/apps/studio/out/opensource/anascummis-studio-da0f6c1d7c0bcf4b.zip.sha256",
+      "bytes": 105,
+      "sha256": "715002e16da4c33c6ab09fe69b063b4aeb907a5694ba5471a9a0adccca9ca68b",
+      "byteIdentical": true
+    }
+  ],
+  "excluded": [
+    "private-data databases and keys",
+    "model weights and caches",
+    "private backup",
+    "full Playwright traces and host logs"
+  ]
+}

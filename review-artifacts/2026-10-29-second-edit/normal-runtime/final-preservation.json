@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-30T00:05:57.582250+00:00",
+  "source": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+  "normalServerPid": 91357,
+  "modelPid": 18848,
+  "modelStartTicks": "845300",
+  "all24ExistingTableRowDigestsUnchangedFromInitialBaseline": true,
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "onlyNormalHostRequestsDuringFinalKitCheck": "GET status/manifest/current ZIP",
+  "noFixtureImported": true
+}

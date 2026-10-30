@@ -1,0 +1,11 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/model-document-profile.test.ts:
+(pass) only the explicit document writer sends the measured profile; later ordinary inference retains its original defaults [2.83ms]
+(pass) foreground preemption retries a background rewrite with the same profile and exact request rather than falling back to default decoding [7.36ms]
+(pass) a cancelled document writer or a provider failure is not retried as a different profile [10.49ms]
+
+ 3 pass
+ 0 fail
+ 92 expect() calls
+Ran 3 tests across 1 file. [36.00ms]

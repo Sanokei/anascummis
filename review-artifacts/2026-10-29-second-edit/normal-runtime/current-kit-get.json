@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-30T00:04:00.668429+00:00",
+  "source": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+  "origin": "http://127.0.0.1:3211",
+  "status": {
+    "runtime": "local",
+    "model": {
+      "ready": true,
+      "name": "qwen3-0.6b"
+    },
+    "speech": "Streaming Pocket TTS with local LavaSR enhancement",
+    "network": "Opt-in actions only"
+  },
+  "manifestMatchesBuiltKit": true,
+  "archiveUrl": "http://127.0.0.1:3211/opensource/anascummis-studio-def6e726f276638a.zip",
+  "contentType": "application/zip",
+  "zipSignature": true,
+  "bytes": 2470745,
+  "sha256": "d790e37c6fbc10acb93e14b8efcba02d34c70913d60a66ba7d6331265b46c376",
+  "archiveMatchesBuiltKit": true,
+  "externalPublicationOrPreview": false,
+  "limits": [
+    "Prepared local host only; no new clean extraction, dependency installation, public preview or native OS/voice claim."
+  ]
+}

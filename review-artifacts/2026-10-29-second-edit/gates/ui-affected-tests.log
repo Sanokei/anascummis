@@ -1,0 +1,20 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-panel-handoff.test.ts:
+(pass) an older goal poll cannot replace a confirmed edit handoff or approval [5137.41ms]
+
+tests/research-brief-edit-ui.test.ts:
+(pass) document edit UI preserves an uncertain request and approval without replay [3225.08ms]
+
+tests/brief-review-text.test.ts:
+(pass) review rendering presents literal code/link labels without altering retained native text [8.14ms]
+(pass) private, credentialled, invented and malformed destinations remain inert even inside source text [1.60ms]
+(pass) actual browser review text has readable links, inert raw HTML and deliberate keyboard navigation [881.10ms]
+
+tests/research-brief-review-dialog.test.ts:
+(pass) expanded review escapes the small window, renders source links and keeps explicit approval safe [1981.24ms]
+
+ 6 pass
+ 0 fail
+ 196 expect() calls
+Ran 6 tests across 4 files. [11.52s]

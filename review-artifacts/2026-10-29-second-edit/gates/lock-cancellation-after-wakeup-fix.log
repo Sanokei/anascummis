@@ -1,0 +1,10 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/local.test.ts:
+(pass) background goal locks wait for current edits and can be cancelled while waiting [102.72ms]
+
+ 1 pass
+ 21 filtered out
+ 0 fail
+ 2 expect() calls
+Ran 1 test across 1 file. [176.00ms]

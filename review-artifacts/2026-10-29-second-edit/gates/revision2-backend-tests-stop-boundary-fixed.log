@@ -1,0 +1,18 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-second-edit.test.ts:
+(pass) current accepted revision pins the exact base and one approved version 2 preserves all earlier bytes and notes [12104.19ms]
+(pass) an interrupted second proposal and rendered checkpoint reuse the raw decision and files without another write or review [79.73ms]
+(pass) stale current parents and a document changed while reviewing cannot trigger inference or approve a version [103.40ms]
+(pass) a base changed after approval cannot overwrite a competing version 2 or claim it as this operation [47.30ms]
+(pass) a lost completion and rolled-back version 2 registration reconcile the same approved operation exactly once [63.88ms]
+(pass) an unknown unregistered version 2 file is preserved through explicit retry without a false revision [48.03ms]
+(pass) uncertain create and exact Apply identities do not create duplicate children or approve a different proposal [51.96ms]
+(pass) a shorter-one-sentence request rejects missing locations, multiple sentences and unshortened text before Apply [98.08ms]
+(pass) unsupported current-revision intents are refused before a new operation without silently changing the request [26.78ms]
+(pass) Stop during prepared-file verification leaves version 2 unpublished until explicit continuation [56.78ms]
+
+ 10 pass
+ 0 fail
+ 255 expect() calls
+Ran 10 tests across 1 file. [12.71s]

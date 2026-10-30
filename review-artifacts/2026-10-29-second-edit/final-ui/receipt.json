@@ -1,0 +1,42 @@
+{
+  "source": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+  "nativeJourneySource": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+  "scope": "Read-only reopen of actual accepted native version2 with final technical label correction; no new inference or Apply/research accepted.",
+  "goalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+  "modelCallsRequested": false,
+  "requests": [],
+  "screenshots": [
+    "final-reopened-review-1440.png",
+    "final-base-version-label-360x420.png"
+  ],
+  "checks": [
+    {
+      "viewport": "desktop",
+      "baseVersionHashLabelCorrect": true,
+      "savedNativeOperationUnchanged": true,
+      "renderedProposalUnchanged": true,
+      "escapeReturnsFocus": true
+    },
+    {
+      "viewport": "narrow",
+      "baseVersionHashLabelCorrect": true,
+      "savedNativeOperationUnchanged": true,
+      "renderedProposalUnchanged": true,
+      "escapeReturnsFocus": true
+    }
+  ],
+  "noGoalOrArtifactMutationSubmitted": true,
+  "passed": true,
+  "originals": [
+    {
+      "path": "final-reopened-review-1440.png",
+      "bytes": 235556,
+      "sha256": "108e1b370dd4f2bb094b085a4f0fb2342d0bd24cfa3fcec7b83f7302ce619935"
+    },
+    {
+      "path": "final-base-version-label-360x420.png",
+      "bytes": 52163,
+      "sha256": "96d495a42bc494da559b9ef0e639c5e707ad20fce29cfd1a3371bb04370c9bb3"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "at": "2026-10-29T23:53:57.846487+00:00",
+  "reviewer": "independent child agent, read-only source and saved-artifact contract audit",
+  "source": "298557eea2091f1f709653c314fb2d0fb99a1f16",
+  "branch": "codex/current-revision-edit-20261029",
+  "base": "1c5a0851a587e0e45eef81beb130f733c0da5038",
+  "status": "source_contract_pass_pending_native_ui",
+  "sourceFingerprints": [
+    {
+      "path": "apps/studio/core/research-brief-edit.ts",
+      "bytes": 54775,
+      "sha256": "37fb6c30a41ef85fe1031a49bfe135bc507524b0e96b5e0fbf6f584f81d89a66"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-types.ts",
+      "bytes": 2551,
+      "sha256": "73a15d60bf50b22b23aa7f9e2cb8a986bfc3b3d51f53c5d67f4b8538ccda5368"
+    },
+    {
+      "path": "apps/studio/core/research-brief-summary.ts",
+      "bytes": 3483,
+      "sha256": "927e6949bb8d04c3c43c8237d898055b7965ee63add9860ad0e96bb8c1af0c34"
+    },
+    {
+      "path": "apps/studio/core/model.ts",
+      "bytes": 7323,
+      "sha256": "3742e2294c92728bb2c3e53267f60e22b87cc3889b8f5c0ee83e239d8e13b30a"
+    },
+    {
+      "path": "apps/studio/core/server.ts",
+      "bytes": 35872,
+      "sha256": "7fc175ad64c926e3f73fd2310ad102f3dad26fdc08522774065964111a1bc94a"
+    },
+    {
+      "path": "apps/studio/core/goal-orchestrator.ts",
+      "bytes": 51314,
+      "sha256": "f776bddee35786cb5fdb78a63057b22b87be39ff465903d31700b47891b4d6ce"
+    },
+    {
+      "path": "apps/studio/core/storage.ts",
+      "bytes": 3513,
+      "sha256": "be083ddd9ae743c7901886317e704d56214f36ea46092c4b62d766e6b30aab4d"
+    },
+    {
+      "path": "apps/studio/core/goal-executor.ts",
+      "bytes": 4147,
+      "sha256": "486b565434984408930a77261931e0ddda59410951a93e43db303f50d696c8ac"
+    },
+    {
+      "path": "apps/studio/components/ResearchBriefEdit.tsx",
+      "bytes": 43034,
+      "sha256": "e878df9169759a9c0908b3f836e376554154167d2575c662fe378641f8ca738e"
+    },
+    {
+      "path": "apps/studio/components/BriefReviewText.tsx",
+      "bytes": 4427,
+      "sha256": "0e98d334c86bead9fef17a9179e6d088a73e9abdbb1e66d2cfd83fa89245d10f"
+    },
+    {
+      "path": "apps/studio/app/page.tsx",
+      "bytes": 66241,
+      "sha256": "47ac6403390ad285d32cdbb1fa2204630fc9c49e42ca5aa6ba3c8412b8f7d6ea"
+    },
+    {
+      "path": "apps/studio/app/style.css",
+      "bytes": 41560,
+      "sha256": "ef430af0584a6a9a3689aebbefdc38451bd90d1a07db680603dd6a953bb914ae"
+    }
+  ],
+  "blockingFindings": [],
+  "caughtAndFixed": [
+    {
+      "finding": "Cancellation during asynchronous pre-publication verification could still copy the target revision file before checking the abort signal. SQL did not falsely complete, but a late owned-file write was possible.",
+      "resolution": "Abort is now checked immediately after verification and after reading the accepted PDF, before writeExact(targetRevision).",
+      "verified": "Current frozen source re-read; owner supplies gated cancellation regression separately."
+    },
+    {
+      "finding": "New create/Apply route locks synchronously kicked the goal worker, whose same-document lock initially had no signal and threw This item is busy before the route released ownership.",
+      "resolution": "Registered document execution now passes its goal AbortSignal to shared exclusive(), waiting for the route lock to release while preserving Stop behavior.",
+      "verified": "Current frozen source re-read and all registered mutation lock call paths inspected; owner supplies wakeup/native-route checks separately."
+    }
+  ],
+  "checkedContracts": [
+    "A child of an accepted current edit pins base revision, operation, PDF/HTML/provenance hashes, accepted parent goal-body hash, base state/input hashes and complete before draft. Every retry/export recursively verifies the pinned original and accepted ancestors, bounded to32revisions with cycle checks.",
+    "Historical registrations require current revision at least their own revision, not equality, so accepted version1 exports remain verifiable after version2 becomes current. Exact revision files and labels remain pinned.",
+    "An independent invocation of the real current private plan() over actual accepted1087version1 state/provenance reproduces its HTML and provenance JSON byte-for-byte, without opening a database, constructing a store, starting a service or invoking a model.",
+    "Current-summary raw text/citations is wrapped into the paragraph structure unchanged. Host comparison formatting and literal single-sentence/shorter/location checks do not compose the factual rewrite.",
+    "The measured DOCUMENT_REWRITE_PROFILE is frozen, host-selected, pinned before inference and compared against the saved current-version request. Production routes explicitly supply documentRewriteInfer only for current-summary mode; old grounded writers, support review and ordinary inference retain infer/T0.",
+    "The document profile requests temperature0.7,top_p0.8,top_k20,min_p0,seed42,chat_template_kwargs.enable_thinking=false on the same loopback model transport. Scheduler preemption preserves the profile/request; cancellation/provider failure does not silently fall back to default decoding. This is request-routing evidence, not a fresh native-quality pass.",
+    "All registered PDF mutations share the document-id ownership lock: native edit execution, create/Apply base preparation, HTTPedit/restore, foreground pdfTools outerlock and goal executor. Conditional SQL publication, operation-owned files and writeExact collision guards prevent overwriting another accepted revision.",
+    "Approve re-reads current goal after asynchronous original/base verification, rejects cancelled/conflicting bases and binds the exact operation/proposal hash. Continue/startup do not approve a proposal; uncertain delivery retains GET inspection rather than replay.",
+    "The native review dialog is a showModal surface with a960pxmaximum/stacked narrow layout, fixed Apply/Cancel footer, explicit base/result versions and summary section, focus heading/restoration, native Escape cancellation and a page-global shortcut guard. Opening/closing review performs no mutation.",
+    "Review rendering uses inert React text/code and allowed HTTPS links derived only from retained quotation URLs; raw before/proposed/native data and exact citation evidence remain separately inspectable. Contextual base-version downloads and original-version downloads target their respective saved goals."
+  ],
+  "historicalPlanReadOnlyCheck": {
+    "path": "/workspace/.cloud-env/anascummis/document-second-edit/independent-historical-plan-check.json",
+    "sha256": "e9d69905d915f1cbe71d9f0f499172e03a35ce2ea79b4399d1a1553d0b9e65f1",
+    "sourceUnderAudit": "working tree based on 1c5a0851a587e0e45eef81beb130f733c0da5038",
+    "historicalSource": "1087bf742ab3c5542a0a6863f8125453e2565a8d",
+    "historicalOperationId": "ba06c920-805b-415c-b946-27defc3c82d1",
+    "htmlEqual": true,
+    "provenanceJsonEqual": true,
+    "htmlSha256": "bcf1f06703120d07a3b8021e0173a2a59d88fd6d51432a2318ea06e370ba2f33",
+    "provenanceSha256": "0554523b297517675d6507715a83dbbdf72845bc858e7173e6228a5ec3a2fb27",
+    "scope": "Invoked the real current private plan() method over saved old provenance/state without constructing a store, opening any database, starting a service or requesting inference."
+  },
+  "ownerValidationReportedSeparately": {
+    "affectedChecks": "70tests/1144assertions before the one-argument lock wait fix; focused storage checks and both TypeScript targets after the fix, per root owner.",
+    "productionBuild": "In progress at audit finalization.",
+    "genuineCurrentVersionUi": "Pending; prompt-only native success and injected transport/UI checks are not relabelled as end-to-end acceptance."
+  },
+  "limits": [
+    "Source/dialog contract audit and saved historical rendering reproduction only. This reviewer made no source edits, model calls, database writes, service starts, normal-data changes or build/test-gate runs.",
+    "Fresh native version1→2 output, actual browser restart/uncertain delivery and original desktop/narrow review screenshots remain required owner acceptance.",
+    "A measured writer-only decoding profile does not prove general semantic accuracy or arbitrary imported-PDF editing. Literal shape/location checks and the same-model support role have separate limits.",
+    "Physical handset/keyboard, native Windows/macOS, voice, public deployment and environment publication are outside this review."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "raw": {
+    "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+    "citations": [
+      1,
+      2
+    ]
+  },
+  "checks": {
+    "nonempty": true,
+    "oneSentence": true,
+    "shorter": true,
+    "bothLocations": true,
+    "citations": true,
+    "noLabels": true,
+    "plainProse": true,
+    "characters": 143
+  },
+  "finishReason": "stop",
+  "profile": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "seed": 42,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  }
+}

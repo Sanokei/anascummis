@@ -1,0 +1,41 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-panel-handoff.test.ts:
+(pass) an older goal poll cannot replace a confirmed edit handoff or approval [4783.58ms]
+
+tests/research-brief-edit-draft.test.ts:
+(pass) document edit browser drafts and uncertain approvals > reload keeps the exact submitted intent separately from newer edits [0.27ms]
+(pass) document edit browser drafts and uncertain approvals > acknowledging the submitted intent clears only that snapshot [0.11ms]
+(pass) document edit browser drafts and uncertain approvals > invalid or oversized storage cannot silently truncate a request [0.23ms]
+(pass) document edit browser drafts and uncertain approvals > an unconfirmed approval retains its exact operation and proposal hash [0.22ms]
+(pass) document edit browser drafts and uncertain approvals > optional sentence format keeps incomplete labels and an exact submitted snapshot [0.30ms]
+(pass) document edit browser drafts and uncertain approvals > unchecked unsent labels survive acknowledgement and invalid labels are not silently shortened [0.17ms]
+
+tests/research-brief-edit-ui.test.ts:
+129 |     expect(JSON.parse(await page.getByLabel('Host citation matching JSON for Tests:', {exact: true}).innerText())).toEqual(partial.documentEditState.sentenceSelections.first);
+130 |     expect(await page.getByLabel('First native sentence decision JSON', {exact: true}).count()).toBe(0);
+131 |     partial.documentEditState.sentenceAttempts.first = structuredClone(child.documentEditState.sentenceAttempts.first);
+132 |     delete partial.documentEditState.sentenceAttempts.second;
+133 |     await page.evaluate(next => (window as any).showEdit(next), partial);
+134 |     expect(await page.getByText('1 of 2 native sentence-writing decisions saved.', {exact: true}).isVisible()).toBe(true);
+                                                                                                                     ^
+error: expect(received).toBe(expected)
+
+Expected: true
+Received: false
+
+      at <anonymous> (/workspace/anascummis/apps/studio/tests/research-brief-edit-ui.test.ts:134:112)
+(fail) document edit UI preserves an uncertain request and approval without replay [1537.04ms]
+
+tests/brief-review-text.test.ts:
+(pass) review rendering presents literal code/link labels without altering retained native text [7.03ms]
+(pass) private, credentialled, invented and malformed destinations remain inert even inside source text [2.18ms]
+(pass) actual browser review text has readable links, inert raw HTML and deliberate keyboard navigation [789.35ms]
+
+tests/research-brief-review-dialog.test.ts:
+(pass) expanded review escapes the small window, renders source links and keeps explicit approval safe [1770.09ms]
+
+ 11 pass
+ 1 fail
+ 171 expect() calls
+Ran 12 tests across 5 files. [9.22s]

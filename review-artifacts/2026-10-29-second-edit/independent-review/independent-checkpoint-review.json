@@ -1,0 +1,144 @@
+{
+  "checkedAt": "2026-10-30T00:05:13.635801+00:00",
+  "reviewer": "Independent checkpoint-review child; read-only source, copied files, artifact parsing and SQLite queries. No build, install, model/network request or service mutation.",
+  "status": "pass_with_documented_scope",
+  "nativeJourneySource": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+  "finalProductSource": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+  "sourceDifference": "Exactly one technical UI label changes Original PDF SHA-256 to Base version {baseRevision} PDF SHA-256. Backend/model requests and factual rendering are unchanged.",
+  "originalCopies": {
+    "initialNativeIndexEntriesCheckedBeforeFinalKitUpdate": 60,
+    "initialNativeIndexSha256": "9a573cb245d491a06b57dc35fcee509c974e7eb918b97fc8c284dbac94f01ea3",
+    "currentIndexEntriesChecked": 72,
+    "currentIndexSha256": "7ee6e8e0a5ec63d64536126a8b7d6d43de85c2f7c2b2036aed87c52bedac5ea8",
+    "everyIndexedFileMatchesCurrentOriginalBytesHashAndSize": true,
+    "packRegularFilesAtCheck": 78,
+    "noSymlinkPrivateDatabaseKeyWeightCacheOrFullTracePaths": true,
+    "currentAndPriorNativeKitsPreserved": true
+  },
+  "actualArtifactChecks": [
+    {
+      "viewport": "desktop",
+      "goalId": "671f5887-899d-4619-b94d-5c4fb54c5c56",
+      "operationId": "2a0af493-4360-41e8-8ea0-c674ffa33c31",
+      "nativeCharacters": 143,
+      "previousReadableCharacters": 216,
+      "personalNotesCharacters": 1719,
+      "pdfPages": 1,
+      "pdfHtmlAndProvenanceHashesMatch": true,
+      "actualPdfAndHtmlContainRewriteNotesOnceAndAllThreeSourceTargets": true,
+      "rawDecisionIsExactPublishedWording": true,
+      "sourceAndCitationIdentitiesPreserved": true,
+      "noActiveHtml": true,
+      "actualStoppedCopiedDatabaseHistory": [
+        0,
+        1,
+        2
+      ],
+      "storedAncestorBytesMatchBefore": true,
+      "historicalDownloadReceiptsUnchanged": true
+    },
+    {
+      "viewport": "narrow",
+      "goalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+      "operationId": "705dfa96-c28b-43a1-8857-f5e45b58ccff",
+      "nativeCharacters": 143,
+      "previousReadableCharacters": 216,
+      "personalNotesCharacters": 1719,
+      "pdfPages": 1,
+      "pdfHtmlAndProvenanceHashesMatch": true,
+      "actualPdfAndHtmlContainRewriteNotesOnceAndAllThreeSourceTargets": true,
+      "rawDecisionIsExactPublishedWording": true,
+      "sourceAndCitationIdentitiesPreserved": true,
+      "noActiveHtml": true,
+      "actualStoppedCopiedDatabaseHistory": [
+        0,
+        1,
+        2
+      ],
+      "storedAncestorBytesMatchBefore": true,
+      "historicalDownloadReceiptsUnchanged": true
+    }
+  ],
+  "gates": {
+    "affectedLogPassed": 70,
+    "affectedExpectCalls": 1144,
+    "separateLockTestPassed": 1,
+    "separateLockExpectCalls": 2,
+    "finalLabelUiPassed": 2,
+    "finalLabelUiExpectCalls": 150,
+    "productionBuildAt298557AndFinal6fLogsPresent": true,
+    "typeScriptLogsEmptyWithOwnerExit0Receipts": true,
+    "scope": "Mixed injected model/transport/UI contracts and real PDF checks remain separate from genuine native goal outcomes; earlier subset counts are not added again."
+  },
+  "diagnostics": {
+    "t0RewriteFailures": 5,
+    "enumOnlyFormatControlPasses": 1,
+    "correctedPatternHttp500Failures": 1,
+    "measuredProfilePromptPasses": 1,
+    "diagnosticPassIsNotUiLifecyclePass": true,
+    "rawSha256EntriesIndependentlyRecomputed": 7,
+    "seed42": "Local reproducibility setting; official Qwen model card recommends temperature/top-p/top-k/min-p and enable_thinking=false, not this seed."
+  },
+  "failureClassification": {
+    "failedNativeDesktopSource": "298557eea2091f1f709653c314fb2d0fb99a1f16",
+    "reason": "The runner negated the unresolved isVisible() Promise, making its wait always false. Its fixed condition awaits actual visibility.",
+    "privateTraceReconciledApprovalMessageFound": true,
+    "privateTraceSha256": "616d6e397eb7167182dcfe690afac748d86706d69a4f7b7020f20711a96e1657",
+    "privateTracePublished": false,
+    "uiFixtureFailures": "First strict-mode locator matched duplicate closed-dialog text; second assertion ran before React commit. Failed logs are preserved."
+  },
+  "finalKit": {
+    "manifest": {
+      "format": 1,
+      "version": "def6e726f276638ac1021000218d226cadf5505b5e5817b2457324d3cfc4c6d5",
+      "filename": "anascummis-studio-def6e726f276638a.zip",
+      "sha256": "d790e37c6fbc10acb93e14b8efcba02d34c70913d60a66ba7d6331265b46c376",
+      "bytes": 2470745,
+      "files": 278,
+      "source": {
+        "commit": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+        "dirty": false
+      },
+      "dependencies": {
+        "next": "16.4.3",
+        "etro": "0.14.1"
+      }
+    },
+    "receipt": "/workspace/.cloud-env/anascummis/document-second-edit/kit-def6e726f276638a-verification.json",
+    "receiptSha256": "39585ba61f86e20e0a4d4a8aaf2fe3b6978c9be9660e8a2417ab797657492bcb",
+    "exactPinnedSourceAuditPassed": true,
+    "archiveEntries": 279,
+    "pinnedSourceFilesByteCompared": 238,
+    "generatedFromPinnedSource": 2,
+    "installedEtroFilesByteCompared": 38,
+    "scope": "Offline ZIP audit only; no new clean extraction/start, installation or platform acceptance."
+  },
+  "staticViews": {
+    "directlyViewed": [
+      "desktop/version-2-pdf-page-1.png",
+      "narrow/02-stacked-proposed-and-apply-360x420.png",
+      "final-ui/final-base-version-label-360x420.png"
+    ],
+    "finding": "Actual PDF page is readable with linked references and complete long notes. Narrow modal has stacked text and fixed Apply/Cancel; bottom of paragraph reaches the intentional scroll boundary. Final detail correctly labels the base-version hash.",
+    "limit": "Static fragments do not show all narrow summary pixels simultaneously or prove real handset/keyboard behavior. Owner dynamic receipts remain separate."
+  },
+  "finalReopen": {
+    "source": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+    "goalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+    "actualAcceptedNativeGoalAndOperationRowsByteIdenticalToNarrowRun": true,
+    "sameDocumentAndHistoryRows": true,
+    "allAcceptedDocumentFilesByteIdentical": true,
+    "receiptAndOriginalImageHashesVerified": true,
+    "noGoalMutationRequestedInOwnerReceipt": true
+  },
+  "documentationNotesForFinalReadme": [
+    "Copied research/AUDIT.md is an exact local chronology: diagnostic/ maps to packaged diagnostics/; native run-directory names map to desktop/ and narrow/.",
+    "Seed42 is local; official sampling recommendations should be described separately.",
+    "The independent historical plan receipt used another actual accepted-v1 operation ba06c920; both current-case version1 exports are separately verified unchanged using before/after download receipts."
+  ],
+  "limits": [
+    "One bounded unchanged structured-summary goal is repeated at two viewports. It does not establish arbitrary imported-PDF editing, broad model prose/semantic accuracy, independent source-claim truth, physical-device, voice or Windows/macOS support.",
+    "New native decisions were not rerun after final label-only source change; final source has affected UI/build/type gates and read-only reopen proof.",
+    "This artifact review does not independently rerun the browser lifecycle or native inference; it checks their frozen reports against actual outputs and stopped copied-state evidence."
+  ]
+}

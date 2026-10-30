@@ -1,0 +1,27 @@
+{
+  "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/8642541b2/tools/server/README.md",
+  "runtimeCommit": "8642541b2",
+  "retrievedAt": "2026-10-29T23:40:56.318084+00:00",
+  "status": 200,
+  "bytes": 135608,
+  "sha256": "8fd5abde2fb52de3b30f30a170631d4c0d92febecc8da44d0541e48b132b35c6",
+  "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "etag": "\"80a8ea32c5a7a3c44214e7595a66fbaa9ce9b2bf834f1f920d183554f0b58d7e\"",
+    "content-length": "135608"
+  },
+  "matches": [
+    {
+      "line": 581,
+      "excerpt": "`grammar`: Set grammar for grammar-based sampling.  Default: no grammar\n\n`json_schema`: Set a JSON schema for grammar-based sampling (e.g. `{\"items\": {\"type\": \"string\"}, \"minItems\": 10, \"maxItems\": 100}` of a list of strings, or `{}` for any JSON). See [tests](../../tests/test-json-schema-to-grammar.cpp) for supported features.  Default: no JSON schema.\n\n`seed`: Set the random number generator (RNG) seed.  Default: `-1`, which is a random seed.\n\n`ignore_eos`: Ignore end of stream token and continue generating.  Default: `false`"
+    },
+    {
+      "line": 872,
+      "excerpt": "`n_predict`: Max number of audio frames to generate. Defaults to `512`; generation normally stops earlier once the model emits an end-of-speech token.\n\n`response_format`: `wav` (default) or `pcm` (raw `float32` little-endian mono samples, no header; the response `Content-Type` carries the sample rate, e.g. `audio/pcm;rate=24000;encoding=float;bits=32`).\n\n`stream`: If `true`, the response is streamed as audio becomes available instead of waiting for the full generation to finish. WAV streaming writes an RFC-noncompliant header with an unknown (`0xFFFFFFFF`) size field, since the final length isn't known up front; most players and decoders (ffmpeg, VLC, ...) handle this by reading until EOF.\n\nNote: it's highly recommended to always provide a speaker reference voice; otherwise, the model's performance may be degraded."
+    },
+    {
+      "line": 1445,
+      "excerpt": "See [OpenAI Chat Completions API documentation](https://platform.openai.com/docs/api-reference/chat). llama.cpp `/completion`-specific features such as `mirostat` are also supported.\n\nThe `response_format` parameter supports both plain JSON output (e.g. `{\"type\": \"json_object\"}`) and schema-constrained JSON (e.g. `{\"type\": \"json_object\", \"schema\": {\"type\": \"string\", \"minLength\": 10, \"maxLength\": 100}}` or `{\"type\": \"json_schema\", \"schema\": {\"properties\": { \"name\": { \"title\": \"Name\",  \"type\": \"string\" }, \"date\": { \"title\": \"Date\",  \"type\": \"string\" }, \"participants\": { \"items\": {\"type: \"string\" }, \"title\": \"Participants\",  \"type\": \"string\" } } } }`), similar to other OpenAI-inspired API providers.\n\n`chat_template_kwargs`: Allows sending additional parameters to the json templating system. For example: `{\"enable_thinking\": false}`\n\n`reasoning_effort`: If `none`, reasoning/thinking is disabled. Otherwise, the value is made available to the jinja template."
+    }
+  ]
+}

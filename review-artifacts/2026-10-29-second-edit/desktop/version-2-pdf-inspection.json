@@ -1,0 +1,128 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "text": "Fetch test contributor brief\nBrief: Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/\nwpt, and results are available at wpt.fyi/results/fetch. [1] [2]\nSource question: Where are the Fetch Standard’s tests kept, and where can I see them\nrunning against browser engines? Cite the README statements supporting both.\nYour notes — personal, not source claims: Personal handoﬀ for my next Fetch test\ncontribution. These are my own proposed actions and working notes, not instructions or\nveriﬁed claims from the source.\nBefore changing anything, I will record the browser and version, a minimal public example,\nthe outcome I expected and what I actually saw. I will remove cookies, authorization\nheaders, account details and private URLs from anything I share.\n1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with\nthe current README. If the evidence changed, ask a new focused question instead of\nediting the accepted copy.\n2. Open the browser-results location from the brief. Write down the engine and platform I\ninspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test\npasses.\n3. Search the cited test directory for a related case before proposing another test. Keep the\ncandidate ﬁlename, my reason for choosing it and any unresolved question in my own draft.\n4. Separate reproduction from implementation. First describe a small public ﬁxture and\nexpected behavior; then explain the proposed test and the observation it should distinguish.\n5. Read the project's current contribution and review instructions before submitting anything.\nI have not checked those instructions yet, and this brief does not establish them.\n6. Keep a handoﬀ log of what I tried, which evidence I saved and what remains uncertain.\nAfter interruption, inspect saved work and continue deliberately rather than repeating\naccepted research.\n7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for\nmissing guidance instead of guessing. My personal checklist is not a source-backed\nconclusion.\nReference [1]: Tests for the Fetch Standard can be found in the fetch/ directory of web-\nplatform-tests/wpt.\nReference [2]: A dashboard showing the tests running against browser engines can be\nseen at wpt.fyi/results/fetch.\nSource: README.md\nRetrieved: 2026-10-29T22:06:27.711Z\nAbout this document: Local-model wording, not independently fact-checked. Full source\nand editing provenance is available in the work window.\n",
+      "links": [
+        {
+          "uri": "https://github.com/web-platform-tests/wpt",
+          "rect": [
+            485.2371520996094,
+            629.4752807617188,
+            509.07415771484375,
+            640.4752807617188
+          ]
+        },
+        {
+          "uri": "https://github.com/web-platform-tests/wpt",
+          "rect": [
+            509.07415771484375,
+            629.4752807617188,
+            509.07415771484375,
+            640.4752807617188
+          ]
+        },
+        {
+          "uri": "https://github.com/web-platform-tests/wpt",
+          "rect": [
+            72,
+            645.42529296875,
+            115.39500427246094,
+            656.42529296875
+          ]
+        },
+        {
+          "uri": "https://github.com/web-platform-tests/wpt",
+          "rect": [
+            115.39500427246094,
+            645.42529296875,
+            115.39500427246094,
+            656.42529296875
+          ]
+        },
+        {
+          "uri": "https://github.com/web-platform-tests/wpt",
+          "rect": [
+            115.39500427246094,
+            645.42529296875,
+            141.68499755859375,
+            656.42529296875
+          ]
+        },
+        {
+          "uri": "https://github.com/web-platform-tests/wpt",
+          "rect": [
+            141.68499755859375,
+            645.42529296875,
+            141.68499755859375,
+            656.42529296875
+          ]
+        },
+        {
+          "uri": "https://github.com/web-platform-tests/wpt",
+          "rect": [
+            141.68499755859375,
+            645.42529296875,
+            158.80099487304688,
+            656.42529296875
+          ]
+        },
+        {
+          "uri": "https://wpt.fyi/results/fetch",
+          "rect": [
+            111.13800048828125,
+            684.3253173828125,
+            145.3699951171875,
+            695.3253173828125
+          ]
+        },
+        {
+          "uri": "https://wpt.fyi/results/fetch",
+          "rect": [
+            145.3699951171875,
+            684.3253173828125,
+            145.3699951171875,
+            695.3253173828125
+          ]
+        },
+        {
+          "uri": "https://wpt.fyi/results/fetch",
+          "rect": [
+            145.3699951171875,
+            684.3253173828125,
+            180.822998046875,
+            695.3253173828125
+          ]
+        },
+        {
+          "uri": "https://wpt.fyi/results/fetch",
+          "rect": [
+            180.822998046875,
+            684.3253173828125,
+            180.822998046875,
+            695.3253173828125
+          ]
+        },
+        {
+          "uri": "https://wpt.fyi/results/fetch",
+          "rect": [
+            180.822998046875,
+            684.3253173828125,
+            204.67098999023438,
+            695.3253173828125
+          ]
+        },
+        {
+          "uri": "https://raw.githubusercontent.com/whatwg/fetch/main/README.md",
+          "rect": [
+            116.01100158691406,
+            707.2753295898438,
+            181.406005859375,
+            718.2753295898438
+          ]
+        }
+      ]
+    }
+  ],
+  "pageCount": 1
+}

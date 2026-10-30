@@ -1,0 +1,12 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-edit-ui.test.ts:
+(pass) document edit UI preserves an uncertain request and approval without replay [3206.88ms]
+
+tests/research-brief-review-dialog.test.ts:
+(pass) expanded review escapes the small window, renders source links and keeps explicit approval safe [2006.95ms]
+
+ 2 pass
+ 0 fail
+ 150 expect() calls
+Ran 2 tests across 2 files. [5.47s]

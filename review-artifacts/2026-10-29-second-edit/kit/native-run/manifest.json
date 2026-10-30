@@ -1,0 +1,16 @@
+{
+  "format": 1,
+  "version": "da0f6c1d7c0bcf4bc11958ebc6c0107b1c13674cae31ca42ebfb4bbf06264fc7",
+  "filename": "anascummis-studio-da0f6c1d7c0bcf4b.zip",
+  "sha256": "7ca73a9145f4b299e3b8a56ad75db8d0ef5a6ce09f8c29d81fc54301bee55e05",
+  "bytes": 2470718,
+  "files": 278,
+  "source": {
+    "commit": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+    "dirty": false
+  },
+  "dependencies": {
+    "next": "16.4.3",
+    "etro": "0.14.1"
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-29T23:58:49.441877+00:00",
+  "sourceCommit": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+  "reviewer": "second_edit_review_ui agent; UI implementer performing a separate original-image review from the native journey driver",
+  "method": "Directly viewed the unmodified original PNG files using view_image; hashes and PNG dimensions read from original files. No source edits, tests, builds, model calls or new captures in this review.",
+  "images": [
+    {
+      "path": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/01-expanded-full-comparison-and-apply-1440.png",
+      "sha256": "50c88fe0ba1949c35ffdf0853c4e4fc51e57e3e9f63022f75f76b1d5ba97bca7",
+      "bytes": 231883,
+      "width": 1440,
+      "height": 1000,
+      "kind": "ordinary-server desktop review",
+      "staticVerdict": "captured-state presentation accepted",
+      "observed": [
+        "The expanded dialog uses approximately 960px of the 1440px desktop width, leaving ordinary Goals at their existing width behind it.",
+        "Complete before/proposed summary sections are visible together with the Apply proposed edit and Cancel review actions; neither paragraph is clipped.",
+        "The header states Version 1 to proposed version 2 and Changed section: Summary in ordinary language.",
+        "Before text renders inline code and source links without Markdown delimiters; the one-sentence proposal retains visible [1] and [2] source links.",
+        "Exact raw comparison/citation evidence and native support review remain collapsed inspectable details. The limited meaning of host/model review is stated.",
+        "Base version 1 PDF/HTML download actions are visible in the same review."
+      ],
+      "critique": [
+        "The native one-sentence proposal uses plain visible repository/result paths rather than direct inline links, but its adjacent numbered citation links provide an evident source route.",
+        "The host-check explanation is technical and comparatively long; it remains below the comparison and does not obstruct reading or Apply in this desktop capture."
+      ]
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/document-second-edit/native-desktop-b8e05a68/research-document-second-edit-desktop/version-2-pdf-page-1.png",
+      "sha256": "a6749f78a5aa0f654b367c3b9ed3959324305a481de515817404924e71c0fff5",
+      "bytes": 139476,
+      "width": 685,
+      "height": 969,
+      "kind": "actual exported version-2 PDF page raster",
+      "staticVerdict": "captured-state presentation accepted",
+      "observed": [
+        "The title and short summary have clear hierarchy. The exact locations and citation numbers remain visible in the one-sentence brief.",
+        "All visible personal-note paragraphs and seven checklist items fit on this page with usable margins and no clipped text or overlaps.",
+        "Reference quotations render code and blue source-link labels without raw Markdown. Repository/result identifiers wrap within the page rather than running outside it.",
+        "The source README link, retrieval time and explicit local-model/not-independently-fact-checked qualification are visible.",
+        "Routine reading is not dominated by operation IDs, duplicated source hashes or machine provenance."
+      ],
+      "critique": [
+        "The preserved long personal notes make the middle of this page dense, but they remain readable and are clearly labelled as personal rather than sourced claims.",
+        "The repository identifier wraps after its slash in the summary/reference area; this looks like normal line wrapping rather than a separated machine URL dump."
+      ]
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/01-stacked-before-comparison-360x420.png",
+      "sha256": "5818649731c47b468b5d6f636df8fc2ac767b5af523704b651c6b1bfdef2b11c",
+      "bytes": 47348,
+      "width": 360,
+      "height": 420,
+      "kind": "ordinary-server narrow review/recovery original",
+      "staticVerdict": "captured-state layout and recovery controls accepted with explicit scroll/capture limits",
+      "observed": [
+        "At 360 by 420 pixels the fixed header shows version 1 to proposed version 2 and changed Summary without horizontal overflow.",
+        "The before summary occupies one column. Inline code, repository label, result label and numbered citations are legible; raw Markdown delimiters are absent.",
+        "The footer is opaque and separate from the middle content. Cancel review fits fully inside the viewport.",
+        "This captured poll phase shows Review only rather than Apply. It does not independently establish why the phase was transient."
+      ],
+      "critique": [
+        "The large fixed header and short viewport leave a small middle reading region; users need intentional vertical scrolling to inspect the complete comparison.",
+        "The screenshot is a scrolled fragment, not a claim that both sections fit simultaneously at this height."
+      ]
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/02-stacked-proposed-and-apply-360x420.png",
+      "sha256": "7333c867fbcc03a7144971f09bc8c708a6a0aa48715bf2aa2dbc0a428af57641",
+      "bytes": 42557,
+      "width": 360,
+      "height": 420,
+      "kind": "ordinary-server narrow review/recovery original",
+      "staticVerdict": "captured-state layout and recovery controls accepted with explicit scroll/capture limits",
+      "observed": [
+        "The proposed summary is stacked in a full-width card, with the before section above in the same middle scroll region.",
+        "Apply proposed edit and Cancel review are both visible, large and separated in the fixed footer. Neither action is behind another work window.",
+        "The opaque footer keeps its instruction text distinct from the proposal and underlying composer."
+      ],
+      "critique": [
+        "The final proposal/citation line meets the bottom of the scroll viewport in this image; the last pixels are clipped by that intentional boundary. This one image cannot confirm every character without a further scroll.",
+        "The capture supports reachable controls and a bounded reading region; actual ability to scroll, read the full text and activate controls belongs to the journey receipt."
+      ]
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/03-unconfirmed-apply-inspect-360x420.png",
+      "sha256": "f30a92c119cee09a127f5da8eee0cc6d0f71150a138ad1cd2bfd2379e60f17bd",
+      "bytes": 44211,
+      "width": 360,
+      "height": 420,
+      "kind": "ordinary-server narrow review/recovery original",
+      "staticVerdict": "captured-state layout and recovery controls accepted with explicit scroll/capture limits",
+      "observed": [
+        "The unconfirmed-delivery footer states Apply needs inspection and Nothing is replayed.",
+        "Inspect saved edit and Cancel review are fully visible within the 360 by 420 viewport; Inspect has an obvious focus outline.",
+        "No second Apply action is offered in this captured unconfirmed state. The requested change remains visible in the middle scroll region.",
+        "Underlying composer text is outside the opaque modal boundary; it does not overlap modal content or controls."
+      ],
+      "critique": [
+        "The longer recovery explanation and comparison are below or above the visible middle fragment; this screenshot verifies the concise immediate recovery controls, not the complete scrollable contents."
+      ]
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/04-saved-version-2-actions-360x420.png",
+      "sha256": "348d350965fe9788cab91b2a4679d85f866c14e2c5225c53e278cf27c609d917",
+      "bytes": 36094,
+      "width": 360,
+      "height": 420,
+      "kind": "ordinary-server saved version actions",
+      "staticVerdict": "captured-state presentation accepted within stated fragment/output limits",
+      "observed": [
+        "The Goals window identifies Version 2, one page, and revised-file/goal checks passed in this scrolled state.",
+        "Open revised PDF, Open revised HTML, Download revised PDF and Download revised HTML are all visible as separate comfortably sized actions inside the 360 by 420 viewport.",
+        "The window content is contained with no horizontal spill, overlap with outside composer text or hidden primary export actions."
+      ],
+      "critique": [
+        "This is a scrolled action view; other status/provenance/history details are outside this fragment. Static visibility does not prove the actions execute."
+      ]
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/version-2-html-360x420.png",
+      "sha256": "03f617f0e2a70b8d27b72c5cd561c25e54a89fb14eb0f8ed1230742beba05ece",
+      "bytes": 33503,
+      "width": 360,
+      "height": 420,
+      "kind": "actual exported/reopened version-2 HTML narrow viewport",
+      "staticVerdict": "captured-state presentation accepted within stated fragment/output limits",
+      "observed": [
+        "The title wraps to two readable lines with ordinary document margins.",
+        "The brief is a readable single-sentence paragraph retaining the visible fetch/repository/results locations and citation numbers without Markdown syntax.",
+        "Source question and personal-notes heading are distinct sections. Content flows vertically without horizontal overflow or text collisions."
+      ],
+      "critique": [
+        "Only the top document fragment is visible at this short height; complete notes, references and provenance require normal page scrolling and are not asserted from this image alone."
+      ]
+    },
+    {
+      "path": "/workspace/.cloud-env/anascummis/document-second-edit/native-narrow-b8e05a68/research-document-second-edit-narrow/version-2-pdf-page-1.png",
+      "sha256": "a6749f78a5aa0f654b367c3b9ed3959324305a481de515817404924e71c0fff5",
+      "bytes": 139476,
+      "width": 685,
+      "height": 969,
+      "kind": "narrow journey actual exported PDF page raster",
+      "staticVerdict": "captured-state presentation accepted within stated fragment/output limits",
+      "observed": [
+        "The page has the same readable title, summary, complete visible notes/checklist, source references and qualification as the desktop journey PDF raster.",
+        "Exact PNG SHA-256 matches the directly reviewed desktop exported-page raster; this is a matching output capture, not a new platform or handset rendering proof."
+      ],
+      "critique": [
+        "PDF page raster dimensions are 685 by 969. It is not a 360-pixel PDF-reader viewport screenshot and must not be represented as proof of narrow reader interaction."
+      ]
+    }
+  ],
+  "overallStaticAssessment": "The desktop review offers a complete readable two-column comparison with Apply; the 360x420 originals use one opaque modal with stacked content, intentional middle scrolling and visible Apply/Cancel/Inspect controls. Saved version2 open/download actions fit the short Goals window, and actual narrow HTML flows cleanly. The exported PDF page is readable and avoids raw Markdown and dominant machine hashes. No blocking captured-state presentation defect was found; narrow full-text scroll behavior, live actions and dynamic/native lifecycle remain owner evidence.",
+  "narrowReview": {
+    "status": "complete: directly inspected original before, proposed/Apply, unconfirmed/Inspect, saved actions, narrow HTML and actual PDF raster",
+    "viewport": {
+      "width": 360,
+      "height": 420
+    },
+    "assessment": "No text-overlap or unreachable-footer defect is visible in the inspected originals. Reading is intentionally sequential through a small middle scroll region. The proposal last-line clipping is recorded as a captured-fragment limit, not asserted to prove full text inspection.",
+    "ownerReportedRunStatus": "Audit agent reports ordinary-server native narrow suite passed exit0; this reviewer did not rerun it."
+  },
+  "limits": [
+    "This is static visual evidence. It does not establish focus order, actual touch/keyboard operation, network requests, interruption/retry identity, preserved-file byte identity, PDF annotation targets or genuine model semantic accuracy.",
+    "The desktop/native lifecycle and exported-file validation belong to the journey owner receipt. This review does not independently rerun or broaden those checks.",
+    "No real-handset keyboard, native OS installation, voice or general document editing quality is inferred."
+  ]
+}

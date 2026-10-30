@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sqlite-transaction",
+    "url": "https://www.sqlite.org/lang_transaction.html",
+    "bytes": 27068,
+    "sha256": "b65dc308fd9e0ce471844c97366a4f5ad3a1f42833a3b19486ad7d6555a8e24e",
+    "status": "retrieved",
+    "readAt": "2026-10-29T23:38:59.214228+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/research-document-edit/research/sqlite-transaction.source",
+    "cachedHashReverified": true,
+    "retrievedAgain": false
+  },
+  {
+    "id": "playwright-downloads",
+    "url": "https://playwright.dev/docs/downloads",
+    "bytes": 40607,
+    "sha256": "b74c5b6044994b3ec7b2319daa4f4e047c78089f9183c9d345ddc85efe978709",
+    "status": "retrieved",
+    "readAt": "2026-10-29T23:38:59.214336+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/research-document-edit/research/playwright-downloads.source",
+    "cachedHashReverified": true,
+    "retrievedAgain": false
+  },
+  {
+    "id": "llama-grammar",
+    "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/grammars/README.md",
+    "bytes": 18051,
+    "sha256": "e1874c0f08abbcfe45eff0b7b0290faa58f630981bf94274e2d99751ef3b0208",
+    "status": "retrieved",
+    "readAt": "2026-10-29T23:38:59.214391+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/research-document-edit/research/llama-grammar.source",
+    "cachedHashReverified": true,
+    "retrievedAgain": false
+  },
+  {
+    "url": "https://huggingface.co/Qwen/Qwen3-0.6B/raw/main/README.md",
+    "retrievedAt": "2026-10-29T22:56:10.920098+00:00",
+    "bytes": 13965,
+    "sha256": "1ab64a26fcb3b461423b89a433a8c858f1bf8d4086f979cbb3ff878d47cf20e9",
+    "scope": "Official inference instructions only; no model weight was downloaded.",
+    "readAt": "2026-10-29T23:38:59.214442+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/research-document-edit/research/qwen-official-model-card.md",
+    "cachedHashReverified": true,
+    "retrievedAgain": false
+  }
+]

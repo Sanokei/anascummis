@@ -1,0 +1,46 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-panel-handoff.test.ts:
+67 |     expect(await childCard.count()).toBe(1);
+68 |     expect(await childCard.getAttribute('aria-current')).toBe('true');
+69 | 
+70 |     await approvalPoll; // This poll captured the child before its approval.
+71 |     await childCard.getByRole('button', {name: 'Apply proposed edit', exact: true}).click();
+72 |     await childCard.getByText('Your approval is saved', {exact: true}).waitFor();
+                                                                            ^
+error: waitFor: Error: strict mode violation: locator('[data-goal-id="00fab2c6-23dd-4db1-a875-e17ae7121cdf"]').getByText('Your approval is saved', { exact: true }) resolved to 2 elements:
+    1) <p>Your approval is saved</p> aka getByRole('paragraph').filter({ hasText: 'Your approval is saved' })
+    2) <p class="research-brief-review-state">Your approval is saved</p> aka getByLabel('Summary comparison and').getByText('Your approval is saved')
+
+Call log:
+[2m  - waiting for locator('[data-goal-id="00fab2c6-23dd-4db1-a875-e17ae7121cdf"]').getByText('Your approval is saved', { exact: true }) to be visible[22m
+
+  log: [ "  - waiting for locator('[data-goal-id=\"00fab2c6-23dd-4db1-a875-e17ae7121cdf\"]').getByText('Your approval is saved', { exact: true }) to be visible" ],
+
+      at /workspace/anascummis/apps/studio/tests/goal-panel-handoff.test.ts:72:72
+      at processTicksAndRejections (native:7:39)
+(fail) an older goal poll cannot replace a confirmed edit handoff or approval [4850.23ms]
+
+tests/research-brief-edit-draft.test.ts:
+(pass) document edit browser drafts and uncertain approvals > reload keeps the exact submitted intent separately from newer edits [0.36ms]
+(pass) document edit browser drafts and uncertain approvals > acknowledging the submitted intent clears only that snapshot [0.17ms]
+(pass) document edit browser drafts and uncertain approvals > invalid or oversized storage cannot silently truncate a request [0.25ms]
+(pass) document edit browser drafts and uncertain approvals > an unconfirmed approval retains its exact operation and proposal hash [0.11ms]
+(pass) document edit browser drafts and uncertain approvals > optional sentence format keeps incomplete labels and an exact submitted snapshot [0.42ms]
+(pass) document edit browser drafts and uncertain approvals > unchecked unsent labels survive acknowledgement and invalid labels are not silently shortened [0.13ms]
+
+tests/research-brief-edit-ui.test.ts:
+(pass) document edit UI preserves an uncertain request and approval without replay [3104.57ms]
+
+tests/brief-review-text.test.ts:
+(pass) review rendering presents literal code/link labels without altering retained native text [8.23ms]
+(pass) private, credentialled, invented and malformed destinations remain inert even inside source text [1.82ms]
+(pass) actual browser review text has readable links, inert raw HTML and deliberate keyboard navigation [718.62ms]
+
+tests/research-brief-review-dialog.test.ts:
+(pass) expanded review escapes the small window, renders source links and keeps explicit approval safe [1632.02ms]
+
+ 11 pass
+ 1 fail
+ 219 expect() calls
+Ran 12 tests across 5 files. [10.64s]

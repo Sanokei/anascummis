@@ -1,0 +1,25 @@
+$ bun scripts/build-scene.ts && next build --webpack && bun run kit:build
+▲ Next.js 16.4.3 (webpack)
+✓ Running next.config.ts took 28ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 11.6s
+  Running TypeScript ...
+  Finished TypeScript in 3.4s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/3) ...
+✓ Generating static pages using 4 workers (3/3) in 474ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+└ ○ /_not-found
+
+
+○  (Static)  prerendered as static content
+
+$ bun scripts/publish-sources.ts
+Source kit def6e726f276638a: anascummis-studio-def6e726f276638a.zip
+SHA-256 d790e37c6fbc10acb93e14b8efcba02d34c70913d60a66ba7d6331265b46c376
+278 payload files; 2470745 bytes; source 6f3144a0af91334c4c9228b302a00aa117b56baa

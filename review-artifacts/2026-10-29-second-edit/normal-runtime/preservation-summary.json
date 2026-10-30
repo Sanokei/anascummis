@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-29T23:58:10.096800+00:00",
+  "source": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+  "initialBaselineAt": "2026-10-29T23:39:35.741466+00:00",
+  "normalServer": {
+    "oldPid": 81304,
+    "newPid": 91357,
+    "all24ExistingTableRowDigestsUnchanged": true,
+    "apiDataUnchangedFromInitialBaseline": true,
+    "noFixturesImported": true,
+    "nonDatabaseFilesUnchangedAcrossRefresh": true,
+    "privateBackupShared": false
+  },
+  "frozenPriorAcceptance": {
+    "filesCompared": 13,
+    "allByteHashesUnchanged": true,
+    "scope": "Prior review manifest, prior frozen source ZIP and actual accepted-v1 fixture document/operation files; no database contents published."
+  },
+  "model": {
+    "sameProcess": true,
+    "pid": 18848,
+    "startTicks": "845300"
+  },
+  "originMain": "df70f5ccdb9c3474f04d3f83ad7f60a8f7ecf917",
+  "mainReferenceNote": "This checkout has origin/main and local work; no local main branch exists."
+}

@@ -1,0 +1,2 @@
+{"id":"schema-enum-contradiction-control","passed":true,"raw":{"text":"FORMAT_CONTROL_7e91"},"checks":{"schemaEnforced":true,"opposingPromptNotFollowed":true},"finishReason":"stop"}
+{"id":"supported-ascii-space-pattern-current-summary","passed":false,"error":"Error: Actual native completion returned 500"}

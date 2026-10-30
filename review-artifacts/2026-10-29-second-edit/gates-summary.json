@@ -1,0 +1,77 @@
+{
+  "checkedAt": "2026-10-30T00:00:31.854465+00:00",
+  "testedSource": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+  "productionBuildSource": "298557eea2091f1f709653c314fb2d0fb99a1f16",
+  "affectedTests": {
+    "command": "bun test tests/research-brief-edit.test.ts tests/research-brief-second-edit.test.ts tests/research-brief-edit-selection.test.ts tests/research-brief-edit-draft.test.ts tests/research-brief-edit-ui.test.ts tests/research-brief-review-dialog.test.ts tests/brief-review-text.test.ts tests/research-brief-presentation.test.ts tests/goal-panel-handoff.test.ts tests/model-document-profile.test.ts tests/model-runtime.test.ts",
+    "passed": 70,
+    "failed": 0,
+    "assertions": 1144,
+    "seconds": 33.79,
+    "log": "gates/affected-tests-final-rerun.log",
+    "scope": "Injected model decisions and browser fixtures for contracts/transport/UI plus real PyMuPDF artifact checks; not genuine native answer quality."
+  },
+  "lockCancellation": {
+    "command": "bun test tests/local.test.ts -t 'background goal locks wait'",
+    "passed": 1,
+    "assertions": 2,
+    "log": "gates/lock-cancellation-after-wakeup-fix.log",
+    "scope": "Abortable lock wait; actual route Create/Apply wakeup separately exercised by both native journeys."
+  },
+  "typeScript": [
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit -p tsconfig.core.json",
+      "exitCode": 0,
+      "log": "gates/types-core-final.log"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit -p tsconfig.json",
+      "exitCode": 0,
+      "log": "gates/types-app-final.log"
+    }
+  ],
+  "productionBuild": {
+    "command": "bun run build",
+    "exitCode": 0,
+    "log": "gates/build-final.log",
+    "gzipByteEquivalence": "gates/build-asset-equivalence.json",
+    "runnerOnlyFollowupEquivalence": "gates/build-driver-only-equivalence.json",
+    "followupKitBuildExitCode": 0
+  },
+  "genuineNativeJourneys": {
+    "command": "BUN_PATH=/workspace/.cloud-tools/node_modules/bun/bin/bun.exe node scripts/e2e/research-document-second-edit.mjs --fixture STOPPED_ACCEPTED_V1 --viewport desktop|narrow --output FRESH_DIR",
+    "passed": 2,
+    "blocked": 0,
+    "failed": 0,
+    "assertions": 16,
+    "aggregate": "native-summary.json"
+  },
+  "preservedFailures": [
+    "gates/affected-tests-final.log: initial shell PATH lacked bun; corrected by existing absolute executable, no install.",
+    "gates/revision2-backend-tests-stop-boundary.log: held test verification gate awaited before release; corrected test ordering, with actual Stop boundary assertions retained.",
+    "gates/ui-affected-first-failed.log and ui-affected-second-failed.log: closed-modal duplicate locator matches and React commit timing corrections retained.",
+    "failures/desktop-runner-promise-wait/report.json: original desktop run failed an incorrect Promise-negation wait; actual inspection recovery succeeded.",
+    "diagnostics/report.json, pattern-report.json and provider-controls-report.json: earlier genuine native failures and provider warning/HTTP500 preserved."
+  ],
+  "limits": [
+    "No unrelated broad regression cycle, new clean extraction/online install, physical handset, native Windows/macOS or voice acceptance in this increment.",
+    "71 affected tests across two commands are separate from16 goal outcome assertions; earlier subset runs are not added again."
+  ],
+  "nativeJourneySource": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+  "currentSource": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+  "finalCopyCorrection": {
+    "scope": "Only technical detail label identifies the selected base revision; exact native prompts, backend/operation behavior and factual output unchanged.",
+    "uiTests": {
+      "passed": 2,
+      "assertions": 150,
+      "log": "gates/ui-base-label-final.log"
+    },
+    "bothTypeScriptTargetsExitCode": 0,
+    "coreTypeScriptLog": "gates/types-core-base-label-final.log",
+    "appTypeScriptLog": "gates/types-app-base-label-final.log",
+    "productionBuildExitCode": 0,
+    "buildLog": "gates/build-base-label-final.log",
+    "gzipEquivalence": "gates/build-base-label-asset-equivalence.json",
+    "readOnlyReopen": "final-ui/receipt.json"
+  }
+}

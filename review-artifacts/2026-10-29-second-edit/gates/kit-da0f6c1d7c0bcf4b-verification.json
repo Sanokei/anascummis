@@ -1,0 +1,71 @@
+{
+  "manifest": {
+    "format": 1,
+    "version": "da0f6c1d7c0bcf4bc11958ebc6c0107b1c13674cae31ca42ebfb4bbf06264fc7",
+    "filename": "anascummis-studio-da0f6c1d7c0bcf4b.zip",
+    "sha256": "7ca73a9145f4b299e3b8a56ad75db8d0ef5a6ce09f8c29d81fc54301bee55e05",
+    "bytes": 2470718,
+    "files": 278,
+    "source": {
+      "commit": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "sourceTree": "91084c8b1ed60fe27ea1ac027595132a09d11ee5",
+  "archiveEntries": 279,
+  "payloadBytesUncompressed": 2384750,
+  "checks": {
+    "actualArchiveBytesHashAndSidecar": true,
+    "allEntryHashesSizes": 278,
+    "versionPayloadRecomputed": true,
+    "crc": true,
+    "safeUniquePathsAndNoSymlinks": true,
+    "privateStateWeightsCachesCredentialPathsExcluded": true,
+    "requiredSourcesLicensesLockfiles": [
+      "studio/package.json",
+      "studio/bun.lock",
+      "studio/requirements.txt",
+      "studio/LOCAL-INSTALL.md",
+      "studio/USER-JOURNEYS.md",
+      "studio/PROVENANCE.md",
+      "studio/core/research-brief-edit.ts",
+      "studio/core/research-brief-edit-types.ts",
+      "studio/core/research-brief-summary.ts",
+      "studio/core/research-brief-presentation.ts",
+      "studio/core/model.ts",
+      "studio/core/server.ts",
+      "studio/core/goal-orchestrator.ts",
+      "studio/components/ResearchBriefEdit.tsx",
+      "studio/components/BriefReviewText.tsx",
+      "studio/scripts/e2e/research-document-edit.mjs",
+      "studio/scripts/e2e/research-document-second-edit.mjs",
+      "studio/tests/research-brief-second-edit.test.ts",
+      "studio/tests/brief-review-text.test.ts",
+      "studio/tests/research-brief-review-dialog.test.ts",
+      "studio/tests/model-document-profile.test.ts",
+      "studio/licenses/etro-GPL-3.0.txt",
+      "studio/licenses/VOICE.md",
+      "studio/licenses/NEWS.md",
+      "studio/worker/lavasr/LICENSE",
+      "studio/worker/lavasr/UPSTREAM.md",
+      "dependencies/etro/LICENSE",
+      "dependencies/etro/package.json"
+    ],
+    "completePinnedPublisherSourceAllowlist": 239,
+    "pinnedSourceFilesByteCompared": 238,
+    "generatedFromPinnedSource": 2,
+    "installedEtro0141FilesByteCompared": 38,
+    "sharedTypesAndOnlyDeclaredTsconfigTransform": true,
+    "sourceCatalogEntriesByteCompared": 90,
+    "licenseSidecarsMatch": true
+  },
+  "limits": [
+    "Offline source/ZIP audit only; no rebuild, install, extraction/start, model, UI or platform execution was performed by this audit.",
+    "Every application payload is compared with exact pinned Git source, except the declared tsconfig path transform and README generated from that pinned publisher; bundled Etro payload is compared with the already-installed 0.14.1 package, not a newly downloaded upstream archive.",
+    "Private-data exclusion verifies the complete payload path allowlist, exact pinned source bytes and absence of state/credential/weight/cache paths; this is not a separate secret-content scanner or a claim about downstream dependency supply-chain security."
+  ]
+}

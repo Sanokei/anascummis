@@ -1,0 +1,266 @@
+{
+  "productionBuildSource": "298557eea2091f1f709653c314fb2d0fb99a1f16",
+  "base": "1c5a0851a587e0e45eef81beb130f733c0da5038",
+  "passed": 2,
+  "blocked": 0,
+  "failed": 0,
+  "assertions": 16,
+  "cases": [
+    {
+      "viewport": "desktop",
+      "status": "passed",
+      "goal": "Shorten the current summary to one sentence for a newcomer; keep both exact locations and citations and do not change notes/evidence.",
+      "goalId": "671f5887-899d-4619-b94d-5c4fb54c5c56",
+      "operationId": "2a0af493-4360-41e8-8ea0-c674ffa33c31",
+      "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+      "baseRevision": 1,
+      "savedRevision": 2,
+      "nativeRewrite": {
+        "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+        "characters": 143,
+        "beforeCharacters": 216,
+        "oneSentence": true,
+        "shorter": true,
+        "bothLocations": true,
+        "citationsPreserved": true,
+        "plainProse": true
+      },
+      "raw": {
+        "raw": {
+          "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+          "citations": [
+            1,
+            2
+          ]
+        },
+        "sha256": "c99278ca7205832707527f1c0214b39219bd5e380da93264374abeee36c3f178",
+        "format": "native-current-summary-v1"
+      },
+      "profile": {
+        "id": "qwen3-document-rewrite-v1",
+        "parameters": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0,
+          "seed": 42,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        }
+      },
+      "cuts": [
+        {
+          "point": "native_current_summary_saved_before_review",
+          "pid": 90322,
+          "signal": "SIGKILL"
+        },
+        {
+          "point": "approved_apply_acknowledgement_lost",
+          "phase": "approved",
+          "pid": 90910,
+          "signal": "SIGKILL"
+        },
+        {
+          "point": "completed_v2_reopen",
+          "pid": 90962,
+          "signal": "SIGTERM"
+        }
+      ],
+      "artifact": {
+        "operationId": "2a0af493-4360-41e8-8ea0-c674ffa33c31",
+        "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+        "revision": 2,
+        "pages": 1,
+        "pdfSha256": "eba34910da8f7a41b616b63e1f331253dedb01f95bd4a49a899656ec01ab6a18",
+        "htmlSha256": "7e1674f81e45891be1b53195705dedee11b6c7e33a07c555292c085e96f83aac",
+        "provenanceSha256": "e19ec9d292395fcc6d0879acf814d19b99c548200fc34509359f024ac3648ab5"
+      },
+      "preservedNotesCharacters": 1719,
+      "preservedNotesSha256": "b8dd822801a9e4207e43de73b89a80a4a0f1153de69ec5020c49350d58be60ba",
+      "preservedCitations": [
+        {
+          "number": 1,
+          "quote": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+          "label": "source-1",
+          "sourceId": "52d48f68-3ab1-467d-bbd4-f5467e4b41ef",
+          "offset": 1914,
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+        },
+        {
+          "number": 2,
+          "quote": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+          "label": "source-1",
+          "sourceId": "52d48f68-3ab1-467d-bbd4-f5467e4b41ef",
+          "offset": 2057,
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+        }
+      ],
+      "historicalFilesByteIdentical": true,
+      "storedAncestorJsonByteIdentical": true,
+      "staleApplyStatus": 400,
+      "staleCreateStatuses": [
+        400,
+        400
+      ],
+      "sourceAndServedBuildFingerprintsFixed": true,
+      "noBrowserPageErrors": true,
+      "voiceRequestsBlockedByHarness": true,
+      "report": "desktop/report.json"
+    },
+    {
+      "viewport": "narrow",
+      "status": "passed",
+      "goal": "Shorten the current summary to one sentence for a newcomer; keep both exact locations and citations and do not change notes/evidence.",
+      "goalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+      "operationId": "705dfa96-c28b-43a1-8857-f5e45b58ccff",
+      "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+      "baseRevision": 1,
+      "savedRevision": 2,
+      "nativeRewrite": {
+        "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+        "characters": 143,
+        "beforeCharacters": 216,
+        "oneSentence": true,
+        "shorter": true,
+        "bothLocations": true,
+        "citationsPreserved": true,
+        "plainProse": true
+      },
+      "raw": {
+        "raw": {
+          "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+          "citations": [
+            1,
+            2
+          ]
+        },
+        "sha256": "c99278ca7205832707527f1c0214b39219bd5e380da93264374abeee36c3f178",
+        "format": "native-current-summary-v1"
+      },
+      "profile": {
+        "id": "qwen3-document-rewrite-v1",
+        "parameters": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0,
+          "seed": 42,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        }
+      },
+      "cuts": [
+        {
+          "point": "native_current_summary_saved_before_review",
+          "pid": 91252,
+          "signal": "SIGKILL"
+        },
+        {
+          "point": "approved_apply_acknowledgement_lost",
+          "phase": "approved",
+          "pid": 91375,
+          "signal": "SIGKILL"
+        },
+        {
+          "point": "completed_v2_reopen",
+          "pid": 91409,
+          "signal": "SIGTERM"
+        }
+      ],
+      "artifact": {
+        "operationId": "705dfa96-c28b-43a1-8857-f5e45b58ccff",
+        "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+        "revision": 2,
+        "pages": 1,
+        "pdfSha256": "d6daef60110ef632b193ad5c24f1a19533d20a6ab9e22556eb0350cb5eb473d9",
+        "htmlSha256": "7e1674f81e45891be1b53195705dedee11b6c7e33a07c555292c085e96f83aac",
+        "provenanceSha256": "77ffc321cf5a6112fac68a5bfed6e2c1ba574ae0d7366a6ed9b7ff2f57af26d4"
+      },
+      "preservedNotesCharacters": 1719,
+      "preservedNotesSha256": "b8dd822801a9e4207e43de73b89a80a4a0f1153de69ec5020c49350d58be60ba",
+      "preservedCitations": [
+        {
+          "number": 1,
+          "quote": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+          "label": "source-1",
+          "sourceId": "52d48f68-3ab1-467d-bbd4-f5467e4b41ef",
+          "offset": 1914,
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+        },
+        {
+          "number": 2,
+          "quote": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+          "label": "source-1",
+          "sourceId": "52d48f68-3ab1-467d-bbd4-f5467e4b41ef",
+          "offset": 2057,
+          "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+        }
+      ],
+      "historicalFilesByteIdentical": true,
+      "storedAncestorJsonByteIdentical": true,
+      "staleApplyStatus": 400,
+      "staleCreateStatuses": [
+        400,
+        400
+      ],
+      "sourceAndServedBuildFingerprintsFixed": true,
+      "noBrowserPageErrors": true,
+      "voiceRequestsBlockedByHarness": true,
+      "report": "narrow/report.json"
+    }
+  ],
+  "scope": "Two copied-checkpoint genuine local-Qwen current-summary rewrites, not fresh original research, arbitrary imported-PDF editing or independent semantic accuracy.",
+  "preservedFailure": {
+    "source": "298557eea2091f1f709653c314fb2d0fb99a1f16",
+    "status": "failed",
+    "reason": "Runner negated an unresolved isVisible() Promise; original trace showed GET inspection correctly reconciled approval. One awaited condition corrected; product, goal and model request unchanged.",
+    "report": "failures/desktop-runner-promise-wait/report.json",
+    "traceRetainedPrivately": true
+  },
+  "source": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+  "nativeJourneySource": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+  "currentSource": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+  "currentProductionBuildSource": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+  "nativeRunKit": {
+    "format": 1,
+    "version": "da0f6c1d7c0bcf4bc11958ebc6c0107b1c13674cae31ca42ebfb4bbf06264fc7",
+    "filename": "anascummis-studio-da0f6c1d7c0bcf4b.zip",
+    "sha256": "7ca73a9145f4b299e3b8a56ad75db8d0ef5a6ce09f8c29d81fc54301bee55e05",
+    "bytes": 2470718,
+    "files": 278,
+    "source": {
+      "commit": "b8e05a68eeaa203b6e16cfb787ef71bb1a756a60",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "kit": {
+    "format": 1,
+    "version": "def6e726f276638ac1021000218d226cadf5505b5e5817b2457324d3cfc4c6d5",
+    "filename": "anascummis-studio-def6e726f276638a.zip",
+    "sha256": "d790e37c6fbc10acb93e14b8efcba02d34c70913d60a66ba7d6331265b46c376",
+    "bytes": 2470745,
+    "files": 278,
+    "source": {
+      "commit": "6f3144a0af91334c4c9228b302a00aa117b56baa",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "finalSourceDifference": {
+    "paths": [
+      "apps/studio/components/ResearchBriefEdit.tsx"
+    ],
+    "change": "Only technical detail label identifies the selected base revision; exact native prompts, backend/operation behavior and factual output unchanged.",
+    "diff": "diff --git a/apps/studio/components/ResearchBriefEdit.tsx b/apps/studio/components/ResearchBriefEdit.tsx\nindex 29a3276..6663ebf 100644\n--- a/apps/studio/components/ResearchBriefEdit.tsx\n+++ b/apps/studio/components/ResearchBriefEdit.tsx\n@@ -238,7 +238,7 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {\n     </details>\n     {state && <details><summary>Edit operation and native decision</summary>\n       <small>Operation {state.operationId}</small><small>Document {request.documentId} \u00b7 base version {request.baseRevision}</small>\n-      <small>Input SHA-256 {state.inputSha256}</small><small>Original PDF SHA-256 {request.basePdfSha256}</small>\n+      <small>Input SHA-256 {state.inputSha256}</small><small>Base version {request.baseRevision} PDF SHA-256 {request.basePdfSha256}</small>\n       {request.inferenceProfile && <details><summary>Native rewrite profile</summary><p>This saved profile describes the actual local rewrite request. It is not a factual-accuracy guarantee.</p><pre tabIndex={0} aria-label=\"Native rewrite profile JSON\">{JSON.stringify(request.inferenceProfile, null, 2)}</pre></details>}\n       {state.proposalSha256 && <small>Proposed wording SHA-256 {state.proposalSha256}</small>}\n       {state.approvedProposalSha256 && <small>Approved wording SHA-256 {state.approvedProposalSha256}</small>}\n",
+    "readOnlyFinalUi": "final-ui/receipt.json"
+  }
+}
