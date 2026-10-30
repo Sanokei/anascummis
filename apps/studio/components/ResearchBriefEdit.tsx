@@ -238,7 +238,7 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
     </details>
     {state && <details><summary>Edit operation and native decision</summary>
       <small>Operation {state.operationId}</small><small>Document {request.documentId} · base version {request.baseRevision}</small>
-      <small>Input SHA-256 {state.inputSha256}</small><small>Original PDF SHA-256 {request.basePdfSha256}</small>
+      <small>Input SHA-256 {state.inputSha256}</small><small>Base version {request.baseRevision} PDF SHA-256 {request.basePdfSha256}</small>
       {request.inferenceProfile && <details><summary>Native rewrite profile</summary><p>This saved profile describes the actual local rewrite request. It is not a factual-accuracy guarantee.</p><pre tabIndex={0} aria-label="Native rewrite profile JSON">{JSON.stringify(request.inferenceProfile, null, 2)}</pre></details>}
       {state.proposalSha256 && <small>Proposed wording SHA-256 {state.proposalSha256}</small>}
       {state.approvedProposalSha256 && <small>Approved wording SHA-256 {state.approvedProposalSha256}</small>}
