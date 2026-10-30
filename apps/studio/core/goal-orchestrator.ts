@@ -524,7 +524,7 @@ export class GoalOrchestrator {
       if(!task?.execution?.documentEditArtifact||!task.review?.accepted||!this.options.reviewDocumentEdit||!goal.tasks.every(task=>task.status==='verified'))throw new Error('The document edit has no accepted explicitly approved revision.');
       const review=await this.options.reviewDocumentEdit(structuredClone(task),structuredClone(goal),task.execution,signal);signal.throwIfAborted();if(!review.accepted)throw new Error('The document edit needs attention: '+review.reason);
       goal.coverageOffset=goal.request.length;goal.coverageDone=true;goal.status='completed';
-      this.event(goal,'coordinator','completed','The explicitly approved native summary edit is saved as one verified document revision. Original files, full personal notes and citation evidence remain inspectable. Native support review is not an independent factual accuracy guarantee.');return;
+      this.event(goal,'coordinator','completed',goal.documentEdit.target?.section==='notes'?'The explicitly approved native personal-note paragraph edit is saved as one verified revision. Summary, all other note paragraphs, source/citation evidence and earlier versions remain preserved and inspectable. Native meaning/tense/clarity review is not independent semantic verification.':'The explicitly approved native summary edit is saved as one verified document revision. Original files, full personal notes and citation evidence remain inspectable. Native support review is not an independent factual accuracy guarantee.');return;
     }
     if (goal.brief) {
       const task = goal.tasks.find(task => task.sourceBrief);
