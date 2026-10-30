@@ -1,0 +1,78 @@
+{
+  "receipt": "/workspace/.cloud-env/anascummis/section-edit/kit-2e760b6aea59a9bc-verification.json",
+  "manifest": {
+    "format": 1,
+    "version": "2e760b6aea59a9bcc5780c020164937c57a07fad318c312a4d896de98a4dd19f",
+    "filename": "anascummis-studio-2e760b6aea59a9bc.zip",
+    "sha256": "f3a7e18600a3394a11a0dd6bc01b1357fe5e79a209d4a3e426cc5e0f57b22abb",
+    "bytes": 2652819,
+    "files": 283,
+    "source": {
+      "commit": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "sourceTree": "e4d1d1dde505c96ca2e23ae86188899a412102af",
+  "archiveEntries": 284,
+  "payloadBytesUncompressed": 2565106,
+  "checks": {
+    "actualArchiveBytesHashAndSidecar": true,
+    "allEntryHashesSizes": 283,
+    "versionPayloadRecomputed": true,
+    "crc": true,
+    "safeUniquePathsAndNoSymlinks": true,
+    "privateStateWeightsCachesCredentialPathsExcluded": true,
+    "requiredSourcesLicensesLockfiles": [
+      "studio/package.json",
+      "studio/bun.lock",
+      "studio/requirements.txt",
+      "studio/LOCAL-INSTALL.md",
+      "studio/USER-JOURNEYS.md",
+      "studio/PROVENANCE.md",
+      "studio/core/research-brief-edit.ts",
+      "studio/core/research-brief-edit-types.ts",
+      "studio/core/research-brief-summary.ts",
+      "studio/core/research-brief-presentation.ts",
+      "studio/core/research-brief-target.ts",
+      "studio/core/research-brief-edit-draft.ts",
+      "studio/core/model.ts",
+      "studio/core/server.ts",
+      "studio/core/goal-orchestrator.ts",
+      "studio/components/ResearchBriefEdit.tsx",
+      "studio/components/BriefReviewText.tsx",
+      "studio/scripts/e2e/research-document-edit.mjs",
+      "studio/scripts/e2e/research-document-second-edit.mjs",
+      "studio/scripts/e2e/research-document-note-edit.mjs",
+      "studio/tests/research-brief-section-edit.test.ts",
+      "studio/tests/research-brief-section-draft.test.ts",
+      "studio/tests/research-brief-section-ui.test.ts",
+      "studio/tests/research-brief-second-edit.test.ts",
+      "studio/tests/brief-review-text.test.ts",
+      "studio/tests/research-brief-review-dialog.test.ts",
+      "studio/tests/model-document-profile.test.ts",
+      "studio/licenses/etro-GPL-3.0.txt",
+      "studio/licenses/VOICE.md",
+      "studio/licenses/NEWS.md",
+      "studio/worker/lavasr/LICENSE",
+      "studio/worker/lavasr/UPSTREAM.md",
+      "dependencies/etro/LICENSE",
+      "dependencies/etro/package.json"
+    ],
+    "completePinnedPublisherSourceAllowlist": 244,
+    "pinnedSourceFilesByteCompared": 243,
+    "generatedFromPinnedSource": 2,
+    "installedEtro0141FilesByteCompared": 38,
+    "sharedTypesAndOnlyDeclaredTsconfigTransform": true,
+    "sourceCatalogEntriesByteCompared": 91,
+    "licenseSidecarsMatch": true
+  },
+  "limits": [
+    "Offline source/ZIP audit only; no rebuild, install, extraction/start, model, UI or platform execution was performed by this audit.",
+    "Every application payload is compared with exact pinned Git source, except the declared tsconfig path transform and README generated from that pinned publisher; bundled Etro payload is compared with the already-installed 0.14.1 package, not a newly downloaded upstream archive.",
+    "Private-data exclusion verifies the complete payload path allowlist, exact pinned source bytes and absence of state/credential/weight/cache paths; this is not a separate secret-content scanner or a claim about downstream dependency supply-chain security."
+  ]
+}

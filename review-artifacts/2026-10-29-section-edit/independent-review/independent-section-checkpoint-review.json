@@ -1,0 +1,168 @@
+{
+  "reviewedAt": "2026-10-30T01:10:06.359795+00:00",
+  "reviewer": "Independent section-contract audit agent; filesystem/ZIP/JSON and SQLite read-only review",
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "sourceTree": "e4d1d1dde505c96ca2e23ae86188899a412102af",
+  "status": "artifact_integrity_and_qualified_scope_pass_after_additive_link_fix",
+  "copyIndex": {
+    "files": 92,
+    "sha256": "2ddf7bed2634f5e23733a26f570cb9ad5637c17221fee053a6b1b04a06424a25",
+    "allPackAndOriginalBytesMatch": true
+  },
+  "artifactBoundary": {
+    "actualOriginalPngs": 7,
+    "allPngSignatures": true,
+    "sourceZips": 1,
+    "noPrivateDatabasesKeysWeightsTracesFixturePdfsOrSymlinks": true,
+    "allJsonParses": true
+  },
+  "actualFailedNativeGoal": {
+    "goalId": "2474c855-f7c3-470d-a1e0-62c9fdc0af17",
+    "operationId": "182e21a3-958c-41c2-80ad-759a531333da",
+    "suiteSummary": {
+      "passed": 0,
+      "blocked": 0,
+      "failed": 1
+    },
+    "exitCode": 1,
+    "preNativeAssertions": 3,
+    "noApplyRequests": true,
+    "readOnlyDbChecks": [
+      {
+        "case": "desktop",
+        "history": [
+          0,
+          1,
+          2
+        ],
+        "currentRevision": 2,
+        "goalStatus": "needs_input",
+        "phase": "rejected",
+        "rawCharacters": 241,
+        "selectedBeforeCharacters": 240,
+        "onlyPunctuationChanged": true,
+        "rawSha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+        "writerStarts": 1,
+        "meaningReviewApprovalAndArtifactAbsent": true,
+        "noVersion3File": true,
+        "acceptedAncestorRowsByteIdentical": 5,
+        "oneNewGoalRow": true
+      },
+      {
+        "case": "phone",
+        "history": [
+          0,
+          1,
+          2
+        ],
+        "currentRevision": 2,
+        "goalStatus": "needs_input",
+        "phase": "rejected",
+        "rawCharacters": 241,
+        "selectedBeforeCharacters": 240,
+        "onlyPunctuationChanged": true,
+        "rawSha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+        "writerStarts": 1,
+        "meaningReviewApprovalAndArtifactAbsent": true,
+        "noVersion3File": true,
+        "acceptedAncestorRowsByteIdentical": 5,
+        "oneNewGoalRow": true
+      }
+    ],
+    "acceptedDocumentFileComparisons": [
+      {
+        "dataPath": "/workspace/.cloud-env/anascummis/section-edit/native-desktop-ea1001de/research-document-note-edit-desktop/private-data",
+        "acceptedDocumentFilesByteIdentical": 12,
+        "newNoteOperationArtifactDirectoryAbsent": true
+      },
+      {
+        "dataPath": "/workspace/.cloud-env/anascummis/section-edit/retained-failure-phone-ea1001de/private-data",
+        "acceptedDocumentFilesByteIdentical": 12,
+        "newNoteOperationArtifactDirectoryAbsent": true
+      }
+    ]
+  },
+  "phone": {
+    "scopedChecks": 5,
+    "nativeGoalAchieved": false,
+    "newNativeGoalAttempted": false,
+    "oneExplicitContinue": true,
+    "writerStartsRemain1": true,
+    "noApplyOrVersion3": true
+  },
+  "kit": {
+    "manifest": {
+      "format": 1,
+      "version": "2e760b6aea59a9bcc5780c020164937c57a07fad318c312a4d896de98a4dd19f",
+      "filename": "anascummis-studio-2e760b6aea59a9bc.zip",
+      "sha256": "f3a7e18600a3394a11a0dd6bc01b1357fe5e79a209d4a3e426cc5e0f57b22abb",
+      "bytes": 2652819,
+      "files": 283,
+      "source": {
+        "commit": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+        "dirty": false
+      },
+      "dependencies": {
+        "next": "16.4.3",
+        "etro": "0.14.1"
+      }
+    },
+    "entries": 284,
+    "payloads": 283,
+    "crcAllHashesVersionSidecarAndPathsPass": true,
+    "directPinnedStudioFiles": 242,
+    "pinnedSharedOrGeneratedTransforms": 3,
+    "installedEtroFiles": 38,
+    "scope": "Offline in-memory ZIP/source audit; no new extraction/build/start/install/upstream download."
+  },
+  "normalPreservation": {
+    "normalServerPid": 104504,
+    "modelPid": 18848,
+    "modelStartTicks": "845300",
+    "all24CurrentTableDigestsMatchInitialBaselineAndRefreshReceipt": true,
+    "receiptApiDataUnchanged": true,
+    "acceptedFrozenFilesByteCompared": 18,
+    "allFrozenHashesMatch": true,
+    "privateBackupNotInPack": true,
+    "normalLiveProcessStartCwdAndCommandMatchReceipt": true
+  },
+  "navigation": {
+    "originalReviewPreservedExactly": true,
+    "derivedReviewExplicitlyLabelled": true,
+    "mappedLinks": 8,
+    "allMappedTargetsExist": true,
+    "standaloneResultEqualsReportCase": true,
+    "mainReadmeRoadmapAndDerivedReviewLinksResolve": true,
+    "derivedBodyExactOriginalWithOnlyDeclaredLinkSubstitutions": true,
+    "addedPrefixExplicitlyLabelsDerivation": true
+  },
+  "scope": {
+    "all11PromptDiagnosticsUnachieved": true,
+    "realDesktopNativeGoalFailed": true,
+    "hostTestsAndPhoneRecoveryNotNativeSuccess": true,
+    "nativeNoteApplyExportAndAcceptedPublicationUnverified": true,
+    "oldFourDiagnosticsAssessmentScopeQualifiedAsChronologyByReadme": true
+  },
+  "materialFindings": [
+    {
+      "id": "copied-static-review-relative-links",
+      "status": "fixed_additively",
+      "resolution": "Unmodified review/manifest retain original bytes. Browsable derivative remaps8 run-relative links to packaged originals; new exact standalone result.json is copied/indexed. Main README links the labelled derivative."
+    }
+  ],
+  "limitations": [
+    "Read-only artifact review only; no source/evidence edits, screenshots, model generations, tests or service calls. Only independent audit/report files written outside pack.",
+    "SQLite was queried via mode=ro for stopped copied fixtures and normal data. No private DB/key/weight/trace is shared.",
+    "Actual native note rewrite remains unachieved. Existing accepted summary lifecycle and injected note-host fixtures retain their original scope."
+  ],
+  "directStaticVisualCheck": {
+    "path": "phone/03-rejected-note-raw-no-apply-360x420.png",
+    "sha256": "0c6f4844fc637c839616c9209ed1652fb40962a991f035418f231f95f6da60a9",
+    "findings": [
+      "Original raw JSON is readable inside one opaque modal/scroller.",
+      "Header identifies base2, proposed3 and Personal notes paragraph2; proposed is not registered.",
+      "Footer explicitly says review only, with reachable Cancel and no Apply in this captured rejected state."
+    ],
+    "limits": "One original image directly viewed by this reviewer; full visual/layout/interactions retain owner/static-review scopes."
+  }
+}

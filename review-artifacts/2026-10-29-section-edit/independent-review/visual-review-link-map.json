@@ -1,0 +1,42 @@
+{
+  "originalReview": "ui-static-review-ea1001de.md",
+  "originalSha256": "348ca760d00558afaa8348347a6b2b6e87a6019618427de5f8b76b415170b951",
+  "derivedReview": "ui-static-review-ea1001de-browsable.md",
+  "derivedSha256": "388522cd2a411b2788ae1b32d601d09019b664a5c5ae4ae37f15d652a193c6d0",
+  "changes": [
+    {
+      "original": "native-desktop-ea1001de/research-document-note-edit-desktop/02-unmet-note-goal-retained-state-1440.png",
+      "packaged": "../desktop/02-unmet-note-goal-retained-state-1440.png"
+    },
+    {
+      "original": "native-desktop-ea1001de/research-document-note-edit-desktop/03-unmet-note-kept-request-and-selection-1440.png",
+      "packaged": "../desktop/03-unmet-note-kept-request-and-selection-1440.png"
+    },
+    {
+      "original": "native-desktop-ea1001de/research-document-note-edit-desktop/04-unmet-note-original-native-response-1440.png",
+      "packaged": "../desktop/04-unmet-note-original-native-response-1440.png"
+    },
+    {
+      "original": "retained-failure-phone-ea1001de/01-kept-ambiguous-request-needs-choices-360x420.png",
+      "packaged": "../phone/01-kept-ambiguous-request-needs-choices-360x420.png"
+    },
+    {
+      "original": "retained-failure-phone-ea1001de/02-same-unmet-note-job-retained-state-360x420.png",
+      "packaged": "../phone/02-same-unmet-note-job-retained-state-360x420.png"
+    },
+    {
+      "original": "retained-failure-phone-ea1001de/03-rejected-note-raw-no-apply-360x420.png",
+      "packaged": "../phone/03-rejected-note-raw-no-apply-360x420.png"
+    },
+    {
+      "original": "native-desktop-ea1001de/research-document-note-edit-desktop/result.json",
+      "packaged": "../desktop/result.json"
+    },
+    {
+      "original": "retained-failure-phone-ea1001de/receipt.json",
+      "packaged": "../phone/receipt.json"
+    }
+  ],
+  "screenshotsUnchanged": true,
+  "standaloneResultExactlyMatchesReportFirstCase": true
+}

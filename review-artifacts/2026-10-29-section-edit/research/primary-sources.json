@@ -1,0 +1,66 @@
+[
+  {
+    "id": "sqlite-transaction",
+    "url": "https://www.sqlite.org/lang_transaction.html",
+    "bytes": 27068,
+    "sha256": "b65dc308fd9e0ce471844c97366a4f5ad3a1f42833a3b19486ad7d6555a8e24e",
+    "status": "retrieved",
+    "readAt": "2026-10-29T23:38:59.214228+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/research-document-edit/research/sqlite-transaction.source",
+    "cachedHashReverified": true,
+    "retrievedAgain": false,
+    "reverifiedAt": "2026-10-30T00:27:59.911154+00:00",
+    "use": "Transactions do not make external files atomic; model syntax/decoding does not prove semantic intent, selected-note scope or tense."
+  },
+  {
+    "id": "playwright-downloads",
+    "url": "https://playwright.dev/docs/downloads",
+    "bytes": 40607,
+    "sha256": "b74c5b6044994b3ec7b2319daa4f4e047c78089f9183c9d345ddc85efe978709",
+    "status": "retrieved",
+    "readAt": "2026-10-29T23:38:59.214336+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/research-document-edit/research/playwright-downloads.source",
+    "cachedHashReverified": true,
+    "retrievedAgain": false,
+    "reverifiedAt": "2026-10-30T00:27:59.911281+00:00",
+    "use": "Transactions do not make external files atomic; model syntax/decoding does not prove semantic intent, selected-note scope or tense."
+  },
+  {
+    "id": "llama-grammar",
+    "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/grammars/README.md",
+    "bytes": 18051,
+    "sha256": "e1874c0f08abbcfe45eff0b7b0290faa58f630981bf94274e2d99751ef3b0208",
+    "status": "retrieved",
+    "readAt": "2026-10-29T23:38:59.214391+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/research-document-edit/research/llama-grammar.source",
+    "cachedHashReverified": true,
+    "retrievedAgain": false,
+    "reverifiedAt": "2026-10-30T00:27:59.911327+00:00",
+    "use": "Transactions do not make external files atomic; model syntax/decoding does not prove semantic intent, selected-note scope or tense."
+  },
+  {
+    "url": "https://huggingface.co/Qwen/Qwen3-0.6B/raw/main/README.md",
+    "retrievedAt": "2026-10-29T22:56:10.920098+00:00",
+    "bytes": 13965,
+    "sha256": "1ab64a26fcb3b461423b89a433a8c858f1bf8d4086f979cbb3ff878d47cf20e9",
+    "scope": "Official inference instructions only; no model weight was downloaded.",
+    "readAt": "2026-10-29T23:38:59.214442+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/research-document-edit/research/qwen-official-model-card.md",
+    "cachedHashReverified": true,
+    "retrievedAgain": false,
+    "reverifiedAt": "2026-10-30T00:27:59.911397+00:00",
+    "use": "Transactions do not make external files atomic; model syntax/decoding does not prove semantic intent, selected-note scope or tense."
+  },
+  {
+    "id": "wcag-on-input",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/on-input.html",
+    "resolvedUrl": "https://www.w3.org/WAI/WCAG22/Understanding/on-input.html",
+    "status": 200,
+    "bytes": 47522,
+    "sha256": "b5f7e43b68fbbb9cc3dd6db557791a9304326b78c9edb0a26675376fe25aad3e",
+    "retrievedAt": "2026-10-30T00:28:00.172863+00:00",
+    "cachedBody": "/workspace/.cloud-env/anascummis/section-edit/wcag-on-input.html",
+    "use": "Explicit section/format selection should preserve request and not automatically submit or change context.",
+    "relevantExcerpt": "Changing the setting of any user interface component does not automatically cause a change of context unless the user has been advised of the behavior before using the component. Intent The intent of this success criterion is to ensure that entering data or selecting a form control has predictable effects. Changing the setting of any user interface component is changing some aspect in the control that will persist when the user is no longer interacting with it. So checking a checkbox, entering text into a text field, or changing the selected option in a list control changes its setting, but activating a link or a button does not. Changes in context can confuse users who do not easily perceive the change or are easily distracted by changes. Changes of context are appropriate only when it is"
+  }
+]

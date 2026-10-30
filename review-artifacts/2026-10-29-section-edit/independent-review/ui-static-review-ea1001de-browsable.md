@@ -1,0 +1,25 @@
+> Derived navigation copy: the review text and printed hashes are retained; eight local-run link targets are mapped to exact packaged originals. The [unchanged original review](ui-static-review-ea1001de.md) has SHA-256 `348ca760d00558afaa8348347a6b2b6e87a6019618427de5f8b76b415170b951`. This copy is not a new visual review.
+
+# Retained personal-note failure: static visual review
+
+Source: `ea1001de93ec6eaccc6d84343868f621f6647e5d` (clean checkout observed during this review). I directly inspected the six original PNGs listed below. This accepts only the captured failure presentation; **the native clearer-paragraph goal failed and is not accepted**. No new source edits, tests, captures, services, model requests or PDF inspection were performed.
+
+- Desktop 02: “Needs attention · needs input”, the substantive-rewrite rejection, and “0 of 1 milestones accepted” are plainly visible. The parent description correctly names personal-note paragraph 2/base version 2 and preserves the summary, other note paragraphs and source evidence. “Open base version 2 edit goal” is visible. Local service reachability is separate from the failed edit and unavailable voice.
+- Desktop 03: the exact request “Make this clearer for a newcomer” remains visible beside the explicit Personal notes · paragraph 2 / clearer plain paragraph selection. Copy identifies the selected paragraph scope and the proposal as needing attention. The lower failure explanation continues below this ordinary Goal window's captured scroll position.
+- Desktop 04: the complete saved native `text` response is readable as wrapped JSON, with its native decision SHA-256 visible. It changes the original only by adding an Oxford comma; this is not a demonstrated clearer rewrite. This frame does not show Apply or an accepted result.
+- Phone 01 (360×420): clarification says no edit was submitted and the complete request is kept. The blank Section control has a visible focus ring; Requested format remains disabled until a section is chosen. The narrow panel contains the controls without horizontal text overlap. The request and eventual Save are outside this particular scroll position.
+- Phone 02 (360×420): the same job title and needs-input state are visible, together with the rejection's beginning. The reason runs below the captured window edge and recovery actions are not in this frame. A static image does not establish their scroll reachability.
+- Phone 03 (360×420): the review identifies base version 2 → **proposed** version 3 and Personal notes · paragraph 2. Raw whole-paragraph JSON wraps within the opaque scrollable middle. A visible “Review only” notice and full-width Cancel review remain separated from that content; **no Apply** is shown. There is no visible text overlap or horizontal clipping in this captured modal state. Opening the review does not establish a saved version 3.
+
+The owner's phone receipt separately records five passed recovery checks, `nativeGoalAchieved:false`, no new native attempt/Apply/version, retained raw/selection through explicit Continue and restart, and history remaining 0/1/2. The desktop result records `status:"failed"`. These are owner execution claims supported by their receipts, not additional interactions performed during this static review. Full keyboard traversal, actual handset keyboard behavior, every scroll position and a successful paragraph rewrite remain outside this review. No revised PDF/HTML or new document-version acceptance is claimed.
+
+Exact file identities follow; the adjacent JSON manifest also records byte counts and dimensions.
+
+- [02-unmet-note-goal-retained-state-1440.png](../desktop/02-unmet-note-goal-retained-state-1440.png) — SHA-256 `bc70fd7634fece39d1ec1a35388cde76a9c70c0cbb06272b4fdf913bd7fa591e`
+- [03-unmet-note-kept-request-and-selection-1440.png](../desktop/03-unmet-note-kept-request-and-selection-1440.png) — SHA-256 `258104ac8904c67962fa664dcbeaf0e1fe75b8ddf28c935122b49725236782db`
+- [04-unmet-note-original-native-response-1440.png](../desktop/04-unmet-note-original-native-response-1440.png) — SHA-256 `283394b2237ba62208acc4dbcc849f6ed211ad95a5b3b63735d4c4af27a3b86f`
+- [01-kept-ambiguous-request-needs-choices-360x420.png](../phone/01-kept-ambiguous-request-needs-choices-360x420.png) — SHA-256 `82e4cfe9450b05e9319ac78c1e09ac1c5b6a17342d683a4456a1a32c96c57ffb`
+- [02-same-unmet-note-job-retained-state-360x420.png](../phone/02-same-unmet-note-job-retained-state-360x420.png) — SHA-256 `ccf106519b0cabffc28565ceba594c4766dcdd46fe721b87ee841a1d871d020c`
+- [03-rejected-note-raw-no-apply-360x420.png](../phone/03-rejected-note-raw-no-apply-360x420.png) — SHA-256 `0c6f4844fc637c839616c9209ed1652fb40962a991f035418f231f95f6da60a9`
+- [result.json](../desktop/result.json) — SHA-256 `0b3654f734a185d99b0acfe3b60744fccb8e54a2f6ea3d64f10c4083877d36b0`
+- [receipt.json](../phone/receipt.json) — SHA-256 `1c6f80fdabff2d14b0bb8cb3b07ecab537ee9fb7061f5afc02005ba2ce01178a`

@@ -1,0 +1,33 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-ui.test.ts:
+(pass) an ambiguous section edit preserves explicit paragraph choices, uncertain delivery and an honest native review [2920.68ms]
+(pass) an original brief offers explicit paragraph selection and clarifies an ambiguous request before any submission [1392.74ms]
+
+tests/research-brief-edit-draft.test.ts:
+(pass) document edit browser drafts and uncertain approvals > reload keeps the exact submitted intent separately from newer edits [0.34ms]
+(pass) document edit browser drafts and uncertain approvals > acknowledging the submitted intent clears only that snapshot [0.15ms]
+(pass) document edit browser drafts and uncertain approvals > invalid or oversized storage cannot silently truncate a request [0.15ms]
+(pass) document edit browser drafts and uncertain approvals > an unconfirmed approval retains its exact operation and proposal hash [0.13ms]
+(pass) document edit browser drafts and uncertain approvals > optional sentence format keeps incomplete labels and an exact submitted snapshot [0.30ms]
+(pass) document edit browser drafts and uncertain approvals > unchecked unsent labels survive acknowledgement and invalid labels are not silently shortened [0.17ms]
+
+tests/research-brief-edit-ui.test.ts:
+(pass) document edit UI preserves an uncertain request and approval without replay [2819.39ms]
+
+tests/research-brief-section-draft.test.ts:
+(pass) explicit section choices and uncertain document-edit snapshots > an ambiguous exact request and each incomplete choice reload without inventing a target or format [0.51ms]
+(pass) explicit section choices and uncertain document-edit snapshots > complete selected paragraph and format are snapshotted separately from later unsent choices [0.28ms]
+(pass) explicit section choices and uncertain document-edit snapshots > a matching acknowledgement clears only the selected snapshot; changed target identity cannot confirm it [0.15ms]
+(pass) explicit section choices and uncertain document-edit snapshots > legacy acknowledgement does not erase a newer incomplete clarification choice [0.13ms]
+(pass) explicit section choices and uncertain document-edit snapshots > target identity is structural but every section, paragraph, hash and format remains significant [0.10ms]
+(pass) explicit section choices and uncertain document-edit snapshots > malformed selected or partial target data remains unreadable instead of being truncated or retargeted [0.71ms]
+(pass) explicit section choices and uncertain document-edit snapshots > conflicting submitted formats cannot become a retry while old no-target drafts and approvals remain readable [0.28ms]
+
+tests/research-brief-review-dialog.test.ts:
+(pass) expanded review escapes the small window, renders source links and keeps explicit approval safe [1975.75ms]
+
+ 17 pass
+ 0 fail
+ 445 expect() calls
+Ran 17 tests across 5 files. [9.42s]

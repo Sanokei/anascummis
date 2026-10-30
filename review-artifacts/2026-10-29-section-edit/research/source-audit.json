@@ -1,0 +1,88 @@
+{
+  "checkedAt": "2026-10-30T00:32:34.604975+00:00",
+  "sourceUnderAudit": "dc1885c9e36738a4a4061f7d916ca074b7e2144a",
+  "scope": "Baseline gap/primary-doc audit, not acceptance of concurrently modified implementation. No repository source edits, database writes, service restarts or model downloads by this audit. Eleven explicitly bounded native diagnostic generations are recorded separately.",
+  "baselineSourceFingerprints": [
+    {
+      "path": "apps/studio/core/research-brief-edit-types.ts",
+      "bytes": 2551,
+      "sha256": "73a15d60bf50b22b23aa7f9e2cb8a986bfc3b3d51f53c5d67f4b8538ccda5368"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-draft.ts",
+      "bytes": 4961,
+      "sha256": "fdd3df163e97b82d70818aa8d85aaf26a58a722318c2c3b017fbd4eeb5f4dac1"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit.ts",
+      "bytes": 54775,
+      "sha256": "37fb6c30a41ef85fe1031a49bfe135bc507524b0e96b5e0fbf6f584f81d89a66"
+    },
+    {
+      "path": "apps/studio/core/research-brief-presentation.ts",
+      "bytes": 9745,
+      "sha256": "dd9035a9a1d919eeaa16166f937dfe723a9d69131052c7e53e0c9fdfee90bdb5"
+    },
+    {
+      "path": "apps/studio/core/goal-orchestrator.ts",
+      "bytes": 51314,
+      "sha256": "f776bddee35786cb5fdb78a63057b22b87be39ff465903d31700b47891b4d6ce"
+    },
+    {
+      "path": "apps/studio/core/server.ts",
+      "bytes": 35872,
+      "sha256": "7fc175ad64c926e3f73fd2310ad102f3dad26fdc08522774065964111a1bc94a"
+    },
+    {
+      "path": "apps/studio/components/ResearchBriefEdit.tsx",
+      "bytes": 43061,
+      "sha256": "7be0831614bd27de8addd6d876e1afa0c2c90e4865b7863970a4917fce22be70"
+    }
+  ],
+  "actualAcceptedBase": {
+    "goalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+    "operationId": "705dfa96-c28b-43a1-8857-f5e45b58ccff",
+    "artifact": {
+      "operationId": "705dfa96-c28b-43a1-8857-f5e45b58ccff",
+      "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+      "revision": 2,
+      "pages": 1,
+      "pdfSha256": "d6daef60110ef632b193ad5c24f1a19533d20a6ab9e22556eb0350cb5eb473d9",
+      "htmlSha256": "7e1674f81e45891be1b53195705dedee11b6c7e33a07c555292c085e96f83aac",
+      "provenanceSha256": "77ffc321cf5a6112fac68a5bfed6e2c1ba574ae0d7366a6ed9b7ff2f57af26d4"
+    },
+    "notesCharacters": 1719,
+    "notesSha256": "b8dd822801a9e4207e43de73b89a80a4a0f1153de69ec5020c49350d58be60ba"
+  },
+  "chosenParagraph": {
+    "section": "personal-notes",
+    "paragraphIndex": 1,
+    "displayNumber": 2,
+    "start": 161,
+    "end": 401,
+    "characters": 240,
+    "offsetUnits": "JavaScript UTF-16 code units; this selected paragraph is ASCII",
+    "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501",
+    "text": "Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details and private URLs from anything I share."
+  },
+  "requirements": [
+    "Original ambiguous intent remains verbatim; section/paragraph/format clarification is a separate explicit user choice. No child/inference before required choices.",
+    "Pin current base revision/operation/PDF/HTML/provenance, current full notes hash and exact selected paragraph index/range/hash. Server derives ranges from accepted notes; never trust arbitrary client file paths.",
+    "Request-key equality includes selection and format, not intent alone. Newer unsent selection changes cannot overwrite the uncertain submitted snapshot.",
+    "Existing preserved() and stateFrom() assume original immutable notes; new current-notes state must be distinct from original source/notes provenance.",
+    "Approval proposal hash for note mode must commit to the actual selected-note replacement/output and target, not unchanged summary BriefDraft alone.",
+    "Projection copies exact prefix/suffix and inserts exact native text only; no host paraphrase/repair or silent normalization. Summary/citations/title and all other notes remain exact.",
+    "Recursive base verification must include effective current notes so future revisions cannot restore original notes over an accepted note edit.",
+    "Legacy mode absent-new-fields must retain v0/v1/v2 HTML/provenance plans byte-for-byte; do not rewrite historical renderer output.",
+    "Notes are personal intentions, not source facts. Use a separate intent/action/tense review, not the factual-source reviewer. Reject copying/punctuation-only/deletion-only loss and invented completed actions.",
+    "Keep raw decisions/derived checks/review and exact diff inspectable, require explicit Apply, shared abortable document lock and same operation through uncertain acknowledgement/Stop/restart.",
+    "Keep explicit selection controls labelled, retain draft on ambiguity/failure/close/reload, and do not make selection itself submit or start native execution.",
+    "Reuse unchanged recovery receipts honestly; validate actual desktop/short-phone selection/clarification/new native note contract and actual PDF/HTML bytes."
+  ],
+  "primarySources": "primary-sources.json",
+  "nativeDiagnostics": "diagnostic-assessments.json",
+  "limits": [
+    "A model-generated review and literal guards cannot establish general semantic accuracy. All eleven observed prompt diagnostics failed the actual clearer-paragraph goal.",
+    "No actual new section-edit child/UI/artifact has been created by this audit."
+  ]
+}

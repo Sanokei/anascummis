@@ -1,0 +1,15 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-draft.test.ts:
+(pass) explicit section choices and uncertain document-edit snapshots > an ambiguous exact request and each incomplete choice reload without inventing a target or format [0.75ms]
+(pass) explicit section choices and uncertain document-edit snapshots > complete selected paragraph and format are snapshotted separately from later unsent choices [0.52ms]
+(pass) explicit section choices and uncertain document-edit snapshots > a matching acknowledgement clears only the selected snapshot; changed target identity cannot confirm it [0.14ms]
+(pass) explicit section choices and uncertain document-edit snapshots > legacy acknowledgement does not erase a newer incomplete clarification choice [0.10ms]
+(pass) explicit section choices and uncertain document-edit snapshots > target identity is structural but every section, paragraph, hash and format remains significant [0.14ms]
+(pass) explicit section choices and uncertain document-edit snapshots > malformed selected or partial target data remains unreadable instead of being truncated or retargeted [0.72ms]
+(pass) explicit section choices and uncertain document-edit snapshots > conflicting submitted formats cannot become a retry while old no-target drafts and approvals remain readable [0.55ms]
+
+ 7 pass
+ 0 fail
+ 113 expect() calls
+Ran 7 tests across 1 file. [14.00ms]

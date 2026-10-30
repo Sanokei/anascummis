@@ -1,0 +1,94 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-panel-handoff.test.ts:
+(pass) an older goal poll cannot replace a confirmed edit handoff or approval [7266.81ms]
+
+tests/research-brief-section-ui.test.ts:
+(pass) an ambiguous section edit preserves explicit paragraph choices, uncertain delivery and an honest native review [2994.80ms]
+(pass) an original brief offers explicit paragraph selection and clarifies an ambiguous request before any submission [1591.47ms]
+
+tests/research-brief-edit-draft.test.ts:
+(pass) document edit browser drafts and uncertain approvals > reload keeps the exact submitted intent separately from newer edits [0.37ms]
+(pass) document edit browser drafts and uncertain approvals > acknowledging the submitted intent clears only that snapshot [0.17ms]
+(pass) document edit browser drafts and uncertain approvals > invalid or oversized storage cannot silently truncate a request [0.16ms]
+(pass) document edit browser drafts and uncertain approvals > an unconfirmed approval retains its exact operation and proposal hash [0.14ms]
+(pass) document edit browser drafts and uncertain approvals > optional sentence format keeps incomplete labels and an exact submitted snapshot [0.30ms]
+(pass) document edit browser drafts and uncertain approvals > unchecked unsent labels survive acknowledgement and invalid labels are not silently shortened [0.16ms]
+
+tests/research-brief-edit-ui.test.ts:
+(pass) document edit UI preserves an uncertain request and approval without replay [3270.82ms]
+
+tests/research-brief-section-draft.test.ts:
+(pass) explicit section choices and uncertain document-edit snapshots > an ambiguous exact request and each incomplete choice reload without inventing a target or format [0.63ms]
+(pass) explicit section choices and uncertain document-edit snapshots > complete selected paragraph and format are snapshotted separately from later unsent choices [0.36ms]
+(pass) explicit section choices and uncertain document-edit snapshots > a matching acknowledgement clears only the selected snapshot; changed target identity cannot confirm it [0.39ms]
+(pass) explicit section choices and uncertain document-edit snapshots > legacy acknowledgement does not erase a newer incomplete clarification choice [0.37ms]
+(pass) explicit section choices and uncertain document-edit snapshots > target identity is structural but every section, paragraph, hash and format remains significant [0.15ms]
+(pass) explicit section choices and uncertain document-edit snapshots > malformed selected or partial target data remains unreadable instead of being truncated or retargeted [0.75ms]
+(pass) explicit section choices and uncertain document-edit snapshots > conflicting submitted formats cannot become a retry while old no-target drafts and approvals remain readable [0.34ms]
+
+tests/research-brief-second-edit.test.ts:
+(pass) current accepted revision pins the exact base and one approved version 2 preserves all earlier bytes and notes [12856.72ms]
+(pass) an interrupted second proposal and rendered checkpoint reuse the raw decision and files without another write or review [84.13ms]
+(pass) stale current parents and a document changed while reviewing cannot trigger inference or approve a version [130.05ms]
+(pass) a base changed after approval cannot overwrite a competing version 2 or claim it as this operation [60.68ms]
+(pass) a lost completion and rolled-back version 2 registration reconcile the same approved operation exactly once [87.93ms]
+(pass) an unknown unregistered version 2 file is preserved through explicit retry without a false revision [68.03ms]
+(pass) uncertain create and exact Apply identities do not create duplicate children or approve a different proposal [72.26ms]
+(pass) a shorter-one-sentence request rejects missing locations, multiple sentences and unshortened text before Apply [120.84ms]
+(pass) unsupported current-revision intents are refused before a new operation without silently changing the request [33.92ms]
+(pass) Stop during prepared-file verification leaves version 2 unpublished until explicit continuation [78.23ms]
+
+tests/research-brief-section-edit.test.ts:
+(pass) paragraph ranges distinguish repeated Unicode text and retain original CRLF/blank-line separators [0.41ms]
+(pass) explicit note paragraph selection publishes only that native rewrite as v3 and real PDF/HTML retain summary, other notes, citations and v0/v1/v2 [25248.46ms]
+(pass) ambiguous or invalid selection clarifies without a child while an explicit summary format preserves the unchanged original intent [128.73ms]
+(pass) literal section-intent conflicts ask for clarification before a child while negative preservation clauses retain the original request [128.35ms]
+(pass) uncertain submission identity includes exact target and distinct note proposals cannot share an Apply hash merely because summary is unchanged [155.95ms]
+(pass) word-identical punctuation copying and lost planned meaning cannot become approved completed-work claims [148.32ms]
+(pass) note proposal and prepared-file interruption continue the same raw selection and one v3 without repeated writer or meaning review [150.96ms]
+(pass) an unapplied competing note proposal remains preserved and stale after one separate operation publishes v3 [161.53ms]
+(pass) an unknown v3 file is never overwritten or claimed by a resumed note operation [118.66ms]
+(pass) tampering with saved note replacement, whole-note splice or selected base hash is detected before Apply [310.00ms]
+(pass) a later explicit summary edit uses accepted current notes instead of silently restoring the original notes [217.45ms]
+
+tests/brief-review-text.test.ts:
+(pass) review rendering presents literal code/link labels without altering retained native text [7.10ms]
+(pass) private, credentialled, invented and malformed destinations remain inert even inside source text [1.41ms]
+(pass) actual browser review text has readable links, inert raw HTML and deliberate keyboard navigation [756.39ms]
+
+tests/research-brief-edit.test.ts:
+(pass) proposal is durable read-only work; Continue does not approve and exact approval creates one version without another native decision [29.69ms]
+(pass) interruption immediately after saving the native proposal reuses it and performs only the missing support decision [11.28ms]
+(pass) interrupted rendered-files checkpoint adopts the exact bytes and registers one revision without rerendering or repeat inference [19.47ms]
+(pass) lost completion and a rolled-back SQL registration retain the same operation and rendered files [32.70ms]
+(pass) approval binds the exact operation and proposal; stopped goals and changed intent cannot publish [12.40ms]
+(pass) source-support rejection stays inspectable and cannot be turned into silent regeneration or approval [8.94ms]
+(pass) introduced URLs and changed citation selection fail before native over-acceptance or publication [15.73ms]
+(pass) original-file tampering and a conflicting revision are detected after a proposal without overwriting accepted files [19.30ms]
+(pass) damaged native response, proposal or complete-note checkpoint is rejected while its original saved bytes remain inspectable [29.76ms]
+(pass) real renderer: revised multi-page PDF/HTML retains complete notes and exact raw citations in separate provenance [3405.16ms]
+(pass) duplicated citation numbers are rejected before support review, approval or document revision [9.87ms]
+(pass) an unregistered unknown revision file is preserved and never claimed as this edit after publication collision [18.13ms]
+(pass) an impossible saved phase without its artifact cannot become a false completed revision [6.15ms]
+(pass) a symlink at the prospective revision path cannot overwrite its target or register an edit [13.49ms]
+(pass) Stop during asynchronous original verification or page inspection creates no late edit checkpoint or native decision [16.95ms]
+(pass) Stop while Apply verifies the original wins over its stale needs-input snapshot and cannot save approval [12.21ms]
+(pass) grounded sentence checkpoints preserve the exact host selection and first response across interruption before completing one version [3559.00ms]
+(pass) a historical native-like single-sentence proposal and false positive model review cannot waive exact quoted prefixes on Apply or Continue [13.56ms]
+(pass) sequential formatting rejects empty, repeated-label, multi-sentence and duplicated-citation raw fields without authored fallback [45.77ms]
+(pass) the previous two-field native failure remains exact and cannot be regenerated by the new sequential writer [11.72ms]
+(pass) sentence labels are explicit, bounded and part of the exact submission identity [7.38ms]
+(pass) a crash-window partial raw response stays inspectable and Continue rejects it without another native request [15.78ms]
+(pass) no matching label evidence remains a persisted needs-input goal without any native request or document write [18.46ms]
+(pass) an unmatched second label keeps the saved first native response and never requests or fabricates the missing sentence [12.35ms]
+(pass) changed candidate provenance or a rehashed selected quote cannot retarget an interrupted native sentence [44.35ms]
+(pass) an existing v2 sequential checkpoint retains its original broader reading contract instead of silently switching evidence mode [18.69ms]
+
+tests/research-brief-review-dialog.test.ts:
+(pass) expanded review escapes the small window, renders source links and keeps explicit approval safe [2050.92ms]
+
+ 68 pass
+ 0 fail
+ 1565 expect() calls
+Ran 68 tests across 10 files. [66.09s]

@@ -1,0 +1,18 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-edit.test.ts:
+(pass) paragraph ranges distinguish repeated Unicode text and retain original CRLF/blank-line separators [2.18ms]
+(pass) explicit note paragraph selection publishes only that native rewrite as v3 and real PDF/HTML retain summary, other notes, citations and v0/v1/v2 [26214.48ms]
+(pass) ambiguous or invalid selection clarifies without a child while an explicit summary format preserves the unchanged original intent [81.87ms]
+(pass) uncertain submission identity includes exact target and distinct note proposals cannot share an Apply hash merely because summary is unchanged [115.78ms]
+(pass) word-identical punctuation copying and lost planned meaning cannot become approved completed-work claims [140.83ms]
+(pass) note proposal and prepared-file interruption continue the same raw selection and one v3 without repeated writer or meaning review [135.48ms]
+(pass) an unapplied competing note proposal remains preserved and stale after one separate operation publishes v3 [134.73ms]
+(pass) an unknown v3 file is never overwritten or claimed by a resumed note operation [104.67ms]
+(pass) tampering with saved note replacement, whole-note splice or selected base hash is detected before Apply [242.22ms]
+(pass) a later explicit summary edit uses accepted current notes instead of silently restoring the original notes [201.57ms]
+
+ 10 pass
+ 0 fail
+ 308 expect() calls
+Ran 10 tests across 1 file. [27.43s]

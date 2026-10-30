@@ -1,0 +1,1624 @@
+{
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "scope": "Retained failure plus one explicit Continue; not a read-only claim.",
+  "nativeGoalAchieved": false,
+  "newNativeGoalAttempted": false,
+  "applyAttempted": false,
+  "newVersionCreated": false,
+  "fixture": "/workspace/.cloud-env/anascummis/section-edit/native-desktop-ea1001de/research-document-note-edit-desktop/private-data",
+  "goalId": "2474c855-f7c3-470d-a1e0-62c9fdc0af17",
+  "processes": [
+    {
+      "pid": 104038,
+      "port": 35141,
+      "command": "bun core/server.ts",
+      "startedAt": "2026-10-30T00:54:59.531Z"
+    },
+    {
+      "pid": 104180,
+      "port": 35141,
+      "command": "bun core/server.ts",
+      "startedAt": "2026-10-30T00:55:04.742Z"
+    }
+  ],
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/api/goals/2474c855-f7c3-470d-a1e0-62c9fdc0af17/resume"
+    }
+  ],
+  "screenshots": [
+    "01-kept-ambiguous-request-needs-choices-360x420.png",
+    "02-same-unmet-note-job-retained-state-360x420.png",
+    "03-rejected-note-raw-no-apply-360x420.png"
+  ],
+  "checks": [
+    {
+      "name": "Unsubmitted complete intent and explicit choices survive close/reload without a child or native attempt.",
+      "passed": true
+    },
+    {
+      "name": "The same failed native goal keeps original intent, exact note selection, raw/op and no approved or generated version3.",
+      "passed": true
+    },
+    {
+      "name": "One explicitly labelled Continue mutation reuses the failed raw/selection and returns needs-input without another writer or version.",
+      "passed": true
+    },
+    {
+      "name": "Rejected raw response remains inspectable, Apply absent, and review closure preserves focus.",
+      "passed": true
+    },
+    {
+      "name": "Owned restart/reopen does not retry inference, Apply, create a child or advance history beyond0/1/2.",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "A previously real native edit failed. Passing these UI/recovery checks does not complete that edit or create a revised document.",
+    "Prepared Linux Chromium touch/keyboard emulation; no physical handset, voice, public deployment or native OS claim."
+  ],
+  "initialFailedGoal": {
+    "id": "2474c855-f7c3-470d-a1e0-62c9fdc0af17",
+    "request": "Make this clearer for a newcomer",
+    "projectId": "edf8a860-3923-41b3-86a5-19b09950fe7f",
+    "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+    "research": false,
+    "status": "needs_input",
+    "phase": "needs_input",
+    "message": "Error: The preserved edit proposal failed its host check: The proposal only copies, changes punctuation/case or deletes words from the selected paragraph. A substantive clearer rewrite has not been demonstrated; the native response is preserved. Create a new intent; retry never silently replaces the decision.",
+    "tasks": [
+      {
+        "id": "native-brief-edit",
+        "specialist": "pdf",
+        "documentEdit": true,
+        "description": "Inspect accepted document version 2, propose the exact requested personal-note paragraph 2 edit and await explicit approval before saving version 3.",
+        "acceptance": "Native edit must clarify only the explicitly selected personal-note paragraph, preserving planned actions, tense and meaning without invented completed work. Preserve the summary, all unselected notes, title, source/citation identities and earlier versions. Apply the exact inspected proposal once and recover deliberately without duplicated work.",
+        "dependsOn": [],
+        "status": "needs_input",
+        "attempts": 1
+      }
+    ],
+    "created": 1793321634036,
+    "updated": 1793321638810,
+    "events": [
+      {
+        "time": 1793321634036,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "The full goal is saved and queued for planning."
+      },
+      {
+        "time": 1793321634038,
+        "role": "coordinator",
+        "phase": "edit_requested",
+        "detail": "The complete original intent, explicit personal-note paragraph/format and accepted base identity are saved. Summary, unselected notes and source evidence remain unchanged. No revision is applied until explicit approval."
+      },
+      {
+        "time": 1793321634042,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Inspect accepted document version 2, propose the exact requested personal-note paragraph 2 edit and await explicit approval before saving version 3.",
+        "taskId": "native-brief-edit"
+      },
+      {
+        "time": 1793321635211,
+        "role": "executor",
+        "phase": "proposing_document_edit",
+        "detail": "The original request, explicit note paragraph/format and current base are saved. The local model rewrites only that selected paragraph; summary, other notes and source evidence stay immutable.",
+        "taskId": "native-brief-edit"
+      },
+      {
+        "time": 1793321638807,
+        "role": "executor",
+        "phase": "edit_proposal_saved",
+        "detail": "Native edit proposal 49b17e3a97b424422ec6d29b1537c6525ba2ca3b6df382d0ddc3397439594c01 saved before support review or any document write. Explicit continuation reuses it.",
+        "taskId": "native-brief-edit"
+      },
+      {
+        "time": 1793321638810,
+        "role": "coordinator",
+        "phase": "needs_input",
+        "detail": "Error: The preserved edit proposal failed its host check: The proposal only copies, changes punctuation/case or deletes words from the selected paragraph. A substantive clearer rewrite has not been demonstrated; the native response is preserved. Create a new intent; retry never silently replaces the decision."
+      }
+    ],
+    "planningOffset": 32,
+    "planningDone": true,
+    "planningCalls": 0,
+    "coverageOffset": 0,
+    "coverageDone": false,
+    "notes": [],
+    "parentGoalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+    "documentEdit": {
+      "parentGoalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+      "requestKey": "0b254f0c-3666-4458-85c9-c636e768230b",
+      "intent": "Make this clearer for a newcomer",
+      "target": {
+        "section": "notes",
+        "paragraph": 1,
+        "paragraphSha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501",
+        "format": "clearer-plain-paragraph"
+      },
+      "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+      "baseRevision": 2,
+      "basePdfSha256": "d6daef60110ef632b193ad5c24f1a19533d20a6ab9e22556eb0350cb5eb473d9",
+      "originalBriefGoalId": "a09643e1-9a33-4d6d-b6d5-dc5e87d516bd",
+      "baseOperationId": "705dfa96-c28b-43a1-8857-f5e45b58ccff",
+      "baseHtmlSha256": "7e1674f81e45891be1b53195705dedee11b6c7e33a07c555292c085e96f83aac",
+      "baseProvenanceSha256": "77ffc321cf5a6112fac68a5bfed6e2c1ba574ae0d7366a6ed9b7ff2f57af26d4",
+      "inferenceProfile": {
+        "id": "qwen3-document-rewrite-v1",
+        "parameters": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0,
+          "seed": 42,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        }
+      }
+    },
+    "briefEditEligibility": {
+      "canEdit": false,
+      "reason": "Finish and accept this document version before proposing another summary edit."
+    },
+    "documentEditState": {
+      "operationId": "182e21a3-958c-41c2-80ad-759a531333da",
+      "goalId": "2474c855-f7c3-470d-a1e0-62c9fdc0af17",
+      "inputSha256": "800a071db5e342b50459f15da1c9afdfe1ac5ba2aac4d2321bd410de57ee23f2",
+      "created": 1793321635210,
+      "phase": "rejected",
+      "writingMode": "note-paragraph-rewrite-v5",
+      "notesEdit": {
+        "before": "Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details and private URLs from anything I share.",
+        "start": 161,
+        "end": 401,
+        "notesSha256": "b8dd822801a9e4207e43de73b89a80a4a0f1153de69ec5020c49350d58be60ba",
+        "paragraphSha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501",
+        "proposal": "Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details, and private URLs from anything I share.",
+        "proposedNotes": "Personal handoff for my next Fetch test contribution. These are my own proposed actions and working notes, not instructions or verified claims from the source.\n\nBefore changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details, and private URLs from anything I share.\n\n1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with the current README. If the evidence changed, ask a new focused question instead of editing the accepted copy.\n2. Open the browser-results location from the brief. Write down the engine and platform I inspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test passes.\n3. Search the cited test directory for a related case before proposing another test. Keep the candidate filename, my reason for choosing it and any unresolved question in my own draft.\n4. Separate reproduction from implementation. First describe a small public fixture and expected behavior; then explain the proposed test and the observation it should distinguish.\n5. Read the project's current contribution and review instructions before submitting anything. I have not checked those instructions yet, and this brief does not establish them.\n6. Keep a handoff log of what I tried, which evidence I saved and what remains uncertain. After interruption, inspect saved work and continue deliberately rather than repeating accepted research.\n7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for missing guidance instead of guessing. My personal checklist is not a source-backed conclusion.",
+        "proposedNotesSha256": "de2295d5ea6eaeab939ea73f50b6cd993189e10f9e3d883393d0b1bf9863a424"
+      },
+      "before": {
+        "paragraphs": [
+          {
+            "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+            "citations": [
+              1,
+              2
+            ]
+          }
+        ]
+      },
+      "preserved": {
+        "title": "Fetch test contributor brief",
+        "notes": "Personal handoff for my next Fetch test contribution. These are my own proposed actions and working notes, not instructions or verified claims from the source.\n\nBefore changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details and private URLs from anything I share.\n\n1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with the current README. If the evidence changed, ask a new focused question instead of editing the accepted copy.\n2. Open the browser-results location from the brief. Write down the engine and platform I inspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test passes.\n3. Search the cited test directory for a related case before proposing another test. Keep the candidate filename, my reason for choosing it and any unresolved question in my own draft.\n4. Separate reproduction from implementation. First describe a small public fixture and expected behavior; then explain the proposed test and the observation it should distinguish.\n5. Read the project's current contribution and review instructions before submitting anything. I have not checked those instructions yet, and this brief does not establish them.\n6. Keep a handoff log of what I tried, which evidence I saved and what remains uncertain. After interruption, inspect saved work and continue deliberately rather than repeating accepted research.\n7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for missing guidance instead of guessing. My personal checklist is not a source-backed conclusion.",
+        "citations": [
+          {
+            "number": 1,
+            "quote": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+            "label": "source-1",
+            "sourceId": "52d48f68-3ab1-467d-bbd4-f5467e4b41ef",
+            "offset": 1914,
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+          },
+          {
+            "number": 2,
+            "quote": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+            "label": "source-1",
+            "sourceId": "52d48f68-3ab1-467d-bbd4-f5467e4b41ef",
+            "offset": 2057,
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+          }
+        ]
+      },
+      "inspectBase": {
+        "pages": [
+          {
+            "page": 1,
+            "width": 595,
+            "height": 842,
+            "rotation": 0,
+            "text": "Fetch test contributor brief\nBrief: Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/\nwpt, and results are available at wpt.fyi/results/fetch. [1] [2]\nSource question: Where are the Fetch Standard’s tests kept, and where can I see them\nrunning against browser engines? Cite the README statements supporting both.\nYour notes — personal, not source claims: Personal handoﬀ for my next Fetch test\ncontribution. These are my own proposed actions and working notes, not instructions or\nveriﬁed claims from the source.\nBefore changing anything, I will record the browser and version, a minimal public example,\nthe outcome I expected and what I actually saw. I will remove cookies, authorization\nheaders, account details and private URLs from anything I share.\n1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with\nthe current README. If the evidence changed, ask a new focused question instead of\nediting the accepted copy.\n2. Open the browser-results location from the brief. Write down the engine and platform I\ninspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test\npasses.\n3. Search the cited test directory for a related case before proposing another test. Keep the\ncandidate ﬁlename, my reason for choosing it and any unresolved question in my own draft.\n4. Separate reproduction from implementation. First describe a small public ﬁxture and\nexpected behavior; then explain the proposed test and the observation it should distinguish.\n5. Read the project's current contribution and review instructions before submitting anything.\nI have not checked those instructions yet, and this brief does not establish them.\n6. Keep a handoﬀ log of what I tried, which evidence I saved and what remains uncertain.\nAfter interruption, inspect saved work and continue deliberately rather than repeating\naccepted research.\n7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for\nmissing guidance instead of guessing. My personal checklist is not a source-backed\nconclusion.\nReference [1]: Tests for the Fetch Standard can be found in the fetch/ directory of web-\nplatform-tests/wpt.\nReference [2]: A dashboard showing the tests running against browser engines can be\nseen at wpt.fyi/results/fetch.\nSource: README.md\nRetrieved: 2026-10-29T22:06:27.711Z\nAbout this document: Local-model wording, not independently fact-checked. Full source\nand editing provenance is available in the work window.\n",
+            "spans": [
+              {
+                "text": "Fetch test contributor brief",
+                "rect": [
+                  72,
+                  75.5,
+                  391.4750061035156,
+                  109.92500305175781
+                ],
+                "size": 25,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": "Brief:",
+                "rect": [
+                  72,
+                  127.00498962402344,
+                  100.72100067138672,
+                  142.15199279785156
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/",
+                "rect": [
+                  100.72100067138672,
+                  126.94999694824219,
+                  514.6290893554688,
+                  142.06399536132812
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "wpt, and results are available at wpt.fyi/results/fetch. [1] [2]",
+                "rect": [
+                  72,
+                  142.89999389648438,
+                  356.9110412597656,
+                  158.0139923095703
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Source question:",
+                "rect": [
+                  72,
+                  165.9049835205078,
+                  161.8479766845703,
+                  181.05198669433594
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Where are the Fetch Standard’s tests kept, and where can I see them",
+                "rect": [
+                  161.84799194335938,
+                  165.84999084472656,
+                  503.6291198730469,
+                  180.9639892578125
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "running against browser engines? Cite the README statements supporting both.",
+                "rect": [
+                  72,
+                  181.79998779296875,
+                  466.9551086425781,
+                  196.9139862060547
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Your notes — personal, not source claims:",
+                "rect": [
+                  72,
+                  204.8049774169922,
+                  295.72900390625,
+                  219.9519805908203
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Personal handoﬀ for my next Fetch test",
+                "rect": [
+                  295.72900390625,
+                  204.74998474121094,
+                  490.7701110839844,
+                  219.86398315429688
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "contribution. These are my own proposed actions and working notes, not instructions or",
+                "rect": [
+                  72,
+                  220.69998168945312,
+                  497.5240173339844,
+                  235.81398010253906
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "veriﬁed claims from the source.",
+                "rect": [
+                  72,
+                  236.6499786376953,
+                  224.20697021484375,
+                  251.76397705078125
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Before changing anything, I will record the browser and version, a minimal public example,",
+                "rect": [
+                  72,
+                  268.5499572753906,
+                  511.5600891113281,
+                  283.6639709472656
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "the outcome I expected and what I actually saw. I will remove cookies, authorization",
+                "rect": [
+                  72,
+                  284.4999694824219,
+                  479.7920837402344,
+                  299.6139831542969
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "headers, account details and private URLs from anything I share.",
+                "rect": [
+                  72,
+                  300.4499816894531,
+                  388.70111083984375,
+                  315.5639953613281
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with",
+                "rect": [
+                  72,
+                  332.3500061035156,
+                  519.4910888671875,
+                  347.4640197753906
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "the current README. If the evidence changed, ask a new focused question instead of",
+                "rect": [
+                  72,
+                  348.3000183105469,
+                  490.2200927734375,
+                  363.4140319824219
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "editing the accepted copy.",
+                "rect": [
+                  72,
+                  364.2500305175781,
+                  199.79798889160156,
+                  379.3640441894531
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "2. Open the browser-results location from the brief. Write down the engine and platform I",
+                "rect": [
+                  72,
+                  380.2000427246094,
+                  502.40814208984375,
+                  395.3140563964844
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "inspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test",
+                "rect": [
+                  72,
+                  396.1500549316406,
+                  495.1151428222656,
+                  411.2640686035156
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "passes.",
+                "rect": [
+                  72,
+                  412.1000671386719,
+                  109.90599060058594,
+                  427.2140808105469
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "3. Search the cited test directory for a related case before proposing another test. Keep the",
+                "rect": [
+                  72,
+                  428.0500793457031,
+                  514.68408203125,
+                  443.1640930175781
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "candidate ﬁlename, my reason for choosing it and any unresolved question in my own draft.",
+                "rect": [
+                  72,
+                  444.0000915527344,
+                  517.7091064453125,
+                  459.1141052246094
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "4. Separate reproduction from implementation. First describe a small public ﬁxture and",
+                "rect": [
+                  72,
+                  459.9501037597656,
+                  491.9910888671875,
+                  475.0641174316406
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "expected behavior; then explain the proposed test and the observation it should distinguish.",
+                "rect": [
+                  72,
+                  475.9001159667969,
+                  517.1370239257812,
+                  491.0141296386719
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "5. Read the project's current contribution and review instructions before submitting anything.",
+                "rect": [
+                  72,
+                  491.8501281738281,
+                  519.7990112304688,
+                  506.9641418457031
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "I have not checked those instructions yet, and this brief does not establish them.",
+                "rect": [
+                  72,
+                  507.8001708984375,
+                  462.0931091308594,
+                  522.9141845703125
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "6. Keep a handoﬀ log of what I tried, which evidence I saved and what remains uncertain.",
+                "rect": [
+                  72,
+                  523.7501831054688,
+                  506.7310485839844,
+                  538.8641967773438
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "After interruption, inspect saved work and continue deliberately rather than repeating",
+                "rect": [
+                  72,
+                  539.7001953125,
+                  483.47705078125,
+                  554.814208984375
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "accepted research.",
+                "rect": [
+                  72,
+                  555.6502075195312,
+                  165.5439910888672,
+                  570.7642211914062
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for",
+                "rect": [
+                  72,
+                  571.6002197265625,
+                  501.7810974121094,
+                  586.7142333984375
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "missing guidance instead of guessing. My personal checklist is not a source-backed",
+                "rect": [
+                  72,
+                  587.5502319335938,
+                  479.78106689453125,
+                  602.6642456054688
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "conclusion.",
+                "rect": [
+                  72,
+                  603.500244140625,
+                  127.02198791503906,
+                  618.6142578125
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Reference [1]:",
+                "rect": [
+                  72,
+                  626.5052490234375,
+                  145.3479766845703,
+                  641.6522827148438
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Tests for the Fetch Standard can be found in the ",
+                "rect": [
+                  145.34799194335938,
+                  626.4502563476562,
+                  387.4910888671875,
+                  641.5642700195312
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "fetch/",
+                "rect": [
+                  387.4910888671875,
+                  628.6383666992188,
+                  424.71514892578125,
+                  641.5530395507812
+                ],
+                "size": 10.34,
+                "font": "NimbusMonoPS-Regular"
+              },
+              {
+                "text": " directory of ",
+                "rect": [
+                  424.715087890625,
+                  626.4502563476562,
+                  485.2371520996094,
+                  641.5642700195312
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "web-",
+                "rect": [
+                  485.2371520996094,
+                  626.4502563476562,
+                  509.0741271972656,
+                  641.5642700195312
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "platform-tests/wpt",
+                "rect": [
+                  72,
+                  642.4002685546875,
+                  158.80099487304688,
+                  657.5142822265625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": ".",
+                "rect": [
+                  158.80099487304688,
+                  642.4002685546875,
+                  161.85899353027344,
+                  657.5142822265625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Reference [2]:",
+                "rect": [
+                  72,
+                  665.4052734375,
+                  145.3479766845703,
+                  680.5523071289062
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " A dashboard showing the tests running against browser engines can be",
+                "rect": [
+                  145.34799194335938,
+                  665.3502807617188,
+                  496.9190979003906,
+                  680.4642944335938
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "seen at ",
+                "rect": [
+                  72,
+                  681.30029296875,
+                  111.13800048828125,
+                  696.414306640625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "wpt.fyi/results/fetch",
+                "rect": [
+                  111.13800048828125,
+                  681.30029296875,
+                  204.6709747314453,
+                  696.414306640625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": ".",
+                "rect": [
+                  204.67098999023438,
+                  681.30029296875,
+                  207.72898864746094,
+                  696.414306640625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Source:",
+                "rect": [
+                  72,
+                  704.3052978515625,
+                  112.95299530029297,
+                  719.4523315429688
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " ",
+                "rect": [
+                  112.9530029296875,
+                  704.2503051757812,
+                  116.01100158691406,
+                  719.3643188476562
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "README.md",
+                "rect": [
+                  116.01100158691406,
+                  704.2503051757812,
+                  181.406005859375,
+                  719.3643188476562
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Retrieved: 2026-10-29T22:06:27.711Z",
+                "rect": [
+                  72,
+                  720.2003173828125,
+                  259.09893798828125,
+                  735.3143310546875
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "About this document:",
+                "rect": [
+                  72,
+                  743.205322265625,
+                  185.6629638671875,
+                  758.3523559570312
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Local-model wording, not independently fact-checked. Full source",
+                "rect": [
+                  185.66299438476562,
+                  743.1503295898438,
+                  508.46905517578125,
+                  758.2643432617188
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "and editing provenance is available in the work window.",
+                "rect": [
+                  72,
+                  759.100341796875,
+                  342.8420104980469,
+                  774.21435546875
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              }
+            ],
+            "forms": []
+          }
+        ],
+        "sha256": "7ed793db6a8cf379bec1d5e045541095b05a776dd069950e3269867e7a5ebae2"
+      },
+      "writingAttempt": {
+        "raw": {
+          "text": "Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details, and private URLs from anything I share."
+        },
+        "sha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+        "format": "native-note-paragraph-v1"
+      },
+      "proposal": {
+        "paragraphs": [
+          {
+            "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+            "citations": [
+              1,
+              2
+            ]
+          }
+        ]
+      },
+      "proposalSha256": "49b17e3a97b424422ec6d29b1537c6525ba2ca3b6df382d0ddc3397439594c01",
+      "draftCheck": {
+        "accepted": false,
+        "reason": "The proposal only copies, changes punctuation/case or deletes words from the selected paragraph. A substantive clearer rewrite has not been demonstrated; the native response is preserved."
+      }
+    }
+  },
+  "clarification": [
+    "Which section and format should change? Choose them explicitly below. Your complete request is kept; no edit was submitted."
+  ],
+  "visibleGoalState": "Needs attention · needs input",
+  "continueControl": {
+    "x": 49,
+    "y": 237.1875,
+    "width": 169.4375,
+    "height": 44,
+    "right": 218.4375,
+    "bottom": 281.1875,
+    "focused": true,
+    "hit": true,
+    "vw": 360,
+    "vh": 420
+  },
+  "explicitContinue": {
+    "submitted": true,
+    "writerStartsBefore": 1,
+    "writerStartsAfter": 1,
+    "unchangedRaw": true,
+    "unchangedTarget": true,
+    "unchangedOperation": true,
+    "newNativeDecisionNotStarted": true
+  },
+  "finalGoal": {
+    "id": "2474c855-f7c3-470d-a1e0-62c9fdc0af17",
+    "request": "Make this clearer for a newcomer",
+    "projectId": "edf8a860-3923-41b3-86a5-19b09950fe7f",
+    "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+    "research": false,
+    "status": "needs_input",
+    "phase": "needs_input",
+    "message": "Error: The preserved edit proposal failed its host check: The proposal only copies, changes punctuation/case or deletes words from the selected paragraph. A substantive clearer rewrite has not been demonstrated; the native response is preserved. Create a new intent; retry never silently replaces the decision.",
+    "tasks": [
+      {
+        "id": "native-brief-edit",
+        "specialist": "pdf",
+        "documentEdit": true,
+        "description": "Inspect accepted document version 2, propose the exact requested personal-note paragraph 2 edit and await explicit approval before saving version 3.",
+        "acceptance": "Native edit must clarify only the explicitly selected personal-note paragraph, preserving planned actions, tense and meaning without invented completed work. Preserve the summary, all unselected notes, title, source/citation identities and earlier versions. Apply the exact inspected proposal once and recover deliberately without duplicated work.",
+        "dependsOn": [],
+        "status": "needs_input",
+        "attempts": 2,
+        "retryReason": "execution_unverified"
+      }
+    ],
+    "created": 1793321634036,
+    "updated": 1793321704371,
+    "events": [
+      {
+        "time": 1793321634036,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "The full goal is saved and queued for planning."
+      },
+      {
+        "time": 1793321634038,
+        "role": "coordinator",
+        "phase": "edit_requested",
+        "detail": "The complete original intent, explicit personal-note paragraph/format and accepted base identity are saved. Summary, unselected notes and source evidence remain unchanged. No revision is applied until explicit approval."
+      },
+      {
+        "time": 1793321634042,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Inspect accepted document version 2, propose the exact requested personal-note paragraph 2 edit and await explicit approval before saving version 3.",
+        "taskId": "native-brief-edit"
+      },
+      {
+        "time": 1793321635211,
+        "role": "executor",
+        "phase": "proposing_document_edit",
+        "detail": "The original request, explicit note paragraph/format and current base are saved. The local model rewrites only that selected paragraph; summary, other notes and source evidence stay immutable.",
+        "taskId": "native-brief-edit"
+      },
+      {
+        "time": 1793321638807,
+        "role": "executor",
+        "phase": "edit_proposal_saved",
+        "detail": "Native edit proposal 49b17e3a97b424422ec6d29b1537c6525ba2ca3b6df382d0ddc3397439594c01 saved before support review or any document write. Explicit continuation reuses it.",
+        "taskId": "native-brief-edit"
+      },
+      {
+        "time": 1793321638810,
+        "role": "coordinator",
+        "phase": "needs_input",
+        "detail": "Error: The preserved edit proposal failed its host check: The proposal only copies, changes punctuation/case or deletes words from the selected paragraph. A substantive clearer rewrite has not been demonstrated; the native response is preserved. Create a new intent; retry never silently replaces the decision."
+      },
+      {
+        "time": 1793321703389,
+        "role": "coordinator",
+        "phase": "queued",
+        "detail": "Continuing remaining milestones. Verified work will not be repeated."
+      },
+      {
+        "time": 1793321703394,
+        "role": "executor",
+        "phase": "executing",
+        "detail": "Inspect accepted document version 2, propose the exact requested personal-note paragraph 2 edit and await explicit approval before saving version 3.",
+        "taskId": "native-brief-edit"
+      },
+      {
+        "time": 1793321704371,
+        "role": "coordinator",
+        "phase": "needs_input",
+        "detail": "Error: The preserved edit proposal failed its host check: The proposal only copies, changes punctuation/case or deletes words from the selected paragraph. A substantive clearer rewrite has not been demonstrated; the native response is preserved. Create a new intent; retry never silently replaces the decision."
+      }
+    ],
+    "planningOffset": 32,
+    "planningDone": true,
+    "planningCalls": 0,
+    "coverageOffset": 0,
+    "coverageDone": false,
+    "notes": [],
+    "parentGoalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+    "documentEdit": {
+      "parentGoalId": "df0fdfbd-1bc8-43fd-bad9-92723e6ce775",
+      "requestKey": "0b254f0c-3666-4458-85c9-c636e768230b",
+      "intent": "Make this clearer for a newcomer",
+      "target": {
+        "section": "notes",
+        "paragraph": 1,
+        "paragraphSha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501",
+        "format": "clearer-plain-paragraph"
+      },
+      "documentId": "fd69d9b5-decb-422d-bbec-e44b724872e0",
+      "baseRevision": 2,
+      "basePdfSha256": "d6daef60110ef632b193ad5c24f1a19533d20a6ab9e22556eb0350cb5eb473d9",
+      "originalBriefGoalId": "a09643e1-9a33-4d6d-b6d5-dc5e87d516bd",
+      "baseOperationId": "705dfa96-c28b-43a1-8857-f5e45b58ccff",
+      "baseHtmlSha256": "7e1674f81e45891be1b53195705dedee11b6c7e33a07c555292c085e96f83aac",
+      "baseProvenanceSha256": "77ffc321cf5a6112fac68a5bfed6e2c1ba574ae0d7366a6ed9b7ff2f57af26d4",
+      "inferenceProfile": {
+        "id": "qwen3-document-rewrite-v1",
+        "parameters": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0,
+          "seed": 42,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        }
+      }
+    },
+    "briefEditEligibility": {
+      "canEdit": false,
+      "reason": "Finish and accept this document version before proposing another summary edit."
+    },
+    "documentEditState": {
+      "operationId": "182e21a3-958c-41c2-80ad-759a531333da",
+      "goalId": "2474c855-f7c3-470d-a1e0-62c9fdc0af17",
+      "inputSha256": "800a071db5e342b50459f15da1c9afdfe1ac5ba2aac4d2321bd410de57ee23f2",
+      "created": 1793321635210,
+      "phase": "rejected",
+      "writingMode": "note-paragraph-rewrite-v5",
+      "notesEdit": {
+        "before": "Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details and private URLs from anything I share.",
+        "start": 161,
+        "end": 401,
+        "notesSha256": "b8dd822801a9e4207e43de73b89a80a4a0f1153de69ec5020c49350d58be60ba",
+        "paragraphSha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501",
+        "proposal": "Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details, and private URLs from anything I share.",
+        "proposedNotes": "Personal handoff for my next Fetch test contribution. These are my own proposed actions and working notes, not instructions or verified claims from the source.\n\nBefore changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details, and private URLs from anything I share.\n\n1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with the current README. If the evidence changed, ask a new focused question instead of editing the accepted copy.\n2. Open the browser-results location from the brief. Write down the engine and platform I inspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test passes.\n3. Search the cited test directory for a related case before proposing another test. Keep the candidate filename, my reason for choosing it and any unresolved question in my own draft.\n4. Separate reproduction from implementation. First describe a small public fixture and expected behavior; then explain the proposed test and the observation it should distinguish.\n5. Read the project's current contribution and review instructions before submitting anything. I have not checked those instructions yet, and this brief does not establish them.\n6. Keep a handoff log of what I tried, which evidence I saved and what remains uncertain. After interruption, inspect saved work and continue deliberately rather than repeating accepted research.\n7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for missing guidance instead of guessing. My personal checklist is not a source-backed conclusion.",
+        "proposedNotesSha256": "de2295d5ea6eaeab939ea73f50b6cd993189e10f9e3d883393d0b1bf9863a424"
+      },
+      "before": {
+        "paragraphs": [
+          {
+            "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+            "citations": [
+              1,
+              2
+            ]
+          }
+        ]
+      },
+      "preserved": {
+        "title": "Fetch test contributor brief",
+        "notes": "Personal handoff for my next Fetch test contribution. These are my own proposed actions and working notes, not instructions or verified claims from the source.\n\nBefore changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details and private URLs from anything I share.\n\n1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with the current README. If the evidence changed, ask a new focused question instead of editing the accepted copy.\n2. Open the browser-results location from the brief. Write down the engine and platform I inspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test passes.\n3. Search the cited test directory for a related case before proposing another test. Keep the candidate filename, my reason for choosing it and any unresolved question in my own draft.\n4. Separate reproduction from implementation. First describe a small public fixture and expected behavior; then explain the proposed test and the observation it should distinguish.\n5. Read the project's current contribution and review instructions before submitting anything. I have not checked those instructions yet, and this brief does not establish them.\n6. Keep a handoff log of what I tried, which evidence I saved and what remains uncertain. After interruption, inspect saved work and continue deliberately rather than repeating accepted research.\n7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for missing guidance instead of guessing. My personal checklist is not a source-backed conclusion.",
+        "citations": [
+          {
+            "number": 1,
+            "quote": "Tests for the Fetch Standard can be found in the `fetch/` directory of [`web-platform-tests/wpt`](https://github.com/web-platform-tests/wpt).",
+            "label": "source-1",
+            "sourceId": "52d48f68-3ab1-467d-bbd4-f5467e4b41ef",
+            "offset": 1914,
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+          },
+          {
+            "number": 2,
+            "quote": "A dashboard showing the tests running against browser engines can be seen at [wpt.fyi/results/fetch](https://wpt.fyi/results/fetch).",
+            "label": "source-1",
+            "sourceId": "52d48f68-3ab1-467d-bbd4-f5467e4b41ef",
+            "offset": 2057,
+            "textSha256": "d484144421db3f758ef98fe5bf13c3dbe1e07a357033af5288298ea0f4f2ceaa"
+          }
+        ]
+      },
+      "inspectBase": {
+        "pages": [
+          {
+            "page": 1,
+            "width": 595,
+            "height": 842,
+            "rotation": 0,
+            "text": "Fetch test contributor brief\nBrief: Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/\nwpt, and results are available at wpt.fyi/results/fetch. [1] [2]\nSource question: Where are the Fetch Standard’s tests kept, and where can I see them\nrunning against browser engines? Cite the README statements supporting both.\nYour notes — personal, not source claims: Personal handoﬀ for my next Fetch test\ncontribution. These are my own proposed actions and working notes, not instructions or\nveriﬁed claims from the source.\nBefore changing anything, I will record the browser and version, a minimal public example,\nthe outcome I expected and what I actually saw. I will remove cookies, authorization\nheaders, account details and private URLs from anything I share.\n1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with\nthe current README. If the evidence changed, ask a new focused question instead of\nediting the accepted copy.\n2. Open the browser-results location from the brief. Write down the engine and platform I\ninspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test\npasses.\n3. Search the cited test directory for a related case before proposing another test. Keep the\ncandidate ﬁlename, my reason for choosing it and any unresolved question in my own draft.\n4. Separate reproduction from implementation. First describe a small public ﬁxture and\nexpected behavior; then explain the proposed test and the observation it should distinguish.\n5. Read the project's current contribution and review instructions before submitting anything.\nI have not checked those instructions yet, and this brief does not establish them.\n6. Keep a handoﬀ log of what I tried, which evidence I saved and what remains uncertain.\nAfter interruption, inspect saved work and continue deliberately rather than repeating\naccepted research.\n7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for\nmissing guidance instead of guessing. My personal checklist is not a source-backed\nconclusion.\nReference [1]: Tests for the Fetch Standard can be found in the fetch/ directory of web-\nplatform-tests/wpt.\nReference [2]: A dashboard showing the tests running against browser engines can be\nseen at wpt.fyi/results/fetch.\nSource: README.md\nRetrieved: 2026-10-29T22:06:27.711Z\nAbout this document: Local-model wording, not independently fact-checked. Full source\nand editing provenance is available in the work window.\n",
+            "spans": [
+              {
+                "text": "Fetch test contributor brief",
+                "rect": [
+                  72,
+                  75.5,
+                  391.4750061035156,
+                  109.92500305175781
+                ],
+                "size": 25,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": "Brief:",
+                "rect": [
+                  72,
+                  127.00498962402344,
+                  100.72100067138672,
+                  142.15199279785156
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/",
+                "rect": [
+                  100.72100067138672,
+                  126.94999694824219,
+                  514.6290893554688,
+                  142.06399536132812
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "wpt, and results are available at wpt.fyi/results/fetch. [1] [2]",
+                "rect": [
+                  72,
+                  142.89999389648438,
+                  356.9110412597656,
+                  158.0139923095703
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Source question:",
+                "rect": [
+                  72,
+                  165.9049835205078,
+                  161.8479766845703,
+                  181.05198669433594
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Where are the Fetch Standard’s tests kept, and where can I see them",
+                "rect": [
+                  161.84799194335938,
+                  165.84999084472656,
+                  503.6291198730469,
+                  180.9639892578125
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "running against browser engines? Cite the README statements supporting both.",
+                "rect": [
+                  72,
+                  181.79998779296875,
+                  466.9551086425781,
+                  196.9139862060547
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Your notes — personal, not source claims:",
+                "rect": [
+                  72,
+                  204.8049774169922,
+                  295.72900390625,
+                  219.9519805908203
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Personal handoﬀ for my next Fetch test",
+                "rect": [
+                  295.72900390625,
+                  204.74998474121094,
+                  490.7701110839844,
+                  219.86398315429688
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "contribution. These are my own proposed actions and working notes, not instructions or",
+                "rect": [
+                  72,
+                  220.69998168945312,
+                  497.5240173339844,
+                  235.81398010253906
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "veriﬁed claims from the source.",
+                "rect": [
+                  72,
+                  236.6499786376953,
+                  224.20697021484375,
+                  251.76397705078125
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Before changing anything, I will record the browser and version, a minimal public example,",
+                "rect": [
+                  72,
+                  268.5499572753906,
+                  511.5600891113281,
+                  283.6639709472656
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "the outcome I expected and what I actually saw. I will remove cookies, authorization",
+                "rect": [
+                  72,
+                  284.4999694824219,
+                  479.7920837402344,
+                  299.6139831542969
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "headers, account details and private URLs from anything I share.",
+                "rect": [
+                  72,
+                  300.4499816894531,
+                  388.70111083984375,
+                  315.5639953613281
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "1. Reopen this brief and follow its original-source link. Compare the saved retrieval time with",
+                "rect": [
+                  72,
+                  332.3500061035156,
+                  519.4910888671875,
+                  347.4640197753906
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "the current README. If the evidence changed, ask a new focused question instead of",
+                "rect": [
+                  72,
+                  348.3000183105469,
+                  490.2200927734375,
+                  363.4140319824219
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "editing the accepted copy.",
+                "rect": [
+                  72,
+                  364.2500305175781,
+                  199.79798889160156,
+                  379.3640441894531
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "2. Open the browser-results location from the brief. Write down the engine and platform I",
+                "rect": [
+                  72,
+                  380.2000427246094,
+                  502.40814208984375,
+                  395.3140563964844
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "inspected. A saved answer is a pointer to evidence, not proof that a bug exists or a test",
+                "rect": [
+                  72,
+                  396.1500549316406,
+                  495.1151428222656,
+                  411.2640686035156
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "passes.",
+                "rect": [
+                  72,
+                  412.1000671386719,
+                  109.90599060058594,
+                  427.2140808105469
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "3. Search the cited test directory for a related case before proposing another test. Keep the",
+                "rect": [
+                  72,
+                  428.0500793457031,
+                  514.68408203125,
+                  443.1640930175781
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "candidate ﬁlename, my reason for choosing it and any unresolved question in my own draft.",
+                "rect": [
+                  72,
+                  444.0000915527344,
+                  517.7091064453125,
+                  459.1141052246094
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "4. Separate reproduction from implementation. First describe a small public ﬁxture and",
+                "rect": [
+                  72,
+                  459.9501037597656,
+                  491.9910888671875,
+                  475.0641174316406
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "expected behavior; then explain the proposed test and the observation it should distinguish.",
+                "rect": [
+                  72,
+                  475.9001159667969,
+                  517.1370239257812,
+                  491.0141296386719
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "5. Read the project's current contribution and review instructions before submitting anything.",
+                "rect": [
+                  72,
+                  491.8501281738281,
+                  519.7990112304688,
+                  506.9641418457031
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "I have not checked those instructions yet, and this brief does not establish them.",
+                "rect": [
+                  72,
+                  507.8001708984375,
+                  462.0931091308594,
+                  522.9141845703125
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "6. Keep a handoﬀ log of what I tried, which evidence I saved and what remains uncertain.",
+                "rect": [
+                  72,
+                  523.7501831054688,
+                  506.7310485839844,
+                  538.8641967773438
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "After interruption, inspect saved work and continue deliberately rather than repeating",
+                "rect": [
+                  72,
+                  539.7001953125,
+                  483.47705078125,
+                  554.814208984375
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "accepted research.",
+                "rect": [
+                  72,
+                  555.6502075195312,
+                  165.5439910888672,
+                  570.7642211914062
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "7. Preserve the PDF and HTML with their recorded hashes and original citations. Ask for",
+                "rect": [
+                  72,
+                  571.6002197265625,
+                  501.7810974121094,
+                  586.7142333984375
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "missing guidance instead of guessing. My personal checklist is not a source-backed",
+                "rect": [
+                  72,
+                  587.5502319335938,
+                  479.78106689453125,
+                  602.6642456054688
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "conclusion.",
+                "rect": [
+                  72,
+                  603.500244140625,
+                  127.02198791503906,
+                  618.6142578125
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Reference [1]:",
+                "rect": [
+                  72,
+                  626.5052490234375,
+                  145.3479766845703,
+                  641.6522827148438
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Tests for the Fetch Standard can be found in the ",
+                "rect": [
+                  145.34799194335938,
+                  626.4502563476562,
+                  387.4910888671875,
+                  641.5642700195312
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "fetch/",
+                "rect": [
+                  387.4910888671875,
+                  628.6383666992188,
+                  424.71514892578125,
+                  641.5530395507812
+                ],
+                "size": 10.34,
+                "font": "NimbusMonoPS-Regular"
+              },
+              {
+                "text": " directory of ",
+                "rect": [
+                  424.715087890625,
+                  626.4502563476562,
+                  485.2371520996094,
+                  641.5642700195312
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "web-",
+                "rect": [
+                  485.2371520996094,
+                  626.4502563476562,
+                  509.0741271972656,
+                  641.5642700195312
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "platform-tests/wpt",
+                "rect": [
+                  72,
+                  642.4002685546875,
+                  158.80099487304688,
+                  657.5142822265625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": ".",
+                "rect": [
+                  158.80099487304688,
+                  642.4002685546875,
+                  161.85899353027344,
+                  657.5142822265625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Reference [2]:",
+                "rect": [
+                  72,
+                  665.4052734375,
+                  145.3479766845703,
+                  680.5523071289062
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " A dashboard showing the tests running against browser engines can be",
+                "rect": [
+                  145.34799194335938,
+                  665.3502807617188,
+                  496.9190979003906,
+                  680.4642944335938
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "seen at ",
+                "rect": [
+                  72,
+                  681.30029296875,
+                  111.13800048828125,
+                  696.414306640625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "wpt.fyi/results/fetch",
+                "rect": [
+                  111.13800048828125,
+                  681.30029296875,
+                  204.6709747314453,
+                  696.414306640625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": ".",
+                "rect": [
+                  204.67098999023438,
+                  681.30029296875,
+                  207.72898864746094,
+                  696.414306640625
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Source:",
+                "rect": [
+                  72,
+                  704.3052978515625,
+                  112.95299530029297,
+                  719.4523315429688
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " ",
+                "rect": [
+                  112.9530029296875,
+                  704.2503051757812,
+                  116.01100158691406,
+                  719.3643188476562
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "README.md",
+                "rect": [
+                  116.01100158691406,
+                  704.2503051757812,
+                  181.406005859375,
+                  719.3643188476562
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "Retrieved: 2026-10-29T22:06:27.711Z",
+                "rect": [
+                  72,
+                  720.2003173828125,
+                  259.09893798828125,
+                  735.3143310546875
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "About this document:",
+                "rect": [
+                  72,
+                  743.205322265625,
+                  185.6629638671875,
+                  758.3523559570312
+                ],
+                "size": 11,
+                "font": "NimbusSans-Bold"
+              },
+              {
+                "text": " Local-model wording, not independently fact-checked. Full source",
+                "rect": [
+                  185.66299438476562,
+                  743.1503295898438,
+                  508.46905517578125,
+                  758.2643432617188
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              },
+              {
+                "text": "and editing provenance is available in the work window.",
+                "rect": [
+                  72,
+                  759.100341796875,
+                  342.8420104980469,
+                  774.21435546875
+                ],
+                "size": 11,
+                "font": "NimbusSans-Regular"
+              }
+            ],
+            "forms": []
+          }
+        ],
+        "sha256": "7ed793db6a8cf379bec1d5e045541095b05a776dd069950e3269867e7a5ebae2"
+      },
+      "writingAttempt": {
+        "raw": {
+          "text": "Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details, and private URLs from anything I share."
+        },
+        "sha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+        "format": "native-note-paragraph-v1"
+      },
+      "proposal": {
+        "paragraphs": [
+          {
+            "text": "Tests for the Fetch Standard are located in the fetch/ directory of web-platform-tests/wpt, and results are available at wpt.fyi/results/fetch.",
+            "citations": [
+              1,
+              2
+            ]
+          }
+        ]
+      },
+      "proposalSha256": "49b17e3a97b424422ec6d29b1537c6525ba2ca3b6df382d0ddc3397439594c01",
+      "draftCheck": {
+        "accepted": false,
+        "reason": "The proposal only copies, changes punctuation/case or deletes words from the selected paragraph. A substantive clearer rewrite has not been demonstrated; the native response is preserved."
+      }
+    }
+  },
+  "acceptedDocumentFilesAndParentApiUnchanged": true,
+  "uiRecoveryChecksPassed": true,
+  "originalFixtureUnchanged": true,
+  "finishedAt": "2026-10-30T00:55:06.093Z"
+}

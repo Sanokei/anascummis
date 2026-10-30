@@ -1,0 +1,10 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-edit.test.ts:
+(pass) paragraph ranges distinguish repeated Unicode text and retain original CRLF/blank-line separators [1.03ms]
+
+ 1 pass
+ 9 filtered out
+ 0 fail
+ 11 expect() calls
+Ran 1 test across 1 file. [33.00ms]

@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-30T00:54:13.188535+00:00",
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "model": {
+    "name": "Qwen3-0.6B",
+    "format": "GGUF",
+    "quantization": "Q4_0",
+    "filename": "Qwen3-0.6B-Q4_0.gguf",
+    "bytes": 428970080,
+    "sha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+    "officialRepository": "ggml-org/Qwen3-0.6B-GGUF",
+    "revision": "13ac06624948e4d8589cb4b6f90100837342fcb8",
+    "originUrl": "https://huggingface.co/ggml-org/Qwen3-0.6B-GGUF/resolve/13ac06624948e4d8589cb4b6f90100837342fcb8/Qwen3-0.6B-Q4_0.gguf",
+    "metadataUrl": "https://huggingface.co/api/models/ggml-org/Qwen3-0.6B-GGUF/revision/13ac06624948e4d8589cb4b6f90100837342fcb8?blobs=true",
+    "metadataBlobId": "a93a9195fadfc2f6e53cc051c106638477abc45b",
+    "officialLfsSha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+    "officialLfsBytes": 428970080,
+    "officialHashAndSizeMatch": true,
+    "installedPath": "/workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf",
+    "storageKind": "Direct application .runtime file, not an HF SDK cache snapshot",
+    "regularFile": true,
+    "symlink": false,
+    "inode": 786626,
+    "liveProcessMapsSameFile": true,
+    "freshActualSha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+    "freshActualBytes": 428970080
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "version": "0.8.0-dev",
+    "build": "b11960",
+    "commit": "8642541b2",
+    "platform": "Linux x86_64",
+    "executable": "/workspace/.cloud-tools/llama/llama-b11960/llama-server",
+    "executableSha256": "005c789a278eff50500a864ee4736e7f4a7edf657acfba13e7a5cf19992927fa",
+    "originUrl": "https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz",
+    "cachedArchive": "/workspace/.cloud-tools/downloads/llama-b11960-bin-ubuntu-x64.tar.gz",
+    "cachedArchiveSha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a",
+    "installerExpectedArchiveSha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a",
+    "cpuThreads": 4,
+    "contextTokens": 2048,
+    "parallelSlots": 1,
+    "gpuLayers": 0,
+    "reasoning": "off",
+    "freshExecutableSha256": "005c789a278eff50500a864ee4736e7f4a7edf657acfba13e7a5cf19992927fa",
+    "freshCachedArchiveSha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a",
+    "runningExecutablePathMatches": true
+  },
+  "modelProcess": {
+    "pid": 18848,
+    "startTicks": "845300",
+    "cwd": "/workspace/anascummis/apps/studio/.runtime",
+    "command": "/workspace/.cloud-tools/llama/llama-b11960/llama-server -m /workspace/anascummis/apps/studio/.runtime/Qwen3-0.6B-Q4_0.gguf --host 127.0.0.1 --port 8081 -ngl 0 -c 2048 -t 4 --parallel 1 --jinja --reasoning off --cors-origins localhost"
+  },
+  "health": {
+    "status": "ok"
+  },
+  "freshWeightHashSizeRegularFileMatch": true,
+  "actualApplicationWriterProfile": {
+    "id": "qwen3-document-rewrite-v1",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "seed": 42,
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  "experimentalControls": "Seed0/plain-protocol/thinking-mode controls were separate diagnostics; no production transport/profile/default change.",
+  "originMetadataReusedFrom": "review-artifacts/2026-10-29-second-edit/readiness/local-model-identity.json",
+  "originMetadataNetworkRefetched": false,
+  "limits": [
+    "Exact resident file/process/health identity only; real goal quality is separately required and not inferred from readiness.",
+    "No model/runtime download, service restart, new provider or remote endpoint."
+  ]
+}

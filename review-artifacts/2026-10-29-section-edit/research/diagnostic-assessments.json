@@ -1,0 +1,394 @@
+{
+  "checkedAt": "2026-10-30T00:59:04.013624+00:00",
+  "scope": "Source-audit author manual/mechanical critique of four separately authorized prompt diagnostics; no UI/version/native-goal acceptance.",
+  "diagnostics": [
+    {
+      "report": "diagnostics/note-rewrite-report-1.json",
+      "reportSha256": "3f567f05be9ac9c7a490fad297b3b31f195e29c559029db94dd06ee02be70209",
+      "rawSha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+      "goalAchieved": false,
+      "newLexicalTokens": [],
+      "removedLexicalTokens": [],
+      "sameLexicalSequence": true,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Only one Oxford comma added. All plans survive, but no meaningful clearer wording; punctuation-sensitive newWording is not a goal pass."
+    },
+    {
+      "report": "diagnostics/note-rewrite-report-2.json",
+      "reportSha256": "8a1807a2643531d9bdc97ac9c4c1095c4e078e843d44bb569636eb48ca215724",
+      "rawSha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+      "goalAchieved": false,
+      "newLexicalTokens": [],
+      "removedLexicalTokens": [],
+      "sameLexicalSequence": true,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Exact same output as diagnostic1 despite stronger simpler-wording role; still only one added comma."
+    },
+    {
+      "report": "diagnostics/note-span-edits-report-3.json",
+      "reportSha256": "7f8c5b934205905e80decdb2d90468916105eade19e5b4cc29e9b1d5f7891647",
+      "rawSha256": "aa2e7d8257181d6f730178110bf4030ea1c5f121af3b8c66ee577fd4604687d9",
+      "goalAchieved": false,
+      "newLexicalTokens": [],
+      "removedLexicalTokens": [
+        "before",
+        "changing"
+      ],
+      "sameLexicalSequence": false,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Native span replacement only deletes Before changing anything. This loses the ordering condition that recording happens before changes; no substantive rephrasing."
+    },
+    {
+      "report": "diagnostics/note-planning-rewrite-report-4.json",
+      "reportSha256": "eb251fcc8740e9016238b8e155468cb3021d16b858ad17afc9e0d10540be43a9",
+      "rawSha256": "3d6a0518568a554971fc535695e3be796ffdcfaff65ac92a9b86297a8b7ad76f",
+      "goalAchieved": false,
+      "newLexicalTokens": [],
+      "removedLexicalTokens": [
+        "actually",
+        "expected",
+        "outcome",
+        "saw",
+        "what"
+      ],
+      "sameLexicalSequence": false,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Planning and final text omit recording the expected outcome and actual observation. beforeChanges planning field hits140 chars and ends in any\u79c1. A structured plan is not evidence that every plan was retained."
+    },
+    {
+      "report": "diagnostics/note-first-sentence-rewrite-report-5.json",
+      "reportSha256": "c11e32990aa781404bab0f77132226620a6d37847cbcd9245addbc17e67103a1",
+      "rawSha256": "f6176aacf6282526ff42db095b1400d2fd259554d3edb47504308f6369b47151",
+      "goalAchieved": false,
+      "newLexicalTokens": [
+        "observe"
+      ],
+      "removedLexicalTokens": [],
+      "sameLexicalSequence": false,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Native first-span output is one longer sentence rather than two shorter sentences, and changes recording the expected/actual outcome into a future observe action. All key nouns appear, but their action relationship changed. Privacy tail is exact original bytes; host did not repair the failed native span.",
+      "budget": {
+        "inputTokens": 272,
+        "maxTokens": 384,
+        "safetyMargin": 128,
+        "total": 784,
+        "contextLimit": 2048,
+        "withinBudget": true,
+        "scope": "Application concatenate/tokenize gate, not exact provider chat-template count; tokenization only, no extra generation."
+      }
+    },
+    {
+      "report": "diagnostics/note-privacy-sentence-rewrite-report-6.json",
+      "reportSha256": "88d78451cf4b7cec461b201b972a2a77a3ba964efa05365c8ed93f1fd638c27b",
+      "rawSha256": "eaed19179e8b4d323d57e17073a90b1a431a09cab1b94fcfcc53a7d662f16857",
+      "goalAchieved": false,
+      "newLexicalTokens": [],
+      "removedLexicalTokens": [],
+      "sameLexicalSequence": true,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Native privacy sentence only adds an Oxford comma and ignores sharing-condition-first request. All meaning and recording prefix remain intact, but there is no substantive rephrasing or clarity improvement.",
+      "budget": {
+        "inputTokens": 253,
+        "maxTokens": 384,
+        "safetyMargin": 128,
+        "total": 765,
+        "contextLimit": 2048,
+        "withinBudget": true,
+        "scope": "Application concatenate/tokenize gate, not exact provider chat-template count; tokenization only, no extra generation."
+      }
+    },
+    {
+      "report": "diagnostics/note-seed-control-report-7.json",
+      "reportSha256": "221156d3145ac42acdf3a9f3cfbab67a2b5c98ab52dd69a15cc38ab55f03df38",
+      "rawSha256": "dd81d9a3839ad419abf9e64a29c22a7ac8da9e603d437be5578b4f77520f5201",
+      "goalAchieved": false,
+      "newLexicalTokens": [],
+      "removedLexicalTokens": [
+        "before",
+        "changing"
+      ],
+      "sameLexicalSequence": false,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Only controlled request change is seed42 to0 for exact diagnostic2 system/user/schema/outputbudget. Output drops Before changing anything; remaining text mostly copies with extra conjunction/comma. All recording/privacy nouns and future tense survive, but ordering condition is lost and clarity goal is unmet.",
+      "budget": {
+        "inputTokens": 227,
+        "maxTokens": 384,
+        "safetyMargin": 128,
+        "total": 739,
+        "contextLimit": 2048,
+        "withinBudget": true
+      },
+      "controlledDifference": "Predetermined seed42\u21920 only; no many-seed search, app/default/model/service change."
+    },
+    {
+      "report": "diagnostics/note-recency-control-report-8.json",
+      "reportSha256": "7f8dc78929303622dc07a4833d588054d1453ceb9207b673e65f064e5e386d9d",
+      "rawSha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+      "goalAchieved": false,
+      "newLexicalTokens": [],
+      "removedLexicalTokens": [],
+      "sameLexicalSequence": true,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Recency control appends the exact original-request/action instruction after the same source text. System/schema/profile(seed42)/outputbudget unchanged and actual request captured. Native output again only adds Oxford comma; no substantive wording or clarity improvement. All original actions/conditions/tense survive, so this fails meaningful rewrite rather than preservation.",
+      "budget": {
+        "inputTokens": 288,
+        "maxTokens": 384,
+        "safetyMargin": 128,
+        "total": 800,
+        "contextLimit": 2048,
+        "withinBudget": true,
+        "scope": "Application concatenate/tokenize gate, not exact provider chat-template count; tokenization only, no extra generation."
+      },
+      "controlledDifference": {
+        "onlyChange": "Append original-request/action instruction after exact selected-source paragraph. System/schema/profile(seed42)/original data/output budget remain unchanged.",
+        "appendedInstruction": "Now carry out the original request: Make this clearer for a newcomer. Write the plan in your own words as one plain paragraph. Keep the BEFORE-changing timing, every recording/removal detail and first-person future intent. Do not copy the paragraph or only change punctuation. Return the rewritten text, not commentary.",
+        "userPrefixByteIdentical": true
+      }
+    },
+    {
+      "report": "diagnostics/note-plain-protocol-control-report-9.json",
+      "reportSha256": "983fa5f50ea45d1796908928467fd84d90fb683aa628333b655e302976101caa",
+      "plainContentSha256": "32b7676b6769f199b30f0c045655a3c9c4752be7934254e26e7f2e77bc834556",
+      "outputProtocol": "Exact plain provider content; no JSON parsing, host prose composition or repair",
+      "goalAchieved": false,
+      "newLexicalTokens": [
+        "by",
+        "carry",
+        "change",
+        "clear",
+        "clearer",
+        "copy",
+        "detail",
+        "don",
+        "ensuring",
+        "every",
+        "expressing",
+        "first",
+        "for",
+        "future",
+        "in",
+        "intention",
+        "keeping",
+        "make",
+        "my",
+        "newcomer",
+        "now",
+        "of",
+        "one",
+        "only",
+        "or",
+        "original",
+        "out",
+        "paragraph",
+        "plan",
+        "punctuation",
+        "recording",
+        "removal",
+        "request",
+        "step",
+        "t",
+        "this",
+        "timing",
+        "while"
+      ],
+      "removedLexicalTokens": [
+        "actually",
+        "expected",
+        "outcome",
+        "saw",
+        "what"
+      ],
+      "sameLexicalSequence": false,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Schema-free native plain prose omits recording the expected outcome and actual observation. It then restates rewrite instructions as new first-person plan prose. This is not retained intended meaning or a useful clearer paragraph, despite one-paragraph/future/lexical checks. Removing grammar changed output but did not solve the user goal.",
+      "budget": {
+        "inputTokens": 292,
+        "maxTokens": 384,
+        "safetyMargin": 128,
+        "total": 804,
+        "contextLimit": 2048,
+        "withinBudget": true
+      },
+      "controlledDifference": {
+        "removedResponseFormat": {
+          "type": "json_schema",
+          "json_schema": {
+            "name": "action",
+            "strict": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 600
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "replacedMainJsonInstruction": {
+          "before": "Return text JSON containing one plain paragraph.",
+          "after": "Return ONLY the rewritten plain paragraph, no quotes, code fence or commentary."
+        },
+        "removedAutomaticJsonOnlySentence": "Return JSON only.",
+        "allOtherRequestFieldsUnchanged": true,
+        "userMessageUnchanged": true
+      }
+    },
+    {
+      "report": "diagnostics/note-thinking-control-report-10.json",
+      "reportSha256": "fe8be27e127ac6b904d0a894ae84cb0fd43b97d91ff5c9a194471c5027ac93ac",
+      "rawSha256": "3a8dba66a8eba923771402027f64b833370fe7c61d9b1422b53192896d9b8034",
+      "goalAchieved": false,
+      "newLexicalTokens": [],
+      "removedLexicalTokens": [],
+      "sameLexicalSequence": false,
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Provider reasoning_content is actually nonempty1291chars, establishing requested thinking mode was exercised despite unchanged process --reasoning off. Final prose only merges two originals into one long sentence, removing repeated I will and adding a conjunction/comma. No simpler wording is demonstrated; readability worsens and before-changing condition now ambiguously scopes privacy removal. Meaningful newcomer-clarity goal remains unmet.",
+      "budget": {
+        "inputTokens": 224,
+        "maxTokens": 1024,
+        "safetyMargin": 128,
+        "total": 1376,
+        "contextLimit": 2048,
+        "withinBudget": true
+      },
+      "reasoningEvidence": {
+        "requested": true,
+        "format": "deepseek",
+        "messageKeys": [
+          "role",
+          "content",
+          "reasoning_content"
+        ],
+        "reasoningFieldPresent": true,
+        "nonemptyReasoningFieldCharacters": 1291,
+        "completeInlineThinkBlocks": 0,
+        "nonemptyInlineReasoningCharacters": 0,
+        "actuallyObserved": true
+      },
+      "controlledStrategy": "Official Qwen thinking-profile T0.6/P0.95/K20/minP0, clientenable_thinkingtrue/reasoning_formatdeepseek, seed42, output1024, no /no_think and appended /think. Same resident model/context/service; no app/default change."
+    },
+    {
+      "report": "diagnostics/note-unrelated-style-example-report-11.json",
+      "reportSha256": "feba712a3898a891e96e371095ca75833e96709eb553ba5f09db1d0bd415db21",
+      "rawSha256": "29f78c3b184266faa7db532202fb577d4e0e587d12e4a6223f1eca0e5acb33dc",
+      "goalAchieved": false,
+      "newLexicalTokens": [
+        "doing"
+      ],
+      "removedLexicalTokens": [
+        "changing"
+      ],
+      "sameLexicalSequence": false,
+      "sameWordCount": true,
+      "exactLexicalDifferences": [
+        {
+          "index": 1,
+          "before": "changing",
+          "after": "doing"
+        }
+      ],
+      "originalRequest": "Make this clearer for a newcomer",
+      "selection": {
+        "section": "personal-notes",
+        "paragraphIndex": 1,
+        "start": 161,
+        "end": 401,
+        "sha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501"
+      },
+      "critique": "Only one word changes: changing\u2192doing in the initial timing phrase, plus an Oxford comma. Remaining words/order and named plans are copied. This is not a substantive clearer-paragraph rewrite and the timing condition becomes less specific. No distinctive unrelated example nouns appear. Host example is guidance input, never native factual output.",
+      "budget": {
+        "inputTokens": 397,
+        "maxTokens": 384,
+        "safetyMargin": 128,
+        "total": 909,
+        "contextLimit": 2048,
+        "withinBudget": true
+      },
+      "exampleOrigin": "host-authored-unrelated-style-guidance",
+      "noExampleFactContaminationObserved": true,
+      "hostAuthoredTargetAnswerSupplied": false
+    }
+  ],
+  "model": "Same resident Qwen0.6B/runtime and context. Calls1\u20136,8,9,11 use existing document sampling profile/seed42. Call7 is one predetermined seed0 control. Call10 is the separately authorized documented-thinking-mode request. Call11 supplies one explicitly labelled unrelated host style example, not target wording. No application/default/download/model/service changes.",
+  "independentFirstTwoCritique": "note-output-independent-critique.json",
+  "agentFollowupLimitation": "Attempt to trigger independent child follow-up for span3 returned collab tool failed: agent thread limit reached; manual critique reported to root instead.",
+  "allRecordedGoalsUnachieved": true,
+  "authorizedGenerationCalls": 11
+}

@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const folder='/workspace/.cloud-env/anascummis/section-edit',path='/workspace/anascummis/apps/studio/scripts/e2e/research-document-note-edit.mjs';
+const source=await readFile(path,'utf8'),body=source.slice(source.indexOf('function checkNoteRewrite('),source.indexOf('function findSampling('));
+const check=Function('assert',body+'\nreturn checkNoteRewrite;')(assert),reportPath=folder+'/diagnostics/note-first-sentence-rewrite-report-5.json',bytes=await readFile(reportPath),diagnostic=JSON.parse(bytes),before=diagnostic.before;
+const result={scope:'Pure driver-quality regression only. Reads saved genuine failed diagnostic5 plus explicitly synthetic valid wording; no inference, browser, service or database calls.',driverSha256:createHash('sha256').update(source).digest('hex'),diagnostic:{path:reportPath,sha256:createHash('sha256').update(bytes).digest('hex'),candidateKind:'Preserved failed native first-span output with its recorded exact-original privacy-tail projection, not a whole-paragraph native success.'},tests:[]};
+let rejected;try{check({text:diagnostic.projection.text},before);}catch(error){rejected=error.message;}assert(rejected&&/new future observe action/u.test(rejected));result.tests.push({name:'Actual diagnostic5 retains keywords but replaces recording details with I will observe; rejected.',passed:true,reason:rejected});
+const synthetic=[
+ "Before making any changes, I'll note the browser and version, a small public example, the expected outcome and the actual result. Before sharing anything, I'll remove cookies, authorization headers, account details and private URLs.",
+ 'Before changing anything, I will note the browser and version and a small public example. I plan to record what I expected and what I actually observed. I intend to remove cookies, authorization headers, account details and private URLs from anything I share.',
+ "Before any changes, I am going to write down the browser and version and a minimal public example. I'll also record the expected outcome and what was observed. I'll remove cookies, authorization headers, account details and private URLs before sharing."
+];
+for(const [index,text] of synthetic.entries()){const checked=check({text},before);assert(Object.values(checked.recordingActionCheck.recordedItems).every(Boolean));result.tests.push({name:'Synthetic valid planned recording wording '+(index+1),passed:true,text,recordingActionCheck:checked.recordingActionCheck,kind:'Synthetic check fixture, not native generation or a completed user goal.'});}
+const copied=JSON.parse(await readFile(folder+'/diagnostics/note-rewrite-report-1.json','utf8'));let copiedReason;try{check(copied.raw,before);}catch(error){copiedReason=error.message;}assert(copiedReason&&/Punctuation\/case/u.test(copiedReason));result.tests.push({name:'Earlier genuine comma-only response remains rejected.',passed:true,reason:copiedReason});
+result.passed=true;await writeFile(folder+'/note-action-regression-check.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({passed:true,tests:result.tests.length,driverSha256:result.driverSha256,diagnostic5Rejected:rejected}));

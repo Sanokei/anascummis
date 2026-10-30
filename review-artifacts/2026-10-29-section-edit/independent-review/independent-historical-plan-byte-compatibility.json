@@ -1,0 +1,22 @@
+{
+  "base": "dc1885c9e36738a4a4061f7d916ca074b7e2144a",
+  "scope": "Read-only invocation of current plan over actual historical accepted-v1/v2 input/state; no database, service, model call, constructor or historical file write.",
+  "results": [
+    {
+      "case": "accepted-v1",
+      "operationId": "ba06c920-805b-415c-b946-27defc3c82d1",
+      "htmlEqual": true,
+      "provenanceJsonEqual": true,
+      "htmlSha256": "bcf1f06703120d07a3b8021e0173a2a59d88fd6d51432a2318ea06e370ba2f33",
+      "provenanceSha256": "0554523b297517675d6507715a83dbbdf72845bc858e7173e6228a5ec3a2fb27"
+    },
+    {
+      "case": "accepted-v2",
+      "operationId": "705dfa96-c28b-43a1-8857-f5e45b58ccff",
+      "htmlEqual": true,
+      "provenanceJsonEqual": true,
+      "htmlSha256": "7e1674f81e45891be1b53195705dedee11b6c7e33a07c555292c085e96f83aac",
+      "provenanceSha256": "77ffc321cf5a6112fac68a5bfed6e2c1ba574ae0d7366a6ed9b7ff2f57af26d4"
+    }
+  ]
+}

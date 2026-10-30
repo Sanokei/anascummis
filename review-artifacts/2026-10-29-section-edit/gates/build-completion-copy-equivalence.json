@@ -1,0 +1,12 @@
+{
+  "buildSource": "5c51874f8d153142463ce30d890e5664d9f302e8",
+  "testedSource": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "changedPaths": [
+    "apps/studio/core/goal-orchestrator.ts"
+  ],
+  "onlyChange": "Conditional goal completion copy identifies selected personal-note revisions; existing summary wording and all lifecycle logic unchanged.",
+  "sameUiAndBuildInputs": true,
+  "coreTypeScriptExitCode": 0,
+  "sourceKitRegenerated": true,
+  "diff": "diff --git a/apps/studio/core/goal-orchestrator.ts b/apps/studio/core/goal-orchestrator.ts\nindex ae7d8d8..4386182 100644\n--- a/apps/studio/core/goal-orchestrator.ts\n+++ b/apps/studio/core/goal-orchestrator.ts\n@@ -524,7 +524,7 @@ export class GoalOrchestrator {\n       if(!task?.execution?.documentEditArtifact||!task.review?.accepted||!this.options.reviewDocumentEdit||!goal.tasks.every(task=>task.status==='verified'))throw new Error('The document edit has no accepted explicitly approved revision.');\n       const review=await this.options.reviewDocumentEdit(structuredClone(task),structuredClone(goal),task.execution,signal);signal.throwIfAborted();if(!review.accepted)throw new Error('The document edit needs attention: '+review.reason);\n       goal.coverageOffset=goal.request.length;goal.coverageDone=true;goal.status='completed';\n-      this.event(goal,'coordinator','completed','The explicitly approved native summary edit is saved as one verified document revision. Original files, full personal notes and citation evidence remain inspectable. Native support review is not an independent factual accuracy guarantee.');return;\n+      this.event(goal,'coordinator','completed',goal.documentEdit.target?.section==='notes'?'The explicitly approved native personal-note paragraph edit is saved as one verified revision. Summary, all other note paragraphs, source/citation evidence and earlier versions remain preserved and inspectable. Native meaning/tense/clarity review is not independent semantic verification.':'The explicitly approved native summary edit is saved as one verified document revision. Original files, full personal notes and citation evidence remain inspectable. Native support review is not an independent factual accuracy guarantee.');return;\n     }\n     if (goal.brief) {\n       const task = goal.tasks.find(task => task.sourceBrief);\n"
+}

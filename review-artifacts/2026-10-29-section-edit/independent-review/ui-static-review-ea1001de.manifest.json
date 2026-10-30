@@ -1,0 +1,61 @@
+{
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "reviewer": "section_edit_ui",
+  "reviewedAt": "2026-10-30T00:57:44.750218+00:00",
+  "scope": "Direct static inspection of six original screenshots. Supporting owner receipts are separately identified. No new execution, model request, capture or PDF review.",
+  "nativeGoalAccepted": false,
+  "files": [
+    {
+      "path": "native-desktop-ea1001de/research-document-note-edit-desktop/02-unmet-note-goal-retained-state-1440.png",
+      "bytes": 378710,
+      "sha256": "bc70fd7634fece39d1ec1a35388cde76a9c70c0cbb06272b4fdf913bd7fa591e",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-desktop-ea1001de/research-document-note-edit-desktop/03-unmet-note-kept-request-and-selection-1440.png",
+      "bytes": 377188,
+      "sha256": "258104ac8904c67962fa664dcbeaf0e1fe75b8ddf28c935122b49725236782db",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "native-desktop-ea1001de/research-document-note-edit-desktop/04-unmet-note-original-native-response-1440.png",
+      "bytes": 372235,
+      "sha256": "283394b2237ba62208acc4dbcc849f6ed211ad95a5b3b63735d4c4af27a3b86f",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "retained-failure-phone-ea1001de/01-kept-ambiguous-request-needs-choices-360x420.png",
+      "bytes": 39340,
+      "sha256": "82e4cfe9450b05e9319ac78c1e09ac1c5b6a17342d683a4456a1a32c96c57ffb",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "retained-failure-phone-ea1001de/02-same-unmet-note-job-retained-state-360x420.png",
+      "bytes": 42213,
+      "sha256": "ccf106519b0cabffc28565ceba594c4766dcdd46fe721b87ee841a1d871d020c",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "retained-failure-phone-ea1001de/03-rejected-note-raw-no-apply-360x420.png",
+      "bytes": 43581,
+      "sha256": "0c6f4844fc637c839616c9209ed1652fb40962a991f035418f231f95f6da60a9",
+      "width": 360,
+      "height": 420
+    },
+    {
+      "path": "native-desktop-ea1001de/research-document-note-edit-desktop/result.json",
+      "bytes": 488469,
+      "sha256": "0b3654f734a185d99b0acfe3b60744fccb8e54a2f6ea3d64f10c4083877d36b0"
+    },
+    {
+      "path": "retained-failure-phone-ea1001de/receipt.json",
+      "bytes": 71519,
+      "sha256": "1c6f80fdabff2d14b0bb8cb3b07ecab537ee9fb7061f5afc02005ba2ce01178a"
+    }
+  ]
+}

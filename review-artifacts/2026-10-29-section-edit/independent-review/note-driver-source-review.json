@@ -1,0 +1,104 @@
+{
+  "at": "2026-10-30T00:35:17.832767+00:00",
+  "reviewer": "independent nested child; read-only source review",
+  "base": "dc1885c9e36738a4a4061f7d916ca074b7e2144a",
+  "status": "no_blocking_driver_source_findings_after_known_action_object_regression_review_pending_frozen_native_run",
+  "sourceState": "Working tree section-edit implementation; no final pin or runtime pass inferred.",
+  "files": [
+    {
+      "path": "apps/studio/scripts/e2e/research-document-note-edit.mjs",
+      "bytes": 61213,
+      "sha256": "b7db3fd811fd093da45b7779c306b3ec94737af89a3571216cf24619f0a9b70e"
+    },
+    {
+      "path": "apps/studio/components/ResearchBriefEdit.tsx",
+      "bytes": 54672,
+      "sha256": "2f5d8c227f52a2c23cbc8d396c385b35c57b5ac7440145170b5adb730e5a0a05"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-types.ts",
+      "bytes": 3313,
+      "sha256": "c302743cafb926820f082c4d65e731ed1f75a49583c3f281e7ad741c7494ec67"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit.ts",
+      "bytes": 70211,
+      "sha256": "da1a0e3d931d5af1946c43820b17b6e0f4a008fd49b17b278a1bd3b767bdab82"
+    }
+  ],
+  "checks": [
+    "All until() negations of asynchronous visibility are awaited; no prior Promise-negation wait remains.",
+    "UI section/paragraph/format names and values match current component; ambiguity uses actual status and focus and zero submission.",
+    "Exact240-character selected paragraph identity and base2 request/hash are saved and checked before native handling.",
+    "Saved raw note/selected slice and composite proposal approval retain identity across recorded owned-host cuts; phone avoids comparing a legitimately progressing background goal during post-Inspect modal close.",
+    "Historical0/1/2 exports, accepted document operation files and persisted ancestor JSON are compared; only derived current-edit affordances are excluded from API equality.",
+    "Clone/output freshness and symlink guards, owned-process stop/cleanup and private trace handling preserve normal fixture/model boundaries.",
+    "Actual PDF/HTML/provenance checks use bytes/MIME/signature/openability, exact new note splice, unchanged summary/citations/sources and complete notes once.",
+    "Competing desktop proposal remains an explicit negative API case, separate from achieved native user goals.",
+    "Final driver now requires complete desktop before/proposed panel containment inside the middle viewport as well as readable widths and visible Apply.",
+    "Final known-failure regression and unmet-native-evidence capture source were reviewed without runtime calls; no material issue found in these additions."
+  ],
+  "nonBlockingCoverageNote": {
+    "path": "apps/studio/scripts/e2e/research-document-note-edit.mjs",
+    "description": "Desktop layout checks column positions/widths and visible Apply but not full before/proposed card containment inside the middle scroll viewport. Restore prior driver containment assertions if the captured desktop state is intended to prove full comparison visibility. Owner still directly inspects actual originals.",
+    "status": "implemented_and_read_only_verified",
+    "resolution": "Both before/proposed panel tops and bottoms must lie within the desktop middle viewport before the original screenshot; prior coverage suggestion is closed."
+  },
+  "limits": [
+    "No journey, test, model call, service or database operation was run by this audit.",
+    "Lexical/tense regexes and native review flags are not independent semantic equivalence proof; actual planned-action wording requires owner critique.",
+    "Runtime code is still being finalized by siblings; source fingerprints document this read moment only."
+  ],
+  "updatedAt": "2026-10-30T00:51:27.227481+00:00",
+  "strengthenedNoteChecksReview": {
+    "endingPunctuation": "Requires complete ending punctuation without imposing a sentence count or shorter text; consistent with this plain-paragraph target.",
+    "addedConcepts": [
+      "before-change condition",
+      "record action",
+      "minimal/public/example",
+      "removal action",
+      "sharing context"
+    ],
+    "findings": [
+      {
+        "severity": "medium verification false-negative risk",
+        "check": "minimalPublicExample",
+        "reason": "Directional adjective\u2192public\u2192example regex rejects semantically valid reordering such as an example that is small and public.",
+        "suggestion": "Use an order-agnostic heuristic or independent presence checks while retaining native/manual meaning review; this does not waive minimal/public/example preservation.",
+        "status": "implemented_and_read_only_verified",
+        "resolution": "Minimal qualifier/public/example now have independent presence checks; sharing accepts shared/shares/sharing and related disclosure verbs. Native/manual meaning and future/completion checks remain separately qualified."
+      },
+      {
+        "severity": "medium verification false-negative risk",
+        "check": "sharingContext",
+        "reason": "shar(?:e|ing) excludes shared in valid planned scope such as material to be shared.",
+        "suggestion": "Include the shared inflection without changing planned-action/completion guards.",
+        "status": "implemented_and_read_only_verified",
+        "resolution": "Minimal qualifier/public/example now have independent presence checks; sharing accepts shared/shares/sharing and related disclosure verbs. Native/manual meaning and future/completion checks remain separately qualified."
+      }
+    ],
+    "scope": "Static source reasoning only; no regex tests, runtime/model calls or source changes performed by this reviewer.",
+    "finalRead": "Complete punctuation and additional action/timing concepts retain the one-plain-paragraph target, with no shorter-text or single-sentence requirement. Broader inflections avoid the two reported ordering/tense false negatives; they remain heuristics rather than independent semantic proof."
+  },
+  "knownNativeFailureRegression": {
+    "driverSha256": "b7db3fd811fd093da45b7779c306b3ec94737af89a3571216cf24619f0a9b70e",
+    "receipt": "/workspace/.cloud-env/anascummis/section-edit/note-action-regression-check.json",
+    "receiptSha256": "75fabdd1646a908f9fb0460d4fdee1a691007f30dceef79e25b6105005549b16",
+    "reviewScope": "Read saved JSON/source only; reviewer did not rerun those fixtures or request inference.",
+    "findings": [
+      "A first-person future action splitter collects all recognized recording/note/write-down clauses before checking required expected/actual/browser/version/example objects, rather than accepting global nouns alone.",
+      "The preserved diagnostic5 I-will-observe substitution is explicitly rejected; the genuine punctuation-only diagnostic remains rejected.",
+      "Three valid wording checks are explicitly synthetic, not native generation or achieved user goals.",
+      "Future action/object checks remain bounded and do not claim independent semantic equivalence; actual native wording critique and support review remain required."
+    ]
+  },
+  "unmetEditEvidenceHelper": {
+    "scope": "Source-only review of preserveUnmetEdit().",
+    "findings": [
+      "Only GET/polling, existing window inspection/details and original screenshots are used; no Apply, replacement inference or mutation is submitted by the helper.",
+      "Original error/status remain failed or blocked. Helper errors are separately recorded and cannot turn failure into a passed goal.",
+      "Evidence retains actual saved intent/target/raw/review, actual history, actual no-Apply-attempt/no-new-version booleans and visible control counts; it does not fabricate needs-input or hide an incorrectly available Apply.",
+      "The helper returns for already-approved operations, allowing the general failure snapshot to preserve such failures without inventing unapproved-state evidence."
+    ]
+  }
+}

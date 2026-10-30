@@ -1,0 +1,21 @@
+tests/research-brief-section-edit.test.ts(202,105): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(expected: BriefDraft): void', gave the following error.
+    Argument of type 'BriefDraft | undefined' is not assignable to parameter of type 'BriefDraft'.
+      Type 'undefined' is not assignable to type 'BriefDraft'.
+  Overload 2 of 2, '(expected: NoInfer<BriefDraft>): void', gave the following error.
+    Argument of type 'BriefDraft | undefined' is not assignable to parameter of type 'BriefDraft'.
+      Type 'undefined' is not assignable to type 'BriefDraft'.
+tests/research-brief-section-edit.test.ts(203,34): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(expected: BriefDraft): void', gave the following error.
+    Argument of type 'BriefDraft | undefined' is not assignable to parameter of type 'BriefDraft'.
+      Type 'undefined' is not assignable to type 'BriefDraft'.
+  Overload 2 of 2, '(expected: NoInfer<BriefDraft>): void', gave the following error.
+    Argument of type 'BriefDraft | undefined' is not assignable to parameter of type 'BriefDraft'.
+      Type 'undefined' is not assignable to type 'BriefDraft'.
+tests/research-brief-section-edit.test.ts(338,125): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(expected: BriefDraft): void', gave the following error.
+    Argument of type 'BriefDraft | undefined' is not assignable to parameter of type 'BriefDraft'.
+      Type 'undefined' is not assignable to type 'BriefDraft'.
+  Overload 2 of 2, '(expected: NoInfer<BriefDraft>): void', gave the following error.
+    Argument of type 'BriefDraft | undefined' is not assignable to parameter of type 'BriefDraft'.
+      Type 'undefined' is not assignable to type 'BriefDraft'.

@@ -1,0 +1,129 @@
+{
+  "checkedAt": "2026-10-30T00:48:24.003880+00:00",
+  "reviewer": "Independent read-only UI/draft source child of section_contract_audit",
+  "base": "dc1885c9e36738a4a4061f7d916ca074b7e2144a",
+  "sourceScope": "Frozen current working-tree section implementation, fingerprinted below; not a committed-source/runtime/native-quality acceptance claim.",
+  "status": "source_review_pass_with_explicit_limits",
+  "noBlockingFinding": true,
+  "sourceFingerprints": [
+    {
+      "path": "apps/studio/components/ResearchBriefEdit.tsx",
+      "bytes": 54672,
+      "sha256": "2f5d8c227f52a2c23cbc8d396c385b35c57b5ac7440145170b5adb730e5a0a05"
+    },
+    {
+      "path": "apps/studio/components/GoalPanel.tsx",
+      "bytes": 24203,
+      "sha256": "ae7655a15514ec418aff6df39c696b8eca1d8188f47aab35daed8e511d096eae"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-draft.ts",
+      "bytes": 8453,
+      "sha256": "84aca150f7b0eb45bde5bd4660489bb4013b0ced0505f1ed4ad89e3d8d76e404"
+    },
+    {
+      "path": "apps/studio/core/research-brief-target.ts",
+      "bytes": 4779,
+      "sha256": "0ca93c5ee6ab524a32e067c4d61ae9786ea31fc25ce7dc6964a408d3c7f8790c"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-types.ts",
+      "bytes": 3313,
+      "sha256": "c302743cafb926820f082c4d65e731ed1f75a49583c3f281e7ad741c7494ec67"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit.ts",
+      "bytes": 69726,
+      "sha256": "e784eb40c0cc34e5b28b2b0493314117d2870138742d3efb5c19ed8aa79bb3fb"
+    },
+    {
+      "path": "apps/studio/core/server.ts",
+      "bytes": 36122,
+      "sha256": "ef0bfd6ce30880c76386f000e09161d68fa60f369f1f6aeb8f44a8589e284a65"
+    },
+    {
+      "path": "apps/studio/core/goal-orchestrator.ts",
+      "bytes": 52851,
+      "sha256": "7be19b32e444b7b2f13f3a3d20fdd5ba320b8f631af41175c2cf9a3c7bfd937a"
+    },
+    {
+      "path": "apps/studio/app/style.css",
+      "bytes": 42668,
+      "sha256": "f2b26ac7d1b10fc0b7c962ddcfa59c93b4bd111c936d1a630a26d73d4a02e30a"
+    }
+  ],
+  "checks": [
+    {
+      "area": "Exact original request and clarification",
+      "evidence": [
+        "ResearchBriefEdit.tsx:344\u2013372 targetFrom/choose/askClarification",
+        "ResearchBriefEdit.tsx:382\u2013400 submit",
+        "ResearchBriefEdit.tsx:427\u2013446 controlled intent/section/paragraph/format fields"
+      ],
+      "finding": "intent remains verbatim. Target/targetDraft is separate. New current edits start with blank section/format; notes require a displayed exact paragraph and matching hash/base revision. Selection onChange writes only browser state; no API/auto-start. The exact ambiguous Make this clearer for a newcomer phrase takes clarification path before child creation/inference."
+    },
+    {
+      "area": "Stale choices and draft persistence",
+      "evidence": [
+        "ResearchBriefEdit.tsx:298\u2013319 storage restore/save",
+        "ResearchBriefEdit.tsx:344\u2013350 base/hash target validation",
+        "ResearchBriefEdit.tsx:440\u2013441 stale selection preview/detail"
+      ],
+      "finding": "Unknown/stale paragraph identities stay in targetDraft and visible detail; no automatic retarget. Unavailable current-base eligibility disables Save/retry without deleting the draft. Original input/partial choices survive local storage and close/reopen; unreadable raw drafts are preserved and require explicit backup before replacement."
+    },
+    {
+      "area": "Uncertain submission versus newer unsent choices",
+      "evidence": [
+        "research-brief-edit-draft.ts:readBriefEditDraft/sameBriefEditSubmission/beginBriefEditSubmission/settleBriefEditSubmission",
+        "ResearchBriefEdit.tsx:374\u2013417 confirmed/submit/inspect",
+        "goal-orchestrator.ts:282\u2013288 existingDocumentEdit",
+        "server.ts:document-edit POST validation"
+      ],
+      "finding": "The submitted snapshot includes intent, target section, paragraph index/hash, format and request key. Newer partial/current choices are compared before clearing and retained under a new unsent key. GET inspection only reconciles a child matching saved parent/request identity; same key with a different target or format rejects server-side. Retry uses the original submitted snapshot deliberately, not newer form choices."
+    },
+    {
+      "area": "No notes substitution when summary selected",
+      "evidence": [
+        "ResearchBriefEdit.tsx:155\u2013175 distinct changed-section labels/branch",
+        "research-brief-edit.ts:project/stateFrom/plan",
+        "research-brief-target.ts:documentEditTargetMismatch"
+      ],
+      "finding": "UI uses notesEdit only for explicit notes target and renders factual summary otherwise; no paragraph selector silently changes target. Backend notes projection keeps summary exact, and summary state rejects unexpected notesEdit/review metadata. Explicit original-intent preservation/opposite-section literal conflicts trigger clarification. Target summary format is a user choice; original request is retained separately."
+    },
+    {
+      "area": "Rendered and raw rejected proposal inspection",
+      "evidence": [
+        "ResearchBriefEdit.tsx:39\u201349 NoteParagraph/RawNoteComparison",
+        "ResearchBriefEdit.tsx:188\u2013241 comparison/modal",
+        "ResearchBriefEdit.tsx:242,262\u2013282 rejected/raw/native review inspection"
+      ],
+      "finding": "Note text is React-escaped plain text. Before/proposed rendering and exact selected-range removed/added JSON are inspectable; no host rewritten prose or model markup execution. Raw writer/reviewer errors remain available even when the proposal is rejected or malformed. Source and unchanged-summary evidence are explicit rather than substituted for the selected note."
+    },
+    {
+      "area": "Approval and literal guard precedence",
+      "evidence": [
+        "ResearchBriefEdit.tsx:109\u2013160 approval identity and meaning flags",
+        "research-brief-edit.ts:proposalHash/stateFrom/approve/execute"
+      ],
+      "finding": "UI Apply binds operationId plus proposalSha256, requires accepted awaiting-approval phase, needs_input, no conflict and every note-meaning/planned/clarity flag. StateFrom requires accepted host and support checks for awaiting/approved/rendered/saved; approve and execute recheck current literal guards. A reviewer flag cannot waive failed host guards. Server hash includes selected target, unchanged summary and proposed full notes."
+    },
+    {
+      "area": "Review dialog/Cancel/focus/source-preserving navigation",
+      "evidence": [
+        "ResearchBriefEdit.tsx:95\u2013108 open/close/focus",
+        "ResearchBriefEdit.tsx:204\u2013240 native dialog and fixed actions",
+        "style.css:144\u2013161 viewport/dialog/middle scroll",
+        "GoalPanel.tsx:parent/followup/Stop/Continue controls"
+      ],
+      "finding": "Native modal open is explicit; initial heading focus and close trigger focus are requested. Escape/Cancel only closes review; it submits neither Apply nor Stop. Fixed opaque footer and bounded middle scroller remain the existing layout; narrow CSS stacks comparison. Parent links name personal-note target and base version; Continue explicitly does not approve/reapply. Actual keyboard/touch/layout behavior is pending owner browser evidence."
+    }
+  ],
+  "limitations": [
+    "Static source inspection only: no tests, browser calls, model calls, service changes, source edits or data writes were performed by this review.",
+    "All ten isolated native diagnostics remain failed; these source guards/UI controls do not establish successful native note rewriting, semantic preservation or useful exported output.",
+    "documentEditTargetMismatch and legacy intent detection are declared narrow literal heuristics, not general intent/negation classifiers. Unrecognized wording cannot be advertised as a complete mismatch detector.",
+    "Original-v0 legacy summary/explicit-label requests remain a compatibility path; new current-version edits and the exact ambiguous phrase use explicit section/format clarification. This is not evidence every legacy free-text format is newly clarified.",
+    "Raw JSON comparison is an exact replacement/range diff, not an independent semantic explanation. Native meaning-review flags remain fallible.",
+    "Server-side approval/state guards were read to validate UI assumptions; full backend recovery/history audit belongs to the parent reviewer."
+  ]
+}

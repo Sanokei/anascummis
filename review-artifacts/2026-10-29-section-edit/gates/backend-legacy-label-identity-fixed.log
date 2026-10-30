@@ -1,0 +1,10 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-edit.test.ts:
+(pass) sentence labels are explicit, bounded and part of the exact submission identity [25.05ms]
+
+ 1 pass
+ 25 filtered out
+ 0 fail
+ 13 expect() calls
+Ran 1 test across 1 file. [59.00ms]

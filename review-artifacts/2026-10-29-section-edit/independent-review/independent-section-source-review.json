@@ -1,0 +1,136 @@
+{
+  "reviewedAt": "2026-10-30T00:51:03.378777+00:00",
+  "reviewer": "Independent section-contract audit agent plus read-only UI/draft child",
+  "sourceUnderReview": "Frozen working tree on codex/section-aware-edit-20261029, based on dc1885c9e36738a4a4061f7d916ca074b7e2144a; exact file fingerprints below",
+  "status": "source_contract_pass_after_literal_alias_fix_pending_actual_native_ui",
+  "sourceFingerprints": [
+    {
+      "path": "apps/studio/core/research-brief-edit.ts",
+      "bytes": 70211,
+      "sha256": "da1a0e3d931d5af1946c43820b17b6e0f4a008fd49b17b278a1bd3b767bdab82"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-types.ts",
+      "bytes": 3313,
+      "sha256": "c302743cafb926820f082c4d65e731ed1f75a49583c3f281e7ad741c7494ec67"
+    },
+    {
+      "path": "apps/studio/core/research-brief-target.ts",
+      "bytes": 4861,
+      "sha256": "9378b6c4fe66ac3db85175dbe36c29d5d5f35e06d43d05e7478b89a9a99063eb"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-draft.ts",
+      "bytes": 8453,
+      "sha256": "84aca150f7b0eb45bde5bd4660489bb4013b0ced0505f1ed4ad89e3d8d76e404"
+    },
+    {
+      "path": "apps/studio/core/server.ts",
+      "bytes": 36122,
+      "sha256": "ef0bfd6ce30880c76386f000e09161d68fa60f369f1f6aeb8f44a8589e284a65"
+    },
+    {
+      "path": "apps/studio/core/goal-orchestrator.ts",
+      "bytes": 52851,
+      "sha256": "7be19b32e444b7b2f13f3a3d20fdd5ba320b8f631af41175c2cf9a3c7bfd937a"
+    },
+    {
+      "path": "apps/studio/components/ResearchBriefEdit.tsx",
+      "bytes": 54672,
+      "sha256": "2f5d8c227f52a2c23cbc8d396c385b35c57b5ac7440145170b5adb730e5a0a05"
+    },
+    {
+      "path": "apps/studio/components/GoalPanel.tsx",
+      "bytes": 24203,
+      "sha256": "ae7655a15514ec418aff6df39c696b8eca1d8188f47aab35daed8e511d096eae"
+    },
+    {
+      "path": "apps/studio/app/style.css",
+      "bytes": 42668,
+      "sha256": "f2b26ac7d1b10fc0b7c962ddcfa59c93b4bd111c936d1a630a26d73d4a02e30a"
+    },
+    {
+      "path": "apps/studio/core/model.ts",
+      "bytes": 7323,
+      "sha256": "3742e2294c92728bb2c3e53267f60e22b87cc3889b8f5c0ee83e239d8e13b30a"
+    },
+    {
+      "path": "apps/studio/core/research-brief-presentation.ts",
+      "bytes": 9745,
+      "sha256": "dd9035a9a1d919eeaa16166f937dfe723a9d69131052c7e53e0c9fdfee90bdb5"
+    }
+  ],
+  "materialFindings": [
+    {
+      "id": "literal-revise-and-factual-paragraph-mismatch",
+      "before": "Known summary aliases were accepted as legacy summary intent but Revise the summary / Revise the factual paragraph with Notes selected, and Revise my notes with Summary selected, did not trigger clarification.",
+      "resolution": "Owner added revise and factual paragraph aliases to existing narrow action/preservation checks. Re-read current helper and pure invocation now rejects all four explicit opposite-section cases.",
+      "status": "fixed_source_verified",
+      "beforeReceipt": "independent-mismatch-gap.json",
+      "afterReceipt": "independent-mismatch-fixed.json",
+      "ownerFocusedGate": {
+        "path": "section-intent-mismatch-alias-tests.log",
+        "passed": 1,
+        "assertions": 85
+      },
+      "scope": "Known literal vocabulary only; no complete natural-language/negation classifier claim."
+    }
+  ],
+  "checks": [
+    {
+      "area": "Original request and explicit target/format",
+      "finding": "Intent remains verbatim goal.request/request.intent; explicit target is separate validated union. Notes target binds paragraph index/hash and server derives current offset/range. Request identity reconciliation compares target and clarified format as well as intent/labels. No client-selected file/version paths."
+    },
+    {
+      "area": "v0/current ambiguity and mismatch",
+      "finding": "Original-v0 ambiguous unlabelled/unselected request fails hasLegacySummaryIntent before child creation; current-version missing target requires explicit old summary contract or new target. Valid explicit summary clarification synthesizes its format requirements separately without replacing original intent. UI onChange only saves draft; explicit Save starts work. Named contradictory section/preservation clauses now reject in prepare and orchestrator."
+    },
+    {
+      "area": "Exact note splice and approval identity",
+      "finding": "noteSnapshot derives exact current paragraph and whole-notes hash; noteProposal splices exact native text into unchanged prefix/suffix, no host prose repair. proposalHash for notes binds target, unchanged summary and complete proposedNotes. stateFrom reconstructs raw->noteProposal and rejects changed target, replacement or other-note bytes. Summary targets reject any notesEdit/notesReview metadata."
+    },
+    {
+      "area": "Current notes versus original provenance and future edits",
+      "finding": "currentNotes uses input.base.notes or immutable original input. acceptedNotes uses accepted note output or preserved effective notes. New child checkpoints pin effective notes when parent/ancestry contains a notes edit; verifyBase compares them recursively. Original brief/source snapshot remains separately immutable. Future summary edits inherit accepted note changes instead of restoring original notes."
+    },
+    {
+      "area": "Literal guards versus optimistic native review",
+      "finding": "Execute recomputes current check before accepting native support; Apply recomputes it before approval regardless of previous positive draft/review flags. Punctuation/case or deletion-only changes are rejected; literal before/future/completed-claim/new-URL guards remain bounded. All supported/meaning/planned/no-completion/clarity flags must be true. These guards and same-model review do not prove semantic accuracy."
+    },
+    {
+      "area": "Raw/rejected/review inspection and no regeneration",
+      "finding": "Raw writer saved before projection/checks; invalid shape/error retains original raw and failure reason. Raw note review is separately saved/hashed before validating it; invalid/rejected review remains inspectable. Rejected proposals retain exact before/proposed/range/native JSON and Continue reuses existing raw rather than regenerating accepted/saved decisions."
+    },
+    {
+      "area": "Abort, stale base, locks and conditional publication",
+      "finding": "Create and Apply share document lock; execution waits abortably on same lock to avoid synchronous-kick reentry failure. Stop stays immediate; approval re-reads goal after async verification. Execute checks abort after prepublication verify and PDF read, before global target copy/SQL. Version publication is conditional on base revision/owned operation and unknown paths are not overwritten. Stale conflicts preserve raw/selection/proposal and do not silently rebase."
+    },
+    {
+      "area": "Historical byte compatibility",
+      "finding": "Read-only invocation of real current plan() over actual accepted v1/v2 inputs/states reproduces HTML and full provenance byte-for-byte. No store constructor/database/service/model used. Renderer and default model transport files remain exact dc1885c bytes.",
+      "receipt": "independent-historical-plan-byte-compatibility.json",
+      "receiptSha256": "6cbb75d9a1331744506a1383cbc3a392af8d3b34e1f1876a7557378be2cfdc98"
+    },
+    {
+      "area": "UI/draft/GoalPanel source",
+      "finding": "Child source audit found no blocker in explicit blank choices, stale hash preservation, unsent/submitted distinction, rendered note comparison/raw diff, rejected/raw/review inspection or modal/Cancel/focus assumptions. Actual browser focus/touch/layout remains owner evidence.",
+      "receipt": "independent-ui-source-review.json",
+      "receiptSha256": "7144145660f1dc9206e7a8320bcfe7ef71c5d4a19fae32e3ab7fa77770e82e7c"
+    }
+  ],
+  "unchangedModelAndRenderer": {
+    "apps/studio/core/model.ts": true,
+    "apps/studio/core/research-brief-presentation.ts": true
+  },
+  "ownerGateEvidence": {
+    "affectedLog": "final-affected-tests.log",
+    "affectedTests": 68,
+    "affectedAssertions": 1565,
+    "scope": "Root-reported substantive gate before bounded literal alias fix; alias focused gate separate. Not run by this reviewer."
+  },
+  "limitations": [
+    "Static source/readonly pure-function and historical-plan evaluation only; no repository edits, test suite/browser/native generation/service/DB mutations performed during this source-review phase. Earlier10 authorized prompt diagnostics are separately recorded failures.",
+    "Actual current NOTE role and normal-server desktop/short-phone selection->clarification->review->Apply->export user goal have not been accepted by this review. Driver must honestly decide achieved/blocked/failed; native quality cannot be inferred from guards or fixture tests.",
+    "Literal mismatch/meaning checks are deliberately narrow and native meaning review is fallible. No arbitrary PDF/general semantic accuracy/voice/physical handset claim."
+  ]
+}

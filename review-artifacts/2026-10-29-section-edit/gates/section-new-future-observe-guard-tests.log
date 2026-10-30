@@ -1,0 +1,10 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-edit.test.ts:
+(pass) word-identical punctuation copying and lost planned meaning cannot become approved completed-work claims [239.13ms]
+
+ 1 pass
+ 10 filtered out
+ 0 fail
+ 71 expect() calls
+Ran 1 test across 1 file. [279.00ms]

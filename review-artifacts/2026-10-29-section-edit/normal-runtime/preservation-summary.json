@@ -1,0 +1,15 @@
+{
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "checkedAt": "2026-10-30T01:03:50.689260+00:00",
+  "normalServerPid": 104504,
+  "modelPid": 18848,
+  "sameModelProcess": true,
+  "initialBaselineAt": "2026-10-30T00:30:11.517679+00:00",
+  "all24ExistingTableRowDigestsAndApiDataUnchanged": true,
+  "acceptedFrozenFilesCompared": 18,
+  "allAcceptedFrozenBytesUnchanged": true,
+  "noTestFixtureImported": true,
+  "privateBackupShared": false,
+  "normalNonDatabaseFilesUnchanged": true,
+  "originMain": "df70f5ccdb9c3474f04d3f83ad7f60a8f7ecf917"
+}

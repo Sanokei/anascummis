@@ -1,0 +1,113 @@
+{
+  "checkedAt": "2026-10-30T00:56:31.699733+00:00",
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "overallNativeGoalAchieved": false,
+  "nativeUserJourney": {
+    "status": "failed",
+    "exitCode": 1,
+    "summary": {
+      "passed": 0,
+      "blocked": 0,
+      "failed": 1
+    },
+    "preNativePathAssertions": 3,
+    "originalIntent": "Make this clearer for a newcomer",
+    "savedTarget": {
+      "section": "notes",
+      "paragraph": 1,
+      "paragraphSha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501",
+      "format": "clearer-plain-paragraph"
+    },
+    "goalId": "2474c855-f7c3-470d-a1e0-62c9fdc0af17",
+    "operationId": "182e21a3-958c-41c2-80ad-759a531333da",
+    "hostGoalStatus": "needs_input",
+    "hostEditPhase": "rejected",
+    "reason": "Actual native paragraph changes only one Oxford comma; it does not demonstrate clearer wording. Both application and E2E reject it.",
+    "beforeCharacters": 240,
+    "rawCharacters": 241,
+    "rawSha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+    "noApplyAttempted": true,
+    "noNewVersionPublished": true,
+    "applyControlsPresent": 0,
+    "sourceAndServedFingerprintsFixed": true,
+    "sourceDirty": false,
+    "originalFixtureUnchanged": true,
+    "report": "/workspace/.cloud-env/anascummis/section-edit/native-desktop-ea1001de/report.json",
+    "reportSha256": "bac12d96b4007029e0687fb639b2e4068fca3099d398974ff90cf09e8f4a7e0b"
+  },
+  "phoneRetainedFailure": {
+    "uiRecoveryChecksPassed": true,
+    "nativeGoalAchieved": false,
+    "checks": 5,
+    "explicitContinue": {
+      "submitted": true,
+      "writerStartsBefore": 1,
+      "writerStartsAfter": 1,
+      "unchangedRaw": true,
+      "unchangedTarget": true,
+      "unchangedOperation": true,
+      "newNativeDecisionNotStarted": true
+    },
+    "reviewStartsBefore": 0,
+    "reviewStartsAfter": 0,
+    "noNewGoalOrApplyRequests": true,
+    "acceptedDocumentFilesAndParentApiUnchanged": true,
+    "fixtureUnchanged": true,
+    "report": "/workspace/.cloud-env/anascummis/section-edit/retained-failure-phone-ea1001de/receipt.json",
+    "reportSha256": "1c6f80fdabff2d14b0bb8cb3b07ecab537ee9fb7061f5afc02005ba2ce01178a",
+    "helper": "/workspace/.cloud-env/anascummis/section-edit/check-note-failure-phone.mjs",
+    "helperSha256": "b0e62adb085cfc62b44b2222fce944b03649cd79312366ba399cbf3ed7cde2c7"
+  },
+  "notReachedByNewRealGoal": [
+    "A semantically accepted substantive note proposal",
+    "Successful new-note saved-raw SIGKILL continuation",
+    "Uncertain Apply and publication of a note version3",
+    "Competing pending-note stale Apply after a version3",
+    "Newly revised notes PDF/HTML downloads and reopening"
+  ],
+  "scope": "Prior accepted summary revision recovery and injected new-note tests are separate evidence. Five phone retention checks do not turn the failed native rewrite into a completed goal. No new notes PDF/HTML was fabricated.",
+  "originals": [
+    {
+      "case": "desktop",
+      "path": "/workspace/.cloud-env/anascummis/section-edit/native-desktop-ea1001de/research-document-note-edit-desktop/01-kept-request-needs-section-and-format-1440.png",
+      "bytes": 357812,
+      "sha256": "0f475945f576f13b9c1c9a7787ea3ffe9d6b6eed00977106a2a5ded3535a584c"
+    },
+    {
+      "case": "desktop",
+      "path": "/workspace/.cloud-env/anascummis/section-edit/native-desktop-ea1001de/research-document-note-edit-desktop/02-unmet-note-goal-retained-state-1440.png",
+      "bytes": 378710,
+      "sha256": "bc70fd7634fece39d1ec1a35388cde76a9c70c0cbb06272b4fdf913bd7fa591e"
+    },
+    {
+      "case": "desktop",
+      "path": "/workspace/.cloud-env/anascummis/section-edit/native-desktop-ea1001de/research-document-note-edit-desktop/03-unmet-note-kept-request-and-selection-1440.png",
+      "bytes": 377188,
+      "sha256": "258104ac8904c67962fa664dcbeaf0e1fe75b8ddf28c935122b49725236782db"
+    },
+    {
+      "case": "desktop",
+      "path": "/workspace/.cloud-env/anascummis/section-edit/native-desktop-ea1001de/research-document-note-edit-desktop/04-unmet-note-original-native-response-1440.png",
+      "bytes": 372235,
+      "sha256": "283394b2237ba62208acc4dbcc849f6ed211ad95a5b3b63735d4c4af27a3b86f"
+    },
+    {
+      "case": "phone",
+      "path": "/workspace/.cloud-env/anascummis/section-edit/retained-failure-phone-ea1001de/01-kept-ambiguous-request-needs-choices-360x420.png",
+      "bytes": 39340,
+      "sha256": "82e4cfe9450b05e9319ac78c1e09ac1c5b6a17342d683a4456a1a32c96c57ffb"
+    },
+    {
+      "case": "phone",
+      "path": "/workspace/.cloud-env/anascummis/section-edit/retained-failure-phone-ea1001de/02-same-unmet-note-job-retained-state-360x420.png",
+      "bytes": 42213,
+      "sha256": "ccf106519b0cabffc28565ceba594c4766dcdd46fe721b87ee841a1d871d020c"
+    },
+    {
+      "case": "phone",
+      "path": "/workspace/.cloud-env/anascummis/section-edit/retained-failure-phone-ea1001de/03-rejected-note-raw-no-apply-360x420.png",
+      "bytes": 43581,
+      "sha256": "0c6f4844fc637c839616c9209ed1652fb40962a991f035418f231f95f6da60a9"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-ui.test.ts:
+85 |     for (const control of [apply, cancel]) {await control.focus(); const layout = await control.evaluate(element => {const b = element.getBoundingClientRect(), hit = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2); return {x: b.x, y: b.y, right: b.right, bottom: b.bottom, width: b.width, height: b.height, hit: hit === element || element.contains(hit), focused: document.activeElement === element};}); expect(layout.x).toBeGreaterThanOrEqual(0); expect(layout.y).toBeGreaterThanOrEqual(0); expect(layout.right).toBeLessThanOrEqual(360); expect(layout.bottom).toBeLessThanOrEqual(420); expect(layout.height).toBeGreaterThanOrEqual(44); expect(layout.width).toBeGreaterThanOrEqual(44); expect(layout.hit).toBe(true); expect(layout.focused).toBe(true);}
+86 |     await cancel.tap(); await dialog.waitFor({state: 'hidden'}); expect(applies).toBe(0); await trigger.tap();
+87 |     await page.route('**/api/goals/*/document-edit/apply', async route => {await route.fetch(); await route.abort('failed');}, {times: 1}); await apply.tap(); const inspect = dialog.getByRole('button', {name: 'Inspect saved edit', exact: true}); await inspect.waitFor(); expect(applies).toBe(1);
+88 |     await inspect.tap(); await dialog.getByText('Your exact proposal approval is saved.', {exact: false}).waitFor(); expect(applies).toBe(1); expect(gets).toBeGreaterThan(1); expect(await dialog.getByRole('button', {name: 'Apply proposed edit', exact: true}).count()).toBe(0); await cancel.tap(); await page.reload(); expect(applies).toBe(1); expect(creates).toBe(1);
+89 |     const rejected = {...child, status: 'needs_input', documentEditState: {...child.documentEditState, phase: 'awaiting_approval', approvedProposalSha256: undefined, supportReview: {...child.documentEditState.supportReview, supported: true, noCompletedWorkInvented: false, reason: 'The candidate invents completed work.'}, notesEdit: {...child.documentEditState.notesEdit, proposal: '<script>window.noteExecuted=true</script> I already completed the investigation.'}}};
+90 |     await page.evaluate(value => (window as any).showGoal(value), rejected); await trigger.tap(); await dialog.waitFor(); await dialog.getByText('Native meaning and planned-action review', {exact: true}).click(); expect(await dialog.innerText()).toContain('The native role rejected this proposal.'); expect(await dialog.innerText()).not.toContain('The native role accepted this proposal.'); expect(await dialog.getByRole('button', {name: 'Apply proposed edit', exact: true}).count()).toBe(0); expect(await next.innerText()).toContain('<script>window.noteExecuted=true</script>'); expect(await page.evaluate(() => (window as any).noteExecuted)).toBeUndefined(); expect(applies).toBe(1);
+
+error: expect(received).toContain(expected)
+
+Expected to contain: "The native role rejected this proposal."
+Received: "Review personal-note edit\n\nVersion 2 → proposed version 3 · Changed section: Personal notes · paragraph 2\n\nFetch contributor brief. The summary, title, every other note paragraph and citation evidence stay unchanged.\nRequested change\n\nMake this clearer for a newcomer\n\nExplicit choice: paragraph 2 of Personal notes. Format: clearer plain paragraph. Keep all planned actions, their tense and meaning; do not invent completed work.\n\nBefore · version 2\n\nBefore changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details and private URLs from anything I share.\n\nProposed · version 3\n\nBefore I make changes, I will note the browser and its version, a small public example, what I expected to happen and what I actually observed. Before sharing anything, I will remove cookies, authorization headers, account details and private URLs.\n\nYour approval is saved\n\nHost checks passed. Injected exact-replacement fixture.\n\nNative meaning and planned-action review\n\nThe native role accepted this proposal. Injected review fixture only, not native quality.\n\n{\n  \"supported\": true,\n  \"meaningRetained\": true,\n  \"plannedActionsRetained\": true,\n  \"noCompletedWorkInvented\": true,\n  \"clearerForNewcomer\": true,\n  \"reason\": \"Injected review fixture only, not native quality.\"\n}\nA model review does not independently verify factual accuracy or semantic preservation.\nExact raw paragraph comparison and evidence\n\nDownload base version 2 PDF · Download base version 2 HTML\n\nApproval is saved. Close review to return to the goal.\n\nCancel review"
+
+      at <anonymous> (/workspace/anascummis/apps/studio/tests/research-brief-section-ui.test.ts:90:247)
+(fail) an ambiguous section edit preserves explicit paragraph choices, uncertain delivery and an honest native review [4333.39ms]
+
+tests/research-brief-edit-draft.test.ts:
+(pass) document edit browser drafts and uncertain approvals > reload keeps the exact submitted intent separately from newer edits [0.59ms]
+(pass) document edit browser drafts and uncertain approvals > acknowledging the submitted intent clears only that snapshot [0.22ms]
+(pass) document edit browser drafts and uncertain approvals > invalid or oversized storage cannot silently truncate a request [0.33ms]
+(pass) document edit browser drafts and uncertain approvals > an unconfirmed approval retains its exact operation and proposal hash [0.14ms]
+(pass) document edit browser drafts and uncertain approvals > optional sentence format keeps incomplete labels and an exact submitted snapshot [0.49ms]
+(pass) document edit browser drafts and uncertain approvals > unchecked unsent labels survive acknowledgement and invalid labels are not silently shortened [0.37ms]
+
+tests/research-brief-edit-ui.test.ts:
+(pass) document edit UI preserves an uncertain request and approval without replay [4086.62ms]
+
+tests/research-brief-section-draft.test.ts:
+(pass) explicit section choices and uncertain document-edit snapshots > an ambiguous exact request and each incomplete choice reload without inventing a target or format [0.37ms]
+(pass) explicit section choices and uncertain document-edit snapshots > complete selected paragraph and format are snapshotted separately from later unsent choices [0.31ms]
+(pass) explicit section choices and uncertain document-edit snapshots > a matching acknowledgement clears only the selected snapshot; changed target identity cannot confirm it [0.17ms]
+(pass) explicit section choices and uncertain document-edit snapshots > legacy acknowledgement does not erase a newer incomplete clarification choice [0.11ms]
+(pass) explicit section choices and uncertain document-edit snapshots > target identity is structural but every section, paragraph, hash and format remains significant [0.09ms]
+(pass) explicit section choices and uncertain document-edit snapshots > malformed selected or partial target data remains unreadable instead of being truncated or retargeted [0.71ms]
+(pass) explicit section choices and uncertain document-edit snapshots > conflicting submitted formats cannot become a retry while old no-target drafts and approvals remain readable [0.28ms]
+
+tests/research-brief-review-dialog.test.ts:
+(pass) expanded review escapes the small window, renders source links and keeps explicit approval safe [2350.14ms]
+
+ 15 pass
+ 1 fail
+ 377 expect() calls
+Ran 16 tests across 5 files. [11.13s]

@@ -1,0 +1,23 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-edit.test.ts:
+242 |     const before = counts();
+243 |     // The existing fixture's original is historical v0, so its store path must
+244 |     // reject a stale base independently. Check this earlier-format gate purely
+245 |     // rather than rewinding accepted document history to manufacture fresh v0.
+246 |     expect(hasLegacySummaryIntent(noteIntent)).toBe(false);
+247 |     for (const named of ['Rewrite the summary', 'Revise the factual paragraph', 'Retain both facts', 'Use two sentences']) expect(hasLegacySummaryIntent(named)).toBe(true);
+                                                                                                                                                                       ^
+error: expect(received).toBe(expected)
+
+Expected: true
+Received: false
+
+      at <anonymous> (/workspace/anascummis/apps/studio/tests/research-brief-section-edit.test.ts:247:162)
+(fail) literal section-intent conflicts ask for clarification before a child while negative preservation clauses retain the original request [103.03ms]
+
+ 0 pass
+ 10 filtered out
+ 1 fail
+ 6 expect() calls
+Ran 1 test across 1 file. [132.00ms]

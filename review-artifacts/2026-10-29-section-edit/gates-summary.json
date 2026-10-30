@@ -1,0 +1,68 @@
+{
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "productionBuildSource": "5c51874f8d153142463ce30d890e5664d9f302e8",
+  "affectedHostTests": {
+    "command": "bun test tests/research-brief-edit.test.ts tests/research-brief-second-edit.test.ts tests/research-brief-section-edit.test.ts tests/research-brief-edit-draft.test.ts tests/research-brief-section-draft.test.ts tests/research-brief-edit-ui.test.ts tests/research-brief-section-ui.test.ts tests/research-brief-review-dialog.test.ts tests/brief-review-text.test.ts tests/goal-panel-handoff.test.ts",
+    "passed": 68,
+    "failed": 0,
+    "assertions": 1565,
+    "seconds": 66.09,
+    "log": "gates/final-affected-tests.log",
+    "scope": "Injected model/host state fixtures, real browser UI fixtures and real PyMuPDF outputs; not native note-writing success."
+  },
+  "focusedFinalChanges": [
+    {
+      "name": "revise/factual paragraph target aliases",
+      "passed": 1,
+      "assertions": 85,
+      "log": "gates/section-intent-mismatch-alias-tests.log"
+    },
+    {
+      "name": "observed new-future-observe action drift",
+      "passed": 1,
+      "assertions": 71,
+      "log": "gates/section-new-future-observe-guard-tests.log"
+    }
+  ],
+  "typeScript": {
+    "bothTargetsExitCode": 0,
+    "core": "gates/final-core-types.log",
+    "app": "gates/final-app-types.log",
+    "finalGuardCore": "gates/backend-future-observe-types.log",
+    "finalCompletionCopyCore": "gates/backend-notes-completion-copy-types.log"
+  },
+  "productionBuild": {
+    "exitCode": 0,
+    "log": "gates/build-source-frozen.log",
+    "gzipEquivalence": "gates/build-asset-equivalence.json",
+    "finalBackendCompletionCopyEquivalence": "gates/build-completion-copy-equivalence.json",
+    "finalKitBuild": "gates/kit-completion-copy.log"
+  },
+  "realNativeGoal": {
+    "achieved": 0,
+    "blocked": 0,
+    "failed": 1,
+    "exitCode": 1,
+    "report": "desktop/report.json",
+    "clarificationIdentityAssertionsBeforeNativeFailure": 3,
+    "notesApplyOrExportReached": false
+  },
+  "phoneSupplement": {
+    "scopedChecksPassed": 5,
+    "nativeGoalAchieved": false,
+    "receipt": "phone/receipt.json",
+    "oneExplicitContinueMutation": true,
+    "noNewWriterOrVersion": true
+  },
+  "diagnostics": {
+    "attempts": 11,
+    "achieved": 0,
+    "assessments": "research/diagnostic-assessments.json"
+  },
+  "notes": [
+    "Focused final cases overlap the main host suite and are not added into a larger test count.",
+    "A failed native goal remains failed despite passed clarification, recovery, host fixtures and source-kit checks.",
+    "No unrelated broad regression, fresh online install, new dependency/model download or native OS/voice/physical handset acceptance in this increment.",
+    "Earlier fixture failures and all genuine unsuccessful model outputs are retained; source/current kit audit is separate from quality."
+  ]
+}

@@ -1,0 +1,45 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-ui.test.ts:
+58 |     expect(await section.evaluate(element => element === document.activeElement)).toBe(true); expect(creates).toBe(0); expect(applies).toBe(0);
+59 |     await page.reload(); expect(await change.inputValue()).toBe(intent); expect(await section.inputValue()).toBe(''); expect(await format.inputValue()).toBe(''); expect(creates).toBe(0);
+60 |     await section.selectOption('notes'); const paragraph = page.getByRole('combobox', {name: 'Personal-note paragraph', exact: true}); expect(await paragraph.inputValue()).toBe(''); expect(await format.inputValue()).toBe('');
+61 |     await save.tap(); await page.getByText('Which exact personal-note paragraph should change? Choose the paragraph and requested format. Your complete request is kept; no edit was submitted.', {exact: true}).waitFor(); expect(await paragraph.evaluate(element => element === document.activeElement)).toBe(true); expect(creates).toBe(0);
+62 |     await paragraph.selectOption('1'); expect(await page.getByRole('region', {name: 'Selected personal-note paragraph', exact: true}).innerText()).toContain(before);
+63 |     await save.tap(); await page.getByText('Which section and format should change? Choose them explicitly below. Your complete request is kept; no edit was submitted.', {exact: true}).waitFor(); expect(await format.evaluate(element => element === document.activeElement)).toBe(true); expect(creates).toBe(0);
+                                                                                                                                                                                                                                                                                      ^
+error: expect(received).toBe(expected)
+
+Expected: true
+Received: false
+
+      at <anonymous> (/workspace/anascummis/apps/studio/tests/research-brief-section-ui.test.ts:63:274)
+(fail) an ambiguous section edit preserves explicit paragraph choices, uncertain delivery and an honest native review [1155.26ms]
+
+tests/research-brief-edit-draft.test.ts:
+(pass) document edit browser drafts and uncertain approvals > reload keeps the exact submitted intent separately from newer edits [0.37ms]
+(pass) document edit browser drafts and uncertain approvals > acknowledging the submitted intent clears only that snapshot [0.19ms]
+(pass) document edit browser drafts and uncertain approvals > invalid or oversized storage cannot silently truncate a request [0.11ms]
+(pass) document edit browser drafts and uncertain approvals > an unconfirmed approval retains its exact operation and proposal hash [0.12ms]
+(pass) document edit browser drafts and uncertain approvals > optional sentence format keeps incomplete labels and an exact submitted snapshot [0.30ms]
+(pass) document edit browser drafts and uncertain approvals > unchecked unsent labels survive acknowledgement and invalid labels are not silently shortened [0.18ms]
+
+tests/research-brief-edit-ui.test.ts:
+(pass) document edit UI preserves an uncertain request and approval without replay [2936.07ms]
+
+tests/research-brief-section-draft.test.ts:
+(pass) explicit section choices and uncertain document-edit snapshots > an ambiguous exact request and each incomplete choice reload without inventing a target or format [0.30ms]
+(pass) explicit section choices and uncertain document-edit snapshots > complete selected paragraph and format are snapshotted separately from later unsent choices [0.30ms]
+(pass) explicit section choices and uncertain document-edit snapshots > a matching acknowledgement clears only the selected snapshot; changed target identity cannot confirm it [0.14ms]
+(pass) explicit section choices and uncertain document-edit snapshots > legacy acknowledgement does not erase a newer incomplete clarification choice [0.11ms]
+(pass) explicit section choices and uncertain document-edit snapshots > target identity is structural but every section, paragraph, hash and format remains significant [0.09ms]
+(pass) explicit section choices and uncertain document-edit snapshots > malformed selected or partial target data remains unreadable instead of being truncated or retargeted [0.55ms]
+(pass) explicit section choices and uncertain document-edit snapshots > conflicting submitted formats cannot become a retry while old no-target drafts and approvals remain readable [0.29ms]
+
+tests/research-brief-review-dialog.test.ts:
+(pass) expanded review escapes the small window, renders source links and keeps explicit approval safe [1839.52ms]
+
+ 15 pass
+ 1 fail
+ 316 expect() calls
+Ran 16 tests across 5 files. [6.20s]

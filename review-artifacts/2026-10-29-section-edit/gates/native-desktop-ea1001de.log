@@ -1,0 +1,9 @@
+ACTIVE note-edit [desktop] running · executing · no checkpoint
+ACTIVE note-edit [desktop] running · proposing_document_edit · preparing
+ACTIVE note-edit [desktop] needs_input · needs_input · rejected
+FAILED note-edit [desktop] AssertionError [ERR_ASSERTION]: Punctuation/case changes alone do not demonstrate a clearer rewrite.
+    at checkNoteRewrite (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-note-edit.mjs:85:10)
+    at runJourney (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-note-edit.mjs:339:20)
+    at async runCase (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-note-edit.mjs:253:75)
+    at async runResearchDocumentNoteEditSuite (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-note-edit.mjs:438:74)
+    at async main (file:///workspace/anascummis/apps/studio/scripts/e2e/research-document-note-edit.mjs:447:13)

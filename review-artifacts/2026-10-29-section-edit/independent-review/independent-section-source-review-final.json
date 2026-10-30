@@ -1,0 +1,105 @@
+{
+  "reviewedAt": "2026-10-30T00:54:46.837924+00:00",
+  "reviewer": "Independent section-contract source audit agent",
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "sourceTree": "e4d1d1dde505c96ca2e23ae86188899a412102af",
+  "parent": "5c51874f8d153142463ce30d890e5664d9f302e8",
+  "branch": "codex/section-aware-edit-20261029",
+  "status": "exact_final_source_contract_pass_pending_actual_native_ui",
+  "extends": {
+    "path": "/workspace/.cloud-env/anascummis/section-edit/independent-section-source-review.json",
+    "sha256": "e6191413e24cdaec919a6f919c6483ad3e19fb28daa0b353d52c19c29bfb6a49",
+    "scope": "Prior full request/target/splice/provenance/inheritance/raw/recovery audit and read-only old-byte plan comparison remain applicable; final conditional and observed guard/aliases below are reread statically."
+  },
+  "sourceFingerprints": [
+    {
+      "path": "apps/studio/core/research-brief-edit.ts",
+      "bytes": 70211,
+      "sha256": "da1a0e3d931d5af1946c43820b17b6e0f4a008fd49b17b278a1bd3b767bdab82"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-types.ts",
+      "bytes": 3313,
+      "sha256": "c302743cafb926820f082c4d65e731ed1f75a49583c3f281e7ad741c7494ec67"
+    },
+    {
+      "path": "apps/studio/core/research-brief-target.ts",
+      "bytes": 4861,
+      "sha256": "9378b6c4fe66ac3db85175dbe36c29d5d5f35e06d43d05e7478b89a9a99063eb"
+    },
+    {
+      "path": "apps/studio/core/research-brief-edit-draft.ts",
+      "bytes": 8453,
+      "sha256": "84aca150f7b0eb45bde5bd4660489bb4013b0ced0505f1ed4ad89e3d8d76e404"
+    },
+    {
+      "path": "apps/studio/core/server.ts",
+      "bytes": 36122,
+      "sha256": "ef0bfd6ce30880c76386f000e09161d68fa60f369f1f6aeb8f44a8589e284a65"
+    },
+    {
+      "path": "apps/studio/core/goal-orchestrator.ts",
+      "bytes": 53186,
+      "sha256": "ba005e0f0d68c0092c2e101ecbe489562698acae852e0e8f9884017e2c749c7e"
+    },
+    {
+      "path": "apps/studio/components/ResearchBriefEdit.tsx",
+      "bytes": 54672,
+      "sha256": "2f5d8c227f52a2c23cbc8d396c385b35c57b5ac7440145170b5adb730e5a0a05"
+    },
+    {
+      "path": "apps/studio/components/GoalPanel.tsx",
+      "bytes": 24203,
+      "sha256": "ae7655a15514ec418aff6df39c696b8eca1d8188f47aab35daed8e511d096eae"
+    },
+    {
+      "path": "apps/studio/app/style.css",
+      "bytes": 42668,
+      "sha256": "f2b26ac7d1b10fc0b7c962ddcfa59c93b4bd111c936d1a630a26d73d4a02e30a"
+    },
+    {
+      "path": "apps/studio/core/model.ts",
+      "bytes": 7323,
+      "sha256": "3742e2294c92728bb2c3e53267f60e22b87cc3889b8f5c0ee83e239d8e13b30a"
+    },
+    {
+      "path": "apps/studio/core/research-brief-presentation.ts",
+      "bytes": 9745,
+      "sha256": "dd9035a9a1d919eeaa16166f937dfe723a9d69131052c7e53e0c9fdfee90bdb5"
+    }
+  ],
+  "allAuditedFilesMatchExactGitPin": true,
+  "changedAuditedPathsSincePreviousReview": [
+    "apps/studio/core/goal-orchestrator.ts"
+  ],
+  "finalCommit": {
+    "changedPaths": [
+      "apps/studio/core/goal-orchestrator.ts"
+    ],
+    "scope": "Only coordinator completion message conditional changes; no task/approval/revision/lifecycle/profile/UI logic changes.",
+    "notesBranchSelectedOnlyForExplicitNotesTarget": true,
+    "summaryFallbackMessageExactParentBytes": true,
+    "notesCompletionText": "The explicitly approved native personal-note paragraph edit is saved as one verified revision. Summary, all other note paragraphs, source/citation evidence and earlier versions remain preserved and inspectable. Native meaning/tense/clarity review is not independent semantic verification.",
+    "summaryCompletionText": "The explicitly approved native summary edit is saved as one verified document revision. Original files, full personal notes and citation evidence remain inspectable. Native support review is not an independent factual accuracy guarantee.",
+    "phaseTiming": "Message is emitted only inside document-edit completion after accepted host review, all task statuses verified and coverage/status completed. Rejected or unapproved note proposals cannot reach this branch."
+  },
+  "lastGuardReview": {
+    "futureObserve": "Within notes literal checks, adding will/shall/going to/plan to/intend to observe when absent from before returns accepted:false with original raw preserved. This addresses observed record\u2192future-observe regression; it is not a complete action/tense classifier.",
+    "optimisticReviewCannotWaive": "Execute and Apply recompute this literal check before support/approval; positive native meaning flags cannot override accepted:false.",
+    "namedSectionAliases": "revise and factual paragraph aliases remain in action and preservation matching; sectionOf maps factual paragraph to summary. Prior before/fixed pure-helper receipts and owner focused tests remain preserved.",
+    "effectiveNotesAndOriginalProvenance": "No changes to exact-splice/approval hash/effective-note inheritance/current base verification/original provenance paths since previous review."
+  },
+  "unchangedEvidenceReused": {
+    "historicalPlans": "independent-historical-plan-byte-compatibility.json",
+    "historicalPlanReceiptSha256": "6cbb75d9a1331744506a1383cbc3a392af8d3b34e1f1876a7557378be2cfdc98",
+    "scope": "No repeated plan/PDF/database/model calls for this final reread; guard and event-copy changes do not alter historical plan/render logic.",
+    "uiSource": "independent-ui-source-review.json",
+    "uiSourceSha256": "7144145660f1dc9206e7a8320bcfe7ef71c5d4a19fae32e3ab7fa77770e82e7c"
+  },
+  "limitations": [
+    "Static exact-source review only; no new source edits, tests, native generation, browser or service/DB changes.",
+    "All10 isolated native diagnostics remain failed. Actual final-source NOTE-role desktop/short-phone user journey was pending when this review was written; no accepted native goal or new PDF/HTML is inferred.",
+    "The notes completion message is accurate only on its verified completion branch; source correctness does not establish native clarity/meaning quality.",
+    "Narrow named-intent/literal timing guards and same-model review remain fallible; no arbitrary PDF/voice/general accuracy claim."
+  ]
+}

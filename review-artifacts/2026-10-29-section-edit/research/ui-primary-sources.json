@@ -1,0 +1,24 @@
+[
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog",
+    "retrievedAt": "2026-10-29T23:37:11.206941+00:00",
+    "bytes": 239789,
+    "sha256": "ed72055020c9899de3a819a3de54bbe56c38558e6a35412316f37c1a1e5d0765",
+    "status": 200,
+    "file": "/workspace/.cloud-env/anascummis/document-second-edit/ui-research/dialog-mdn.html",
+    "hashReverifiedAt": "2026-10-30T00:38:59.794744+00:00",
+    "reusedExistingPrimaryBody": true,
+    "networkRefetched": false
+  },
+  {
+    "url": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+    "retrievedAt": "2026-10-29T23:37:11.719013+00:00",
+    "bytes": 43147,
+    "sha256": "8665148d3128aa970765a9ece3355ed3df284fd6b7cd055af1720bc437b0d94c",
+    "status": 200,
+    "file": "/workspace/.cloud-env/anascummis/document-second-edit/ui-research/dialog-apg.html",
+    "hashReverifiedAt": "2026-10-30T00:38:59.800056+00:00",
+    "reusedExistingPrimaryBody": true,
+    "networkRefetched": false
+  }
+]

@@ -1,0 +1,1045 @@
+{
+  "reviewedAt": "2026-10-30T01:08:05.936373+00:00",
+  "reviewer": "section_contract_audit/section_ui_source_audit",
+  "scope": "Read-only review of pack/roadmap wording, local Markdown navigation, saved JSON/log receipts and exact copied artifacts. No source edits, tests, browser/model/service/database calls, native generation or fresh PDF/PNG visual inspection.",
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "sourceTree": "e4d1d1dde505c96ca2e23ae86188899a412102af",
+  "pack": "/workspace/anascummis/review-artifacts/2026-10-29-section-edit",
+  "status": "outcome_scopes_pass_with_pack_navigation_finding",
+  "materialOutcomeScopeContradictions": [],
+  "findings": [
+    {
+      "id": "P2-copied-static-review-navigation",
+      "severity": "P2",
+      "status": "reported_to_parent_unmodified",
+      "path": "independent-review/ui-static-review-ea1001de.md",
+      "description": "Eight relative Markdown links retain local original folder names and do not resolve from the copied independent-review directory. Main README direct screenshot/receipt links are valid, so evidence is present, but navigation from the linked visual review is broken.",
+      "brokenLinks": [
+        {
+          "document": "independent-review/ui-static-review-ea1001de.md",
+          "href": "native-desktop-ea1001de/research-document-note-edit-desktop/02-unmet-note-goal-retained-state-1440.png",
+          "exists": false
+        },
+        {
+          "document": "independent-review/ui-static-review-ea1001de.md",
+          "href": "native-desktop-ea1001de/research-document-note-edit-desktop/03-unmet-note-kept-request-and-selection-1440.png",
+          "exists": false
+        },
+        {
+          "document": "independent-review/ui-static-review-ea1001de.md",
+          "href": "native-desktop-ea1001de/research-document-note-edit-desktop/04-unmet-note-original-native-response-1440.png",
+          "exists": false
+        },
+        {
+          "document": "independent-review/ui-static-review-ea1001de.md",
+          "href": "retained-failure-phone-ea1001de/01-kept-ambiguous-request-needs-choices-360x420.png",
+          "exists": false
+        },
+        {
+          "document": "independent-review/ui-static-review-ea1001de.md",
+          "href": "retained-failure-phone-ea1001de/02-same-unmet-note-job-retained-state-360x420.png",
+          "exists": false
+        },
+        {
+          "document": "independent-review/ui-static-review-ea1001de.md",
+          "href": "retained-failure-phone-ea1001de/03-rejected-note-raw-no-apply-360x420.png",
+          "exists": false
+        },
+        {
+          "document": "independent-review/ui-static-review-ea1001de.md",
+          "href": "native-desktop-ea1001de/research-document-note-edit-desktop/result.json",
+          "exists": false
+        },
+        {
+          "document": "independent-review/ui-static-review-ea1001de.md",
+          "href": "retained-failure-phone-ea1001de/receipt.json",
+          "exists": false
+        }
+      ],
+      "recommendation": "Preserve original receipt identity; provide an additive explicit link map or update only review-pack navigation with a documented transformed-copy identity. Screenshot equivalents are ../desktop/<filename> and ../phone/<filename>; phone receipt is ../phone/receipt.json. The standalone original result.json is not copied; desktop/report.json embeds that result, or copy the exact original as a separate artifact if desired."
+    },
+    {
+      "id": "P3-diagnostic-critique-scope-count",
+      "severity": "P3",
+      "status": "reported_to_parent_unmodified",
+      "path": "research/diagnostic-assessments.json",
+      "description": "Top-level scope says four separately authorized diagnostics, but diagnostics contains eleven all-unachieved entries. Main README, gates, roadmap and outcome count eleven accurately; no false success results.",
+      "exactScope": "Source-audit author manual/mechanical critique of four separately authorized prompt diagnostics; no UI/version/native-goal acceptance.",
+      "recommendation": "Keep original assessment byte identity; clarify archival stale count in an additive note, or record a transparent metadata correction if changing the source receipt."
+    }
+  ],
+  "checks": {
+    "mainReadmeLinks": {
+      "localLinks": 26,
+      "allExist": true
+    },
+    "allPackMarkdownLinks": {
+      "count": 34,
+      "missing": 8
+    },
+    "copiedOriginals": {
+      "count": 91,
+      "allLocalHashAndSizeAndOriginalBytesMatch": true,
+      "checks": [
+        {
+          "path": "desktop/report.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "desktop/01-kept-request-needs-section-and-format-1440.png",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "desktop/02-unmet-note-goal-retained-state-1440.png",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "desktop/03-unmet-note-kept-request-and-selection-1440.png",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "desktop/04-unmet-note-original-native-response-1440.png",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "phone/receipt.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "phone/01-kept-ambiguous-request-needs-choices-360x420.png",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "phone/02-same-unmet-note-job-retained-state-360x420.png",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "phone/03-rejected-note-raw-no-apply-360x420.png",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-first-sentence-rewrite-report-5.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-plain-protocol-control-report-9.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-planning-rewrite-report-4.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-privacy-sentence-rewrite-report-6.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-recency-control-report-8.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-rewrite-report-1.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-rewrite-report-2.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-seed-control-report-7.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-span-edits-report-3.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-thinking-control-report-10.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/note-unrelated-style-example-report-11.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "diagnostics/context-budget-check.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/AUDIT.md",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/source-audit.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/primary-sources.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/diagnostic-assessments.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/note-output-independent-critique.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/journey-fixture-audit.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/JOURNEY-PLAN.md",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/ui-primary-sources.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "research/patch-primary-sources.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "independent-review/independent-section-source-review.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "independent-review/independent-section-source-review-final.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "independent-review/independent-ui-source-review.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "independent-review/independent-historical-plan-byte-compatibility.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "independent-review/historical-plan-byte-compatibility.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "independent-review/note-driver-source-review.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "independent-review/ui-static-review-ea1001de.md",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "independent-review/ui-static-review-ea1001de.manifest.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "readiness/local-model-identity.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/backend-alias-types.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/backend-current-types.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/backend-first-types.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/backend-freeze-types.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/backend-future-observe-types.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/backend-legacy-compat.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/backend-legacy-label-identity-fixed.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/backend-notes-completion-copy-types.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/build-source-frozen.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/final-affected-tests.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/final-app-types.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/final-core-types.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/kit-2e760b6aea59a9bc-independent.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/kit-completion-copy.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/native-desktop-ea1001de.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/normal-refresh-stdout.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/retained-failure-phone-ea1001de.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-backend-tests-first.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-backend-tests-second.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-draft-first.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-draft-legacy-current.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-intent-mismatch-alias-tests.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-intent-mismatch-preservation-fixed-tests.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-intent-mismatch-preservation-tests.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-intent-mismatch-tests.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-new-future-observe-guard-tests.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/section-parser-preflight.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-affected-final.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-affected-first.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-affected-second.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-affected-third.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-affected-with-mismatch.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-goal-link-copy-explicit-labels.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-goal-link-copy-final.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-goal-link-copy.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-note-only-fixed-bootstrap.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-typecheck-copy-final.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-typecheck-final.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-typecheck-first.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-typecheck-v0.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/ui-v0-clarification.log",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/build-asset-equivalence.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/build-completion-copy-equivalence.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/note-action-regression-check.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "gates/kit-2e760b6aea59a9bc-verification.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "normal-runtime/receipt.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "qa-tools/check-note-failure-phone.mjs",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "qa-tools/check-note-action-regression.mjs",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "journey-outcomes.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "kit/manifest.json",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "kit/anascummis-studio-2e760b6aea59a9bc.zip",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        },
+        {
+          "path": "kit/anascummis-studio-2e760b6aea59a9bc.zip.sha256",
+          "localExists": true,
+          "localBytesMatch": true,
+          "localSha256Match": true,
+          "originalExists": true,
+          "copyEqualsOriginal": true
+        }
+      ]
+    },
+    "originalPngCount": 7,
+    "nativeDesktop": {
+      "sourceMatches": true,
+      "status": "failed",
+      "summary": {
+        "passed": 0,
+        "blocked": 0,
+        "failed": 1
+      },
+      "exitCode": 1,
+      "goalAchieved": false,
+      "preNativeAssertions": 3,
+      "appStatus": "needs_input",
+      "phase": "rejected",
+      "actualWriterOutput": "One Oxford comma; 240 to 241 characters. Host draft guard rejects before meaning review.",
+      "noApply": true,
+      "noNewVersion3": true,
+      "unchangedHistory": [
+        0,
+        1,
+        2
+      ],
+      "report": "desktop/report.json"
+    },
+    "phoneSupplement": {
+      "sameFailedGoal": true,
+      "checksPassed": 5,
+      "nativeGoalAchieved": false,
+      "newNativeGoalAttempted": false,
+      "oneExplicitContinueMutation": true,
+      "writerStartsBefore": 1,
+      "writerStartsAfter": 1,
+      "reviewStartsBefore": 0,
+      "reviewStartsAfter": 0,
+      "noApplyOrNewVersion": true,
+      "report": "phone/receipt.json"
+    },
+    "nativeDiagnostics": {
+      "count": 11,
+      "allUnachieved": true,
+      "allExactReportHashesMatch": true,
+      "reports": [
+        {
+          "report": "diagnostics/note-rewrite-report-1.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-rewrite-report-2.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-span-edits-report-3.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-planning-rewrite-report-4.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-first-sentence-rewrite-report-5.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-privacy-sentence-rewrite-report-6.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-seed-control-report-7.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-recency-control-report-8.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-plain-protocol-control-report-9.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-thinking-control-report-10.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        },
+        {
+          "report": "diagnostics/note-unrelated-style-example-report-11.json",
+          "goalAchieved": false,
+          "reportSha256Matches": true
+        }
+      ]
+    },
+    "hostAndBuildGates": {
+      "affectedFixtureSuite": {
+        "passed": 68,
+        "failed": 0,
+        "assertions": 1565
+      },
+      "focusedAlias": {
+        "passed": 1,
+        "assertions": 85
+      },
+      "focusedFutureObserve": {
+        "passed": 1,
+        "assertions": 71
+      },
+      "countsNotAdded": true,
+      "bothTypeScriptTargets": "Saved owner gate summary records exit0; corresponding empty successful-output logs are present. No re-execution by this review.",
+      "productionBuildSource": "5c51874f8d153142463ce30d890e5664d9f302e8",
+      "finalSourceDelta": "Conditional coordinator completion message only; saved equivalence receipt preserves unchanged UI/build/approval/versioning inputs, final core type-check and regenerated kit.",
+      "nativeQualityInferred": false
+    },
+    "sourceKit": {
+      "files": 283,
+      "bytes": 2652819,
+      "version": "2e760b6aea59a9bcc5780c020164937c57a07fad318c312a4d896de98a4dd19f",
+      "zipSha256": "f3a7e18600a3394a11a0dd6bc01b1357fe5e79a209d4a3e426cc5e0f57b22abb",
+      "manifestAndReadmeMatch": true,
+      "cleanExtractionOrInstallInferred": false
+    },
+    "ownerRuntimeScope": {
+      "savedReceiptOnly": true,
+      "normalLoopbackOrigin": "http://127.0.0.1:3211",
+      "publicPreviewClaim": false,
+      "existingRowsAndApiDataPreserved": "Saved receipt states24existing table row digests/API data unchanged; all18accepted frozen file bytes unchanged.",
+      "residentModelIdentitySeparateFromQuality": true
+    },
+    "evidenceSeparation": {
+      "sourceAuditsRetainTheirEarlierTimestampAndPendingNativeLimits": true,
+      "staticVisualReviewQualifiesOnlyCapturedFailurePresentation": true,
+      "hostInjectedSuccessesNotNativeSuccess": true,
+      "oldAcceptedSummaryLifecycleNotRelabelledAsNotes": true,
+      "noNativeNoteVersion3ApplyPdfHtmlOrUncertainApplyClaim": true,
+      "roadmapKeepsSameGoalAsFailingQualityGate": true
+    }
+  },
+  "limitations": [
+    "This audit validates existing artifacts and claims only; it does not independently repeat owner runtime/browser/native execution or fixture tests.",
+    "No actual native note rewrite met the user goal. Successful note Apply, version3 PDF/HTML and note-specific accepted-publication/uncertain-Apply/stale-base lifecycle remain unverified.",
+    "Historical primary-source and audit receipts may retain earlier local paths/counts as archives. Main README supplies pack mapping, but the specific copied visual-review Markdown links above need an accessible mapping.",
+    "No source/service/model/database or project artifact edits were made by this review; only this new independent report was written."
+  ],
+  "inputFingerprints": [
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/README.md",
+      "bytes": 15997,
+      "sha256": "3b4749b9b741910a2f81746ca8a593f423cafa7a55f9b1f09e0ab5bb794e16b8"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/PLAN.md",
+      "bytes": 6781,
+      "sha256": "2ad8682afe25905de5a0635b3882f981f2791c961fc5be58c7e9047a054d8bff"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/gates-summary.json",
+      "bytes": 2883,
+      "sha256": "d3885d74327a501372daa354dc798d15378da3fdf7912ec5692b04d6dba98954"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/outcome-summary.json",
+      "bytes": 3992,
+      "sha256": "930b622cc641626058e5685b59d2e3dcdde960ecfc495b35cb42503c57674f24"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/journey-outcomes.json",
+      "bytes": 5090,
+      "sha256": "f7c0b8abce0c8b5ff1473b1f78050a875a07660ea43b4b140060359a6bcb37e4"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/desktop/report.json",
+      "bytes": 565310,
+      "sha256": "bac12d96b4007029e0687fb639b2e4068fca3099d398974ff90cf09e8f4a7e0b"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/phone/receipt.json",
+      "bytes": 71519,
+      "sha256": "1c6f80fdabff2d14b0bb8cb3b07ecab537ee9fb7061f5afc02005ba2ce01178a"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/original-copy-index.json",
+      "bytes": 28198,
+      "sha256": "cad4aea075f019dc28632e30d5501d5bdaa2a0b6257475f09beeeb46d86cd28a"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/research/diagnostic-assessments.json",
+      "bytes": 17076,
+      "sha256": "7a3e2e2ded41fe98a21604d67b234592cd4dbbd411c3624cf21d8e62a1bb0a46"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/independent-review/ui-static-review-ea1001de.md",
+      "bytes": 4951,
+      "sha256": "348ca760d00558afaa8348347a6b2b6e87a6019618427de5f8b76b415170b951"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/normal-runtime/receipt.json",
+      "bytes": 15673,
+      "sha256": "86bbaaf1eecfa831ab8681f55d175388b275537fcb7d87df7c70044694c5a198"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/normal-runtime/preservation-summary.json",
+      "bytes": 554,
+      "sha256": "669371bbf0a6d9969c4c87bc731e590da15332f6b910ee22c7c5bfe9cff6a78f"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/normal-runtime/current-kit-get.json",
+      "bytes": 639,
+      "sha256": "3ee974657311e36720d0356bb40aa2b30c587fdbf2fb252aab4586b082593e69"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/kit/manifest.json",
+      "bytes": 435,
+      "sha256": "bf7c84016eec4be7ab77d86266202df853d58e129597517d622440b8fa0350e3"
+    },
+    {
+      "path": "review-artifacts/2026-10-29-section-edit/gates/build-completion-copy-equivalence.json",
+      "bytes": 2335,
+      "sha256": "c870f194c9e013fbc9189e39d3862d3c15fc5bef4e301e6478545776755ecc63"
+    },
+    {
+      "path": "PROJECT-ROADMAP.md",
+      "bytes": 17784,
+      "sha256": "95448df85b1850cfbb97bf1daa0621b3906af7b34aefa5abc92181e9b923d900"
+    }
+  ]
+}

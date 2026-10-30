@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-30T00:32:52.429Z",
+  "scope": "Reproduces current application tokenize gate. Tokenization only; no additional generation. This is the application counting method, not a claim that its concatenation exactly matches provider chat-template tokenization.",
+  "reports": [
+    {
+      "report": "note-rewrite-report-1.json",
+      "inputTokens": 200,
+      "maxTokens": 384,
+      "safetyMargin": 128,
+      "applicationTotal": 712,
+      "contextLimit": 2048,
+      "withinBudget": true
+    },
+    {
+      "report": "note-rewrite-report-2.json",
+      "inputTokens": 227,
+      "maxTokens": 384,
+      "safetyMargin": 128,
+      "applicationTotal": 739,
+      "contextLimit": 2048,
+      "withinBudget": true
+    },
+    {
+      "report": "note-span-edits-report-3.json",
+      "inputTokens": 237,
+      "maxTokens": 384,
+      "safetyMargin": 128,
+      "applicationTotal": 749,
+      "contextLimit": 2048,
+      "withinBudget": true
+    },
+    {
+      "report": "note-planning-rewrite-report-4.json",
+      "inputTokens": 246,
+      "maxTokens": 384,
+      "safetyMargin": 128,
+      "applicationTotal": 758,
+      "contextLimit": 2048,
+      "withinBudget": true
+    }
+  ]
+}

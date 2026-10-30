@@ -1,0 +1,11 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/goal-panel-handoff.test.ts:
+[Bun.serve]: request timed out after 10 seconds. Pass `idleTimeout` to configure.
+killed 1 dangling process
+(fail) an older goal poll cannot replace a confirmed edit handoff or approval [30001.57ms]
+  ^ this test timed out after 30000ms.
+
+ 0 pass
+ 1 fail
+Ran 1 test across 1 file. [30.24s]

@@ -1,0 +1,31 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/research-brief-section-edit.test.ts:
+(pass) paragraph ranges distinguish repeated Unicode text and retain original CRLF/blank-line separators [1.61ms]
+(pass) explicit note paragraph selection publishes only that native rewrite as v3 and real PDF/HTML retain summary, other notes, citations and v0/v1/v2 [26452.82ms]
+(pass) ambiguous or invalid selection clarifies without a child while an explicit summary format preserves the unchanged original intent [114.87ms]
+(pass) uncertain submission identity includes exact target and distinct note proposals cannot share an Apply hash merely because summary is unchanged [155.80ms]
+177 |         if(this.controls.has(reuse.id)||!['completed','needs_input','cancelled'].includes(reuse.status))throw new Error('Stop the original question and wait for its active operation before starting a linked question.');
+178 |         for(let index=0;index<sourceQuestion.urls.length;index++){const task=reuse.tasks.find(task=>task.id==='source-'+(index+1));if(!task?.sourceUrl||task.sourceUrl!==sourceQuestion.urls[index]||task.status!=='verified'||!task.review?.accepted||!task.execution?.verified||!task.execution.sourceId)throw new Error('Every original source needs a verified saved acquisition before reuse.');const saved=this.options.sourceLedger.get(reuse.id,task.execution.sourceId);if(saved.source.taskId!==task.id||saved.source.requestedUrl!==task.sourceUrl)throw new Error('The original source ownership does not match its verified reading milestone.');}
+179 |         if(value.ranges!==undefined)manualRanges=this.options.sourceLedger.validateRanges(reuse.id,value.ranges);
+180 |       }else if(value.ranges!==undefined)throw new Error('Manual ranges require a linked question using verified saved source copies.');
+181 |     }
+182 |     if (this.list().filter(goal => ['queued', 'planning', 'running'].includes(goal.status)).length >= 5) throw new Error('Five goals are already queued');
+                                                                                                                         ^
+error: Five goals are already queued
+      at create (/workspace/anascummis/apps/studio/core/goal-orchestrator.ts:182:116)
+      at <anonymous> (/workspace/anascummis/apps/studio/core/goal-orchestrator.ts:296:26)
+      at transaction (bun:sqlite:416:27)
+      at createDocumentEdit (/workspace/anascummis/apps/studio/core/goal-orchestrator.ts:303:6)
+      at async <anonymous> (/workspace/anascummis/apps/studio/tests/research-brief-section-edit.test.ts:261:75)
+(fail) word-identical punctuation copying and lost planned meaning cannot become approved completed-work claims [154.37ms]
+(pass) note proposal and prepared-file interruption continue the same raw selection and one v3 without repeated writer or meaning review [152.93ms]
+(pass) an unapplied competing note proposal remains preserved and stale after one separate operation publishes v3 [177.94ms]
+(pass) an unknown v3 file is never overwritten or claimed by a resumed note operation [138.21ms]
+(pass) tampering with saved note replacement, whole-note splice or selected base hash is detected before Apply [287.48ms]
+(pass) a later explicit summary edit uses accepted current notes instead of silently restoring the original notes [213.80ms]
+
+ 9 pass
+ 1 fail
+ 290 expect() calls
+Ran 10 tests across 1 file. [27.89s]

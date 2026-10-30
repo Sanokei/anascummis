@@ -1,0 +1,98 @@
+{
+  "source": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+  "sourceTree": "e4d1d1dde505c96ca2e23ae86188899a412102af",
+  "base": "dc1885c9e36738a4a4061f7d916ca074b7e2144a",
+  "branch": "codex/section-aware-edit-20261029",
+  "requestedNativeNoteGoalAchieved": false,
+  "nativeGoal": {
+    "status": "failed",
+    "exitCode": 1,
+    "passed": 0,
+    "blocked": 0,
+    "failed": 1,
+    "preNativeAssertions": 3,
+    "report": "desktop/report.json",
+    "goalId": "2474c855-f7c3-470d-a1e0-62c9fdc0af17",
+    "operationId": "182e21a3-958c-41c2-80ad-759a531333da",
+    "originalRequest": "Make this clearer for a newcomer",
+    "target": {
+      "section": "notes",
+      "paragraph": 1,
+      "paragraphSha256": "f728b3a1705eaaa90075d3b17a8b52a2304d5cf0883ea9b631edcd211be76501",
+      "format": "clearer-plain-paragraph"
+    },
+    "phase": "rejected",
+    "appStatus": "needs_input",
+    "raw": {
+      "raw": {
+        "text": "Before changing anything, I will record the browser and version, a minimal public example, the outcome I expected and what I actually saw. I will remove cookies, authorization headers, account details, and private URLs from anything I share."
+      },
+      "sha256": "e26341a33efca4198fdb117fe12aa7d49fc9599d6b07686baba579da212f6118",
+      "format": "native-note-paragraph-v1"
+    },
+    "selectedBeforeCharacters": 240,
+    "selectedProposedCharacters": 241,
+    "noApply": true,
+    "noVersion3": true,
+    "actualHistory": [
+      0,
+      1,
+      2
+    ]
+  },
+  "phone": {
+    "scopedUiRecoveryChecksPassed": 5,
+    "nativeGoalAchieved": false,
+    "receipt": "phone/receipt.json",
+    "note": "Same failed job, one explicit Continue; not a second native generation, native success, Apply or PDF result."
+  },
+  "diagnostics": {
+    "attempts": 11,
+    "achieved": 0,
+    "allUnachieved": true,
+    "reports": [
+      "diagnostics/note-first-sentence-rewrite-report-5.json",
+      "diagnostics/note-plain-protocol-control-report-9.json",
+      "diagnostics/note-planning-rewrite-report-4.json",
+      "diagnostics/note-privacy-sentence-rewrite-report-6.json",
+      "diagnostics/note-recency-control-report-8.json",
+      "diagnostics/note-rewrite-report-1.json",
+      "diagnostics/note-rewrite-report-2.json",
+      "diagnostics/note-seed-control-report-7.json",
+      "diagnostics/note-span-edits-report-3.json",
+      "diagnostics/note-thinking-control-report-10.json",
+      "diagnostics/note-unrelated-style-example-report-11.json"
+    ],
+    "assessments": "research/diagnostic-assessments.json",
+    "note": "Prompt/seed/protocol/thinking/unrelated-example controls remain separate from the one actual ordinary-server goal; no experiment changed production defaults/model/runtime."
+  },
+  "unverifiedNativeStages": [
+    "accepted substantive note proposal",
+    "successful in-flight note interruption and continuation",
+    "new-note uncertain Apply acknowledgement",
+    "native version3 publication",
+    "native note stale Apply against version3",
+    "new notes PDF/HTML export/readability"
+  ],
+  "unchangedAcceptedEvidence": "Earlier actual summary-edit recovery/version2 files remain accepted historical evidence; injected note-host tests are not new native acceptance.",
+  "kit": {
+    "format": 1,
+    "version": "2e760b6aea59a9bcc5780c020164937c57a07fad318c312a4d896de98a4dd19f",
+    "filename": "anascummis-studio-2e760b6aea59a9bc.zip",
+    "sha256": "f3a7e18600a3394a11a0dd6bc01b1357fe5e79a209d4a3e426cc5e0f57b22abb",
+    "bytes": 2652819,
+    "files": 283,
+    "source": {
+      "commit": "ea1001de93ec6eaccc6d84343868f621f6647e5d",
+      "dirty": false
+    },
+    "dependencies": {
+      "next": "16.4.3",
+      "etro": "0.14.1"
+    }
+  },
+  "limits": [
+    "Experimental section clarification and guarded host workflow; native note-rewrite requirement remains unachieved.",
+    "Prepared Linux Chromium/emulated touch only; no new clean installation, voice, actual handset, native Windows/macOS or arbitrary imported-PDF claim."
+  ]
+}
