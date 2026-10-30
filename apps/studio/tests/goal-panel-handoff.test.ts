@@ -56,6 +56,9 @@ test('an older goal poll cannot replace a confirmed edit handoff or approval', a
     const parentCard = page.locator('[data-goal-id="' + parentId + '"]'), childCard = page.locator('[data-goal-id="' + childId + '"]');
     await parentCard.getByRole('button', {name: 'Edit brief', exact: true}).click();
     await parentCard.getByLabel('Requested brief change', {exact: true}).fill('Use labelled Tests: and Browser results: sentences.');
+    await parentCard.getByRole('checkbox', {name: 'Two labelled sentences', exact: true}).check();
+    await parentCard.getByLabel('First sentence label', {exact: true}).fill('Tests:');
+    await parentCard.getByLabel('Second sentence label', {exact: true}).fill('Browser results:');
     await createPoll; // The ordinary poll has captured the old parent-only list.
     await parentCard.getByRole('button', {name: 'Save edit and propose changes', exact: true}).click();
     await childCard.waitFor();
@@ -78,5 +81,10 @@ test('an older goal poll cannot replace a confirmed edit handoff or approval', a
     expect(await childCard.getByRole('button', {name: 'Apply proposed edit', exact: true}).count()).toBe(0);
     expect(await childCard.getByRole('button', {name: 'Stop goal', exact: true}).count()).toBe(1);
     expect(creates).toBe(1); expect(applies).toBe(1);
+    // A separate synthetic metadata state checks the section-specific link copy;
+    // it does not claim another model decision or a real saved note revision.
+    savedChild = {...savedChild, updated: 4, request: 'Make this clearer for a newcomer', documentEdit: {...savedChild.documentEdit, intent: 'Make this clearer for a newcomer', sentenceLabels: undefined, baseRevision: 2, target: {section: 'notes', paragraph: 1, paragraphSha256: 'd'.repeat(64), format: 'clearer-plain-paragraph'}}};
+    await childCard.getByText('An edit to personal-note paragraph 2 based on accepted version 2. The summary, other note paragraphs and source evidence are preserved; earlier files remain available.', {exact: true}).waitFor();
+    expect(await childCard.getByText('A summary edit based on accepted version 2. Earlier files, notes and research are preserved.', {exact: true}).count()).toBe(0); expect(creates).toBe(1); expect(applies).toBe(1);
   } finally {for (const release of releases.values()) release(); await browser?.close(); await server.stop(true); await rm(folder, {recursive: true, force: true});}
 }, 30_000);

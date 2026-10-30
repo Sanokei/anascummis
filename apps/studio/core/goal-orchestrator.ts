@@ -4,7 +4,8 @@ import {objectSchema, validate} from './harness';
 import {ActivityJournal, type ActivityInput, type ActivityPage} from './activity-journal';
 import {publicSourceUrl, sourceHash, type SourceSnapshot, type SourceProgress, type SourceReadingPlan, type SourceRangeInput, type PublicSourceLedger} from './public-source';
 import type {BriefRequest, BriefState, BriefArtifact} from './research-brief-types';
-import type {DocumentEditRequest, DocumentEditState, DocumentEditArtifact} from './research-brief-edit-types';
+import type {DocumentEditRequest, DocumentEditState, DocumentEditArtifact, DocumentEditTarget, DocumentEditOptions} from './research-brief-edit-types';
+import {validateDocumentEditTarget,documentEditTargetMismatch} from './research-brief-target';
 import {citationSpans} from './source-citation-spans';
 
 export const GOAL_SPECIALISTS = ['analysis', 'website', 'pdf', 'scene', 'commerce', 'research', 'workspace', 'video', 'video_sources', 'software'] as const;
@@ -48,6 +49,7 @@ export type GoalRecord = {
   briefEditEligibility?: {canEdit:boolean;reason?:string};
   documentEdit?: DocumentEditRequest;
   documentEditState?: DocumentEditState;
+  documentEditOptions?: DocumentEditOptions;
   parentGoalId?: string;
   reading?: SourceReadingPlan;
   sources?: SourceSnapshot[];
@@ -277,26 +279,31 @@ export class GoalOrchestrator {
   /** The server supplies a verified base document identity. Client input cannot
    * choose files, tool operations or a revision. Duplicate delivery returns the
    * original child without restarting it. */
-  existingDocumentEdit(parentId:string,requestKey:string,intent:string,sentenceLabels?:[string,string]):GoalRecord|undefined {
+  existingDocumentEdit(parentId:string,requestKey:string,intent:string,sentenceLabels?:[string,string],target?:DocumentEditTarget):GoalRecord|undefined {
     const row=this.db.query('SELECT goal_id FROM goal_document_edit_requests WHERE parent_id=? AND request_key=?').get(parentId,requestKey) as {goal_id:string}|null;
     if(!row)return undefined;
     const saved=this.get(row.goal_id);
     if(saved.documentEdit?.intent!==intent||JSON.stringify(saved.documentEdit?.sentenceLabels)!==JSON.stringify(sentenceLabels))throw new Error('This edit identity already saved another intent or sentence format. Inspect its original proposal before starting another.');
+    if(JSON.stringify(saved.documentEdit?.target)!==JSON.stringify(target))throw new Error('This edit identity already saved another section, paragraph or clarified format. Inspect its original proposal before starting another.');
     return saved;
   }
 
   createDocumentEdit(parentId:string,input:DocumentEditRequest):GoalRecord {
+    validateDocumentEditTarget(input.target);
+    const mismatch=documentEditTargetMismatch(input.intent,input.target);if(mismatch)throw new Error(mismatch);
+    if(input.target&&input.sentenceLabels)throw new Error('Choose an explicit section/format or the saved two-sentence labels; both cannot be submitted in one edit.');
     if(!this.options.reviewDocumentEdit)throw new Error('The native document edit host is unavailable.');
     const child=this.db.transaction(()=>{
-      const existing=this.existingDocumentEdit(parentId,input.requestKey,input.intent,input.sentenceLabels);if(existing)return existing;
+      const existing=this.existingDocumentEdit(parentId,input.requestKey,input.intent,input.sentenceLabels,input.target);if(existing)return existing;
       const parent=this.get(parentId),briefArtifact=parent.tasks.find(task=>task.sourceBrief)?.execution?.briefArtifact,editTask=parent.tasks.find(task=>task.documentEdit),editArtifact=editTask?.execution?.documentEditArtifact,artifact=parent.documentEdit?editArtifact:briefArtifact;
       if((!parent.brief&&!parent.documentEdit)||parent.status!=='completed'||!parent.coverageDone||input.parentGoalId!==parent.id||!artifact||input.documentId!==artifact.documentId||input.basePdfSha256!==artifact.pdfSha256||input.baseRevision!==(parent.documentEdit?editArtifact!.revision:0)||!input.intent.trim()||input.intent.length>500||!/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(input.requestKey))throw new Error('Finish and inspect the accepted current research brief version before editing.');
       if(parent.documentEdit&&(!editTask?.review?.accepted||editTask.status!=='verified'||input.originalBriefGoalId!==(parent.documentEdit.originalBriefGoalId||parent.documentEdit.parentGoalId)||input.baseOperationId!==editArtifact!.operationId||input.baseHtmlSha256!==editArtifact!.htmlSha256||input.baseProvenanceSha256!==editArtifact!.provenanceSha256))throw new Error('The current-version edit base does not match the accepted parent operation.');
       const created=this.create({request:input.intent,projectId:parent.projectId,documentId:input.documentId},true);
       created.parentGoalId=parent.id;created.documentEdit=structuredClone(input);created.planningDone=true;created.planningOffset=created.request.length;
-      created.tasks=[{id:'native-brief-edit',specialist:'pdf',documentEdit:true,description:'Inspect accepted document version '+input.baseRevision+', propose the exact requested summary edit and await explicit approval before saving version '+(input.baseRevision+1)+'.',acceptance:'Native edit must satisfy the exact intent with source support. Preserve all earlier PDF/HTML versions, complete personal notes, title and citations. Apply only the inspected exact proposal, register one durable revision and reconcile interruption without duplicated edits.',dependsOn:[],status:'pending',attempts:0}];
+      const noteTarget=input.target?.section==='notes';
+      created.tasks=[{id:'native-brief-edit',specialist:'pdf',documentEdit:true,description:'Inspect accepted document version '+input.baseRevision+', propose the exact requested '+(noteTarget?'personal-note paragraph '+(input.target!.section==='notes'?input.target!.paragraph+1:''):'summary')+' edit and await explicit approval before saving version '+(input.baseRevision+1)+'.',acceptance:noteTarget?'Native edit must clarify only the explicitly selected personal-note paragraph, preserving planned actions, tense and meaning without invented completed work. Preserve the summary, all unselected notes, title, source/citation identities and earlier versions. Apply the exact inspected proposal once and recover deliberately without duplicated work.':'Native edit must satisfy the exact intent with source support. Preserve all earlier PDF/HTML versions, complete personal notes, title and citations. Apply only the inspected exact proposal, register one durable revision and reconcile interruption without duplicated edits.',dependsOn:[],status:'pending',attempts:0}];
       this.db.query('INSERT INTO goal_document_edit_requests VALUES(?,?,?)').run(parentId,input.requestKey,created.id);
-      this.event(created,'coordinator','edit_requested','Exact edit intent and unchanged original document identity saved. The local model can propose a summary change; no revision is applied until you explicitly approve the saved proposal.');
+      this.event(created,'coordinator','edit_requested',noteTarget?'The complete original intent, explicit personal-note paragraph/format and accepted base identity are saved. Summary, unselected notes and source evidence remain unchanged. No revision is applied until explicit approval.':'Exact edit intent and unchanged original document identity saved. The local model can propose a summary change; no revision is applied until you explicitly approve the saved proposal.');
       return created;
     })();this.kick();return this.get(child.id);
   }

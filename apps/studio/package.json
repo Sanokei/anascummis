@@ -22,6 +22,7 @@
     "test:e2e:research-document": "node scripts/e2e/research-document.mjs",
     "test:e2e:research-document-edit": "node scripts/e2e/research-document-edit.mjs",
     "test:e2e:research-document-second-edit": "node scripts/e2e/research-document-second-edit.mjs",
+    "test:e2e:research-document-note-edit": "node scripts/e2e/research-document-note-edit.mjs",
     "test:local-ai": "bun scripts/check-local-ai.ts"
   },
   "dependencies": {

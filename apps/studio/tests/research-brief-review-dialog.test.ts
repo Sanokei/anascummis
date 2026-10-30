@@ -40,14 +40,14 @@ test('expanded review escapes the small window, renders source links and keeps e
     for (const href of ['https://github.com/web-platform-tests/wpt', 'https://wpt.fyi/results/fetch']) expect(await next.locator('a[href="' + href + '"]').count()).toBeGreaterThan(0);
     const apply = dialog.getByRole('button', {name: 'Apply proposed edit', exact: true}), cancel = dialog.getByRole('button', {name: 'Cancel review', exact: true});
     const footer = await dialog.locator('footer').boundingBox(); expect(oldBox!.y + oldBox!.height).toBeLessThan(footer!.y); expect(nextBox!.y + nextBox!.height).toBeLessThan(footer!.y);
-    await mkdir('/workspace/.cloud-env/anascummis/document-second-edit/ui-preflight', {recursive: true});
-    await page.screenshot({path: '/workspace/.cloud-env/anascummis/document-second-edit/ui-preflight/fixture-desktop-review.png'});
+    await mkdir('/workspace/.cloud-env/anascummis/section-edit/ui-preflight', {recursive: true});
+    await page.screenshot({path: '/workspace/.cloud-env/anascummis/section-edit/ui-preflight/fixture-desktop-summary-review.png'});
     await page.keyboard.press('Enter'); expect(applies).toBe(0); await page.keyboard.press('Escape'); await dialog.waitFor({state: 'hidden'}); expect(await trigger.evaluate(e => e === document.activeElement)).toBe(true); expect(applies).toBe(0); expect(creates).toBe(0);
     await trigger.click(); await cancel.click(); await dialog.waitFor({state: 'hidden'}); expect(applies).toBe(0); expect(await trigger.evaluate(e => e === document.activeElement)).toBe(true);
     await page.setViewportSize({width: 360, height: 420}); await trigger.tap(); await dialog.waitFor();
     const stackedOld = await old.boundingBox(), stackedNext = await next.boundingBox(); expect(stackedNext!.y).toBeGreaterThan(stackedOld!.y + stackedOld!.height); expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     for (const control of [apply, cancel]) {const b = await control.boundingBox(); expect(b!.height).toBeGreaterThanOrEqual(44); expect(b!.x).toBeGreaterThanOrEqual(0); expect(b!.x + b!.width).toBeLessThanOrEqual(360); expect(b!.y).toBeGreaterThanOrEqual(0); expect(b!.y + b!.height).toBeLessThanOrEqual(420); await control.focus(); expect(await control.evaluate(e => e === document.activeElement)).toBe(true);}
-    await page.screenshot({path: '/workspace/.cloud-env/anascummis/document-second-edit/ui-preflight/fixture-short-review.png'});
+    await page.screenshot({path: '/workspace/.cloud-env/anascummis/section-edit/ui-preflight/fixture-short-summary-review.png'});
     await dialog.getByText('Exact raw comparison and citation evidence', {exact: true}).click(); expect(JSON.parse(await dialog.getByLabel('Raw before summary JSON', {exact: true}).innerText())).toEqual(before); expect(JSON.parse(await dialog.getByLabel('Raw proposed summary JSON', {exact: true}).innerText())).toEqual(proposal);
     expect(await dialog.getByRole('link', {name: 'Download base version 1 PDF', exact: true}).getAttribute('href')).toBe('/api/goals/' + parent + '/document-edit/export?format=pdf');
     await dialog.getByRole('region', {name: 'Summary comparison and evidence', exact: true}).evaluate(e => {e.scrollTop = e.scrollHeight;});
@@ -60,14 +60,16 @@ test('expanded review escapes the small window, renders source links and keeps e
     const acceptedVersionOne = {...goal, id: parent, status: 'completed', briefEditEligibility: {canEdit: true}, documentEdit: {...goal.documentEdit, parentGoalId: original, baseRevision: 0}, documentEditState: {...goal.documentEditState, phase: 'saved', proposal: before, artifact: {revision: 1, pages: 1, documentId: goal.documentEdit.documentId}}};
     await page.evaluate(nextGoal => (window as any).showGoal(nextGoal), acceptedVersionOne);
     await page.getByRole('button', {name: 'Edit current brief', exact: true}).tap();
-    await page.getByText('This current-version action supports shortening the summary to one sentence. Exact notes, locations and citation evidence stay unchanged.', {exact: true}).waitFor();
+    await page.getByRole('group', {name: 'Clarify the intended change', exact: true}).waitFor();
     const change = page.getByRole('textbox', {name: 'Requested brief change', exact: true});
     await change.fill('Make this more cheerful'); await page.getByRole('button', {name: 'Save edit and propose changes', exact: true}).tap();
-    await page.getByText('This current-version action supports an explicit request to shorten the summary to one sentence. Your exact draft is kept; nothing was submitted.', {exact: true}).waitFor();
+    await page.getByText('Which section and format should change? Choose them explicitly below. Your complete request is kept; no edit was submitted.', {exact: true}).waitFor();
     const kept = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), 'anascummis.research-brief-edit-draft.v1.' + parent);
     expect(kept.intent).toBe('Make this more cheerful'); expect(kept.submitted).toBeUndefined(); expect(creates).toBe(0);
+    await page.getByRole('combobox', {name: 'Section to edit', exact: true}).selectOption('summary');
+    await page.getByRole('combobox', {name: 'Requested format', exact: true}).selectOption('shorter-single-sentence');
     await change.fill(intent); await page.getByRole('button', {name: 'Close edit form', exact: true}).tap();
-    await page.getByRole('button', {name: 'Continue edit draft', exact: true}).tap(); expect(await change.inputValue()).toBe(intent); expect(creates).toBe(0);
+    await page.getByRole('button', {name: 'Continue edit draft', exact: true}).tap(); expect(await change.inputValue()).toBe(intent); expect(await page.getByRole('combobox', {name: 'Section to edit', exact: true}).inputValue()).toBe('summary'); expect(await page.getByRole('combobox', {name: 'Requested format', exact: true}).inputValue()).toBe('shorter-single-sentence'); expect(creates).toBe(0);
     await context.close();
   } finally {await browser?.close(); await server.stop(true); await rm(dir, {recursive: true, force: true});}
 }, 30_000);

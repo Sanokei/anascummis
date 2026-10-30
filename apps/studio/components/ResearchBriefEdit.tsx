@@ -1,17 +1,18 @@
 'use client';
 import {useEffect, useRef, useState} from 'react';
 import type {GoalRecord} from '../core/goal-orchestrator';
-import type {DocumentEditRequest, DocumentEditState, DocumentSentenceSelection} from '../core/research-brief-edit-types';
+import type {DocumentEditRequest, DocumentEditState, DocumentEditTarget, DocumentSentenceSelection} from '../core/research-brief-edit-types';
 import type {BriefDraft} from '../core/research-brief-types';
 import {BriefReviewText} from './BriefReviewText';
-import {summaryRequirements} from '../core/research-brief-summary';
+import {documentEditTargetMismatch, hasLegacySummaryIntent} from '../core/research-brief-target';
 import {
   beginBriefEditSubmission, readBriefEditApproval, readBriefEditDraft, sameBriefEditApproval,
   sameBriefEditSubmission, settleBriefEditSubmission, validBriefEditLabels,
-  type BriefEditApproval, type BriefEditFormDraft, type BriefEditSubmission
+  type BriefEditApproval, type BriefEditFormDraft, type BriefEditSubmission, type BriefEditTargetDraft
 } from '../core/research-brief-edit-draft';
 
-type EditGoal = GoalRecord & {documentEdit?: DocumentEditRequest; documentEditState?: DocumentEditState};
+type EditGoal = GoalRecord & {documentEdit?: DocumentEditRequest; documentEditState?: DocumentEditState;
+  documentEditOptions?: {baseRevision: number; notesSha256: string; paragraphs: {index: number; start: number; end: number; text: string; sha256: string}[]}};
 type Props = {goal: EditGoal; onCreated: (child: GoalRecord) => void; onOpenDocument: (id: string) => void};
 const phases: Record<DocumentEditState['phase'], string> = {
   preparing: 'Inspecting the saved document', proposal_saved: 'Native edit proposal saved',
@@ -33,6 +34,19 @@ async function api(path: string, body: unknown | undefined, signal: AbortSignal)
 
 function DraftParagraphs({draft, citations}: {draft: BriefDraft; citations?: {number: number; quote: string}[]}) {
   return <BriefReviewText draft={draft} citations={citations}/>;
+}
+
+function NoteParagraph({text}: {text: string}) {return <p className="research-brief-note-paragraph">{text}</p>;}
+
+function RawNoteComparison({state}: {state: DocumentEditState}) {
+  const note = state.notesEdit!;
+  return <details><summary>Exact raw paragraph comparison and evidence</summary>
+    <pre tabIndex={0} aria-label="Raw before personal-note paragraph JSON">{JSON.stringify(note.before, null, 2)}</pre>
+    <pre tabIndex={0} aria-label="Raw proposed personal-note paragraph JSON">{JSON.stringify(note.proposal ?? null, null, 2)}</pre>
+    <pre tabIndex={0} aria-label="Exact personal-note paragraph diff JSON">{JSON.stringify({start: note.start, end: note.end, removed: note.before, added: note.proposal ?? null}, null, 2)}</pre>
+    {state.writingAttempt && <pre tabIndex={0} aria-label="Raw native edit decision JSON">{JSON.stringify(state.writingAttempt.raw, null, 2)}</pre>}
+    <details><summary>Unchanged summary and citation evidence</summary><pre tabIndex={0} aria-label="Unchanged factual summary JSON">{JSON.stringify(state.before, null, 2)}</pre>{state.preserved.citations.map(citation => <blockquote key={citation.number}>[{citation.number}] {citation.quote}</blockquote>)}</details>
+  </details>;
 }
 
 function HostCitationSelection({selection, part}: {selection: DocumentSentenceSelection; part: 'first' | 'second'}) {
@@ -80,7 +94,7 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
   }
   function openReview() {
     const dialog = reviewDialog.current;
-    if (!dialog || !state?.proposal) return;
+    if (!dialog || !hasProposal) return;
     if (!dialog.open) dialog.showModal();
     setReviewOpen(true);
     requestAnimationFrame(() => reviewHeading.current?.focus({preventScroll: true}));
@@ -138,7 +152,14 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
   const artifact = state?.phase === 'saved' ? state.artifact : undefined, base = '/api/goals/' + encodeURIComponent(goal.id) + '/document-edit';
   const original = '/api/goals/' + encodeURIComponent(request.originalBriefGoalId || request.parentGoalId) + '/brief';
   const baseFiles = '/api/goals/' + encodeURIComponent(request.parentGoalId) + (request.baseRevision === 0 ? '/brief' : '/document-edit');
-  const canApply = state?.phase === 'awaiting_approval' && goal.status === 'needs_input' && !!state.proposalSha256 && !state.conflict;
+  const notesTarget = request.target?.section === 'notes' ? request.target : undefined, note = state?.notesEdit;
+  const isNotes = !!notesTarget, hasProposal = isNotes ? typeof note?.proposal === 'string' : !!state?.proposal;
+  const reviewAccepted = isNotes ? !state?.notesReviewAttempt?.error && !!state?.supportReview && state.supportReview.supported === true
+    && state.supportReview.meaningRetained === true && state.supportReview.plannedActionsRetained === true
+    && state.supportReview.noCompletedWorkInvented === true && state.supportReview.clearerForNewcomer === true : !!state?.supportReview?.supported;
+  const canApply = state?.phase === 'awaiting_approval' && goal.status === 'needs_input' && !!state.proposalSha256 && !state.conflict && (!isNotes || (hasProposal && !!note?.proposedNotes && reviewAccepted));
+  const changedSection = isNotes ? 'Personal notes · paragraph ' + (notesTarget!.paragraph + 1) : 'Summary';
+  const preservation = isNotes ? 'The summary, title, every other note paragraph and citation evidence stay unchanged.' : 'The complete notes, title and citation evidence stay unchanged.';
   const grounded = state?.writingMode === 'grounded-labelled-sentences-v3';
   const rewrite = state?.writingMode === 'current-summary-rewrite-v4';
   const sequential = grounded || state?.writingMode === 'sequential-labelled-sentences-v2';
@@ -147,10 +168,11 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
   return <section className="research-brief-edit" aria-label="Research brief edit">
     <h4>Edit the research brief</h4>
     <p>{state ? state.phase === 'preparing' && sequential ? savedSentences === 1 ? 'First native sentence saved; the second is not yet saved' : savedSentences === 2 ? 'Both native sentences saved; preparing the proposal' : 'Preparing two native sentence-writing decisions' : phases[state.phase] : 'The exact edit request is saved. Waiting for the document specialist.'}</p>
-    <section className="research-brief-edit-intent" aria-label="Requested change"><h5>Requested change</h5><p>{request.intent}</p>{request.sentenceLabels && <><p>Requested sentence labels: {request.sentenceLabels.join(' / ')}</p><small>The host adds these exact labels to two native-written factual sentences. The model supplies their content; the host does not add facts.</small></>}</section>
+    <section className="research-brief-edit-intent" aria-label="Requested change"><h5>Requested change</h5><p>{request.intent}</p>{request.target && <p>Chosen section: {changedSection}. Chosen format: {isNotes ? 'Clearer plain paragraph; keep meaning and planned actions.' : 'Shorter single sentence.'}</p>}{request.sentenceLabels && <><p>Requested sentence labels: {request.sentenceLabels.join(' / ')}</p><small>The host adds these exact labels to two native-written factual sentences. The model supplies their content; the host does not add facts.</small></>}</section>
     {state?.conflict && <div className="research-brief-review-conflict" role="status"><strong>Base version {state.conflict.expectedRevision} changed to version {state.conflict.actualRevision}.</strong><p>{state.conflict.reason}</p><p>This proposal has not been applied to the newer version. Open the latest accepted edit before requesting another change.</p></div>}
-    <small>This edit changes only the factual brief paragraph. The title, complete personal notes, accepted research and literal citation evidence are preserved. It is not an arbitrary PDF-layout edit.</small>
+    <small>{isNotes ? 'This edit changes only the explicitly selected personal-note paragraph. The summary, title, other notes, accepted research and literal citation evidence are preserved.' : 'This edit changes only the factual brief paragraph. The title, complete personal notes, accepted research and literal citation evidence are preserved.'} It is not an arbitrary PDF-layout edit.</small>
     {rewrite && <p>The local model rewrites the current accepted summary. Its original response is kept below; the host does not compose or replace factual sentences.</p>}
+    {isNotes && <p>The local model proposes clearer wording for your selected paragraph. Its original response is kept. Planned actions must remain planned; a model review does not prove semantic accuracy or completed work.</p>}
     {request.requirements && <p className="research-brief-review-requirements">Requested summary: {request.requirements.oneSentence ? 'one sentence; ' : ''}{request.requirements.shorterThanCharacters ? 'shorter than the current ' + request.requirements.shorterThanCharacters + ' characters; ' : ''}keep the exact saved locations and citation numbers.</p>}
     {sequential && <section aria-label="Native sentence progress">
       <p>{savedSentences} of 2 native sentence-writing decisions saved.</p>
@@ -163,48 +185,49 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
       <button ref={inspectButton} type="button" disabled={busy || !loaded} onClick={() => void inspect()}>Inspect saved edit</button>
       {checkedUnapplied && canApply && <button type="button" disabled={busy} onClick={() => void apply(true)}>Retry applying inspected proposal</button>}
     </div>}
-    {state?.proposal && <div className="research-brief-review-launch">
-      <p><strong>Changed section: Summary.</strong> Version {request.baseRevision} → {artifact ? 'saved' : 'proposed'} version {request.baseRevision + 1}. Title, notes and evidence stay unchanged.</p>
+    {hasProposal && <div className="research-brief-review-launch">
+      <p><strong>Changed section: {changedSection}.</strong> Version {request.baseRevision} → {artifact ? 'saved' : 'proposed'} version {request.baseRevision + 1}. {preservation}</p>
       <button ref={reviewTrigger} type="button" onClick={openReview}>Review proposed change</button>
       <small>Open a wider review with readable source links. Exact raw text remains inspectable.</small>
     </div>}
     {state && <div className="research-brief-edit-comparison" aria-label="Proposed document changes">
-      <section aria-label="Before edit"><h5>Before edit · version {request.baseRevision}</h5><DraftParagraphs draft={state.before} citations={state.preserved.citations}/></section>
-      {state.proposal && <section aria-label="Proposed edit"><h5>Proposed edit · version {request.baseRevision + 1}</h5><DraftParagraphs draft={state.proposal} citations={state.preserved.citations}/></section>}
+      <section aria-label="Before edit"><h5>Before edit · version {request.baseRevision}</h5>{isNotes ? note ? <NoteParagraph text={note.before}/> : <p>The exact selected personal-note paragraph is not available yet. The factual summary is not a substitute for this selection.</p> : <DraftParagraphs draft={state.before} citations={state.preserved.citations}/>}</section>
+      {hasProposal && <section aria-label="Proposed edit"><h5>Proposed edit · version {request.baseRevision + 1}</h5>{isNotes && note ? <NoteParagraph text={note.proposal!}/> : <DraftParagraphs draft={state.proposal!} citations={state.preserved.citations}/>}</section>}
     </div>}
     {state?.draftCheck && <p>{state.draftCheck.accepted ? 'Host proposal checks passed: ' : 'Host proposal checks need attention: '}{state.draftCheck.reason}</p>}
-    {state?.supportReview && <p>{state.supportReview.supported ? 'Native support review passed: ' : 'Native support review needs attention: '}{state.supportReview.reason}</p>}
+    {state?.supportReview && <p>{reviewAccepted ? isNotes ? 'Native note review passed: ' : 'Native support review passed: ' : isNotes ? 'Native note review needs attention: ' : 'Native support review needs attention: '}{state.supportReview.reason}</p>}
     {state?.projection && <details><summary>Host sentence formatting</summary><p>{state.projection.method}</p><small>{sequential ? 'The two native responses remain unchanged and separately inspectable below, with an aggregate JSON copy. The host may remove one exact repeated label before adding your exact labels; it does not rewrite factual sentence content.' : 'The native response remains unchanged in the operation inspection below. The displayed proposal includes your exact requested labels.'}</small><small>{state.projection.version}</small><small>{sequential ? 'Aggregate native response' : 'Native response'} SHA-256 {state.projection.rawSha256}</small><small>Proposed wording SHA-256 {state.projection.proposalSha256}</small></details>}
     {canApply && !pending && !unknownApproval && <div hidden={reviewOpen} className="research-brief-edit-approval">
       <p>Compare the wording above. Apply saves one revised version and uses the updated document presentation. The original files remain available below.</p>
       <button type="button" disabled={busy || !loaded} onClick={() => void apply()}>Apply proposed edit</button>
     </div>}
-    {state?.proposal && <dialog ref={reviewDialog} className="research-brief-review-dialog" aria-labelledby={'brief-review-title-' + goal.id} aria-modal="true"
+    {hasProposal && state && <dialog ref={reviewDialog} className="research-brief-review-dialog" aria-labelledby={'brief-review-title-' + goal.id} aria-modal="true"
       onClose={reviewClosed} onCancel={event => {event.preventDefault(); closeReview();}} onKeyDown={event => event.stopPropagation()}>
       {reviewOpen && <>
       <header className="research-brief-review-header">
-        <h2 ref={reviewHeading} id={'brief-review-title-' + goal.id} tabIndex={-1}>Review summary edit</h2>
-        <p>Version {request.baseRevision} → {artifact ? 'saved' : 'proposed'} version {request.baseRevision + 1} · Changed section: Summary</p>
-        <small>{state.preserved.title}. The complete notes, title and citation evidence stay unchanged.</small>
+        <h2 ref={reviewHeading} id={'brief-review-title-' + goal.id} tabIndex={-1}>{isNotes ? 'Review personal-note edit' : 'Review summary edit'}</h2>
+        <p>Version {request.baseRevision} → {artifact ? 'saved' : 'proposed'} version {request.baseRevision + 1} · Changed section: {changedSection}</p>
+        <small>{state.preserved.title}. {preservation}</small>
       </header>
-      <div className="research-brief-review-scroll" role="region" aria-label="Summary comparison and evidence" tabIndex={0}>
+      <div className="research-brief-review-scroll" role="region" aria-label={isNotes ? 'Personal-note comparison and evidence' : 'Summary comparison and evidence'} tabIndex={0}>
         <section className="research-brief-review-request" aria-label="Review requested change"><h3>Requested change</h3><p>{request.intent}</p></section>
         {state.conflict && <div className="research-brief-review-conflict" role="status"><strong>Base version {state.conflict.expectedRevision} changed to version {state.conflict.actualRevision}.</strong><p>{state.conflict.reason}</p><p>No automatic rebase or Apply is performed. Inspect the latest accepted version before creating another request.</p></div>}
         {request.requirements && <p>Requested summary: {request.requirements.oneSentence ? 'one sentence; ' : ''}{request.requirements.shorterThanCharacters ? 'shorter than the current ' + request.requirements.shorterThanCharacters + ' characters; ' : ''}keep the exact saved locations and citation numbers.</p>}
+        {isNotes && <p>Explicit choice: paragraph {notesTarget!.paragraph + 1} of Personal notes. Format: clearer plain paragraph. Keep all planned actions, their tense and meaning; do not invent completed work.</p>}
         <p ref={reviewNotice} role="status" tabIndex={-1} hidden={!message}>{message}</p>
         <div className="research-brief-review-comparison" aria-label="Expanded proposed document changes">
-          <section aria-label="Before summary"><h3>Before · version {request.baseRevision}</h3><DraftParagraphs draft={state.before} citations={state.preserved.citations}/></section>
-          <section aria-label="Proposed summary"><h3>{artifact ? 'Saved' : 'Proposed'} · version {request.baseRevision + 1}</h3><DraftParagraphs draft={state.proposal} citations={state.preserved.citations}/></section>
+          <section aria-label={isNotes ? 'Before personal-note paragraph' : 'Before summary'}><h3>Before · version {request.baseRevision}</h3>{isNotes && note ? <NoteParagraph text={note.before}/> : <DraftParagraphs draft={state.before} citations={state.preserved.citations}/>}</section>
+          <section aria-label={isNotes ? 'Proposed personal-note paragraph' : 'Proposed summary'}><h3>{artifact ? 'Saved' : 'Proposed'} · version {request.baseRevision + 1}</h3>{isNotes && note ? <NoteParagraph text={note.proposal!}/> : <DraftParagraphs draft={state.proposal!} citations={state.preserved.citations}/>}</section>
         </div>
         <p className="research-brief-review-state">{phases[state.phase]}</p>
         {state.draftCheck && <p>{state.draftCheck.accepted ? 'Host checks passed. ' : 'Host checks need attention. '}{state.draftCheck.reason}</p>}
-        {state.supportReview && <details><summary>Native support review</summary><p>{state.supportReview.supported ? 'The native role accepted this proposal. ' : 'The native role rejected this proposal. '}{state.supportReview.reason}</p><small>A model review does not independently verify factual accuracy.</small></details>}
-        <details><summary>Exact raw comparison and citation evidence</summary>
+        {state.supportReview && <details><summary>{isNotes ? 'Native meaning and planned-action review' : 'Native support review'}</summary><p>{reviewAccepted ? 'The native role accepted this proposal. ' : 'The native role rejected this proposal. '}{state.supportReview.reason}</p>{isNotes && <pre tabIndex={0} aria-label="Native note review JSON">{JSON.stringify(state.supportReview, null, 2)}</pre>}<small>A model review does not independently verify factual accuracy or semantic preservation.</small></details>}
+        {isNotes && note ? <RawNoteComparison state={state}/> : <details><summary>Exact raw comparison and citation evidence</summary>
           <pre tabIndex={0} aria-label="Raw before summary JSON">{JSON.stringify(state.before, null, 2)}</pre>
           <pre tabIndex={0} aria-label="Raw proposed summary JSON">{JSON.stringify(state.proposal, null, 2)}</pre>
           {state.preserved.citations.map(citation => <blockquote key={citation.number}>[{citation.number}] {citation.quote}</blockquote>)}
           {state.writingAttempt && <pre tabIndex={0} aria-label="Raw native edit decision JSON">{JSON.stringify(state.writingAttempt.raw, null, 2)}</pre>}
-        </details>
+        </details>}
         <p><a href={baseFiles + '/export?format=pdf'} download>Download base version {request.baseRevision} PDF</a> · <a href={baseFiles + '/export?format=html'} download>Download base version {request.baseRevision} HTML</a></p>
       </div>
       <footer className="research-brief-review-footer">
@@ -230,8 +253,8 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
       </div>
       <small>The PDF editor opens the latest document version. These revised downloads and the HTML preview retain version {artifact.revision}, even after later manual edits.</small>
     </>}
-    <details className="research-brief-edit-preserved"><summary>Preserved notes, citations and original files</summary>
-      {state && <><h5>{state.preserved.title}</h5><p className="research-brief-notes">{state.preserved.notes || 'No personal notes were supplied.'}</p>
+    <details className="research-brief-edit-preserved"><summary>{isNotes ? 'Notes, citations and original files' : 'Preserved notes, citations and original files'}</summary>
+      {state && <><h5>{state.preserved.title}</h5>{isNotes && <p>{artifact ? 'Personal notes in this saved version; one explicitly selected paragraph was changed.' : 'Personal notes in the selected base version; the proposed replacement is not applied yet.'}</p>}<p className="research-brief-notes">{(artifact && isNotes ? note?.proposedNotes : state.preserved.notes) || 'No personal notes were supplied.'}</p>
         {state.preserved.citations.map(citation => <blockquote key={citation.number}>[{citation.number}] {citation.quote}</blockquote>)}</>}
       <div className="goal-actions research-brief-actions"><a href={original + '/export?format=pdf'} download>Download original PDF</a><a href={original + '/export?format=html'} download>Download original HTML</a></div>
       <small>These downloads retain the original accepted files. Revised downloads use this edit’s fixed version.</small>
@@ -239,6 +262,8 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
     {state && <details><summary>Edit operation and native decision</summary>
       <small>Operation {state.operationId}</small><small>Document {request.documentId} · base version {request.baseRevision}</small>
       <small>Input SHA-256 {state.inputSha256}</small><small>Base version {request.baseRevision} PDF SHA-256 {request.basePdfSha256}</small>
+      {request.target && <pre tabIndex={0} aria-label="Saved edit selection JSON">{JSON.stringify(request.target, null, 2)}</pre>}
+      {isNotes && note && <small>Selected personal-note paragraph SHA-256 {note.paragraphSha256}; exact text range {note.start}–{note.end} in the base notes. Review proposed change exposes the exact removed/added text.</small>}
       {request.inferenceProfile && <details><summary>Native rewrite profile</summary><p>This saved profile describes the actual local rewrite request. It is not a factual-accuracy guarantee.</p><pre tabIndex={0} aria-label="Native rewrite profile JSON">{JSON.stringify(request.inferenceProfile, null, 2)}</pre></details>}
       {state.proposalSha256 && <small>Proposed wording SHA-256 {state.proposalSha256}</small>}
       {state.approvedProposalSha256 && <small>Approved wording SHA-256 {state.approvedProposalSha256}</small>}
@@ -253,6 +278,7 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
         {sequential && <small>This aggregate JSON combines two saved native sentence decisions. Their individual original responses and identities are shown above.</small>}
         {state.writingAttempt.error && <p>{state.writingAttempt.error}</p>}
         <pre tabIndex={0} aria-label="Original native edit decision JSON">{JSON.stringify(state.writingAttempt.raw, null, 2)}</pre></>}
+      {state.notesReviewAttempt && <><small>Native note review SHA-256 {state.notesReviewAttempt.sha256}</small>{state.notesReviewAttempt.error && <p>{state.notesReviewAttempt.error}</p>}<pre tabIndex={0} aria-label="Raw native note review decision JSON">{JSON.stringify(state.notesReviewAttempt.raw, null, 2)}</pre></>}
       <small>A native support review is bounded model evidence; it does not independently verify the source’s claims.</small>
     </details>}
     {storageError && <p role="status">{storageError}</p>}
@@ -263,14 +289,22 @@ function SavedEdit({goal, onCreated, onOpenDocument}: Props) {
 function EditCreation({goal, onCreated}: Props) {
   const [draft, setDraft] = useState<BriefEditFormDraft>(), [open, setOpen] = useState(false), [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false), [message, setMessage] = useState(''), [storageError, setStorageError] = useState(''), [checkedMissing, setCheckedMissing] = useState(false);
+  const [clarification, setClarification] = useState('');
   const [unreadable, setUnreadable] = useState<{raw: string; backupKey?: string}>(), [restoreFailed, setRestoreFailed] = useState(false);
   const current = useRef<BriefEditFormDraft | undefined>(undefined), active = useRef<AbortController | undefined>(undefined), mounted = useRef(true);
   const intentInput = useRef<HTMLTextAreaElement>(null), inspectButton = useRef<HTMLButtonElement>(null), notice = useRef<HTMLParagraphElement>(null);
+  const sectionInput = useRef<HTMLSelectElement>(null), paragraphInput = useRef<HTMLSelectElement>(null), formatInput = useRef<HTMLSelectElement>(null);
+  const clarificationNotice = useRef<HTMLParagraphElement>(null);
   const storageKey = 'anascummis.research-brief-edit-draft.v1.' + goal.id;
   const unavailable = goal.briefEditEligibility?.canEdit === false;
   const currentVersion = !!goal.documentEdit;
+  const sectionMode = currentVersion || draft?.target !== undefined || draft?.targetDraft !== undefined;
   const unavailableReason = goal.briefEditEligibility?.reason || 'This action needs the accepted current document version. Open the latest linked edit goal before requesting another change.';
   const sourceRevision = goal.documentEditState?.artifact?.revision ?? 0;
+  const choices: BriefEditTargetDraft = draft?.targetDraft || draft?.target || {};
+  const paragraphs = goal.documentEditOptions?.paragraphs || [];
+  const selectedNote = choices.section === 'notes' ? paragraphs.find(paragraph => paragraph.index === choices.paragraph && paragraph.sha256 === choices.paragraphSha256) : undefined;
+  const clarificationId = 'brief-edit-clarification-' + goal.id;
   useEffect(() => {
     mounted.current = true;
     let raw: string | null = null;
@@ -307,22 +341,57 @@ function EditCreation({goal, onCreated}: Props) {
     const sentenceLabels: [string, string] = [...previous.sentenceLabels]; sentenceLabels[index] = value;
     save({...previous, sentenceLabels});
   }
+  function targetFrom(choices: BriefEditTargetDraft): DocumentEditTarget | undefined {
+    if (choices.section === 'summary' && choices.format === 'shorter-single-sentence') return {section: 'summary', format: 'shorter-single-sentence'};
+    if (choices.section === 'notes' && choices.format === 'clearer-plain-paragraph'
+      && goal.documentEditOptions?.baseRevision === sourceRevision
+      && paragraphs.some(paragraph => paragraph.index === choices.paragraph && paragraph.sha256 === choices.paragraphSha256)) {
+      return {section: 'notes', paragraph: choices.paragraph!, paragraphSha256: choices.paragraphSha256!, format: 'clearer-plain-paragraph'};
+    }
+  }
+  function choose(next: BriefEditTargetDraft) {
+    const previous = current.current;
+    if (!previous) return;
+    const {target, ...rest} = previous, clarified = targetFrom(next);
+    save({...rest, targetDraft: next, ...(clarified ? {target: clarified} : {})}); setClarification('');
+  }
+  function chooseSectionMode() {
+    const previous = current.current;
+    if (!previous) return;
+    save({...previous, targetDraft: previous.targetDraft || previous.target || {}});
+    requestAnimationFrame(() => sectionInput.current?.focus());
+  }
+  function askClarification() {
+    setClarification(choices.section === 'notes' && !selectedNote
+      ? 'Which exact personal-note paragraph should change? Choose the paragraph and requested format. Your complete request is kept; no edit was submitted.'
+      : 'Which section and format should change? Choose them explicitly below. Your complete request is kept; no edit was submitted.');
+    requestAnimationFrame(() => {
+      if (!choices.section) sectionInput.current?.focus();
+      else if (choices.section === 'notes' && !selectedNote) paragraphInput.current?.focus();
+      else formatInput.current?.focus();
+    });
+  }
   function confirmed(child: EditGoal, submitted: BriefEditSubmission) {
     if (child.parentGoalId !== goal.id || child.documentEdit?.parentGoalId !== goal.id || !sameBriefEditSubmission(child.documentEdit, submitted)) throw new Error('The saved edit does not match the exact requested change and submission identity.');
     if (!current.current) throw new Error('The pending edit draft is missing. Inspect saved goals before submitting again.');
     const next = settleBriefEditSubmission(current.current, submitted, () => crypto.randomUUID());
     save(next); setCheckedMissing(false); if (!next) setOpen(false);
-    setMessage(next ? 'The submitted edit is saved. Your unsent requested change or sentence labels remain here as a separate browser draft.' : 'The exact requested change and format are saved in a linked edit goal. Review its proposal before applying.');
+    setMessage(next ? 'The submitted edit is saved. Your unsent requested change, section choices or sentence labels remain here as a separate browser draft.' : 'The exact requested change, selection and format are saved in a linked edit goal. Review its proposal before applying.');
     onCreated(child);
   }
   async function submit(retry = false) {
     if (active.current || !current.current || unavailable) return;
     let saved = current.current;
-    if (currentVersion) {
-      const candidate = retry ? saved.submitted : saved, before = goal.documentEditState?.proposal;
-      if (!candidate || candidate.sentenceLabels) {setMessage('This current-version action supports shortening the summary to one sentence. Your saved labels and request are kept; turn off the two-label format before sending. Nothing was submitted.'); requestAnimationFrame(() => notice.current?.focus()); return;}
-      const requirements = before && summaryRequirements(candidate.intent, before);
-      if (!requirements?.oneSentence || !requirements.shorterThanCharacters) {setMessage('This current-version action supports an explicit request to shorten the summary to one sentence. Your exact draft is kept; nothing was submitted.'); requestAnimationFrame(() => notice.current?.focus()); return;}
+    if (!retry && !sectionMode && !saved.sentenceLabels && !hasLegacySummaryIntent(saved.intent)) {
+      save({...saved, targetDraft: {}}); askClarification(); return;
+    }
+    if (sectionMode && !retry) {
+      if (saved.sentenceLabels) {setMessage('Your earlier two-label draft is kept. Keep its labels aside before choosing a section and format; nothing was submitted.'); requestAnimationFrame(() => notice.current?.focus()); return;}
+      const target = targetFrom(choices);
+      if (!target) {askClarification(); return;}
+      const mismatch = documentEditTargetMismatch(saved.intent, target);
+      if (mismatch) {setClarification(mismatch); requestAnimationFrame(() => clarificationNotice.current?.focus()); return;}
+      saved = {...saved, target};
     }
     try {if (!retry) {saved = beginBriefEditSubmission(saved); save(saved);} else if (!checkedMissing || !saved.submitted) return;}
     catch (error) {setMessage(String(error)); return;}
@@ -353,21 +422,39 @@ function EditCreation({goal, onCreated}: Props) {
     {unreadable && <details><summary>Unreadable saved edit draft</summary><p>This exact browser copy is kept for inspection. Check the linked goals for any earlier submission before sending new work.</p><pre tabIndex={0} aria-label="Unreadable saved edit draft raw text">{unreadable.raw}</pre>{unreadable.backupKey && <small>Kept in browser storage as {unreadable.backupKey}</small>}</details>}
     {unavailable && <div role="status"><p>{unavailableReason}</p><small>Any saved request remains in this browser. Open the latest accepted edit goal to inspect the current version before starting another edit.</small></div>}
     {open && draft && <form onSubmit={event => {event.preventDefault(); void submit();}}>
-      <h4>Request a factual paragraph edit</h4>
-      <p>Editing accepted version {sourceRevision}; the proposal will create version {sourceRevision + 1}. The local AI proposes a change to the summary. Review the before/after wording before applying it. Complete notes and citation evidence remain unchanged.</p>
-      {currentVersion && <p>This current-version action supports shortening the summary to one sentence. Exact notes, locations and citation evidence stay unchanged.</p>}
-      <label>Requested brief change<textarea ref={intentInput} aria-label="Requested brief change" value={draft.intent} maxLength={500} onChange={event => {if (current.current) save({...current.current, intent: event.target.value});}} placeholder="Describe the specific paragraph change you want."/></label>
-      <small>Up to 500 characters. This request stays in this browser until you explicitly save it. The accepted current summary is the base; earlier versions remain available. Imported PDF layouts and arbitrary page edits are outside this action’s scope.</small>
-      {!currentVersion ? <fieldset className="research-brief-edit-format"><legend>Optional sentence format</legend>
+      <h4>{sectionMode ? 'Request a section edit' : 'Request a factual paragraph edit'}</h4>
+      <p>Editing accepted version {sourceRevision}; the proposal will create version {sourceRevision + 1}. {sectionMode ? 'Choose the section, exact paragraph when needed, and format. The local AI proposes wording; your original request remains unchanged.' : 'The local AI proposes a change to the summary. Complete notes and citation evidence remain unchanged.'} Review the before/after wording before applying it.</p>
+      <label>Requested brief change<textarea ref={intentInput} aria-label="Requested brief change" value={draft.intent} maxLength={500} onChange={event => {if (current.current) save({...current.current, intent: event.target.value}); setClarification('');}} placeholder="Describe the specific paragraph change you want."/></label>
+      <small>Up to 500 characters. This request stays in this browser until you explicitly save it. The accepted current document is the base; earlier versions remain available. Imported PDF layouts and arbitrary page edits are outside this action’s scope.</small>
+      {!sectionMode && <button type="button" onClick={chooseSectionMode}>Choose section or paragraph</button>}
+      {sectionMode && <fieldset className="research-brief-edit-target"><legend>Clarify the intended change</legend>
+        <p>Select the intended section and format. Nothing is inferred from ambiguous wording, and choosing an option does not submit work.</p>
+        {clarification && <p ref={clarificationNotice} id={clarificationId} role="status" tabIndex={-1}>{clarification}</p>}
+        <label>Section<select ref={sectionInput} aria-label="Section to edit" aria-describedby={clarification ? clarificationId : undefined} value={choices.section || ''} onChange={event => choose(event.target.value ? {section: event.target.value as 'summary' | 'notes'} : {})}>
+          <option value="">Choose a section</option><option value="summary">Summary</option><option value="notes">Personal notes</option>
+        </select></label>
+        {choices.section === 'notes' && <>
+          <label>Exact paragraph<select ref={paragraphInput} aria-label="Personal-note paragraph" aria-describedby={clarification ? clarificationId : undefined} value={choices.paragraph === undefined ? '' : String(choices.paragraph)} onChange={event => {const paragraph = paragraphs.find(value => String(value.index) === event.target.value); choose({...choices, paragraph: paragraph?.index, paragraphSha256: paragraph?.sha256});}}>
+            <option value="">Choose a personal-note paragraph</option>{paragraphs.map(paragraph => <option key={paragraph.index} value={String(paragraph.index)}>Paragraph {paragraph.index + 1} · {paragraph.text.replace(/\s+/gu, ' ').slice(0, 70)}{paragraph.text.length > 70 ? '…' : ''}</option>)}
+          </select></label>
+          {selectedNote ? <section className="research-brief-selected-note" aria-label="Selected personal-note paragraph"><h5>Paragraph {selectedNote.index + 1} · accepted version {sourceRevision}</h5><NoteParagraph text={selectedNote.text}/><small>Only this exact saved paragraph can change. The summary, every other paragraph and citation evidence stay unchanged.</small></section> : <p>{paragraphs.length ? 'Select the exact saved paragraph before requesting a rewrite.' : 'No saved personal-note paragraph choices are available from this accepted version. Your request is kept; inspect the current document before continuing.'}</p>}
+          {choices.paragraph !== undefined && !selectedNote && <details><summary>Kept paragraph choice needs inspection</summary><pre aria-label="Kept paragraph choice JSON">{JSON.stringify(choices, null, 2)}</pre><p>The selected paragraph identity no longer matches the supplied choices. It was not silently changed.</p></details>}
+        </>}
+        <label>Requested format<select ref={formatInput} aria-label="Requested format" aria-describedby={clarification ? clarificationId : undefined} disabled={!choices.section} value={choices.format || ''} onChange={event => choose({...choices, format: event.target.value ? event.target.value as BriefEditTargetDraft['format'] : undefined})}>
+          <option value="">Choose a format</option>{choices.section === 'notes' && <option value="clearer-plain-paragraph">Clearer plain paragraph · keep meaning and planned actions</option>}{choices.section === 'summary' && <option value="shorter-single-sentence">Shorter single sentence · retain exact locations and citations</option>}
+        </select></label>
+        {choices.section === 'notes' && <><p>Experimental local rewrite; review may reject it. No change until Apply.</p><small>The paragraph need not be shorter or one sentence. Planned work must remain planned; review the actual native wording before applying it.</small></>}
+      </fieldset>}
+      {!sectionMode ? <fieldset className="research-brief-edit-format"><legend>Optional sentence format</legend>
         <label className="goal-option"><input type="checkbox" aria-label="Two labelled sentences" checked={!!draft.sentenceLabels} onChange={event => sentenceMode(event.target.checked)}/>Two labelled sentences</label>
         <label>First sentence label<input aria-label="First sentence label" value={(draft.sentenceLabels || draft.labelDraft)?.[0] || ''} maxLength={32} disabled={!draft.sentenceLabels} onChange={event => editLabel(0, event.target.value)} placeholder="Tests:"/></label>
         <label>Second sentence label<input aria-label="Second sentence label" value={(draft.sentenceLabels || draft.labelDraft)?.[1] || ''} maxLength={32} disabled={!draft.sentenceLabels} onChange={event => editLabel(1, event.target.value)} placeholder="Browser results:"/></label>
         <small>When checked, the local model writes two factual sentences and the host adds your labels exactly. Labels stay in this browser when unchecked and are not sent with a free-prose request.</small>
         {draft.sentenceLabels && !validBriefEditLabels(draft.sentenceLabels) && <p role="status">Enter two different nonempty sentence labels, at most 32 characters each, without leading or trailing spaces.</p>}
-      </fieldset> : draft.sentenceLabels ? <div className="research-brief-edit-notice"><p>The saved two-label draft is kept, but this current-summary rewrite supports one sentence.</p><pre aria-label="Kept sentence labels JSON">{JSON.stringify(draft.sentenceLabels)}</pre><button type="button" onClick={() => sentenceMode(false)}>Keep labels aside and use one sentence</button></div> : draft.labelDraft?.some(label => label.length) ? <details><summary>Kept inactive sentence labels</summary><pre>{JSON.stringify(draft.labelDraft)}</pre><small>These labels stay in the browser draft and are not submitted for the one-sentence rewrite.</small></details> : null}
+      </fieldset> : draft.sentenceLabels ? <div className="research-brief-edit-notice"><p>The saved two-label draft and request are kept. This edit uses your explicit section and format choices instead.</p><pre aria-label="Kept sentence labels JSON">{JSON.stringify(draft.sentenceLabels)}</pre><button type="button" onClick={() => sentenceMode(false)}>Keep labels aside and choose a section</button></div> : draft.labelDraft?.some(label => label.length) ? <details><summary>Kept inactive sentence labels</summary><pre>{JSON.stringify(draft.labelDraft)}</pre><small>These labels stay in the browser draft and are not submitted with a selected section and format.</small></details> : null}
       {draft.submitted && <div className="research-brief-edit-notice" aria-label="Unconfirmed edit submission">
         <p>The original submission needs inspection. Any newer wording above is kept as a separate unsent draft.</p>
-        <details><summary>Original submitted change</summary><p>{draft.submitted.intent}</p>{draft.submitted.sentenceLabels && <p>Submitted sentence labels: {draft.submitted.sentenceLabels.join(' / ')}</p>}<small>Submission {draft.submitted.requestKey}</small></details>
+        <details><summary>Original submitted change</summary><p>{draft.submitted.intent}</p>{draft.submitted.sentenceLabels && <p>Submitted sentence labels: {draft.submitted.sentenceLabels.join(' / ')}</p>}{draft.submitted.target && <pre aria-label="Original submitted selection JSON">{JSON.stringify(draft.submitted.target, null, 2)}</pre>}<small>Submission {draft.submitted.requestKey}</small></details>
         <button ref={inspectButton} type="button" disabled={busy} onClick={() => void inspect()}>Inspect saved edits</button>
         {checkedMissing && <button type="button" disabled={busy || unavailable} onClick={() => void submit(true)}>Retry saved edit submission</button>}
       </div>}

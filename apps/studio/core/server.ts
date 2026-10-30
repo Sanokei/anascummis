@@ -28,6 +28,7 @@ import {PublicSourceLedger,sourceHash} from './public-source';
 import {reviewSourceAcquisition} from './source-question';
 import {ResearchBriefStore} from './research-brief';
 import {ResearchBriefEditStore,validateDocumentEditLabels} from './research-brief-edit';
+import {validateDocumentEditTarget} from './research-brief-target';
 import {stopGoalSoftware,reconcileGoalSoftware,goalSoftwareLinks} from './goal-software';
 import {importMedia,listMedia,listVideoPlans,media,mediaPath,videoPlan,videoTools} from './video';
 const port=Number(process.env.STUDIO_PORT||3211),origin=`http://127.0.0.1:${port}`,token=crypto.randomUUID();
@@ -48,7 +49,7 @@ function briefEditEligibility(goal:GoalRecord):{canEdit:boolean;reason?:string}|
   if(revision>=32)return {canEdit:false,reason:'This bounded lineage has reached 32 revisions. Preserve it and start a separate document.'};
   return {canEdit:true};
 }
-const goalResponse=(goal:GoalRecord)=>{const links=goalSoftwareLinks(goal.id),answer=goal.tasks.find(task=>task.sourceAnswer)?.execution?.sourceAnswer;return {...goal,...(goal.brief||goal.documentEdit?{briefEditEligibility:briefEditEligibility(goal)}:{}),...(goal.brief?{briefState:researchBriefs.state(goal.id)}:{}),...(goal.documentEdit?{documentEditState:researchBriefEdits.state(goal.id)}:{}),...(goal.sourceQuestion?{sources:goalSources.list(goal.id),reading:goalSources.reading(goal.id,'source-answer',answer?.readingId?{id:answer.readingId}:{questionSha256:sourceHash(goal.request+(goal.guidance?'\nContinuation guidance: '+goal.guidance:''))},false)}:{}),tasks:goal.tasks.map(task=>({...task,...(links[task.id]?{softwareTaskId:links[task.id]}:{})}))};};
+const goalResponse=(goal:GoalRecord)=>{const links=goalSoftwareLinks(goal.id),answer=goal.tasks.find(task=>task.sourceAnswer)?.execution?.sourceAnswer;return {...goal,...(goal.brief||goal.documentEdit?{briefEditEligibility:briefEditEligibility(goal),documentEditOptions:researchBriefEdits.options(goal)}:{}),...(goal.brief?{briefState:researchBriefs.state(goal.id)}:{}),...(goal.documentEdit?{documentEditState:researchBriefEdits.state(goal.id)}:{}),...(goal.sourceQuestion?{sources:goalSources.list(goal.id),reading:goalSources.reading(goal.id,'source-answer',answer?.readingId?{id:answer.readingId}:{questionSha256:sourceHash(goal.request+(goal.guidance?'\nContinuation guidance: '+goal.guidance:''))},false)}:{}),tasks:goal.tasks.map(task=>({...task,...(links[task.id]?{softwareTaskId:links[task.id]}:{})}))};};
 const json=(v:unknown,status=200)=>Response.json(v,{status,headers:{'Cache-Control':'no-store'}});
 function activityPagination(url:URL){const raw=url.searchParams.get('limit');if(raw!==null&&!/^[1-9][0-9]*$/.test(raw))throw new Error('Choose an activity history limit from 1 to 100');return {limit:raw===null?25:Number(raw),before:url.searchParams.get('before')??undefined};}
 const download=(bytes:Uint8Array,type:string,name:string)=>new Response(bytes as any,{headers:{'Content-Type':type,'Content-Disposition':`attachment; filename="${name.replace(/[^\w.-]/g,'_')}"`,'Cache-Control':'no-store'}});
@@ -103,8 +104,8 @@ async function handleLocal(req:Request):Promise<Response>{
         return new Response(file.bytes as any,{headers:{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; sandbox allow-top-navigation-by-user-activation; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Cache-Control':'no-store'}});
       }
       if(req.method!=='POST')return json({error:'Use the saved goal to inspect its document edit'},405);
-      const a=object(await req.json());if(Object.keys(a).some(key=>!['requestKey','intent','sentenceLabels'].includes(key)))throw new Error('A native edit accepts only its exact intent, optional sentence labels and submission identity.');
-      const editIntent=text(a.intent,500),labels=validateDocumentEditLabels(editIntent,a.sentenceLabels),submitted={requestKey:text(a.requestKey,100),intent:editIntent,...(labels?{sentenceLabels:labels}:{})},existing=goals.existingDocumentEdit(goal.id,submitted.requestKey,submitted.intent,submitted.sentenceLabels);
+      const a=object(await req.json());if(Object.keys(a).some(key=>!['requestKey','intent','sentenceLabels','target'].includes(key)))throw new Error('A native edit accepts only its exact intent, explicit section/paragraph/format, optional sentence labels and submission identity.');
+      const editIntent=text(a.intent,500),labels=validateDocumentEditLabels(editIntent,a.sentenceLabels),target=validateDocumentEditTarget(a.target),submitted={requestKey:text(a.requestKey,100),intent:editIntent,...(labels?{sentenceLabels:labels}:{}),...(target?{target}:{})},existing=goals.existingDocumentEdit(goal.id,submitted.requestKey,submitted.intent,submitted.sentenceLabels,submitted.target);
       if(existing)return json(goalResponse(existing),202);
       return await exclusive(goal.documentId!,async()=>{const prepared=await researchBriefEdits.prepare(goal,submitted);return json(goalResponse(goals.createDocumentEdit(goal.id,prepared)),202);});
     }
